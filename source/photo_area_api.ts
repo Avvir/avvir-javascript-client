@@ -5,22 +5,22 @@ import WebGatewayApi from "./web_gateway_api";
 import { httpGetHeaders } from "./request_headers";
 import checkFetchStatus from "./check_fetch_status";
 import ApiPhotoArea from "./models/api/api_photo_area";
-import getErrorCallback from "./get_error_callback";
 import ApiPhotoLocation from "./models/api/api_photo_location";
 import ApiPhotoSession from "./models/api/api_photo_session";
+import Config from "./config";
 
 export default class PhotoAreaApi {
-  static listPhotoAreasForProject({ projectId }: AssociationIds, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static listPhotoAreasForProject({ projectId }: AssociationIds, user: User) {
     return (fetch(`${WebGatewayApi.baseUrl}/projects/${projectId}/photo-areas`, {
       headers: {
         ...httpGetHeaders,
         ...getAuthorizationHeaders(user)
       }
     }).then(checkFetchStatus) as Promise<ApiPhotoArea[]>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static listPhotoLocations({ projectId, photoAreaId, photoSessionId }: AssociationIds, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static listPhotoLocations({ projectId, photoAreaId, photoSessionId }: AssociationIds, user: User) {
     let url = `${WebGatewayApi.baseUrl}/projects/${projectId}/photo-areas/${photoAreaId}/locations`;
     if (photoSessionId) {
       url += `?photoSessionId=${photoSessionId}`;
@@ -31,16 +31,16 @@ export default class PhotoAreaApi {
         ...getAuthorizationHeaders(user)
       }
     }).then(checkFetchStatus) as Promise<ApiPhotoLocation[]>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static listPhotoSessionsForPhotoArea({ projectId, photoAreaId }: AssociationIds, user, dispatch: Dispatch<ApiFailureEvent>) {
+  static listPhotoSessionsForPhotoArea({ projectId, photoAreaId }: AssociationIds, user) {
     return (fetch(`${WebGatewayApi.baseUrl}/projects/${projectId}/photo-areas/${photoAreaId}/sessions`, {
       headers: {
         ...httpGetHeaders,
         ...getAuthorizationHeaders(user)
       }
     }).then(checkFetchStatus) as Promise<ApiPhotoSession[]>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 }

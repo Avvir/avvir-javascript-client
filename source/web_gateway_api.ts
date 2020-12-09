@@ -3,29 +3,27 @@ import ApiPipeline from "./models/api/api_pipeline";
 import ApiPlannedElement from "./models/api/api_planned_element";
 import checkFetchStatus from "./check_fetch_status";
 import DetailedElement from "./models/domain/detailed_element";
-import DeviationStatus from "./models/domain/enums/deviation_status";
+import DeviationStatus from "./models/enums/deviation_status";
 import getAuthorizationHeaders, { BasicUser, User } from "./get_authorization_headers";
-import getErrorCallback from "./get_error_callback";
-import UserAuthType from "./models/domain/enums/user_auth_type";
-import { ApiFailureEvent } from "../../models/enums/event_types";
+import UserAuthType from "./models/enums/user_auth_type";
 import { AssociationIds, Dispatch } from "type_aliases";
 import { httpGetHeaders, httpPostHeaders } from "./request_headers";
-import { isFirebaseUser, isGatewayUser } from "../reducers/reduce_user_session";
+import Config from "./config";
 
 export default class WebGatewayApi {
   static baseUrl: string = process.env.REACT_APP_WEB_API_GATEWAY_DOMAIN;
 
-  static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User) {
     return (fetch(`${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}/planned-building-elements`, {
       headers: {
         ...httpGetHeaders,
         ...getAuthorizationHeaders(user)
       }
     }).then(checkFetchStatus) as Promise<ApiPlannedElement[]>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static connectProjectToStructionSite({ projectId }: AssociationIds, structionSiteProjectUrl: string, token: string, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static connectProjectToStructionSite({ projectId }: AssociationIds, structionSiteProjectUrl: string, token: string, user: User) {
     const url = `${WebGatewayApi.baseUrl}/projects/${projectId}/connect-to-structionsite?structionsite-access-token=${token}&structionsite-project-url=${structionSiteProjectUrl}`;
     return (fetch(url, {
       method: "POST",
@@ -34,10 +32,10 @@ export default class WebGatewayApi {
         ...getAuthorizationHeaders(user)
       }
     }).then(checkFetchStatus) as Promise<ApiPipeline>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static checkPipelineStatus({ projectId }: AssociationIds, pipelineId: number, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static checkPipelineStatus({ projectId }: AssociationIds, pipelineId: number, user: User) {
     const url = `${WebGatewayApi.baseUrl}/pipelines/${pipelineId}`;
     return (fetch(url, {
       headers: {
@@ -45,10 +43,10 @@ export default class WebGatewayApi {
         ...getAuthorizationHeaders(user)
       }
     }).then(checkFetchStatus) as Promise<ApiPipeline>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static createInvitation(inviteeEmail: string, role: string, organizationId: string, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static createInvitation(inviteeEmail: string, role: string, organizationId: string, user: User) {
     const url = `${WebGatewayApi.baseUrl}/users/invitations`;
     return (fetch(url, {
       method: "POST",
@@ -58,10 +56,10 @@ export default class WebGatewayApi {
       },
       body: JSON.stringify({ userEmail: inviteeEmail, role, clientAccountId: organizationId })
     }).then(checkFetchStatus) as Promise<{ token: string, userEmail: string }>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static getInvitation(invitationToken: string, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static getInvitation(invitationToken: string, user: User) {
     const url = `${WebGatewayApi.baseUrl}/users/invitations/${invitationToken}`;
     return (fetch(url, {
       headers: {
@@ -69,10 +67,10 @@ export default class WebGatewayApi {
         ...getAuthorizationHeaders(user)
       },
     }).then(checkFetchStatus) as Promise<{ userEmail: string, resourceName: string, expiry: number }>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static getScanRepresentation({ projectId, floorId, scanDatasetId }: AssociationIds, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static getScanRepresentation({ projectId, floorId, scanDatasetId }: AssociationIds, user: User) {
     const url = `${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/files/scan-representation`;
     return (fetch(url, {
       headers: {
@@ -80,7 +78,7 @@ export default class WebGatewayApi {
         ...getAuthorizationHeaders(user)
       }
     }).then(checkFetchStatus) as Promise<{ url: string }>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
   static getProgressReportPdfUrl(projectId: string, user: User): string {
@@ -119,7 +117,7 @@ export default class WebGatewayApi {
     }
   }
 
-  static checkProcoreAccessToken(projectId: string, procoreAccessToken: string, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static checkProcoreAccessToken(projectId: string, procoreAccessToken: string, user: User) {
     if (!projectId) {
       return Promise.reject(new Error("Project not loaded yet"));
     }
@@ -132,10 +130,10 @@ export default class WebGatewayApi {
         ...getAuthorizationHeaders(user)
       },
     }).then(checkFetchStatus) as Promise<{ expiresInSeconds: number }>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static pushPdfToProcore({ projectId, floorId, scanDatasetId }: AssociationIds, procoreProjectId: string, procoreAccessToken: string, pdfType: string, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static pushPdfToProcore({ projectId, floorId, scanDatasetId }: AssociationIds, procoreProjectId: string, procoreAccessToken: string, pdfType: string, user: User) {
     if (!projectId) {
       return Promise.reject(new Error("Project not loaded yet"));
     }
@@ -148,10 +146,10 @@ export default class WebGatewayApi {
         ...getAuthorizationHeaders(user)
       },
     }).then(checkFetchStatus) as Promise<{ body: { id: number } }>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static getProcoreProjects(projectId: string, procoreAccessToken: string, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static getProcoreProjects(projectId: string, procoreAccessToken: string, user: User) {
     if (!projectId) {
       return Promise.reject(new Error("Project not loaded yet"));
     }
@@ -164,11 +162,11 @@ export default class WebGatewayApi {
         ...getAuthorizationHeaders(user)
       },
     }).then(checkFetchStatus) as Promise<{ lastUpdated: number, projectId: string | number }[]>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
 
   }
 
-  static updateDeviationStatus({ projectId, floorId, scanDatasetId }: AssociationIds, deviationGlobalId: string, status: DeviationStatus, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static updateDeviationStatus({ projectId, floorId, scanDatasetId }: AssociationIds, deviationGlobalId: string, status: DeviationStatus, user: User) {
     const url = `${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/deviation-status`;
     return (fetch(url, {
       method: "PATCH",
@@ -181,7 +179,7 @@ export default class WebGatewayApi {
         status
       })
     }).then(checkFetchStatus) as Promise<void>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
   static getCustomFirebaseToken(user: User) {
@@ -219,27 +217,27 @@ export default class WebGatewayApi {
     }) as Promise<{ headers: Headers, body: { storageToken: string, redirectUrl: string } }>;
   }
 
-  static acceptInvitation(token: string, password: string, dispatch: Dispatch<ApiFailureEvent>) {
+  static acceptInvitation(token: string, password: string) {
     const url = `${WebGatewayApi.baseUrl}/users/accept-invitation`;
     return (fetch(url, {
       method: "POST",
       headers: httpPostHeaders,
       body: JSON.stringify({ invitationToken: token, password })
     }).then(checkFetchStatus) as Promise<void>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static getElementDetails({ projectId, floorId, scanDatasetId }: AssociationIds, elementGlobalId: string, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static getElementDetails({ projectId, floorId, scanDatasetId }: AssociationIds, elementGlobalId: string, user: User) {
     return (fetch(`${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/element/${elementGlobalId}`, {
       headers: {
         ...httpGetHeaders,
         ...getAuthorizationHeaders(user)
       }
     }).then(checkFetchStatus) as Promise<DetailedElement>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static exportIfc({ projectId, floorId, scanDatasetId }: AssociationIds, type: string, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static exportIfc({ projectId, floorId, scanDatasetId }: AssociationIds, type: string, user: User) {
     return (fetch(`${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/export-ifc?type=${type}`, {
       method: "POST",
       headers: {
@@ -247,20 +245,20 @@ export default class WebGatewayApi {
         ...getAuthorizationHeaders(user)
       }
     }).then(checkFetchStatus) as Promise<{ workflowName: string, startTime: number, status: "running" | "complete" }>)
-      .catch(getErrorCallback(dispatch, false));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static checkExportedIfc({ projectId, floorId, scanDatasetId }: AssociationIds, workflowName: string, type: string, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static checkExportedIfc({ projectId, floorId, scanDatasetId }: AssociationIds, workflowName: string, type: string, user: User) {
     return (fetch(`${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/export-ifc/${workflowName}?type=${type}`, {
       headers: {
         ...httpGetHeaders,
         ...getAuthorizationHeaders(user)
       }
     }).then(checkFetchStatus) as Promise<{ workflowName: string, startTime: number, status: "running" | "complete" }>)
-      .catch(getErrorCallback(dispatch, false));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static downsampleScan({ projectId, floorId, scanDatasetId }: AssociationIds, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static downsampleScan({ projectId, floorId, scanDatasetId }: AssociationIds, user: User) {
     return (fetch(`${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/downsample-scan`, {
       method: "POST",
       headers: {
@@ -268,26 +266,26 @@ export default class WebGatewayApi {
         ...getAuthorizationHeaders(user)
       }
     }).then(checkFetchStatus) as Promise<void>)
-      .catch(getErrorCallback(dispatch, false));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static getGcpBearerToken({ projectId }: AssociationIds, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static getGcpBearerToken({ projectId }: AssociationIds, user: User) {
     return (fetch(`${WebGatewayApi.baseUrl}/projects/${projectId}/gcpAccessToken`, {
       headers: {
         ...httpGetHeaders,
         ...getAuthorizationHeaders(user)
       }
     }).then(checkFetchStatus) as Promise<{ accessToken: string, expireTime: string }>)
-      .catch(getErrorCallback(dispatch, false));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static getMasterformat(version: number, dispatch: Dispatch<ApiFailureEvent>) {
+  static getMasterformat(version: number) {
     return (fetch(`${WebGatewayApi.baseUrl}/masterformats/${version}`, {
       headers: {
         ...httpGetHeaders
       }
     }).then(checkFetchStatus) as Promise<ApiMasterformat[]>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
   static updateElement({ projectId, floorId, scanDatasetId, globalId }: AssociationIds, element: DetailedElement, user: User) {
@@ -312,7 +310,7 @@ export default class WebGatewayApi {
     }).then(checkFetchStatus);
   }
 
-  static triggerArgoRunProgressAndDeviations({ projectId, floorId }: AssociationIds, deviationsFlag: string, bimSourceFileExtension: string, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static triggerArgoRunProgressAndDeviations({ projectId, floorId }: AssociationIds, deviationsFlag: string, bimSourceFileExtension: string, user: User) {
     return (fetch(`${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}/run-progress-and-deviations?deviationsFlag=${deviationsFlag}&bimSourceFileExtension=${bimSourceFileExtension}`,
       {
         method: "POST",
@@ -321,10 +319,10 @@ export default class WebGatewayApi {
           ...getAuthorizationHeaders(user)
         }
       }).then(checkFetchStatus) as Promise<void>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static triggerArgoRunNwdConvert({ projectId, floorId }: AssociationIds, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static triggerArgoRunNwdConvert({ projectId, floorId }: AssociationIds, user: User) {
     return (fetch(`${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}/nwd-convert`, {
       method: "POST",
       headers: {
@@ -332,7 +330,7 @@ export default class WebGatewayApi {
         ...getAuthorizationHeaders(user)
       }
     }).then(checkFetchStatus) as Promise<void>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
   static recordUserActions(type, userActions, user: User) {

@@ -16,7 +16,7 @@ describe("PhotoAreaApi", () => {
       PhotoAreaApi.listPhotoAreasForProject({ projectId: "some-project-id" }, {
         authType: GATEWAY_JWT,
         gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-      }, null);
+      });
 
       expect(fetchMock.lastCall()[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/photo-areas`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
@@ -26,7 +26,7 @@ describe("PhotoAreaApi", () => {
       PhotoAreaApi.listPhotoAreasForProject({ projectId: "some-project-id" }, {
         authType: GATEWAY_JWT,
         gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-      }, null);
+      });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
@@ -41,7 +41,7 @@ describe("PhotoAreaApi", () => {
       PhotoAreaApi.listPhotoLocations({ projectId: "some-project-id", photoAreaId: 4 }, {
         authType: GATEWAY_JWT,
         gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-      }, null);
+      });
 
       expect(fetchMock.lastCall()[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/photo-areas/4/locations`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
@@ -51,7 +51,7 @@ describe("PhotoAreaApi", () => {
       PhotoAreaApi.listPhotoLocations({ projectId: "some-project-id", photoAreaId: 4 }, {
         authType: GATEWAY_JWT,
         gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-      }, null);
+      });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
@@ -65,7 +65,7 @@ describe("PhotoAreaApi", () => {
         PhotoAreaApi.listPhotoLocations({ projectId: "some-project-id", photoAreaId: 4, photoSessionId: 5 }, {
           authType: GATEWAY_JWT,
           gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-        }, null);
+        });
 
         expect(fetchMock.lastCall()[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/photo-areas/4/locations?photoSessionId=5`);
       });
@@ -81,7 +81,7 @@ describe("PhotoAreaApi", () => {
       PhotoAreaApi.listPhotoSessionsForPhotoArea({ projectId: "some-project-id", photoAreaId: 4 }, {
         authType: GATEWAY_JWT,
         gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-      }, null);
+      });
 
       expect(fetchMock.lastCall()[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/photo-areas/4/sessions`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
@@ -91,7 +91,7 @@ describe("PhotoAreaApi", () => {
       PhotoAreaApi.listPhotoSessionsForPhotoArea({ projectId: "some-project-id", photoAreaId: 4 }, {
         authType: GATEWAY_JWT,
         gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-      }, null);
+      });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });

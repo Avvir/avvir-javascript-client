@@ -1,13 +1,12 @@
 import checkFetchStatus from "./check_fetch_status";
 import getAuthorizationHeaders, { User } from "./get_authorization_headers";
-import getErrorCallback from "./get_error_callback";
-import pipelineTriggerFailed, { PipelineTriggerFailedEvent } from "../../events/superadmin/pipelines/pipeline_trigger_failed";
 import WebGatewayApi from "./web_gateway_api";
-import { AssociationIds, Dispatch } from "type_aliases";
+import { AssociationIds } from "type_aliases";
 import { httpPostHeaders } from "./request_headers";
+import Config from "./config";
 
 export default class PipelineApi {
-  static triggerPipeline({ accountId, projectId, floorId, scanDatasetId }: AssociationIds, extraMetadata = {}, user: User, dispatch: Dispatch<PipelineTriggerFailedEvent>) {
+  static triggerPipeline({ accountId, projectId, floorId, scanDatasetId }: AssociationIds, extraMetadata = {}, user: User) {
     const url = `${WebGatewayApi.baseUrl}/pipeline/${accountId}/${projectId}/${floorId}/${scanDatasetId}/trigger`;
     return (fetch(url, {
       method: "POST",
@@ -17,11 +16,7 @@ export default class PipelineApi {
       },
       body: JSON.stringify(extraMetadata)
     }).then(checkFetchStatus) as Promise<any>)
-      .catch(getErrorCallback(dispatch))
-      .catch((error) => {
-        dispatch(pipelineTriggerFailed({ floorId, scanDatasetId }));
-        throw error;
-      });
+      .catch(Config.sharedErrorHandler);
   }
 }
 

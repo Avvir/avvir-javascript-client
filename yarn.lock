@@ -1425,6 +1425,11 @@ chai-datetime@^1.7.0:
   dependencies:
     chai ">1.9.0"
 
+chai-json-equal@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/chai-json-equal/-/chai-json-equal-0.0.1.tgz#338fcbbdaec63349379c7c4278c8a28da3b141a1"
+  integrity sha1-M4/Lva7GM0k3nHxCeMiijaOxQaE=
+
 chai-roughly@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/chai-roughly/-/chai-roughly-1.0.0.tgz#1fea8e03ab7c76b428a2bc97a7d844d82e6ee176"
@@ -1436,6 +1441,11 @@ chai-spies@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/chai-spies/-/chai-spies-1.0.0.tgz#d16b39336fb316d03abf8c375feb23c0c8bb163d"
   integrity sha512-elF2ZUczBsFoP07qCfMO/zeggs8pqCf3fZGyK5+2X4AndS8jycZYID91ztD9oQ7d/0tnS963dPkd0frQEThDsg==
+
+chai-things@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/chai-things/-/chai-things-0.2.0.tgz#c55128378f9bb399e994f00052151984ed6ebe70"
+  integrity sha1-xVEoN4+bs5nplPAAUhUZhO1uvnA=
 
 chai@>1.9.0, chai@^4.2.0:
   version "4.2.0"
@@ -2734,6 +2744,11 @@ nise@^4.0.4:
     just-extend "^4.0.2"
     path-to-regexp "^1.7.0"
 
+node-fetch@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
+  integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
+
 node-modules-regexp@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/node-modules-regexp/-/node-modules-regexp-1.0.0.tgz#8d9dbe28964a4ac5712e9131642107c71e90ec40"
@@ -3504,6 +3519,12 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     extend-shallow "^3.0.2"
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
+
+"tolerant-deep-eql@git+http://git@github.com/TiraO/deep-eql.git#06a376d":
+  version "0.1.3"
+  resolved "git+http://git@github.com/TiraO/deep-eql.git#06a376d0ed7fd4b2f6f78addc13c524daf1b825e"
+  dependencies:
+    type-detect "^1.0.0"
 
 tr46@^1.0.1:
   version "1.0.1"

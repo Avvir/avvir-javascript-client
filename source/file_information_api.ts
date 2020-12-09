@@ -2,16 +2,15 @@ import ApiArgoResponse from "./models/api/api_argo_response";
 import ApiCloudFile from "./models/api/api_cloud_file";
 import checkFetchStatus from "./check_fetch_status";
 import getAuthorizationHeaders, { User } from "./get_authorization_headers";
-import getErrorCallback from "./get_error_callback";
-import PurposeTypeConverter from "../converters/purpose_type_converter";
-import uploadFailed, { UploadFailedEvent } from "../../events/notifications/failures/upload_failed";
+import PurposeTypeConverter from "./converters/purpose_type_converter";
 import WebGatewayApi from "./web_gateway_api";
-import { AssociationIds, AvvirApiFiles, Dispatch } from "type_aliases";
+import { AssociationIds, AvvirApiFiles } from "type_aliases";
 import { httpGetHeaders, httpPostHeaders } from "./request_headers";
-import { FloorPurposeType, PurposeType } from "./models/domain/enums/purpose_type";
+import { FloorPurposeType, PurposeType } from "./models/enums/purpose_type";
+import Config from "./config";
 
 export default class FileInformationApi {
-  static createProjectFile({ projectId }: AssociationIds, apiFile: ApiCloudFile, user: User, dispatch: Dispatch<UploadFailedEvent>) {
+  static createProjectFile({ projectId }: AssociationIds, apiFile: ApiCloudFile, user: User) {
     const url = `${WebGatewayApi.baseUrl}/projects/${projectId}/files`;
     return (fetch(url, {
       method: "POST",
@@ -21,7 +20,7 @@ export default class FileInformationApi {
       },
       body: JSON.stringify(apiFile)
     }).then(checkFetchStatus) as Promise<void>)
-      .catch(getErrorCallback(dispatch, true, uploadFailed));
+      .catch(Config.sharedErrorHandler);
   }
 
   static listProjectFiles({ projectId }: AssociationIds, user: User) {
@@ -55,7 +54,7 @@ export default class FileInformationApi {
     }).then(checkFetchStatus) as Promise<ApiCloudFile[]>);
   }
 
-  static saveFloorFile({ projectId, floorId }: AssociationIds, apiFile: ApiCloudFile, user: User, dispatch: Dispatch<UploadFailedEvent>) {
+  static saveFloorFile({ projectId, floorId }: AssociationIds, apiFile: ApiCloudFile, user: User) {
     const url = `${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}/file`;
     return (fetch(url, {
       method: "POST",
@@ -65,7 +64,7 @@ export default class FileInformationApi {
       },
       body: JSON.stringify(apiFile)
     }).then(checkFetchStatus) as Promise<void>)
-      .catch(getErrorCallback(dispatch, true, uploadFailed));
+      .catch(Config.sharedErrorHandler);
   }
 
   static listFloorFiles({ projectId, floorId }: AssociationIds, user: User) {
@@ -77,7 +76,7 @@ export default class FileInformationApi {
     }).then(checkFetchStatus) as Promise<AvvirApiFiles<FloorPurposeType>>;
   }
 
-  static saveScanDatasetFile({ projectId, floorId, scanDatasetId }: AssociationIds, apiFile: ApiCloudFile, user: User, dispatch: Dispatch<UploadFailedEvent>) {
+  static saveScanDatasetFile({ projectId, floorId, scanDatasetId }: AssociationIds, apiFile: ApiCloudFile, user: User) {
     const url = `${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/file`;
     return (fetch(url, {
       method: "POST",
@@ -87,7 +86,7 @@ export default class FileInformationApi {
       },
       body: JSON.stringify(apiFile)
     }).then(checkFetchStatus) as Promise<void>)
-      .catch(getErrorCallback(dispatch, true, uploadFailed));
+      .catch(Config.sharedErrorHandler);
   }
 
   static getScanDatasetFiles({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<{ files: ApiCloudFile[] }>

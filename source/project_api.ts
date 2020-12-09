@@ -4,11 +4,11 @@ import ApiProjectCostAnalysisProgress from "./models/api/api_project_cost_analys
 import ApiProjectMasterformatProgress from "./models/api/api_project_masterformat_progress";
 import checkFetchStatus from "./check_fetch_status";
 import getAuthorizationHeaders, { User } from "./get_authorization_headers";
-import getErrorCallback from "./get_error_callback";
 import WebGatewayApi from "./web_gateway_api";
 import { ApiFailureEvent } from "../../models/enums/event_types";
 import { AssociationIds, Dispatch } from "type_aliases";
 import { httpGetHeaders, httpPostHeaders } from "./request_headers";
+import Config from "./config";
 
 export default class ProjectApi {
   static listProjectsForOrganization(accountId: string, user: User) {
@@ -80,7 +80,7 @@ export default class ProjectApi {
     }).then(checkFetchStatus) as Promise<void>;
   }
 
-  static saveProjectCostAnalysisProgress({ projectId }: AssociationIds, progress, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static saveProjectCostAnalysisProgress({ projectId }: AssociationIds, progress, user: User) {
     const url = `${WebGatewayApi.baseUrl}/projects/${projectId}/cost-analysis-progress`;
     return (fetch(url, {
       method: "POST",
@@ -90,10 +90,10 @@ export default class ProjectApi {
       },
       body: JSON.stringify(progress)
     }).then(checkFetchStatus) as Promise<void>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static saveScannedProjectMasterformatProgress({ projectId }: AssociationIds, progress: ApiProjectMasterformatProgress, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static saveScannedProjectMasterformatProgress({ projectId }: AssociationIds, progress: ApiProjectMasterformatProgress, user: User) {
     const url = `${WebGatewayApi.baseUrl}/projects/${projectId}/masterformat-progress`;
     return (fetch(url, {
       method: "POST",
@@ -103,10 +103,10 @@ export default class ProjectApi {
       },
       body: JSON.stringify(progress)
     }).then(checkFetchStatus) as Promise<void>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
-  static saveScheduledProjectMasterformatProgress({ projectId }: AssociationIds, progress: ApiProjectMasterformatProgress, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static saveScheduledProjectMasterformatProgress({ projectId }: AssociationIds, progress: ApiProjectMasterformatProgress, user: User) {
     const url = `${WebGatewayApi.baseUrl}/projects/${projectId}/scheduled-masterformat-progress`;
     return (fetch(url, {
       method: "POST",
@@ -116,7 +116,7 @@ export default class ProjectApi {
       },
       body: JSON.stringify(progress)
     }).then(checkFetchStatus) as Promise<void>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
   static getProjectCostAnalysisProgress({ projectId }: AssociationIds, user: User) {

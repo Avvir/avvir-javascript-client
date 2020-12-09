@@ -1,11 +1,10 @@
 import ApiFloor from "./models/api/api_floor";
 import checkFetchStatus from "./check_fetch_status";
 import getAuthorizationHeaders, { User } from "./get_authorization_headers";
-import getErrorCallback from "./get_error_callback";
 import WebGatewayApi from "./web_gateway_api";
-import { ApiFailureEvent } from "../../models/enums/event_types";
-import { AssociationIds, Dispatch } from "type_aliases";
+import { AssociationIds } from "type_aliases";
 import { httpGetHeaders, httpPostHeaders } from "./request_headers";
+import Config from "./config";
 
 export default class FloorApi {
   static listFloorsForProject(projectId: string, user: User) {
@@ -17,7 +16,7 @@ export default class FloorApi {
     }).then(checkFetchStatus) as Promise<ApiFloor[]>;
   }
 
-  static createFloor(projectId: string, floorNumber: string, user: User, dispatch: Dispatch<ApiFailureEvent>) {
+  static createFloor(projectId: string, floorNumber: string, user: User) {
     const url = `${WebGatewayApi.baseUrl}/projects/${projectId}/floors`;
     return (fetch(url, {
       method: "POST",
@@ -27,7 +26,7 @@ export default class FloorApi {
       },
       body: JSON.stringify({ text: floorNumber })
     }).then(checkFetchStatus) as Promise<ApiFloor>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
   static getFloor({ projectId, floorId }: AssociationIds, user: User) {
@@ -49,7 +48,7 @@ export default class FloorApi {
     }).then(checkFetchStatus) as Promise<any>;
   }
 
-  static updateFloor({ projectId, floorId }: AssociationIds, apiFloor: ApiFloor, user: User, dispatch: Dispatch<ApiFailureEvent>, isSuperadmin: boolean = true) {
+  static updateFloor({ projectId, floorId }: AssociationIds, apiFloor: ApiFloor, user: User, isSuperadmin: boolean = true) {
     const url = `${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}`;
     const patchHeaders = isSuperadmin ? httpPostHeaders : httpPostHeaders("application/vnd.avvir.gateway.UserFloor+json")
     return (fetch(url, {
@@ -60,7 +59,7 @@ export default class FloorApi {
       },
       body: JSON.stringify(apiFloor)
     }).then(checkFetchStatus) as Promise<void>)
-      .catch(getErrorCallback(dispatch));
+      .catch(Config.sharedErrorHandler);
   }
 
   static updateFloorOrder({ projectId, floorId }: AssociationIds, ordinal: number, user: User) {
