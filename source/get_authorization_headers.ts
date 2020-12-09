@@ -3,16 +3,16 @@ import UserRole from "./models/enums/user_role";
 
 export type GatewayUser = {
   authType: typeof GATEWAY_JWT
-  gatewayUser: {
-    idToken: string,
-    role: UserRole
+  gatewayUser?: {
+    idToken?: string,
+    role?: UserRole
   }
 }
 
 export type FirebaseUser = {
   firebaseUser: {
     uid: string
-    role: UserRole
+    role?: UserRole
     displayName?: string
     idToken: string
     email?: string

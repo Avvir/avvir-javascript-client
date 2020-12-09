@@ -1,5 +1,5 @@
 import "./test_utils/setup_tests";
-import { expect } from "chai";
+import {expect} from "chai";
 import fetchMock from "fetch-mock";
 import moment from "moment";
 
@@ -9,7 +9,8 @@ import ApiProjectMasterformatProgress from "../source/models/api/api_project_mas
 import DateConverter from "../source/converters/date_converter";
 import ProjectApi from "../source/project_api";
 import WebGatewayApi from "../source/web_gateway_api";
-import { FIREBASE } from "../source/models/enums/user_auth_type";
+import {FIREBASE, GATEWAY_JWT} from "../source/models/enums/user_auth_type";
+import {SUPERADMIN} from "../source/models/enums/user_role";
 
 describe("ProjectApi", () => {
   let user;
@@ -54,7 +55,7 @@ describe("ProjectApi", () => {
     it("makes a request to the gateway api", () => {
       ProjectApi.getProject("some-project-id", {
         authType: "GATEWAY_JWT",
-        gatewayUser: { idToken: "some-firebase.id.token" }
+        gatewayUser: {idToken: "some-firebase.id.token"}
       });
       const fetchCall = fetchMock.lastCall();
 
@@ -65,7 +66,7 @@ describe("ProjectApi", () => {
     it("includes the authorization headers", () => {
       ProjectApi.getProject("some-project-id", {
         authType: "GATEWAY_JWT",
-        gatewayUser: { idToken: "some-firebase.id.token" }
+        gatewayUser: {idToken: "some-firebase.id.token"}
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
@@ -107,14 +108,14 @@ describe("ProjectApi", () => {
 
     it("makes a call to the masterformat progress endpoint", () => {
       ProjectApi.saveScannedProjectMasterformatProgress(
-        { projectId: "some-project-id" },
+        {projectId: "some-project-id"},
         progress,
-        { firebaseUser: { idToken: "some-firebase.id.token" } });
+        {firebaseUser: {idToken: "some-firebase.id.token"}});
       const fetchCall = fetchMock.lastCall();
 
       expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/masterformat-progress`);
       expect(JSON.parse(fetchCall[1].body)).to.deep.eq([{
-        masterformat: { version: 2016, code: "00 00 01" },
+        masterformat: {version: 2016, code: "00 00 01"},
         scanDate: DateConverter.dateToInstant(moment("2018-04-01")),
         percentComplete: 0.8
       }]);
@@ -122,7 +123,7 @@ describe("ProjectApi", () => {
 
     it("sends the request with authorization headers", () => {
       ProjectApi.saveScannedProjectMasterformatProgress(
-        { projectId: "some-project-id" },
+        {projectId: "some-project-id"},
         progress,
         user);
 
@@ -134,25 +135,27 @@ describe("ProjectApi", () => {
 
     it("resolves the promise", () => {
       return ProjectApi.saveScannedProjectMasterformatProgress(
-        { projectId: "some-project-id" },
+        {projectId: "some-project-id"},
         progress,
-        { firebaseUser: { idToken: "some-firebase.id.token" } });
+        {firebaseUser: {idToken: "some-firebase.id.token"}});
     });
 
     describe("when the call fails", () => {
       beforeEach(() => {
         fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/masterformat-progress`,
-          { status: 500, body: { some: "body" }, sendAsJson: true },
-          { overwriteRoutes: true });
+          {status: 500, body: {some: "body"}, sendAsJson: true},
+          {overwriteRoutes: true});
       });
 
       it("dispatches an api failure notification", () => {
         let rejected = false;
         return ProjectApi.saveScannedProjectMasterformatProgress(
-          { projectId: "some-project-id" },
+          {projectId: "some-project-id"},
           progress,
-          { firebaseUser: { idToken: "some-firebase.id.token" } })
-          .catch(() => {rejected = true;})
+          {firebaseUser: {idToken: "some-firebase.id.token"}})
+          .catch(() => {
+            rejected = true;
+          })
           .finally(() => {
             expect(rejected).to.eq(true);
           });
@@ -186,9 +189,9 @@ describe("ProjectApi", () => {
 
     it("makes a call to the cost analysis progress endpoint", () => {
       ProjectApi.saveProjectCostAnalysisProgress(
-        { projectId: "some-project-id" },
+        {projectId: "some-project-id"},
         progress,
-        { firebaseUser: { idToken: "some-firebase.id.token" } });
+        {firebaseUser: {idToken: "some-firebase.id.token"}});
       const fetchCall = fetchMock.lastCall();
 
       expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/cost-analysis-progress`);
@@ -214,7 +217,7 @@ describe("ProjectApi", () => {
 
     it("sends the request with authorization headers", () => {
       ProjectApi.saveProjectCostAnalysisProgress(
-        { projectId: "some-project-id" },
+        {projectId: "some-project-id"},
         progress,
         user);
 
@@ -226,25 +229,27 @@ describe("ProjectApi", () => {
 
     it("resolves the promise", () => {
       return ProjectApi.saveProjectCostAnalysisProgress(
-        { projectId: "some-project-id" },
+        {projectId: "some-project-id"},
         progress,
-        { firebaseUser: { idToken: "some-firebase.id.token" } });
+        {firebaseUser: {idToken: "some-firebase.id.token"}});
     });
 
     describe("when the call fails", () => {
       beforeEach(() => {
         fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/cost-analysis-progress`,
-          { status: 500, body: { some: "body" }, sendAsJson: true },
-          { overwriteRoutes: true });
+          {status: 500, body: {some: "body"}, sendAsJson: true},
+          {overwriteRoutes: true});
       });
 
       it("dispatches an api failure notification", () => {
         let rejected = false;
         return ProjectApi.saveProjectCostAnalysisProgress(
-          { projectId: "some-project-id" },
+          {projectId: "some-project-id"},
           progress,
-          { firebaseUser: { idToken: "some-firebase.id.token" } })
-          .catch(() => {rejected = true;})
+          {firebaseUser: {idToken: "some-firebase.id.token"}})
+          .catch(() => {
+            rejected = true;
+          })
           .finally(() => {
             expect(rejected).to.eq(true);
           });
@@ -264,14 +269,14 @@ describe("ProjectApi", () => {
 
     it("makes a call to the scheduled masterformat progress endpoint", () => {
       ProjectApi.saveScheduledProjectMasterformatProgress(
-        { projectId: "some-project-id" },
+        {projectId: "some-project-id"},
         progress,
-        { firebaseUser: { idToken: "some-firebase.id.token" } });
+        {firebaseUser: {idToken: "some-firebase.id.token"}});
       const fetchCall = fetchMock.lastCall();
 
       expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/scheduled-masterformat-progress`);
       expect(JSON.parse(fetchCall[1].body)).to.deep.eq([{
-        masterformat: { version: 2016, code: "00 00 01" },
+        masterformat: {version: 2016, code: "00 00 01"},
         scanDate: DateConverter.dateToInstant(moment("2018-04-01")),
         percentComplete: 0.8
       }]);
@@ -279,7 +284,7 @@ describe("ProjectApi", () => {
 
     it("sends the request with authorization headers", () => {
       ProjectApi.saveScheduledProjectMasterformatProgress(
-        { projectId: "some-project-id" },
+        {projectId: "some-project-id"},
         progress,
         user);
 
@@ -291,25 +296,27 @@ describe("ProjectApi", () => {
 
     it("resolves the promise", () => {
       return ProjectApi.saveScheduledProjectMasterformatProgress(
-        { projectId: "some-project-id" },
+        {projectId: "some-project-id"},
         progress,
-        { firebaseUser: { idToken: "some-firebase.id.token" } });
+        {firebaseUser: {idToken: "some-firebase.id.token"}});
     });
 
     describe("when the call fails", () => {
       beforeEach(() => {
         fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/scheduled-masterformat-progress`,
-          { status: 500, body: { some: "body" }, sendAsJson: true },
-          { overwriteRoutes: true });
+          {status: 500, body: {some: "body"}, sendAsJson: true},
+          {overwriteRoutes: true});
       });
 
       it("rejects the promise", () => {
         let rejected = false;
         return ProjectApi.saveScheduledProjectMasterformatProgress(
-          { projectId: "some-project-id" },
+          {projectId: "some-project-id"},
           progress,
-          { firebaseUser: { idToken: "some-firebase.id.token" } })
-          .catch(() => {rejected = true;})
+          {firebaseUser: {idToken: "some-firebase.id.token"}})
+          .catch(() => {
+            rejected = true;
+          })
           .finally(() => {
             expect(rejected).to.eq(true);
           });
@@ -329,8 +336,8 @@ describe("ProjectApi", () => {
 
     it("makes a call to retrieve the cost analysis progress endpoint", () => {
       ProjectApi.getProjectCostAnalysisProgress(
-        { projectId: "some-project-id" },
-        { firebaseUser: { idToken: "some-firebase.id.token" } }
+        {projectId: "some-project-id"},
+        {firebaseUser: {idToken: "some-firebase.id.token"}}
       );
       const fetchCall = fetchMock.lastCall();
       expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/cost-analysis-progress`);
@@ -338,7 +345,7 @@ describe("ProjectApi", () => {
 
     it("sends the request with authorization headers", () => {
       ProjectApi.getProjectCostAnalysisProgress(
-        { projectId: "some-project-id" },
+        {projectId: "some-project-id"},
         user);
 
       const lastFetchOpts = fetchMock.lastOptions();
@@ -355,9 +362,9 @@ describe("ProjectApi", () => {
     });
 
     it("makes a request to the gateway api", () => {
-      ProjectApi.getScannedProjectMasterformatProgress({ projectId: "some-project-id" }, {
-        authType: "GATEWAY_JWT",
-        gatewayUser: { idToken: "some-firebase.id.token" }
+      ProjectApi.getScannedProjectMasterformatProgress({projectId: "some-project-id"}, {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token"}
       });
       const fetchCall = fetchMock.lastCall();
 
@@ -366,9 +373,9 @@ describe("ProjectApi", () => {
     });
 
     it("includes the authorization headers", () => {
-      ProjectApi.getScannedProjectMasterformatProgress({ projectId: "some-project-id" }, {
-        authType: "GATEWAY_JWT",
-        gatewayUser: { idToken: "some-firebase.id.token" }
+      ProjectApi.getScannedProjectMasterformatProgress({projectId: "some-project-id"}, {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token"}
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
@@ -381,9 +388,9 @@ describe("ProjectApi", () => {
     });
 
     it("makes a request to the gateway api", () => {
-      ProjectApi.getScheduledProjectMasterformatProgress({ projectId: "some-project-id" }, {
-        authType: "GATEWAY_JWT",
-        gatewayUser: { idToken: "some-firebase.id.token" }
+      ProjectApi.getScheduledProjectMasterformatProgress({projectId: "some-project-id"}, {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token"}
       });
       const fetchCall = fetchMock.lastCall();
 
@@ -392,9 +399,9 @@ describe("ProjectApi", () => {
     });
 
     it("includes the authorization headers", () => {
-      ProjectApi.getScheduledProjectMasterformatProgress({ projectId: "some-project-id" }, {
-        authType: "GATEWAY_JWT",
-        gatewayUser: { idToken: "some-firebase.id.token" }
+      ProjectApi.getScheduledProjectMasterformatProgress({projectId: "some-project-id"}, {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: SUPERADMIN}
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
@@ -417,10 +424,10 @@ describe("ProjectApi", () => {
     });
 
     it("includes auth headers and makes a request to the gateway", () => {
-      ProjectApi.listProjectFloorFiles({ projectId: "some-project-id" },
+      ProjectApi.listProjectFloorFiles({projectId: "some-project-id"},
         {
-          authType: "GATEWAY_JWT",
-          gatewayUser: { idToken: "some-firebase.id.token" }
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: "SUPERADMIN"}
         });
       const fetchCall = fetchMock.lastCall();
 

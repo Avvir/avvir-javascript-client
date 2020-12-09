@@ -2,8 +2,6 @@ import { Matrix3 } from "three";
 import Matrix3Converter from "../../source/converters/matrix_3_converter";
 import { expect } from "chai";
 
-
-
 describe("Matrix3Converter", () => {
   let someMatrix3, someMatrix3AsString, someMatrix3AsStringWithRandomSpaces
   beforeEach(() => {

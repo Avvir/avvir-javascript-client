@@ -8,7 +8,7 @@
  */
 import { Matrix3 } from "three";
 
-import ApiMatrix3 from "../../models/api/api_matrix_3";
+import ApiMatrix3 from "../models/api/api_matrix_3";
 
 export default class Matrix3Converter {
   private static convertMatrixStringToArray(matrixString: string): string[] {

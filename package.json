@@ -13,6 +13,7 @@
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-typescript": "^7.12.7",
     "@types/mocha": "^8.2.0",
+    "babel-plugin-module-resolver": "^4.0.0",
     "chai-almost": "^1.0.1",
     "chai-datetime": "^1.7.0",
     "chai-roughly": "^1.0.0",
@@ -31,6 +32,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "@babel/register": "^7.12.1",
     "babel-loader": "^8.2.2",
     "chai": "^4.2.0",
     "mocha": "^8.2.1",

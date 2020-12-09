@@ -1,0 +1,24 @@
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./src/typings"
+        ],
+        "extensions": [
+          ".js",
+          ".json",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }]
+
+  ]
+}
