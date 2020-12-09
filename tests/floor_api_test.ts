@@ -3,13 +3,12 @@ import { expect } from "chai";
 import fetchMock from "fetch-mock";
 import _ from "underscore";
 
-import ApiFloor from "../source/javascript/models/api/api_floor";
-import FloorApi from "../source/javascript/services/gateway_api_services/floor_api";
-import WebGatewayApi from "../source/javascript/services/gateway_api_services/web_gateway_api";
-import { API_FAILURE } from "../source/javascript/events/notifications/failures/api_failure";
-import { FIREBASE } from "../source/javascript/models/domain/enums/user_auth_type";
-import { makeFakeDispatch, makeStoreContents } from "./test_utils/factories/test_factories";
-import { User } from "../source/javascript/services/gateway_api_services/get_authorization_headers";
+import ApiFloor from "../source/models/api/api_floor";
+import FloorApi from "../source/floor_api";
+import WebGatewayApi from "../source/web_gateway_api";
+import { API_FAILURE } from "../source/models/enums/event_types";
+import { FIREBASE } from "../source/models/enums/user_auth_type";
+import { User } from "../source/get_authorization_headers";
 
 describe("FloorApi", () => {
   let fakeDispatch, dispatchSpy, fakeGetState, user;
@@ -24,7 +23,6 @@ describe("FloorApi", () => {
     });
 
     dispatchSpy = sandbox.spy();
-    fakeDispatch = makeFakeDispatch(dispatchSpy, fakeGetState);
   });
 
   describe("#listFloorsForProject", () => {
@@ -137,14 +135,14 @@ describe("FloorApi", () => {
           { overwriteRoutes: true });
       });
 
-      it("dispatches an api failure notification", () => {
+      it("calls the shared error handler", () => {
         return FloorApi.createFloor("some-project-id",
           "14",
           { firebaseUser: { idToken: "some-firebase.id.token" } } as User,
           fakeDispatch)
           .catch(_.noop)
           .finally(() => {
-            expect(dispatchSpy).to.have.been.calledWithMatch({
+            expect(config.sharedErrorHandler).to.have.been.calledWithMatch({
               type: API_FAILURE,
             });
           });

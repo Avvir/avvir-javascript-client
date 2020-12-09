@@ -3,15 +3,15 @@ import { expect } from "chai";
 import fetchMock from "fetch-mock";
 import moment from "moment";
 
-import ApiCloudFile from "../source/javascript/models/api/api_cloud_file";
-import DateConverter from "../source/javascript/services/converters/date_converter";
-import FileInformationApi from "../source/javascript/services/gateway_api_services/file_information_api";
-import WebGatewayApi from "../source/javascript/services/gateway_api_services/web_gateway_api";
-import { FIREBASE } from "../source/javascript/models/domain/enums/user_auth_type";
-import { makeFakeDispatch, makeStoreContents } from "./test_utils/factories/test_factories";
-import { OTHER } from "../source/javascript/models/domain/enums/purpose_type";
-import { SUPERADMIN } from "../source/javascript/models/domain/enums/user_role";
-import { UPLOAD_FAILED } from "../source/javascript/events/notifications/failures/upload_failed";
+import ApiCloudFile from "../source/models/api/api_cloud_file";
+import DateConverter from "../source/converters/date_converter";
+import FileInformationApi from "../source/file_information_api";
+import WebGatewayApi from "../source/web_gateway_api";
+import { FIREBASE } from "../source/models/enums/user_auth_type";
+import { makeFakeDispatch, makeStoreContents } from "./test_utils/test_factories";
+import { OTHER } from "../source/models/enums/purpose_type";
+import { SUPERADMIN } from "../source/models/enums/user_role";
+import { UPLOAD_FAILED } from "../source/events/notifications/failures/upload_failed";
 
 describe("FileInformationApi", () => {
   let fakeDispatch, dispatchSpy, fakeGetState, user;

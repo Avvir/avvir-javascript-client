@@ -1,4 +1,4 @@
-import ApiOrganization from "../../models/api/api_organization";
+import ApiOrganization from "./models/api/api_organization";
 import checkFetchStatus from "./check_fetch_status";
 import getAuthorizationHeaders, { User } from "./get_authorization_headers";
 import WebGatewayApi from "./web_gateway_api";

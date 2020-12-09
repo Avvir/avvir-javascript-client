@@ -1,10 +1,10 @@
 import "./test_utils/setup_tests";
 import fetchMock from "fetch-mock";
-import WebGatewayApi from "../source/javascript/services/gateway_api_services/web_gateway_api";
-import { GATEWAY_JWT } from "../source/javascript/models/domain/enums/user_auth_type";
-import { USER } from "../source/javascript/models/domain/enums/user_role";
+import WebGatewayApi from "../source/web_gateway_api";
+import { GATEWAY_JWT } from "../source/models/enums/user_auth_type";
+import { USER } from "../source/models/enums/user_role";
 import { expect } from "chai";
-import PhotoAreaApi from "../source/javascript/services/gateway_api_services/photo_area_api";
+import PhotoAreaApi from "../source/photo_area_api";
 
 describe("PhotoAreaApi", () => {
   describe("#listPhotoAreasForProject", () => {

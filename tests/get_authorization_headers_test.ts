@@ -1,7 +1,7 @@
 import { expect } from "chai";
 
-import getAuthorizationHeaders from "../source/javascript/services/gateway_api_services/get_authorization_headers";
-import { BASIC, FIREBASE, GATEWAY_JWT } from "../source/javascript/models/domain/enums/user_auth_type";
+import getAuthorizationHeaders from "../source/get_authorization_headers";
+import { BASIC, FIREBASE, GATEWAY_JWT } from "../source/models/enums/user_auth_type";
 
 describe("#getAuthorizationHeaders", () => {
   describe("when the user signed in using firebase auth directly", () => {

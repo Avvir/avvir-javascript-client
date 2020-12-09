@@ -3,11 +3,11 @@ import { expect } from "chai";
 import fetchMock from "fetch-mock";
 import _ from "underscore";
 
-import PipelineApi from "../source/javascript/services/gateway_api_services/pipeline_api";
-import WebGatewayApi from "../source/javascript/services/gateway_api_services/web_gateway_api";
-import { API_FAILURE } from "../source/javascript/events/notifications/failures/api_failure";
-import { FIREBASE } from "../source/javascript/models/domain/enums/user_auth_type";
-import { makeFakeDispatch, makeStoreContents } from "./test_utils/factories/test_factories";
+import PipelineApi from "../source/pipeline_api";
+import WebGatewayApi from "../source/web_gateway_api";
+import { API_FAILURE } from "../source/models/enums/event_types";
+import { FIREBASE } from "../source/models/enums/user_auth_type";
+import { makeFakeDispatch, makeStoreContents } from "./test_utils/test_factories";
 
 describe("PipelineApi", () => {
   let fakeDispatch, dispatchSpy, fakeGetState, user;

@@ -1,5 +1,5 @@
-import ResponseError from "../../models/response_error";
-import responseStatusText from "../../../resources/response_statuses.json";
+import ResponseError from "./models/response_error";
+import responseStatusText from "./resources/response_statuses.json";
 import WebGatewayApi from "./web_gateway_api";
 
 const checkFetchStatus = <R extends string | {}>(response: Response): Promise<R | never> => {

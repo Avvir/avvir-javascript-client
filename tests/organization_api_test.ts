@@ -2,9 +2,9 @@ import "./test_utils/setup_tests";
 import { expect } from "chai";
 import fetchMock from "fetch-mock";
 
-import OrganizationApi from "../source/javascript/services/gateway_api_services/organization_api";
-import WebGatewayApi from "../source/javascript/services/gateway_api_services/web_gateway_api";
-import { FIREBASE } from "../source/javascript/models/domain/enums/user_auth_type";
+import OrganizationApi from "../source/organization_api";
+import WebGatewayApi from "../source/web_gateway_api";
+import { FIREBASE } from "../source/models/enums/user_auth_type";
 
 describe("OrganizationApi", () => {
   let user;

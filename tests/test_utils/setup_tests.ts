@@ -1,23 +1,18 @@
 import chai from "chai";
 import sinon, { SinonSandbox, SinonStub } from "sinon";
 import SinonChai from "sinon-chai";
-import * as PropTypes from "prop-types";
-import { configure as configureEnzyme, mount, MountRendererProps, ReactWrapper, shallow, ShallowRendererProps } from "enzyme";
 import ChaiSpies from "chai-spies";
 import chaiAlmost from "chai-almost";
 import ChaiDatetime from "chai-datetime";
 import fetchMock from "fetch-mock";
-import React, { Component, ReactElement } from "react";
 
 import beVeryLike from "./chai_be_very_like";
-import FileInformationApi from "../../src/javascript/services/gateway_api_services/file_information_api";
-import FloorApi from "../../src/javascript/services/gateway_api_services/floor_api";
-import meshStore from "../../src/javascript/services/utilities/threejs_utilities/mesh_store";
-import PipelineApi from "../../src/javascript/services/gateway_api_services/pipeline_api";
-import ProjectApi from "../../src/javascript/services/gateway_api_services/project_api";
-import ScanDatasetApi from "../../src/javascript/services/gateway_api_services/scan_dataset_api";
-import WebGatewayApi from "../../src/javascript/services/gateway_api_services/web_gateway_api";
-import { DeepPartial } from "../../src/typings/type_aliases";
+import FileInformationApi from "../../source/file_information_api";
+import FloorApi from "../../source/floor_api";
+import PipelineApi from "../../source/pipeline_api";
+import ProjectApi from "../../source/project_api";
+import ScanDatasetApi from "../../source/scan_dataset_api";
+import WebGatewayApi from "../../source/web_gateway_api";
 
 const chaiRoughly = require("chai-roughly");
 const chaiJsonEqual = require("chai-json-equal");
@@ -56,14 +51,10 @@ export const stubAllGatewayRoutes = () => {
 
 beforeEach(() => {
   sandbox = sinon.createSandbox();
-  sandbox.stub(global, "requestAnimationFrame").callsFake(rafStub.add);
-  sandbox.stub(window, "requestAnimationFrame").callsFake(rafStub.add);
-  meshStore.clearAll();
 });
 
 afterEach((done) => {
   sandbox.restore();
   fetchMock.flush().then(() => done());
   fetchMock.restore();
-  rafStub.reset();
 });

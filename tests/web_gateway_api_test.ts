@@ -3,17 +3,16 @@ import { expect } from "chai";
 import { match } from "sinon";
 import fetchMock from "fetch-mock";
 
-import ApiPipeline from "../source/javascript/models/api/api_pipeline";
-import DetailedElement from "../source/javascript/models/domain/detailed_element";
-import ResponseError from "../source/javascript/models/response_error";
-import WebGatewayApi from "../source/javascript/services/gateway_api_services/web_gateway_api";
-import { API_FAILURE } from "../source/javascript/events/notifications/failures/api_failure";
-import { DETECTED, INCLUDED } from "../source/javascript/models/domain/enums/deviation_status";
-import { DEVIATED } from "../source/javascript/models/domain/enums/scan_label";
-import { FIREBASE, GATEWAY_JWT } from "../source/javascript/models/domain/enums/user_auth_type";
-import { makeFakeDispatch, makeStoreContents } from "./test_utils/factories/test_factories";
-import { USER } from "../source/javascript/models/domain/enums/user_role";
-import { ELEMENTS_STATUSES_UPDATED } from "../source/javascript/events/viewer/elements_statuses_updated";
+import ApiPipeline from "../source/models/api/api_pipeline";
+import DetailedElement from "../source/models/domain/detailed_element";
+import ResponseError from "../source/models/response_error";
+import WebGatewayApi from "../source/web_gateway_api";
+import { DETECTED, INCLUDED } from "../source/models/enums/deviation_status";
+import { DEVIATED } from "../source/models/enums/scan_label";
+import { FIREBASE, GATEWAY_JWT } from "../source/models/enums/user_auth_type";
+import { makeFakeDispatch, makeStoreContents } from "./test_utils/test_factories";
+import { USER } from "../source/models/enums/user_role";
+import { ELEMENTS_STATUSES_UPDATED, API_FAILURE } from "../source/models/enums/event_types";
 
 describe("WebGatewayApi", () => {
   describe("::login", () => {

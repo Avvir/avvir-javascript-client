@@ -1,5 +1,5 @@
-import { BASIC, FIREBASE, GATEWAY_JWT } from "../../models/domain/enums/user_auth_type";
-import UserRole from "../../models/domain/enums/user_role";
+import { BASIC, FIREBASE, GATEWAY_JWT } from "./models/enums/user_auth_type";
+import UserRole from "./models/enums/user_role";
 
 export type GatewayUser = {
   authType: typeof GATEWAY_JWT

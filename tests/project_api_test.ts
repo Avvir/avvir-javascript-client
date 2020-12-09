@@ -3,13 +3,13 @@ import { expect } from "chai";
 import fetchMock from "fetch-mock";
 import moment from "moment";
 
-import ApiMasterformat from "../source/javascript/models/api/api_masterformat";
-import ApiProjectCostAnalysisProgress from "../source/javascript/models/api/api_project_cost_analysis_progress";
-import ApiProjectMasterformatProgress from "../source/javascript/models/api/api_project_masterformat_progress";
-import DateConverter from "../source/javascript/services/converters/date_converter";
-import ProjectApi from "../source/javascript/services/gateway_api_services/project_api";
-import WebGatewayApi from "../source/javascript/services/gateway_api_services/web_gateway_api";
-import { FIREBASE } from "../source/javascript/models/domain/enums/user_auth_type";
+import ApiMasterformat from "../source/models/api/api_masterformat";
+import ApiProjectCostAnalysisProgress from "../source/models/api/api_project_cost_analysis_progress";
+import ApiProjectMasterformatProgress from "../source/models/api/api_project_masterformat_progress";
+import DateConverter from "../source/converters/date_converter";
+import ProjectApi from "../source/project_api";
+import WebGatewayApi from "../source/web_gateway_api";
+import { FIREBASE } from "../source/models/enums/user_auth_type";
 
 describe("ProjectApi", () => {
   let user;

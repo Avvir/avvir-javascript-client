@@ -1,5 +1,5 @@
-import ApiArgoResponse from "../../models/api/api_argo_response";
-import ApiCloudFile from "../../models/api/api_cloud_file";
+import ApiArgoResponse from "./models/api/api_argo_response";
+import ApiCloudFile from "./models/api/api_cloud_file";
 import checkFetchStatus from "./check_fetch_status";
 import getAuthorizationHeaders, { User } from "./get_authorization_headers";
 import getErrorCallback from "./get_error_callback";
@@ -8,7 +8,7 @@ import uploadFailed, { UploadFailedEvent } from "../../events/notifications/fail
 import WebGatewayApi from "./web_gateway_api";
 import { AssociationIds, AvvirApiFiles, Dispatch } from "type_aliases";
 import { httpGetHeaders, httpPostHeaders } from "./request_headers";
-import { FloorPurposeType, PurposeType } from "../../models/domain/enums/purpose_type";
+import { FloorPurposeType, PurposeType } from "./models/domain/enums/purpose_type";
 
 export default class FileInformationApi {
   static createProjectFile({ projectId }: AssociationIds, apiFile: ApiCloudFile, user: User, dispatch: Dispatch<UploadFailedEvent>) {

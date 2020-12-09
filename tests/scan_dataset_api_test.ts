@@ -4,18 +4,17 @@ import fetchMock from "fetch-mock";
 import _ from "underscore";
 import moment from "moment";
 
-import ApiScanDataset from "../source/javascript/models/api/api_scan_dataset";
-import DateConverter from "../source/javascript/services/converters/date_converter";
-import ScanDatasetApi from "../source/javascript/services/gateway_api_services/scan_dataset_api";
-import WebGatewayApi from "../source/javascript/services/gateway_api_services/web_gateway_api";
-import { API_FAILURE } from "../source/javascript/events/notifications/failures/api_failure";
-import { FIREBASE, GATEWAY_JWT } from "../source/javascript/models/domain/enums/user_auth_type";
-import { makeFakeDispatch, makeStoreContents } from "./test_utils/factories/test_factories";
-import { SUPERADMIN, USER } from "../source/javascript/models/domain/enums/user_role";
-import { UserSessionStore } from "../source/javascript/services/reducers/reduce_user_session";
+import ApiScanDataset from "../source/models/api/api_scan_dataset";
+import DateConverter from "../source/converters/date_converter";
+import ScanDatasetApi from "../source/scan_dataset_api";
+import WebGatewayApi from "../source/web_gateway_api";
+import { API_FAILURE } from "../source/models/enums/event_types";
+import { FIREBASE, GATEWAY_JWT } from "../source/models/enums/user_auth_type";
+import { makeFakeDispatch, makeStoreContents } from "./test_utils/test_factories";
+import { SUPERADMIN, USER } from "../source/models/enums/user_role";
 
 describe("ScanDatasetApi", () => {
-  let fakeDispatch, dispatchSpy, fakeGetState, user: UserSessionStore;
+  let fakeDispatch, dispatchSpy, fakeGetState, user: any;
   beforeEach(() => {
     user = { authType: FIREBASE, firebaseUser: { uid: "some-uid", role: SUPERADMIN, idToken: "some-firebase.id.token" } };
     fakeGetState = () => makeStoreContents({

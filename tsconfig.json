@@ -22,17 +22,18 @@
     "baseUrl": "./",
     "paths": {
       "*": [
-        "src/typings/*"
+        "source/typings/*"
       ],
       "type_aliases": [
-        "src/typings/type_aliases"
+        "source/typings/type_aliases"
       ],
       "uniformat": [
-        "src/typings/uniformat"
+        "source/typings/uniformat"
       ]
     }
   },
   "include": [
-    "./src"
+    "./source",
+    "./tests"
   ]
 }

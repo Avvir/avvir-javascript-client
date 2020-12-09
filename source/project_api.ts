@@ -1,12 +1,12 @@
-import ApiCloudFile from "../../models/api/api_cloud_file";
-import ApiProject from "../../models/api/api_project";
-import ApiProjectCostAnalysisProgress from "../../models/api/api_project_cost_analysis_progress";
-import ApiProjectMasterformatProgress from "../../models/api/api_project_masterformat_progress";
+import ApiCloudFile from "./models/api/api_cloud_file";
+import ApiProject from "./models/api/api_project";
+import ApiProjectCostAnalysisProgress from "./models/api/api_project_cost_analysis_progress";
+import ApiProjectMasterformatProgress from "./models/api/api_project_masterformat_progress";
 import checkFetchStatus from "./check_fetch_status";
 import getAuthorizationHeaders, { User } from "./get_authorization_headers";
 import getErrorCallback from "./get_error_callback";
 import WebGatewayApi from "./web_gateway_api";
-import { ApiFailureEvent } from "../../events/notifications/failures/api_failure";
+import { ApiFailureEvent } from "../../models/enums/event_types";
 import { AssociationIds, Dispatch } from "type_aliases";
 import { httpGetHeaders, httpPostHeaders } from "./request_headers";
 

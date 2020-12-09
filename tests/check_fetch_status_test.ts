@@ -3,9 +3,9 @@ import { expect } from "chai";
 import { match } from "sinon";
 import { Response, Headers } from "node-fetch";
 
-import checkFetchStatus from "../source/javascript/services/gateway_api_services/check_fetch_status";
-import ResponseError from "../source/javascript/models/response_error";
-import WebGatewayApi from "../source/javascript/services/gateway_api_services/web_gateway_api";
+import checkFetchStatus from "../source/check_fetch_status";
+import ResponseError from "../source/models/response_error";
+import WebGatewayApi from "../source/web_gateway_api";
 
 describe("#checkFetchStatus", () => {
   describe("when the request is successful", () => {

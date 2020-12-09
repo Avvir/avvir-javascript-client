@@ -1,14 +1,15 @@
-import ApiScanDataset from "../../models/api/api_scan_dataset";
+import ApiScanDataset from "./models/api/api_scan_dataset";
 import checkFetchStatus from "./check_fetch_status";
-import DetailedElement from "../../models/domain/detailed_element";
+import DetailedElement from "./models/domain/detailed_element";
 import getAuthorizationHeaders, { User } from "./get_authorization_headers";
 import getErrorCallback from "./get_error_callback";
-import ProgressReportForScanDataset from "../../models/domain/progress/progress_report_for_scan_dataset";
+import ProgressReportForScanDataset from "./models/domain/progress/progress_report_for_scan_dataset";
 import WebGatewayApi from "./web_gateway_api";
-import { ApiFailureEvent } from "../../events/notifications/failures/api_failure";
-import { AssociationIds, Dispatch } from "type_aliases";
+import { ApiFailureEvent } from "../../models/enums/event_types";
+import { AssociationIds } from "type_aliases";
 import { httpGetHeaders, httpPostHeaders } from "./request_headers";
-import { ScanLabelValues } from "../../models/domain/enums/scan_label";
+import { ScanLabelValues } from "./models/domain/enums/scan_label";
+import config from "./config";
 
 export default class ScanDatasetApi {
   static listScanDatasetsForFloor({ projectId, floorId }: AssociationIds, user: User, dispatch: Dispatch<ApiFailureEvent>) {
@@ -18,7 +19,7 @@ export default class ScanDatasetApi {
         ...getAuthorizationHeaders(user)
       }
     }).then(checkFetchStatus) as Promise<ApiScanDataset[]>)
-      .catch(getErrorCallback(dispatch));
+      .catch(config.sharedErrorHandler);
   }
 
   static updateScanDataset({ projectId, floorId, scanDatasetId }: AssociationIds, apiScanDataset: ApiScanDataset, user: User, dispatch: Dispatch<ApiFailureEvent>) {
@@ -31,7 +32,7 @@ export default class ScanDatasetApi {
       },
       body: JSON.stringify(apiScanDataset)
     }).then(checkFetchStatus) as Promise<void>)
-      .catch(getErrorCallback(dispatch));
+      .catch(config.sharedErrorHandler);
   }
 
   static createScanDataset({ projectId, floorId }: AssociationIds, user: User, dispatch: Dispatch<ApiFailureEvent>) {
@@ -43,7 +44,7 @@ export default class ScanDatasetApi {
         ...getAuthorizationHeaders(user)
       },
     }).then(checkFetchStatus) as Promise<ApiScanDataset>)
-      .catch(getErrorCallback(dispatch));
+      .catch(config.sharedErrorHandler);
   }
 
   static deleteScanDataset({ projectId, floorId, scanDatasetId }: AssociationIds, user: User, dispatch: Dispatch<ApiFailureEvent>) {
@@ -66,7 +67,7 @@ export default class ScanDatasetApi {
       },
       body: JSON.stringify(analysis)
     }).then(checkFetchStatus) as Promise<void>)
-      .catch(getErrorCallback(dispatch));
+      .catch(config.sharedErrorHandler);
   }
 
   static getScanDataset({ projectId, floorId, scanDatasetId }: AssociationIds, user: User, dispatch: Dispatch<ApiFailureEvent>) {
@@ -76,7 +77,7 @@ export default class ScanDatasetApi {
         ...getAuthorizationHeaders(user)
       }
     }).then(checkFetchStatus) as Promise<ApiScanDataset>)
-      .catch(getErrorCallback(dispatch));
+      .catch(config.sharedErrorHandler);
   }
 
   static getViewerDetailedElementsForScanDataset({ projectId, floorId, scanDatasetId }: AssociationIds, user: User, dispatch: Dispatch<ApiFailureEvent>) {
@@ -86,7 +87,7 @@ export default class ScanDatasetApi {
         ...getAuthorizationHeaders(user)
       }
     }).then(checkFetchStatus) as Promise<DetailedElement[]>)
-      .catch(getErrorCallback(dispatch));
+      .catch(config.sharedErrorHandler);
   }
 
   static getProgressReportForScanDataset({ projectId, floorId, scanDatasetId }: AssociationIds, user: User, dispatch: Dispatch<ApiFailureEvent>) {
@@ -96,6 +97,6 @@ export default class ScanDatasetApi {
         ...getAuthorizationHeaders(user)
       }
     }).then(checkFetchStatus) as Promise<ProgressReportForScanDataset>)
-      .catch(getErrorCallback(dispatch));
+      .catch(config.sharedErrorHandler);
   }
 }
