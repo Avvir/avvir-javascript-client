@@ -1,0 +1,29 @@
+{
+  "name": "avvir-javascript-client",
+  "repository": "git@github.com:Avvir/avvir-javascript-client.git",
+  "version": "0.0.1",
+  "description": "Javascript client for Avvir APIs",
+  "private": true,
+  "scripts": {
+    "build": "yarn run babel source --out-dir lib"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-typescript": "^7.12.7",
+    "chai-datetime": "^1.7.0",
+    "fetch-mock": "^9.11.0",
+    "sinon": "^9.2.1",
+    "sinon-chai": "^3.5.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "babel-loader": "^8.2.2",
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "webpack": "^5.10.0",
+    "webpack-node-externals": "^2.5.2"
+  }
+}
