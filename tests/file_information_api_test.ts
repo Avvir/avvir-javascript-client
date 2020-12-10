@@ -11,7 +11,7 @@ import { FIREBASE } from "../source/models/enums/user_auth_type";
 import { makeFakeDispatch, makeStoreContents } from "./test_utils/test_factories";
 import { OTHER } from "../source/models/enums/purpose_type";
 import { SUPERADMIN } from "../source/models/enums/user_role";
-import { UPLOAD_FAILED } from "../source/events/notifications/failures/upload_failed";
+import { UPLOAD_FAILED } from "../source/models/enums/event_types";
 
 describe("FileInformationApi", () => {
   let fakeDispatch, dispatchSpy, fakeGetState, user;
@@ -49,7 +49,6 @@ describe("FileInformationApi", () => {
           lastModified: moment("2018-04-01")
         }),
         user,
-        fakeDispatch
       );
       const request = fetchMock.lastCall();
 
@@ -73,7 +72,6 @@ describe("FileInformationApi", () => {
           lastModified: moment("2018-04-01")
         }),
         user,
-        fakeDispatch
       );
 
       const lastFetchOpts = fetchMock.lastOptions();
@@ -98,7 +96,6 @@ describe("FileInformationApi", () => {
             lastModified: moment("2018-04-01")
           }),
           user,
-          fakeDispatch
         ).catch(() => {}).then(() => {
           expect(dispatchSpy).to.have.been.calledWithMatch({
             type: UPLOAD_FAILED,
@@ -194,7 +191,6 @@ describe("FileInformationApi", () => {
           lastModified: moment("2018-04-01")
         }),
         user,
-        fakeDispatch
       );
       const request = fetchMock.lastCall();
 
@@ -218,7 +214,6 @@ describe("FileInformationApi", () => {
           lastModified: moment("2018-04-01")
         }),
         user,
-        fakeDispatch
       );
 
       const lastFetchOpts = fetchMock.lastOptions();
@@ -243,7 +238,6 @@ describe("FileInformationApi", () => {
             lastModified: moment("2018-04-01")
           }),
           user,
-          fakeDispatch
         ).catch(() => {}).then(() => {
           expect(dispatchSpy).to.have.been.calledWithMatch({
             type: UPLOAD_FAILED,
@@ -270,7 +264,6 @@ describe("FileInformationApi", () => {
           lastModified: moment("2018-04-01")
         }),
         user,
-        fakeDispatch
       );
       const request = fetchMock.lastCall();
 
@@ -295,7 +288,6 @@ describe("FileInformationApi", () => {
           lastModified: moment("2018-04-01")
         }),
         user,
-        fakeDispatch
       );
 
       const lastFetchOpts = fetchMock.lastOptions();
@@ -321,7 +313,6 @@ describe("FileInformationApi", () => {
             lastModified: moment("2018-04-01")
           }),
           user,
-          fakeDispatch
         ).catch(() => {}).then(() => {
           expect(dispatchSpy).to.have.been.calledWithMatch({
             type: UPLOAD_FAILED,

@@ -1,5 +1,4 @@
-import { ApiFailureEvent } from "../../models/enums/event_types";
-import { AssociationIds, Dispatch } from "type_aliases";
+import { AssociationIds } from "type_aliases";
 import getAuthorizationHeaders, { User } from "./get_authorization_headers";
 import WebGatewayApi from "./web_gateway_api";
 import { httpGetHeaders } from "./request_headers";

@@ -1,8 +1,8 @@
-import addInstantGetterAndSetterToApiModel from "../../services/utilities/mixins/add_instant_getter_and_setter_to_api_model";
-import addReadOnlyPropertiesToModel from "../../services/utilities/mixins/add_read_only_properties_to_model";
+import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
+import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 import ApiProjectCostAnalysisProgress from "./api_project_cost_analysis_progress";
 import ApiProjectMasterformatProgress from "./api_project_masterformat_progress";
-import SystemOfMeasurement, { IMPERIAL } from "../domain/enums/system_of_measurement";
+import SystemOfMeasurement, { IMPERIAL } from "../enums/system_of_measurement";
 import { DateLike, Modify } from "type_aliases";
 
 interface ApiProjectArgument extends Partial<Modify<ApiProject, {

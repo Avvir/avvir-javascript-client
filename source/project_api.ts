@@ -5,8 +5,7 @@ import ApiProjectMasterformatProgress from "./models/api/api_project_masterforma
 import checkFetchStatus from "./check_fetch_status";
 import getAuthorizationHeaders, { User } from "./get_authorization_headers";
 import WebGatewayApi from "./web_gateway_api";
-import { ApiFailureEvent } from "../../models/enums/event_types";
-import { AssociationIds, Dispatch } from "type_aliases";
+import { AssociationIds } from "type_aliases";
 import { httpGetHeaders, httpPostHeaders } from "./request_headers";
 import Config from "./config";
 

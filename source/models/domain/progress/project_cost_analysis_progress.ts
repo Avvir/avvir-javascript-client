@@ -1,11 +1,11 @@
-import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
+import addDateGetterAndSetterToDomainModel from "../../../mixins/add_date_getter_and_setter_to_domain_model";
 import { DateLike, Modify } from "type_aliases";
 
-interface ApiProjectCostAnalysisProgressArgument extends Partial<Modify<ApiProjectCostAnalysisProgress, {
+interface ProjectCostAnalysisProgressArgument extends Partial<Modify<ProjectCostAnalysisProgress, {
   analysisDate?: DateLike
 }>> {}
 
-export default class ApiProjectCostAnalysisProgress {
+export default class ProjectCostAnalysisProgress {
   constructor({
     masterformatCode,
     sequence,
@@ -20,8 +20,8 @@ export default class ApiProjectCostAnalysisProgress {
     installedQuantity,
     installedCost,
     analysisDate
-  }: ApiProjectCostAnalysisProgressArgument) {
-    addInstantGetterAndSetterToApiModel(this, "analysisDate");
+  }: ProjectCostAnalysisProgressArgument = {}) {
+    addDateGetterAndSetterToDomainModel(this, "analysisDate");
     this.masterformatCode = masterformatCode;
     this.sequence = sequence;
     this.name = name;
@@ -50,5 +50,5 @@ export default class ApiProjectCostAnalysisProgress {
   reportedInstalled: number | null = null;
   installedQuantity: number | null = null;
   installedCost: number | null = null;
-  analysisDate: number | null = null;
+  analysisDate: Date | null = null;
 }

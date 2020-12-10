@@ -1,4 +1,4 @@
-import addInstantGetterAndSetterToApiModel from "../../services/utilities/mixins/add_instant_getter_and_setter_to_api_model";
+import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
 import ApiMasterformat from "./api_masterformat";
 import { DateLike } from "type_aliases";
 

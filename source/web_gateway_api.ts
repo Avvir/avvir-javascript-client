@@ -6,9 +6,10 @@ import DetailedElement from "./models/domain/detailed_element";
 import DeviationStatus from "./models/enums/deviation_status";
 import getAuthorizationHeaders, { BasicUser, User } from "./get_authorization_headers";
 import UserAuthType from "./models/enums/user_auth_type";
-import { AssociationIds, Dispatch } from "type_aliases";
+import { AssociationIds } from "type_aliases";
 import { httpGetHeaders, httpPostHeaders } from "./request_headers";
 import Config from "./config";
+import {isFirebaseUser, isGatewayUser} from "./reduce_user_session";
 
 export default class WebGatewayApi {
   static baseUrl: string = process.env.REACT_APP_WEB_API_GATEWAY_DOMAIN;

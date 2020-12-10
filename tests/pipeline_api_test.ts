@@ -118,8 +118,7 @@ describe("PipelineApi", () => {
             scanDatasetId: "some-scan-dataset-id"
           },
           {},
-          { firebaseUser: { idToken: "some-firebase.id.token" } },
-          fakeDispatch)
+          { firebaseUser: { idToken: "some-firebase.id.token" } })
           .catch(_.noop)
           .finally(() => {
             expect(dispatchSpy).to.have.been.calledWithMatch({
@@ -136,8 +135,7 @@ describe("PipelineApi", () => {
             scanDatasetId: "some-scan-dataset-with-an-already-running-job"
           },
           {},
-          { firebaseUser: { idToken: "some-firebase.id.token" } },
-          fakeDispatch)
+          { firebaseUser: { idToken: "some-firebase.id.token" } })
           .catch(_.noop)
           .finally(() => {
             expect(dispatchSpy).to.have.been.calledWithMatch({

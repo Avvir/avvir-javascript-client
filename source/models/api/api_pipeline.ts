@@ -1,6 +1,6 @@
-import addInstantGetterAndSetterToApiModel from "../../services/utilities/mixins/add_instant_getter_and_setter_to_api_model";
-import addReadOnlyPropertiesToModel from "../../services/utilities/mixins/add_read_only_properties_to_model";
-import RunningProcessStatus from "../domain/enums/running_process_status";
+import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
+import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
+import RunningProcessStatus from "../enums/running_process_status";
 import { DateLike, Modify, ModifyPartial } from "type_aliases";
 
 interface ApiPipelineArgument extends ModifyPartial<ApiPipeline, {

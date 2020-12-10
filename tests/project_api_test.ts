@@ -427,7 +427,7 @@ describe("ProjectApi", () => {
       ProjectApi.listProjectFloorFiles({projectId: "some-project-id"},
         {
           authType: GATEWAY_JWT,
-          gatewayUser: {idToken: "some-firebase.id.token", role: "SUPERADMIN"}
+          gatewayUser: {idToken: "some-firebase.id.token", role: SUPERADMIN}
         });
       const fetchCall = fetchMock.lastCall();
 

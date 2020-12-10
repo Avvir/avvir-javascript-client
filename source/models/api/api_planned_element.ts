@@ -1,5 +1,5 @@
 import { UniformatId } from "uniformat";
-import addReadOnlyPropertiesToModel from "../../services/utilities/mixins/add_read_only_properties_to_model";
+import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 
 export default class ApiPlannedElement {
   constructor({ globalId, name, ifcType, uniformat, itemId, discipline, primaryUnitOfMeasurement, primaryMeasurement }: Partial<ApiPlannedElement> = {}) {

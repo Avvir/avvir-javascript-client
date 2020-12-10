@@ -1,4 +1,4 @@
-import addReadOnlyPropertiesToModel from "../../services/utilities/mixins/add_read_only_properties_to_model";
+import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 
 export default class ApiOrganization {
   constructor({

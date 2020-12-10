@@ -1,5 +1,5 @@
 import moment from "moment";
-import DateConverter from "../../converters/date_converter";
+import DateConverter from "../converters/date_converter";
 
 const addInstantGetterAndSetterToApiModel = (modelInstance, propertyName) => {
   let dateVal;

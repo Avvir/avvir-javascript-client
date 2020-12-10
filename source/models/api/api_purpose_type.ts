@@ -1,4 +1,4 @@
-import { FloorTypeKeys, ProjectTypeKeys, ScanDatasetTypeKeys, PhotoAreaTypeKeys} from "../domain/enums/purpose_type";
+import { FloorTypeKeys, ProjectTypeKeys, ScanDatasetTypeKeys, PhotoAreaTypeKeys} from "../enums/purpose_type";
 
 export enum ApiProjectPurposeType {
   OTHER = "OTHER",

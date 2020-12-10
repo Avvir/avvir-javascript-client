@@ -1,6 +1,6 @@
-import addReadOnlyPropertiesToModel from "../../services/utilities/mixins/add_read_only_properties_to_model";
+import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 import { DateLike, ModifyPartial } from "type_aliases";
-import addInstantGetterAndSetterToApiModel from "../../services/utilities/mixins/add_instant_getter_and_setter_to_api_model";
+import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
 
 export type ApiPhotoSessionArgs = ModifyPartial<ApiPhotoSession, { sessionDate?: DateLike }>
 export default class ApiPhotoSession {

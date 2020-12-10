@@ -9,6 +9,8 @@ import WebGatewayApi from "../source/web_gateway_api";
 import { API_FAILURE } from "../source/models/enums/event_types";
 import { FIREBASE } from "../source/models/enums/user_auth_type";
 import { User } from "../source/get_authorization_headers";
+import {makeStoreContents} from "./test_utils/test_factories";
+import Config from "../source/config";
 
 describe("FloorApi", () => {
   let fakeDispatch, dispatchSpy, fakeGetState, user;
@@ -19,7 +21,6 @@ describe("FloorApi", () => {
     };
     fakeGetState = () => makeStoreContents({
       user,
-      locationMetadata: { projectId: "some-project-id", floorId: "some-floor-id" },
     });
 
     dispatchSpy = sandbox.spy();
@@ -138,11 +139,10 @@ describe("FloorApi", () => {
       it("calls the shared error handler", () => {
         return FloorApi.createFloor("some-project-id",
           "14",
-          { firebaseUser: { idToken: "some-firebase.id.token" } } as User,
-          fakeDispatch)
+          { firebaseUser: { idToken: "some-firebase.id.token" } })
           .catch(_.noop)
           .finally(() => {
-            expect(config.sharedErrorHandler).to.have.been.calledWithMatch({
+            expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
               type: API_FAILURE,
             });
           });
@@ -180,7 +180,7 @@ describe("FloorApi", () => {
           floorId: "some-floor-id"
         }, new ApiFloor({
           defaultFirebaseScanDatasetId: "some-scan-id"
-        }), { firebaseUser: { idToken: "some-firebase.id.token" } } as User, fakeDispatch, false);
+        }), { firebaseUser: { idToken: "some-firebase.id.token" } } as User);
         const lastFetchOpts = fetchMock.lastOptions();
 
         expect(lastFetchOpts.headers).to.include.key("Content-Type");
