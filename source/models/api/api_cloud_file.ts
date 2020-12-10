@@ -2,7 +2,7 @@ import { DateLike, Modify } from "type_aliases";
 import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
 import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 import ApiTypesEnum, { ApiPurposeType, isApiPurposeType } from "./api_purpose_type";
-import { PurposeType, isPurposeType } from "../domain/enums/purpose_type";
+import { PurposeType, isPurposeType } from "../enums/purpose_type";
 import PurposeTypeConverter from "../../converters/purpose_type_converter";
 
 interface ApiCloudFileArgument extends Partial<Modify<ApiCloudFile, {

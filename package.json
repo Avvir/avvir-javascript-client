@@ -5,7 +5,8 @@
   "description": "Javascript client for Avvir APIs",
   "private": true,
   "scripts": {
-    "build": "yarn run babel source --out-dir lib"
+    "build": "yarn run babel source --out-dir lib",
+    "test": "NODE_ENV=test mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.8",

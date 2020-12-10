@@ -1,4 +1,4 @@
-import "../../test_utils/setup_tests";
+import "../test_utils/setup_tests";
 import { expect } from "chai";
 import moment from "moment";
 import DateConverter from "../../source/converters/date_converter";
