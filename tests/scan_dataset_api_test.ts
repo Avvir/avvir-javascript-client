@@ -69,7 +69,9 @@ describe("ScanDatasetApi", () => {
     describe("when the call fails", () => {
       beforeEach(() => {
         fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets`,
-          {status: 500, body: {some: "body"}, sendAsJson: true},
+          {status: 500, body: {some: "body"},
+            headers: {"ContentType": "application/json"}
+          },
           {overwriteRoutes: true});
       });
 
@@ -145,7 +147,9 @@ describe("ScanDatasetApi", () => {
     describe("when the call fails", () => {
       beforeEach(() => {
         fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/analysis?enforceBuiltPersistence=false`,
-          {status: 500, body: {some: "body"}, sendAsJson: true},
+          {status: 500, body: {some: "body"},
+            headers: {"ContentType": "application/json"}
+            },
           {overwriteRoutes: true});
       });
 
@@ -227,7 +231,7 @@ describe("ScanDatasetApi", () => {
 
       expect(fetchMock.lastUrl()).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id`);
       expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
-      expect(fetchMock.lastOptions().body).to.eq(JSON.stringify({
+      expect(JSON.parse(fetchMock.lastOptions().body)).to.deep.eq({
         coarseAlignmentMatrix: {
           x1: 1, x2: 2, x3: 3, x4: 4,
           y1: 0, y2: 0, y3: 0, y4: 1,
@@ -246,7 +250,7 @@ describe("ScanDatasetApi", () => {
         firebaseId: "some-scan-dataset-id",
         firebaseFloorId: "some-floor-id",
         scanNumber: 1
-      }));
+      });
     });
 
     it("includes the authorization headers", () => {

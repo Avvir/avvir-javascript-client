@@ -145,7 +145,9 @@ describe("ProjectApi", () => {
     describe("when the call fails", () => {
       beforeEach(() => {
         fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/masterformat-progress`,
-          {status: 500, body: {some: "body"}, sendAsJson: true},
+          {status: 500, body: {some: "body"},
+            headers: {"ContentType": "application/json"}
+          },
           {overwriteRoutes: true});
       });
 
@@ -239,7 +241,9 @@ describe("ProjectApi", () => {
     describe("when the call fails", () => {
       beforeEach(() => {
         fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/cost-analysis-progress`,
-          {status: 500, body: {some: "body"}, sendAsJson: true},
+          {status: 500, body: {some: "body"},
+            headers: {"ContentType": "application/json"}
+          },
           {overwriteRoutes: true});
       });
 
@@ -306,7 +310,9 @@ describe("ProjectApi", () => {
     describe("when the call fails", () => {
       beforeEach(() => {
         fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/scheduled-masterformat-progress`,
-          {status: 500, body: {some: "body"}, sendAsJson: true},
+          {status: 500, body: {some: "body"},
+            headers: {"ContentType": "application/json"}
+          },
           {overwriteRoutes: true});
       });
 

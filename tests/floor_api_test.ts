@@ -132,7 +132,9 @@ describe("FloorApi", () => {
     describe("when the call fails", () => {
       beforeEach(() => {
         fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors`,
-          { status: 500, body: { some: "body" }, sendAsJson: true },
+          { status: 500, body: { some: "body" },
+            headers: {"ContentType": "application/json"}
+          },
           { overwriteRoutes: true });
       });
 
@@ -206,7 +208,9 @@ describe("FloorApi", () => {
     describe("when the call fails", () => {
       beforeEach(() => {
         fetchMock.patch(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id`,
-          { status: 500, body: { some: "body" }, sendAsJson: true },
+          { status: 500, body: { some: "body" },
+            headers: {"ContentType": "application/json"}
+          },
           { overwriteRoutes: true });
       });
 

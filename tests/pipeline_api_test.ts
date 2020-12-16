@@ -46,55 +46,62 @@ describe("PipelineApi", () => {
     });
 
     describe("when the pipeline fails to trigger", () => {
-      // beforeEach(() => {
-      //   const alreadyRunningResponse = {
-      //     body: {
-      //       "jobLogs": "Started by remote host 10.100.0.16" +
-      //         "\r\n[Pipeline] readJSON" +
-      //         "\r\n[Pipeline] podTemplate" +
-      //         "\r\n[Pipeline] {" +
-      //         "\r\n[Pipeline] node" +
-      //         "\r\nStill waiting to schedule task" +
-      //         "\r\nWaiting for next available executor",
-      //       "error": "Pipeline job already running",
-      //       "errorDetails": "Jenkins job number: 4"
-      //     },
-      //     status: 401,
-      //     sendAsJson: true,
-      //   };
-      //
-      //   const filesMissingResponse = {
-      //     body: {
-      //       "error": "Cannot trigger pipeline job for this scanDataset",
-      //       "errorDetails": "IFC file or processed scan file URLs missing"
-      //     },
-      //     status: 401,
-      //     sendAsJson: true,
-      //   };
-      //
-      //   fetchMock.mock(`begin:${WebGatewayApi.baseUrl}/pipeline/`, (url) => {
-      //     const startLength = `${WebGatewayApi.baseUrl}/pipeline/`.length;
-      //     const argsString = url.slice(startLength).split("/");
-      //     const floorId = argsString[2];
-      //     const scanDatasetId = argsString[3];
-      //
-      //     if (scanDatasetId === "some-scan-dataset-with-an-already-running-job") {
-      //       return alreadyRunningResponse;
-      //     } else if (floorId === "some-non-existent-floor-id") {
-      //       return filesMissingResponse;
-      //     } else {
-      //       return {status: 500, body: {error: "some unfortunate error"}, sendAsJson: true};
-      //     }
-      //   }, {overwriteRoutes: true});
-      // });
+      beforeEach(() => {
+        const alreadyRunningResponse = {
+          body: {
+            "jobLogs": "Started by remote host 10.100.0.16" +
+              "\r\n[Pipeline] readJSON" +
+              "\r\n[Pipeline] podTemplate" +
+              "\r\n[Pipeline] {" +
+              "\r\n[Pipeline] node" +
+              "\r\nStill waiting to schedule task" +
+              "\r\nWaiting for next available executor",
+            "error": "Pipeline job already running",
+            "errorDetails": "Jenkins job number: 4"
+          },
+          status: 401,
+          headers: {"ContentType": "application/json"}
+
+        };
+
+        const filesMissingResponse = {
+          body: {
+            "error": "Cannot trigger pipeline job for this scanDataset",
+            "errorDetails": "IFC file or processed scan file URLs missing"
+          },
+          status: 401,
+          headers: {"ContentType": "application/json"}
+        };
+
+        fetchMock.mock(`begin:${WebGatewayApi.baseUrl}/pipeline/`, (url) => {
+          const startLength = `${WebGatewayApi.baseUrl}/pipeline/`.length;
+          const argsString = url.slice(startLength).split("/");
+          const floorId = argsString[2];
+          const scanDatasetId = argsString[3];
+
+          if (scanDatasetId === "some-scan-dataset-with-an-already-running-job") {
+            return alreadyRunningResponse;
+          } else if (floorId === "some-non-existent-floor-id") {
+            return filesMissingResponse;
+          } else {
+            return {
+                status: 500,
+                body: {error: "some unfortunate error"},
+                headers: {"ContentType": "application/json"}
+            };
+          }
+        }, {overwriteRoutes: true});
+      });
 
       it("rejects the promise and calls the shared error handler", () => {
         fetchMock.mock(`begin:${WebGatewayApi.baseUrl}/pipeline/`, (url) => {
-          return { status: 500,  body: {error: "some unfortunate error"}, sendAsJson: true }
+          return {
+              status: 500,  body: {error: "some unfortunate error"},
+              headers: {"ContentType": "application/json"}
+          }
         });
-        Config.sharedErrorHandler = sandbox.spy();
 
-        // sandbox.spy(Config, "sharedErrorHandler");
+        sandbox.spy(Config, "sharedErrorHandler");
 
         return PipelineApi.triggerPipeline({
             accountId: "some-organization-id",
@@ -107,18 +114,16 @@ describe("PipelineApi", () => {
         ).catch((err) => {
           expect(err.status).to.eql(500)
         }).then(() => {
-          expect(Config.sharedErrorHandler).to.have.been.called();
-          expect(Config.sharedErrorHandler.calls.count).to.eq(1);
           expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
-            error: {},
-            arguments: [{
-              accountId: "some-organization-id",
-              projectId: "some-project-id",
-              floorId: "some-floor-id",
-              scanDatasetId: "some-scan-id"
-            },
-              {},
-              {firebaseUser: {idToken: "some-firebase.id.token"}}]
+            // error: {},
+            // arguments: [{
+            //   accountId: "some-organization-id",
+            //   projectId: "some-project-id",
+            //   floorId: "some-floor-id",
+            //   scanDatasetId: "some-scan-id"
+            // },
+            //   {},
+            //   {firebaseUser: {idToken: "some-firebase.id.token"}}]
             // type: "pipeline_trigger_failed",
             // payload: {
             //   floorId: "some-floor-id",

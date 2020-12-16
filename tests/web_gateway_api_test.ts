@@ -1,4 +1,4 @@
-import { sandbox } from "./test_utils/setup_tests";
+import {sand, sandbox} from "./test_utils/setup_tests";
 import { expect } from "chai";
 import { match } from "sinon";
 import fetchMock from "fetch-mock";
@@ -544,22 +544,22 @@ describe("WebGatewayApi", () => {
 
     describe("when there is an error with the request", () => {
       beforeEach(() => {
-        fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`, {
-          status: 404,
-          body: {
-            error: "Not Found",
-            exception: "io.avvir.avvirwebgateway.exceptions.ProjectNotFound",
-            message: "No such Project",
-            path: "/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built",
-            status: 404
-          },
-          sendAsJson: true
-        }, {
-          overwriteRoutes: true
-        });
+        fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`,
+            {
+              status: 404,
+              headers: {'Content-Type': 'application/json'},
+              body: {
+                error: "Not Found",
+                exception: "io.avvir.avvirwebgateway.exceptions.ProjectNotFound",
+                message: "No such Project",
+                path: "/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built",
+              },
+            }, {overwriteRoutes: true});
       });
 
       it("shows that there was an error", () => {
+        sandbox.stub(Config, "sharedErrorHandler");
+
         return WebGatewayApi.exportIfc({
           projectId: "some-project-id",
           floorId: "some-floor-id",
@@ -568,20 +568,14 @@ describe("WebGatewayApi", () => {
           authType: GATEWAY_JWT,
           gatewayUser: { idToken: "some-firebase.id.token", role: USER }
         }, ).then(() => {
-          expect(Config.sharedErrorHandler).to.have.been.calledWith({
-            type: API_FAILURE,
-            payload: {
-              error: match.instanceOf(ResponseError).and(match({
-                message: "404 Not Found: 'No such Project' at `.../projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`",
-                status: 404,
-                responseBody: {
-                  error: "Not Found",
-                  exception: "io.avvir.avvirwebgateway.exceptions.ProjectNotFound",
-                  message: "No such Project",
-                  path: "/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built",
-                  status: 404
-                }
-              }))
+          expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
+            message: "404 Not Found: 'No such Project' at `.../projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`",
+            status: 404,
+            responseBody: {
+              error: "Not Found",
+              exception: "io.avvir.avvirwebgateway.exceptions.ProjectNotFound",
+              message: "No such Project",
+              path: "/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built",
             }
           });
         });
@@ -624,20 +618,20 @@ describe("WebGatewayApi", () => {
       beforeEach(() => {
         fetchMock.get(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`, {
           status: 404,
+          headers: {'Content-Type': 'application/json'},
           body: {
             error: "Not Found",
             exception: "io.avvir.avvirwebgateway.exceptions.ProjectNotFound",
             message: "No such Project",
             path: "/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built",
-            status: 404
           },
-          sendAsJson: true
         }, {
           overwriteRoutes: true
         });
       });
 
       it("shows that there was an error", () => {
+        sandbox.stub(Config, "sharedErrorHandler");
         return WebGatewayApi.checkExportedIfc({
             projectId: "some-project-id",
             floorId: "some-floor-id",
@@ -647,10 +641,7 @@ describe("WebGatewayApi", () => {
             authType: GATEWAY_JWT,
             gatewayUser: { idToken: "some-firebase.id.token", role: USER }
           }, ).then(() => {
-          expect(dispatchSpy).to.have.been.calledWith({
-            type: API_FAILURE,
-            payload: {
-              error: match.instanceOf(ResponseError).and(match({
+          expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
                 message: "404 Not Found: 'No such Project' at `.../projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`",
                 status: 404,
                 responseBody: {
@@ -658,11 +649,8 @@ describe("WebGatewayApi", () => {
                   exception: "io.avvir.avvirwebgateway.exceptions.ProjectNotFound",
                   message: "No such Project",
                   path: "/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built",
-                  status: 404
                 }
-              }))
-            }
-          });
+            });
         });
       });
     });
