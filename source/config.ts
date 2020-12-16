@@ -1,3 +1,5 @@
 export default class Config {
-  static sharedErrorHandler = (error) => { throw error; }
+  static sharedErrorHandler = (error) => {
+    throw error;
+  }
 }

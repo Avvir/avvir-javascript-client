@@ -11,6 +11,8 @@ import ProjectApi from "../source/project_api";
 import WebGatewayApi from "../source/web_gateway_api";
 import {FIREBASE, GATEWAY_JWT} from "../source/models/enums/user_auth_type";
 import {SUPERADMIN} from "../source/models/enums/user_role";
+import {sandbox} from "./test_utils/setup_tests";
+import Config from "../source/config";
 
 describe("ProjectApi", () => {
   let user;
@@ -147,7 +149,7 @@ describe("ProjectApi", () => {
           {overwriteRoutes: true});
       });
 
-      it("dispatches an api failure notification", () => {
+      it("rejects the promise", () => {
         let rejected = false;
         return ProjectApi.saveScannedProjectMasterformatProgress(
           {projectId: "some-project-id"},
@@ -241,7 +243,7 @@ describe("ProjectApi", () => {
           {overwriteRoutes: true});
       });
 
-      it("dispatches an api failure notification", () => {
+      it("rejects the promise", () => {
         let rejected = false;
         return ProjectApi.saveProjectCostAnalysisProgress(
           {projectId: "some-project-id"},

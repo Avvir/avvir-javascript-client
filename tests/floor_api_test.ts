@@ -211,6 +211,7 @@ describe("FloorApi", () => {
       });
 
       it("dispatches an api failure notification", () => {
+        sandbox.stub(Config, "sharedErrorHandler");
         return FloorApi.updateFloor({
             projectId: "some-project-id",
             floorId: "some-floor-id"
@@ -218,13 +219,10 @@ describe("FloorApi", () => {
           new ApiFloor({
             defaultFirebaseScanDatasetId: "some-scan-id"
           }),
-          { firebaseUser: { idToken: "some-firebase.id.token" } } as User,
-          fakeDispatch)
+          { firebaseUser: { idToken: "some-firebase.id.token" } } as User)
           .catch(_.noop)
           .finally(() => {
-            expect(dispatchSpy).to.have.been.calledWithMatch({
-              type: API_FAILURE,
-            });
+            expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({});
           });
       });
     });

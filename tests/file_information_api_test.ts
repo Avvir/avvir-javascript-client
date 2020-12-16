@@ -12,6 +12,7 @@ import { makeFakeDispatch, makeStoreContents } from "./test_utils/test_factories
 import { OTHER } from "../source/models/enums/purpose_type";
 import { SUPERADMIN } from "../source/models/enums/user_role";
 import { UPLOAD_FAILED } from "../source/models/enums/event_types";
+import Config from "../source/config";
 
 describe("FileInformationApi", () => {
   let fakeDispatch, dispatchSpy, fakeGetState, user;
@@ -86,6 +87,7 @@ describe("FileInformationApi", () => {
       });
 
       it("dispatches an api failure notification", () => {
+        sandbox.stub(Config, "sharedErrorHandler");
         return FileInformationApi.createProjectFile({
             projectId: "some-project-id",
             floorId: "some-floor-id",
@@ -97,9 +99,7 @@ describe("FileInformationApi", () => {
           }),
           user,
         ).catch(() => {}).then(() => {
-          expect(dispatchSpy).to.have.been.calledWithMatch({
-            type: UPLOAD_FAILED,
-          });
+          expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({});
         });
       });
     });
@@ -228,6 +228,7 @@ describe("FileInformationApi", () => {
       });
 
       it("dispatches an api failure notification", () => {
+        sandbox.stub(Config, "sharedErrorHandler");
         return FileInformationApi.saveFloorFile({
             projectId: "some-project-id",
             floorId: "some-floor-id",
@@ -239,9 +240,7 @@ describe("FileInformationApi", () => {
           }),
           user,
         ).catch(() => {}).then(() => {
-          expect(dispatchSpy).to.have.been.calledWithMatch({
-            type: UPLOAD_FAILED,
-          });
+          expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({});
         });
       });
     });
@@ -302,6 +301,7 @@ describe("FileInformationApi", () => {
       });
 
       it("dispatches an api failure notification", () => {
+        sandbox.stub(Config, "sharedErrorHandler");
         return FileInformationApi.saveScanDatasetFile({
             projectId: "some-project-id",
             floorId: "some-floor-id",
@@ -314,9 +314,7 @@ describe("FileInformationApi", () => {
           }),
           user,
         ).catch(() => {}).then(() => {
-          expect(dispatchSpy).to.have.been.calledWithMatch({
-            type: UPLOAD_FAILED,
-          });
+          expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({});
         });
       });
     });

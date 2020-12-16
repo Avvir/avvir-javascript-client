@@ -34,7 +34,6 @@
     "mocha": "^8.2.1",
     "moment": "^2.29.1",
     "node-fetch": "^2.6.1",
-    "sinon": "^9.2.1",
     "sinon-chai": "^3.5.0",
     "three": "^0.123.0",
     "tolerant-deep-eql": "git+http://git@github.com/TiraO/deep-eql.git#06a376d",
@@ -46,5 +45,7 @@
     "webpack-cli": "^4.2.0",
     "webpack-node-externals": "^2.5.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "sinon": "^9.2.1"
+  }
 }

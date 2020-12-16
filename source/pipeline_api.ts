@@ -6,7 +6,8 @@ import { httpPostHeaders } from "./request_headers";
 import Config from "./config";
 
 export default class PipelineApi {
-  static triggerPipeline({ accountId, projectId, floorId, scanDatasetId }: AssociationIds, extraMetadata = {}, user: User) {
+  static triggerPipeline(associationIds: AssociationIds, extraMetadata = {}, user: User) {
+    let { accountId, projectId, floorId, scanDatasetId } = associationIds;
     const url = `${WebGatewayApi.baseUrl}/pipeline/${accountId}/${projectId}/${floorId}/${scanDatasetId}/trigger`;
     return (fetch(url, {
       method: "POST",
@@ -16,7 +17,10 @@ export default class PipelineApi {
       },
       body: JSON.stringify(extraMetadata)
     }).then(checkFetchStatus) as Promise<any>)
-      .catch(Config.sharedErrorHandler);
+      .catch((error)=>{
+        console.log("Hello world", error)
+        Config.sharedErrorHandler( {error, arguments: [associationIds, extraMetadata, user], status: error.status});
+      });
   }
 }
 

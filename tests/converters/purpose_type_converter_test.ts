@@ -10,6 +10,7 @@ describe("PurposeTypeConverter", () => {
     });
 
     it("converts all of the purpose types", () => {
+      // @ts-ignore
       const allPurposeTypes = Object.values(ProjectPurposeType).concat(Object.values(FloorPurposeType)).concat(Object.values(ScanDatasetPurposeType));
 
       allPurposeTypes.forEach(purposeType => {
