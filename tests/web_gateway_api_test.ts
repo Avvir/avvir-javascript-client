@@ -569,7 +569,7 @@ describe("WebGatewayApi", () => {
           gatewayUser: { idToken: "some-firebase.id.token", role: USER }
         }, ).then(() => {
           expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
-            message: "404 Not Found: 'No such Project' at `.../projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`",
+            verboseMessage: "404 Not Found: 'No such Project' at `.../projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`",
             status: 404,
             responseBody: {
               error: "Not Found",
@@ -642,7 +642,7 @@ describe("WebGatewayApi", () => {
             gatewayUser: { idToken: "some-firebase.id.token", role: USER }
           }, ).then(() => {
           expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
-                message: "404 Not Found: 'No such Project' at `.../projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`",
+                verboseMessage: "404 Not Found: 'No such Project' at `.../projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`",
                 status: 404,
                 responseBody: {
                   error: "Not Found",

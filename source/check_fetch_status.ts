@@ -24,8 +24,12 @@ from: \`${requestPath}\``);
     }
   } else {
     return response.json().then((errorBody) => {
+      let message = errorBody.message;
+      let statusMessage = responseStatusText[response.status];
+      let verboseMessage = `${response.status} ${statusMessage}: '${message}' at \`${requestPath}\``;
       const error = new ResponseError(
-        `${response.status} ${responseStatusText[response.status]}: '${errorBody.errorDetails || errorBody.message}' at \`${requestPath}\``,
+        message,
+        verboseMessage,
         response,
         errorBody
       );

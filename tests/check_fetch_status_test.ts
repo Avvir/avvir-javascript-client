@@ -60,7 +60,8 @@ describe("#checkFetchStatus", () => {
         .catch(rejectionSpy)
         .finally(() => {
           expect(rejectionSpy).to.have.been.calledWithMatch({
-            message: "404 Not Found: 'some body once told me' at `.../some-slug`",
+            message: "some body once told me",
+            verboseMessage: "404 Not Found: 'some body once told me' at `.../some-slug`",
             responseBody: { message: "some body once told me" },
             status: 404
           });

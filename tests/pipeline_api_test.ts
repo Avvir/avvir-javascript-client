@@ -8,17 +8,13 @@ import WebGatewayApi from "../source/web_gateway_api";
 import {FIREBASE} from "../source/models/enums/user_auth_type";
 import {makeFakeDispatch, makeStoreContents} from "./test_utils/test_factories";
 import Config from "../source/config";
+import ResponseError from "../source/models/response_error";
 
 describe("PipelineApi", () => {
-  let fakeGetState, user;
+  let user;
   beforeEach(() => {
     fetchMock.resetBehavior();
     user = {authType: FIREBASE, firebaseUser: {idToken: "some-firebase.id.token"}};
-    fakeGetState = () => makeStoreContents({
-      user,
-      locationMetadata: {projectId: "some-project-id", floorId: "some-floor-id"},
-      selection: {projectId: "some-project-id", floorId: "some-floor-id", scanDatasetId: "some-scan-id"},
-    });
 
   });
 
@@ -63,8 +59,7 @@ describe("PipelineApi", () => {
 
         const filesMissingResponse = {
           body: {
-            "error": "Cannot trigger pipeline job for this scanDataset",
-            "errorDetails": "IFC file or processed scan file URLs missing"
+            "message": "Cannot trigger pipeline job for this scanDataset",
           },
           status: 401,
           headers: {"ContentType": "application/json"}
@@ -83,7 +78,7 @@ describe("PipelineApi", () => {
           } else {
             return {
                 status: 500,
-                body: {error: "some unfortunate error"},
+                body: {message: "some unfortunate error"},
                 headers: {"ContentType": "application/json"}
             };
           }
@@ -93,7 +88,7 @@ describe("PipelineApi", () => {
       it("rejects the promise and calls the shared error handler", () => {
         fetchMock.mock(`begin:${WebGatewayApi.baseUrl}/pipeline/`, (url) => {
           return {
-              status: 500,  body: {error: "some unfortunate error"},
+              status: 500,  body: {message: "some unfortunate error"},
               headers: {"ContentType": "application/json"}
           }
         }, {overwriteRoutes: true});
@@ -109,23 +104,21 @@ describe("PipelineApi", () => {
           {},
           {authType: FIREBASE, firebaseUser: {idToken: "some-firebase.id.token"}}
         ).catch((err) => {
-          expect(err.status).to.eql(500)
-        }).then(() => {
+          return err;
+        }).then((err) => {
+          expect(err.status).to.eql(500);
+          expect(err.message).to.eq("some unfortunate error");
           expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
-            // error: {},
-            // arguments: [{
-            //   accountId: "some-organization-id",
-            //   projectId: "some-project-id",
-            //   floorId: "some-floor-id",
-            //   scanDatasetId: "some-scan-id"
-            // },
-            //   {},
-            //   {firebaseUser: {idToken: "some-firebase.id.token"}}]
-            // type: "pipeline_trigger_failed",
-            // payload: {
-            //   floorId: "some-floor-id",
-            //   scanDatasetId: "some-scan-id"
-            // }
+            error: err,
+            action: "triggerPipeline",
+            arguments: [{
+              accountId: "some-organization-id",
+              projectId: "some-project-id",
+              floorId: "some-floor-id",
+              scanDatasetId: "some-scan-id"
+            },
+              {},
+              {authType: FIREBASE, firebaseUser: {idToken: "some-firebase.id.token"}}]
           });
         });
       });

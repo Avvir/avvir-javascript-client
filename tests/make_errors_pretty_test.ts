@@ -28,9 +28,8 @@ describe("makeErrorsPretty", () => {
     return clazz.doSomething("foo", "bar").then(() => {
       expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
         error: {
-          message: "500 Internal Server Error: 'some unfortunate error' at `.../some-url-path`"
-          // message: "some unfortunate error",
-          // verboseMessage: "500 Internal Server Error: 'some unfortunate error' at `.../some-url-path`"
+          message: "some unfortunate error",
+          verboseMessage: "500 Internal Server Error: 'some unfortunate error' at `.../some-url-path`"
         },
         action: "doSomething",
         arguments: ["foo", "bar"]

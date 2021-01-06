@@ -142,11 +142,11 @@ describe("FloorApi", () => {
         sandbox.stub(Config, "sharedErrorHandler");
         return FloorApi.createFloor("some-project-id",
           "14",
-          { firebaseUser: { idToken: "some-firebase.id.token" } })
+          {authType: FIREBASE, firebaseUser: {idToken: "some-firebase.id.token"}})
           .catch(_.noop)
           .finally(() => {
             expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
-              message: "500 Internal Server Error: 'some error message' at `.../projects/some-project-id/floors`"
+              verboseMessage: "500 Internal Server Error: 'some error message' at `.../projects/some-project-id/floors`"
             });
           });
       });
