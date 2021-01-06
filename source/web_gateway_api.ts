@@ -12,7 +12,7 @@ import Config from "./config";
 import {isFirebaseUser, isGatewayUser} from "./reduce_user_session";
 
 export default class WebGatewayApi {
-  static baseUrl: string = process.env.REACT_APP_WEB_API_GATEWAY_DOMAIN;
+  static baseUrl: string = process.env.AVVIR_GATEWAY_URL;
 
   static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User) {
     return (fetch(`${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}/planned-building-elements`, {

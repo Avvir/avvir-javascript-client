@@ -10,7 +10,7 @@ import {makeFakeDispatch, makeStoreContents} from "./test_utils/test_factories";
 import Config from "../source/config";
 
 describe("PipelineApi", () => {
-  let fakeDispatch, dispatchSpy, fakeGetState, user;
+  let fakeGetState, user;
   beforeEach(() => {
     fetchMock.resetBehavior();
     user = {authType: FIREBASE, firebaseUser: {idToken: "some-firebase.id.token"}};
@@ -20,13 +20,11 @@ describe("PipelineApi", () => {
       selection: {projectId: "some-project-id", floorId: "some-floor-id", scanDatasetId: "some-scan-id"},
     });
 
-    dispatchSpy = sandbox.spy();
-    fakeDispatch = makeFakeDispatch(dispatchSpy, fakeGetState);
   });
 
   describe("#triggerPipeline", () => {
     beforeEach(() => {
-      // fetchMock.post(`${WebGatewayApi.baseUrl}/pipeline/some-organization-id/some-project-id/some-floor-id/some-scan-dataset-id/trigger`, 200);
+      fetchMock.post(`${WebGatewayApi.baseUrl}/pipeline/some-organization-id/some-project-id/some-floor-id/some-scan-dataset-id/trigger`, 200);
     });
 
     it("Calls the correct URL", () => {
@@ -37,8 +35,7 @@ describe("PipelineApi", () => {
           scanDatasetId: "some-scan-dataset-id"
         },
         {},
-        {firebaseUser: {idToken: "some-firebase.id.token"}},
-        fakeDispatch);
+        { authType:FIREBASE, firebaseUser: {idToken: "some-firebase.id.token" }});
 
       expect(fetchMock.lastUrl()).to.eq(
         `${WebGatewayApi.baseUrl}/pipeline/some-organization-id/some-project-id/some-floor-id/some-scan-dataset-id/trigger`
@@ -99,7 +96,7 @@ describe("PipelineApi", () => {
               status: 500,  body: {error: "some unfortunate error"},
               headers: {"ContentType": "application/json"}
           }
-        });
+        }, {overwriteRoutes: true});
 
         sandbox.spy(Config, "sharedErrorHandler");
 
@@ -110,7 +107,7 @@ describe("PipelineApi", () => {
             scanDatasetId: "some-scan-id"
           },
           {},
-          {firebaseUser: {idToken: "some-firebase.id.token"}}
+          {authType: FIREBASE, firebaseUser: {idToken: "some-firebase.id.token"}}
         ).catch((err) => {
           expect(err.status).to.eql(500)
         }).then(() => {
@@ -143,7 +140,7 @@ describe("PipelineApi", () => {
             scanDatasetId: "some-scan-dataset-id"
           },
           {},
-          {firebaseUser: {idToken: "some-firebase.id.token"}})
+          {authType: FIREBASE, firebaseUser: {idToken: "some-firebase.id.token"}})
           .catch(_.noop)
           .finally(() => {
             expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
@@ -153,6 +150,7 @@ describe("PipelineApi", () => {
       });
 
       it("handles pipeline already running errors", () => {
+        sandbox.stub(Config, "sharedErrorHandler");
         return PipelineApi.triggerPipeline({
             accountId: "some-organization-id",
             projectId: "some-project-id",
@@ -160,11 +158,11 @@ describe("PipelineApi", () => {
             scanDatasetId: "some-scan-dataset-with-an-already-running-job"
           },
           {},
-          {firebaseUser: {idToken: "some-firebase.id.token"}})
+          {authType: FIREBASE, firebaseUser: {idToken: "some-firebase.id.token"}})
           .catch(_.noop)
           .finally(() => {
             expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
-              // type: API_FAILURE,
+             // TODO
             });
           });
       });

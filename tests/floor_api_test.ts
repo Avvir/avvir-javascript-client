@@ -1,4 +1,4 @@
-import { sandbox } from "./test_utils/setup_tests";
+import {sand, sandbox} from "./test_utils/setup_tests";
 import { expect } from "chai";
 import fetchMock from "fetch-mock";
 import _ from "underscore";
@@ -132,20 +132,21 @@ describe("FloorApi", () => {
     describe("when the call fails", () => {
       beforeEach(() => {
         fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors`,
-          { status: 500, body: { some: "body" },
+          { status: 500, body: { some: "body", message:"some error message" },
             headers: {"ContentType": "application/json"}
           },
           { overwriteRoutes: true });
       });
 
       it("calls the shared error handler", () => {
+        sandbox.stub(Config, "sharedErrorHandler");
         return FloorApi.createFloor("some-project-id",
           "14",
           { firebaseUser: { idToken: "some-firebase.id.token" } })
           .catch(_.noop)
           .finally(() => {
             expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
-              type: API_FAILURE,
+              message: "500 Internal Server Error: 'some error message' at `.../projects/some-project-id/floors`"
             });
           });
       });
@@ -168,26 +169,11 @@ describe("FloorApi", () => {
       const lastFetchOpts = fetchMock.lastOptions();
 
       expect(lastFetchOpts.headers).to.include.key("Content-Type");
-      expect(lastFetchOpts.headers["Content-Type"]).to.eq("application/json");
+      expect(lastFetchOpts.headers["Content-Type"]).to.eq("application/vnd.avvir.gateway.UserFloor+json");
       expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id`);
       expect(fetchCall[1].body).to.deep.eq(JSON.stringify(new ApiFloor({
         defaultFirebaseScanDatasetId: "some-scan-id"
       })));
-    });
-
-    describe("when the user is not a superadmin", () => {
-      it("sends the request with UserFloor content-type headers", () => {
-        FloorApi.updateFloor({
-          projectId: "some-project-id",
-          floorId: "some-floor-id"
-        }, new ApiFloor({
-          defaultFirebaseScanDatasetId: "some-scan-id"
-        }), { firebaseUser: { idToken: "some-firebase.id.token" } } as User);
-        const lastFetchOpts = fetchMock.lastOptions();
-
-        expect(lastFetchOpts.headers).to.include.key("Content-Type");
-        expect(lastFetchOpts.headers["Content-Type"]).to.eq("application/vnd.avvir.gateway.UserFloor+json");
-      });
     });
 
     it("sends the request with authorization headers", () => {

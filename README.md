@@ -1,9 +1,14 @@
 # avvir-javascript-client
 
 
-#setup
+# Usage
 
-`git clone git@github.com:Avvir/avvir-javascript-client.git javascript-client`
-`yarn install`
+configure environment:
+AVVIR_GATEWAY_URL=https://avvir-gateway-production.herokuapp.com
 
-In webstorm mocha configuration set extra-mocha-options to `--require ./tests/test_utils/mocha_setup.js`
+configure credentials:
+```javascript
+
+let response = await WebGatewayApi.login(username, password);
+```
+`let user = { // TODO }`

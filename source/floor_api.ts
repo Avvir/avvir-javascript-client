@@ -48,9 +48,9 @@ export default class FloorApi {
     }).then(checkFetchStatus) as Promise<any>;
   }
 
-  static updateFloor({ projectId, floorId }: AssociationIds, apiFloor: ApiFloor, user: User, isSuperadmin: boolean = true) {
+  static updateFloor({ projectId, floorId }: AssociationIds, apiFloor: ApiFloor, user: User) {
     const url = `${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}`;
-    const patchHeaders = isSuperadmin ? httpPostHeaders : httpPostHeaders("application/vnd.avvir.gateway.UserFloor+json")
+    const patchHeaders = httpPostHeaders("application/vnd.avvir.gateway.UserFloor+json")
     return (fetch(url, {
       method: "PATCH",
       headers: {

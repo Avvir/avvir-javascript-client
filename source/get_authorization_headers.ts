@@ -11,10 +11,10 @@ export type GatewayUser = {
 
 export type FirebaseUser = {
   firebaseUser: {
-    uid: string
+    uid?: string
     role?: UserRole
     displayName?: string
-    idToken: string
+    idToken?: string
     email?: string
   }
   authType: typeof FIREBASE
