@@ -112,20 +112,19 @@ describe("PipelineApi", () => {
           expect(err.status).to.eql(500)
         }).then(() => {
           expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
-            // error: {},
-            // arguments: [{
-            //   accountId: "some-organization-id",
-            //   projectId: "some-project-id",
-            //   floorId: "some-floor-id",
-            //   scanDatasetId: "some-scan-id"
-            // },
-            //   {},
-            //   {firebaseUser: {idToken: "some-firebase.id.token"}}]
-            // type: "pipeline_trigger_failed",
-            // payload: {
-            //   floorId: "some-floor-id",
-            //   scanDatasetId: "some-scan-id"
-            // }
+            error: {
+              message: "some unfortunate error",
+              verboseMessage: "500 Internal Server Error: 'some unfortunate error' at `.../pipeline/projects/some-project-id/floors`"
+            },
+            method: "triggerPipeline",
+            arguments: [{
+              accountId: "some-organization-id",
+              projectId: "some-project-id",
+              floorId: "some-floor-id",
+              scanDatasetId: "some-scan-id"
+            },
+              {},
+              {firebaseUser: {idToken: "some-firebase.id.token"}}]
           });
         });
       });

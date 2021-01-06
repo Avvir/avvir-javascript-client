@@ -27,7 +27,8 @@ const makeErrorsPretty = (apiClass) => {
   let functionNames = getFunctionNames(apiClass);
   _.forEach(functionNames, (functionName) => {
     apiClass[functionName] = makeErrorsPrettyForFunction(functionName, apiClass[functionName]);
-  })
+  });
+  return apiClass;
 }
 
 export default makeErrorsPretty;
