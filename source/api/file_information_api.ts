@@ -1,10 +1,10 @@
-import ApiCloudFile from "./models/api/api_cloud_file";
-import PurposeTypeConverter from "./converters/purpose_type_converter";
+import ApiCloudFile from "../models/api/api_cloud_file";
+import PurposeTypeConverter from "../converters/purpose_type_converter";
 import { AssociationIds } from "type_aliases";
-import Http from "./http";
-import makeErrorsPretty from "./make_errors_pretty";
-import {User} from "./get_authorization_headers";
-import {PurposeType} from "./models/enums/purpose_type";
+import Http from "../utilities/http";
+import makeErrorsPretty from "../utilities/make_errors_pretty";
+import {User} from "../utilities/get_authorization_headers";
+import {PurposeType} from "../models/enums/purpose_type";
 
 export default class FileInformationApi {
   static createProjectFile({ projectId }: AssociationIds, apiFile: ApiCloudFile, user: User) {

@@ -1,19 +1,19 @@
-import {sand, sandbox} from "./test_utils/setup_tests";
+import {sand, sandbox} from "../test_utils/setup_tests";
 import {expect} from "chai";
 import {match} from "sinon";
 import fetchMock from "fetch-mock";
 
-import ApiPipeline from "../source/models/api/api_pipeline";
-import DetailedElement from "../source/models/domain/detailed_element";
-import ResponseError from "../source/models/response_error";
-import WebGatewayApi from "../source/web_gateway_api";
-import {DETECTED, INCLUDED} from "../source/models/enums/deviation_status";
-import {DEVIATED} from "../source/models/enums/scan_label";
-import {FIREBASE, GATEWAY_JWT} from "../source/models/enums/user_auth_type";
-import {USER} from "../source/models/enums/user_role";
-import {ELEMENTS_STATUSES_UPDATED, API_FAILURE} from "../source/models/enums/event_types";
-import Config from "../source/config";
-import Http from "../source/http";
+import ApiPipeline from "../../source/models/api/api_pipeline";
+import DetailedElement from "../../source/models/domain/detailed_element";
+import ResponseError from "../../source/models/response_error";
+import WebGatewayApi from "../../source/api/web_gateway_api";
+import {DETECTED, INCLUDED} from "../../source/models/enums/deviation_status";
+import {DEVIATED} from "../../source/models/enums/scan_label";
+import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
+import {USER} from "../../source/models/enums/user_role";
+import {ELEMENTS_STATUSES_UPDATED, API_FAILURE} from "../../source/models/enums/event_types";
+import Config from "../../source/utilities/config";
+import Http from "../../source/utilities/http";
 
 describe("WebGatewayApi", () => {
   describe("::login", () => {

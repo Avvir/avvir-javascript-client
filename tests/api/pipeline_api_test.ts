@@ -1,15 +1,15 @@
-import {sandbox} from "./test_utils/setup_tests";
+import {sandbox} from "../test_utils/setup_tests";
 import {expect} from "chai";
 import fetchMock from "fetch-mock";
 import _ from "underscore";
 
-import PipelineApi from "../source/pipeline_api";
-import WebGatewayApi from "../source/web_gateway_api";
-import {FIREBASE} from "../source/models/enums/user_auth_type";
-import {makeFakeDispatch, makeStoreContents} from "./test_utils/test_factories";
-import Config from "../source/config";
-import ResponseError from "../source/models/response_error";
-import Http from "../source/http";
+import PipelineApi from "../../source/api/pipeline_api";
+import WebGatewayApi from "../../source/api/web_gateway_api";
+import {FIREBASE} from "../../source/models/enums/user_auth_type";
+import {makeFakeDispatch, makeStoreContents} from "../test_utils/test_factories";
+import Config from "../../source/utilities/config";
+import ResponseError from "../../source/models/response_error";
+import Http from "../../source/utilities/http";
 
 describe("PipelineApi", () => {
   let user;

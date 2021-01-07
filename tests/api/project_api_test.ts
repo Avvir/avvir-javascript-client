@@ -1,19 +1,19 @@
-import "./test_utils/setup_tests";
+import "../test_utils/setup_tests";
 import {expect} from "chai";
 import fetchMock from "fetch-mock";
 import moment from "moment";
 
-import ApiMasterformat from "../source/models/api/api_masterformat";
-import ApiProjectCostAnalysisProgress from "../source/models/api/api_project_cost_analysis_progress";
-import ApiProjectMasterformatProgress from "../source/models/api/api_project_masterformat_progress";
-import DateConverter from "../source/converters/date_converter";
-import ProjectApi from "../source/project_api";
-import WebGatewayApi from "../source/web_gateway_api";
-import {FIREBASE, GATEWAY_JWT} from "../source/models/enums/user_auth_type";
-import {SUPERADMIN} from "../source/models/enums/user_role";
+import ApiMasterformat from "../../source/models/api/api_masterformat";
+import ApiProjectCostAnalysisProgress from "../../source/models/api/api_project_cost_analysis_progress";
+import ApiProjectMasterformatProgress from "../../source/models/api/api_project_masterformat_progress";
+import DateConverter from "../../source/converters/date_converter";
+import ProjectApi from "../../source/api/project_api";
+import WebGatewayApi from "../../source/api/web_gateway_api";
+import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
+import {SUPERADMIN} from "../../source/models/enums/user_role";
 import {sandbox} from "./test_utils/setup_tests";
-import Config from "../source/config";
-import Http from "../source/http";
+import Config from "../../source/utilities/config";
+import Http from "../../source/utilities/http";
 
 describe("ProjectApi", () => {
   let user;

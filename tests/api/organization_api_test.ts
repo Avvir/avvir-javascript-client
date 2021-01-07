@@ -1,11 +1,10 @@
-import "./test_utils/setup_tests";
+import "../test_utils/setup_tests";
 import { expect } from "chai";
 import fetchMock from "fetch-mock";
 
-import OrganizationApi from "../source/organization_api";
-import WebGatewayApi from "../source/web_gateway_api";
-import { FIREBASE } from "../source/models/enums/user_auth_type";
-import Http from "../source/http";
+import OrganizationApi from "../../source/api/organization_api";
+import { FIREBASE } from "../../source/models/enums/user_auth_type";
+import Http from "../../source/utilities/http";
 
 describe("OrganizationApi", () => {
   let user;

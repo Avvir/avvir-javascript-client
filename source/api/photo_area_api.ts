@@ -1,7 +1,7 @@
 import {AssociationIds} from "type_aliases";
-import {User} from "./get_authorization_headers";
-import makeErrorsPretty from "./make_errors_pretty";
-import Http from "./http";
+import {User} from "../utilities/get_authorization_headers";
+import makeErrorsPretty from "../utilities/make_errors_pretty";
+import Http from "../utilities/http";
 
 export default class PhotoAreaApi {
   static listPhotoAreasForProject({ projectId }: AssociationIds, user: User) {

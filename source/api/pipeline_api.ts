@@ -1,7 +1,7 @@
 import {AssociationIds} from "type_aliases";
-import Http from "./http";
-import makeErrorsPretty from "./make_errors_pretty";
-import {User} from "./get_authorization_headers";
+import Http from "../utilities/http";
+import makeErrorsPretty from "../utilities/make_errors_pretty";
+import {User} from "../utilities/get_authorization_headers";
 
 class PipelineApi {
   static triggerPipeline(associationIds: AssociationIds, body = {}, user: User) {

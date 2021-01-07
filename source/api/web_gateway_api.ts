@@ -1,11 +1,11 @@
-import DetailedElement from "./models/domain/detailed_element";
-import DeviationStatus from "./models/enums/deviation_status";
-import getAuthorizationHeaders, {BasicUser, User} from "./get_authorization_headers";
-import UserAuthType from "./models/enums/user_auth_type";
+import DetailedElement from "../models/domain/detailed_element";
+import DeviationStatus from "../models/enums/deviation_status";
+import getAuthorizationHeaders, {BasicUser, User} from "../utilities/get_authorization_headers";
+import UserAuthType from "../models/enums/user_auth_type";
 import {AssociationIds} from "type_aliases";
-import {httpGetHeaders} from "./request_headers";
-import Http from "./http";
-import makeErrorsPretty from "./make_errors_pretty";
+import {httpGetHeaders} from "../utilities/request_headers";
+import Http from "../utilities/http";
+import makeErrorsPretty from "../utilities/make_errors_pretty";
 
 export default class WebGatewayApi {
 

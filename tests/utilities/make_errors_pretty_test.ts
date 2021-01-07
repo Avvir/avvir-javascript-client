@@ -1,7 +1,7 @@
 import {expect} from "chai";
-import Config from "../source/config";
-import makeErrorsPretty from "../source/make_errors_pretty";
-import {sandbox} from "./test_utils/setup_tests";
+import Config from "../../source/utilities/config";
+import makeErrorsPretty from "../../source/utilities/make_errors_pretty";
+import {sandbox} from "../test_utils/setup_tests";
 
 describe("makeErrorsPretty", () => {
   let clazz;

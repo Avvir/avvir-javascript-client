@@ -1,12 +1,12 @@
-import PipelineApi from "./pipeline_api";
-import ProjectApi from "./project_api";
-import OrganizationApi from "./organization_api";
-import Config from "./config";
-import FloorApi from "./floor_api";
-import WebGatewayApi from "./web_gateway_api";
-import FileInformationApi from "./file_information_api";
-import PhotoAreaApi from "./photo_area_api";
-import ScanDatasetApi from "./scan_dataset_api";
+import PipelineApi from "./api/pipeline_api";
+import ProjectApi from "./api/project_api";
+import OrganizationApi from "./api/organization_api";
+import Config from "./utilities/config";
+import FloorApi from "./api/floor_api";
+import WebGatewayApi from "./api/web_gateway_api";
+import FileInformationApi from "./api/file_information_api";
+import PhotoAreaApi from "./api/photo_area_api";
+import ScanDatasetApi from "./api/scan_dataset_api";
 
 export default class AvvirApi {
   static config = Config

@@ -3,18 +3,18 @@ import fetchMock from "fetch-mock";
 import _ from "underscore";
 import moment from "moment";
 
-import ApiScanDataset from "../source/models/api/api_scan_dataset";
-import DateConverter from "../source/converters/date_converter";
-import ScanDatasetApi from "../source/scan_dataset_api";
-import WebGatewayApi from "../source/web_gateway_api";
-import {API_FAILURE} from "../source/models/enums/event_types";
-import {FIREBASE, GATEWAY_JWT} from "../source/models/enums/user_auth_type";
-import {makeStoreContents} from "./test_utils/test_factories";
-import {SUPERADMIN, USER} from "../source/models/enums/user_role";
-import {User} from "../source/get_authorization_headers";
-import Config from "../source/config";
-import {sandbox} from "./test_utils/setup_tests";
-import Http from "../source/http";
+import ApiScanDataset from "../../source/models/api/api_scan_dataset";
+import DateConverter from "../../source/converters/date_converter";
+import ScanDatasetApi from "../../source/api/scan_dataset_api";
+import WebGatewayApi from "../../source/api/web_gateway_api";
+import {API_FAILURE} from "../../source/models/enums/event_types";
+import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
+import {makeStoreContents} from "../test_utils/test_factories";
+import {SUPERADMIN, USER} from "../../source/models/enums/user_role";
+import {User} from "../../source/utilities/get_authorization_headers";
+import Config from "../../source/utilities/config";
+import {sandbox} from "../test_utils/setup_tests";
+import Http from "../../source/utilities/http";
 
 describe("ScanDatasetApi", () => {
   let user: User, fakeGetState;

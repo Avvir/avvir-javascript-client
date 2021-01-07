@@ -1,8 +1,8 @@
-import ApiOrganization from "./models/api/api_organization";
-import {User} from "./get_authorization_headers";
+import ApiOrganization from "../models/api/api_organization";
+import {User} from "../utilities/get_authorization_headers";
 import WebGatewayApi from "./web_gateway_api";
-import Http from "./http";
-import makeErrorsPretty from "./make_errors_pretty";
+import Http from "../utilities/http";
+import makeErrorsPretty from "../utilities/make_errors_pretty";
 
 class OrganizationApi {
   static listOrganizations(user: User) {

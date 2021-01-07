@@ -1,10 +1,10 @@
-import ApiProject from "./models/api/api_project";
-import ApiProjectMasterformatProgress from "./models/api/api_project_masterformat_progress";
-import {User} from "./get_authorization_headers";
+import ApiProject from "../models/api/api_project";
+import ApiProjectMasterformatProgress from "../models/api/api_project_masterformat_progress";
+import {User} from "../utilities/get_authorization_headers";
 import WebGatewayApi from "./web_gateway_api";
 import {AssociationIds} from "type_aliases";
-import Http from "./http";
-import makeErrorsPretty from "./make_errors_pretty";
+import Http from "../utilities/http";
+import makeErrorsPretty from "../utilities/make_errors_pretty";
 
 class ProjectApi {
   static listProjectsForOrganization(accountId: string, user: User) {

@@ -1,12 +1,12 @@
-import { sandbox } from "./test_utils/setup_tests";
+import { sandbox } from "../test_utils/setup_tests";
 import { expect } from "chai";
 import { match } from "sinon";
 import { Response, Headers } from "node-fetch";
 
-import checkFetchStatus from "../source/check_fetch_status";
-import ResponseError from "../source/models/response_error";
-import WebGatewayApi from "../source/web_gateway_api";
-import Http from "../source/http";
+import checkFetchStatus from "../../source/utilities/check_fetch_status";
+import ResponseError from "../../source/models/response_error";
+import WebGatewayApi from "../../source/api/web_gateway_api";
+import Http from "../../source/utilities/http";
 
 describe("#checkFetchStatus", () => {
   describe("when the request is successful", () => {

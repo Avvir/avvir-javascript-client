@@ -1,19 +1,19 @@
-import { sandbox } from "./test_utils/setup_tests";
+import { sandbox } from "../test_utils/setup_tests";
 import { expect } from "chai";
 import fetchMock from "fetch-mock";
 import moment from "moment";
 
-import ApiCloudFile from "../source/models/api/api_cloud_file";
-import DateConverter from "../source/converters/date_converter";
-import FileInformationApi from "../source/file_information_api";
-import WebGatewayApi from "../source/web_gateway_api";
-import { FIREBASE } from "../source/models/enums/user_auth_type";
-import { makeFakeDispatch, makeStoreContents } from "./test_utils/test_factories";
-import { OTHER } from "../source/models/enums/purpose_type";
-import { SUPERADMIN } from "../source/models/enums/user_role";
-import { UPLOAD_FAILED } from "../source/models/enums/event_types";
-import Config from "../source/config";
-import Http from "../source/http";
+import ApiCloudFile from "../../source/models/api/api_cloud_file";
+import DateConverter from "../../source/converters/date_converter";
+import FileInformationApi from "../../source/api/file_information_api";
+import WebGatewayApi from "../../source/api/web_gateway_api";
+import { FIREBASE } from "../../source/models/enums/user_auth_type";
+import { makeFakeDispatch, makeStoreContents } from "../test_utils/test_factories";
+import { OTHER } from "../../source/models/enums/purpose_type";
+import { SUPERADMIN } from "../../source/models/enums/user_role";
+import { UPLOAD_FAILED } from "../../source/models/enums/event_types";
+import Config from "../../source/utilities/config";
+import Http from "../../source/utilities/http";
 
 describe("FileInformationApi", () => {
   let fakeDispatch, dispatchSpy, fakeGetState, user;

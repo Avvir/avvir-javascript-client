@@ -1,14 +1,14 @@
-import {sandbox} from "./test_utils/setup_tests";
+import {sandbox} from "../test_utils/setup_tests";
 import {expect} from "chai";
 import fetchMock from "fetch-mock";
 import _ from "underscore";
 
-import ApiFloor from "../source/models/api/api_floor";
-import FloorApi from "../source/floor_api";
-import {FIREBASE} from "../source/models/enums/user_auth_type";
-import {User} from "../source/get_authorization_headers";
-import Config from "../source/config";
-import Http from "../source/http";
+import ApiFloor from "../../source/models/api/api_floor";
+import FloorApi from "../../source/api/floor_api";
+import {FIREBASE} from "../../source/models/enums/user_auth_type";
+import {User} from "../../source/utilities/get_authorization_headers";
+import Config from "../../source/utilities/config";
+import Http from "../../source/utilities/http";
 
 describe("FloorApi", () => {
   let user;

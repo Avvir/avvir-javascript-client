@@ -1,10 +1,10 @@
-import ApiScanDataset from "./models/api/api_scan_dataset";
-import {User} from "./get_authorization_headers";
+import ApiScanDataset from "../models/api/api_scan_dataset";
+import {User} from "../utilities/get_authorization_headers";
 import WebGatewayApi from "./web_gateway_api";
 import {AssociationIds} from "type_aliases";
-import {ScanLabelValues} from "./models/enums/scan_label";
-import Http from "./http";
-import makeErrorsPretty from "./make_errors_pretty";
+import {ScanLabelValues} from "../models/enums/scan_label";
+import Http from "../utilities/http";
+import makeErrorsPretty from "../utilities/make_errors_pretty";
 
 class ScanDatasetApi {
   static listScanDatasetsForFloor({ projectId, floorId }: AssociationIds, user: User) {

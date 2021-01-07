@@ -7,12 +7,12 @@ import ChaiDatetime from "chai-datetime";
 import fetchMock from "fetch-mock";
 
 import beVeryLike from "./chai_be_very_like";
-import FileInformationApi from "../../source/file_information_api";
-import FloorApi from "../../source/floor_api";
-import PipelineApi from "../../source/pipeline_api";
-import ProjectApi from "../../source/project_api";
-import ScanDatasetApi from "../../source/scan_dataset_api";
-import WebGatewayApi from "../../source/web_gateway_api";
+import FileInformationApi from "../../source/api/file_information_api";
+import FloorApi from "../../source/api/floor_api";
+import PipelineApi from "../../source/api/pipeline_api";
+import ProjectApi from "../../source/api/project_api";
+import ScanDatasetApi from "../../source/api/scan_dataset_api";
+import WebGatewayApi from "../../source/api/web_gateway_api";
 
 const chaiRoughly = require("chai-roughly");
 const chaiJsonEqual = require("chai-json-equal");
