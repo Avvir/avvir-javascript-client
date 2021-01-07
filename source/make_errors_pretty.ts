@@ -22,11 +22,14 @@ const getFunctionNames = (clazz) => {
   return _.without(Object.getOwnPropertyNames(clazz), ...builtinProperties)
 }
 
-const makeErrorsPretty = (apiClass) => {
+const makeErrorsPretty = (apiClass, options = {exclude: []}) => {
   console.log(apiClass)
   let functionNames = getFunctionNames(apiClass);
   _.forEach(functionNames, (functionName) => {
-    apiClass[functionName] = makeErrorsPrettyForFunction(functionName, apiClass[functionName]);
+    let isExcluded = options.exclude && options.exclude.includes(functionName);
+    if (!isExcluded) {
+      apiClass[functionName] = makeErrorsPrettyForFunction(functionName, apiClass[functionName]);
+    }
   });
   return apiClass;
 }

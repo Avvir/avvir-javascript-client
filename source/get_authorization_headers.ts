@@ -29,6 +29,9 @@ export type BasicUser = {
 export type User = BasicUser | GatewayUser | FirebaseUser | null
 
 const getAuthorizationHeaders = (user: User) => {
+  if(!user){
+    return null;
+  }
   switch (user?.authType) {
     case GATEWAY_JWT: {
       return {

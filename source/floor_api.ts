@@ -5,10 +5,11 @@ import WebGatewayApi from "./web_gateway_api";
 import { AssociationIds } from "type_aliases";
 import { httpGetHeaders, httpPostHeaders } from "./request_headers";
 import Config from "./config";
+import Http from "./http";
 
 export default class FloorApi {
   static listFloorsForProject(projectId: string, user: User) {
-    return fetch(`${WebGatewayApi.baseUrl}/projects/${projectId}/floors`, {
+    return fetch(`${Http.baseUrl}/projects/${projectId}/floors`, {
       headers: {
         ...httpGetHeaders,
         ...getAuthorizationHeaders(user)
@@ -17,7 +18,7 @@ export default class FloorApi {
   }
 
   static createFloor(projectId: string, floorNumber: string, user: User) {
-    const url = `${WebGatewayApi.baseUrl}/projects/${projectId}/floors`;
+    const url = `${Http.baseUrl}/projects/${projectId}/floors`;
     return (fetch(url, {
       method: "POST",
       headers: {
@@ -30,7 +31,7 @@ export default class FloorApi {
   }
 
   static getFloor({ projectId, floorId }: AssociationIds, user: User) {
-    const url = `${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}`;
+    const url = `${Http.baseUrl}/projects/${projectId}/floors/${floorId}`;
     return fetch(url, {
       headers: {
         ...httpGetHeaders,
@@ -40,7 +41,7 @@ export default class FloorApi {
   }
 
   static getViewerFloor({ projectId, floorId }: AssociationIds, user: User) {
-    return fetch(`${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}/viewer`, {
+    return fetch(`${Http.baseUrl}/projects/${projectId}/floors/${floorId}/viewer`, {
       headers: {
         ...httpGetHeaders,
         ...getAuthorizationHeaders(user)
@@ -49,7 +50,7 @@ export default class FloorApi {
   }
 
   static updateFloor({ projectId, floorId }: AssociationIds, apiFloor: ApiFloor, user: User) {
-    const url = `${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}`;
+    const url = `${Http.baseUrl}/projects/${projectId}/floors/${floorId}`;
     const patchHeaders = httpPostHeaders("application/vnd.avvir.gateway.UserFloor+json")
     return (fetch(url, {
       method: "PATCH",
@@ -63,7 +64,7 @@ export default class FloorApi {
   }
 
   static updateFloorOrder({ projectId, floorId }: AssociationIds, ordinal: number, user: User) {
-    const url = `${WebGatewayApi.baseUrl}/projects/${projectId}/floors/${floorId}/reorder/${ordinal}`;
+    const url = `${Http.baseUrl}/projects/${projectId}/floors/${floorId}/reorder/${ordinal}`;
     return (fetch(url, {
       method: "PATCH",
       headers: {

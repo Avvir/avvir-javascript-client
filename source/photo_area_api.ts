@@ -1,45 +1,27 @@
-import { AssociationIds } from "type_aliases";
-import getAuthorizationHeaders, { User } from "./get_authorization_headers";
+import {AssociationIds} from "type_aliases";
+import {User} from "./get_authorization_headers";
 import WebGatewayApi from "./web_gateway_api";
-import { httpGetHeaders } from "./request_headers";
-import checkFetchStatus from "./check_fetch_status";
-import ApiPhotoArea from "./models/api/api_photo_area";
-import ApiPhotoLocation from "./models/api/api_photo_location";
-import ApiPhotoSession from "./models/api/api_photo_session";
-import Config from "./config";
+import makeErrorsPretty from "./make_errors_pretty";
+import Http from "./http";
 
-export default class PhotoAreaApi {
+class PhotoAreaApi {
   static listPhotoAreasForProject({ projectId }: AssociationIds, user: User) {
-    return (fetch(`${WebGatewayApi.baseUrl}/projects/${projectId}/photo-areas`, {
-      headers: {
-        ...httpGetHeaders,
-        ...getAuthorizationHeaders(user)
-      }
-    }).then(checkFetchStatus) as Promise<ApiPhotoArea[]>)
-      .catch(Config.sharedErrorHandler);
+    let url = `${Http.baseUrl}/projects/${projectId}/photo-areas`;
+    return Http.get(url, user);
   }
 
   static listPhotoLocations({ projectId, photoAreaId, photoSessionId }: AssociationIds, user: User) {
-    let url = `${WebGatewayApi.baseUrl}/projects/${projectId}/photo-areas/${photoAreaId}/locations`;
+    let url = `${Http.baseUrl}/projects/${projectId}/photo-areas/${photoAreaId}/locations`;
     if (photoSessionId) {
       url += `?photoSessionId=${photoSessionId}`;
     }
-    return (fetch(url, {
-      headers: {
-        ...httpGetHeaders,
-        ...getAuthorizationHeaders(user)
-      }
-    }).then(checkFetchStatus) as Promise<ApiPhotoLocation[]>)
-      .catch(Config.sharedErrorHandler);
+    return Http.get(url, user);
   }
 
   static listPhotoSessionsForPhotoArea({ projectId, photoAreaId }: AssociationIds, user) {
-    return (fetch(`${WebGatewayApi.baseUrl}/projects/${projectId}/photo-areas/${photoAreaId}/sessions`, {
-      headers: {
-        ...httpGetHeaders,
-        ...getAuthorizationHeaders(user)
-      }
-    }).then(checkFetchStatus) as Promise<ApiPhotoSession[]>)
-      .catch(Config.sharedErrorHandler);
+    let url = `${Http.baseUrl}/projects/${projectId}/photo-areas/${photoAreaId}/sessions`;
+    return Http.get(url, user);
   }
 }
+
+export default makeErrorsPretty(PhotoAreaApi);

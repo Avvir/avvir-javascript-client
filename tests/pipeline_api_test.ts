@@ -9,6 +9,7 @@ import {FIREBASE} from "../source/models/enums/user_auth_type";
 import {makeFakeDispatch, makeStoreContents} from "./test_utils/test_factories";
 import Config from "../source/config";
 import ResponseError from "../source/models/response_error";
+import Http from "../source/http";
 
 describe("PipelineApi", () => {
   let user;
@@ -20,7 +21,7 @@ describe("PipelineApi", () => {
 
   describe("#triggerPipeline", () => {
     beforeEach(() => {
-      fetchMock.post(`${WebGatewayApi.baseUrl}/pipeline/some-organization-id/some-project-id/some-floor-id/some-scan-dataset-id/trigger`, 200);
+      fetchMock.post(`${Http.baseUrl}/pipeline/some-organization-id/some-project-id/some-floor-id/some-scan-dataset-id/trigger`, 200);
     });
 
     it("Calls the correct URL", () => {
@@ -34,7 +35,7 @@ describe("PipelineApi", () => {
         { authType:FIREBASE, firebaseUser: {idToken: "some-firebase.id.token" }});
 
       expect(fetchMock.lastUrl()).to.eq(
-        `${WebGatewayApi.baseUrl}/pipeline/some-organization-id/some-project-id/some-floor-id/some-scan-dataset-id/trigger`
+        `${Http.baseUrl}/pipeline/some-organization-id/some-project-id/some-floor-id/some-scan-dataset-id/trigger`
       );
     });
 
@@ -65,8 +66,8 @@ describe("PipelineApi", () => {
           headers: {"ContentType": "application/json"}
         };
 
-        fetchMock.mock(`begin:${WebGatewayApi.baseUrl}/pipeline/`, (url) => {
-          const startLength = `${WebGatewayApi.baseUrl}/pipeline/`.length;
+        fetchMock.mock(`begin:${Http.baseUrl}/pipeline/`, (url) => {
+          const startLength = `${Http.baseUrl}/pipeline/`.length;
           const argsString = url.slice(startLength).split("/");
           const floorId = argsString[2];
           const scanDatasetId = argsString[3];
@@ -86,7 +87,7 @@ describe("PipelineApi", () => {
       });
 
       it("rejects the promise and calls the shared error handler", () => {
-        fetchMock.mock(`begin:${WebGatewayApi.baseUrl}/pipeline/`, (url) => {
+        fetchMock.mock(`begin:${Http.baseUrl}/pipeline/`, (url) => {
           return {
               status: 500,  body: {message: "some unfortunate error"},
               headers: {"ContentType": "application/json"}

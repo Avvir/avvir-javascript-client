@@ -1,30 +1,34 @@
 import {sand, sandbox} from "./test_utils/setup_tests";
-import { expect } from "chai";
-import { match } from "sinon";
+import {expect} from "chai";
+import {match} from "sinon";
 import fetchMock from "fetch-mock";
 
 import ApiPipeline from "../source/models/api/api_pipeline";
 import DetailedElement from "../source/models/domain/detailed_element";
 import ResponseError from "../source/models/response_error";
 import WebGatewayApi from "../source/web_gateway_api";
-import { DETECTED, INCLUDED } from "../source/models/enums/deviation_status";
-import { DEVIATED } from "../source/models/enums/scan_label";
-import { FIREBASE, GATEWAY_JWT } from "../source/models/enums/user_auth_type";
-import { USER } from "../source/models/enums/user_role";
-import { ELEMENTS_STATUSES_UPDATED, API_FAILURE } from "../source/models/enums/event_types";
+import {DETECTED, INCLUDED} from "../source/models/enums/deviation_status";
+import {DEVIATED} from "../source/models/enums/scan_label";
+import {FIREBASE, GATEWAY_JWT} from "../source/models/enums/user_auth_type";
+import {USER} from "../source/models/enums/user_role";
+import {ELEMENTS_STATUSES_UPDATED, API_FAILURE} from "../source/models/enums/event_types";
 import Config from "../source/config";
+import Http from "../source/http";
 
 describe("WebGatewayApi", () => {
   describe("::login", () => {
     beforeEach(() => {
-      fetchMock.get(`${WebGatewayApi.baseUrl}/login`, { status: 200, body: { storageToken: "some-auth-token", redirectUrl: "/projects/some-project-id" } });
+      fetchMock.get(`${Http.baseUrl}/login`, {
+        status: 200,
+        body: {storageToken: "some-auth-token", redirectUrl: "/projects/some-project-id"}
+      });
     });
 
     it("makes a call to the login endpoint", () => {
       WebGatewayApi.login("some-username", "some-password");
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/login`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/login`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
@@ -48,24 +52,27 @@ describe("WebGatewayApi", () => {
 
   describe("::getCustomFirebaseToken", () => {
     beforeEach(() => {
-      fetchMock.get(`${WebGatewayApi.baseUrl}/login`, { status: 200, body: { storageToken: "some-auth-token", redirectUrl: "/projects/some-project-id" } });
+      fetchMock.get(`${Http.baseUrl}/login`, {
+        status: 200,
+        body: {storageToken: "some-auth-token", redirectUrl: "/projects/some-project-id"}
+      });
     });
 
     it("makes a call to the login endpoint", () => {
       WebGatewayApi.getCustomFirebaseToken({
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/login`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/login`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
     it("sends the request with an Authorization header", () => {
       WebGatewayApi.getCustomFirebaseToken({
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       const lastFetchOpts = fetchMock.lastOptions();
@@ -75,9 +82,9 @@ describe("WebGatewayApi", () => {
 
     it("resolves with the authorization token and redirect url", () => {
       return WebGatewayApi.getCustomFirebaseToken({
-          authType: GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-        })
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      })
         .then((result) => {
           expect(result.body.storageToken).to.eq("some-auth-token");
         });
@@ -86,26 +93,26 @@ describe("WebGatewayApi", () => {
 
   describe("::connectProjectToStructionSite", () => {
     beforeEach(() => {
-      fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/connect-to-structionsite?structionsite-access-token=some-structionsite-access-token&structionsite-project-url=structionsite-url/projects/10`,
+      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/connect-to-structionsite?structionsite-access-token=some-structionsite-access-token&structionsite-project-url=structionsite-url/projects/10`,
         200);
     });
 
     it("makes a request to the gateway", () => {
-      WebGatewayApi.connectProjectToStructionSite({ projectId: "some-project-id" }, "structionsite-url/projects/10", "some-structionsite-access-token", {
+      WebGatewayApi.connectProjectToStructionSite({projectId: "some-project-id"}, "structionsite-url/projects/10", "some-structionsite-access-token", {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       expect(fetchMock.lastCall()[0])
         .to
-        .eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/connect-to-structionsite?structionsite-access-token=some-structionsite-access-token&structionsite-project-url=structionsite-url/projects/10`);
+        .eq(`${Http.baseUrl}/projects/some-project-id/connect-to-structionsite?structionsite-access-token=some-structionsite-access-token&structionsite-project-url=structionsite-url/projects/10`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
     it("includes the authorization headers", () => {
-      WebGatewayApi.connectProjectToStructionSite({ projectId: "some-project-id" }, "structionsite-url/projects/10", "some-structionsite-access-token", {
+      WebGatewayApi.connectProjectToStructionSite({projectId: "some-project-id"}, "structionsite-url/projects/10", "some-structionsite-access-token", {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
@@ -114,23 +121,23 @@ describe("WebGatewayApi", () => {
 
   describe("::checkPipelineStatus", () => {
     beforeEach(() => {
-      fetchMock.get(`${WebGatewayApi.baseUrl}/pipelines/10`, { ...new ApiPipeline({ id: 10, name: "some-pipeline-name" }) });
+      fetchMock.get(`${Http.baseUrl}/pipelines/10`, {...new ApiPipeline({id: 10, name: "some-pipeline-name"})});
     });
 
     it("makes a request to the gateway", () => {
-      WebGatewayApi.checkPipelineStatus({ projectId: "some-project-id" }, 10, {
+      WebGatewayApi.checkPipelineStatus({projectId: "some-project-id"}, 10, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
-      expect(fetchMock.lastCall()[0]).to.eq(`${WebGatewayApi.baseUrl}/pipelines/10`);
+      expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl}/pipelines/10`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
     it("includes the authorization headers", () => {
-      WebGatewayApi.checkPipelineStatus({ projectId: "some-project-id" }, 10, {
+      WebGatewayApi.checkPipelineStatus({projectId: "some-project-id"}, 10, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
@@ -139,7 +146,7 @@ describe("WebGatewayApi", () => {
 
   describe("::createInvitation", () => {
     beforeEach(() => {
-      fetchMock.post(`${WebGatewayApi.baseUrl}/users/invitations`, {
+      fetchMock.post(`${Http.baseUrl}/users/invitations`, {
         userEmail: "someone@example.com",
         token: "some-token",
         expiry: {
@@ -152,12 +159,12 @@ describe("WebGatewayApi", () => {
     it("makes a call to the invitation generation endpoint", () => {
       WebGatewayApi.createInvitation("someone@example.com", "USER", "some-organization-id", {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/users/invitations`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/users/invitations`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
       expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
       expect(fetchMock.lastOptions().body).to.eq(JSON.stringify(
@@ -172,7 +179,7 @@ describe("WebGatewayApi", () => {
     it("sends the request with an Authorization header", () => {
       WebGatewayApi.createInvitation("someone@example.com", "USER", "some-organization-id", {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
@@ -181,7 +188,7 @@ describe("WebGatewayApi", () => {
 
   describe("::getInvitation", () => {
     beforeEach(() => {
-      fetchMock.get(`${WebGatewayApi.baseUrl}/users/invitations/some-token`, {
+      fetchMock.get(`${Http.baseUrl}/users/invitations/some-token`, {
         status: 200,
         body: {
           userEmail: "someone@example.com",
@@ -201,7 +208,7 @@ describe("WebGatewayApi", () => {
 
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/users/invitations/some-token`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/users/invitations/some-token`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
@@ -215,7 +222,7 @@ describe("WebGatewayApi", () => {
 
   describe("::acceptInvitation", () => {
     beforeEach(() => {
-      fetchMock.post(`${WebGatewayApi.baseUrl}/users/accept-invitation`, 200);
+      fetchMock.post(`${Http.baseUrl}/users/accept-invitation`, 200);
     });
 
     it("makes a call to the accept invitation endpoint", () => {
@@ -223,7 +230,7 @@ describe("WebGatewayApi", () => {
 
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/users/accept-invitation`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/users/accept-invitation`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
       expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
       expect(fetchMock.lastOptions().body)
@@ -231,39 +238,9 @@ describe("WebGatewayApi", () => {
     });
   });
 
-  describe("::getScanRepresentation", () => {
-    beforeEach(() => {
-      fetchMock.get(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/files/scan-representation`, {
-        url: "https://example.com/some-scan.glb"
-      });
-    });
-
-    it("resolves with the scan representation file", () => {
-      WebGatewayApi.getScanRepresentation({
-          projectId: "some-project-id",
-          floorId: "some-floor-id",
-          scanDatasetId: "some-scan-id"
-        }, null)
-        .then((scan) => {
-          expect(fetchMock.lastCall()[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/files/scan-representation`);
-          expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
-          expect(scan.url).to.eq("https://example.com/some-scan.glb");
-        });
-    });
-
-    it("includes the authorization headers", () => {
-      WebGatewayApi.getScanRepresentation({ projectId: "some-project-id", floorId: "some-floor-id", scanDatasetId: "some-scan-id" }, {
-        authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-      });
-
-      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
-    });
-  });
-
   describe("::updateDeviationStatus", () => {
     beforeEach(() => {
-      fetchMock.patch(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/deviation-status`, 200);
+      fetchMock.patch(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/deviation-status`, 200);
     });
 
     it("makes a call to the deviation status endpoint", () => {
@@ -273,20 +250,24 @@ describe("WebGatewayApi", () => {
         scanDatasetId: "some-scan-id"
       }, "some-deviation-id", INCLUDED, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       const fetchCall = fetchMock.lastCall();
-      expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/deviation-status`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/deviation-status`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
       expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
       expect(fetchMock.lastOptions().body).to.eq(`{"globalId":"some-deviation-id","status":"INCLUDED"}`);
     });
 
     it("includes the authorization headers", () => {
-      WebGatewayApi.updateDeviationStatus({ projectId: "some-project-id", floorId: "some-floor-id", scanDatasetId: "some-scan-id" }, "some-deviation-id", INCLUDED, {
+      WebGatewayApi.updateDeviationStatus({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, "some-deviation-id", INCLUDED, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
@@ -295,7 +276,7 @@ describe("WebGatewayApi", () => {
 
   describe("::updateElement", () => {
     beforeEach(() => {
-      fetchMock.patch(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/elements/some-element-id`, 200);
+      fetchMock.patch(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/elements/some-element-id`, 200);
     });
 
     it("makes a call to the update element endpoint", () => {
@@ -320,11 +301,11 @@ describe("WebGatewayApi", () => {
         }
       }, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       const fetchCall = fetchMock.lastCall();
-      expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/elements/some-element-id`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/elements/some-element-id`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
       expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
       expect(fetchMock.lastOptions().body).to.eq(JSON.stringify({
@@ -352,7 +333,7 @@ describe("WebGatewayApi", () => {
         globalId: "some-element-id"
       }, {} as DetailedElement, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       }).then(() => {
         expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
       });
@@ -361,7 +342,7 @@ describe("WebGatewayApi", () => {
 
   describe("::updateElements", () => {
     beforeEach(() => {
-      fetchMock.patch(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/detailed-elements`, 200);
+      fetchMock.patch(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/detailed-elements`, 200);
     });
 
     it("makes a call to the update element endpoint", () => {
@@ -385,11 +366,11 @@ describe("WebGatewayApi", () => {
         }
       }], {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       const fetchCall = fetchMock.lastCall();
-      expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/detailed-elements`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/detailed-elements`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
       expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
       expect(fetchMock.lastOptions().body).to.eq(JSON.stringify([{
@@ -416,7 +397,7 @@ describe("WebGatewayApi", () => {
         scanDatasetId: "some-scan-id"
       }, [{}] as DetailedElement[], {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       }).then(() => {
         expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
       });
@@ -425,7 +406,7 @@ describe("WebGatewayApi", () => {
 
   describe("::getElementDetails", () => {
     beforeEach(() => {
-      fetchMock.get(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/element/some-element-id`, {
+      fetchMock.get(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/element/some-element-id`, {
         name: "Some Element Name",
         globalId: "some-element-id",
         ifcType: "IfcSomeType",
@@ -452,23 +433,23 @@ describe("WebGatewayApi", () => {
         scanDatasetId: "some-scan-id"
       }, "some-element-id", {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       const fetchCall = fetchMock.lastCall();
-      expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/element/some-element-id`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/element/some-element-id`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
     it("returns the element details", () => {
       return WebGatewayApi.getElementDetails({
-          projectId: "some-project-id",
-          floorId: "some-floor-id",
-          scanDatasetId: "some-scan-id"
-        }, "some-element-id", {
-          authType: GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-        })
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, "some-element-id", {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      })
         .then((elementDetails) => {
           expect(elementDetails).to.deep.eq({
             name: "Some Element Name",
@@ -496,7 +477,7 @@ describe("WebGatewayApi", () => {
       beforeEach(() => {
         user = {
           authType: GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
         };
       });
 
@@ -515,7 +496,7 @@ describe("WebGatewayApi", () => {
 
   describe("::exportPushedToBimIfc", () => {
     beforeEach(() => {
-      fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`, 200);
+      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`, 200);
     });
 
     it("makes a request to the export ifc endpoint", () => {
@@ -525,36 +506,40 @@ describe("WebGatewayApi", () => {
         scanDatasetId: "some-scan-id"
       }, "as_built", {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-      }, );
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      },);
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
     it("includes the authorization headers", () => {
-      WebGatewayApi.exportIfc({ projectId: "some-project-id", floorId: "some-floor-id", scanDatasetId: "some-scan-id" }, "as_built", {
+      WebGatewayApi.exportIfc({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, "as_built", {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-      }, );
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      },);
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
 
     describe("when there is an error with the request", () => {
       beforeEach(() => {
-        fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`,
-            {
-              status: 404,
-              headers: {'Content-Type': 'application/json'},
-              body: {
-                error: "Not Found",
-                exception: "io.avvir.avvirwebgateway.exceptions.ProjectNotFound",
-                message: "No such Project",
-                path: "/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built",
-              },
-            }, {overwriteRoutes: true});
+        fetchMock.post(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`,
+          {
+            status: 404,
+            headers: {'Content-Type': 'application/json'},
+            body: {
+              error: "Not Found",
+              exception: "io.avvir.avvirwebgateway.exceptions.ProjectNotFound",
+              message: "No such Project",
+              path: "/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built",
+            },
+          }, {overwriteRoutes: true});
       });
 
       it("shows that there was an error", () => {
@@ -566,16 +551,13 @@ describe("WebGatewayApi", () => {
           scanDatasetId: "some-scan-id"
         }, "as_built", {
           authType: GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-        }, ).then(() => {
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        },).then(() => {
           expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
-            verboseMessage: "404 Not Found: 'No such Project' at `.../projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`",
-            status: 404,
-            responseBody: {
-              error: "Not Found",
-              exception: "io.avvir.avvirwebgateway.exceptions.ProjectNotFound",
+            action: "exportIfc",
+            error: {
+              verboseMessage: "404 Not Found: 'No such Project' at `.../projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`",
               message: "No such Project",
-              path: "/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built",
             }
           });
         });
@@ -587,7 +569,7 @@ describe("WebGatewayApi", () => {
     let dispatchSpy;
     beforeEach(() => {
       dispatchSpy = sandbox.spy();
-      fetchMock.get(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`, 200);
+      fetchMock.get(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`, 200);
     });
 
     it("makes a request to check if the export has finished", () => {
@@ -597,26 +579,30 @@ describe("WebGatewayApi", () => {
         scanDatasetId: "some-scan-id"
       }, "3", "as_built", {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-      }, );
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      },);
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
     it("includes the authorization headers", () => {
-      WebGatewayApi.checkExportedIfc({ projectId: "some-project-id", floorId: "some-floor-id", scanDatasetId: "some-scan-id" }, "3", "as_built", {
+      WebGatewayApi.checkExportedIfc({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, "3", "as_built", {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-      }, );
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      },);
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
 
     describe("when there was an error", () => {
       beforeEach(() => {
-        fetchMock.get(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`, {
+        fetchMock.get(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`, {
           status: 404,
           headers: {'Content-Type': 'application/json'},
           body: {
@@ -639,18 +625,15 @@ describe("WebGatewayApi", () => {
           }, "3",
           "as_built", {
             authType: GATEWAY_JWT,
-            gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-          }, ).then(() => {
+            gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+          },).then(() => {
           expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
-                verboseMessage: "404 Not Found: 'No such Project' at `.../projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`",
-                status: 404,
-                responseBody: {
-                  error: "Not Found",
-                  exception: "io.avvir.avvirwebgateway.exceptions.ProjectNotFound",
-                  message: "No such Project",
-                  path: "/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built",
-                }
-            });
+            action: "checkExportedIfc",
+            error: {
+              verboseMessage: "404 Not Found: 'No such Project' at `.../projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`",
+              message: "No such Project",
+            }
+          });
         });
       });
     });
@@ -660,7 +643,7 @@ describe("WebGatewayApi", () => {
     let dispatchSpy;
     beforeEach(() => {
       dispatchSpy = sandbox.spy();
-      fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/downsample-scan`, 200);
+      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/downsample-scan`, 200);
     });
 
     it("makes a request to the gateway", () => {
@@ -668,22 +651,26 @@ describe("WebGatewayApi", () => {
         projectId: "some-project-id",
         floorId: "some-floor-id",
         scanDatasetId: "some-scan-id"
-      }, null, );
+      }, null,);
       const lastCall = fetchMock.lastCall();
 
-      expect(lastCall[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/downsample-scan`);
+      expect(lastCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/downsample-scan`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
     it("includes the authorization headers", () => {
-      WebGatewayApi.downsampleScan({ projectId: "some-project-id", floorId: "some-floor-id", scanDatasetId: "some-scan-id" }, {
+      WebGatewayApi.downsampleScan({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, {
         firebaseUser: {
           uid: "some-email@example.com",
           idToken: "some-firebase.id.token",
           role: USER
         },
         authType: FIREBASE
-      }, );
+      },);
 
       expect(fetchMock.lastOptions().headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
@@ -691,14 +678,14 @@ describe("WebGatewayApi", () => {
 
   describe("::getMasterformat", () => {
     beforeEach(() => {
-      fetchMock.get(`${WebGatewayApi.baseUrl}/masterformats/2016`, 200);
+      fetchMock.get(`${Http.baseUrl}/masterformats/2016`, 200);
     });
 
     it("makes a request to the gateway api", () => {
       WebGatewayApi.getMasterformat(2016);
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/masterformats/2016`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/masterformats/2016`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
   });
@@ -707,57 +694,65 @@ describe("WebGatewayApi", () => {
     let dispatchSpy;
     beforeEach(() => {
       dispatchSpy = sandbox.spy();
-      fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/push-report-to-procore/progress?procore-project-id=some-procore-project-id&procore-access-token=some-procore-access-token`,
+      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/push-report-to-procore/progress?procore-project-id=some-procore-project-id&procore-access-token=some-procore-access-token`,
         200);
     });
 
     it("includes the authorization headers", () => {
-      WebGatewayApi.pushPdfToProcore({ projectId: "some-project-id", floorId: "some-floor-id", scanDatasetId: "some-scan-dataset-id" },
+      WebGatewayApi.pushPdfToProcore({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        },
         "some-procore-project-id",
         "some-procore-access-token",
         "progress",
         {
           authType: GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token", role: USER },
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER},
         },
-        );
+      );
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
 
     it("makes a request to the gateway api", () => {
-      WebGatewayApi.pushPdfToProcore({ projectId: "some-project-id", floorId: "some-floor-id", scanDatasetId: "some-scan-dataset-id" },
+      WebGatewayApi.pushPdfToProcore({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        },
         "some-procore-project-id",
         "some-procore-access-token",
         "progress",
         {
           authType: GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
         },
-        );
+      );
       const fetchCall = fetchMock.lastCall();
 
       expect(fetchCall[0])
         .to
-        .eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/push-report-to-procore/progress?procore-project-id=some-procore-project-id&procore-access-token=some-procore-access-token`);
+        .eq(`${Http.baseUrl}/projects/some-project-id/push-report-to-procore/progress?procore-project-id=some-procore-project-id&procore-access-token=some-procore-access-token`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
   });
 
   describe("::getProcoreProjects", () => {
     beforeEach(() => {
-      fetchMock.get(`${WebGatewayApi.baseUrl}/projects/some-project-id/procore-projects?procore-access-token=some-procore-access-token`,
-        { status: 200, body: ["some-procore-project"] });
+      fetchMock.get(`${Http.baseUrl}/projects/some-project-id/procore-projects?procore-access-token=some-procore-access-token`,
+        {status: 200, body: ["some-procore-project"]});
     });
 
     it("includes auth headers and makes a request to the gateway", () => {
       WebGatewayApi.getProcoreProjects("some-project-id", "some-procore-access-token", {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/procore-projects?procore-access-token=some-procore-access-token`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/procore-projects?procore-access-token=some-procore-access-token`);
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
@@ -765,18 +760,18 @@ describe("WebGatewayApi", () => {
 
   describe("::getGcpBearerToken", () => {
     beforeEach(() => {
-      fetchMock.get(`${WebGatewayApi.baseUrl}/projects/some-project-id/gcpAccessToken`,
-        { accessToken: "some-token" });
+      fetchMock.get(`${Http.baseUrl}/projects/some-project-id/gcpAccessToken`,
+        {accessToken: "some-token"});
     });
 
     it("makes a request to the gateway", () => {
-      WebGatewayApi.getGcpBearerToken({ projectId: "some-project-id" }, {
+      WebGatewayApi.getGcpBearerToken({projectId: "some-project-id"}, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/gcpAccessToken`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/gcpAccessToken`);
     });
   });
 
@@ -784,20 +779,23 @@ describe("WebGatewayApi", () => {
     let dispatchSpy;
     beforeEach(() => {
       dispatchSpy = sandbox.spy();
-      fetchMock.post(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/run-progress-and-deviations?deviationsFlag=&bimSourceFileExtension=ifc`,
+      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/run-progress-and-deviations?deviationsFlag=&bimSourceFileExtension=ifc`,
         {
           status: 200,
         });
     });
 
     it("includes auth headers and makes a request to the gateway", () => {
-      WebGatewayApi.triggerArgoRunProgressAndDeviations({ projectId: "some-project-id", floorId: "some-floor-id" }, "", "ifc", {
+      WebGatewayApi.triggerArgoRunProgressAndDeviations({
+        projectId: "some-project-id",
+        floorId: "some-floor-id"
+      }, "", "ifc", {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-      }, );
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      },);
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/projects/some-project-id/floors/some-floor-id/run-progress-and-deviations?deviationsFlag=&bimSourceFileExtension=ifc`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/run-progress-and-deviations?deviationsFlag=&bimSourceFileExtension=ifc`);
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
@@ -805,23 +803,27 @@ describe("WebGatewayApi", () => {
 
   describe("::recordUserAction", () => {
     beforeEach(() => {
-      fetchMock.post(`${WebGatewayApi.baseUrl}/user-actions`, 200);
+      fetchMock.post(`${Http.baseUrl}/user-actions`, 200);
     });
 
     it("makes a request to the gateway", () => {
-      WebGatewayApi.recordUserActions(ELEMENTS_STATUSES_UPDATED, [{projectId: "some-project"},{projectId: "some-other-project"}], {
+      WebGatewayApi.recordUserActions(ELEMENTS_STATUSES_UPDATED, [{projectId: "some-project"}, {projectId: "some-other-project"}], {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
-      expect(fetchMock.lastCall()[0]).to.eq(`${WebGatewayApi.baseUrl}/user-actions`);
+      expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl}/user-actions`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
     it("includes the authorization headers", () => {
-      WebGatewayApi.recordUserActions({ projectId: "some-project-id", floorId: "some-floor-id", scanDatasetId: "some-scan-id" }, { userAction: "Some user action info" }, {
+      WebGatewayApi.recordUserActions({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, {userAction: "Some user action info"}, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");

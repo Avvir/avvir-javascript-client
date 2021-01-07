@@ -5,6 +5,7 @@ import fetchMock from "fetch-mock";
 import OrganizationApi from "../source/organization_api";
 import WebGatewayApi from "../source/web_gateway_api";
 import { FIREBASE } from "../source/models/enums/user_auth_type";
+import Http from "../source/http";
 
 describe("OrganizationApi", () => {
   let user;
@@ -19,7 +20,7 @@ describe("OrganizationApi", () => {
 
   describe("#createOrganization", () => {
     beforeEach(() => {
-      fetchMock.post(`${WebGatewayApi.baseUrl}/client-accounts`, {
+      fetchMock.post(`${Http.baseUrl}/client-accounts`, {
         status: 200,
         body: {
           firebaseId: "some-organization-id"
@@ -33,7 +34,7 @@ describe("OrganizationApi", () => {
       const fetchCall = fetchMock.lastCall();
       const lastFetchOpts = fetchMock.lastOptions();
 
-      expect(fetchCall[0]).to.eq(`${WebGatewayApi.baseUrl}/client-accounts`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/client-accounts`);
       expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });

@@ -1,9 +1,10 @@
 import ResponseError from "./models/response_error";
 import responseStatusText from "./resources/response_statuses.json";
 import WebGatewayApi from "./web_gateway_api";
+import Http from "./http";
 
 const checkFetchStatus = <R extends string | {}>(response: Response): Promise<R | never> => {
-  const requestPath = response.url.split(WebGatewayApi.baseUrl).join("..."); // split and join to replace text
+  const requestPath = response.url.split(Http.baseUrl).join("..."); // split and join to replace text
   if (response.headers.has("Warning")) {
     console.warn(`Warning present in response: ${response.headers.get("Warning")}
 from: \`${requestPath}\``);

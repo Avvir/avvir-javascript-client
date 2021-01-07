@@ -6,6 +6,7 @@ import { Response, Headers } from "node-fetch";
 import checkFetchStatus from "../source/check_fetch_status";
 import ResponseError from "../source/models/response_error";
 import WebGatewayApi from "../source/web_gateway_api";
+import Http from "../source/http";
 
 describe("#checkFetchStatus", () => {
   describe("when the request is successful", () => {
@@ -42,7 +43,7 @@ describe("#checkFetchStatus", () => {
       rejectionSpy = sandbox.spy();
 
       response = new Response(`{"message": "some body once told me"}`, {
-        url: `${WebGatewayApi.baseUrl}/some-slug`,
+        url: `${Http.baseUrl}/some-slug`,
         status: 404
       });
     });
