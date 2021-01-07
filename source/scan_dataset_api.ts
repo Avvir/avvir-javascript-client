@@ -47,4 +47,5 @@ class ScanDatasetApi {
     return Http.get(url, user);
   }
 }
-export default makeErrorsPretty(ScanDatasetApi);
+makeErrorsPretty(ScanDatasetApi)
+export default ScanDatasetApi;

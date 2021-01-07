@@ -1,30 +1,22 @@
-import {sand, sandbox} from "./test_utils/setup_tests";
-import { expect } from "chai";
+import {sandbox} from "./test_utils/setup_tests";
+import {expect} from "chai";
 import fetchMock from "fetch-mock";
 import _ from "underscore";
 
 import ApiFloor from "../source/models/api/api_floor";
 import FloorApi from "../source/floor_api";
-import WebGatewayApi from "../source/web_gateway_api";
-import { API_FAILURE } from "../source/models/enums/event_types";
-import { FIREBASE } from "../source/models/enums/user_auth_type";
-import { User } from "../source/get_authorization_headers";
-import {makeStoreContents} from "./test_utils/test_factories";
+import {FIREBASE} from "../source/models/enums/user_auth_type";
+import {User} from "../source/get_authorization_headers";
 import Config from "../source/config";
 import Http from "../source/http";
 
 describe("FloorApi", () => {
-  let fakeDispatch, dispatchSpy, fakeGetState, user;
+  let user;
   beforeEach(() => {
     user = {
       authType: FIREBASE,
       firebaseUser: { idToken: "some-firebase.id.token" }
     };
-    fakeGetState = () => makeStoreContents({
-      user,
-    });
-
-    dispatchSpy = sandbox.spy();
   });
 
   describe("#listFloorsForProject", () => {
@@ -113,7 +105,7 @@ describe("FloorApi", () => {
     });
 
     it("makes a call to the floor creation endpoint", () => {
-      FloorApi.createFloor("some-project-id", "14", { firebaseUser: { idToken: "some-firebase.id.token" } } as User, fakeDispatch);
+      FloorApi.createFloor("some-project-id", "14", { firebaseUser: { idToken: "some-firebase.id.token" } } as User);
       const fetchCall = fetchMock.lastCall();
 
       expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors`);
@@ -121,7 +113,7 @@ describe("FloorApi", () => {
     });
 
     it("sends the request with authorization headers", () => {
-      FloorApi.createFloor("some-project-id", "14", user, fakeDispatch);
+      FloorApi.createFloor("some-project-id", "14", user);
       const fetchCall = fetchMock.lastCall();
       const lastFetchOpts = fetchMock.lastOptions();
 
@@ -147,7 +139,10 @@ describe("FloorApi", () => {
           .catch(_.noop)
           .finally(() => {
             expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
-              verboseMessage: "500 Internal Server Error: 'some error message' at `.../projects/some-project-id/floors`"
+              action: "createFloor",
+              error: {
+                verboseMessage: "500 Internal Server Error: 'some error message' at `.../projects/some-project-id/floors`"
+              }
             });
           });
       });
@@ -165,12 +160,12 @@ describe("FloorApi", () => {
         floorId: "some-floor-id"
       }, new ApiFloor({
         defaultFirebaseScanDatasetId: "some-scan-id"
-      }), { firebaseUser: { idToken: "some-firebase.id.token" } } as User, fakeDispatch);
+      }), { firebaseUser: { idToken: "some-firebase.id.token" } } as User);
       const fetchCall = fetchMock.lastCall();
       const lastFetchOpts = fetchMock.lastOptions();
 
       expect(lastFetchOpts.headers).to.include.key("Content-Type");
-      expect(lastFetchOpts.headers["Content-Type"]).to.eq("application/vnd.avvir.gateway.UserFloor+json");
+      expect(lastFetchOpts.headers["Content-Type"]).to.eq("application/json");
       expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id`);
       expect(fetchCall[1].body).to.deep.eq(JSON.stringify(new ApiFloor({
         defaultFirebaseScanDatasetId: "some-scan-id"
@@ -183,7 +178,7 @@ describe("FloorApi", () => {
         floorId: "some-floor-id"
       }, new ApiFloor({
         defaultFirebaseScanDatasetId: "some-scan-id"
-      }), user, fakeDispatch);
+      }), user);
       const fetchCall = fetchMock.lastCall();
       const lastFetchOpts = fetchMock.lastOptions();
 

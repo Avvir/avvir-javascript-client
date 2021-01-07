@@ -14,3 +14,4 @@ In webstorm mocha configuration template:
  - create a single entrypoint e.g. `AvvirApi.floors.getFloor(...)`
  - rename reduce_user_session.ts
  - move Api files to a folder
+ - find a way to give good type hints on API methods

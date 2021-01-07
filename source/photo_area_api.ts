@@ -1,10 +1,9 @@
 import {AssociationIds} from "type_aliases";
 import {User} from "./get_authorization_headers";
-import WebGatewayApi from "./web_gateway_api";
 import makeErrorsPretty from "./make_errors_pretty";
 import Http from "./http";
 
-class PhotoAreaApi {
+export default class PhotoAreaApi {
   static listPhotoAreasForProject({ projectId }: AssociationIds, user: User) {
     let url = `${Http.baseUrl}/projects/${projectId}/photo-areas`;
     return Http.get(url, user);
@@ -23,5 +22,4 @@ class PhotoAreaApi {
     return Http.get(url, user);
   }
 }
-
-export default makeErrorsPretty(PhotoAreaApi);
+makeErrorsPretty(PhotoAreaApi);

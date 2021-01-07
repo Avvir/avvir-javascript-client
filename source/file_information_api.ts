@@ -1,13 +1,12 @@
 import ApiCloudFile from "./models/api/api_cloud_file";
 import PurposeTypeConverter from "./converters/purpose_type_converter";
-import WebGatewayApi from "./web_gateway_api";
 import { AssociationIds } from "type_aliases";
 import Http from "./http";
 import makeErrorsPretty from "./make_errors_pretty";
 import {User} from "./get_authorization_headers";
 import {PurposeType} from "./models/enums/purpose_type";
 
-class FileInformationApi {
+export default class FileInformationApi {
   static createProjectFile({ projectId }: AssociationIds, apiFile: ApiCloudFile, user: User) {
     const url = `${Http.baseUrl}/projects/${projectId}/files`;
     return Http.post(url, user, apiFile);
@@ -58,4 +57,4 @@ class FileInformationApi {
   }
 }
 
-export default makeErrorsPretty(FileInformationApi);
+makeErrorsPretty(FileInformationApi);

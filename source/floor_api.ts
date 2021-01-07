@@ -6,71 +6,38 @@ import { AssociationIds } from "type_aliases";
 import { httpGetHeaders, httpPostHeaders } from "./request_headers";
 import Config from "./config";
 import Http from "./http";
+import makeErrorsPretty from "./make_errors_pretty";
 
 export default class FloorApi {
   static listFloorsForProject(projectId: string, user: User) {
-    return fetch(`${Http.baseUrl}/projects/${projectId}/floors`, {
-      headers: {
-        ...httpGetHeaders,
-        ...getAuthorizationHeaders(user)
-      }
-    }).then(checkFetchStatus) as Promise<ApiFloor[]>;
+    let url = `${Http.baseUrl}/projects/${projectId}/floors`;
+    return Http.get(url, user);
   }
 
   static createFloor(projectId: string, floorNumber: string, user: User) {
     const url = `${Http.baseUrl}/projects/${projectId}/floors`;
-    return (fetch(url, {
-      method: "POST",
-      headers: {
-        ...httpPostHeaders,
-        ...getAuthorizationHeaders(user)
-      },
-      body: JSON.stringify({ text: floorNumber })
-    }).then(checkFetchStatus) as Promise<ApiFloor>)
-      .catch(Config.sharedErrorHandler);
+    return Http.post(url, user, {text: floorNumber});
   }
 
   static getFloor({ projectId, floorId }: AssociationIds, user: User) {
     const url = `${Http.baseUrl}/projects/${projectId}/floors/${floorId}`;
-    return fetch(url, {
-      headers: {
-        ...httpGetHeaders,
-        ...getAuthorizationHeaders(user)
-      },
-    }).then(checkFetchStatus) as Promise<ApiFloor>;
+    return Http.get(url, user);
   }
 
   static getViewerFloor({ projectId, floorId }: AssociationIds, user: User) {
-    return fetch(`${Http.baseUrl}/projects/${projectId}/floors/${floorId}/viewer`, {
-      headers: {
-        ...httpGetHeaders,
-        ...getAuthorizationHeaders(user)
-      }
-    }).then(checkFetchStatus) as Promise<any>;
+    let url = `${Http.baseUrl}/projects/${projectId}/floors/${floorId}/viewer`;
+    return Http.get(url, user);
   }
 
-  static updateFloor({ projectId, floorId }: AssociationIds, apiFloor: ApiFloor, user: User) {
+  static updateFloor({ projectId, floorId }: AssociationIds, floor: ApiFloor, user: User) {
     const url = `${Http.baseUrl}/projects/${projectId}/floors/${floorId}`;
-    const patchHeaders = httpPostHeaders("application/vnd.avvir.gateway.UserFloor+json")
-    return (fetch(url, {
-      method: "PATCH",
-      headers: {
-        ...patchHeaders,
-        ...getAuthorizationHeaders(user)
-      },
-      body: JSON.stringify(apiFloor)
-    }).then(checkFetchStatus) as Promise<void>)
-      .catch(Config.sharedErrorHandler);
+    return Http.patch(url, user, floor);
   }
 
   static updateFloorOrder({ projectId, floorId }: AssociationIds, ordinal: number, user: User) {
     const url = `${Http.baseUrl}/projects/${projectId}/floors/${floorId}/reorder/${ordinal}`;
-    return (fetch(url, {
-      method: "PATCH",
-      headers: {
-        ...httpPostHeaders,
-        ...getAuthorizationHeaders(user)
-      }
-    }).then(checkFetchStatus) as Promise<void>);
+    return Http.patch(url, user, null);
   }
 }
+
+makeErrorsPretty(FloorApi);
