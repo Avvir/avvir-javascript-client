@@ -1,11 +1,19 @@
 import { BASIC, FIREBASE, GATEWAY_JWT } from "../models/enums/user_auth_type";
 import UserRole from "../models/enums/user_role";
 
-export type GatewayUser = {
+export class GatewayUser {
   authType: typeof GATEWAY_JWT
   gatewayUser?: {
     idToken?: string,
     role?: UserRole
+  }
+
+  constructor(authType, idToken, role) {
+    this.authType = authType;
+    this.gatewayUser = {
+      idToken,
+      role
+    }
   }
 }
 

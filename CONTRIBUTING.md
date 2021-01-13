@@ -11,7 +11,7 @@ In webstorm mocha configuration template:
  # TODO - Chores etc.
  
  - remove overload method from FileInformationApi
- - create a single entrypoint e.g. `AvvirApi.floors.getFloor(...)`
  - rename reduce_user_session.ts
- - move Api files to a folder
- - find a way to give good type hints on API methods
+ - why doesn't async/await transpile?
+ - pretty errors on AuthApi.login()
+ - getViewerFloor is still a thing?

@@ -7,6 +7,7 @@ import WebGatewayApi from "./api/web_gateway_api";
 import FileInformationApi from "./api/file_information_api";
 import PhotoAreaApi from "./api/photo_area_api";
 import ScanDatasetApi from "./api/scan_dataset_api";
+import AuthApi from "./api/auth_api";
 
 export default class AvvirApi {
   static config = Config
@@ -15,8 +16,8 @@ export default class AvvirApi {
   static organizations = OrganizationApi;
   static photos = PhotoAreaApi;
   static files = FileInformationApi;
-  // static authentication =
   static scanDatasets = ScanDatasetApi;
   static floors = FloorApi;
+  static auth = AuthApi;
   static other = WebGatewayApi;
 }
