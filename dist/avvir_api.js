@@ -2,25 +2,48 @@ module.exports =
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 3186:
+/***/ 4016:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _source_avvir_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4406);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "default": () => /* binding */ avvir
+});
+
+// EXTERNAL MODULE: ./source/avvir_api.ts
+var avvir_api = __webpack_require__(4406);
+;// CONCATENATED MODULE: external "node-fetch"
+const external_node_fetch_namespaceObject = require("node-fetch");;
+var external_node_fetch_default = /*#__PURE__*/__webpack_require__.n(external_node_fetch_namespaceObject);
+// EXTERNAL MODULE: external "underscore"
+var external_underscore_ = __webpack_require__(2164);
+var external_underscore_default = /*#__PURE__*/__webpack_require__.n(external_underscore_);
+;// CONCATENATED MODULE: ./avvir.ts
+
+
+
+
+global.fetch = (external_node_fetch_default());
 
 const Avvir = {
-  api: _source_avvir_api__WEBPACK_IMPORTED_MODULE_0__.default
+  api: avvir_api.default
 };
 
 function importAll(directoryContext, target) {
   directoryContext.keys().forEach(filePath => {
+
     let moduleExports = directoryContext(filePath);
+    external_underscore_default().forEach(moduleExports, (moduleExport, exportName) => {
+      // if (exportName !== 'default') {
+        target[exportName] = moduleExport;
+      // }
+    })
     if (moduleExports.default && moduleExports.default.name) {
-      target[moduleExports.default.name] = moduleExports;
+      target[moduleExports.default.name] = moduleExports.default;
     }
   });
 }
@@ -29,7 +52,7 @@ function importAll(directoryContext, target) {
 // skip .d.ts files because some use syntax our webpack settings don't support
 importAll(__webpack_require__(5422), Avvir);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Avvir);
+/* harmony default export */ const avvir = (Avvir);
 
 
 /***/ }),
@@ -100,7 +123,7 @@ var AuthApi = /*#__PURE__*/function () {
             complete: true
           });
           var role = decodedJwt.payload.role;
-          return new get_authorization_headers.GatewayUser(user_auth_type.GATEWAY_JWT, token, role);
+          return new get_authorization_headers.GatewayUser(user_auth_type.GATEWAY_JWT, jwt, role);
         });
       });
     }
@@ -4492,6 +4515,6 @@ module.exports = require("underscore");;
 /******/ 	// module exports must be returned from runtime so entry inlining is disabled
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(3186);
+/******/ 	return __webpack_require__(4016);
 /******/ })()
 ;

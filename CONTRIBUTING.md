@@ -15,3 +15,7 @@ In webstorm mocha configuration template:
  - why doesn't async/await transpile?
  - pretty errors on AuthApi.login()
  - getViewerFloor is still a thing?
+ - avvir-only docs ?
+    - how to get superadmin credentials 
+ - upload file from local data
+ - 

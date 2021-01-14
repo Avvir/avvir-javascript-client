@@ -20,12 +20,12 @@ export default class AuthApi {
     }).then((response) => {
       return response.json()
         .then(body => {
-          const token = body.storageToken;
+          const storageToken = body.storageToken; //TODO attach to user object and let users upload from this lib
           const authHeader = response.headers.get("Authorization");
           const jwt = authHeader.substr("Bearer ".length);
           const decodedJwt = JsonWebToken.decode(jwt, {complete: true});
           const role = decodedJwt.payload.role;
-          return new GatewayUser(GATEWAY_JWT, token, role);
+          return new GatewayUser(GATEWAY_JWT, jwt, role);
         });
     }) as Promise<GatewayUser>;
   }

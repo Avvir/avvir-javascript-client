@@ -39,7 +39,7 @@ describe("AuthApi", () => {
     it("resolves to a gateway user", () => {
       return AuthApi.login("some-user", "somePa$$").then((user: GatewayUser) => {
         expect(user.authType).to.eq(GATEWAY_JWT);
-        expect(user.gatewayUser.idToken).to.eq("some-auth-token");
+        expect(user.gatewayUser.idToken).to.eq("some-jwt-token");
         expect(user.gatewayUser.role).to.eq("USER")
       });
     });
