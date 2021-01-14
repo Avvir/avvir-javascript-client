@@ -10,14 +10,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var _source_avvir_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4406);
 
 const Avvir = {
-  api: {}
+  api: _source_avvir_api__WEBPACK_IMPORTED_MODULE_0__.default
 };
 
 function importAll(directoryContext, target) {
-
-  console.log("importing all", directoryContext.keys())
   directoryContext.keys().forEach(filePath => {
     let moduleExports = directoryContext(filePath);
     if (moduleExports.default && moduleExports.default.name) {
@@ -27,7 +26,7 @@ function importAll(directoryContext, target) {
 }
 
 
-importAll(__webpack_require__(3260), Avvir.api);
+// skip .d.ts files because some use syntax our webpack settings don't support
 importAll(__webpack_require__(5422), Avvir);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Avvir);
@@ -4299,43 +4298,6 @@ var serializeForm = function serializeForm(form) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (serializeForm);
-
-/***/ }),
-
-/***/ 3260:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var map = {
-	"./auth_api.ts": 7323,
-	"./file_information_api.ts": 8074,
-	"./floor_api.ts": 7755,
-	"./organization_api.ts": 8077,
-	"./photo_area_api.ts": 686,
-	"./pipeline_api.ts": 3529,
-	"./project_api.ts": 6734,
-	"./scan_dataset_api.ts": 901,
-	"./web_gateway_api.ts": 8080
-};
-
-
-function webpackContext(req) {
-	var id = webpackContextResolve(req);
-	return __webpack_require__(id);
-}
-function webpackContextResolve(req) {
-	if(!__webpack_require__.o(map, req)) {
-		var e = new Error("Cannot find module '" + req + "'");
-		e.code = 'MODULE_NOT_FOUND';
-		throw e;
-	}
-	return map[req];
-}
-webpackContext.keys = function webpackContextKeys() {
-	return Object.keys(map);
-};
-webpackContext.resolve = webpackContextResolve;
-module.exports = webpackContext;
-webpackContext.id = 3260;
 
 /***/ }),
 

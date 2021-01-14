@@ -1,6 +1,6 @@
-
+import AvvirApi from "./source/avvir_api";
 const Avvir = {
-  api: {}
+  api: AvvirApi
 };
 
 function importAll(directoryContext, target) {
@@ -13,7 +13,6 @@ function importAll(directoryContext, target) {
 }
 
 
-importAll(require.context('./source/api', true, /\.ts$/), Avvir.api);
 // skip .d.ts files because some use syntax our webpack settings don't support
 importAll(require.context('./source', true, /(?<!\.d)\.ts$/), Avvir);
 
