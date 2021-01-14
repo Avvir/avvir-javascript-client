@@ -3,18 +3,25 @@ var webpack = require('webpack');
 var nodeExternals = require('webpack-node-externals');
 
 module.exports = {
-  entry: './tests/test_utils/webpack_test_root.js',
+  entry: path.join(__dirname, 'source/avvir_api.ts'),
   target: 'node',
   output: {
-    path: path.join(__dirname, 'public'),
-    publicPath: '/public/',
-    filename: 'test_bundle.js'
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].js'
+  },
+  optimization: {
+    minimize: false
   },
   externals: [nodeExternals({
     // this WILL include these in the bundle:
     allowlist: []
   })],
+  resolve: {
+    // Add `.ts` and `.tsx` as a resolvable extension
+    extensions: ['.ts', '.tsx', '.js']
+  },
   module: {
+
     rules: [
       {
         use: {
@@ -23,7 +30,7 @@ module.exports = {
         test: /\.ts$/,
 
         include: [
-          path.resolve(__dirname, 'tests'),
+          // path.resolve(__dirname, 'tests'),
           path.resolve(__dirname, 'source'),
           path.resolve(__dirname, 'node_modules'),
         ]

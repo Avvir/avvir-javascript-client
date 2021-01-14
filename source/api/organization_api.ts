@@ -1,3 +1,4 @@
+// @ts-nocheck
 import ApiOrganization from "../models/api/api_organization";
 import {User} from "../utilities/get_authorization_headers";
 import WebGatewayApi from "./web_gateway_api";

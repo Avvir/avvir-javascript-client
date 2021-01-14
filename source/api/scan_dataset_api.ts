@@ -1,3 +1,4 @@
+// @ts-nocheck
 import ApiScanDataset from "../models/api/api_scan_dataset";
 import {User} from "../utilities/get_authorization_headers";
 import WebGatewayApi from "./web_gateway_api";

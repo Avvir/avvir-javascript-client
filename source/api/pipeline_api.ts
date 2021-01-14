@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {AssociationIds} from "type_aliases";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
