@@ -9,15 +9,15 @@ import PhotoAreaApi from "./api/photo_area_api";
 import ScanDatasetApi from "./api/scan_dataset_api";
 import AuthApi from "./api/auth_api";
 
-export default class AvvirApi {
-  static config = Config
-  static pipelines = PipelineApi;
-  static projects = ProjectApi;
-  static organizations = OrganizationApi;
-  static photos = PhotoAreaApi;
-  static files = FileInformationApi;
-  static scanDatasets = ScanDatasetApi;
-  static floors = FloorApi;
-  static auth = AuthApi;
-  static other = WebGatewayApi;
+export default {
+   config: Config,
+   pipelines: PipelineApi,
+   projects: ProjectApi,
+   organizations: OrganizationApi,
+   photos: PhotoAreaApi,
+   files: FileInformationApi,
+   scanDatasets: ScanDatasetApi,
+   floors: FloorApi,
+   auth: AuthApi,
+   other: WebGatewayApi,
 }

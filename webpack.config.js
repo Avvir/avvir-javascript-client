@@ -3,11 +3,12 @@ var webpack = require('webpack');
 var nodeExternals = require('webpack-node-externals');
 
 module.exports = {
-  entry: path.join(__dirname, 'source/avvir_api.ts'),
+  entry: path.join(__dirname, './avvir.ts'),
   target: 'node',
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].js'
+    filename: 'avvir_api.js',
+    libraryTarget : 'commonjs2'
   },
   optimization: {
     minimize: false

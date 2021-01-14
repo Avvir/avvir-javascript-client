@@ -3,8 +3,8 @@ import _ from "underscore";
 
 import addReadOnlyPropertiesToModel from "../../../mixins/add_read_only_properties_to_model";
 import ApiPhotoLocation from "../../api/api_photo_location";
-import Matrix4Converter from "../../../services/converters/matrix_4_converter";
-import PhotoProjectionType from "../enums/photo_projection_type";
+import Matrix4Converter from "../../../converters/matrix_4_converter";
+import PhotoProjectionType from "../../enums/photo_projection_type";
 import { Matrix4Like, Modify, Vector2Like } from "type_aliases";
 import ApiMatrix4 from "../../api/api_matrix_4";
 
