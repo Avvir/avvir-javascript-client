@@ -43,5 +43,25 @@ describe("AuthApi", () => {
         expect(user.gatewayUser.role).to.eq("USER")
       });
     });
+
+    describe("when the request fails", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl}/login`, {
+          status: 403,
+          body: {message: "some server error message"},
+          headers: {}
+        }, {overwriteRoutes: true});
+      });
+
+      it("throws a descriptive error", () => {
+        return AuthApi.login("some-user", "some bad password 123")
+          .catch((error) => {
+            return error;
+          })
+          .then((error) => {
+            expect(error.message).to.include("some server error message");
+          });
+      });
+    });
   });
 });

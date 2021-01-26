@@ -3,6 +3,8 @@ import UserAuthType, {GATEWAY_JWT} from "../models/enums/user_auth_type";
 import Http from "../utilities/http";
 import {httpGetHeaders} from "../utilities/request_headers";
 import JsonWebToken from "jsonwebtoken";
+import responseStatusText from "../resources/response_statuses.json";
+import ResponseError from "../models/response_error";
 
 export default class AuthApi {
 
@@ -20,12 +22,26 @@ export default class AuthApi {
     }).then((response) => {
       return response.json()
         .then(body => {
-          const storageToken = body.storageToken; //TODO attach to user object and let users upload from this lib
-          const authHeader = response.headers.get("Authorization");
-          const jwt = authHeader.substr("Bearer ".length);
-          const decodedJwt = JsonWebToken.decode(jwt, {complete: true});
-          const role = decodedJwt.payload.role;
-          return new GatewayUser(GATEWAY_JWT, jwt, role);
+          if (response.ok) {
+            const storageToken = body.storageToken; //TODO attach to user object and let users upload from this lib
+            const authHeader = response.headers.get("Authorization");
+            const jwt = authHeader.substr("Bearer ".length);
+            const decodedJwt = JsonWebToken.decode(jwt, {complete: true});
+            const role = decodedJwt.payload.role;
+            return new GatewayUser(GATEWAY_JWT, jwt, role);
+          } else {
+            let message = body.message;
+            let statusMessage = responseStatusText[response.status];
+            let verboseMessage = `${response.status} ${statusMessage}: '${message}' at \`/login\``;
+            const error = new ResponseError(
+              message,
+              verboseMessage,
+              response,
+              body
+            );
+            console.error(error);
+            throw error;
+          }
         });
     }) as Promise<GatewayUser>;
   }
