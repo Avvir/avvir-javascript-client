@@ -3,7 +3,7 @@
   "repository": "git@github.com:Avvir/avvir-javascript-client.git",
   "version": "0.0.1",
   "description": "Javascript client for Avvir APIs",
-  "private": true,
+  "module": "dist/avvir_api.js",
   "scripts": {
     "build": "yarn run babel source --out-dir lib",
     "test": "NODE_ENV=test AVVIR_GATEWAY_URL=https://avvir-gateway-acceptance.herokuapp.com mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive"
