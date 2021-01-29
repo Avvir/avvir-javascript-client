@@ -23,7 +23,6 @@ const getFunctionNames = (clazz) => {
 }
 
 const makeErrorsPretty = (apiClass, options = {exclude: []}) => {
-  console.log(apiClass)
   let functionNames = getFunctionNames(apiClass);
   _.forEach(functionNames, (functionName) => {
     let isExcluded = options.exclude && options.exclude.includes(functionName);
