@@ -68,7 +68,7 @@ describe("FloorApi", () => {
       const lastFetchOpts = fetchMock.lastOptions();
 
       expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id`);
-      expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
   });
@@ -92,7 +92,7 @@ describe("FloorApi", () => {
       const lastFetchOpts = fetchMock.lastOptions();
 
       expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors`);
-      expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
 
@@ -133,16 +133,18 @@ describe("FloorApi", () => {
         projectId: "some-project-id",
         floorId: "some-floor-id"
       }, new ApiFloor({
-        defaultFirebaseScanDatasetId: "some-scan-id"
+        defaultFirebaseScanDatasetId: "some-scan-id",
+        floorElevation: 10.0
       }), { firebaseUser: { idToken: "some-firebase.id.token" } } as User);
       const fetchCall = fetchMock.lastCall();
       const lastFetchOpts = fetchMock.lastOptions();
 
-      expect(lastFetchOpts.headers).to.include.key("Content-Type");
+      expect(lastFetchOpts.headers).to.include.keys("Content-Type");
       expect(lastFetchOpts.headers["Content-Type"]).to.eq("application/json");
       expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id`);
       expect(fetchCall[1].body).to.deep.eq(JSON.stringify(new ApiFloor({
-        defaultFirebaseScanDatasetId: "some-scan-id"
+        defaultFirebaseScanDatasetId: "some-scan-id",
+        floorElevation: 10.0
       })));
     });
 

@@ -27,7 +27,8 @@ export default class ApiFloor {
     photoAreaId,
     offset,
     photoAreaMinimapPixelToBimMinimapPixel,
-    bimMinimapToWorld
+    bimMinimapToWorld,
+      floorElevation
   }: ApiFloorArgument = {}) {
     addInstantGetterAndSetterToApiModel(this, "scanDate");
     addReadOnlyPropertiesToModel(this, { id, firebaseId, firebaseProjectId });
@@ -92,6 +93,7 @@ export default class ApiFloor {
     this.photoAreaMinimapPixelToBimMinimapPixel = photoAreaMinimapPixelToBimMinimapPixel || null;
     // @ts-ignore
     this.bimMinimapToWorld = bimMinimapToWorld || null;
+    this.floorElevation = floorElevation || null;
   }
 
 
@@ -109,4 +111,5 @@ export default class ApiFloor {
   photoAreaId: number | null = null;
   photoAreaMinimapPixelToBimMinimapPixel: ApiMatrix3 | null = null;
   bimMinimapToWorld: ApiMatrix3 | null = null;
+  floorElevation: number | null;
 }
