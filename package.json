@@ -1,7 +1,7 @@
 {
   "name": "avvir-javascript-client",
   "repository": "git@github.com:Avvir/avvir-javascript-client.git",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "Javascript client for Avvir APIs",
   "module": "dist/avvir_api.js",
   "scripts": {
