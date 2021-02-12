@@ -1,9 +1,10 @@
 import getAuthorizationHeaders, {User} from "./get_authorization_headers";
 import {httpPostHeaders} from "./request_headers";
 import {isFirebaseUser, isGatewayUser} from "./reduce_user_session";
+import config from "../config";
 
 export default class Http {
-  static baseUrl: string = process.env.AVVIR_GATEWAY_URL;
+  static baseUrl: string = config.AVVIR_GATEWAY_URL;
 
   static get(url, user){
     return fetch(url, {
