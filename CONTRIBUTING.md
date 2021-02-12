@@ -8,6 +8,8 @@ In webstorm mocha configuration template:
  - set AVVIR_ENVIRONMENT to acceptance
  
  
+ IMPORTANT: make sure you change version in package.json or yarn will not update the downloaded version of dependencies.
+ 
  # TODO - Chores etc.
  
  - remove overload method from FileInformationApi
