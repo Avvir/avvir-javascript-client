@@ -5,8 +5,8 @@
   "description": "Javascript client for Avvir APIs",
   "module": "dist/avvir_api.js",
   "scripts": {
-    "build": "yarn run babel source --out-dir lib",
-    "test": "NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn run babel source --out-dir lib"
+    "build": "yarn run webpack",
+    "test": "NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn run build"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.8",

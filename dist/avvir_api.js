@@ -2019,7 +2019,8 @@ var ApiFloor = function ApiFloor() {
       photoAreaId = _ref.photoAreaId,
       offset = _ref.offset,
       photoAreaMinimapPixelToBimMinimapPixel = _ref.photoAreaMinimapPixelToBimMinimapPixel,
-      bimMinimapToWorld = _ref.bimMinimapToWorld;
+      bimMinimapToWorld = _ref.bimMinimapToWorld,
+      floorElevation = _ref.floorElevation;
 
   _classCallCheck(this, ApiFloor);
 
@@ -2037,6 +2038,7 @@ var ApiFloor = function ApiFloor() {
   this.photoAreaId = null;
   this.photoAreaMinimapPixelToBimMinimapPixel = null;
   this.bimMinimapToWorld = null;
+  this.floorElevation = void 0;
   (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, "scanDate");
   (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_3__.default)(this, {
     id: id,
@@ -2106,6 +2108,7 @@ var ApiFloor = function ApiFloor() {
   this.photoAreaMinimapPixelToBimMinimapPixel = photoAreaMinimapPixelToBimMinimapPixel || null; // @ts-ignore
 
   this.bimMinimapToWorld = bimMinimapToWorld || null;
+  this.floorElevation = floorElevation || null;
 };
 
 
@@ -4121,7 +4124,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9137);
 /* harmony import */ var _request_headers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(104);
-/* harmony import */ var _reduce_user_session__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3226);
+/* harmony import */ var _reduce_user_session__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3226);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5663);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_2__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -4133,6 +4138,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -4181,9 +4187,9 @@ var Http = /*#__PURE__*/function () {
     key: "addAuthToDownloadUrl",
     value: function addAuthToDownloadUrl(baseUrl, user) {
       if (user) {
-        if ((0,_reduce_user_session__WEBPACK_IMPORTED_MODULE_2__.isGatewayUser)(user)) {
+        if ((0,_reduce_user_session__WEBPACK_IMPORTED_MODULE_3__.isGatewayUser)(user)) {
           return "".concat(baseUrl, "?auth=").concat(user.gatewayUser.idToken);
-        } else if ((0,_reduce_user_session__WEBPACK_IMPORTED_MODULE_2__.isFirebaseUser)(user)) {
+        } else if ((0,_reduce_user_session__WEBPACK_IMPORTED_MODULE_3__.isFirebaseUser)(user)) {
           return "".concat(baseUrl, "?firebaseAuth=").concat(user.firebaseUser.idToken);
         }
       } else {
@@ -4195,7 +4201,7 @@ var Http = /*#__PURE__*/function () {
   return Http;
 }();
 
-Http.baseUrl = process.env.AVVIR_GATEWAY_URL;
+Http.baseUrl = (_config__WEBPACK_IMPORTED_MODULE_2___default().AVVIR_GATEWAY_URL);
 
 
 /***/ }),
@@ -4242,7 +4248,6 @@ var makeErrorsPretty = function makeErrorsPretty(apiClass) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
     exclude: []
   };
-  console.log(apiClass);
   var functionNames = getFunctionNames(apiClass);
 
   underscore__WEBPACK_IMPORTED_MODULE_0___default().forEach(functionNames, function (functionName) {
@@ -4329,6 +4334,33 @@ var serializeForm = function serializeForm(form) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (serializeForm);
+
+/***/ }),
+
+/***/ 5663:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const _ = __webpack_require__(2164);
+
+let config;
+if(process.env.AVVIR_ENVIRONMENT == 'acceptance'){
+  config = {
+    AVVIR_GATEWAY_URL: "https://avvir-web-gateway-acceptance.herokuapp.com"
+  }
+} else {
+  config = {
+    AVVIR_GATEWAY_URL: "https://avvir-gateway-production.herokuapp.com"
+  }
+}
+
+_.forEach(config, (value, varName) =>{
+  if(process.env[varName] != null && process.env[varName] != '') {
+    config[varName] = process.env[varName];
+  }
+});
+
+console.log("Avvir client configured to reach ", config.AVVIR_GATEWAY_URL);
+module.exports = config;
 
 /***/ }),
 
