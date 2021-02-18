@@ -12,10 +12,10 @@ if(process.env.AVVIR_ENVIRONMENT == 'acceptance'){
 }
 
 _.forEach(config, (value, varName) =>{
-  if(process.env[varName] != null) {
+  if(process.env[varName] != null && process.env[varName] != '') {
     config[varName] = process.env[varName];
   }
 });
 
-
+console.log("Avvir client configured to reach ", config.AVVIR_GATEWAY_URL);
 module.exports = config;
