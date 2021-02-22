@@ -21,7 +21,7 @@ describe("FloorApi", () => {
 
   describe("#listFloorsForProject", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/projects/some-project-id/floors`, 200);
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors`, 200);
     });
 
     it("makes a request to the gateway", () => {
@@ -31,7 +31,7 @@ describe("FloorApi", () => {
         }
       } as User);
 
-      expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors`);
+      expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors`);
       expect(fetchMock.lastOptions().headers["Accept"]).to.eq("application/json");
     });
 
@@ -44,7 +44,7 @@ describe("FloorApi", () => {
 
   describe("#getFloor", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id`, {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`, {
         status: 200,
         body: {
           id: "some-floor-id",
@@ -67,7 +67,7 @@ describe("FloorApi", () => {
       const fetchCall = fetchMock.lastCall();
       const lastFetchOpts = fetchMock.lastOptions();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`);
       expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
@@ -75,14 +75,14 @@ describe("FloorApi", () => {
 
   describe("#createFloor", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/floors`, { status: 200, body: {} });
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors`, { status: 200, body: {} });
     });
 
     it("makes a call to the floor creation endpoint", () => {
       FloorApi.createFloor("some-project-id", "14", { firebaseUser: { idToken: "some-firebase.id.token" } } as User);
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors`);
       expect(JSON.parse(fetchCall[1].body)).to.deep.eq({ text: "14" });
     });
 
@@ -91,14 +91,14 @@ describe("FloorApi", () => {
       const fetchCall = fetchMock.lastCall();
       const lastFetchOpts = fetchMock.lastOptions();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors`);
       expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
 
     describe("when the call fails", () => {
       beforeEach(() => {
-        fetchMock.post(`${Http.baseUrl}/projects/some-project-id/floors`,
+        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors`,
           { status: 500, body: { some: "body", message:"some error message" },
             headers: {"ContentType": "application/json"}
           },
@@ -125,7 +125,7 @@ describe("FloorApi", () => {
 
   describe("#updateFloor", () => {
     beforeEach(() => {
-      fetchMock.patch(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id`, 200);
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`, 200);
     });
 
     it("makes a call to the correct endpoint", () => {
@@ -141,7 +141,7 @@ describe("FloorApi", () => {
 
       expect(lastFetchOpts.headers).to.include.keys("Content-Type");
       expect(lastFetchOpts.headers["Content-Type"]).to.eq("application/json");
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`);
       expect(fetchCall[1].body).to.deep.eq(JSON.stringify(new ApiFloor({
         defaultFirebaseScanDatasetId: "some-scan-id",
         floorElevation: 10.0
@@ -158,14 +158,14 @@ describe("FloorApi", () => {
       const fetchCall = fetchMock.lastCall();
       const lastFetchOpts = fetchMock.lastOptions();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`);
       expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
 
     describe("when the call fails", () => {
       beforeEach(() => {
-        fetchMock.patch(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id`,
+        fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`,
           { status: 500, body: { some: "body" },
             headers: {"ContentType": "application/json"}
           },
@@ -192,7 +192,7 @@ describe("FloorApi", () => {
 
   describe("#updateFloorOrder", () => {
     beforeEach(() => {
-      fetchMock.patch(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/reorder/3`, 200);
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/reorder/3`, 200);
     });
 
     it("makes a call to the correct endpoint", () => {
@@ -202,7 +202,7 @@ describe("FloorApi", () => {
       }, 3, { firebaseUser: { idToken: "some-firebase.id.token" } } as User);
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/reorder/3`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/reorder/3`);
     });
 
     it("sends the request with authorization headers", () => {

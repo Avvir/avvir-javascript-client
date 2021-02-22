@@ -118,7 +118,7 @@ var AuthApi = /*#__PURE__*/function () {
         username: username,
         password: password
       };
-      return fetch("".concat(http.default.baseUrl, "/login"), {
+      return fetch("".concat(http.default.baseUrl(), "/login"), {
         headers: _objectSpread(_objectSpread({}, request_headers.httpGetHeaders), (0,get_authorization_headers.default)(user))
       }).then(function (response) {
         return response.json().then(function (body) {
@@ -183,21 +183,21 @@ var FileInformationApi = /*#__PURE__*/function () {
     key: "createProjectFile",
     value: function createProjectFile(_ref, apiFile, user) {
       var projectId = _ref.projectId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl, "/projects/").concat(projectId, "/files");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl(), "/projects/").concat(projectId, "/files");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.post(url, user, apiFile);
     }
   }, {
     key: "listProjectFiles",
     value: function listProjectFiles(_ref2, user) {
       var projectId = _ref2.projectId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl, "/projects/").concat(projectId, "/files");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl(), "/projects/").concat(projectId, "/files");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
     }
   }, {
     key: "zipProjectFolder",
     value: function zipProjectFolder(folderName, _ref3, user) {
       var projectId = _ref3.projectId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl, "/projects/").concat(projectId, "/zip-project-folder?folder-prefix=").concat(folderName);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl(), "/projects/").concat(projectId, "/zip-project-folder?folder-prefix=").concat(folderName);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.post(url, user, null);
     }
   }, {
@@ -205,7 +205,7 @@ var FileInformationApi = /*#__PURE__*/function () {
     value: function listPhotoAreaFiles(_ref4, user) {
       var projectId = _ref4.projectId,
           photoAreaId = _ref4.photoAreaId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl, "/projects/").concat(projectId, "/photo-areas/").concat(photoAreaId, "/files");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl(), "/projects/").concat(projectId, "/photo-areas/").concat(photoAreaId, "/files");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
     }
   }, {
@@ -213,7 +213,7 @@ var FileInformationApi = /*#__PURE__*/function () {
     value: function saveFloorFile(_ref5, apiFile, user) {
       var projectId = _ref5.projectId,
           floorId = _ref5.floorId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/file");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/file");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.post(url, user, apiFile);
     }
   }, {
@@ -221,7 +221,7 @@ var FileInformationApi = /*#__PURE__*/function () {
     value: function listFloorFiles(_ref6, user) {
       var projectId = _ref6.projectId,
           floorId = _ref6.floorId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/files");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/files");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
     }
   }, {
@@ -230,7 +230,7 @@ var FileInformationApi = /*#__PURE__*/function () {
       var projectId = _ref7.projectId,
           floorId = _ref7.floorId,
           scanDatasetId = _ref7.scanDatasetId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/file");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/file");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.post(url, user, apiFile);
     }
   }, {
@@ -248,7 +248,7 @@ var FileInformationApi = /*#__PURE__*/function () {
         user = purposeType;
       }
 
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/files").concat(query);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/files").concat(query);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
     }
   }]);
@@ -289,13 +289,13 @@ var FloorApi = /*#__PURE__*/function () {
   _createClass(FloorApi, null, [{
     key: "listFloorsForProject",
     value: function listFloorsForProject(projectId, user) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/floors");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     }
   }, {
     key: "createFloor",
     value: function createFloor(projectId, floorNumber, user) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/floors");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, {
         text: floorNumber
       });
@@ -305,7 +305,7 @@ var FloorApi = /*#__PURE__*/function () {
     value: function getFloor(_ref, user) {
       var projectId = _ref.projectId,
           floorId = _ref.floorId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     }
   }, {
@@ -313,7 +313,7 @@ var FloorApi = /*#__PURE__*/function () {
     value: function updateFloor(_ref2, floor, user) {
       var projectId = _ref2.projectId,
           floorId = _ref2.floorId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, floor);
     }
   }, {
@@ -321,7 +321,7 @@ var FloorApi = /*#__PURE__*/function () {
     value: function updateFloorOrder(_ref3, ordinal, user) {
       var projectId = _ref3.projectId,
           floorId = _ref3.floorId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/reorder/").concat(ordinal);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/reorder/").concat(ordinal);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, null);
     }
   }]);
@@ -362,31 +362,31 @@ var OrganizationApi = /*#__PURE__*/function () {
   _createClass(OrganizationApi, null, [{
     key: "listOrganizations",
     value: function listOrganizations(user) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/client-accounts");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/client-accounts");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     }
   }, {
     key: "getOrganization",
     value: function getOrganization(organizationId, user) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/client-accounts/").concat(organizationId);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/client-accounts/").concat(organizationId);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     }
   }, {
     key: "getOrganizationName",
     value: function getOrganizationName(organizationId, user) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/client-accounts/").concat(organizationId, "/name");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/client-accounts/").concat(organizationId, "/name");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     }
   }, {
     key: "createOrganization",
     value: function createOrganization(organization, user) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/client-accounts");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/client-accounts");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, organization);
     }
   }, {
     key: "updateOrganization",
     value: function updateOrganization(accountId, organization, user) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/client-accounts/").concat(accountId);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/client-accounts/").concat(accountId);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, organization);
     }
   }]);
@@ -427,7 +427,7 @@ var PhotoAreaApi = /*#__PURE__*/function () {
     key: "listPhotoAreasForProject",
     value: function listPhotoAreasForProject(_ref, user) {
       var projectId = _ref.projectId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl, "/projects/").concat(projectId, "/photo-areas");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl(), "/projects/").concat(projectId, "/photo-areas");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
     }
   }, {
@@ -436,7 +436,7 @@ var PhotoAreaApi = /*#__PURE__*/function () {
       var projectId = _ref2.projectId,
           photoAreaId = _ref2.photoAreaId,
           photoSessionId = _ref2.photoSessionId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl, "/projects/").concat(projectId, "/photo-areas/").concat(photoAreaId, "/locations");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl(), "/projects/").concat(projectId, "/photo-areas/").concat(photoAreaId, "/locations");
 
       if (photoSessionId) {
         url += "?photoSessionId=".concat(photoSessionId);
@@ -449,7 +449,7 @@ var PhotoAreaApi = /*#__PURE__*/function () {
     value: function listPhotoSessionsForPhotoArea(_ref3, user) {
       var projectId = _ref3.projectId,
           photoAreaId = _ref3.photoAreaId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl, "/projects/").concat(projectId, "/photo-areas/").concat(photoAreaId, "/sessions");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl(), "/projects/").concat(projectId, "/photo-areas/").concat(photoAreaId, "/sessions");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
     }
   }]);
@@ -496,7 +496,7 @@ var PipelineApi = /*#__PURE__*/function () {
           projectId = associationIds.projectId,
           floorId = associationIds.floorId,
           scanDatasetId = associationIds.scanDatasetId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/pipeline/").concat(accountId, "/").concat(projectId, "/").concat(floorId, "/").concat(scanDatasetId, "/trigger");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/pipeline/").concat(accountId, "/").concat(projectId, "/").concat(floorId, "/").concat(scanDatasetId, "/trigger");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, body);
     }
   }]);
@@ -537,100 +537,100 @@ var ProjectApi = /*#__PURE__*/function () {
   _createClass(ProjectApi, null, [{
     key: "listProjectsForOrganization",
     value: function listProjectsForOrganization(accountId, user) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/client-accounts/").concat(accountId, "/projects");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/client-accounts/").concat(accountId, "/projects");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     }
   }, {
     key: "listAllProjectsForUser",
     value: function listAllProjectsForUser(user) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/list-user-projects");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/list-user-projects");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     } // deprecated. Call getProject and listProjectsForOrganization instead
 
   }, {
     key: "listProjects",
     value: function listProjects(projectId, user) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/list");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/list");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     }
   }, {
     key: "getProject",
     value: function getProject(projectId, user) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     }
   }, {
     key: "createProject",
     value: function createProject(accountId, project, user) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/client-accounts/").concat(accountId, "/projects");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/client-accounts/").concat(accountId, "/projects");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, project);
     }
   }, {
     key: "updateProject",
     value: function updateProject(projectId, project, user) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, project);
     }
   }, {
     key: "archiveProject",
     value: function archiveProject(accountId, projectId, user) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/archive");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/archive");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, null);
     }
   }, {
     key: "saveProjectCostAnalysisProgress",
     value: function saveProjectCostAnalysisProgress(_ref, progress, user) {
       var projectId = _ref.projectId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/cost-analysis-progress");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/cost-analysis-progress");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, progress);
     }
   }, {
     key: "saveScannedProjectMasterformatProgress",
     value: function saveScannedProjectMasterformatProgress(_ref2, progress, user) {
       var projectId = _ref2.projectId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/masterformat-progress");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/masterformat-progress");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, progress);
     }
   }, {
     key: "saveScheduledProjectMasterformatProgress",
     value: function saveScheduledProjectMasterformatProgress(_ref3, progress, user) {
       var projectId = _ref3.projectId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/scheduled-masterformat-progress");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/scheduled-masterformat-progress");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, progress);
     }
   }, {
     key: "getProjectCostAnalysisProgress",
     value: function getProjectCostAnalysisProgress(_ref4, user) {
       var projectId = _ref4.projectId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/cost-analysis-progress");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/cost-analysis-progress");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     }
   }, {
     key: "getScannedProjectMasterformatProgress",
     value: function getScannedProjectMasterformatProgress(_ref5, user) {
       var projectId = _ref5.projectId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/masterformat-progress");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/masterformat-progress");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     }
   }, {
     key: "getScheduledProjectMasterformatProgress",
     value: function getScheduledProjectMasterformatProgress(_ref6, user) {
       var projectId = _ref6.projectId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/scheduled-masterformat-progress");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/scheduled-masterformat-progress");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     }
   }, {
     key: "listProjectFloorFiles",
     value: function listProjectFloorFiles(_ref7, user) {
       var projectId = _ref7.projectId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/floor-files");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floor-files");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     }
   }, {
     key: "getProjectDeviationsReportTsvUrl",
     value: function getProjectDeviationsReportTsvUrl(_ref8, fileName, user) {
       var projectId = _ref8.projectId;
-      var baseUrl = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/").concat(fileName, "_deviation-report.tsv");
+      var baseUrl = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/").concat(fileName, "_deviation-report.tsv");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.addAuthToDownloadUrl(baseUrl, user);
     }
   }]);
@@ -672,7 +672,7 @@ var ScanDatasetApi = /*#__PURE__*/function () {
     value: function listScanDatasetsForFloor(_ref, user) {
       var projectId = _ref.projectId,
           floorId = _ref.floorId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     }
   }, {
@@ -681,7 +681,7 @@ var ScanDatasetApi = /*#__PURE__*/function () {
       var projectId = _ref2.projectId,
           floorId = _ref2.floorId,
           scanDatasetId = _ref2.scanDatasetId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, scanDataset);
     }
   }, {
@@ -689,7 +689,7 @@ var ScanDatasetApi = /*#__PURE__*/function () {
     value: function createScanDataset(_ref3, user) {
       var projectId = _ref3.projectId,
           floorId = _ref3.floorId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, null);
     }
   }, {
@@ -698,7 +698,7 @@ var ScanDatasetApi = /*#__PURE__*/function () {
       var projectId = _ref4.projectId,
           floorId = _ref4.floorId,
           scanDatasetId = _ref4.scanDatasetId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.delete(url, user);
     }
   }, {
@@ -707,7 +707,7 @@ var ScanDatasetApi = /*#__PURE__*/function () {
       var projectId = _ref5.projectId,
           floorId = _ref5.floorId,
           scanDatasetId = _ref5.scanDatasetId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/analysis?enforceBuiltPersistence=false");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/analysis?enforceBuiltPersistence=false");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, analysis);
     }
   }, {
@@ -716,7 +716,7 @@ var ScanDatasetApi = /*#__PURE__*/function () {
       var projectId = _ref6.projectId,
           floorId = _ref6.floorId,
           scanDatasetId = _ref6.scanDatasetId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     }
   }, {
@@ -725,7 +725,7 @@ var ScanDatasetApi = /*#__PURE__*/function () {
       var projectId = _ref7.projectId,
           floorId = _ref7.floorId,
           scanDatasetId = _ref7.scanDatasetId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/detailed-elements/viewer");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/detailed-elements/viewer");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     }
   }, {
@@ -734,7 +734,7 @@ var ScanDatasetApi = /*#__PURE__*/function () {
       var projectId = _ref8.projectId,
           floorId = _ref8.floorId,
           scanDatasetId = _ref8.scanDatasetId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/progress");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/progress");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     }
   }]);
@@ -789,27 +789,27 @@ var WebGatewayApi = /*#__PURE__*/function () {
     value: function getPlannedBuildingElements(_ref, user) {
       var projectId = _ref.projectId,
           floorId = _ref.floorId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/planned-building-elements");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/planned-building-elements");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.get(url, user);
     }
   }, {
     key: "connectProjectToStructionSite",
     value: function connectProjectToStructionSite(_ref2, structionSiteProjectUrl, token, user) {
       var projectId = _ref2.projectId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/connect-to-structionsite?structionsite-access-token=").concat(token, "&structionsite-project-url=").concat(structionSiteProjectUrl);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/connect-to-structionsite?structionsite-access-token=").concat(token, "&structionsite-project-url=").concat(structionSiteProjectUrl);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, null);
     }
   }, {
     key: "checkPipelineStatus",
     value: function checkPipelineStatus(_ref3, pipelineId, user) {
       var projectId = _ref3.projectId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/pipelines/").concat(pipelineId);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/pipelines/").concat(pipelineId);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.get(url, user);
     }
   }, {
     key: "createInvitation",
     value: function createInvitation(inviteeEmail, role, organizationId, user) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/users/invitations");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/users/invitations");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, {
         userEmail: inviteeEmail,
         role: role,
@@ -819,26 +819,26 @@ var WebGatewayApi = /*#__PURE__*/function () {
   }, {
     key: "getInvitation",
     value: function getInvitation(invitationToken, user) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/users/invitations/").concat(invitationToken);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/users/invitations/").concat(invitationToken);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.get(url, user);
     }
   }, {
     key: "getProgressReportPdfUrl",
     value: function getProgressReportPdfUrl(projectId, user) {
-      var baseUrl = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/progress-report.pdf");
+      var baseUrl = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/progress-report.pdf");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.addAuthToDownloadUrl(baseUrl, user);
     }
   }, {
     key: "getQualityControlReportPdfUrl",
     value: function getQualityControlReportPdfUrl(projectId) {
-      return "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/report.pdf");
+      return "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/report.pdf");
     }
   }, {
     key: "getPlannedElementsTsvUrl",
     value: function getPlannedElementsTsvUrl(_ref4, fileName, user) {
       var projectId = _ref4.projectId,
           floorId = _ref4.floorId;
-      var baseUrl = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/").concat(fileName, "_planned-building-elements.tsv");
+      var baseUrl = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/").concat(fileName, "_planned-building-elements.tsv");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.addAuthToDownloadUrl(baseUrl, user);
     }
   }, {
@@ -846,7 +846,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
     value: function getDeviationsReportTsvUrl(_ref5, fileName, user) {
       var projectId = _ref5.projectId,
           floorId = _ref5.floorId;
-      var baseUrl = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/").concat(fileName, "_deviation-report.tsv");
+      var baseUrl = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/").concat(fileName, "_deviation-report.tsv");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.addAuthToDownloadUrl(baseUrl, user);
     }
   }, {
@@ -855,7 +855,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
       var projectId = _ref6.projectId,
           floorId = _ref6.floorId,
           scanDatasetId = _ref6.scanDatasetId;
-      var baseUrl = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/").concat(fileName, "_scan-analysis.tsv");
+      var baseUrl = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/").concat(fileName, "_scan-analysis.tsv");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.addAuthToDownloadUrl(baseUrl, user);
     }
   }, {
@@ -865,7 +865,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
         return Promise.reject(new Error("Project not loaded yet"));
       }
 
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/procore?procore-access-token=").concat(procoreAccessToken);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/procore?procore-access-token=").concat(procoreAccessToken);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.get(url, user);
     }
   }, {
@@ -879,7 +879,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
         return Promise.reject(new Error("Project not loaded yet"));
       }
 
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/push-report-to-procore/").concat(pdfType, "?procore-project-id=").concat(procoreProjectId, "&procore-access-token=").concat(procoreAccessToken);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/push-report-to-procore/").concat(pdfType, "?procore-project-id=").concat(procoreProjectId, "&procore-access-token=").concat(procoreAccessToken);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, null);
     }
   }, {
@@ -889,7 +889,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
         return Promise.reject(new Error("Project not loaded yet"));
       }
 
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/procore-projects?procore-access-token=").concat(procoreAccessToken);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/procore-projects?procore-access-token=").concat(procoreAccessToken);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.get(url, user);
     }
   }, {
@@ -898,7 +898,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
       var projectId = _ref8.projectId,
           floorId = _ref8.floorId,
           scanDatasetId = _ref8.scanDatasetId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/deviation-status");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/deviation-status");
       var deviation = {
         globalId: deviationGlobalId,
         status: status
@@ -909,7 +909,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
   }, {
     key: "getCustomFirebaseToken",
     value: function getCustomFirebaseToken(user) {
-      return fetch("".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/login"), {
+      return fetch("".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/login"), {
         headers: _objectSpread(_objectSpread({}, _utilities_request_headers__WEBPACK_IMPORTED_MODULE_2__.httpGetHeaders), (0,_utilities_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user))
       }).then(function (response) {
         return response.json().then(function (body) {
@@ -930,7 +930,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
         username: username,
         password: password
       };
-      return fetch("".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/login"), {
+      return fetch("".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/login"), {
         headers: _objectSpread(_objectSpread({}, _utilities_request_headers__WEBPACK_IMPORTED_MODULE_2__.httpGetHeaders), (0,_utilities_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user))
       }).then(function (response) {
         return response.json().then(function (body) {
@@ -946,7 +946,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
   }, {
     key: "acceptInvitation",
     value: function acceptInvitation(token, password) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/users/accept-invitation");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/users/accept-invitation");
       var invitationForm = {
         invitationToken: token,
         password: password
@@ -959,7 +959,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
       var projectId = _ref9.projectId,
           floorId = _ref9.floorId,
           scanDatasetId = _ref9.scanDatasetId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/element/").concat(elementGlobalId);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/element/").concat(elementGlobalId);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.get(url, user);
     }
   }, {
@@ -968,7 +968,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
       var projectId = _ref10.projectId,
           floorId = _ref10.floorId,
           scanDatasetId = _ref10.scanDatasetId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/export-ifc?type=").concat(type);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/export-ifc?type=").concat(type);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, null);
     } // TODO unify with pipeline api
 
@@ -978,7 +978,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
       var projectId = _ref11.projectId,
           floorId = _ref11.floorId,
           scanDatasetId = _ref11.scanDatasetId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/export-ifc/").concat(workflowName, "?type=").concat(type);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/export-ifc/").concat(workflowName, "?type=").concat(type);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.get(url, user);
     }
   }, {
@@ -987,7 +987,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
       var projectId = _ref12.projectId,
           floorId = _ref12.floorId,
           scanDatasetId = _ref12.scanDatasetId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/downsample-scan");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/downsample-scan");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, null);
     } //TODO move to AuthApi
 
@@ -995,13 +995,13 @@ var WebGatewayApi = /*#__PURE__*/function () {
     key: "getGcpBearerToken",
     value: function getGcpBearerToken(_ref13, user) {
       var projectId = _ref13.projectId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/gcpAccessToken");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/gcpAccessToken");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.get(url, user);
     }
   }, {
     key: "getMasterformat",
     value: function getMasterformat(version) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/masterformats/").concat(version);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/masterformats/").concat(version);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.get(url, null);
     }
   }, {
@@ -1011,7 +1011,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
           floorId = _ref14.floorId,
           scanDatasetId = _ref14.scanDatasetId,
           globalId = _ref14.globalId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/elements/").concat(globalId);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/elements/").concat(globalId);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.patch(url, user, element);
     }
   }, {
@@ -1020,7 +1020,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
       var projectId = _ref15.projectId,
           floorId = _ref15.floorId,
           scanDatasetId = _ref15.scanDatasetId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/detailed-elements");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/detailed-elements");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.patch(url, user, elements);
     }
   }, {
@@ -1028,7 +1028,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
     value: function triggerArgoRunProgressAndDeviations(_ref16, deviationsFlag, bimSourceFileExtension, user) {
       var projectId = _ref16.projectId,
           floorId = _ref16.floorId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/run-progress-and-deviations?deviationsFlag=").concat(deviationsFlag, "&bimSourceFileExtension=").concat(bimSourceFileExtension);
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/run-progress-and-deviations?deviationsFlag=").concat(deviationsFlag, "&bimSourceFileExtension=").concat(bimSourceFileExtension);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, null);
     }
   }, {
@@ -1036,13 +1036,13 @@ var WebGatewayApi = /*#__PURE__*/function () {
     value: function triggerArgoRunNwdConvert(_ref17, user) {
       var projectId = _ref17.projectId,
           floorId = _ref17.floorId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/projects/").concat(projectId, "/floors/").concat(floorId, "/nwd-convert");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/nwd-convert");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, null);
     }
   }, {
     key: "recordUserActions",
     value: function recordUserActions(type, userActions, user) {
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl, "/user-actions");
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/user-actions");
       var actionForm = {
         type: type,
         payload: userActions
@@ -3990,7 +3990,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var checkFetchStatus = function checkFetchStatus(response) {
-  var requestPath = response.url.split(_http__WEBPACK_IMPORTED_MODULE_2__.default.baseUrl).join("..."); // split and join to replace text
+  var requestPath = response.url.split(_http__WEBPACK_IMPORTED_MODULE_2__.default.baseUrl()).join("..."); // split and join to replace text
 
   if (response.headers.has("Warning")) {
     console.warn("Warning present in response: ".concat(response.headers.get("Warning"), "\nfrom: `").concat(requestPath, "`"));
@@ -4179,7 +4179,10 @@ var Http = /*#__PURE__*/function () {
   return Http;
 }();
 
-Http.baseUrl = (_config__WEBPACK_IMPORTED_MODULE_2___default().AVVIR_GATEWAY_URL);
+Http.baseUrl = function () {
+  return (_config__WEBPACK_IMPORTED_MODULE_2___default().AVVIR_GATEWAY_URL);
+};
+
 
 
 /***/ }),

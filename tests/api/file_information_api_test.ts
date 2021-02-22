@@ -38,7 +38,7 @@ describe("FileInformationApi", () => {
 
   describe("#createProjectFile", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/files`, 200);
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/files`, 200);
     });
 
     it("makes a call to the project files endpoint", () => {
@@ -54,7 +54,7 @@ describe("FileInformationApi", () => {
       );
       const request = fetchMock.lastCall();
 
-      expect(request["0"]).to.eq(`${Http.baseUrl}/projects/some-project-id/files`);
+      expect(request["0"]).to.eq(`${Http.baseUrl()}/projects/some-project-id/files`);
       expect(JSON.parse(request["1"].body as string)).to.deep.eq({
         createdAt: null,
         purposeType: "OTHER",
@@ -84,7 +84,7 @@ describe("FileInformationApi", () => {
 
     describe("when the call fails", () => {
       beforeEach(() => {
-        fetchMock.post(`${Http.baseUrl}/projects/some-project-id/files`, 500, { overwriteRoutes: true });
+        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/files`, 500, { overwriteRoutes: true });
       });
 
       it("dispatches an api failure notification", () => {
@@ -108,7 +108,7 @@ describe("FileInformationApi", () => {
 
   describe("#listProjectFiles", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/projects/some-project-id/files`, [{
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/files`, [{
         url: "some-file-url.com",
         purposeType: "OTHER"
       }]);
@@ -117,7 +117,7 @@ describe("FileInformationApi", () => {
     it("makes a call to the project files endpoint", () => {
       FileInformationApi.listProjectFiles({ projectId: "some-project-id" }, user);
       const request = fetchMock.lastCall();
-      expect(request[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/files`);
+      expect(request[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/files`);
     });
 
     it("sends the request with authorization headers", () => {
@@ -132,7 +132,7 @@ describe("FileInformationApi", () => {
 
   describe("#listPhotoAreaFiles", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/projects/some-project-id/photo-areas/4/files`, [{
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/files`, [{
         url: "some-file-url.com",
         purposeType: "OTHER"
       }]);
@@ -141,7 +141,7 @@ describe("FileInformationApi", () => {
     it("makes a call to the project files endpoint", () => {
       FileInformationApi.listPhotoAreaFiles({ projectId: "some-project-id", photoAreaId: 4 }, user);
       const request = fetchMock.lastCall();
-      expect(request[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/photo-areas/4/files`);
+      expect(request[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/files`);
     });
 
     it("sends the request with authorization headers", () => {
@@ -156,14 +156,14 @@ describe("FileInformationApi", () => {
 
   describe("zipProjectFolder", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/zip-project-folder?folder-prefix=some-folder-name`, 200);
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/zip-project-folder?folder-prefix=some-folder-name`, 200);
     });
 
     it("makes a call to the zip project folder endpoint", () => {
       FileInformationApi.zipProjectFolder("some-folder-name", { projectId: "some-project-id" }, user);
 
       const request = fetchMock.lastCall();
-      expect(request["0"]).to.eq(`${Http.baseUrl}/projects/some-project-id/zip-project-folder?folder-prefix=some-folder-name`);
+      expect(request["0"]).to.eq(`${Http.baseUrl()}/projects/some-project-id/zip-project-folder?folder-prefix=some-folder-name`);
     });
 
     it("sends the request with authorization headers", () => {
@@ -178,7 +178,7 @@ describe("FileInformationApi", () => {
 
   describe("#saveFloorFile", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/file`, 200);
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/file`, 200);
     });
 
     it("makes a call to the floor files endpoint", () => {
@@ -195,7 +195,7 @@ describe("FileInformationApi", () => {
       );
       const request = fetchMock.lastCall();
 
-      expect(request["0"]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/file`);
+      expect(request["0"]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/file`);
       expect(JSON.parse(request["1"].body as string)).to.deep.eq({
         createdAt: null,
         purposeType: "OTHER",
@@ -225,7 +225,7 @@ describe("FileInformationApi", () => {
 
     describe("when the call fails", () => {
       beforeEach(() => {
-        fetchMock.post(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/file`, 500, { overwriteRoutes: true });
+        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/file`, 500, { overwriteRoutes: true });
       });
 
       it("dispatches an api failure notification", () => {
@@ -249,7 +249,7 @@ describe("FileInformationApi", () => {
 
   describe("#saveScanDatasetFile", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/file`, 200);
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/file`, 200);
     });
 
     it("makes a call to the scan dataset files endpoint", () => {
@@ -267,7 +267,7 @@ describe("FileInformationApi", () => {
       );
       const request = fetchMock.lastCall();
 
-      expect(request["0"]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/file`);
+      expect(request["0"]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/file`);
       expect(JSON.parse(request["1"].body as string)).to.deep.eq({
         createdAt: null,
         purposeType: "OTHER",
@@ -298,7 +298,7 @@ describe("FileInformationApi", () => {
 
     describe("when the call fails", () => {
       beforeEach(() => {
-        fetchMock.post(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/file`, 500, { overwriteRoutes: true });
+        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/file`, 500, { overwriteRoutes: true });
       });
 
       it("dispatches an api failure notification", () => {

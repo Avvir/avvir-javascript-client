@@ -8,7 +8,7 @@ import ApiArgoResponse from "../models/api/api_argo_response";
 class PipelineApi {
   static triggerPipeline(associationIds: AssociationIds, body = {}, user: User): Promise<ApiArgoResponse> {
     let {accountId, projectId, floorId, scanDatasetId} = associationIds;
-    const url = `${Http.baseUrl}/pipeline/${accountId}/${projectId}/${floorId}/${scanDatasetId}/trigger`;
+    const url = `${Http.baseUrl()}/pipeline/${accountId}/${projectId}/${floorId}/${scanDatasetId}/trigger`;
     return Http.post(url, user, body);
   }
 }

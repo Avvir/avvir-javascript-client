@@ -21,7 +21,7 @@ describe("PipelineApi", () => {
 
   describe("#triggerPipeline", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl}/pipeline/some-organization-id/some-project-id/some-floor-id/some-scan-dataset-id/trigger`, 200);
+      fetchMock.post(`${Http.baseUrl()}/pipeline/some-organization-id/some-project-id/some-floor-id/some-scan-dataset-id/trigger`, 200);
     });
 
     it("Calls the correct URL", () => {
@@ -35,7 +35,7 @@ describe("PipelineApi", () => {
         { authType:FIREBASE, firebaseUser: {idToken: "some-firebase.id.token" }});
 
       expect(fetchMock.lastUrl()).to.eq(
-        `${Http.baseUrl}/pipeline/some-organization-id/some-project-id/some-floor-id/some-scan-dataset-id/trigger`
+        `${Http.baseUrl()}/pipeline/some-organization-id/some-project-id/some-floor-id/some-scan-dataset-id/trigger`
       );
     });
 
@@ -66,8 +66,8 @@ describe("PipelineApi", () => {
           headers: {"ContentType": "application/json"}
         };
 
-        fetchMock.mock(`begin:${Http.baseUrl}/pipeline/`, (url) => {
-          const startLength = `${Http.baseUrl}/pipeline/`.length;
+        fetchMock.mock(`begin:${Http.baseUrl()}/pipeline/`, (url) => {
+          const startLength = `${Http.baseUrl()}/pipeline/`.length;
           const argsString = url.slice(startLength).split("/");
           const floorId = argsString[2];
           const scanDatasetId = argsString[3];
@@ -87,7 +87,7 @@ describe("PipelineApi", () => {
       });
 
       it("rejects the promise and calls the shared error handler", () => {
-        fetchMock.mock(`begin:${Http.baseUrl}/pipeline/`, (url) => {
+        fetchMock.mock(`begin:${Http.baseUrl()}/pipeline/`, (url) => {
           return {
               status: 500,  body: {message: "some unfortunate error"},
               headers: {"ContentType": "application/json"}

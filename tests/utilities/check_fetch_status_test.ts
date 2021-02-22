@@ -43,7 +43,7 @@ describe("#checkFetchStatus", () => {
       rejectionSpy = sandbox.spy();
 
       response = new Response(`{"message": "some body once told me"}`, {
-        url: `${Http.baseUrl}/some-slug`,
+        url: `${Http.baseUrl()}/some-slug`,
         status: 404
       });
     });

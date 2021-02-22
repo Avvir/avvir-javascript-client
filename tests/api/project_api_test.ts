@@ -28,7 +28,7 @@ describe("ProjectApi", () => {
 
   describe("#listProjectsForOrganization", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/client-accounts/some-organization-id/projects`, {
+      fetchMock.get(`${Http.baseUrl()}/client-accounts/some-organization-id/projects`, {
         status: 200,
         body: [{
           projectId: "some-project-id",
@@ -44,7 +44,7 @@ describe("ProjectApi", () => {
       const fetchCall = fetchMock.lastCall();
       const lastFetchOpts = fetchMock.lastOptions();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/client-accounts/some-organization-id/projects`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/client-accounts/some-organization-id/projects`);
       expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
@@ -52,7 +52,7 @@ describe("ProjectApi", () => {
 
   describe("#getProject", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/projects/some-project-id`, 200);
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id`, 200);
     });
 
     it("makes a request to the gateway api", () => {
@@ -62,7 +62,7 @@ describe("ProjectApi", () => {
       });
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
@@ -78,7 +78,7 @@ describe("ProjectApi", () => {
 
   describe("#updateProject", () => {
     beforeEach(() => {
-      fetchMock.patch(`${Http.baseUrl}/projects/some-project-id`, 200);
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id`, 200);
     });
 
     it("makes a request to the gateway", () => {
@@ -86,7 +86,7 @@ describe("ProjectApi", () => {
         name: "Some Project Name"
       }, user);
 
-      expect(fetchMock.lastUrl()).to.eq(`${Http.baseUrl}/projects/some-project-id`);
+      expect(fetchMock.lastUrl()).to.eq(`${Http.baseUrl()}/projects/some-project-id`);
       expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
     });
 
@@ -106,7 +106,7 @@ describe("ProjectApi", () => {
         new ApiMasterformat(2016, "00 00 01"),
         0.8,
         DateConverter.dateToInstant(moment("2018-04-01")))];
-      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/masterformat-progress`, 200);
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/masterformat-progress`, 200);
     });
 
     it("makes a call to the masterformat progress endpoint", () => {
@@ -116,7 +116,7 @@ describe("ProjectApi", () => {
         {firebaseUser: {idToken: "some-firebase.id.token"}});
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/masterformat-progress`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/masterformat-progress`);
       expect(JSON.parse(fetchCall[1].body)).to.deep.eq([{
         masterformat: {version: 2016, code: "00 00 01"},
         scanDate: DateConverter.dateToInstant(moment("2018-04-01")),
@@ -145,7 +145,7 @@ describe("ProjectApi", () => {
 
     describe("when the call fails", () => {
       beforeEach(() => {
-        fetchMock.post(`${Http.baseUrl}/projects/some-project-id/masterformat-progress`,
+        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/masterformat-progress`,
           {status: 500, body: {some: "body"},
             headers: {"ContentType": "application/json"}
           },
@@ -189,7 +189,7 @@ describe("ProjectApi", () => {
           analysisDate: 0
         })]
       };
-      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/cost-analysis-progress`, 200);
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/cost-analysis-progress`, 200);
     });
 
     it("makes a call to the cost analysis progress endpoint", () => {
@@ -199,7 +199,7 @@ describe("ProjectApi", () => {
         {firebaseUser: {idToken: "some-firebase.id.token"}});
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/cost-analysis-progress`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/cost-analysis-progress`);
       expect(JSON.parse(fetchCall[1].body)).to.deep.eq({
         date: DateConverter.dateToInstant(moment("2018-04-01")),
         data: [{
@@ -241,7 +241,7 @@ describe("ProjectApi", () => {
 
     describe("when the call fails", () => {
       beforeEach(() => {
-        fetchMock.post(`${Http.baseUrl}/projects/some-project-id/cost-analysis-progress`,
+        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/cost-analysis-progress`,
           {status: 500, body: {some: "body"},
             headers: {"ContentType": "application/json"}
           },
@@ -271,7 +271,7 @@ describe("ProjectApi", () => {
         new ApiMasterformat(2016, "00 00 01"),
         0.8,
         DateConverter.dateToInstant(moment("2018-04-01")))];
-      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/scheduled-masterformat-progress`, 200);
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/scheduled-masterformat-progress`, 200);
     });
 
     it("makes a call to the scheduled masterformat progress endpoint", () => {
@@ -281,7 +281,7 @@ describe("ProjectApi", () => {
         {firebaseUser: {idToken: "some-firebase.id.token"}});
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/scheduled-masterformat-progress`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/scheduled-masterformat-progress`);
       expect(JSON.parse(fetchCall[1].body)).to.deep.eq([{
         masterformat: {version: 2016, code: "00 00 01"},
         scanDate: DateConverter.dateToInstant(moment("2018-04-01")),
@@ -310,7 +310,7 @@ describe("ProjectApi", () => {
 
     describe("when the call fails", () => {
       beforeEach(() => {
-        fetchMock.post(`${Http.baseUrl}/projects/some-project-id/scheduled-masterformat-progress`,
+        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/scheduled-masterformat-progress`,
           {status: 500, body: {some: "body"},
             headers: {"ContentType": "application/json"}
           },
@@ -335,7 +335,7 @@ describe("ProjectApi", () => {
 
   describe("#getProjectCostAnalysisProgress", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/projects/some-project-id/cost-analysis-progress`, {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/cost-analysis-progress`, {
         status: 200,
         body: {
           "data": "hello world"
@@ -349,7 +349,7 @@ describe("ProjectApi", () => {
         {firebaseUser: {idToken: "some-firebase.id.token"}}
       );
       const fetchCall = fetchMock.lastCall();
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/cost-analysis-progress`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/cost-analysis-progress`);
     });
 
     it("sends the request with authorization headers", () => {
@@ -367,7 +367,7 @@ describe("ProjectApi", () => {
 
   describe("#getScannedProjectMasterformatProgress", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/projects/some-project-id/masterformat-progress`, 200);
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/masterformat-progress`, 200);
     });
 
     it("makes a request to the gateway api", () => {
@@ -377,7 +377,7 @@ describe("ProjectApi", () => {
       });
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/masterformat-progress`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/masterformat-progress`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
@@ -393,7 +393,7 @@ describe("ProjectApi", () => {
 
   describe("#getScheduledProjectMasterformatProgress", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/projects/some-project-id/scheduled-masterformat-progress`, 200);
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/scheduled-masterformat-progress`, 200);
     });
 
     it("makes a request to the gateway api", () => {
@@ -403,7 +403,7 @@ describe("ProjectApi", () => {
       });
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/scheduled-masterformat-progress`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/scheduled-masterformat-progress`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
@@ -419,7 +419,7 @@ describe("ProjectApi", () => {
 
   describe("#listProjectFloorFiles", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/projects/some-project-id/floor-files`,
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floor-files`,
         {
           status: 200,
           body: [{
@@ -440,7 +440,7 @@ describe("ProjectApi", () => {
         });
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floor-files`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floor-files`);
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });

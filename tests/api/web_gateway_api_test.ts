@@ -18,7 +18,7 @@ import Http from "../../source/utilities/http";
 describe("WebGatewayApi", () => {
   describe("::login", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/login`, {
+      fetchMock.get(`${Http.baseUrl()}/login`, {
         status: 200,
         body: {storageToken: "some-auth-token", redirectUrl: "/projects/some-project-id"}
       });
@@ -28,7 +28,7 @@ describe("WebGatewayApi", () => {
       WebGatewayApi.login("some-username", "some-password");
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/login`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/login`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
@@ -52,7 +52,7 @@ describe("WebGatewayApi", () => {
 
   describe("::getCustomFirebaseToken", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/login`, {
+      fetchMock.get(`${Http.baseUrl()}/login`, {
         status: 200,
         body: {storageToken: "some-auth-token", redirectUrl: "/projects/some-project-id"}
       });
@@ -65,7 +65,7 @@ describe("WebGatewayApi", () => {
       });
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/login`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/login`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
@@ -93,7 +93,7 @@ describe("WebGatewayApi", () => {
 
   describe("::connectProjectToStructionSite", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/connect-to-structionsite?structionsite-access-token=some-structionsite-access-token&structionsite-project-url=structionsite-url/projects/10`,
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/connect-to-structionsite?structionsite-access-token=some-structionsite-access-token&structionsite-project-url=structionsite-url/projects/10`,
         200);
     });
 
@@ -105,7 +105,7 @@ describe("WebGatewayApi", () => {
 
       expect(fetchMock.lastCall()[0])
         .to
-        .eq(`${Http.baseUrl}/projects/some-project-id/connect-to-structionsite?structionsite-access-token=some-structionsite-access-token&structionsite-project-url=structionsite-url/projects/10`);
+        .eq(`${Http.baseUrl()}/projects/some-project-id/connect-to-structionsite?structionsite-access-token=some-structionsite-access-token&structionsite-project-url=structionsite-url/projects/10`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
@@ -121,7 +121,7 @@ describe("WebGatewayApi", () => {
 
   describe("::checkPipelineStatus", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/pipelines/10`, {...new ApiPipeline({id: 10, name: "some-pipeline-name"})});
+      fetchMock.get(`${Http.baseUrl()}/pipelines/10`, {...new ApiPipeline({id: 10, name: "some-pipeline-name"})});
     });
 
     it("makes a request to the gateway", () => {
@@ -130,7 +130,7 @@ describe("WebGatewayApi", () => {
         gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
-      expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl}/pipelines/10`);
+      expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/pipelines/10`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
@@ -146,7 +146,7 @@ describe("WebGatewayApi", () => {
 
   describe("::createInvitation", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl}/users/invitations`, {
+      fetchMock.post(`${Http.baseUrl()}/users/invitations`, {
         userEmail: "someone@example.com",
         token: "some-token",
         expiry: {
@@ -164,7 +164,7 @@ describe("WebGatewayApi", () => {
 
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/users/invitations`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/invitations`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
       expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
       expect(fetchMock.lastOptions().body).to.eq(JSON.stringify(
@@ -188,7 +188,7 @@ describe("WebGatewayApi", () => {
 
   describe("::getInvitation", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/users/invitations/some-token`, {
+      fetchMock.get(`${Http.baseUrl()}/users/invitations/some-token`, {
         status: 200,
         body: {
           userEmail: "someone@example.com",
@@ -208,7 +208,7 @@ describe("WebGatewayApi", () => {
 
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/users/invitations/some-token`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/invitations/some-token`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
@@ -222,7 +222,7 @@ describe("WebGatewayApi", () => {
 
   describe("::acceptInvitation", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl}/users/accept-invitation`, 200);
+      fetchMock.post(`${Http.baseUrl()}/users/accept-invitation`, 200);
     });
 
     it("makes a call to the accept invitation endpoint", () => {
@@ -230,7 +230,7 @@ describe("WebGatewayApi", () => {
 
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/users/accept-invitation`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accept-invitation`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
       expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
       expect(fetchMock.lastOptions().body)
@@ -240,7 +240,7 @@ describe("WebGatewayApi", () => {
 
   describe("::updateDeviationStatus", () => {
     beforeEach(() => {
-      fetchMock.patch(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/deviation-status`, 200);
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/deviation-status`, 200);
     });
 
     it("makes a call to the deviation status endpoint", () => {
@@ -254,7 +254,7 @@ describe("WebGatewayApi", () => {
       });
 
       const fetchCall = fetchMock.lastCall();
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/deviation-status`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/deviation-status`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
       expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
       expect(fetchMock.lastOptions().body).to.eq(`{"globalId":"some-deviation-id","status":"INCLUDED"}`);
@@ -276,7 +276,7 @@ describe("WebGatewayApi", () => {
 
   describe("::updateElement", () => {
     beforeEach(() => {
-      fetchMock.patch(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/elements/some-element-id`, 200);
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/elements/some-element-id`, 200);
     });
 
     it("makes a call to the update element endpoint", () => {
@@ -305,7 +305,7 @@ describe("WebGatewayApi", () => {
       });
 
       const fetchCall = fetchMock.lastCall();
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/elements/some-element-id`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/elements/some-element-id`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
       expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
       expect(fetchMock.lastOptions().body).to.eq(JSON.stringify({
@@ -342,7 +342,7 @@ describe("WebGatewayApi", () => {
 
   describe("::updateElements", () => {
     beforeEach(() => {
-      fetchMock.patch(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/detailed-elements`, 200);
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/detailed-elements`, 200);
     });
 
     it("makes a call to the update element endpoint", () => {
@@ -370,7 +370,7 @@ describe("WebGatewayApi", () => {
       });
 
       const fetchCall = fetchMock.lastCall();
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/detailed-elements`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/detailed-elements`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
       expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
       expect(fetchMock.lastOptions().body).to.eq(JSON.stringify([{
@@ -406,7 +406,7 @@ describe("WebGatewayApi", () => {
 
   describe("::getElementDetails", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/element/some-element-id`, {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/element/some-element-id`, {
         name: "Some Element Name",
         globalId: "some-element-id",
         ifcType: "IfcSomeType",
@@ -437,7 +437,7 @@ describe("WebGatewayApi", () => {
       });
 
       const fetchCall = fetchMock.lastCall();
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/element/some-element-id`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/element/some-element-id`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
@@ -496,7 +496,7 @@ describe("WebGatewayApi", () => {
 
   describe("::exportPushedToBimIfc", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`, 200);
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`, 200);
     });
 
     it("makes a request to the export ifc endpoint", () => {
@@ -510,7 +510,7 @@ describe("WebGatewayApi", () => {
       },);
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
@@ -529,7 +529,7 @@ describe("WebGatewayApi", () => {
 
     describe("when there is an error with the request", () => {
       beforeEach(() => {
-        fetchMock.post(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`,
+        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc?type=as_built`,
           {
             status: 404,
             headers: {'Content-Type': 'application/json'},
@@ -569,7 +569,7 @@ describe("WebGatewayApi", () => {
     let dispatchSpy;
     beforeEach(() => {
       dispatchSpy = sandbox.spy();
-      fetchMock.get(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`, 200);
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`, 200);
     });
 
     it("makes a request to check if the export has finished", () => {
@@ -583,7 +583,7 @@ describe("WebGatewayApi", () => {
       },);
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
@@ -602,7 +602,7 @@ describe("WebGatewayApi", () => {
 
     describe("when there was an error", () => {
       beforeEach(() => {
-        fetchMock.get(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`, {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/export-ifc/3?type=as_built`, {
           status: 404,
           headers: {'Content-Type': 'application/json'},
           body: {
@@ -643,7 +643,7 @@ describe("WebGatewayApi", () => {
     let dispatchSpy;
     beforeEach(() => {
       dispatchSpy = sandbox.spy();
-      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/downsample-scan`, 200);
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/downsample-scan`, 200);
     });
 
     it("makes a request to the gateway", () => {
@@ -654,7 +654,7 @@ describe("WebGatewayApi", () => {
       }, null,);
       const lastCall = fetchMock.lastCall();
 
-      expect(lastCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/downsample-scan`);
+      expect(lastCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/downsample-scan`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
@@ -678,14 +678,14 @@ describe("WebGatewayApi", () => {
 
   describe("::getMasterformat", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/masterformats/2016`, 200);
+      fetchMock.get(`${Http.baseUrl()}/masterformats/2016`, 200);
     });
 
     it("makes a request to the gateway api", () => {
       WebGatewayApi.getMasterformat(2016);
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/masterformats/2016`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/masterformats/2016`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
   });
@@ -694,7 +694,7 @@ describe("WebGatewayApi", () => {
     let dispatchSpy;
     beforeEach(() => {
       dispatchSpy = sandbox.spy();
-      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/push-report-to-procore/progress?procore-project-id=some-procore-project-id&procore-access-token=some-procore-access-token`,
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/push-report-to-procore/progress?procore-project-id=some-procore-project-id&procore-access-token=some-procore-access-token`,
         200);
     });
 
@@ -734,14 +734,14 @@ describe("WebGatewayApi", () => {
 
       expect(fetchCall[0])
         .to
-        .eq(`${Http.baseUrl}/projects/some-project-id/push-report-to-procore/progress?procore-project-id=some-procore-project-id&procore-access-token=some-procore-access-token`);
+        .eq(`${Http.baseUrl()}/projects/some-project-id/push-report-to-procore/progress?procore-project-id=some-procore-project-id&procore-access-token=some-procore-access-token`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
   });
 
   describe("::getProcoreProjects", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/projects/some-project-id/procore-projects?procore-access-token=some-procore-access-token`,
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/procore-projects?procore-access-token=some-procore-access-token`,
         {status: 200, body: ["some-procore-project"]});
     });
 
@@ -752,7 +752,7 @@ describe("WebGatewayApi", () => {
       });
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/procore-projects?procore-access-token=some-procore-access-token`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/procore-projects?procore-access-token=some-procore-access-token`);
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
@@ -760,7 +760,7 @@ describe("WebGatewayApi", () => {
 
   describe("::getGcpBearerToken", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/projects/some-project-id/gcpAccessToken`,
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/gcpAccessToken`,
         {accessToken: "some-token"});
     });
 
@@ -771,7 +771,7 @@ describe("WebGatewayApi", () => {
       });
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/gcpAccessToken`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/gcpAccessToken`);
     });
   });
 
@@ -779,7 +779,7 @@ describe("WebGatewayApi", () => {
     let dispatchSpy;
     beforeEach(() => {
       dispatchSpy = sandbox.spy();
-      fetchMock.post(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/run-progress-and-deviations?deviationsFlag=&bimSourceFileExtension=ifc`,
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/run-progress-and-deviations?deviationsFlag=&bimSourceFileExtension=ifc`,
         {
           status: 200,
         });
@@ -795,7 +795,7 @@ describe("WebGatewayApi", () => {
       },);
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/projects/some-project-id/floors/some-floor-id/run-progress-and-deviations?deviationsFlag=&bimSourceFileExtension=ifc`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/run-progress-and-deviations?deviationsFlag=&bimSourceFileExtension=ifc`);
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
@@ -803,7 +803,7 @@ describe("WebGatewayApi", () => {
 
   describe("::recordUserAction", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl}/user-actions`, 200);
+      fetchMock.post(`${Http.baseUrl()}/user-actions`, 200);
     });
 
     it("makes a request to the gateway", () => {
@@ -812,7 +812,7 @@ describe("WebGatewayApi", () => {
         gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
-      expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl}/user-actions`);
+      expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/user-actions`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 

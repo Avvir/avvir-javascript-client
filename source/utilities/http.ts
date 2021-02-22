@@ -4,8 +4,7 @@ import {isFirebaseUser, isGatewayUser} from "./reduce_user_session";
 import config from "../config";
 
 export default class Http {
-  static baseUrl: string = config.AVVIR_GATEWAY_URL;
-
+  static baseUrl = ():string => config.AVVIR_GATEWAY_URL;
   static get(url, user){
     return fetch(url, {
       method: "GET",

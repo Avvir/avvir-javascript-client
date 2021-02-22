@@ -7,27 +7,27 @@ import makeErrorsPretty from "../utilities/make_errors_pretty";
 
 class OrganizationApi {
   static listOrganizations(user: User):Promise<ApiOrganization[]> {
-    let url = `${Http.baseUrl}/client-accounts`;
+    let url = `${Http.baseUrl()}/client-accounts`;
     return Http.get(url, user);
   }
 
   static getOrganization(organizationId: string, user: User):Promise<ApiOrganization> {
-    let url = `${Http.baseUrl}/client-accounts/${organizationId}`;
+    let url = `${Http.baseUrl()}/client-accounts/${organizationId}`;
     return Http.get(url, user);
   }
 
   static getOrganizationName(organizationId: string, user: User):Promise<string> {
-    let url = `${Http.baseUrl}/client-accounts/${organizationId}/name`;
+    let url = `${Http.baseUrl()}/client-accounts/${organizationId}/name`;
     return Http.get(url, user);
   }
 
   static createOrganization(organization: ApiOrganization, user: User): Promise<{ firebaseId: string }> {
-    let url = `${Http.baseUrl}/client-accounts`;
+    let url = `${Http.baseUrl()}/client-accounts`;
     return Http.post(url, user, organization);
   }
 
   static updateOrganization(accountId: string, organization: ApiOrganization, user: User): Promise<void> {
-    let url = `${Http.baseUrl}/client-accounts/${accountId}`;
+    let url = `${Http.baseUrl()}/client-accounts/${accountId}`;
     return Http.patch(url, user, organization);
   }
 }

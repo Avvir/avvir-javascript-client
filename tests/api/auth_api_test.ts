@@ -10,7 +10,7 @@ import JsonWebToken from "jsonwebtoken";
 describe("AuthApi", () => {
   describe("#login", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl}/login`, {
+      fetchMock.get(`${Http.baseUrl()}/login`, {
         status: 200,
         body: {storageToken: "some-auth-token", redirectUrl: "/projects/some-project-id"},
         headers: {"Authorization": "Bearer some-jwt-token"}
@@ -23,7 +23,7 @@ describe("AuthApi", () => {
       AuthApi.login("some-username", "some-password");
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/login`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/login`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
@@ -46,7 +46,7 @@ describe("AuthApi", () => {
 
     describe("when the request fails", () => {
       beforeEach(() => {
-        fetchMock.get(`${Http.baseUrl}/login`, {
+        fetchMock.get(`${Http.baseUrl()}/login`, {
           status: 403,
           body: {message: "some server error message"},
           headers: {}

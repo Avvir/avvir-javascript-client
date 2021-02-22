@@ -9,12 +9,12 @@ import ApiPhotoSession from "../models/api/api_photo_session";
 
 export default class PhotoAreaApi {
   static listPhotoAreasForProject({ projectId }: AssociationIds, user: User) :Promise<ApiPhotoArea[]>{
-    let url = `${Http.baseUrl}/projects/${projectId}/photo-areas`;
+    let url = `${Http.baseUrl()}/projects/${projectId}/photo-areas`;
     return Http.get(url, user);
   }
 
   static listPhotoLocations({ projectId, photoAreaId, photoSessionId }: AssociationIds, user: User): Promise<ApiPhotoLocation[]> {
-    let url = `${Http.baseUrl}/projects/${projectId}/photo-areas/${photoAreaId}/locations`;
+    let url = `${Http.baseUrl()}/projects/${projectId}/photo-areas/${photoAreaId}/locations`;
     if (photoSessionId) {
       url += `?photoSessionId=${photoSessionId}`;
     }
@@ -22,7 +22,7 @@ export default class PhotoAreaApi {
   }
 
   static listPhotoSessionsForPhotoArea({ projectId, photoAreaId }: AssociationIds, user): Promise<ApiPhotoSession[]> {
-    let url = `${Http.baseUrl}/projects/${projectId}/photo-areas/${photoAreaId}/sessions`;
+    let url = `${Http.baseUrl()}/projects/${projectId}/photo-areas/${photoAreaId}/sessions`;
     return Http.get(url, user);
   }
 }

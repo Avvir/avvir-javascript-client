@@ -19,7 +19,7 @@ describe("OrganizationApi", () => {
 
   describe("#createOrganization", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl}/client-accounts`, {
+      fetchMock.post(`${Http.baseUrl()}/client-accounts`, {
         status: 200,
         body: {
           firebaseId: "some-organization-id"
@@ -33,7 +33,7 @@ describe("OrganizationApi", () => {
       const fetchCall = fetchMock.lastCall();
       const lastFetchOpts = fetchMock.lastOptions();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl}/client-accounts`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/client-accounts`);
       expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
