@@ -12,7 +12,7 @@ import { makeFakeDispatch, makeStoreContents } from "../test_utils/test_factorie
 import { OTHER } from "../../source/models/enums/purpose_type";
 import { SUPERADMIN } from "../../source/models/enums/user_role";
 import { UPLOAD_FAILED } from "../../source/models/enums/event_types";
-import Config from "../../source/utilities/config";
+import Config from"../../source/config";
 import Http from "../../source/utilities/http";
 
 describe("FileInformationApi", () => {

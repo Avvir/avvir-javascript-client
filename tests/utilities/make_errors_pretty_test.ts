@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import Config from "../../source/utilities/config";
+import Config from"../../source/config";
 import makeErrorsPretty from "../../source/utilities/make_errors_pretty";
 import {sandbox} from "../test_utils/setup_tests";
 import config from "../../source/config";

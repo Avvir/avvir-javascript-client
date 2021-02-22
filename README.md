@@ -5,7 +5,7 @@
 
 configure environment:
 
-`AVVIR_GATEWAY_URL=https://avvir-gateway-production.herokuapp.com`
+`AVVIR_ENVIRONMENT=production`
 
 get your project id:
 

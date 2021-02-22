@@ -12,7 +12,7 @@ import {DEVIATED} from "../../source/models/enums/scan_label";
 import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
 import {USER} from "../../source/models/enums/user_role";
 import {ELEMENTS_STATUSES_UPDATED, API_FAILURE} from "../../source/models/enums/event_types";
-import Config from "../../source/utilities/config";
+import Config from"../../source/config";
 import Http from "../../source/utilities/http";
 
 describe("WebGatewayApi", () => {

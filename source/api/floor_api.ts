@@ -1,11 +1,7 @@
 // @ts-nocheck
 import ApiFloor from "../models/api/api_floor";
-import checkFetchStatus from "../utilities/check_fetch_status";
-import getAuthorizationHeaders, { User } from "../utilities/get_authorization_headers";
-import WebGatewayApi from "./web_gateway_api";
+import { User } from "../utilities/get_authorization_headers";
 import { AssociationIds } from "type_aliases";
-import { httpGetHeaders, httpPostHeaders } from "../utilities/request_headers";
-import Config from "../utilities/config";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 

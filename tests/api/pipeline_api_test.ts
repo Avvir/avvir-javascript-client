@@ -7,7 +7,7 @@ import PipelineApi from "../../source/api/pipeline_api";
 import WebGatewayApi from "../../source/api/web_gateway_api";
 import {FIREBASE} from "../../source/models/enums/user_auth_type";
 import {makeFakeDispatch, makeStoreContents} from "../test_utils/test_factories";
-import Config from "../../source/utilities/config";
+import Config from"../../source/config";
 import ResponseError from "../../source/models/response_error";
 import Http from "../../source/utilities/http";
 

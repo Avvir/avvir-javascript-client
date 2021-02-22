@@ -1072,7 +1072,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_pipeline_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3529);
 /* harmony import */ var _api_project_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6734);
 /* harmony import */ var _api_organization_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8077);
-/* harmony import */ var _utilities_config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(260);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5663);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _api_floor_api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7755);
 /* harmony import */ var _api_web_gateway_api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8080);
 /* harmony import */ var _api_file_information_api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(8074);
@@ -1090,7 +1091,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  config: _utilities_config__WEBPACK_IMPORTED_MODULE_3__.default,
+  config: (_config__WEBPACK_IMPORTED_MODULE_3___default()),
   pipelines: _api_pipeline_api__WEBPACK_IMPORTED_MODULE_0__.default,
   projects: _api_project_api__WEBPACK_IMPORTED_MODULE_1__.default,
   organizations: _api_organization_api__WEBPACK_IMPORTED_MODULE_2__.default,
@@ -4027,29 +4028,6 @@ var checkFetchStatus = function checkFetchStatus(response) {
 
 /***/ }),
 
-/***/ 260:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ Config
-/* harmony export */ });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Config = function Config() {
-  _classCallCheck(this, Config);
-};
-
-Config.sharedErrorHandler = function (_ref) {
-  var error = _ref.error;
-  throw error;
-};
-
-
-
-/***/ }),
-
 /***/ 9137:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4217,7 +4195,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2164);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(underscore__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _check_fetch_status__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7866);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(260);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5663);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
@@ -4229,7 +4208,7 @@ var makeErrorsPrettyForFunction = function makeErrorsPrettyForFunction(actionNam
     }
 
     return action.apply(void 0, argumentList).then(_check_fetch_status__WEBPACK_IMPORTED_MODULE_1__.default)["catch"](function (error) {
-      return _config__WEBPACK_IMPORTED_MODULE_2__.default.sharedErrorHandler({
+      return _config__WEBPACK_IMPORTED_MODULE_2___default().sharedErrorHandler({
         error: error,
         action: actionName,
         arguments: argumentList
@@ -4359,6 +4338,10 @@ _.forEach(config, (value, varName) =>{
   }
 });
 
+config.sharedErrorHandler = ({error}) => {
+  throw error;
+}
+
 console.log("Avvir client configured to reach ", config.AVVIR_GATEWAY_URL);
 module.exports = config;
 
@@ -4438,7 +4421,6 @@ var map = {
 	"./models/enums/user_role.ts": 3501,
 	"./models/response_error.ts": 3972,
 	"./utilities/check_fetch_status.ts": 7866,
-	"./utilities/config.ts": 260,
 	"./utilities/get_authorization_headers.ts": 9137,
 	"./utilities/http.ts": 1127,
 	"./utilities/make_errors_pretty.ts": 2854,

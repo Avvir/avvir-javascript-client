@@ -17,5 +17,9 @@ _.forEach(config, (value, varName) =>{
   }
 });
 
+config.sharedErrorHandler = ({error}) => {
+  throw error;
+}
+
 console.log("Avvir client configured to reach ", config.AVVIR_GATEWAY_URL);
 module.exports = config;

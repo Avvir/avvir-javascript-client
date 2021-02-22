@@ -12,7 +12,7 @@ import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
 import {makeStoreContents} from "../test_utils/test_factories";
 import {SUPERADMIN, USER} from "../../source/models/enums/user_role";
 import {User} from "../../source/utilities/get_authorization_headers";
-import Config from "../../source/utilities/config";
+import Config from"../../source/config";
 import {sandbox} from "../test_utils/setup_tests";
 import Http from "../../source/utilities/http";
 

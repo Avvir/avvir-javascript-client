@@ -7,7 +7,7 @@ import ApiFloor from "../../source/models/api/api_floor";
 import FloorApi from "../../source/api/floor_api";
 import {FIREBASE} from "../../source/models/enums/user_auth_type";
 import {User} from "../../source/utilities/get_authorization_headers";
-import Config from "../../source/utilities/config";
+import Config from"../../source/config";
 import Http from "../../source/utilities/http";
 
 describe("FloorApi", () => {

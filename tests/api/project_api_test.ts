@@ -12,7 +12,7 @@ import WebGatewayApi from "../../source/api/web_gateway_api";
 import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
 import {SUPERADMIN} from "../../source/models/enums/user_role";
 import {sandbox} from "./test_utils/setup_tests";
-import Config from "../../source/utilities/config";
+import Config from"../../source/config";
 import Http from "../../source/utilities/http";
 
 describe("ProjectApi", () => {

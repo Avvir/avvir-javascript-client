@@ -1,6 +1,6 @@
 import _ from "underscore";
 import checkFetchStatus from "./check_fetch_status";
-import Config from "./config";
+import Config from "../config";
 
 const makeErrorsPrettyForFunction = (actionName, action) => {
   return (...argumentList) => {
