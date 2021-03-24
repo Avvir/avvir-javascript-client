@@ -12,8 +12,9 @@ import {DEVIATED} from "../../source/models/enums/scan_label";
 import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
 import {USER} from "../../source/models/enums/user_role";
 import {ELEMENTS_STATUSES_UPDATED, API_FAILURE} from "../../source/models/enums/event_types";
-import Config from"../../source/config";
+import Config from "../../source/config";
 import Http from "../../source/utilities/http";
+import {describe} from "mocha";
 
 describe("WebGatewayApi", () => {
   describe("::login", () => {
@@ -829,4 +830,50 @@ describe("WebGatewayApi", () => {
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
   });
+
+  describe("::matchPlannedBuildingElements", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/match`, 200);
+    })
+
+    it("makes a request to the gateway", () => {
+      WebGatewayApi.matchPlannedBuildingElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+      }, {"some-v1-id": "some-v2-id"},
+         [{
+          globalId: "some-new-v2-id",
+          name: "some new element"
+        }],
+        {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        })
+
+      expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/match`)
+      expect(fetchMock.lastOptions().body).to.eq(JSON.stringify({
+        matches: {
+          "some-v1-id": "some-v2-id"
+        },
+        newElements: [{
+          globalId: "some-new-v2-id",
+          name: "some new element"
+        }]
+      }))
+    });
+
+    it("includes the authorization headers", () => {
+      WebGatewayApi.matchPlannedBuildingElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+
+      }, {}, [], {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+
+  })
 });

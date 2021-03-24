@@ -1049,6 +1049,17 @@ var WebGatewayApi = /*#__PURE__*/function () {
       };
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, actionForm);
     }
+  }, {
+    key: "matchPlannedBuildingElements",
+    value: function matchPlannedBuildingElements(_ref18, matches, newElements, user) {
+      var projectId = _ref18.projectId,
+          floorId = _ref18.floorId;
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/planned-building-elements/match");
+      return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, {
+        matches: matches,
+        newElements: newElements
+      });
+    }
   }]);
 
   return WebGatewayApi;

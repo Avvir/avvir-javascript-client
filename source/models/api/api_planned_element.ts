@@ -15,7 +15,7 @@ export default class ApiPlannedElement {
 
   readonly globalId: string;
   name: string;
-  ifcType: string;
+  ifcType?: string;
   uniformat?: UniformatId;
   itemId?: string;
   discipline?: string;

@@ -8,6 +8,7 @@ import {httpGetHeaders} from "../utilities/request_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import DeprecatedApiPipeline from "../models/api/deprecated_api_pipeline";
+import ApiPlannedElement from "../models/api/api_planned_element";
 export default class WebGatewayApi {
 
   static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User):Promise<ApiPlannedElement[]> {
@@ -198,6 +199,11 @@ export default class WebGatewayApi {
       payload: userActions
     };
     return Http.post(url, user, actionForm);
+  }
+
+  static matchPlannedBuildingElements({projectId, floorId}: AssociationIds, matches: {[v1Id: string]: string}, newElements: ApiPlannedElement[], user: User): Promise<void> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/match`;
+    return Http.post(url, user, {matches, newElements});
   }
 }
 
