@@ -182,6 +182,11 @@ export default class WebGatewayApi {
     return Http.patch(url, user, elements);
   }
 
+  static createElements({ projectId, floorId }: AssociationIds, elements: DetailedElement<any>[], user: User):Promise<void> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements`;
+    return Http.post(url, user, elements);
+  }
+
   static triggerArgoRunProgressAndDeviations({ projectId, floorId }: AssociationIds, deviationsFlag: string, bimSourceFileExtension: string, user: User):Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/run-progress-and-deviations?deviationsFlag=${deviationsFlag}&bimSourceFileExtension=${bimSourceFileExtension}`;
     return Http.post(url, user, null);

@@ -740,6 +740,34 @@ describe("WebGatewayApi", () => {
     });
   });
 
+  describe('::createElements', ()=> {
+      beforeEach(() => {
+        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements`, 200);
+      });
+
+      it("makes a call to create the elements", () => {
+        WebGatewayApi.createElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+        }, [{
+          globalId: "some-element-id",
+          scanResult: null
+        }], {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+
+        const fetchCall = fetchMock.lastCall();
+        expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements`);
+        expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
+        expect(fetchMock.lastOptions().body).to.eq(JSON.stringify([{
+          globalId: "some-element-id",
+          scanResult: null
+        }]));
+      });
+  });
+
   describe("::getProcoreProjects", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/procore-projects?procore-access-token=some-procore-access-token`,

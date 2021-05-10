@@ -1024,18 +1024,26 @@ var WebGatewayApi = /*#__PURE__*/function () {
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.patch(url, user, elements);
     }
   }, {
-    key: "triggerArgoRunProgressAndDeviations",
-    value: function triggerArgoRunProgressAndDeviations(_ref16, deviationsFlag, bimSourceFileExtension, user) {
+    key: "createElements",
+    value: function createElements(_ref16, elements, user) {
       var projectId = _ref16.projectId,
           floorId = _ref16.floorId;
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/planned-building-elements");
+      return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, elements);
+    }
+  }, {
+    key: "triggerArgoRunProgressAndDeviations",
+    value: function triggerArgoRunProgressAndDeviations(_ref17, deviationsFlag, bimSourceFileExtension, user) {
+      var projectId = _ref17.projectId,
+          floorId = _ref17.floorId;
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/run-progress-and-deviations?deviationsFlag=").concat(deviationsFlag, "&bimSourceFileExtension=").concat(bimSourceFileExtension);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, null);
     }
   }, {
     key: "triggerArgoRunNwdConvert",
-    value: function triggerArgoRunNwdConvert(_ref17, user) {
-      var projectId = _ref17.projectId,
-          floorId = _ref17.floorId;
+    value: function triggerArgoRunNwdConvert(_ref18, user) {
+      var projectId = _ref18.projectId,
+          floorId = _ref18.floorId;
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/nwd-convert");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, null);
     }
@@ -1051,9 +1059,9 @@ var WebGatewayApi = /*#__PURE__*/function () {
     }
   }, {
     key: "matchPlannedBuildingElements",
-    value: function matchPlannedBuildingElements(_ref18, matches, newElements, user) {
-      var projectId = _ref18.projectId,
-          floorId = _ref18.floorId;
+    value: function matchPlannedBuildingElements(_ref19, matches, newElements, user) {
+      var projectId = _ref19.projectId,
+          floorId = _ref19.floorId;
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/planned-building-elements/match");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, {
         matches: matches,
