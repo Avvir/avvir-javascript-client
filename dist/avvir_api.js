@@ -199,8 +199,8 @@ var ElementApi = /*#__PURE__*/function () {
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, deviation);
     }
   }, {
-    key: "getElementDetails",
-    value: function getElementDetails(_ref3, elementGlobalId, user) {
+    key: "getDetailedElement",
+    value: function getDetailedElement(_ref3, elementGlobalId, user) {
       var projectId = _ref3.projectId,
           floorId = _ref3.floorId,
           scanDatasetId = _ref3.scanDatasetId;
@@ -208,37 +208,51 @@ var ElementApi = /*#__PURE__*/function () {
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
     }
   }, {
-    key: "updateElement",
-    value: function updateElement(_ref4, element, user) {
+    key: "getDetailedElements",
+    value: function getDetailedElements(_ref4, user, viewerIds) {
       var projectId = _ref4.projectId,
           floorId = _ref4.floorId,
-          scanDatasetId = _ref4.scanDatasetId,
-          globalId = _ref4.globalId;
+          scanDatasetId = _ref4.scanDatasetId;
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/building-elements");
+
+      if (viewerIds) {
+        url += "?viewerIds=".concat(viewerIds.join(","));
+      }
+
+      return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+    }
+  }, {
+    key: "updateElement",
+    value: function updateElement(_ref5, element, user) {
+      var projectId = _ref5.projectId,
+          floorId = _ref5.floorId,
+          scanDatasetId = _ref5.scanDatasetId,
+          globalId = _ref5.globalId;
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/elements/").concat(globalId);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, element);
     }
   }, {
     key: "updateManyElements",
-    value: function updateManyElements(_ref5, elements, user) {
-      var projectId = _ref5.projectId,
-          floorId = _ref5.floorId,
-          scanDatasetId = _ref5.scanDatasetId;
+    value: function updateManyElements(_ref6, elements, user) {
+      var projectId = _ref6.projectId,
+          floorId = _ref6.floorId,
+          scanDatasetId = _ref6.scanDatasetId;
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/detailed-elements");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, elements);
     }
   }, {
     key: "createElements",
-    value: function createElements(_ref6, elements, user) {
-      var projectId = _ref6.projectId,
-          floorId = _ref6.floorId;
+    value: function createElements(_ref7, elements, user) {
+      var projectId = _ref7.projectId,
+          floorId = _ref7.floorId;
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/planned-building-elements");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, elements);
     }
   }, {
     key: "matchPlannedBuildingElements",
-    value: function matchPlannedBuildingElements(_ref7, matches, newElements, user) {
-      var projectId = _ref7.projectId,
-          floorId = _ref7.floorId;
+    value: function matchPlannedBuildingElements(_ref8, matches, newElements, user) {
+      var projectId = _ref8.projectId,
+          floorId = _ref8.floorId;
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/planned-building-elements/match");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, {
         matches: matches,

@@ -8,12 +8,15 @@ import DetailedElement from "../models/domain/detailed_element";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 
 export default class ElementApi {
-  static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User):Promise<ApiPlannedElement[]> {
+  static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User): Promise<ApiPlannedElement[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements`;
     return Http.get(url, user);
   }
 
-  static updateDeviationStatus({ projectId, floorId, scanDatasetId }: AssociationIds, deviationGlobalId: string, status: DeviationStatus, user: User):Promise<void> {
+  static updateDeviationStatus({ projectId, floorId, scanDatasetId }: AssociationIds,
+                               deviationGlobalId: string,
+                               status: DeviationStatus,
+                               user: User): Promise<void> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/deviation-status`;
     let deviation = {
       globalId: deviationGlobalId,
@@ -21,29 +24,52 @@ export default class ElementApi {
     };
     return Http.patch(url, user, deviation);
   }
-  static getElementDetails({ projectId, floorId, scanDatasetId }: AssociationIds, elementGlobalId: string, user: User) {
+
+  static getDetailedElement({ projectId, floorId, scanDatasetId }: AssociationIds,
+                            elementGlobalId: string,
+                            user: User): Promise<DetailedElement> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/element/${elementGlobalId}`;
     return Http.get(url, user);
   }
-  static updateElement({ projectId, floorId, scanDatasetId, globalId }: AssociationIds, element: DetailedElement, user: User): Promise<void> {
+
+  static getDetailedElements({ projectId, floorId, scanDatasetId }: AssociationIds,
+                             user: User,
+                             viewerIds?: string[]): Promise<DetailedElement[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/building-elements`;
+    if (viewerIds) {
+      url += `?viewerIds=${viewerIds.join(",")}`;
+    }
+    return Http.get(url, user);
+  }
+
+  static updateElement({ projectId, floorId, scanDatasetId, globalId }: AssociationIds,
+                       element: DetailedElement,
+                       user: User): Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/elements/${globalId}`;
     return Http.patch(url, user, element);
   }
 
-  static updateManyElements({ projectId, floorId, scanDatasetId }: AssociationIds, elements: DetailedElement<any>[], user: User):Promise<void> {
+  static updateManyElements({ projectId, floorId, scanDatasetId }: AssociationIds,
+                            elements: DetailedElement<any>[],
+                            user: User): Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/detailed-elements`;
     return Http.patch(url, user, elements);
   }
 
-  static createElements({ projectId, floorId }: AssociationIds, elements: DetailedElement<any>[], user: User):Promise<void> {
+  static createElements({ projectId, floorId }: AssociationIds,
+                        elements: DetailedElement<any>[],
+                        user: User): Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements`;
     return Http.post(url, user, elements);
   }
 
-  static matchPlannedBuildingElements({projectId, floorId}: AssociationIds, matches: {[v1Id: string]: string}, newElements: ApiPlannedElement[], user: User): Promise<void> {
+  static matchPlannedBuildingElements({ projectId, floorId }: AssociationIds,
+                                      matches: { [v1Id: string]: string },
+                                      newElements: ApiPlannedElement[],
+                                      user: User): Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/match`;
-    return Http.post(url, user, {matches, newElements});
+    return Http.post(url, user, { matches, newElements });
   }
 }
 
-makeErrorsPretty(ElementApi)
+makeErrorsPretty(ElementApi);

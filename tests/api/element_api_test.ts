@@ -186,7 +186,7 @@ describe("ElementApi", () => {
     });
   });
 
-  describe("::getElementDetails", () => {
+  describe("::getDetailedElement", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/element/some-element-id`,
         {
@@ -210,7 +210,7 @@ describe("ElementApi", () => {
     });
 
     it("makes a request to the element details endpoint", () => {
-      ElementApi.getElementDetails({
+      ElementApi.getDetailedElement({
         projectId: "some-project-id",
         floorId: "some-floor-id",
         scanDatasetId: "some-scan-id"
@@ -227,7 +227,7 @@ describe("ElementApi", () => {
     });
 
     it("returns the element details", () => {
-      return ElementApi.getElementDetails({
+      return ElementApi.getDetailedElement({
           projectId: "some-project-id",
           floorId: "some-floor-id",
           scanDatasetId: "some-scan-id"
@@ -267,11 +267,127 @@ describe("ElementApi", () => {
       });
 
       it("authenticates the request", () => {
-        ElementApi.getElementDetails({
+        ElementApi.getDetailedElement({
           projectId: "some-project-id",
           floorId: "some-floor-id",
           scanDatasetId: "some-scan-id"
         }, "some-element-id", user);
+
+        const lastFetchOpts = fetchMock.lastOptions();
+        expect(lastFetchOpts.headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      });
+    });
+  });
+
+  describe("::getDetailedElements", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/building-elements`,
+        [{
+          name: "Some Element Name",
+          globalId: "some-element-id",
+          ifcType: "IfcSomeType",
+          discipline: "Some Discipline",
+          uniformat: "A1010.10",
+          scanResult: {
+            scanLabel: "DEVIATED",
+            deviation: {
+              status: "DETECTED",
+              deviationVectorMeters: {
+                x: 1,
+                y: 1,
+                z: 0
+              }
+            }
+          },
+        }]);
+    });
+
+    it("makes a request to the element details endpoint", () => {
+      ElementApi.getDetailedElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, {
+        authType: GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+      });
+
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/building-elements`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("returns the element details", () => {
+      return ElementApi.getDetailedElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-id"
+        }, {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        })
+        .then((elementDetails) => {
+          expect(elementDetails).to.deep.eq([{
+            name: "Some Element Name",
+            globalId: "some-element-id",
+            ifcType: "IfcSomeType",
+            discipline: "Some Discipline",
+            uniformat: "A1010.10",
+            scanResult: {
+              scanLabel: "DEVIATED",
+              deviation: {
+                status: "DETECTED",
+                deviationVectorMeters: {
+                  x: 1,
+                  y: 1,
+                  z: 0
+                }
+              }
+            },
+          }]);
+        });
+    });
+
+    describe("when requesting specific viewer ids", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/building-elements?viewerIds=some-element-id,some-other-element-id`, 200)
+      });
+
+      it("adds them as query params", () => {
+        ElementApi.getDetailedElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-id"
+        }, {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        }, ["some-element-id", "some-other-element-id"]);
+
+        const fetchCall = fetchMock.lastCall();
+        expect(fetchCall[0])
+          .to
+          .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/building-elements?viewerIds=some-element-id,some-other-element-id`);
+        expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+      });
+    });
+
+    describe("when the user is signed in", () => {
+      let user;
+      beforeEach(() => {
+        user = {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        };
+      });
+
+      it("authenticates the request", () => {
+        ElementApi.getDetailedElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-id"
+        }, user);
 
         const lastFetchOpts = fetchMock.lastOptions();
         expect(lastFetchOpts.headers.Authorization).to.eq("Bearer some-firebase.id.token");
