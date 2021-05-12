@@ -50,7 +50,7 @@ function importAll(directoryContext, target) {
 
 
 // skip .d.ts files because some use syntax our webpack settings don't support
-importAll(__webpack_require__(5422), Avvir);
+importAll(__webpack_require__(1976), Avvir);
 
 /* harmony default export */ const avvir = (Avvir);
 
@@ -149,6 +149,109 @@ var AuthApi = /*#__PURE__*/function () {
 }();
 
 
+
+/***/ }),
+
+/***/ 54:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ ElementApi
+/* harmony export */ });
+/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1127);
+/* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2854);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+// @ts-nocheck
+
+
+
+var ElementApi = /*#__PURE__*/function () {
+  function ElementApi() {
+    _classCallCheck(this, ElementApi);
+  }
+
+  _createClass(ElementApi, null, [{
+    key: "getPlannedBuildingElements",
+    value: function getPlannedBuildingElements(_ref, user) {
+      var projectId = _ref.projectId,
+          floorId = _ref.floorId;
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/planned-building-elements");
+      return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+    }
+  }, {
+    key: "updateDeviationStatus",
+    value: function updateDeviationStatus(_ref2, deviationGlobalId, status, user) {
+      var projectId = _ref2.projectId,
+          floorId = _ref2.floorId,
+          scanDatasetId = _ref2.scanDatasetId;
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/deviation-status");
+      var deviation = {
+        globalId: deviationGlobalId,
+        status: status
+      };
+      return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, deviation);
+    }
+  }, {
+    key: "getElementDetails",
+    value: function getElementDetails(_ref3, elementGlobalId, user) {
+      var projectId = _ref3.projectId,
+          floorId = _ref3.floorId,
+          scanDatasetId = _ref3.scanDatasetId;
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/element/").concat(elementGlobalId);
+      return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+    }
+  }, {
+    key: "updateElement",
+    value: function updateElement(_ref4, element, user) {
+      var projectId = _ref4.projectId,
+          floorId = _ref4.floorId,
+          scanDatasetId = _ref4.scanDatasetId,
+          globalId = _ref4.globalId;
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/elements/").concat(globalId);
+      return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, element);
+    }
+  }, {
+    key: "updateManyElements",
+    value: function updateManyElements(_ref5, elements, user) {
+      var projectId = _ref5.projectId,
+          floorId = _ref5.floorId,
+          scanDatasetId = _ref5.scanDatasetId;
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/detailed-elements");
+      return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, elements);
+    }
+  }, {
+    key: "createElements",
+    value: function createElements(_ref6, elements, user) {
+      var projectId = _ref6.projectId,
+          floorId = _ref6.floorId;
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/planned-building-elements");
+      return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, elements);
+    }
+  }, {
+    key: "matchPlannedBuildingElements",
+    value: function matchPlannedBuildingElements(_ref7, matches, newElements, user) {
+      var projectId = _ref7.projectId,
+          floorId = _ref7.floorId;
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/planned-building-elements/match");
+      return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, {
+        matches: matches,
+        newElements: newElements
+      });
+    }
+  }]);
+
+  return ElementApi;
+}();
+
+
+(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__.default)(ElementApi);
 
 /***/ }),
 
@@ -785,24 +888,16 @@ var WebGatewayApi = /*#__PURE__*/function () {
   }
 
   _createClass(WebGatewayApi, null, [{
-    key: "getPlannedBuildingElements",
-    value: function getPlannedBuildingElements(_ref, user) {
-      var projectId = _ref.projectId,
-          floorId = _ref.floorId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/planned-building-elements");
-      return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.get(url, user);
-    }
-  }, {
     key: "connectProjectToStructionSite",
-    value: function connectProjectToStructionSite(_ref2, structionSiteProjectUrl, token, user) {
-      var projectId = _ref2.projectId;
+    value: function connectProjectToStructionSite(_ref, structionSiteProjectUrl, token, user) {
+      var projectId = _ref.projectId;
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/connect-to-structionsite?structionsite-access-token=").concat(token, "&structionsite-project-url=").concat(structionSiteProjectUrl);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, null);
     }
   }, {
     key: "checkPipelineStatus",
-    value: function checkPipelineStatus(_ref3, pipelineId, user) {
-      var projectId = _ref3.projectId;
+    value: function checkPipelineStatus(_ref2, pipelineId, user) {
+      var projectId = _ref2.projectId;
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/pipelines/").concat(pipelineId);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.get(url, user);
     }
@@ -835,26 +930,26 @@ var WebGatewayApi = /*#__PURE__*/function () {
     }
   }, {
     key: "getPlannedElementsTsvUrl",
-    value: function getPlannedElementsTsvUrl(_ref4, fileName, user) {
-      var projectId = _ref4.projectId,
-          floorId = _ref4.floorId;
+    value: function getPlannedElementsTsvUrl(_ref3, fileName, user) {
+      var projectId = _ref3.projectId,
+          floorId = _ref3.floorId;
       var baseUrl = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/").concat(fileName, "_planned-building-elements.tsv");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.addAuthToDownloadUrl(baseUrl, user);
     }
   }, {
     key: "getDeviationsReportTsvUrl",
-    value: function getDeviationsReportTsvUrl(_ref5, fileName, user) {
-      var projectId = _ref5.projectId,
-          floorId = _ref5.floorId;
+    value: function getDeviationsReportTsvUrl(_ref4, fileName, user) {
+      var projectId = _ref4.projectId,
+          floorId = _ref4.floorId;
       var baseUrl = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/").concat(fileName, "_deviation-report.tsv");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.addAuthToDownloadUrl(baseUrl, user);
     }
   }, {
     key: "getScanAnalysisUrl",
-    value: function getScanAnalysisUrl(_ref6, fileName, user) {
-      var projectId = _ref6.projectId,
-          floorId = _ref6.floorId,
-          scanDatasetId = _ref6.scanDatasetId;
+    value: function getScanAnalysisUrl(_ref5, fileName, user) {
+      var projectId = _ref5.projectId,
+          floorId = _ref5.floorId,
+          scanDatasetId = _ref5.scanDatasetId;
       var baseUrl = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/").concat(fileName, "_scan-analysis.tsv");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.addAuthToDownloadUrl(baseUrl, user);
     }
@@ -870,10 +965,10 @@ var WebGatewayApi = /*#__PURE__*/function () {
     }
   }, {
     key: "pushPdfToProcore",
-    value: function pushPdfToProcore(_ref7, procoreProjectId, procoreAccessToken, pdfType, user) {
-      var projectId = _ref7.projectId,
-          floorId = _ref7.floorId,
-          scanDatasetId = _ref7.scanDatasetId;
+    value: function pushPdfToProcore(_ref6, procoreProjectId, procoreAccessToken, pdfType, user) {
+      var projectId = _ref6.projectId,
+          floorId = _ref6.floorId,
+          scanDatasetId = _ref6.scanDatasetId;
 
       if (!projectId) {
         return Promise.reject(new Error("Project not loaded yet"));
@@ -891,19 +986,6 @@ var WebGatewayApi = /*#__PURE__*/function () {
 
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/procore-projects?procore-access-token=").concat(procoreAccessToken);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.get(url, user);
-    }
-  }, {
-    key: "updateDeviationStatus",
-    value: function updateDeviationStatus(_ref8, deviationGlobalId, status, user) {
-      var projectId = _ref8.projectId,
-          floorId = _ref8.floorId,
-          scanDatasetId = _ref8.scanDatasetId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/deviation-status");
-      var deviation = {
-        globalId: deviationGlobalId,
-        status: status
-      };
-      return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.patch(url, user, deviation);
     } // TODO: rename / move
 
   }, {
@@ -954,47 +1036,38 @@ var WebGatewayApi = /*#__PURE__*/function () {
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, null, invitationForm);
     }
   }, {
-    key: "getElementDetails",
-    value: function getElementDetails(_ref9, elementGlobalId, user) {
-      var projectId = _ref9.projectId,
-          floorId = _ref9.floorId,
-          scanDatasetId = _ref9.scanDatasetId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/element/").concat(elementGlobalId);
-      return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.get(url, user);
-    }
-  }, {
     key: "exportIfc",
-    value: function exportIfc(_ref10, type, user) {
-      var projectId = _ref10.projectId,
-          floorId = _ref10.floorId,
-          scanDatasetId = _ref10.scanDatasetId;
+    value: function exportIfc(_ref7, type, user) {
+      var projectId = _ref7.projectId,
+          floorId = _ref7.floorId,
+          scanDatasetId = _ref7.scanDatasetId;
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/export-ifc?type=").concat(type);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, null);
     } // TODO unify with pipeline api
 
   }, {
     key: "checkExportedIfc",
-    value: function checkExportedIfc(_ref11, workflowName, type, user) {
-      var projectId = _ref11.projectId,
-          floorId = _ref11.floorId,
-          scanDatasetId = _ref11.scanDatasetId;
+    value: function checkExportedIfc(_ref8, workflowName, type, user) {
+      var projectId = _ref8.projectId,
+          floorId = _ref8.floorId,
+          scanDatasetId = _ref8.scanDatasetId;
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/export-ifc/").concat(workflowName, "?type=").concat(type);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.get(url, user);
     }
   }, {
     key: "downsampleScan",
-    value: function downsampleScan(_ref12, user) {
-      var projectId = _ref12.projectId,
-          floorId = _ref12.floorId,
-          scanDatasetId = _ref12.scanDatasetId;
+    value: function downsampleScan(_ref9, user) {
+      var projectId = _ref9.projectId,
+          floorId = _ref9.floorId,
+          scanDatasetId = _ref9.scanDatasetId;
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/downsample-scan");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, null);
     } //TODO move to AuthApi
 
   }, {
     key: "getGcpBearerToken",
-    value: function getGcpBearerToken(_ref13, user) {
-      var projectId = _ref13.projectId;
+    value: function getGcpBearerToken(_ref10, user) {
+      var projectId = _ref10.projectId;
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/gcpAccessToken");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.get(url, user);
     }
@@ -1005,45 +1078,18 @@ var WebGatewayApi = /*#__PURE__*/function () {
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.get(url, null);
     }
   }, {
-    key: "updateElement",
-    value: function updateElement(_ref14, element, user) {
-      var projectId = _ref14.projectId,
-          floorId = _ref14.floorId,
-          scanDatasetId = _ref14.scanDatasetId,
-          globalId = _ref14.globalId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/elements/").concat(globalId);
-      return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.patch(url, user, element);
-    }
-  }, {
-    key: "updateManyElements",
-    value: function updateManyElements(_ref15, elements, user) {
-      var projectId = _ref15.projectId,
-          floorId = _ref15.floorId,
-          scanDatasetId = _ref15.scanDatasetId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/scan-datasets/").concat(scanDatasetId, "/detailed-elements");
-      return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.patch(url, user, elements);
-    }
-  }, {
-    key: "createElements",
-    value: function createElements(_ref16, elements, user) {
-      var projectId = _ref16.projectId,
-          floorId = _ref16.floorId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/planned-building-elements");
-      return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, elements);
-    }
-  }, {
     key: "triggerArgoRunProgressAndDeviations",
-    value: function triggerArgoRunProgressAndDeviations(_ref17, deviationsFlag, bimSourceFileExtension, user) {
-      var projectId = _ref17.projectId,
-          floorId = _ref17.floorId;
+    value: function triggerArgoRunProgressAndDeviations(_ref11, deviationsFlag, bimSourceFileExtension, user) {
+      var projectId = _ref11.projectId,
+          floorId = _ref11.floorId;
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/run-progress-and-deviations?deviationsFlag=").concat(deviationsFlag, "&bimSourceFileExtension=").concat(bimSourceFileExtension);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, null);
     }
   }, {
     key: "triggerArgoRunNwdConvert",
-    value: function triggerArgoRunNwdConvert(_ref18, user) {
-      var projectId = _ref18.projectId,
-          floorId = _ref18.floorId;
+    value: function triggerArgoRunNwdConvert(_ref12, user) {
+      var projectId = _ref12.projectId,
+          floorId = _ref12.floorId;
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/nwd-convert");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, null);
     }
@@ -1056,17 +1102,6 @@ var WebGatewayApi = /*#__PURE__*/function () {
         payload: userActions
       };
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, actionForm);
-    }
-  }, {
-    key: "matchPlannedBuildingElements",
-    value: function matchPlannedBuildingElements(_ref19, matches, newElements, user) {
-      var projectId = _ref19.projectId,
-          floorId = _ref19.floorId;
-      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/planned-building-elements/match");
-      return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, {
-        matches: matches,
-        newElements: newElements
-      });
     }
   }]);
 
@@ -1088,17 +1123,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _api_pipeline_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3529);
-/* harmony import */ var _api_project_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6734);
-/* harmony import */ var _api_organization_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8077);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5663);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _api_auth_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7323);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5663);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _api_element_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(54);
+/* harmony import */ var _api_file_information_api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(8074);
 /* harmony import */ var _api_floor_api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7755);
-/* harmony import */ var _api_web_gateway_api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8080);
-/* harmony import */ var _api_file_information_api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(8074);
-/* harmony import */ var _api_photo_area_api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(686);
-/* harmony import */ var _api_scan_dataset_api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(901);
-/* harmony import */ var _api_auth_api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(7323);
+/* harmony import */ var _api_organization_api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8077);
+/* harmony import */ var _api_photo_area_api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(686);
+/* harmony import */ var _api_pipeline_api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(3529);
+/* harmony import */ var _api_project_api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(6734);
+/* harmony import */ var _api_scan_dataset_api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(901);
+/* harmony import */ var _api_web_gateway_api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(8080);
+
 
 
 
@@ -1110,16 +1147,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  config: (_config__WEBPACK_IMPORTED_MODULE_3___default()),
-  pipelines: _api_pipeline_api__WEBPACK_IMPORTED_MODULE_0__.default,
-  projects: _api_project_api__WEBPACK_IMPORTED_MODULE_1__.default,
-  organizations: _api_organization_api__WEBPACK_IMPORTED_MODULE_2__.default,
-  photos: _api_photo_area_api__WEBPACK_IMPORTED_MODULE_7__.default,
-  files: _api_file_information_api__WEBPACK_IMPORTED_MODULE_6__.default,
-  scanDatasets: _api_scan_dataset_api__WEBPACK_IMPORTED_MODULE_8__.default,
+  auth: _api_auth_api__WEBPACK_IMPORTED_MODULE_0__.default,
+  config: (_config__WEBPACK_IMPORTED_MODULE_1___default()),
+  elements: _api_element_api__WEBPACK_IMPORTED_MODULE_2__.default,
+  files: _api_file_information_api__WEBPACK_IMPORTED_MODULE_3__.default,
   floors: _api_floor_api__WEBPACK_IMPORTED_MODULE_4__.default,
-  auth: _api_auth_api__WEBPACK_IMPORTED_MODULE_9__.default,
-  other: _api_web_gateway_api__WEBPACK_IMPORTED_MODULE_5__.default
+  organizations: _api_organization_api__WEBPACK_IMPORTED_MODULE_5__.default,
+  photos: _api_photo_area_api__WEBPACK_IMPORTED_MODULE_6__.default,
+  pipelines: _api_pipeline_api__WEBPACK_IMPORTED_MODULE_7__.default,
+  projects: _api_project_api__WEBPACK_IMPORTED_MODULE_8__.default,
+  scanDatasets: _api_scan_dataset_api__WEBPACK_IMPORTED_MODULE_9__.default,
+  other: _api_web_gateway_api__WEBPACK_IMPORTED_MODULE_10__.default
 });
 
 /***/ }),
@@ -4377,11 +4415,12 @@ module.exports = JSON.parse("{\"100\":\"Continue\",\"101\":\"Switching Protocol\
 
 /***/ }),
 
-/***/ 5422:
+/***/ 1976:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
 	"./api/auth_api.ts": 7323,
+	"./api/element_api.ts": 54,
 	"./api/file_information_api.ts": 8074,
 	"./api/floor_api.ts": 7755,
 	"./api/organization_api.ts": 8077,
@@ -4469,7 +4508,7 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 5422;
+webpackContext.id = 1976;
 
 /***/ }),
 

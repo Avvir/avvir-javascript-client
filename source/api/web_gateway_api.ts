@@ -1,20 +1,13 @@
 // @ts-nocheck
-import DetailedElement from "../models/domain/detailed_element";
-import DeviationStatus from "../models/enums/deviation_status";
-import getAuthorizationHeaders, {BasicUser, User} from "../utilities/get_authorization_headers";
+import getAuthorizationHeaders, { BasicUser, User } from "../utilities/get_authorization_headers";
 import UserAuthType from "../models/enums/user_auth_type";
-import {AssociationIds} from "type_aliases";
-import {httpGetHeaders} from "../utilities/request_headers";
+import { AssociationIds } from "type_aliases";
+import { httpGetHeaders } from "../utilities/request_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import DeprecatedApiPipeline from "../models/api/deprecated_api_pipeline";
-import ApiPlannedElement from "../models/api/api_planned_element";
-export default class WebGatewayApi {
 
-  static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User):Promise<ApiPlannedElement[]> {
-    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements`;
-    return Http.get(url, user);
-  }
+export default class WebGatewayApi {
 
   static connectProjectToStructionSite({ projectId }: AssociationIds, structionSiteProjectUrl: string, token: string, user: User): Promise<ApiPipeline>{
     const url = `${Http.baseUrl()}/projects/${projectId}/connect-to-structionsite?structionsite-access-token=${token}&structionsite-project-url=${structionSiteProjectUrl}`;
@@ -84,17 +77,6 @@ export default class WebGatewayApi {
     return Http.get(url, user);
   }
 
-
-  static updateDeviationStatus({ projectId, floorId, scanDatasetId }: AssociationIds, deviationGlobalId: string, status: DeviationStatus, user: User):Promise<void> {
-    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/deviation-status`;
-    let deviation = {
-      globalId: deviationGlobalId,
-      status
-    };
-    return Http.patch(url, user, deviation);
-  }
-
-
   // TODO: rename / move
   static getCustomFirebaseToken(user: User) {
     return fetch(`${Http.baseUrl()}/login`, {
@@ -139,12 +121,6 @@ export default class WebGatewayApi {
     return Http.post(url, null, invitationForm);
   }
 
-  static getElementDetails({ projectId, floorId, scanDatasetId }: AssociationIds, elementGlobalId: string, user: User) {
-    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/element/${elementGlobalId}`;
-    return Http.get(url, user);
-  }
-
-
   static exportIfc({ projectId, floorId, scanDatasetId }: AssociationIds, type: string, user: User) :Promise<DeprecatedApiPipeline>{
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/export-ifc?type=${type}`;
     return Http.post(url, user, null);
@@ -172,21 +148,6 @@ export default class WebGatewayApi {
     return Http.get(url, null);
   }
 
-  static updateElement({ projectId, floorId, scanDatasetId, globalId }: AssociationIds, element: DetailedElement, user: User): Promise<void> {
-    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/elements/${globalId}`;
-    return Http.patch(url, user, element);
-  }
-
-  static updateManyElements({ projectId, floorId, scanDatasetId }: AssociationIds, elements: DetailedElement<any>[], user: User):Promise<void> {
-    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/detailed-elements`;
-    return Http.patch(url, user, elements);
-  }
-
-  static createElements({ projectId, floorId }: AssociationIds, elements: DetailedElement<any>[], user: User):Promise<void> {
-    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements`;
-    return Http.post(url, user, elements);
-  }
-
   static triggerArgoRunProgressAndDeviations({ projectId, floorId }: AssociationIds, deviationsFlag: string, bimSourceFileExtension: string, user: User):Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/run-progress-and-deviations?deviationsFlag=${deviationsFlag}&bimSourceFileExtension=${bimSourceFileExtension}`;
     return Http.post(url, user, null);
@@ -204,11 +165,6 @@ export default class WebGatewayApi {
       payload: userActions
     };
     return Http.post(url, user, actionForm);
-  }
-
-  static matchPlannedBuildingElements({projectId, floorId}: AssociationIds, matches: {[v1Id: string]: string}, newElements: ApiPlannedElement[], user: User): Promise<void> {
-    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/match`;
-    return Http.post(url, user, {matches, newElements});
   }
 }
 
