@@ -6,6 +6,7 @@ import { httpGetHeaders } from "../utilities/request_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import DeprecatedApiPipeline from "../models/api/deprecated_api_pipeline";
+import {RunningProcess} from "../models/domain/running_process";
 
 export default class WebGatewayApi {
 
@@ -166,6 +167,12 @@ export default class WebGatewayApi {
     };
     return Http.post(url, user, actionForm);
   }
+
+  static checkRunningProcess(processId: number, user: User):Promise<RunningProcess> {
+    let url = `${Http.baseUrl()}/running-processes/${processId}`;
+    return Http.get(url, user)
+  }
+
 }
 
 makeErrorsPretty(WebGatewayApi, {exclude: ["getCustomFirebaseToken", "login"]})
