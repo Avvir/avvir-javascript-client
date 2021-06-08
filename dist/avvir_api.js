@@ -50,7 +50,7 @@ function importAll(directoryContext, target) {
 
 
 // skip .d.ts files because some use syntax our webpack settings don't support
-importAll(__webpack_require__(1976), Avvir);
+importAll(__webpack_require__(5422), Avvir);
 
 /* harmony default export */ const avvir = (Avvir);
 
@@ -1116,6 +1116,12 @@ var WebGatewayApi = /*#__PURE__*/function () {
         payload: userActions
       };
       return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.post(url, user, actionForm);
+    }
+  }, {
+    key: "checkRunningProcess",
+    value: function checkRunningProcess(processId, user) {
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/running-processes/").concat(processId);
+      return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.get(url, user);
     }
   }]);
 
@@ -3540,6 +3546,13 @@ var TimeSeriesTsvAnalysisTypes = {
 
 /***/ }),
 
+/***/ 8072:
+/***/ (() => {
+
+
+
+/***/ }),
+
 /***/ 8369:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4429,7 +4442,7 @@ module.exports = JSON.parse("{\"100\":\"Continue\",\"101\":\"Switching Protocol\
 
 /***/ }),
 
-/***/ 1976:
+/***/ 5422:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
@@ -4482,6 +4495,7 @@ var map = {
 	"./models/domain/progress/project_cost_analysis_progress.ts": 4532,
 	"./models/domain/progress/project_masterformat_progress.ts": 1725,
 	"./models/domain/progress/time_series_tsv_analysis_types.ts": 2496,
+	"./models/domain/running_process.ts": 8072,
 	"./models/enums/deviation_status.ts": 8369,
 	"./models/enums/event_types.ts": 3164,
 	"./models/enums/notification_level.ts": 6402,
@@ -4522,7 +4536,7 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 1976;
+webpackContext.id = 5422;
 
 /***/ }),
 
