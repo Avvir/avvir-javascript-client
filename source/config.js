@@ -53,3 +53,6 @@ config.sharedErrorHandler = ({error}) => {
 
 console.log("Avvir client configured to reach ", config.AVVIR_GATEWAY_URL);
 module.exports = config;
+module.exports.useAcceptanceConfiguration = useAcceptanceConfiguration
+module.exports.useProductionConfiguration = useProductionConfiguration
+module.exports.useLocalProductionConfiguration = useLocalProductionConfiguration

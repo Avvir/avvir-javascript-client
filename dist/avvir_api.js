@@ -1,61 +1,5 @@
-module.exports =
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
-
-/***/ 4016:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "default": () => /* binding */ avvir
-});
-
-// EXTERNAL MODULE: ./source/avvir_api.ts
-var avvir_api = __webpack_require__(4406);
-;// CONCATENATED MODULE: external "node-fetch"
-const external_node_fetch_namespaceObject = require("node-fetch");;
-var external_node_fetch_default = /*#__PURE__*/__webpack_require__.n(external_node_fetch_namespaceObject);
-// EXTERNAL MODULE: external "underscore"
-var external_underscore_ = __webpack_require__(2164);
-var external_underscore_default = /*#__PURE__*/__webpack_require__.n(external_underscore_);
-;// CONCATENATED MODULE: ./avvir.ts
-
-
-
-
-global.fetch = (external_node_fetch_default());
-
-const Avvir = {
-  api: avvir_api.default
-};
-
-function importAll(directoryContext, target) {
-  directoryContext.keys().forEach(filePath => {
-
-    let moduleExports = directoryContext(filePath);
-    external_underscore_default().forEach(moduleExports, (moduleExport, exportName) => {
-      // if (exportName !== 'default') {
-        target[exportName] = moduleExport;
-      // }
-    })
-    if (moduleExports.default && moduleExports.default.name) {
-      target[moduleExports.default.name] = moduleExports.default;
-    }
-  });
-}
-
-
-// skip .d.ts files because some use syntax our webpack settings don't support
-importAll(__webpack_require__(5422), Avvir);
-
-/* harmony default export */ const avvir = (Avvir);
-
-
-/***/ }),
 
 /***/ 7323:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -66,7 +10,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "default": () => /* binding */ AuthApi
+  "default": () => (/* binding */ AuthApi)
 });
 
 // EXTERNAL MODULE: ./source/utilities/get_authorization_headers.ts
@@ -85,7 +29,7 @@ var response_statuses = __webpack_require__(297);
 // EXTERNAL MODULE: ./source/models/response_error.ts + 1 modules
 var response_error = __webpack_require__(3972);
 ;// CONCATENATED MODULE: ./source/api/auth_api.ts
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -158,7 +102,7 @@ var AuthApi = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ElementApi
+/* harmony export */   "default": () => (/* binding */ ElementApi)
 /* harmony export */ });
 /* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1127);
 /* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2854);
@@ -275,7 +219,7 @@ var ElementApi = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ FileInformationApi
+/* harmony export */   "default": () => (/* binding */ FileInformationApi)
 /* harmony export */ });
 /* harmony import */ var _converters_purpose_type_converter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(256);
 /* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1127);
@@ -384,7 +328,7 @@ var FileInformationApi = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ FloorApi
+/* harmony export */   "default": () => (/* binding */ FloorApi)
 /* harmony export */ });
 /* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1127);
 /* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2854);
@@ -457,7 +401,7 @@ var FloorApi = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1127);
 /* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2854);
@@ -521,7 +465,7 @@ var OrganizationApi = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ PhotoAreaApi
+/* harmony export */   "default": () => (/* binding */ PhotoAreaApi)
 /* harmony export */ });
 /* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2854);
 /* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1127);
@@ -585,7 +529,7 @@ var PhotoAreaApi = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1127);
 /* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2854);
@@ -632,7 +576,7 @@ var PipelineApi = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1127);
 /* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2854);
@@ -765,7 +709,7 @@ var ProjectApi = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1127);
 /* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2854);
@@ -870,14 +814,14 @@ var ScanDatasetApi = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ WebGatewayApi
+/* harmony export */   "default": () => (/* binding */ WebGatewayApi)
 /* harmony export */ });
 /* harmony import */ var _utilities_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9137);
 /* harmony import */ var _models_enums_user_auth_type__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2503);
 /* harmony import */ var _utilities_request_headers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(104);
 /* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1127);
 /* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2854);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -1141,7 +1085,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _api_auth_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7323);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5663);
@@ -1188,7 +1132,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ DateConverter
+/* harmony export */   "default": () => (/* binding */ DateConverter)
 /* harmony export */ });
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2470);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
@@ -1313,7 +1257,7 @@ var DateConverter = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ Matrix3Converter
+/* harmony export */   "default": () => (/* binding */ Matrix3Converter)
 /* harmony export */ });
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2293);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
@@ -1326,7 +1270,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -1494,7 +1438,7 @@ var Matrix3Converter = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ Matrix4Converter
+/* harmony export */   "default": () => (/* binding */ Matrix4Converter)
 /* harmony export */ });
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2293);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
@@ -1507,7 +1451,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -1710,7 +1654,7 @@ var Matrix4Converter = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ PurposeTypeConverter
+/* harmony export */   "default": () => (/* binding */ PurposeTypeConverter)
 /* harmony export */ });
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2164);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(underscore__WEBPACK_IMPORTED_MODULE_0__);
@@ -1758,7 +1702,7 @@ var PurposeTypeConverter = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2470);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
@@ -1797,7 +1741,7 @@ function addDateGetterAndSetterToDomainModel(target, propertyName) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2470);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
@@ -1834,7 +1778,7 @@ var addInstantGetterAndSetterToApiModel = function addInstantGetterAndSetterToAp
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2164);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(underscore__WEBPACK_IMPORTED_MODULE_0__);
@@ -1844,7 +1788,7 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
@@ -1894,7 +1838,7 @@ var addLoggingToInstanceMethods = function addLoggingToInstanceMethods(instance,
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var addReadOnlyPropertiesToModel = function addReadOnlyPropertiesToModel(modelInstance, properties) {
   Object.getOwnPropertyNames(properties).forEach(function (propertyName) {
@@ -1917,7 +1861,7 @@ var addReadOnlyPropertiesToModel = function addReadOnlyPropertiesToModel(modelIn
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiArgoResponse
+/* harmony export */   "default": () => (/* binding */ ApiArgoResponse)
 /* harmony export */ });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1957,7 +1901,7 @@ var ApiArgoResponse = function ApiArgoResponse() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiCloudFile
+/* harmony export */   "default": () => (/* binding */ ApiCloudFile)
 /* harmony export */ });
 /* harmony import */ var _mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4474);
 /* harmony import */ var _mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1257);
@@ -2028,7 +1972,7 @@ var ApiCloudFile = function ApiCloudFile(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiConstructionGrid
+/* harmony export */   "default": () => (/* binding */ ApiConstructionGrid)
 /* harmony export */ });
 /* harmony import */ var _mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1257);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2068,7 +2012,7 @@ var ApiConstructionGrid = function ApiConstructionGrid(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiFloor
+/* harmony export */   "default": () => (/* binding */ ApiFloor)
 /* harmony export */ });
 /* harmony import */ var _mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4474);
 /* harmony import */ var _mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1257);
@@ -2199,7 +2143,7 @@ var ApiFloor = function ApiFloor() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiGridLine
+/* harmony export */   "default": () => (/* binding */ ApiGridLine)
 /* harmony export */ });
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2293);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
@@ -2242,7 +2186,7 @@ var ApiGridLine = function ApiGridLine(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiInvitation
+/* harmony export */   "default": () => (/* binding */ ApiInvitation)
 /* harmony export */ });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2264,7 +2208,7 @@ var ApiInvitation = function ApiInvitation() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiMasterformat
+/* harmony export */   "default": () => (/* binding */ ApiMasterformat)
 /* harmony export */ });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2289,7 +2233,7 @@ var ApiMasterformat = function ApiMasterformat(version, code, description) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiMatrix3
+/* harmony export */   "default": () => (/* binding */ ApiMatrix3)
 /* harmony export */ });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2345,7 +2289,7 @@ var ApiMatrix3 = function ApiMatrix3(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiMatrix4
+/* harmony export */   "default": () => (/* binding */ ApiMatrix4)
 /* harmony export */ });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2430,7 +2374,7 @@ var ApiMatrix4 = function ApiMatrix4() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiOrganization
+/* harmony export */   "default": () => (/* binding */ ApiOrganization)
 /* harmony export */ });
 /* harmony import */ var _mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1257);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2500,7 +2444,7 @@ var ApiOrganization = function ApiOrganization(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiPhotoArea
+/* harmony export */   "default": () => (/* binding */ ApiPhotoArea)
 /* harmony export */ });
 /* harmony import */ var _mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1257);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2537,7 +2481,7 @@ var ApiPhotoArea = function ApiPhotoArea(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiPhotoLocation
+/* harmony export */   "default": () => (/* binding */ ApiPhotoLocation)
 /* harmony export */ });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2565,7 +2509,7 @@ var ApiPhotoLocation = function ApiPhotoLocation() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiPhotoSession
+/* harmony export */   "default": () => (/* binding */ ApiPhotoSession)
 /* harmony export */ });
 /* harmony import */ var _mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1257);
 /* harmony import */ var _mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4474);
@@ -2604,7 +2548,7 @@ var ApiPhotoSession = function ApiPhotoSession() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiPipeline
+/* harmony export */   "default": () => (/* binding */ ApiPipeline)
 /* harmony export */ });
 /* harmony import */ var _mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4474);
 /* harmony import */ var _mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1257);
@@ -2666,7 +2610,7 @@ var ApiPipeline = function ApiPipeline() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiPlannedElement
+/* harmony export */   "default": () => (/* binding */ ApiPlannedElement)
 /* harmony export */ });
 /* harmony import */ var _mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1257);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2716,7 +2660,7 @@ var ApiPlannedElement = function ApiPlannedElement() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4474);
 /* harmony import */ var _mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1257);
@@ -2824,7 +2768,7 @@ var ApiProject = function ApiProject() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiProjectCostAnalysisProgress
+/* harmony export */   "default": () => (/* binding */ ApiProjectCostAnalysisProgress)
 /* harmony export */ });
 /* harmony import */ var _mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4474);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2888,7 +2832,7 @@ var ApiProjectCostAnalysisProgress = function ApiProjectCostAnalysisProgress(_re
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiProjectMasterformatProgress
+/* harmony export */   "default": () => (/* binding */ ApiProjectMasterformatProgress)
 /* harmony export */ });
 /* harmony import */ var _mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4474);
 /* harmony import */ var _api_masterformat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5648);
@@ -2931,12 +2875,12 @@ var ApiProjectMasterformatProgress = function ApiProjectMasterformatProgress(mas
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ApiProjectPurposeType": () => /* binding */ ApiProjectPurposeType,
-/* harmony export */   "ApiFloorPurposeType": () => /* binding */ ApiFloorPurposeType,
-/* harmony export */   "ApiScanDatasetPurposeType": () => /* binding */ ApiScanDatasetPurposeType,
-/* harmony export */   "ApiPhotoAreaPurposeType": () => /* binding */ ApiPhotoAreaPurposeType,
-/* harmony export */   "isApiPurposeType": () => /* binding */ isApiPurposeType,
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "ApiProjectPurposeType": () => (/* binding */ ApiProjectPurposeType),
+/* harmony export */   "ApiFloorPurposeType": () => (/* binding */ ApiFloorPurposeType),
+/* harmony export */   "ApiScanDatasetPurposeType": () => (/* binding */ ApiScanDatasetPurposeType),
+/* harmony export */   "ApiPhotoAreaPurposeType": () => (/* binding */ ApiPhotoAreaPurposeType),
+/* harmony export */   "isApiPurposeType": () => (/* binding */ isApiPurposeType),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var ApiProjectPurposeType;
 
@@ -3024,7 +2968,7 @@ var isApiPurposeType = function isApiPurposeType(type) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ApiScanDataset
+/* harmony export */   "default": () => (/* binding */ ApiScanDataset)
 /* harmony export */ });
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2293);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
@@ -3127,7 +3071,7 @@ var ApiScanDataset = function ApiScanDataset(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ DeprecatedApiPipeline
+/* harmony export */   "default": () => (/* binding */ DeprecatedApiPipeline)
 /* harmony export */ });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -3149,9 +3093,9 @@ var DeprecatedApiPipeline = function DeprecatedApiPipeline() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Deviation": () => /* binding */ Deviation,
-/* harmony export */   "isDeviationScanResult": () => /* binding */ isDeviationScanResult,
-/* harmony export */   "default": () => /* binding */ DetailedElement
+/* harmony export */   "Deviation": () => (/* binding */ Deviation),
+/* harmony export */   "isDeviationScanResult": () => (/* binding */ isDeviationScanResult),
+/* harmony export */   "default": () => (/* binding */ DetailedElement)
 /* harmony export */ });
 /* harmony import */ var _enums_deviation_status__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8369);
 /* harmony import */ var _enums_scan_label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5632);
@@ -3205,7 +3149,7 @@ var DetailedElement = function DetailedElement(ifcType, globalId, scanResult) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ PhotoArea
+/* harmony export */   "default": () => (/* binding */ PhotoArea)
 /* harmony export */ });
 /* harmony import */ var _mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1257);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3247,7 +3191,7 @@ var PhotoArea = function PhotoArea() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ PhotoLocation
+/* harmony export */   "default": () => (/* binding */ PhotoLocation)
 /* harmony export */ });
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2293);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
@@ -3255,7 +3199,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(underscore__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1257);
 /* harmony import */ var _converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1700);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -3347,7 +3291,7 @@ PhotoLocation.fromApi = function (apiPhotoLocation) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ PhotoSession
+/* harmony export */   "default": () => (/* binding */ PhotoSession)
 /* harmony export */ });
 /* harmony import */ var _mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1257);
 /* harmony import */ var _mixins_add_date_getter_and_setter_to_domain_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9036);
@@ -3386,7 +3330,7 @@ var PhotoSession = function PhotoSession() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ProgressCategory
+/* harmony export */   "default": () => (/* binding */ ProgressCategory)
 /* harmony export */ });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -3410,7 +3354,7 @@ var ProgressCategory = function ProgressCategory() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ProgressReportForScanDataset
+/* harmony export */   "default": () => (/* binding */ ProgressReportForScanDataset)
 /* harmony export */ });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -3433,7 +3377,7 @@ var ProgressReportForScanDataset = function ProgressReportForScanDataset() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ProjectCostAnalysisProgress
+/* harmony export */   "default": () => (/* binding */ ProjectCostAnalysisProgress)
 /* harmony export */ });
 /* harmony import */ var _mixins_add_date_getter_and_setter_to_domain_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9036);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3498,7 +3442,7 @@ var ProjectCostAnalysisProgress = function ProjectCostAnalysisProgress() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ ProjectMasterformatProgress
+/* harmony export */   "default": () => (/* binding */ ProjectMasterformatProgress)
 /* harmony export */ });
 /* harmony import */ var _mixins_add_date_getter_and_setter_to_domain_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9036);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3527,7 +3471,7 @@ var ProjectMasterformatProgress = function ProjectMasterformatProgress(masterfor
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TimeSeriesTsvAnalysisTypes": () => /* binding */ TimeSeriesTsvAnalysisTypes
+/* harmony export */   "TimeSeriesTsvAnalysisTypes": () => (/* binding */ TimeSeriesTsvAnalysisTypes)
 /* harmony export */ });
 var TimeSeriesTsvAnalysisTypes = {
   ANALYSIS_4D: {
@@ -3547,8 +3491,10 @@ var TimeSeriesTsvAnalysisTypes = {
 /***/ }),
 
 /***/ 8072:
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 
 
 /***/ }),
@@ -3559,11 +3505,11 @@ var TimeSeriesTsvAnalysisTypes = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DETECTED": () => /* binding */ DETECTED,
-/* harmony export */   "DISMISSED": () => /* binding */ DISMISSED,
-/* harmony export */   "INCLUDED": () => /* binding */ INCLUDED,
-/* harmony export */   "FIXED": () => /* binding */ FIXED,
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "DETECTED": () => (/* binding */ DETECTED),
+/* harmony export */   "DISMISSED": () => (/* binding */ DISMISSED),
+/* harmony export */   "INCLUDED": () => (/* binding */ INCLUDED),
+/* harmony export */   "FIXED": () => (/* binding */ FIXED),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var DeviationStatus;
 
@@ -3588,9 +3534,9 @@ var FIXED = DeviationStatus.FIXED;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ELEMENTS_STATUSES_UPDATED": () => /* binding */ ELEMENTS_STATUSES_UPDATED,
-/* harmony export */   "API_FAILURE": () => /* binding */ API_FAILURE,
-/* harmony export */   "UPLOAD_FAILED": () => /* binding */ UPLOAD_FAILED
+/* harmony export */   "ELEMENTS_STATUSES_UPDATED": () => (/* binding */ ELEMENTS_STATUSES_UPDATED),
+/* harmony export */   "API_FAILURE": () => (/* binding */ API_FAILURE),
+/* harmony export */   "UPLOAD_FAILED": () => (/* binding */ UPLOAD_FAILED)
 /* harmony export */ });
 var ELEMENTS_STATUSES_UPDATED = "elements_statuses_updated";
 var API_FAILURE = "api_failure";
@@ -3604,9 +3550,9 @@ var UPLOAD_FAILED = "upload_failed";
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "failure": () => /* binding */ failure,
-/* harmony export */   "success": () => /* binding */ success,
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "failure": () => (/* binding */ failure),
+/* harmony export */   "success": () => (/* binding */ success),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var NotificationLevel;
 
@@ -3627,20 +3573,20 @@ var success = NotificationLevel.success;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ACCEPT_INVITATION": () => /* binding */ ACCEPT_INVITATION,
-/* harmony export */   "ORGANIZATION": () => /* binding */ ORGANIZATION,
-/* harmony export */   "ORGANIZATION_LIST": () => /* binding */ ORGANIZATION_LIST,
-/* harmony export */   "LOGIN": () => /* binding */ LOGIN,
-/* harmony export */   "NOT_FOUND": () => /* binding */ NOT_FOUND,
-/* harmony export */   "PROCORE_AUTHENTICATED": () => /* binding */ PROCORE_AUTHENTICATED,
-/* harmony export */   "PROGRESS_REPORT": () => /* binding */ PROGRESS_REPORT,
-/* harmony export */   "PROJECT": () => /* binding */ PROJECT,
-/* harmony export */   "PROJECT_REPORTS": () => /* binding */ PROJECT_REPORTS,
-/* harmony export */   "PROJECT_UPLOADS": () => /* binding */ PROJECT_UPLOADS,
-/* harmony export */   "PROJECT_VIEWER": () => /* binding */ PROJECT_VIEWER,
-/* harmony export */   "QUALITY_CONTROL_REPORT": () => /* binding */ QUALITY_CONTROL_REPORT,
-/* harmony export */   "PHOTOS": () => /* binding */ PHOTOS,
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "ACCEPT_INVITATION": () => (/* binding */ ACCEPT_INVITATION),
+/* harmony export */   "ORGANIZATION": () => (/* binding */ ORGANIZATION),
+/* harmony export */   "ORGANIZATION_LIST": () => (/* binding */ ORGANIZATION_LIST),
+/* harmony export */   "LOGIN": () => (/* binding */ LOGIN),
+/* harmony export */   "NOT_FOUND": () => (/* binding */ NOT_FOUND),
+/* harmony export */   "PROCORE_AUTHENTICATED": () => (/* binding */ PROCORE_AUTHENTICATED),
+/* harmony export */   "PROGRESS_REPORT": () => (/* binding */ PROGRESS_REPORT),
+/* harmony export */   "PROJECT": () => (/* binding */ PROJECT),
+/* harmony export */   "PROJECT_REPORTS": () => (/* binding */ PROJECT_REPORTS),
+/* harmony export */   "PROJECT_UPLOADS": () => (/* binding */ PROJECT_UPLOADS),
+/* harmony export */   "PROJECT_VIEWER": () => (/* binding */ PROJECT_VIEWER),
+/* harmony export */   "QUALITY_CONTROL_REPORT": () => (/* binding */ QUALITY_CONTROL_REPORT),
+/* harmony export */   "PHOTOS": () => (/* binding */ PHOTOS),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var PageNames;
 
@@ -3684,7 +3630,7 @@ var PHOTOS = PageNames.PHOTOS;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var PhotoProjectionType;
 
@@ -3704,36 +3650,36 @@ var PhotoProjectionType;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ProjectPurposeType": () => /* binding */ ProjectPurposeType,
-/* harmony export */   "FloorPurposeType": () => /* binding */ FloorPurposeType,
-/* harmony export */   "ScanDatasetPurposeType": () => /* binding */ ScanDatasetPurposeType,
-/* harmony export */   "PhotoAreaPurposeType": () => /* binding */ PhotoAreaPurposeType,
-/* harmony export */   "isPurposeType": () => /* binding */ isPurposeType,
-/* harmony export */   "OTHER": () => /* binding */ OTHER,
-/* harmony export */   "RAW_PROJECT_BIM": () => /* binding */ RAW_PROJECT_BIM,
-/* harmony export */   "PROJECT_FOLDER_ZIP": () => /* binding */ PROJECT_FOLDER_ZIP,
-/* harmony export */   "RAW_SCAN": () => /* binding */ RAW_SCAN,
-/* harmony export */   "SCANNER_PATH": () => /* binding */ SCANNER_PATH,
-/* harmony export */   "FLOOR_FLATNESS_TOPO_MAP": () => /* binding */ FLOOR_FLATNESS_TOPO_MAP,
-/* harmony export */   "BUILT_NOT_BUILT_BIM_IFC": () => /* binding */ BUILT_NOT_BUILT_BIM_IFC,
-/* harmony export */   "NEEDS_FURTHER_ANALYSIS": () => /* binding */ NEEDS_FURTHER_ANALYSIS,
-/* harmony export */   "PREPROCESSED_SCAN": () => /* binding */ PREPROCESSED_SCAN,
-/* harmony export */   "INCLUDED_BIM_IFC": () => /* binding */ INCLUDED_BIM_IFC,
-/* harmony export */   "POTREE": () => /* binding */ POTREE,
-/* harmony export */   "BIM_IFC": () => /* binding */ BIM_IFC,
-/* harmony export */   "BIM_NWD": () => /* binding */ BIM_NWD,
-/* harmony export */   "GRID_IFC": () => /* binding */ GRID_IFC,
-/* harmony export */   "BIM_MESH_GLB": () => /* binding */ BIM_MESH_GLB,
-/* harmony export */   "BIM_MESH_OBJ": () => /* binding */ BIM_MESH_OBJ,
-/* harmony export */   "BIM_TEXTURE_MTL": () => /* binding */ BIM_TEXTURE_MTL,
-/* harmony export */   "VIEWER_BIM_MESH_OBJ": () => /* binding */ VIEWER_BIM_MESH_OBJ,
-/* harmony export */   "PLANNED_CLOUD_ZIP": () => /* binding */ PLANNED_CLOUD_ZIP,
-/* harmony export */   "SVF": () => /* binding */ SVF,
-/* harmony export */   "MINIMAP": () => /* binding */ MINIMAP,
-/* harmony export */   "THREE_SIXTY_PHOTO": () => /* binding */ THREE_SIXTY_PHOTO,
-/* harmony export */   "uploadHistoryPurposeTypes": () => /* binding */ uploadHistoryPurposeTypes,
-/* harmony export */   "floorPurposeTypes": () => /* binding */ floorPurposeTypes,
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "ProjectPurposeType": () => (/* binding */ ProjectPurposeType),
+/* harmony export */   "FloorPurposeType": () => (/* binding */ FloorPurposeType),
+/* harmony export */   "ScanDatasetPurposeType": () => (/* binding */ ScanDatasetPurposeType),
+/* harmony export */   "PhotoAreaPurposeType": () => (/* binding */ PhotoAreaPurposeType),
+/* harmony export */   "isPurposeType": () => (/* binding */ isPurposeType),
+/* harmony export */   "OTHER": () => (/* binding */ OTHER),
+/* harmony export */   "RAW_PROJECT_BIM": () => (/* binding */ RAW_PROJECT_BIM),
+/* harmony export */   "PROJECT_FOLDER_ZIP": () => (/* binding */ PROJECT_FOLDER_ZIP),
+/* harmony export */   "RAW_SCAN": () => (/* binding */ RAW_SCAN),
+/* harmony export */   "SCANNER_PATH": () => (/* binding */ SCANNER_PATH),
+/* harmony export */   "FLOOR_FLATNESS_TOPO_MAP": () => (/* binding */ FLOOR_FLATNESS_TOPO_MAP),
+/* harmony export */   "BUILT_NOT_BUILT_BIM_IFC": () => (/* binding */ BUILT_NOT_BUILT_BIM_IFC),
+/* harmony export */   "NEEDS_FURTHER_ANALYSIS": () => (/* binding */ NEEDS_FURTHER_ANALYSIS),
+/* harmony export */   "PREPROCESSED_SCAN": () => (/* binding */ PREPROCESSED_SCAN),
+/* harmony export */   "INCLUDED_BIM_IFC": () => (/* binding */ INCLUDED_BIM_IFC),
+/* harmony export */   "POTREE": () => (/* binding */ POTREE),
+/* harmony export */   "BIM_IFC": () => (/* binding */ BIM_IFC),
+/* harmony export */   "BIM_NWD": () => (/* binding */ BIM_NWD),
+/* harmony export */   "GRID_IFC": () => (/* binding */ GRID_IFC),
+/* harmony export */   "BIM_MESH_GLB": () => (/* binding */ BIM_MESH_GLB),
+/* harmony export */   "BIM_MESH_OBJ": () => (/* binding */ BIM_MESH_OBJ),
+/* harmony export */   "BIM_TEXTURE_MTL": () => (/* binding */ BIM_TEXTURE_MTL),
+/* harmony export */   "VIEWER_BIM_MESH_OBJ": () => (/* binding */ VIEWER_BIM_MESH_OBJ),
+/* harmony export */   "PLANNED_CLOUD_ZIP": () => (/* binding */ PLANNED_CLOUD_ZIP),
+/* harmony export */   "SVF": () => (/* binding */ SVF),
+/* harmony export */   "MINIMAP": () => (/* binding */ MINIMAP),
+/* harmony export */   "THREE_SIXTY_PHOTO": () => (/* binding */ THREE_SIXTY_PHOTO),
+/* harmony export */   "uploadHistoryPurposeTypes": () => (/* binding */ uploadHistoryPurposeTypes),
+/* harmony export */   "floorPurposeTypes": () => (/* binding */ floorPurposeTypes),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var ProjectPurposeType;
 
@@ -3851,7 +3797,7 @@ var floorPurposeTypes = [BIM_IFC, BIM_NWD, GRID_IFC, BIM_MESH_GLB, BIM_MESH_OBJ,
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var RunningProcessStatus;
 
@@ -3870,12 +3816,12 @@ var RunningProcessStatus;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "IN_PLACE": () => /* binding */ IN_PLACE,
-/* harmony export */   "NOT_BUILT": () => /* binding */ NOT_BUILT,
-/* harmony export */   "INSUFFICIENT_DATA": () => /* binding */ INSUFFICIENT_DATA,
-/* harmony export */   "DEVIATED": () => /* binding */ DEVIATED,
-/* harmony export */   "DEVIATED_WITHIN_TOLERANCE": () => /* binding */ DEVIATED_WITHIN_TOLERANCE,
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "IN_PLACE": () => (/* binding */ IN_PLACE),
+/* harmony export */   "NOT_BUILT": () => (/* binding */ NOT_BUILT),
+/* harmony export */   "INSUFFICIENT_DATA": () => (/* binding */ INSUFFICIENT_DATA),
+/* harmony export */   "DEVIATED": () => (/* binding */ DEVIATED),
+/* harmony export */   "DEVIATED_WITHIN_TOLERANCE": () => (/* binding */ DEVIATED_WITHIN_TOLERANCE),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var IN_PLACE = "IN_PLACE";
 var NOT_BUILT = "NOT_BUILT";
@@ -3899,9 +3845,9 @@ var ScanLabel = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "IMPERIAL": () => /* binding */ IMPERIAL,
-/* harmony export */   "METRIC": () => /* binding */ METRIC,
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "IMPERIAL": () => (/* binding */ IMPERIAL),
+/* harmony export */   "METRIC": () => (/* binding */ METRIC),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var SystemOfMeasurement;
 
@@ -3922,10 +3868,10 @@ var METRIC = SystemOfMeasurement.METRIC;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NONE": () => /* binding */ NONE,
-/* harmony export */   "LOADING": () => /* binding */ LOADING,
-/* harmony export */   "ERROR": () => /* binding */ ERROR,
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "NONE": () => (/* binding */ NONE),
+/* harmony export */   "LOADING": () => (/* binding */ LOADING),
+/* harmony export */   "ERROR": () => (/* binding */ ERROR),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var UploaderStatus;
 
@@ -3948,10 +3894,10 @@ var ERROR = UploaderStatus.ERROR;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "GATEWAY_JWT": () => /* binding */ GATEWAY_JWT,
-/* harmony export */   "BASIC": () => /* binding */ BASIC,
-/* harmony export */   "FIREBASE": () => /* binding */ FIREBASE,
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "GATEWAY_JWT": () => (/* binding */ GATEWAY_JWT),
+/* harmony export */   "BASIC": () => (/* binding */ BASIC),
+/* harmony export */   "FIREBASE": () => (/* binding */ FIREBASE),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var UserAuthType;
 
@@ -3974,9 +3920,9 @@ var FIREBASE = UserAuthType.FIREBASE;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SUPERADMIN": () => /* binding */ SUPERADMIN,
-/* harmony export */   "USER": () => /* binding */ USER,
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "SUPERADMIN": () => (/* binding */ SUPERADMIN),
+/* harmony export */   "USER": () => (/* binding */ USER),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var UserRole;
 
@@ -4000,7 +3946,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "default": () => /* binding */ response_error
+  "default": () => (/* binding */ response_error)
 });
 
 ;// CONCATENATED MODULE: external "extendable-error-class"
@@ -4021,7 +3967,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -4064,7 +4010,7 @@ var ResponseError = /*#__PURE__*/function (_ExtendableError) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _models_response_error__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3972);
 /* harmony import */ var _resources_response_statuses_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(297);
@@ -4118,8 +4064,8 @@ var checkFetchStatus = function checkFetchStatus(response) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "GatewayUser": () => /* binding */ GatewayUser,
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "GatewayUser": () => (/* binding */ GatewayUser),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _models_enums_user_auth_type__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2503);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4182,14 +4128,14 @@ var getAuthorizationHeaders = function getAuthorizationHeaders(user) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ Http
+/* harmony export */   "default": () => (/* binding */ Http)
 /* harmony export */ });
 /* harmony import */ var _get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9137);
 /* harmony import */ var _request_headers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(104);
 /* harmony import */ var _reduce_user_session__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3226);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5663);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_2__);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -4277,7 +4223,7 @@ Http.baseUrl = function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2164);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(underscore__WEBPACK_IMPORTED_MODULE_0__);
@@ -4337,8 +4283,8 @@ var makeErrorsPretty = function makeErrorsPretty(apiClass) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "isFirebaseUser": () => /* binding */ isFirebaseUser,
-/* harmony export */   "isGatewayUser": () => /* binding */ isGatewayUser
+/* harmony export */   "isFirebaseUser": () => (/* binding */ isFirebaseUser),
+/* harmony export */   "isGatewayUser": () => (/* binding */ isGatewayUser)
 /* harmony export */ });
 var isFirebaseUser = function isFirebaseUser(user) {
   return !!(user !== null && user !== void 0 && user.firebaseUser);
@@ -4355,8 +4301,8 @@ var isGatewayUser = function isGatewayUser(user) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "httpPostHeaders": () => /* binding */ httpPostHeaders,
-/* harmony export */   "httpGetHeaders": () => /* binding */ httpGetHeaders
+/* harmony export */   "httpPostHeaders": () => (/* binding */ httpPostHeaders),
+/* harmony export */   "httpGetHeaders": () => (/* binding */ httpGetHeaders)
 /* harmony export */ });
 function makePostHeaders(contentType) {
   return {
@@ -4386,7 +4332,7 @@ var httpGetHeaders = makeGetHeaders;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2164);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(underscore__WEBPACK_IMPORTED_MODULE_0__);
@@ -4428,7 +4374,7 @@ const useAcceptanceConfiguration = () => {
 
 const useProductionConfiguration = () => {
   config = {
-    AVVIR_GATEWAY_URL: "https://avvir-gateway-production.herokuapp.com",
+    AVVIR_GATEWAY_URL: "https://api.avvir.io",
     AVVIR_ENVIRONMENT: "production"
   }
   addEnvironmentVariablesToConfiguration()
@@ -4436,7 +4382,7 @@ const useProductionConfiguration = () => {
 
 const useLocalProductionConfiguration = () => {
   config = {
-    AVVIR_GATEWAY_URL: "https://avvir-gateway-production.herokuapp.com",
+    AVVIR_GATEWAY_URL: "https://api.avvir.io",
     AVVIR_ENVIRONMENT: "local-production"
   }
   addEnvironmentVariablesToConfiguration()
@@ -4461,6 +4407,10 @@ config.sharedErrorHandler = ({error}) => {
 
 console.log("Avvir client configured to reach ", config.AVVIR_GATEWAY_URL);
 module.exports = config;
+// module.exports.useAcceptanceConfiguration = useAcceptanceConfiguration
+// module.exports.useProductionConfiguration = useProductionConfiguration
+// module.exports.useLocalProductionConfiguration = useLocalProductionConfiguration
+
 
 /***/ }),
 
@@ -4468,7 +4418,7 @@ module.exports = config;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse("{\"100\":\"Continue\",\"101\":\"Switching Protocol\",\"102\":\"Processing (WebDAV)\",\"103\":\"Early Hints\",\"200\":\"OK\",\"201\":\"Created\",\"202\":\"Accepted\",\"203\":\"Non-Authoritative Information\",\"204\":\"No Content\",\"205\":\"Reset Content\",\"206\":\"Partial Content\",\"207\":\"Multi-Status (WebDAV)\",\"208\":\"Multi-Status (WebDAV)\",\"226\":\"IM Used (HTTP Delta encoding)\",\"300\":\"Multiple Choice\",\"301\":\"Moved Permanently\",\"302\":\"Found\",\"303\":\"See Other\",\"304\":\"Not Modified\",\"305\":\"Use Proxy\",\"306\":\"unused\",\"307\":\"Temporary Redirect\",\"308\":\"Permanent Redirect\",\"400\":\"Bad Request\",\"401\":\"Unauthorized\",\"402\":\"Payment Required\",\"403\":\"Forbidden\",\"404\":\"Not Found\",\"405\":\"Method Not Allowed\",\"406\":\"Not Acceptable\",\"407\":\"Proxy Authentication Required\",\"408\":\"Request Timeout\",\"409\":\"Conflict\",\"410\":\"Gone\",\"411\":\"Length Required\",\"412\":\"Precondition Failed\",\"413\":\"Payload Too Large\",\"414\":\"URI Too Long\",\"415\":\"Unsupported Media Type\",\"416\":\"Requested Range Not Satisfiable\",\"417\":\"Expectation Failed\",\"418\":\"I'm a teapot\",\"421\":\"Misdirected Request\",\"422\":\"Unprocessable Entity (WebDAV)\",\"423\":\"Locked (WebDAV)\",\"424\":\"Failed Dependency (WebDAV)\",\"425\":\"Too Early\",\"426\":\"Upgrade Required\",\"428\":\"Precondition Required\",\"429\":\"Too Many Requests\",\"431\":\"Request Header Fields Too Large\",\"451\":\"Unavailable For Legal Reasons\",\"500\":\"Internal Server Error\",\"501\":\"Not Implemented\",\"502\":\"Bad Gateway\",\"503\":\"Service Unavailable\",\"504\":\"Gateway Timeout\",\"505\":\"HTTP Version Not Supported\",\"506\":\"Variant Also Negotiates\",\"507\":\"Insufficient Storage\",\"508\":\"Loop Detected (WebDAV)\",\"510\":\"Not Extended\",\"511\":\"Network Authentication Required\",\"100_detailed\":\"This interim response indicates that everything so far is OK and that the client should continue with the request or ignore it if it is already finished.\",\"101_detailed\":\"This code is sent in response to an Upgrade request header by the client, and indicates the protocol the server is switching to.\",\"102_detailed\":\"This code indicates that the server has received and is processing the request, but no response is available yet.\",\"103_detailed\":\"This status code is primarily intended to be used with the Link header to allow the user agent to start preloading resources while the server is still preparing a response.\",\"200_detailed\":\"The request has succeeded. The meaning of a success varies depending on the HTTP method:\\n  GET: The resource has been fetched and is transmitted in the message body.\\n  HEAD: The entity headers are in the message body.\\n  PUT or POST: The resource describing the result of the action is transmitted in the message body.\\n  TRACE: The message body contains the request message as received by the server\",\"201_detailed\":\"The request has succeeded and a new resource has been created as a result of it. This is typically the response sent after a POST request, or after some PUT requests.\",\"202_detailed\":\"The request has been received but not yet acted upon. It is non-committal, meaning that there is no way in HTTP to later send an asynchronous response indicating the outcome of processing the request. It is intended for cases where another process or server handles the request, or for batch processing.\",\"203_detailed\":\"This response code means returned meta-information set is not exact set as available from the origin server, but collected from a local or a third party copy. Except this condition, 200 OK response should be preferred instead of this response.\",\"204_detailed\":\"There is no content to send for this request, but the headers may be useful. The user-agent may update its cached headers for this resource with the new ones.\",\"205_detailed\":\"This response code is sent after accomplishing request to tell user agent reset document view which sent this request.\",\"206_detailed\":\"This response code is used because of range header sent by the client to separate download into multiple streams.\",\"207_detailed\":\"A Multi-Status response conveys information about multiple resources in situations where multiple status codes might be appropriate.\",\"208_detailed\":\"Used inside a DAV: propstat response element to avoid enumerating the internal members of multiple bindings to the same collection repeatedly.\",\"226_detailed\":\"The server has fulfilled a GET request for the resource, and the response is a representation of the result of one or more instance-manipulations applied to the current instance.\",\"300_detailed\":\"The request has more than one possible response. The user-agent or user should choose one of them. There is no standardized way of choosing one of the responses.\",\"301_detailed\":\"This response code means that the URI of the requested resource has been changed. Probably, the new URI would be given in the response.\",\"302_detailed\":\"This response code means that the URI of requested resource has been changed temporarily. New changes in the URI might be made in the future. Therefore, this same URI should be used by the client in future requests.\",\"303_detailed\":\"The server sent this response to direct the client to get the requested resource at another URI with a GET request.\",\"304_detailed\":\"This is used for caching purposes. It tells the client that the response has not been modified, so the client can continue to use the same cached version of the response.\",\"305_detailed\":\"Was defined in a previous version of the HTTP specification to indicate that a requested response must be accessed by a proxy. It has been deprecated due to security concerns regarding in-band configuration of a proxy.\",\"306_detailed\":\"This response code is no longer used, it is just reserved currently. It was used in a previous version of the HTTP 1.1 specification.\",\"307_detailed\":\"The server sends this response to direct the client to get the requested resource at another URI with same method that was used in the prior request. This has the same semantics as the 302 Found HTTP response code, with the exception that the user agent must not change the HTTP method used: If a POST was used in the first request, a POST must be used in the second request.\",\"308_detailed\":\"This means that the resource is now permanently located at another URI, specified by the Location: HTTP Response header. This has the same semantics as the 301 Moved Permanently HTTP response code, with the exception that the user agent must not change the HTTP method used: If a POST was used in the first request, a POST must be used in the second request.\",\"400_detailed\":\"This response means that server could not understand the request due to invalid syntax.\",\"401_detailed\":\"Although the HTTP standard specifies \\\"unauthorized\\\", semantically this response means \\\"unauthenticated\\\". That is, the client must authenticate itself to get the requested response.\",\"402_detailed\":\"This response code is reserved for future use. Initial aim for creating this code was using it for digital payment systems however this is not used currently.\",\"403_detailed\":\"The client does not have access rights to the content, i.e. they are unauthorized, so server is rejecting to give proper response. Unlike 401, the client's identity is known to the server.\",\"404_detailed\":\"The server can not find requested resource. In the browser, this means the URL is not recognized. In an API, this can also mean that the endpoint is valid but the resource itself does not exist. Servers may also send this response instead of 403 to hide the existence of a resource from an unauthorized client. This response code is probably the most famous one due to its frequent occurence on the web.\",\"405_detailed\":\"The request method is known by the server but has been disabled and cannot be used. For example, an API may forbid DELETE-ing a resource. The two mandatory methods, GET and HEAD, must never be disabled and should not return this error code.\",\"406_detailed\":\"This response is sent when the web server, after performing server-driven content negotiation, doesn't find any content following the criteria given by the user agent.\",\"407_detailed\":\"This is similar to 401 but authentication is needed to be done by a proxy.\",\"408_detailed\":\"This response is sent on an idle connection by some servers, even without any previous request by the client. It means that the server would like to shut down this unused connection. This response is used much more since some browsers, like Chrome, Firefox 27+, or IE9, use HTTP pre-connection mechanisms to speed up surfing. Also note that some servers merely shut down the connection without sending this message.\",\"409_detailed\":\"This response is sent when a request conflicts with the current state of the server.\",\"410_detailed\":\"This response would be sent when the requested content has been permanently deleted from server, with no forwarding address. Clients are expected to remove their caches and links to the resource. The HTTP specification intends this status code to be used for \\\"limited-time, promotional services\\\". APIs should not feel compelled to indicate resources that have been deleted with this status code.\",\"411_detailed\":\"Server rejected the request because the Content-Length header field is not defined and the server requires it.\",\"412_detailed\":\"The client has indicated preconditions in its headers which the server does not meet.\",\"413_detailed\":\"Request entity is larger than limits defined by server; the server might close the connection or return an Retry-After header field.\",\"414_detailed\":\"The URI requested by the client is longer than the server is willing to interpret.\",\"415_detailed\":\"The media format of the requested data is not supported by the server, so the server is rejecting the request.\",\"416_detailed\":\"The range specified by the Range header field in the request can't be fulfilled; it's possible that the range is outside the size of the target URI's data.\",\"417_detailed\":\"This response code means the expectation indicated by the Expect request header field can't be met by the server.\",\"418_detailed\":\"The server refuses the attempt to brew coffee with a teapot.\",\"421_detailed\":\"The request was directed at a server that is not able to produce a response. This can be sent by a server that is not configured to produce responses for the combination of scheme and authority that are included in the request URI.\",\"422_detailed\":\"The request was well-formed but was unable to be followed due to semantic errors.\",\"423_detailed\":\"The resource that is being accessed is locked.\",\"424_detailed\":\"The request failed due to failure of a previous request.\",\"425_detailed\":\"Indicates that the server is unwilling to risk processing a request that might be replayed.\",\"426_detailed\":\"The server refuses to perform the request using the current protocol but might be willing to do so after the client upgrades to a different protocol. The server sends an Upgrade header in a 426 response to indicate the required protocol(s).\",\"428_detailed\":\"The origin server requires the request to be conditional. Intended to prevent the 'lost update' problem, where a client GETs a resource's state, modifies it, and PUTs it back to the server, when meanwhile a third party has modified the state on the server, leading to a conflict.\",\"429_detailed\":\"The user has sent too many requests in a given amount of time (\\\"rate limiting\\\").\",\"431_detailed\":\"The server is unwilling to process the request because its header fields are too large. The request MAY be resubmitted after reducing the size of the request header fields.\",\"451_detailed\":\"The user requests an illegal resource, such as a web page censored by a government.\",\"500_detailed\":\"The server has encountered a situation it doesn't know how to handle.\",\"501_detailed\":\"The request method is not supported by the server and cannot be handled. The only methods that servers are required to support (and therefore that must not return this code) are GET and HEAD.\",\"502_detailed\":\"This error response means that the server, while working as a gateway to get a response needed to handle the request, got an invalid response.\",\"503_detailed\":\"The server is not ready to handle the request. Common causes are a server that is down for maintenance or that is overloaded. Note that together with this response, a user-friendly page explaining the problem should be sent. This responses should be used for temporary conditions and the Retry-After: HTTP header should, if possible, contain the estimated time before the recovery of the service. The webmaster must also take care about the caching-related headers that are sent along with this response, as these temporary condition responses should usually not be cached.\",\"504_detailed\":\"This error response is given when the server is acting as a gateway and cannot get a response in time.\",\"505_detailed\":\"The HTTP version used in the request is not supported by the server.\",\"506_detailed\":\"The server has an internal configuration error: transparent content negotiation for the request results in a circular reference.\",\"507_detailed\":\"The server has an internal configuration error: the chosen variant resource is configured to engage in transparent content negotiation itself, and is therefore not a proper end point in the negotiation process.\",\"508_detailed\":\"The server detected an infinite loop while processing the request.\",\"510_detailed\":\"Further extensions to the request are required for the server to fulfill it.\",\"511_detailed\":\"The 511 status code indicates that the client needs to authenticate to gain network access.\"}");
+module.exports = JSON.parse('{"100":"Continue","101":"Switching Protocol","102":"Processing (WebDAV)","103":"Early Hints","200":"OK","201":"Created","202":"Accepted","203":"Non-Authoritative Information","204":"No Content","205":"Reset Content","206":"Partial Content","207":"Multi-Status (WebDAV)","208":"Multi-Status (WebDAV)","226":"IM Used (HTTP Delta encoding)","300":"Multiple Choice","301":"Moved Permanently","302":"Found","303":"See Other","304":"Not Modified","305":"Use Proxy","306":"unused","307":"Temporary Redirect","308":"Permanent Redirect","400":"Bad Request","401":"Unauthorized","402":"Payment Required","403":"Forbidden","404":"Not Found","405":"Method Not Allowed","406":"Not Acceptable","407":"Proxy Authentication Required","408":"Request Timeout","409":"Conflict","410":"Gone","411":"Length Required","412":"Precondition Failed","413":"Payload Too Large","414":"URI Too Long","415":"Unsupported Media Type","416":"Requested Range Not Satisfiable","417":"Expectation Failed","418":"I\'m a teapot","421":"Misdirected Request","422":"Unprocessable Entity (WebDAV)","423":"Locked (WebDAV)","424":"Failed Dependency (WebDAV)","425":"Too Early","426":"Upgrade Required","428":"Precondition Required","429":"Too Many Requests","431":"Request Header Fields Too Large","451":"Unavailable For Legal Reasons","500":"Internal Server Error","501":"Not Implemented","502":"Bad Gateway","503":"Service Unavailable","504":"Gateway Timeout","505":"HTTP Version Not Supported","506":"Variant Also Negotiates","507":"Insufficient Storage","508":"Loop Detected (WebDAV)","510":"Not Extended","511":"Network Authentication Required","100_detailed":"This interim response indicates that everything so far is OK and that the client should continue with the request or ignore it if it is already finished.","101_detailed":"This code is sent in response to an Upgrade request header by the client, and indicates the protocol the server is switching to.","102_detailed":"This code indicates that the server has received and is processing the request, but no response is available yet.","103_detailed":"This status code is primarily intended to be used with the Link header to allow the user agent to start preloading resources while the server is still preparing a response.","200_detailed":"The request has succeeded. The meaning of a success varies depending on the HTTP method:\\n  GET: The resource has been fetched and is transmitted in the message body.\\n  HEAD: The entity headers are in the message body.\\n  PUT or POST: The resource describing the result of the action is transmitted in the message body.\\n  TRACE: The message body contains the request message as received by the server","201_detailed":"The request has succeeded and a new resource has been created as a result of it. This is typically the response sent after a POST request, or after some PUT requests.","202_detailed":"The request has been received but not yet acted upon. It is non-committal, meaning that there is no way in HTTP to later send an asynchronous response indicating the outcome of processing the request. It is intended for cases where another process or server handles the request, or for batch processing.","203_detailed":"This response code means returned meta-information set is not exact set as available from the origin server, but collected from a local or a third party copy. Except this condition, 200 OK response should be preferred instead of this response.","204_detailed":"There is no content to send for this request, but the headers may be useful. The user-agent may update its cached headers for this resource with the new ones.","205_detailed":"This response code is sent after accomplishing request to tell user agent reset document view which sent this request.","206_detailed":"This response code is used because of range header sent by the client to separate download into multiple streams.","207_detailed":"A Multi-Status response conveys information about multiple resources in situations where multiple status codes might be appropriate.","208_detailed":"Used inside a DAV: propstat response element to avoid enumerating the internal members of multiple bindings to the same collection repeatedly.","226_detailed":"The server has fulfilled a GET request for the resource, and the response is a representation of the result of one or more instance-manipulations applied to the current instance.","300_detailed":"The request has more than one possible response. The user-agent or user should choose one of them. There is no standardized way of choosing one of the responses.","301_detailed":"This response code means that the URI of the requested resource has been changed. Probably, the new URI would be given in the response.","302_detailed":"This response code means that the URI of requested resource has been changed temporarily. New changes in the URI might be made in the future. Therefore, this same URI should be used by the client in future requests.","303_detailed":"The server sent this response to direct the client to get the requested resource at another URI with a GET request.","304_detailed":"This is used for caching purposes. It tells the client that the response has not been modified, so the client can continue to use the same cached version of the response.","305_detailed":"Was defined in a previous version of the HTTP specification to indicate that a requested response must be accessed by a proxy. It has been deprecated due to security concerns regarding in-band configuration of a proxy.","306_detailed":"This response code is no longer used, it is just reserved currently. It was used in a previous version of the HTTP 1.1 specification.","307_detailed":"The server sends this response to direct the client to get the requested resource at another URI with same method that was used in the prior request. This has the same semantics as the 302 Found HTTP response code, with the exception that the user agent must not change the HTTP method used: If a POST was used in the first request, a POST must be used in the second request.","308_detailed":"This means that the resource is now permanently located at another URI, specified by the Location: HTTP Response header. This has the same semantics as the 301 Moved Permanently HTTP response code, with the exception that the user agent must not change the HTTP method used: If a POST was used in the first request, a POST must be used in the second request.","400_detailed":"This response means that server could not understand the request due to invalid syntax.","401_detailed":"Although the HTTP standard specifies \\"unauthorized\\", semantically this response means \\"unauthenticated\\". That is, the client must authenticate itself to get the requested response.","402_detailed":"This response code is reserved for future use. Initial aim for creating this code was using it for digital payment systems however this is not used currently.","403_detailed":"The client does not have access rights to the content, i.e. they are unauthorized, so server is rejecting to give proper response. Unlike 401, the client\'s identity is known to the server.","404_detailed":"The server can not find requested resource. In the browser, this means the URL is not recognized. In an API, this can also mean that the endpoint is valid but the resource itself does not exist. Servers may also send this response instead of 403 to hide the existence of a resource from an unauthorized client. This response code is probably the most famous one due to its frequent occurence on the web.","405_detailed":"The request method is known by the server but has been disabled and cannot be used. For example, an API may forbid DELETE-ing a resource. The two mandatory methods, GET and HEAD, must never be disabled and should not return this error code.","406_detailed":"This response is sent when the web server, after performing server-driven content negotiation, doesn\'t find any content following the criteria given by the user agent.","407_detailed":"This is similar to 401 but authentication is needed to be done by a proxy.","408_detailed":"This response is sent on an idle connection by some servers, even without any previous request by the client. It means that the server would like to shut down this unused connection. This response is used much more since some browsers, like Chrome, Firefox 27+, or IE9, use HTTP pre-connection mechanisms to speed up surfing. Also note that some servers merely shut down the connection without sending this message.","409_detailed":"This response is sent when a request conflicts with the current state of the server.","410_detailed":"This response would be sent when the requested content has been permanently deleted from server, with no forwarding address. Clients are expected to remove their caches and links to the resource. The HTTP specification intends this status code to be used for \\"limited-time, promotional services\\". APIs should not feel compelled to indicate resources that have been deleted with this status code.","411_detailed":"Server rejected the request because the Content-Length header field is not defined and the server requires it.","412_detailed":"The client has indicated preconditions in its headers which the server does not meet.","413_detailed":"Request entity is larger than limits defined by server; the server might close the connection or return an Retry-After header field.","414_detailed":"The URI requested by the client is longer than the server is willing to interpret.","415_detailed":"The media format of the requested data is not supported by the server, so the server is rejecting the request.","416_detailed":"The range specified by the Range header field in the request can\'t be fulfilled; it\'s possible that the range is outside the size of the target URI\'s data.","417_detailed":"This response code means the expectation indicated by the Expect request header field can\'t be met by the server.","418_detailed":"The server refuses the attempt to brew coffee with a teapot.","421_detailed":"The request was directed at a server that is not able to produce a response. This can be sent by a server that is not configured to produce responses for the combination of scheme and authority that are included in the request URI.","422_detailed":"The request was well-formed but was unable to be followed due to semantic errors.","423_detailed":"The resource that is being accessed is locked.","424_detailed":"The request failed due to failure of a previous request.","425_detailed":"Indicates that the server is unwilling to risk processing a request that might be replayed.","426_detailed":"The server refuses to perform the request using the current protocol but might be willing to do so after the client upgrades to a different protocol. The server sends an Upgrade header in a 426 response to indicate the required protocol(s).","428_detailed":"The origin server requires the request to be conditional. Intended to prevent the \'lost update\' problem, where a client GETs a resource\'s state, modifies it, and PUTs it back to the server, when meanwhile a third party has modified the state on the server, leading to a conflict.","429_detailed":"The user has sent too many requests in a given amount of time (\\"rate limiting\\").","431_detailed":"The server is unwilling to process the request because its header fields are too large. The request MAY be resubmitted after reducing the size of the request header fields.","451_detailed":"The user requests an illegal resource, such as a web page censored by a government.","500_detailed":"The server has encountered a situation it doesn\'t know how to handle.","501_detailed":"The request method is not supported by the server and cannot be handled. The only methods that servers are required to support (and therefore that must not return this code) are GET and HEAD.","502_detailed":"This error response means that the server, while working as a gateway to get a response needed to handle the request, got an invalid response.","503_detailed":"The server is not ready to handle the request. Common causes are a server that is down for maintenance or that is overloaded. Note that together with this response, a user-friendly page explaining the problem should be sent. This responses should be used for temporary conditions and the Retry-After: HTTP header should, if possible, contain the estimated time before the recovery of the service. The webmaster must also take care about the caching-related headers that are sent along with this response, as these temporary condition responses should usually not be cached.","504_detailed":"This error response is given when the server is acting as a gateway and cannot get a response in time.","505_detailed":"The HTTP version used in the request is not supported by the server.","506_detailed":"The server has an internal configuration error: transparent content negotiation for the request results in a circular reference.","507_detailed":"The server has an internal configuration error: the chosen variant resource is configured to engage in transparent content negotiation itself, and is therefore not a proper end point in the negotiation process.","508_detailed":"The server detected an infinite loop while processing the request.","510_detailed":"Further extensions to the request are required for the server to fulfill it.","511_detailed":"The 511 status code indicates that the client needs to authenticate to gain network access."}');
 
 /***/ }),
 
@@ -4602,8 +4552,9 @@ module.exports = require("underscore");;
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
-/******/ 		if(__webpack_module_cache__[moduleId]) {
-/******/ 			return __webpack_module_cache__[moduleId].exports;
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
@@ -4625,8 +4576,8 @@ module.exports = require("underscore");;
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
 /******/ 		__webpack_require__.n = (module) => {
 /******/ 			var getter = module && module.__esModule ?
-/******/ 				() => module['default'] :
-/******/ 				() => module;
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
 /******/ 			__webpack_require__.d(getter, { a: getter });
 /******/ 			return getter;
 /******/ 		};
@@ -4646,7 +4597,7 @@ module.exports = require("underscore");;
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
@@ -4661,9 +4612,60 @@ module.exports = require("underscore");;
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-/******/ 	// module exports must be returned from runtime so entry inlining is disabled
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(4016);
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "default": () => (/* binding */ avvir)
+});
+
+// EXTERNAL MODULE: ./source/avvir_api.ts
+var avvir_api = __webpack_require__(4406);
+;// CONCATENATED MODULE: external "node-fetch"
+const external_node_fetch_namespaceObject = require("node-fetch");;
+var external_node_fetch_default = /*#__PURE__*/__webpack_require__.n(external_node_fetch_namespaceObject);
+// EXTERNAL MODULE: external "underscore"
+var external_underscore_ = __webpack_require__(2164);
+var external_underscore_default = /*#__PURE__*/__webpack_require__.n(external_underscore_);
+;// CONCATENATED MODULE: ./avvir.ts
+
+
+
+
+global.fetch = (external_node_fetch_default());
+
+const Avvir = {
+  api: avvir_api.default
+};
+
+function importAll(directoryContext, target) {
+  directoryContext.keys().forEach(filePath => {
+
+    let moduleExports = directoryContext(filePath);
+    external_underscore_default().forEach(moduleExports, (moduleExport, exportName) => {
+      // if (exportName !== 'default') {
+        target[exportName] = moduleExport;
+      // }
+    })
+    if (moduleExports.default && moduleExports.default.name) {
+      target[moduleExports.default.name] = moduleExports.default;
+    }
+  });
+}
+
+
+// skip .d.ts files because some use syntax our webpack settings don't support
+importAll(__webpack_require__(5422), Avvir);
+
+/* harmony default export */ const avvir = (Avvir);
+
+})();
+
+module.exports = __webpack_exports__;
 /******/ })()
 ;
