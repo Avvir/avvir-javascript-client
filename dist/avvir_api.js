@@ -4405,12 +4405,16 @@ config.sharedErrorHandler = ({error}) => {
   throw error;
 }
 
+const getConfiguration = () => {
+  return config
+}
+
 console.log("Avvir client configured to reach ", config.AVVIR_GATEWAY_URL);
 module.exports = config;
-// module.exports.useAcceptanceConfiguration = useAcceptanceConfiguration
-// module.exports.useProductionConfiguration = useProductionConfiguration
-// module.exports.useLocalProductionConfiguration = useLocalProductionConfiguration
-
+module.exports.useAcceptanceConfiguration = useAcceptanceConfiguration
+module.exports.useProductionConfiguration = useProductionConfiguration
+module.exports.useLocalProductionConfiguration = useLocalProductionConfiguration
+module.exports.getConfiguration = getConfiguration
 
 /***/ }),
 
