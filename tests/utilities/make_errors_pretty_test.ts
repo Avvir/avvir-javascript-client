@@ -1,8 +1,7 @@
 import {expect} from "chai";
-import Config from"../../source/config";
 import makeErrorsPretty from "../../source/utilities/make_errors_pretty";
 import {sandbox} from "../test_utils/setup_tests";
-import config from "../../source/config";
+import Config from "../../source/config";
 
 describe("makeErrorsPretty", () => {
   let clazz;
@@ -16,7 +15,7 @@ describe("makeErrorsPretty", () => {
           json: () => Promise.resolve({
             message: "some unfortunate error",
           }),
-          url: config.AVVIR_GATEWAY_URL + "/some-url-path"
+          url: Config.configuration.AVVIR_GATEWAY_URL + "/some-url-path"
         })
       }
     }

@@ -4210,7 +4210,7 @@ var Http = /*#__PURE__*/function () {
 }();
 
 Http.baseUrl = function () {
-  return (_config__WEBPACK_IMPORTED_MODULE_2___default().AVVIR_GATEWAY_URL);
+  return (_config__WEBPACK_IMPORTED_MODULE_2___default().configuration.AVVIR_GATEWAY_URL);
 };
 
 
@@ -4354,18 +4354,18 @@ var serializeForm = function serializeForm(form) {
 
 const _ = __webpack_require__(2164);
 
-let config;
+let configuration = {};
 
 const addEnvironmentVariablesToConfiguration = () => {
-  _.forEach(config, (value, varName) => {
+  _.forEach(configuration, (value, varName) => {
     if (process.env[varName] != null && process.env[varName] != '') {
-      config[varName] = process.env[varName];
+      configuration[varName] = process.env[varName];
     }
   });
 }
 
 const useAcceptanceConfiguration = () => {
-  config = {
+  configuration = {
     AVVIR_GATEWAY_URL: "https://acceptance-api.avvir.io",
     AVVIR_ENVIRONMENT: "acceptance"
   }
@@ -4373,7 +4373,7 @@ const useAcceptanceConfiguration = () => {
 }
 
 const useProductionConfiguration = () => {
-  config = {
+  configuration = {
     AVVIR_GATEWAY_URL: "https://api.avvir.io",
     AVVIR_ENVIRONMENT: "production"
   }
@@ -4381,7 +4381,7 @@ const useProductionConfiguration = () => {
 }
 
 const useLocalProductionConfiguration = () => {
-  config = {
+  configuration = {
     AVVIR_GATEWAY_URL: "https://api.avvir.io",
     AVVIR_ENVIRONMENT: "local-production"
   }
@@ -4396,25 +4396,23 @@ const setConfigurationFromEnvironmentVariable = () => {
   } else {
     useProductionConfiguration()
   }
+  console.log("Avvir client configured to reach ", configuration.AVVIR_GATEWAY_URL);
 }
 
 
 setConfigurationFromEnvironmentVariable()
 
-config.sharedErrorHandler = ({error}) => {
+const sharedErrorHandler = ({error}) => {
   throw error;
 }
 
 const getConfiguration = () => {
-  return config
+  return configuration
 }
 
-console.log("Avvir client configured to reach ", config.AVVIR_GATEWAY_URL);
-module.exports = config;
-module.exports.useAcceptanceConfiguration = useAcceptanceConfiguration
-module.exports.useProductionConfiguration = useProductionConfiguration
-module.exports.useLocalProductionConfiguration = useLocalProductionConfiguration
-module.exports.getConfiguration = getConfiguration
+const Config = {configuration, useAcceptanceConfiguration, useProductionConfiguration, useLocalProductionConfiguration, getConfiguration, sharedErrorHandler}
+
+module.exports = Config
 
 /***/ }),
 

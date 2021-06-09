@@ -12,6 +12,10 @@ get your project id:
 // TODO
 
 
+## Setup testing
+Add the following in the mocha template in the `Extra Mocha options` field
+`--require ./scripts/mocha_setup.js`
+
 ## Sample client code (Node)
 ```javascript
 // if you're writing code for the browser, instead of require use this import:
