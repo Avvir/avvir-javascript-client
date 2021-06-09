@@ -4210,7 +4210,7 @@ var Http = /*#__PURE__*/function () {
 }();
 
 Http.baseUrl = function () {
-  return (_config__WEBPACK_IMPORTED_MODULE_2___default().configuration.AVVIR_GATEWAY_URL);
+  return _config__WEBPACK_IMPORTED_MODULE_2___default().getConfiguration().AVVIR_GATEWAY_URL;
 };
 
 
@@ -4410,7 +4410,7 @@ const getConfiguration = () => {
   return configuration
 }
 
-const Config = {configuration, useAcceptanceConfiguration, useProductionConfiguration, useLocalProductionConfiguration, getConfiguration, sharedErrorHandler}
+const Config = {useAcceptanceConfiguration, useProductionConfiguration, useLocalProductionConfiguration, getConfiguration, sharedErrorHandler}
 
 module.exports = Config
 

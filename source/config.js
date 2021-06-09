@@ -56,6 +56,6 @@ const getConfiguration = () => {
   return configuration
 }
 
-const Config = {configuration, useAcceptanceConfiguration, useProductionConfiguration, useLocalProductionConfiguration, getConfiguration, sharedErrorHandler}
+const Config = {useAcceptanceConfiguration, useProductionConfiguration, useLocalProductionConfiguration, getConfiguration, sharedErrorHandler}
 
 module.exports = Config

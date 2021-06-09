@@ -15,7 +15,7 @@ describe("makeErrorsPretty", () => {
           json: () => Promise.resolve({
             message: "some unfortunate error",
           }),
-          url: Config.configuration.AVVIR_GATEWAY_URL + "/some-url-path"
+          url: Config.getConfiguration().AVVIR_GATEWAY_URL + "/some-url-path"
         })
       }
     }
