@@ -4158,9 +4158,28 @@ var Http = /*#__PURE__*/function () {
   }
 
   _createClass(Http, null, [{
+    key: "fetch",
+    value: function (_fetch) {
+      function fetch(_x, _x2) {
+        return _fetch.apply(this, arguments);
+      }
+
+      fetch.toString = function () {
+        return _fetch.toString();
+      };
+
+      return fetch;
+    }(function (url, data) {
+      if (_config__WEBPACK_IMPORTED_MODULE_2___default().getConfiguration().logFetch) {
+        console.log("Calling fetch with:", url, data);
+      }
+
+      return fetch(url, data);
+    })
+  }, {
     key: "get",
     value: function get(url, user) {
-      return fetch(url, {
+      return Http.fetch(url, {
         method: "GET",
         headers: _objectSpread(_objectSpread({}, _request_headers__WEBPACK_IMPORTED_MODULE_1__.httpPostHeaders), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user))
       });
@@ -4168,7 +4187,7 @@ var Http = /*#__PURE__*/function () {
   }, {
     key: "delete",
     value: function _delete(url, user) {
-      return fetch(url, {
+      return Http.fetch(url, {
         method: "DELETE",
         headers: _objectSpread(_objectSpread({}, _request_headers__WEBPACK_IMPORTED_MODULE_1__.httpPostHeaders), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user))
       });
@@ -4176,7 +4195,7 @@ var Http = /*#__PURE__*/function () {
   }, {
     key: "post",
     value: function post(url, user, body) {
-      return fetch(url, {
+      return Http.fetch(url, {
         method: "POST",
         headers: _objectSpread(_objectSpread({}, _request_headers__WEBPACK_IMPORTED_MODULE_1__.httpPostHeaders), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user)),
         body: JSON.stringify(body)
@@ -4185,7 +4204,7 @@ var Http = /*#__PURE__*/function () {
   }, {
     key: "patch",
     value: function patch(url, user, body) {
-      return fetch(url, {
+      return Http.fetch(url, {
         method: "PATCH",
         headers: _objectSpread(_objectSpread({}, _request_headers__WEBPACK_IMPORTED_MODULE_1__.httpPostHeaders), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user)),
         body: JSON.stringify(body)
@@ -4354,7 +4373,7 @@ var serializeForm = function serializeForm(form) {
 
 const _ = __webpack_require__(2164);
 
-let configuration = {};
+let configuration = {logFetch: false};
 
 const addEnvironmentVariablesToConfiguration = () => {
   _.forEach(configuration, (value, varName) => {

@@ -1,6 +1,6 @@
 const _ = require("underscore");
 
-let configuration = {};
+let configuration = {logFetch: false};
 
 const addEnvironmentVariablesToConfiguration = () => {
   _.forEach(configuration, (value, varName) => {

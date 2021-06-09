@@ -5,8 +5,14 @@ import Config from "../config";
 
 export default class Http {
   static baseUrl = ():string => Config.getConfiguration().AVVIR_GATEWAY_URL;
+  static fetch(url, data){
+    if(Config.getConfiguration().logFetch){
+      console.log("Calling fetch with:", url, data)
+    }
+    return fetch(url, data)
+  }
   static get(url, user){
-    return fetch(url, {
+    return Http.fetch(url, {
       method: "GET",
       headers: {
         ...httpPostHeaders,
@@ -15,7 +21,7 @@ export default class Http {
     });
   }
   static delete(url, user){
-    return fetch(url, {
+    return Http.fetch(url, {
       method: "DELETE",
       headers: {
         ...httpPostHeaders,
@@ -24,7 +30,7 @@ export default class Http {
     });
   }
   static post(url, user, body){
-    return fetch(url, {
+    return Http.fetch(url, {
       method: "POST",
       headers: {
         ...httpPostHeaders,
@@ -35,7 +41,7 @@ export default class Http {
   }
 
   static patch(url, user, body){
-    return fetch(url, {
+    return Http.fetch(url, {
       method: "PATCH",
       headers: {
         ...httpPostHeaders,
