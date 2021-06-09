@@ -4420,14 +4420,16 @@ const addEnvironmentVariablesToConfiguration = () => {
 
 const useAcceptanceConfiguration = () => {
   config = {
-    AVVIR_GATEWAY_URL: "https://acceptance-api.avvir.io"
+    AVVIR_GATEWAY_URL: "https://acceptance-api.avvir.io",
+    AVVIR_ENVIRONMENT: "acceptance"
   }
   addEnvironmentVariablesToConfiguration()
 }
 
 const useProductionConfiguration = () => {
   config = {
-    AVVIR_GATEWAY_URL: "https://avvir-gateway-production.herokuapp.com"
+    AVVIR_GATEWAY_URL: "https://avvir-gateway-production.herokuapp.com",
+    AVVIR_ENVIRONMENT: "production"
   }
   addEnvironmentVariablesToConfiguration()
 }

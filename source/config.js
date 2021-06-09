@@ -12,14 +12,24 @@ const addEnvironmentVariablesToConfiguration = () => {
 
 const useAcceptanceConfiguration = () => {
   config = {
-    AVVIR_GATEWAY_URL: "https://acceptance-api.avvir.io"
+    AVVIR_GATEWAY_URL: "https://acceptance-api.avvir.io",
+    AVVIR_ENVIRONMENT: "acceptance"
   }
   addEnvironmentVariablesToConfiguration()
 }
 
 const useProductionConfiguration = () => {
   config = {
-    AVVIR_GATEWAY_URL: "https://avvir-gateway-production.herokuapp.com"
+    AVVIR_GATEWAY_URL: "https://avvir-gateway-production.herokuapp.com",
+    AVVIR_ENVIRONMENT: "production"
+  }
+  addEnvironmentVariablesToConfiguration()
+}
+
+const useLocalProductionConfiguration = () => {
+  config = {
+    AVVIR_GATEWAY_URL: "https://avvir-gateway-production.herokuapp.com",
+    AVVIR_ENVIRONMENT: "local-production"
   }
   addEnvironmentVariablesToConfiguration()
 }
@@ -27,6 +37,8 @@ const useProductionConfiguration = () => {
 const setConfigurationFromEnvironmentVariable = () => {
   if(process.env.AVVIR_ENVIRONMENT === 'acceptance'){
     useAcceptanceConfiguration()
+  } else if(process.env.AVVIR_ENVIRONMENT === 'local-production'){
+    useLocalProductionConfiguration()
   } else {
     useProductionConfiguration()
   }
