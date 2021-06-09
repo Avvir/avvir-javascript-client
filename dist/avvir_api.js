@@ -62,7 +62,7 @@ var AuthApi = /*#__PURE__*/function () {
         username: username,
         password: password
       };
-      return fetch("".concat(http.default.baseUrl(), "/login"), {
+      return http.default.fetch("".concat(http.default.baseUrl(), "/login"), {
         headers: _objectSpread(_objectSpread({}, request_headers.httpGetHeaders), (0,get_authorization_headers.default)(user))
       }).then(function (response) {
         return response.json().then(function (body) {
@@ -949,7 +949,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
   }, {
     key: "getCustomFirebaseToken",
     value: function getCustomFirebaseToken(user) {
-      return fetch("".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/login"), {
+      return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.fetch("".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/login"), {
         headers: _objectSpread(_objectSpread({}, _utilities_request_headers__WEBPACK_IMPORTED_MODULE_2__.httpGetHeaders), (0,_utilities_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user))
       }).then(function (response) {
         return response.json().then(function (body) {
@@ -970,7 +970,7 @@ var WebGatewayApi = /*#__PURE__*/function () {
         username: username,
         password: password
       };
-      return fetch("".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/login"), {
+      return _utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.fetch("".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_3__.default.baseUrl(), "/login"), {
         headers: _objectSpread(_objectSpread({}, _utilities_request_headers__WEBPACK_IMPORTED_MODULE_2__.httpGetHeaders), (0,_utilities_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user))
       }).then(function (response) {
         return response.json().then(function (body) {

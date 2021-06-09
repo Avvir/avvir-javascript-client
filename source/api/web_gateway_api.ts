@@ -80,7 +80,7 @@ export default class WebGatewayApi {
 
   // TODO: rename / move
   static getCustomFirebaseToken(user: User) {
-    return fetch(`${Http.baseUrl()}/login`, {
+    return Http.fetch(`${Http.baseUrl()}/login`, {
       headers: {
         ...httpGetHeaders,
         ...getAuthorizationHeaders(user)
@@ -101,7 +101,7 @@ export default class WebGatewayApi {
       username,
       password
     };
-    return fetch(`${Http.baseUrl()}/login`, {
+    return Http.fetch(`${Http.baseUrl()}/login`, {
       headers: {
         ...httpGetHeaders,
         ...getAuthorizationHeaders(user)
