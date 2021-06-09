@@ -471,6 +471,17 @@ describe("ElementApi", () => {
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
-
+    it("returns the running process", () => {
+      ElementApi.matchPlannedBuildingElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+      }, {}, [], {
+        authType: GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+    }).then(runningProcess => {
+        expect(runningProcess.endDate).to.eq(null);
+        expect(runningProcess.startDate).not.to.eq(null);
+      });
+    });
   });
 });

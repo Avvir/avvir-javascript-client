@@ -6,6 +6,7 @@ import Http from "../utilities/http";
 import DeviationStatus from "../models/enums/deviation_status";
 import DetailedElement from "../models/domain/detailed_element";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
+import {RunningProcess} from "../models/domain/running_process";
 
 export default class ElementApi {
   static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User): Promise<ApiPlannedElement[]> {
@@ -66,7 +67,7 @@ export default class ElementApi {
   static matchPlannedBuildingElements({ projectId, floorId }: AssociationIds,
                                       matches: { [v1Id: string]: string },
                                       newElements: ApiPlannedElement[],
-                                      user: User): Promise<void> {
+                                      user: User): Promise<RunningProcess> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/match`;
     return Http.post(url, user, { matches, newElements });
   }
