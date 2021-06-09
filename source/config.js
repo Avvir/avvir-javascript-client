@@ -20,7 +20,7 @@ const useAcceptanceConfiguration = () => {
 
 const useProductionConfiguration = () => {
   config = {
-    AVVIR_GATEWAY_URL: "https://avvir-gateway-production.herokuapp.com",
+    AVVIR_GATEWAY_URL: "https://api.avvir.io",
     AVVIR_ENVIRONMENT: "production"
   }
   addEnvironmentVariablesToConfiguration()
@@ -28,7 +28,7 @@ const useProductionConfiguration = () => {
 
 const useLocalProductionConfiguration = () => {
   config = {
-    AVVIR_GATEWAY_URL: "https://avvir-gateway-production.herokuapp.com",
+    AVVIR_GATEWAY_URL: "https://api.avvir.io",
     AVVIR_ENVIRONMENT: "local-production"
   }
   addEnvironmentVariablesToConfiguration()
