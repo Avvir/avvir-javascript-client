@@ -14,7 +14,7 @@ export default class AuthApi {
       username,
       password
     };
-    return fetch(`${Http.baseUrl()}/login`, {
+    return Http.fetch(`${Http.baseUrl()}/login`, {
       headers: {
         ...httpGetHeaders,
         ...getAuthorizationHeaders(user)
