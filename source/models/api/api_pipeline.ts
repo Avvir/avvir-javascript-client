@@ -6,6 +6,7 @@ import { DateLike, Modify, ModifyPartial } from "type_aliases";
 interface ApiPipelineArgument extends ModifyPartial<ApiPipeline, {
   startTime?: DateLike
   endTime?: DateLike
+  status?: RunningProcessStatus
 }> {}
 
 export default class ApiPipeline {
