@@ -14,11 +14,14 @@ export default class AuthApi {
       username,
       password
     };
-    return Http.fetch(`${Http.baseUrl()}/login`, {
-      headers: {
-        ...httpGetHeaders,
-        ...getAuthorizationHeaders(user)
-      }
+    const headers = {
+      ...httpGetHeaders,
+      ...getAuthorizationHeaders(user)
+    }
+    const url = `${Http.baseUrl()}/login`;
+
+    return Http.fetch(url, {
+      headers
     }).then((response) => {
       return response.json()
         .then(body => {
