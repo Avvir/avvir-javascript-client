@@ -9,7 +9,7 @@ import {FloorPurposeType, PurposeType} from "../models/enums/purpose_type";
 import ApiArgoResponse from "../models/api/api_argo_response";
 
 export default class FileInformationApi {
-  static createProjectFile({ projectId }: AssociationIds, apiFile: ApiCloudFile, user: User) : Promise<void>{
+  static createProjectFile({ projectId }: AssociationIds, apiFile: ApiCloudFile, user: User) : Promise<ApiCloudFile>{
     const url = `${Http.baseUrl()}/projects/${projectId}/files`;
     return Http.post(url, user, apiFile);
   }
