@@ -13,7 +13,7 @@ class PipelineApi {
     return Http.post(url, user, body);
   }
 
-  static triggerPipeline (body: ApiPipelineArgument = {}, user: User ) {
+  static triggerPipeline (body: ApiPipelineArgument = {}, user: User ): Promise<ApiPipeline> {
     const url = `${Http.baseUrl()}/pipeline`;
     let response = Http.post(url, user, body);
     return response;

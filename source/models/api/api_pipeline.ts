@@ -1,11 +1,12 @@
 import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
 import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 import RunningProcessStatus from "../enums/running_process_status";
-import { DateLike, Modify, ModifyPartial } from "type_aliases";
+import { DateLike, ModifyPartial } from "type_aliases";
 
-interface ApiPipelineArgument extends ModifyPartial<ApiPipeline, {
+export interface ApiPipelineArgument extends ModifyPartial<ApiPipeline, {
   startTime?: DateLike
   endTime?: DateLike
+  options?: object
   status?: RunningProcessStatus
 }> {}
 
@@ -20,6 +21,7 @@ export default class ApiPipeline {
     firebaseProjectId,
     firebaseFloorId,
     firebaseScanDatasetId,
+    options,
     status
   }: ApiPipelineArgument = {}) {
     addReadOnlyPropertiesToModel(this, { id });
@@ -35,6 +37,7 @@ export default class ApiPipeline {
     this.firebaseProjectId = firebaseProjectId || null;
     this.firebaseFloorId = firebaseFloorId || null;
     this.firebaseScanDatasetId = firebaseScanDatasetId || null;
+    this.options = options || null;
     this.status = status || null;
   }
 
@@ -48,6 +51,8 @@ export default class ApiPipeline {
   firebaseProjectId: string;
   firebaseFloorId: string;
   firebaseScanDatasetId: string;
+
+  options: object;
 
   status: RunningProcessStatus;
 }
