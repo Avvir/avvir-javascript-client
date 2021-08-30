@@ -7,15 +7,20 @@ In webstorm mocha configuration template:
  - set extra-mocha-options to `--require ./tests/test_utils/mocha_setup.js`
  - set AVVIR_ENVIRONMENT to acceptance
  
- 
+ # Testing 
+
+## Setup testing
+Add the following in the mocha template in the `Extra Mocha options` field
+`--require ./scripts/mocha_setup.js`
+
  # TODO - Chores etc.
  
- - remove overload method from FileInformationApi
- - rename reduce_user_session.ts
- - why doesn't async/await transpile?
- - pretty errors on AuthApi.login()
- - getViewerFloor is still a thing?
- - avvir-only docs ?
-    - how to get superadmin credentials 
- - upload file from local data
- - 
+ -[ ] remove overload method from FileInformationApi
+ -[ ] rename reduce_user_session.ts
+ -[ ] why doesn't async/await transpile?
+ -[ ] pretty errors on AuthApi.login()
+ -[ ] getViewerFloor is still a thing?
+ -[ ] avvir-only docs ?
+ -[ ] how to get superadmin credentials
+ -[ ] upload file from local data
+

@@ -2,20 +2,18 @@
 
 
 # Getting Started Guide
+Configure Environment:
 
-configure environment:
+`AVVIR_ENVIRONMENT=acceptance`
 
-`AVVIR_ENVIRONMENT=production`
-
-get your project id:
-
-// TODO
-
-
-## Setup testing
-Add the following in the mocha template in the `Extra Mocha options` field
-`--require ./scripts/mocha_setup.js`
-
+## Getting Project Id
+Get your project id:
+1. Navigate to https://portal.avvir.io/
+2. Log in with your credentials
+3. Choose project you'd like to work with
+4. Take project id from the URL
+   - ex: https://portal.avvir.io/admin/organizations/{organizationId}/projects/{projectId}
+   
 ## Sample client code (Node)
 ```javascript
 // if you're writing code for the browser, instead of require use this import:
@@ -45,6 +43,9 @@ let createExampleFile = async ()=>{
 createExampleFile();
 ```
 
-# Troubleshooting
+## Troubleshooting
 
 `TypeError: Only absolute URLs are supported`: make sure that your AVVIR_GATEWAY_URL environment variable is set.
+
+## Contributing 
+Read our [contributing guide](./CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to avvir-javascript-client.
