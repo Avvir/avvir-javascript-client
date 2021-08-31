@@ -40,7 +40,7 @@ describe("PipelineApi", () => {
     describe("#triggerPipeline", () => {
       let request;
       beforeEach(() => {
-        fetchMock.post(`${Http.baseUrl()}/pipeline`, (url, req, opts)=>{
+        fetchMock.post(`${Http.baseUrl()}/pipelines`,(url, req, opts)=>{
           const { name, id } = req.body;
           const apiResponse = new ApiPipeline({
             status: RunningProcessStatus.RUNNING,
@@ -67,7 +67,7 @@ describe("PipelineApi", () => {
             new ApiPipeline({}),
             { authType:FIREBASE, firebaseUser: {idToken: "some-firebase.id.token" }}
         );
-        expect(fetchMock.lastUrl()).to.eq(`${Http.baseUrl()}/pipeline`);
+        expect(fetchMock.lastUrl()).to.eq(`${Http.baseUrl()}/pipelines`);
       });
 
       it("Returns an ApiPipeline type",  () => {
@@ -160,7 +160,7 @@ describe("PipelineApi", () => {
           expect(err.message).to.eq("some unfortunate error");
           expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
             error: err,
-            action: "triggerPipeline",
+            action: "triggerJobStepsPipeline",
             arguments: [{
               accountId: "some-organization-id",
               projectId: "some-project-id",

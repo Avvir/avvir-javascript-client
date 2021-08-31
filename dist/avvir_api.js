@@ -62,8 +62,12 @@ var AuthApi = /*#__PURE__*/function () {
         username: username,
         password: password
       };
-      return http.default.fetch("".concat(http.default.baseUrl(), "/login"), {
-        headers: _objectSpread(_objectSpread({}, request_headers.httpGetHeaders), (0,get_authorization_headers.default)(user))
+
+      var headers = _objectSpread(_objectSpread({}, request_headers.httpGetHeaders), (0,get_authorization_headers.default)(user));
+
+      var url = "".concat(http.default.baseUrl(), "/login");
+      return http.default.fetch(url, {
+        headers: headers
       }).then(function (response) {
         return response.json().then(function (body) {
           if (response.ok) {
@@ -549,8 +553,8 @@ var PipelineApi = /*#__PURE__*/function () {
   }
 
   _createClass(PipelineApi, null, [{
-    key: "triggerPipeline",
-    value: function triggerPipeline(associationIds) {
+    key: "triggerJobStepsPipeline",
+    value: function triggerJobStepsPipeline(associationIds) {
       var body = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       var user = arguments.length > 2 ? arguments[2] : undefined;
       var accountId = associationIds.accountId,
@@ -559,6 +563,19 @@ var PipelineApi = /*#__PURE__*/function () {
           scanDatasetId = associationIds.scanDatasetId;
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/pipeline/").concat(accountId, "/").concat(projectId, "/").concat(floorId, "/").concat(scanDatasetId, "/trigger");
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, body);
+    }
+  }, {
+    key: "triggerPipeline",
+    value: function triggerPipeline() {
+      var body = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var user = arguments.length > 1 ? arguments[1] : undefined;
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/pipelines");
+      var response = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, body);
+      return response;
+    }
+  }, {
+    key: "checkPipelinesApi",
+    value: function checkPipelinesApi(name) {//TODO: move from web_gateway_api
     }
   }]);
 
@@ -1270,7 +1287,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -1451,7 +1468,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -2568,6 +2585,7 @@ var ApiPipeline = function ApiPipeline() {
       firebaseProjectId = _ref.firebaseProjectId,
       firebaseFloorId = _ref.firebaseFloorId,
       firebaseScanDatasetId = _ref.firebaseScanDatasetId,
+      options = _ref.options,
       status = _ref.status;
 
   _classCallCheck(this, ApiPipeline);
@@ -2581,6 +2599,7 @@ var ApiPipeline = function ApiPipeline() {
   this.firebaseProjectId = void 0;
   this.firebaseFloorId = void 0;
   this.firebaseScanDatasetId = void 0;
+  this.options = void 0;
   this.status = void 0;
   (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_1__.default)(this, {
     id: id
@@ -2597,6 +2616,7 @@ var ApiPipeline = function ApiPipeline() {
   this.firebaseProjectId = firebaseProjectId || null;
   this.firebaseFloorId = firebaseFloorId || null;
   this.firebaseScanDatasetId = firebaseScanDatasetId || null;
+  this.options = options || null;
   this.status = status || null;
 };
 
@@ -3644,6 +3664,25 @@ var PhotoProjectionType;
 
 /***/ }),
 
+/***/ 8768:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Pipelines": () => (/* binding */ Pipelines),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var Pipelines;
+
+(function (Pipelines) {
+  Pipelines["INGEST_PROJECT_FILE"] = "ingest-project-file";
+})(Pipelines || (Pipelines = {}));
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Pipelines);
+
+/***/ }),
+
 /***/ 3011:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3963,7 +4002,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
@@ -4150,7 +4189,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
-
+ // import node_fetch from "node-fetch";
+//
+// // const fetch = fetch || node_fetch;
 
 var Http = /*#__PURE__*/function () {
   function Http() {
@@ -4385,7 +4426,8 @@ const addEnvironmentVariablesToConfiguration = () => {
 
 const useAcceptanceConfiguration = () => {
   configuration = {
-    AVVIR_GATEWAY_URL: "https://acceptance-api.avvir.io",
+    // AVVIR_GATEWAY_URL: "https://acceptance-api.avvir.io",
+    AVVIR_GATEWAY_URL: "http://localhost:8080",
     AVVIR_ENVIRONMENT: "acceptance"
   }
   addEnvironmentVariablesToConfiguration()
@@ -4415,7 +4457,6 @@ const setConfigurationFromEnvironmentVariable = () => {
   } else {
     useProductionConfiguration()
   }
-  console.log("Avvir client configured to reach ", configuration.AVVIR_GATEWAY_URL);
 }
 
 
@@ -4502,6 +4543,7 @@ var map = {
 	"./models/enums/notification_level.ts": 6402,
 	"./models/enums/page_names.ts": 3100,
 	"./models/enums/photo_projection_type.ts": 7932,
+	"./models/enums/pipeline_types.ts": 8768,
 	"./models/enums/purpose_type.ts": 3011,
 	"./models/enums/running_process_status.ts": 3714,
 	"./models/enums/scan_label.ts": 5632,
