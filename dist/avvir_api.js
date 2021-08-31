@@ -1938,7 +1938,8 @@ var ApiCloudFile = function ApiCloudFile(_ref) {
       id = _ref.id,
       lastModified = _ref.lastModified,
       createdAt = _ref.createdAt,
-      purposeType = _ref.purposeType;
+      purposeType = _ref.purposeType,
+      fileType = _ref.fileType;
 
   _classCallCheck(this, ApiCloudFile);
 
@@ -1951,7 +1952,8 @@ var ApiCloudFile = function ApiCloudFile(_ref) {
   (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, "createdAt");
   (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_4__.default)(this, {
     url: url,
-    id: id
+    id: id,
+    fileType: fileType
   });
   var purposeTypeVal = _api_purpose_type__WEBPACK_IMPORTED_MODULE_1__.default.OTHER;
   Object.defineProperties(this, {
@@ -4190,8 +4192,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
  // import node_fetch from "node-fetch";
-//
-// // const fetch = fetch || node_fetch;
+// const fetch = fetch || node_fetch;
 
 var Http = /*#__PURE__*/function () {
   function Http() {

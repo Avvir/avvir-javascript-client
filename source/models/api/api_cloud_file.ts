@@ -8,14 +8,15 @@ import PurposeTypeConverter from "../../converters/purpose_type_converter";
 interface ApiCloudFileArgument extends Partial<Modify<ApiCloudFile, {
   lastModified?: DateLike
   createdAt?: DateLike
-  purposeType: ApiPurposeType | PurposeType
+  purposeType: ApiPurposeType | PurposeType,
+  fileType?: string
 }>> {}
 
 export default class ApiCloudFile {
-  constructor({ url, id, lastModified, createdAt, purposeType }: ApiCloudFileArgument) {
+  constructor({ url, id, lastModified, createdAt, purposeType, fileType }: ApiCloudFileArgument) {
     addInstantGetterAndSetterToApiModel(this, "lastModified");
     addInstantGetterAndSetterToApiModel(this, "createdAt");
-    addReadOnlyPropertiesToModel(this, { url, id });
+    addReadOnlyPropertiesToModel(this, { url, id, fileType });
     let purposeTypeVal: ApiPurposeType = ApiTypesEnum.OTHER;
     Object.defineProperties(this, {
       purposeType: {

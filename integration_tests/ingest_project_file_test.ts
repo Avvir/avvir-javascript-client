@@ -39,7 +39,10 @@ describe("Ingest project files test", () => {
 
   it("Copies the file into Avvir's cloud storage", function(done) {
     this.timeout(0)
-    let apiCloudFile: ApiCloudFile = new ApiCloudFile({url: 'https://storage.googleapis.com/avvir-public-readonly/test-fixture.txt', purposeType: OTHER})
+    let apiCloudFile: ApiCloudFile = new ApiCloudFile({
+      url: 'https://storage.googleapis.com/avvir-public-readonly/test-fixture.txt',
+      purposeType: OTHER
+    })
 
     let pipelineResponse: ApiPipeline;
 
@@ -51,7 +54,8 @@ describe("Ingest project files test", () => {
                   name: Pipelines.INGEST_PROJECT_FILE,
                   firebaseProjectId: projectId,
                   options: {
-                    url: apiCloudFile.url
+                    url: apiCloudFile.url,
+                    fileType: 'txt'
                   }
                 })
                 AvvirApi.pipelines.triggerPipeline(pipeline, user)
