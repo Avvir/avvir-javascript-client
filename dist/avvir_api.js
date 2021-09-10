@@ -4173,9 +4173,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9137);
 /* harmony import */ var _request_headers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(104);
-/* harmony import */ var _reduce_user_session__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3226);
+/* harmony import */ var _reduce_user_session__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3226);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5663);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6786);
+/* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(node_fetch__WEBPACK_IMPORTED_MODULE_3__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -4191,8 +4193,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
- // import node_fetch from "node-fetch";
-// const fetch = fetch || node_fetch;
+
+
+
+var _fetch = _fetch || (node_fetch__WEBPACK_IMPORTED_MODULE_3___default());
 
 var Http = /*#__PURE__*/function () {
   function Http() {
@@ -4201,23 +4205,13 @@ var Http = /*#__PURE__*/function () {
 
   _createClass(Http, null, [{
     key: "fetch",
-    value: function (_fetch) {
-      function fetch(_x, _x2) {
-        return _fetch.apply(this, arguments);
-      }
-
-      fetch.toString = function () {
-        return _fetch.toString();
-      };
-
-      return fetch;
-    }(function (url, data) {
+    value: function fetch(url, data) {
       if (_config__WEBPACK_IMPORTED_MODULE_2___default().getConfiguration().logFetch) {
         console.log("Calling fetch with:", url, data);
       }
 
-      return fetch(url, data);
-    })
+      return _fetch(url, data);
+    }
   }, {
     key: "get",
     value: function get(url, user) {
@@ -4256,9 +4250,9 @@ var Http = /*#__PURE__*/function () {
     key: "addAuthToDownloadUrl",
     value: function addAuthToDownloadUrl(baseUrl, user) {
       if (user) {
-        if ((0,_reduce_user_session__WEBPACK_IMPORTED_MODULE_3__.isGatewayUser)(user)) {
+        if ((0,_reduce_user_session__WEBPACK_IMPORTED_MODULE_4__.isGatewayUser)(user)) {
           return "".concat(baseUrl, "?auth=").concat(user.gatewayUser.idToken);
-        } else if ((0,_reduce_user_session__WEBPACK_IMPORTED_MODULE_3__.isFirebaseUser)(user)) {
+        } else if ((0,_reduce_user_session__WEBPACK_IMPORTED_MODULE_4__.isFirebaseUser)(user)) {
           return "".concat(baseUrl, "?firebaseAuth=").concat(user.firebaseUser.idToken);
         }
       } else {
@@ -4450,11 +4444,21 @@ const useLocalProductionConfiguration = () => {
   addEnvironmentVariablesToConfiguration()
 }
 
+const useLocalConfiguration = () => {
+  addEnvironmentVariablesToConfiguration()
+  configuration = {
+    AVVIR_GATEWAY_URL: "http://localhost:8080",
+    AVVIR_ENVIRONMENT: "local"
+  }
+}
+
 const setConfigurationFromEnvironmentVariable = () => {
   if(process.env.AVVIR_ENVIRONMENT === 'acceptance'){
     useAcceptanceConfiguration()
   } else if(process.env.AVVIR_ENVIRONMENT === 'local-production'){
     useLocalProductionConfiguration()
+  } else if(process.env.AVVIR_ENVIRONMENT === 'local'){
+    useLocalConfiguration()
   } else {
     useProductionConfiguration()
   }
@@ -4471,7 +4475,7 @@ const getConfiguration = () => {
   return configuration
 }
 
-const Config = {useAcceptanceConfiguration, useProductionConfiguration, useLocalProductionConfiguration, getConfiguration, sharedErrorHandler}
+const Config = {useAcceptanceConfiguration, useProductionConfiguration, useLocalProductionConfiguration, useLocalConfiguration, getConfiguration, sharedErrorHandler}
 
 module.exports = Config
 
@@ -4592,6 +4596,14 @@ module.exports = require("moment");;
 
 /***/ }),
 
+/***/ 6786:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node-fetch");;
+
+/***/ }),
+
 /***/ 2293:
 /***/ ((module) => {
 
@@ -4680,38 +4692,30 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "default": () => (/* binding */ avvir)
-});
-
-// EXTERNAL MODULE: ./source/avvir_api.ts
-var avvir_api = __webpack_require__(4406);
-;// CONCATENATED MODULE: external "node-fetch"
-const external_node_fetch_namespaceObject = require("node-fetch");;
-var external_node_fetch_default = /*#__PURE__*/__webpack_require__.n(external_node_fetch_namespaceObject);
-// EXTERNAL MODULE: external "underscore"
-var external_underscore_ = __webpack_require__(2164);
-var external_underscore_default = /*#__PURE__*/__webpack_require__.n(external_underscore_);
-;// CONCATENATED MODULE: ./avvir.ts
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _source_avvir_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4406);
+/* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6786);
+/* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(node_fetch__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2164);
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(underscore__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
 
-global.fetch = (external_node_fetch_default());
+global.fetch = (node_fetch__WEBPACK_IMPORTED_MODULE_1___default());
 
 const Avvir = {
-  api: avvir_api.default
+  api: _source_avvir_api__WEBPACK_IMPORTED_MODULE_0__.default
 };
 
 function importAll(directoryContext, target) {
   directoryContext.keys().forEach(filePath => {
 
     let moduleExports = directoryContext(filePath);
-    external_underscore_default().forEach(moduleExports, (moduleExport, exportName) => {
+    underscore__WEBPACK_IMPORTED_MODULE_2___default().forEach(moduleExports, (moduleExport, exportName) => {
       // if (exportName !== 'default') {
         target[exportName] = moduleExport;
       // }
@@ -4726,7 +4730,7 @@ function importAll(directoryContext, target) {
 // skip .d.ts files because some use syntax our webpack settings don't support
 importAll(__webpack_require__(5422), Avvir);
 
-/* harmony default export */ const avvir = (Avvir);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Avvir);
 
 })();
 

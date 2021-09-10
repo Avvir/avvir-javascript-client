@@ -15,7 +15,7 @@ describe("Ingest project files test", () => {
     email = process.env.AVVIR_SANDBOX_EMAIL
     password = process.env.AVVIR_SANDBOX_PASSWORD
     projectId = process.env.AVVIR_SANDBOX_PROJECT_ID
-    checkPipelineTimeout = 500;
+    checkPipelineTimeout = 1000;
     checkPipelineIterations = 100
 
 
@@ -64,11 +64,10 @@ describe("Ingest project files test", () => {
 
                   checkPipeline(pipelineResponse, user)
                       .then((response) => {
-                        console.log(response);
                         AvvirApi.files.listProjectFiles({projectId}, user).then((projectFiles) => {
                           let url = projectFiles.slice(-1)[0].url;
-                          expect(url).to.eq("https://storage.googleapis.com/avvir-public-readonly/test-fixture.txt")
-                          // throw "error";
+                          let isExternalUrl = new RegExp(`https://storage.googleapis.com/avvir-portal-acceptance.appspot.com/project_uploads/${[projectId]}/\\d\\d\\d\\d-\\d\\d-\\d\\d_\\d\\d-\\d\\d-\\d\\d_test-fixture.txt`)
+                          expect(isExternalUrl.test(url)).to.eq(true);
                           done()
                         }).catch((err)=>{
                           done(err)

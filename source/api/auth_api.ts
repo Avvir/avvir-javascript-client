@@ -19,10 +19,10 @@ export default class AuthApi {
       ...getAuthorizationHeaders(user)
     }
     const url = `${Http.baseUrl()}/login`;
-
     return Http.fetch(url, {
       headers
     }).then((response) => {
+
       return response.json()
         .then(body => {
           if (response.ok) {

@@ -35,11 +35,21 @@ const useLocalProductionConfiguration = () => {
   addEnvironmentVariablesToConfiguration()
 }
 
+const useLocalConfiguration = () => {
+  addEnvironmentVariablesToConfiguration()
+  configuration = {
+    AVVIR_GATEWAY_URL: "http://localhost:8080",
+    AVVIR_ENVIRONMENT: "local"
+  }
+}
+
 const setConfigurationFromEnvironmentVariable = () => {
   if(process.env.AVVIR_ENVIRONMENT === 'acceptance'){
     useAcceptanceConfiguration()
   } else if(process.env.AVVIR_ENVIRONMENT === 'local-production'){
     useLocalProductionConfiguration()
+  } else if(process.env.AVVIR_ENVIRONMENT === 'local'){
+    useLocalConfiguration()
   } else {
     useProductionConfiguration()
   }
@@ -56,6 +66,6 @@ const getConfiguration = () => {
   return configuration
 }
 
-const Config = {useAcceptanceConfiguration, useProductionConfiguration, useLocalProductionConfiguration, getConfiguration, sharedErrorHandler}
+const Config = {useAcceptanceConfiguration, useProductionConfiguration, useLocalProductionConfiguration, useLocalConfiguration, getConfiguration, sharedErrorHandler}
 
 module.exports = Config
