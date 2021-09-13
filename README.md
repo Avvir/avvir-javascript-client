@@ -1,11 +1,5 @@
 # avvir-javascript-client
 
-
-# Getting Started Guide
-Configure Environment:
-
-`AVVIR_ENVIRONMENT=acceptance`
-
 ## Getting Project Id
 Get your project id:
 1. Navigate to https://portal.avvir.io/

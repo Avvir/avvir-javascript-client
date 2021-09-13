@@ -5,7 +5,7 @@
 
 In webstorm mocha configuration template:
  - set extra-mocha-options to `--require ./tests/test_utils/mocha_setup.js`
- - set AVVIR_ENVIRONMENT to acceptance
+ - set AVVIR_ENVIRONMENT to acceptance `AVVIR_ENVIRONMENT=acceptance`
  
  # Testing 
 
