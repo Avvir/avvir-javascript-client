@@ -12,7 +12,6 @@ const addEnvironmentVariablesToConfiguration = () => {
 
 const useAcceptanceConfiguration = () => {
   configuration = {
-    // AVVIR_GATEWAY_URL: "https://acceptance-api.avvir.io",
     AVVIR_GATEWAY_URL: "http://localhost:8080",
     AVVIR_ENVIRONMENT: "acceptance"
   }
