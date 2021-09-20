@@ -13,6 +13,12 @@ In webstorm mocha configuration template:
 Add the following in the mocha template in the `Extra Mocha options` field
 `--require ./scripts/mocha_setup.js`
 
+
+## Troubleshooting
+
+`TypeError: Only absolute URLs are supported`: make sure that your AVVIR_GATEWAY_URL environment variable is set.
+
+
  # TODO - Chores etc.
  
  -[ ] remove overload method from FileInformationApi
