@@ -72,14 +72,35 @@ export default class ApiScanDataset {
     this.scanDate = scanDate;
   }
 
+  /**
+   * Internal identifier, not used in URLs.
+   */
   readonly id: number;
+
+  /**
+   * External identifier, suitable for use in URLs.
+   */
   readonly firebaseId: string;
+
+  /**
+   * External identifier of the area that this Capture Dataset belongs to.
+   */
   readonly firebaseFloorId: string;
+
+  /**
+   * Ordinal number for sorting datasets when showing a list of datasets associated with an area.
+   */
   readonly scanNumber: number;
+
+  /**
+   * Date that the dataset was captured.
+   */
+  scanDate: number | null = null;
+
   coarseAlignmentMatrix: ApiMatrix4 | null = null;
   fineAlignmentMatrix: ApiMatrix4 | null = null;
   dataPresences?: { scanAnalysis?: boolean };
   notes: string | null = null;
   name: string | null = null;
-  scanDate: number | null = null;
+
 }

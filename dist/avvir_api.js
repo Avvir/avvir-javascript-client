@@ -2150,7 +2150,11 @@ var ApiFloor = function ApiFloor() {
 
   this.bimMinimapToWorld = bimMinimapToWorld || null;
   this.floorElevation = floorElevation || null;
-};
+}
+/**
+ * Internal identifier, not used in URLs.
+ */
+;
 
 
 
@@ -3022,12 +3026,12 @@ var ApiScanDataset = function ApiScanDataset(_ref) {
   this.firebaseId = void 0;
   this.firebaseFloorId = void 0;
   this.scanNumber = void 0;
+  this.scanDate = null;
   this.coarseAlignmentMatrix = null;
   this.fineAlignmentMatrix = null;
   this.dataPresences = void 0;
   this.notes = null;
   this.name = null;
-  this.scanDate = null;
   (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_1__.default)(this, "scanDate");
   (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_3__.default)(this, {
     id: id,
@@ -3081,7 +3085,11 @@ var ApiScanDataset = function ApiScanDataset(_ref) {
   this.name = name || null; // @ts-ignore
 
   this.scanDate = scanDate;
-};
+}
+/**
+ * Internal identifier, not used in URLs.
+ */
+;
 
 
 

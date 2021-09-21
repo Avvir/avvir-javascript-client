@@ -96,14 +96,41 @@ export default class ApiFloor {
     this.floorElevation = floorElevation || null;
   }
 
-
+  /**
+   * Internal identifier, not used in URLs.
+   */
   readonly id: number;
+
+  /**
+   * External identifier, suitable for use in URLs.
+   */
   readonly firebaseId: string;
+
+  /**
+   * External identifier of the project that this area belongs to.
+   */
   readonly firebaseProjectId: string;
+
+  /**
+   * Ordinal number to sort this area by when showing all of the areas in a project.
+   */
   ordinal: number;
+
+  /**
+   * The name or title of this area.
+   */
   floorNumber: string;
+
+  /**
+   * External identifier of the default capture dataset associated with this area.
+   */
   defaultFirebaseScanDatasetId: string;
+
+  /**
+   * An array of external identifiers of the capture datasets associated with this area.
+   */
   firebaseScanDatasetIds: Array<string> = [];
+
   constructionGrid: ApiConstructionGrid | null = null;
   plannedElementCount: number | null = null;
   scanDate: number | null = null;
