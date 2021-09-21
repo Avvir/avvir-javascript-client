@@ -11,7 +11,6 @@ import ApiArgoResponse from "../models/api/api_argo_response";
 export default class FileInformationApi {
   static createProjectFile({ projectId }: AssociationIds, apiFile: ApiCloudFile, user: User) : Promise<ApiCloudFile>{
     const url = `${Http.baseUrl()}/projects/${projectId}/files`;
-    console.log(url);
     return Http.post(url, user, apiFile);
   }
 

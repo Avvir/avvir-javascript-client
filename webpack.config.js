@@ -5,6 +5,7 @@ var nodeExternals = require('webpack-node-externals');
 module.exports = {
   entry: path.join(__dirname, './avvir.ts'),
   target: 'node',
+  mode: "production",
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'avvir_api.js',
