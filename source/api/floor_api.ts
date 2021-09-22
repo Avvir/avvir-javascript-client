@@ -6,7 +6,7 @@ import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 
 export default class FloorApi {
-  static listFloorsForProject(projectId: string, user: User) : Promise<ApiFloor[]>{
+  static listFloorsForProject(projectId: string, user: User) : Promise<ApiFloor[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors`;
     return Http.get(url, user);
   }
@@ -16,7 +16,7 @@ export default class FloorApi {
     return Http.post(url, user, {text: floorNumber});
   }
 
-  static getFloor({ projectId, floorId }: AssociationIds, user: User) : Promise<ApiFloor[]>{
+  static getFloor({ projectId, floorId }: AssociationIds, user: User) : Promise<ApiFloor[]> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}`;
     return Http.get(url, user);
   }

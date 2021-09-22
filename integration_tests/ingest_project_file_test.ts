@@ -37,7 +37,7 @@ describe("Ingest project files test", () => {
     }
   })
 
-  it("Copies the file into Avvir's cloud storage", function(done) {
+  it("Copies the file into Avvir's cloud storage",  function(done) {
     this.timeout(0)
     let apiCloudFile: ApiCloudFile = new ApiCloudFile({
       url: 'https://storage.googleapis.com/avvir-public-readonly/test-fixture.txt',
