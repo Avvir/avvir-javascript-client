@@ -25,15 +25,14 @@ As a basic example this code will retrieve all the areas associated with a proje
 
 ```javascript
 const Avvir = require("avvir-javascript-client").default;
+// Make sure to replace the credentials with your actual username and password
+const username = "you@example.com";
+const password = "yourPassw0rd123";
+
+// Replace this with the project ID you retrieved from the "Getting a project ID" step
+const projectId = "your-project-id";
 
 async function printAreasAndCaptureDatasets() {
-   // Make sure to replace the credentials with your actual username and password
-   const username = "you@example.com";
-   const password = "yourPassw0rd123";
-
-   // Replace this with the project ID you retrieved from the "Getting a project ID" step
-   const projectId = "your-project-id";
-   
    const user = await Avvir.api.auth.login(username, password);
    const areas = await Avvir.api.floors.listFloorsForProject(projectId, user);
 
@@ -53,5 +52,171 @@ async function printAreasAndCaptureDatasets() {
 printAreasAndCaptureDatasets();
 ```
 
-## Contributing
+## Uploading a Project File
+
+When you have a scan file that you wish to upload into your project, you can use the api to pull a file from an external data source, and apply it to your project. 
+All uploaded project files can be found at:
+
+https://acceptance-portal.avvir.io/projects/{projectId}/uploads 
+
+Where the `projectId` should be replaced with the projectID acquired through the steps [above](#getting-a-project-id). 
+
+```javascript
+const uploadProjectFile = async () => {
+   const user = await Avvir.api.auth.login(username, password);
+   //create the payload for creating a project file
+   const apiCloudFile: ApiCloudFile = new ApiCloudFile({
+      url: 'https://some-external-host.com/scan-file.las',
+      purposeType: OTHER
+   });
+
+   //This will make the external file reference available to you in the avvir portal in on the files page
+   let fileRef = await AvvirApi.files.createProjectFile({projectId}, apiCloudFile, user);
+   console.log(fileRef)
+   let pipeline: ApiPipelineArgument = new ApiPipeline({
+      name: Pipelines.INGEST_PROJECT_FILE,
+      firebaseProjectId: projectId,
+      options: {
+         url: apiCloudFile.url,
+         fileType: 'las'
+      }
+   });
+
+   //This will trigger the avvir portal to dowload the created file reference into your project
+   let pipelineResponse = await AvvirApi.pipelines.triggerPipeline(pipeline, user);
+   //you must poll the pipeline in to check on its status while downloading your file.
+   let pipelineStatus = await AvvirApi.other.checkPipelineStatus({projectId}, pipelineResponse.id, user);
+   while(pipeline.status == 'RUNNING') {
+      pipelineStatus = await AvvirApi.other.checkPipelineStatus({projectId}, pipelineResponse.id, user);
+   }
+   if(pipeline.status == 'COMPLETE') {
+     //once completed, you can get the file by listing the project files, and grabbing the latest.
+      let files = await AvvirApi.files.listProjectFiles({projectId}, user);
+      const newFile = files.pop();
+      //you can also navigate to /uploads in the portal to view the file in the UI
+      return newFile
+   }
+}
+uploadProjectFile();
+```
+
+## Associating a Scan File to a Project Area
+Once a scan file has be ingested by the portal, you can now associate a scan to an area's scan dataset. By doing this, you gain the ability to run analysis on the scan to determine deviations and progress for the given area. 
+
+You must first acquire an area id from the portal by navigating to a floor in the portal and copying the id from the url:
+
+https://portal.avvir.io/admin/organizations/{organizationId}/projects/{projectId}/floors/{areaId}
+
+Or can create a floor programatically:
+```javascript
+const createFloor = async () => {
+  return await Avvir.api.floors.createFloor(projectId, "<Any Area Name>", user);
+}
+```
+
+Then, assuming you've already uploaded a scan file to your project, apply the following steps to associate the scan to an area. 
+
+```javascript
+const areaID = '<Your-Area-Id>';
+//you can get this url from the portal or by calling the uploadProjectFile() above, and getting the url property. 
+const fileUrl = 'https://some-file-url.com/scan.las';
+
+const associateScan = async (areaId, fileUrl) => {
+   const user = await Avvir.api.auth.login(username, password);
+   let floorId = areaId;
+   
+   const scanDataset = Avvir.api.scanDatasets.createScanDataset({ projectId, floorId }, user);
+   const cloudFile = new ApiCloudFile({
+      url: fileUrl,
+      purposeType: 'PREPROCESSED_SCAN'
+   });
+   let scanDatasetId = scanDataset.firebaseId;
+   await Avvir.api.files.saveScanDatasetFile({ projectId, floorId, scanDatasetId }, cloudFile, user);
+}
+
+let area = await createFloor()
+let areaId = area.firebaseId;
+
+associateScan(areaId, fileUrl)
+```
+
+## Contributing 
 Read our [contributing guide](./CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to avvir-javascript-client.
+
+## Api Reference
+___
+## Floor
+
+### listFloorsForProject(projectId, user)
+Get a list of all the floors for a given project
+#### Params
+1. _projectId_ `String` - Id for your project
+1. _user_ `User` - Authenticated User object 
+#### Returns
+1. `Promise<ApiFloor[]>` - list of floors from that specific project
+#### Example
+```javascript
+Avvir.api.floors.listFloorsForProject(projectId, user).then((response) => {
+   console.log(response);
+});
+```
+
+### createFloor(projectId, areaNumber, user)
+Creates a floor for a given project
+#### Params
+1. _projectId_ `String` - Id for your project
+1. _areaNumber_ `String` - The label which references the area (usually a number)
+1. _user_ `User` - Authenticated User object
+#### Returns
+1. `Promise<ApiFloor[]>` - An api object which represents the meta data of a floor. 
+#### Example
+```typescript
+Avvir.api.floors.createFloor(projectId, "<Any Area Name>", user).then((floor) => {
+  console.log(floor)
+})
+```
+
+### getFloor(associationIds, user)
+gets a floor by a given projectId and floorId
+#### Params
+1. _associationIds_ `AssociationIds` - Wrapper object for housing projectId and floorId
+1. _user_ `User` - Authenticated User object
+#### Returns
+1. `Promise<ApiFloor[]>` - list of floors that match param requirements
+   <br><br>
+   *see [ApiFloor](###ApiFloor) for type info
+#### Example
+```typescript
+const associationIds: AssociationIds = { projectId: '-MiR1yIeEPw0l8-gxr01', floorId: '-MiRiAGSt7-S1kt_xBRY'};
+Avvir.api.floors.getFloor(associationIds, user).then((response) => {
+    console.log(response);
+});
+```
+
+## Scan Dataset
+
+
+
+## Photo Area
+
+
+
+# Types
+
+### ApiFloor
+#### Properties
+- _readonly_ `Number` id
+- _readonly_ `String` firebaseId
+- _readonly_ `String` firebaseProjectId
+- `Number` ordinal
+- `String` floorNumber
+- `String` defaultFirebaseScanDatasetId
+- `String[]` firebaseScanDatasetIds
+- `ApiConstructionGrid | Null` constructionGrid
+- `Number | Null` plannedElementCount
+- `Number | Null` scanDate
+- _readonly_ `Vector2Like` offset
+- `Number | Null` photoAreaId
+- `ApiMatrix3 | Null` photoAreaMinimapPixelToBimMinimapPixel
+- `ApiMatrix3 | Null` bimMinimapToWorld
+- `Number | Null` floorElevation
