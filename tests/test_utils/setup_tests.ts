@@ -13,6 +13,7 @@ import PipelineApi from "../../source/api/pipeline_api";
 import ProjectApi from "../../source/api/project_api";
 import ScanDatasetApi from "../../source/api/scan_dataset_api";
 import WebGatewayApi from "../../source/api/web_gateway_api";
+import ElementApi from "../../source/api/element_api";
 
 const chaiRoughly = require("chai-roughly");
 const chaiJsonEqual = require("chai-json-equal");
@@ -45,7 +46,7 @@ export const stubAllGatewayRoutes = () => {
   Object.getOwnPropertyNames(ScanDatasetApi).filter(propertyIsMethod(ScanDatasetApi)).forEach(makeRouteResolve(ScanDatasetApi, {}));
 
   (FileInformationApi.listFloorFiles as SinonStub).resolves({});
-  (WebGatewayApi.getPlannedBuildingElements as SinonStub).resolves([]);
+  (ElementApi.getPlannedBuildingElements as SinonStub).resolves([]);
 };
 
 

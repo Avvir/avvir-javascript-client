@@ -1,4 +1,4 @@
-const _ = require("underscore");
+import _ from "underscore";
 
 let configuration = {logFetch: false};
 
@@ -67,4 +67,4 @@ const getConfiguration = () => {
 
 const Config = {useAcceptanceConfiguration, useProductionConfiguration, useLocalProductionConfiguration, useLocalConfiguration, getConfiguration, sharedErrorHandler}
 
-module.exports = Config
+export default Config;

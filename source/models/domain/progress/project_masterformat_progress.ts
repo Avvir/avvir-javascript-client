@@ -1,5 +1,5 @@
 import addDateGetterAndSetterToDomainModel from "../../../mixins/add_date_getter_and_setter_to_domain_model";
-import Masterformat from "../masterformat";
+import Masterformat from "../../api/api_masterformat";
 
 export default class ProjectMasterformatProgress {
   constructor(masterformat, percentComplete, scanDate) {

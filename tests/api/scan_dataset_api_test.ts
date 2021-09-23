@@ -6,8 +6,6 @@ import moment from "moment";
 import ApiScanDataset from "../../source/models/api/api_scan_dataset";
 import DateConverter from "../../source/converters/date_converter";
 import ScanDatasetApi from "../../source/api/scan_dataset_api";
-import WebGatewayApi from "../../source/api/web_gateway_api";
-import {API_FAILURE} from "../../source/models/enums/event_types";
 import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
 import {makeStoreContents} from "../test_utils/test_factories";
 import {SUPERADMIN, USER} from "../../source/models/enums/user_role";
@@ -117,7 +115,7 @@ describe("ScanDatasetApi", () => {
       const fetchCall = fetchMock.lastCall();
 
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/analysis?enforceBuiltPersistence=false`);
-      expect(JSON.parse(fetchCall[1].body)).to.deep.eq([{
+      expect(JSON.parse(fetchCall[1].body.toString())).to.deep.eq([{
         globalId: "some-global-id",
         scanLabel: "DEVIATED",
         deviation: {x: 1, y: 2, z: 3}
@@ -232,7 +230,7 @@ describe("ScanDatasetApi", () => {
 
       expect(fetchMock.lastUrl()).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id`);
       expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
-      expect(JSON.parse(fetchMock.lastOptions().body)).to.deep.eq({
+      expect(JSON.parse(fetchMock.lastOptions().body.toString())).to.deep.eq({
         coarseAlignmentMatrix: {
           x1: 1, x2: 2, x3: 3, x4: 4,
           y1: 0, y2: 0, y3: 0, y4: 1,

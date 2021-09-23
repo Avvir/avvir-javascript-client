@@ -38,7 +38,6 @@ describe("PipelineApi", () => {
       );
     });
     describe("#triggerPipeline", () => {
-      let request;
       beforeEach(() => {
         fetchMock.post(`${Http.baseUrl()}/pipelines`,(url, req, opts)=>{
           const { name, id } = req.body;
@@ -83,7 +82,7 @@ describe("PipelineApi", () => {
         const lastCall = fetchMock.lastCall()[1];
 
         expect(lastCall.body).to.be.eq(JSON.stringify(request));
-        expect(lastCall.headers.Accept).to.be.eq("application/json");
+        expect(lastCall.headers["Accept"]).to.be.eq("application/json");
 
       })
 
@@ -136,7 +135,7 @@ describe("PipelineApi", () => {
       });
 
       it("rejects the promise and calls the shared error handler", () => {
-        fetchMock.mock(`begin:${Http.baseUrl()}/pipeline/`, (url) => {
+        fetchMock.mock(`begin:${Http.baseUrl()}/pipeline/`, () => {
           return {
               status: 500,  body: {message: "some unfortunate error"},
               headers: {"ContentType": "application/json"}

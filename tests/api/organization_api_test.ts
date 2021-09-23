@@ -34,7 +34,7 @@ describe("OrganizationApi", () => {
       const lastFetchOpts = fetchMock.lastOptions();
 
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/client-accounts`);
-      expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+      expect(lastFetchOpts.headers).to.include.keys(["firebaseIdToken"]);
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
   });

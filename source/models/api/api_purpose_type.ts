@@ -39,12 +39,13 @@ export enum ApiPhotoAreaPurposeType {
   THREE_SIXTY_PHOTO = "THREE_SIXTY_PHOTO"
 }
 
-export type ApiPurposeType = ApiProjectPurposeType | ApiFloorPurposeType | ApiScanDatasetPurposeType | ApiPhotoAreaPurposeType
+export type ApiPurposeType = ApiProjectPurposeType | ApiFloorPurposeType | ApiScanDatasetPurposeType | ApiPhotoAreaPurposeType;
 type ApiProjectTypeMap = { [type in ProjectTypeKeys]: ApiProjectPurposeType }
 type ApiFloorTypeMap = { [type in FloorTypeKeys]: ApiFloorPurposeType }
 type ApiScanDatasetTypeMap = { [type in ScanDatasetTypeKeys]: ApiScanDatasetPurposeType }
 type ApiPhotoAreaTypeMap = { [type in PhotoAreaTypeKeys]: ApiPhotoAreaPurposeType }
-const ApiPurposeType = {
+
+const ApiPurposeTypes = {
   RAW_SCAN: ApiScanDatasetPurposeType.RAW_SCAN,
   SCANNER_PATH: ApiScanDatasetPurposeType.SCANNER_PATH,
   FLOOR_FLATNESS_TOPO_MAP: ApiScanDatasetPurposeType.FLOOR_FLATNESS_TOPO_MAP,
@@ -75,6 +76,6 @@ const ApiPurposeType = {
   THREE_SIXTY_PHOTO: ApiPhotoAreaPurposeType.THREE_SIXTY_PHOTO
 };
 
-export const isApiPurposeType = (type: any): type is ApiPurposeType => Object.values(ApiPurposeType).includes(type);
+export const isApiPurposeType = (type: any): type is ApiPurposeType => Object.values(ApiPurposeTypes).includes(type);
 
-export default ApiPurposeType as ApiProjectTypeMap & ApiFloorTypeMap & ApiScanDatasetTypeMap & ApiPhotoAreaTypeMap;
+export default ApiPurposeTypes;

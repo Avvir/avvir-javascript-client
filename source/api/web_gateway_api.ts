@@ -7,6 +7,9 @@ import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import DeprecatedApiPipeline from "../models/api/deprecated_api_pipeline";
 import {RunningProcess} from "../models/domain/running_process";
+import ApiMasterformat from "../models/api/api_masterformat";
+import ApiInvitation from "../models/api/api_invitation";
+import ApiPipeline from "../models/api/api_pipeline";
 
 export default class WebGatewayApi {
 

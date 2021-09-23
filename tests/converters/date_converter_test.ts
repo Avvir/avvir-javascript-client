@@ -8,6 +8,7 @@ describe("DateConverter", () => {
     it("converts an instant to a Date object", () => {
       const date = DateConverter.instantToDate(1535732352.137000);
 
+      // @ts-ignore
       expect(date).to.equalTime(moment(1535732352137).toDate());
     });
 
@@ -85,6 +86,7 @@ describe("DateConverter", () => {
     it("converts milliseconds to a date object", () => {
       const date = DateConverter.millisecondsToDate(1535732352000);
 
+      // @ts-ignore
       expect(date).to.equalTime(moment(1535732352000).toDate());
     });
   });

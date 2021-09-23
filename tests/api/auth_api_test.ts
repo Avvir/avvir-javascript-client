@@ -1,10 +1,12 @@
 import {GatewayUser} from "../../source/utilities/get_authorization_headers";
 import {GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
 import {expect} from "chai";
+// @ts-ignore
 import fetchMock from "fetch-mock";
 import Http from "../../source/utilities/http";
 import AuthApi from "../../source/api/auth_api";
 import {sandbox} from "../test_utils/setup_tests";
+// @ts-ignore
 import JsonWebToken from "jsonwebtoken";
 
 describe("AuthApi", () => {

@@ -53,7 +53,7 @@ declare interface AvvirThunkAction<Return, State, Actions extends Action> extend
   (dispatch: ThunkDispatch<State, unknown, Actions>, getState?: () => State): Return
 }
 
-declare type AssociationIds = { accountId?: string, projectId?: string, floorId?: string, scanDatasetId?: string, globalId?: string, photoAreaId?: number, photoSessionId?: number, photoLocationId?: number }
+declare type AssociationIds = { accountId?: string, projectId?: string, floorId?: string, scanDatasetId?: string, globalId?: string, photoAreaId?: number, photoSessionId?: number, photoLocationId?: number, captureDatasetId?: string }
 declare type FirebaseUploadTask = firebase.storage.UploadTask
 declare type FirebaseRef = firebase.storage.Reference
 declare type ByFirebaseId<Model> = { [firebaseId: string]: Model }

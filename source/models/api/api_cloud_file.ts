@@ -5,7 +5,7 @@ import ApiTypesEnum, { ApiPurposeType, isApiPurposeType } from "./api_purpose_ty
 import { PurposeType, isPurposeType } from "../enums/purpose_type";
 import PurposeTypeConverter from "../../converters/purpose_type_converter";
 
-interface ApiCloudFileArgument extends Partial<Modify<ApiCloudFile, {
+export interface ApiCloudFileArgument extends Partial<Modify<ApiCloudFile, {
   lastModified?: DateLike
   createdAt?: DateLike
   purposeType: ApiPurposeType | PurposeType,
@@ -43,6 +43,7 @@ export default class ApiCloudFile {
     this.purposeType = purposeType;
   }
 
+  // @ts-ignore
   readonly url: string;
   readonly id?: number
   lastModified?: number | null = null;

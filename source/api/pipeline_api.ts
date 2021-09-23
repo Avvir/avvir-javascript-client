@@ -4,7 +4,7 @@ import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import {User} from "../utilities/get_authorization_headers";
 import ApiArgoResponse from "../models/api/api_argo_response";
-import ApiPipeline from "../models/api/api_pipeline";
+import ApiPipeline, {ApiPipelineArgument} from "../models/api/api_pipeline";
 
 class PipelineApi {
   static triggerJobStepsPipeline(associationIds: AssociationIds, body = {}, user: User): Promise<ApiArgoResponse> {

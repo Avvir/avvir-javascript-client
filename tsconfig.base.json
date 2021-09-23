@@ -1,0 +1,34 @@
+{
+  "extends": "@tsconfig/node12/tsconfig.json",
+  "compilerOptions": {
+    "lib": ["esnext"],
+    "allowJs": true,
+    "outDir": "build",
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "importHelpers": true,
+    "strict": false,
+    "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
+    "paths": {
+      "*": [
+        "source/typings/*"
+      ],
+      "type_aliases": [
+        "source/typings/type_aliases"
+      ],
+      "uniformat": [
+        "source/typings/uniformat"
+      ]
+    }
+  },
+  "include": [
+    "./source"
+  ]
+}

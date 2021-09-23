@@ -1,39 +1,6 @@
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "downlevelIteration": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react",
-    "noImplicitAny": false,
-    "baseUrl": "./",
-    "paths": {
-      "*": [
-        "source/typings/*"
-      ],
-      "type_aliases": [
-        "source/typings/type_aliases"
-      ],
-      "uniformat": [
-        "source/typings/uniformat"
-      ]
-    }
-  },
-  "include": [
-    "./source",
-    "./tests"
-  ]
+    "module": "commonjs"
+  }
 }

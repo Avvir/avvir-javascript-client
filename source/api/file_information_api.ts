@@ -1,17 +1,16 @@
-// @ts-nocheck
-import ApiCloudFile from "../models/api/api_cloud_file";
+import ApiCloudFile, {ApiCloudFileArgument} from "../models/api/api_cloud_file";
 import PurposeTypeConverter from "../converters/purpose_type_converter";
 import {AssociationIds, AvvirApiFiles} from "type_aliases";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import {User} from "../utilities/get_authorization_headers";
 import {FloorPurposeType, PurposeType} from "../models/enums/purpose_type";
+import {ApiScanDatasetPurposeType} from "../models/api/api_purpose_type";
 import ApiArgoResponse from "../models/api/api_argo_response";
 
 export default class FileInformationApi {
   static createProjectFile({ projectId }: AssociationIds, apiFile: ApiCloudFile, user: User) : Promise<ApiCloudFile>{
     const url = `${Http.baseUrl()}/projects/${projectId}/files`;
-    console.log(url);
     return Http.post(url, user, apiFile);
   }
 
@@ -40,7 +39,15 @@ export default class FileInformationApi {
     return Http.get(url, user);
   }
 
-  static saveScanDatasetFile({ projectId, floorId, scanDatasetId }: AssociationIds, apiFile: ApiCloudFile, user: User):Promise<ApiCloudFile> {
+  static associateScanFileWithCaptureDataset({projectId, floorId, captureDatasetId}: AssociationIds, file: ApiCloudFileArgument, user: User): Promise<ApiCloudFile> {
+    const fileAsPreprocessedScan = new ApiCloudFile(file);
+    fileAsPreprocessedScan.purposeType = ApiScanDatasetPurposeType.PREPROCESSED_SCAN;
+    return FileInformationApi.saveScanDatasetFile({projectId, floorId, scanDatasetId: captureDatasetId},
+        fileAsPreprocessedScan,
+        user);
+  }
+
+  static saveScanDatasetFile({ projectId, floorId, scanDatasetId }: AssociationIds, apiFile: ApiCloudFileArgument, user: User): Promise<ApiCloudFile> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/file`;
     return Http.post(url, user, apiFile);
   }
@@ -60,4 +67,4 @@ export default class FileInformationApi {
   }
 }
 
-makeErrorsPretty(FileInformationApi);
+makeErrorsPretty(FileInformationApi, {exclude: ["associateScanFileWithCaptureDataset"]});

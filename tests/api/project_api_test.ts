@@ -8,11 +8,8 @@ import ApiProjectCostAnalysisProgress from "../../source/models/api/api_project_
 import ApiProjectMasterformatProgress from "../../source/models/api/api_project_masterformat_progress";
 import DateConverter from "../../source/converters/date_converter";
 import ProjectApi from "../../source/api/project_api";
-import WebGatewayApi from "../../source/api/web_gateway_api";
 import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
 import {SUPERADMIN} from "../../source/models/enums/user_role";
-import {sandbox} from "./test_utils/setup_tests";
-import Config from"../../source/config";
 import Http from "../../source/utilities/http";
 
 describe("ProjectApi", () => {
@@ -45,7 +42,7 @@ describe("ProjectApi", () => {
       const lastFetchOpts = fetchMock.lastOptions();
 
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/client-accounts/some-organization-id/projects`);
-      expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+      expect(lastFetchOpts.headers).to.include.keys(["firebaseIdToken"]);
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
   });
@@ -117,7 +114,7 @@ describe("ProjectApi", () => {
       const fetchCall = fetchMock.lastCall();
 
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/masterformat-progress`);
-      expect(JSON.parse(fetchCall[1].body)).to.deep.eq([{
+      expect(JSON.parse(fetchCall[1].body.toString())).to.deep.eq([{
         masterformat: {version: 2016, code: "00 00 01"},
         scanDate: DateConverter.dateToInstant(moment("2018-04-01")),
         percentComplete: 0.8
@@ -132,7 +129,7 @@ describe("ProjectApi", () => {
 
       const lastFetchOpts = fetchMock.lastOptions();
 
-      expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+      expect(lastFetchOpts.headers).to.include.keys(["firebaseIdToken"]);
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
 
@@ -200,7 +197,7 @@ describe("ProjectApi", () => {
       const fetchCall = fetchMock.lastCall();
 
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/cost-analysis-progress`);
-      expect(JSON.parse(fetchCall[1].body)).to.deep.eq({
+      expect(JSON.parse(fetchCall[1].body.toString())).to.deep.eq({
         date: DateConverter.dateToInstant(moment("2018-04-01")),
         data: [{
           analysisDate: 0,
@@ -228,7 +225,7 @@ describe("ProjectApi", () => {
 
       const lastFetchOpts = fetchMock.lastOptions();
 
-      expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+      expect(lastFetchOpts.headers).to.include.keys(["firebaseIdToken"]);
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
 
@@ -282,7 +279,7 @@ describe("ProjectApi", () => {
       const fetchCall = fetchMock.lastCall();
 
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/scheduled-masterformat-progress`);
-      expect(JSON.parse(fetchCall[1].body)).to.deep.eq([{
+      expect(JSON.parse(fetchCall[1].body.toString())).to.deep.eq([{
         masterformat: {version: 2016, code: "00 00 01"},
         scanDate: DateConverter.dateToInstant(moment("2018-04-01")),
         percentComplete: 0.8
@@ -297,7 +294,7 @@ describe("ProjectApi", () => {
 
       const lastFetchOpts = fetchMock.lastOptions();
 
-      expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+      expect(lastFetchOpts.headers).to.include.keys(["firebaseIdToken"]);
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
 
@@ -359,7 +356,7 @@ describe("ProjectApi", () => {
 
       const lastFetchOpts = fetchMock.lastOptions();
 
-      expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+      expect(lastFetchOpts.headers).to.include.keys(["firebaseIdToken"]);
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
 

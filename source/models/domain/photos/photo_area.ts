@@ -1,6 +1,6 @@
 import addReadOnlyPropertiesToModel from "../../../mixins/add_read_only_properties_to_model";
 import { AvvirApiFiles, AvvirFiles, Modify } from "type_aliases";
-import { PhotoAreaPurposeType } from "../enums/purpose_type";
+import { PhotoAreaPurposeType } from "../../enums/purpose_type";
 
 interface PhotoAreaArgs extends Partial<Modify<PhotoArea, {
   files?: AvvirFiles<PhotoAreaPurposeType> | AvvirApiFiles<PhotoAreaPurposeType>

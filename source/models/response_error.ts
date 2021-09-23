@@ -1,4 +1,5 @@
 import ExtendableError from "extendable-error-class";
+import {Response} from "node-fetch";
 
 class ResponseError extends ExtendableError {
   constructor(message: string, verboseMessage: string, response: Response, responseBody: any) {

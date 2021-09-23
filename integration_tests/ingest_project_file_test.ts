@@ -24,7 +24,6 @@ describe("Ingest project files test", () => {
       return new Promise((resolve, reject) => {
         AvvirApi.other.checkPipelineStatus({projectId}, pipelineResponse.id, user)
             .then((response) => {
-              // console.log(index, response);
               if (index > checkPipelineIterations) {
                 reject("Too Many Calls: Check endpoint to make sure the implementation isn't flawed.")
               } else if (response.status !== RunningProcessStatus.COMPLETED) {
