@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "description": "Javascript client for Avvir APIs",
   "module": "dist/avvir_api.js",
+  "main": "dist/avvir_api.js",
   "scripts": {
     "build": "yarn run webpack",
     "test": "NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn run build"

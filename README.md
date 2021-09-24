@@ -24,7 +24,7 @@ yarn install
 As a basic example this code will retrieve all the areas associated with a project along with their capture datasets and log the results to the console. [This example](./samples/areas-and-capture-datasets.js) as well as others can be found in the [samples](./samples) directory.
 
 ```javascript
-const Avvir = require("./dist/avvir_api").default;
+const Avvir = require("avvir-javascript-client").default;
 
 async function printAreasAndCaptureDatasets() {
    // Make sure to replace the credentials with your actual username and password
