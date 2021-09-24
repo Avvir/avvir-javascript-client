@@ -50,6 +50,7 @@
     "sinon": "^9.2.1",
     "three": "^0.123.0",
     "underscore": "^1.12.0",
-    "uniformat": "^1.0.4"
+    "uniformat": "^1.0.4",
+    "moment": "^2.29.1"
   }
 }
