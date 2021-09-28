@@ -112,30 +112,41 @@ Or can create a floor programatically:
 const createFloor = async () => {
   return await Avvir.api.floors.createFloor(projectId, "<Any Area Name>", user);
 }
+let area = await createFloor()
+let areaId = area.firebaseId;
 ```
 
 Then, assuming you've already uploaded a scan file to your project, apply the following steps to associate the scan to an area. 
 
+> If you haven't uploaded a file using the api, you can subsequently upload a file through the portal by navigating to the "files" section of the portal, and dragging your file into the dropzone located at the top of that page. Once file has completed uploading, bring the file into view, and copy the file address by right clicking the cloud icon, and selecting "Copy link address".  
+
 ```javascript
-const areaID = '<Your-Area-Id>';
+
+const Avvir = require("avvir-javascript-client").default;
+//The instructions above details how to get the following variables
+let username = "<You-User-Login>";
+let password = "<Your-Password>";
+let projectId = "<Your-Project-ID>";
+
+//use the instructions above to get area id
+const areaId = '<Your-Area-Id>';
 //you can get this url from the portal or by calling the uploadProjectFile() above, and getting the url property. 
-const fileUrl = 'https://some-file-url.com/scan.las';
+const fileUrl = 'https://some-file-source.com/scan.las';
 
 const associateScan = async (areaId, fileUrl) => {
    const user = await Avvir.api.auth.login(username, password);
    let floorId = areaId;
-   
-   const scanDataset = Avvir.api.scanDatasets.createScanDataset({ projectId, floorId }, user);
-   const cloudFile = new ApiCloudFile({
+   //this creates a new scan on the area you've selected.
+   const scanDataset = await Avvir.api.scanDatasets.createScanDataset({ projectId, floorId }, user);
+   const cloudFile = new Avvir.ApiCloudFile({
       url: fileUrl,
       purposeType: 'PREPROCESSED_SCAN'
    });
    let scanDatasetId = scanDataset.firebaseId;
    await Avvir.api.files.saveScanDatasetFile({ projectId, floorId, scanDatasetId }, cloudFile, user);
+   console.log(`Go to Scan #${scanDataset.scanNumber} in the scan datasets dropdown of the portal under your selected floor`);
+   console.log(`Completed associating scan dataset...`)
 }
-
-let area = await createFloor()
-let areaId = area.firebaseId;
 
 associateScan(areaId, fileUrl)
 ```
