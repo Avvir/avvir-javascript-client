@@ -2,6 +2,7 @@ import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter
 import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 import RunningProcessStatus from "../enums/running_process_status";
 import { DateLike, ModifyPartial } from "type_aliases";
+import {PipelineName} from "../enums/pipeline_types";
 
 export interface ApiPipelineArgument extends ModifyPartial<ApiPipeline, {
   startTime?: DateLike
@@ -42,7 +43,7 @@ export default class ApiPipeline {
   }
 
   readonly id: number;
-  name: string;
+  name: PipelineName;
   externalId: string;
   externalUrl: string;
   startTime: number;
