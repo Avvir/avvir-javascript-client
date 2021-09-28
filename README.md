@@ -151,6 +151,41 @@ const associateScan = async (areaId, fileUrl) => {
 associateScan(areaId, fileUrl)
 ```
 
+
+## Process scan for 3d Viewer
+
+Given you have associated a scan to a scan dataset, using the same scan dataset id and credentials as above, 
+if you want to view your scan in the viewer, you will need to run another pipeline. 
+
+```javascript
+let username = "<You-User-Login>";
+let password = "<Your-Password>";
+let projectId = "<Your-Project-ID>";
+let captureDatasetId = "<Your-Capture-Dataset>";
+let areaId = "<Your-Area-ID>";
+
+const processScan = async () => {
+   let pipeline = new ApiPipeline({
+      name: "downsample-scan",
+      firebaseProjectId: projectId,
+      firebaseFloorId: areaId,
+      firebaseScanDatasetId: captureDatasetId
+   });
+   
+   return PipelineApi.triggerPipeline(pipeline, user).then((response) => {
+      console.log(`Pipeline Status: ${response.status}`);
+      expect(response.status).to.be.eq(RunningProcessStatus.RUNNING);
+   });
+}
+
+processScan();
+```
+
+After the pipeline has completed processing your scan, you should be able to navigate to the 3d viewer in the portal, and view your scan by changing viewer's mode to `Inspection Mode` in the left panel, and toggling `View Point Cloud`. 
+
+
+
+
 ## Contributing 
 Read our [contributing guide](./CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to avvir-javascript-client.
 
