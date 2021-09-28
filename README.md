@@ -151,6 +151,48 @@ const associateScan = async (areaId, fileUrl) => {
 associateScan(areaId, fileUrl)
 ```
 
+
+## Process Deviations and Progress analysis on Scan Dataset
+
+Given you have a scan associated to a scan dataset on your area, to get analysis on the scandataset, you must trigger the `process-steps` pipeline, with the type of analysis you wish to compute. 
+
+```javascript
+let username = "<You-User-Login>";
+let password = "<Your-Password>";
+let projectId = "<Your-Project-ID>";
+let captureDatasetId = "<Your-Capture-Dataset-ID>";
+let areaId = "<Your-Area-ID>";
+
+const processSteps = async ( type ) => {
+   let steps = [];
+   if( type == "deviation") {
+     steps.push("compute-deviations")
+   } else if (type == "progress") {
+     steps.push("compute-progress");
+   } else {
+     steps = ["compute-deviations", "compute-progress"]
+   }
+   
+   let user = await Avvir.auth.login(username, password)
+   let pipeline: ApiPipelineArgument = new Avvir.ApiPipeline({
+      name: "pipeline-steps",
+      firebaseProjectId: projectId,
+      firebaseFloorId: areaId,
+      firebaseScanDatasetId: captureDatasetId,
+      options: {
+         steps
+      }
+   })
+   let response = await PipelineApi.triggerPipeline(pipeline, user);
+   console.log(response.status);
+}
+
+//will process both deviations and progress
+processSteps()
+```
+
+After the pipeline has finished processing your scans, you should be able to navigate to the `3d Viewer` and see the deviations displayed in the model. You can also view progress data by exporting the `Progress Pdf` from the `Exports & Reports` dropdown on the upper right of the viewer.
+
 ## Contributing 
 Read our [contributing guide](./CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to avvir-javascript-client.
 
