@@ -30,6 +30,12 @@ export default class FloorApi {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/reorder/${ordinal}`;
     return Http.patch(url, user, null);
   }
+
+  static deleteFloor({projectId: string, floorId: string}, user: User): Promise<ApiFloor[]> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}`;
+    return Http.delete(url, user);
+  }
+
 }
 
 makeErrorsPretty(FloorApi);
