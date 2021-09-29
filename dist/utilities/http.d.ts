@@ -7,4 +7,5 @@ export default class Http {
     static post(url: any, user: any, body: any): Promise<Response>;
     static patch(url: any, user: any, body: any): Promise<Response>;
     static addAuthToDownloadUrl(baseUrl: string, user: User): string;
+    static __fetch: any;
 }

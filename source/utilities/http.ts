@@ -1,20 +1,19 @@
-import getAuthorizationHeaders, {User} from "./get_authorization_headers";
-import {httpPostHeaders} from "./request_headers";
-import {isFirebaseUser, isGatewayUser} from "./reduce_user_session";
+import getAuthorizationHeaders, { User } from "./get_authorization_headers";
+import { httpPostHeaders } from "./request_headers";
+import { isFirebaseUser, isGatewayUser } from "./reduce_user_session";
 import Config from "../config";
-// import node_fetch from "node-fetch";
-
-// const fetch = fetch || node_fetch;
 
 export default class Http {
-  static baseUrl = ():string => Config.getConfiguration().AVVIR_GATEWAY_URL;
-  static fetch(url, data){
-    if(Config.getConfiguration().logFetch){
-      console.log("Calling fetch with:", url, data)
+  static baseUrl = (): string => Config.getConfiguration().AVVIR_GATEWAY_URL;
+
+  static fetch(url, data) {
+    if (Config.getConfiguration().logFetch) {
+      console.log("Calling fetch with:", url, data);
     }
-    return fetch(url, data)
+    return fetch(url, data);
   }
-  static get(url, user){
+
+  static get(url, user) {
     return Http.fetch(url, {
       method: "GET",
       headers: {
@@ -23,7 +22,8 @@ export default class Http {
       }
     });
   }
-  static delete(url, user){
+
+  static delete(url, user) {
     return Http.fetch(url, {
       method: "DELETE",
       headers: {
@@ -32,7 +32,8 @@ export default class Http {
       }
     });
   }
-  static post(url, user, body){
+
+  static post(url, user, body) {
     return Http.fetch(url, {
       method: "POST",
       headers: {
@@ -43,7 +44,7 @@ export default class Http {
     });
   }
 
-  static patch(url, user, body){
+  static patch(url, user, body) {
     return Http.fetch(url, {
       method: "PATCH",
       headers: {
@@ -65,4 +66,6 @@ export default class Http {
       return baseUrl;
     }
   }
+
+  static __fetch;
 }

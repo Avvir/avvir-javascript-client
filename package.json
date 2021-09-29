@@ -5,6 +5,11 @@
   "description": "Javascript client for Avvir APIs",
   "module": "dist/avvir_api.js",
   "main": "dist/avvir_api.js",
+  "browserslist": [
+    "> 1%",
+    "IE 11",
+    "Firefox ESR"
+  ],
   "scripts": {
     "build": "yarn run webpack",
     "test": "NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn run build"
@@ -18,11 +23,10 @@
     "@babel/preset-typescript": "^7.12.7",
     "@babel/register": "^7.12.1",
     "@types/chai-datetime": "^0.0.37",
-    "@types/mocha": "^8.2.0",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.10.2",
     "@types/sinon": "^9.0.0",
     "@types/sinon-chai": "^3.2.4",
-    "babel-loader": "^8.2.2",
-    "babel-plugin-module-resolver": "^4.0.0",
     "chai": "^4.2.0",
     "chai-almost": "^1.0.1",
     "chai-datetime": "^1.7.0",
@@ -33,7 +37,7 @@
     "deepmerge": "^4.2.2",
     "fetch-mock": "^9.11.0",
     "mocha": "^8.2.1",
-    "moment": "^2.29.1",
+    "sinon": "^11.1.2",
     "sinon-chai": "^3.5.0",
     "tolerant-deep-eql": "git+http://git@github.com/TiraO/deep-eql.git#06a376d",
     "ts-loader": "^9.2.6",
@@ -43,15 +47,16 @@
     "webpack-node-externals": "^2.5.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.12.5",
-    "@types/node": "^14.14.22",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
     "extendable-error-class": "^0.1.2",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "node-fetch": "^2.6.1",
-    "sinon": "^9.2.1",
+    "process": "^0.11.10",
+    "stream-browserify": "^3.0.0",
     "three": "^0.123.0",
     "underscore": "^1.12.0",
-    "uniformat": "^1.0.4"
+    "util": "^0.12.4"
   }
 }

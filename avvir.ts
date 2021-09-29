@@ -1,8 +1,5 @@
 import AvvirApi from "./source/avvir_api";
-import fetch from 'node-fetch';
 import _ from 'underscore';
-
-global.fetch = fetch;
 
 const Avvir = {
   api: AvvirApi

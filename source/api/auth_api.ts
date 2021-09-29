@@ -1,10 +1,11 @@
-import getAuthorizationHeaders, {BasicUser, GatewayUser} from "../utilities/get_authorization_headers";
-import UserAuthType, {GATEWAY_JWT} from "../models/enums/user_auth_type";
-import Http from "../utilities/http";
-import {httpGetHeaders} from "../utilities/request_headers";
 import JsonWebToken from "jsonwebtoken";
-import responseStatusText from "../resources/response_statuses.json";
+
+import getAuthorizationHeaders, { BasicUser, GatewayUser } from "../utilities/get_authorization_headers";
+import Http from "../utilities/http";
 import ResponseError from "../models/response_error";
+import responseStatusText from "../resources/response_statuses.json";
+import UserAuthType, { GATEWAY_JWT } from "../models/enums/user_auth_type";
+import { httpGetHeaders } from "../utilities/request_headers";
 
 export default class AuthApi {
 
