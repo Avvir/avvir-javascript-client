@@ -120,7 +120,7 @@ describe("WebGatewayApi", () => {
 
   describe("::checkPipelineStatus", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl()}/pipelines/10`, {...new ApiPipeline({id: 10, name: "some-pipeline-name"})});
+      fetchMock.get(`${Http.baseUrl()}/pipelines/10`, {...new ApiPipeline({id: 10, name: "pipeline-steps"})});
     });
 
     it("makes a request to the gateway", () => {

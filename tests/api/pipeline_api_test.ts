@@ -1,7 +1,7 @@
 import {sandbox} from "../test_utils/setup_tests";
 import {expect} from "chai";
 import fetchMock from "fetch-mock";
-import _ from "underscore";
+import _, { Dictionary } from "underscore";
 
 import PipelineApi from "../../source/api/pipeline_api";
 import {FIREBASE} from "../../source/models/enums/user_auth_type";
@@ -72,7 +72,7 @@ describe("PipelineApi", () => {
 
       it("Returns an ApiPipeline type",  () => {
         let request = new ApiPipeline({
-          name: "some-name",
+          name: "pipeline-steps",
           id: 1
         });
         PipelineApi.triggerPipeline(
@@ -83,7 +83,7 @@ describe("PipelineApi", () => {
         const lastCall = fetchMock.lastCall()[1];
 
         expect(lastCall.body).to.be.eq(JSON.stringify(request));
-        expect(lastCall.headers.Accept).to.be.eq("application/json");
+        expect((lastCall.headers as Dictionary<string>).Accept).to.be.eq("application/json");
 
       })
 

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import PurposeTypeConverter from "../../source/converters/purpose_type_converter";
-import { FloorPurposeType, ProjectPurposeType, ScanDatasetPurposeType } from "../../source/models/enums/purpose_type";
-import { ApiFloorPurposeType, ApiProjectPurposeType, ApiScanDatasetPurposeType } from "../../source/models/api/api_purpose_type";
+import { FloorPurposeType, ProjectPurposeType, PurposeType, ScanDatasetPurposeType } from "../../source/models/enums/purpose_type";
+import { ApiFloorPurposeType, ApiProjectPurposeType, ApiPurposeType, ApiScanDatasetPurposeType } from "../../source/models/api/api_purpose_type";
 
 describe("PurposeTypeConverter", () => {
   describe("#toApiPurposeType", () => {
@@ -10,8 +10,7 @@ describe("PurposeTypeConverter", () => {
     });
 
     it("converts all of the purpose types", () => {
-      // @ts-ignore
-      const allPurposeTypes = Object.values(ProjectPurposeType).concat(Object.values(FloorPurposeType)).concat(Object.values(ScanDatasetPurposeType));
+      const allPurposeTypes = (Object.values(ProjectPurposeType) as PurposeType[]).concat(Object.values(FloorPurposeType)).concat(Object.values(ScanDatasetPurposeType));
 
       allPurposeTypes.forEach(purposeType => {
         expect(PurposeTypeConverter.toApiPurposeType(purposeType)).not.to.be.undefined;
@@ -25,7 +24,7 @@ describe("PurposeTypeConverter", () => {
     });
 
     it("converts all of the purpose types", () => {
-      const allPurposeTypes = Object.values(ApiProjectPurposeType).concat(Object.values(ApiFloorPurposeType)).concat(Object.values(ApiScanDatasetPurposeType));
+      const allPurposeTypes = (Object.values(ApiProjectPurposeType) as ApiPurposeType[]).concat(Object.values(ApiFloorPurposeType)).concat(Object.values(ApiScanDatasetPurposeType));
 
       allPurposeTypes.forEach(purposeType => {
         expect(PurposeTypeConverter.toPurposeType(purposeType)).not.to.be.undefined;

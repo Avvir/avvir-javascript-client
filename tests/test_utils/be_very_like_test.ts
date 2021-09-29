@@ -1,5 +1,5 @@
-const { expect } = require("chai");
-require("./setup_tests");
+import { expect } from "chai";
+import "./setup_tests";
 
 describe("beVeryLike", () => {
   it("can pass", () => {
@@ -17,7 +17,7 @@ describe("beVeryLike", () => {
     });
 
     it("can fail at level 1", () => {
-      expect({v: [4], a: "hi"}).to.beVeryLike({v: [5], a: "hi"}, 1.5);
+      expect({ v: [4], a: "hi" }).to.beVeryLike({ v: [5], a: "hi" }, 1.5);
 
     });
 

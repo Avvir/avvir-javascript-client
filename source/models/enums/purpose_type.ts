@@ -5,7 +5,6 @@ export enum ProjectPurposeType {
 }
 
 export enum FloorPurposeType {
-  OTHER = "other",
   BIM_IFC = "bimIfc",
   BIM_NWD = "bimNwd",
   GRID_IFC = "gridIfc",
@@ -19,7 +18,6 @@ export enum FloorPurposeType {
 }
 
 export enum ScanDatasetPurposeType {
-  OTHER = "other",
   RAW_SCAN = "rawScan",
   SCANNER_PATH = "scannerPath",
   FLOOR_FLATNESS_TOPO_MAP = "floorFlatnessTopoMap",
@@ -34,7 +32,6 @@ export enum ScanDatasetPurposeType {
 }
 
 export enum PhotoAreaPurposeType {
-  OTHER = "other",
   MINIMAP = "minimap",
   THREE_SIXTY_PHOTO = "threeSixtyPhoto"
 }

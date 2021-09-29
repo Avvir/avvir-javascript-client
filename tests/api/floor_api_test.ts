@@ -4,11 +4,11 @@ import fetchMock from "fetch-mock";
 import _ from "underscore";
 
 import ApiFloor from "../../source/models/api/api_floor";
+import Config from "../../source/config";
 import FloorApi from "../../source/api/floor_api";
-import {FIREBASE} from "../../source/models/enums/user_auth_type";
-import {User} from "../../source/utilities/get_authorization_headers";
-import Config from"../../source/config";
 import Http from "../../source/utilities/http";
+import { FIREBASE } from "../../source/models/enums/user_auth_type";
+import { User } from "../../source/utilities/get_authorization_headers";
 
 describe("FloorApi", () => {
   let user;
@@ -83,7 +83,7 @@ describe("FloorApi", () => {
       const fetchCall = fetchMock.lastCall();
 
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors`);
-      expect(JSON.parse(fetchCall[1].body)).to.deep.eq({ text: "14" });
+      expect(JSON.parse(fetchCall[1].body as string)).to.deep.eq({ text: "14" });
     });
 
     it("sends the request with authorization headers", () => {
@@ -159,7 +159,7 @@ describe("FloorApi", () => {
       const lastFetchOpts = fetchMock.lastOptions();
 
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`);
-      expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
 
@@ -212,7 +212,7 @@ describe("FloorApi", () => {
       }, 3, user);
       const lastFetchOpts = fetchMock.lastOptions();
 
-      expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
   });

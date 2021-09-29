@@ -12,7 +12,7 @@ import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
 import {makeStoreContents} from "../test_utils/test_factories";
 import {SUPERADMIN, USER} from "../../source/models/enums/user_role";
 import {User} from "../../source/utilities/get_authorization_headers";
-import Config from"../../source/config";
+import Config from "../../source/config";
 import {sandbox} from "../test_utils/setup_tests";
 import Http from "../../source/utilities/http";
 
@@ -117,7 +117,7 @@ describe("ScanDatasetApi", () => {
       const fetchCall = fetchMock.lastCall();
 
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/analysis?enforceBuiltPersistence=false`);
-      expect(JSON.parse(fetchCall[1].body)).to.deep.eq([{
+      expect(JSON.parse(fetchCall[1].body as string)).to.deep.eq([{
         globalId: "some-global-id",
         scanLabel: "DEVIATED",
         deviation: {x: 1, y: 2, z: 3}
@@ -232,7 +232,7 @@ describe("ScanDatasetApi", () => {
 
       expect(fetchMock.lastUrl()).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id`);
       expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
-      expect(JSON.parse(fetchMock.lastOptions().body)).to.deep.eq({
+      expect(JSON.parse(fetchMock.lastCall()[1].body as string)).to.deep.eq({
         coarseAlignmentMatrix: {
           x1: 1, x2: 2, x3: 3, x4: 4,
           y1: 0, y2: 0, y3: 0, y4: 1,

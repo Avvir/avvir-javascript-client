@@ -1,4 +1,4 @@
-const deepEql = require("tolerant-deep-eql");
+import deepEql from "tolerant-deep-eql";
 
 const DEFAULT_TOLERANCE = 1.0e-6;
 
@@ -30,3 +30,12 @@ export default function (chai, utils) {
 
   chai.Assertion.addMethod("beVeryLike", roughly);
 };
+
+
+declare global {
+  namespace Chai {
+    interface Assertion {
+      beVeryLike(object: any, msg?: any): Assertion
+    }
+  }
+}

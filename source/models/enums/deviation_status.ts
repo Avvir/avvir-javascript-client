@@ -1,4 +1,4 @@
-enum DeviationStatus {
+const enum DeviationStatus {
   DETECTED = "DETECTED",
   DISMISSED = "DISMISSED",
   INCLUDED = "INCLUDED",

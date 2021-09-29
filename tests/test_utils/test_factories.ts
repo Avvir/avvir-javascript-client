@@ -1,5 +1,4 @@
 import { SinonSpy } from "sinon";
-import moment from "moment";
 import deepmerge from "deepmerge";
 import _ from "underscore";
 

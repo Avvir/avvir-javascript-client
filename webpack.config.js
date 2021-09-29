@@ -27,7 +27,7 @@ module.exports = {
     rules: [
       {
         use: {
-          loader: 'babel-loader',
+          loader: 'ts-loader',
         },
         test: /\.ts$/,
 

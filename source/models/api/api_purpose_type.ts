@@ -41,9 +41,9 @@ export enum ApiPhotoAreaPurposeType {
 
 export type ApiPurposeType = ApiProjectPurposeType | ApiFloorPurposeType | ApiScanDatasetPurposeType | ApiPhotoAreaPurposeType
 type ApiProjectTypeMap = { [type in ProjectTypeKeys]: ApiProjectPurposeType }
-type ApiFloorTypeMap = { [type in FloorTypeKeys]: ApiFloorPurposeType }
-type ApiScanDatasetTypeMap = { [type in ScanDatasetTypeKeys]: ApiScanDatasetPurposeType }
-type ApiPhotoAreaTypeMap = { [type in PhotoAreaTypeKeys]: ApiPhotoAreaPurposeType }
+type ApiFloorTypeMap = Omit<{ [type in FloorTypeKeys]: ApiFloorPurposeType }, "OTHER">
+type ApiScanDatasetTypeMap = Omit<{ [type in ScanDatasetTypeKeys]: ApiScanDatasetPurposeType }, "OTHER">
+type ApiPhotoAreaTypeMap = Omit<{ [type in PhotoAreaTypeKeys]: ApiPhotoAreaPurposeType }, "OTHER">
 const ApiPurposeType = {
   RAW_SCAN: ApiScanDatasetPurposeType.RAW_SCAN,
   SCANNER_PATH: ApiScanDatasetPurposeType.SCANNER_PATH,

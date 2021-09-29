@@ -1,6 +1,6 @@
 const _ = require("underscore");
 
-let configuration = {logFetch: false};
+let configuration: {[key: string]: any} = {logFetch: false};
 
 const addEnvironmentVariablesToConfiguration = () => {
   _.forEach(configuration, (value, varName) => {
@@ -57,7 +57,7 @@ const setConfigurationFromEnvironmentVariable = () => {
 
 setConfigurationFromEnvironmentVariable()
 
-const sharedErrorHandler = ({error}) => {
+const sharedErrorHandler = ({error}: any) => {
   throw error;
 }
 
@@ -67,4 +67,4 @@ const getConfiguration = () => {
 
 const Config = {useAcceptanceConfiguration, useProductionConfiguration, useLocalProductionConfiguration, useLocalConfiguration, getConfiguration, sharedErrorHandler}
 
-module.exports = Config
+export default Config
