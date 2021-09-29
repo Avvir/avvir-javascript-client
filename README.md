@@ -24,7 +24,7 @@ yarn install
 As a basic example this code will retrieve all the areas associated with a project along with their capture datasets and log the results to the console. [This example](./samples/areas-and-capture-datasets.js) as well as others can be found in the [samples](./samples) directory.
 
 ```javascript
-const Avvir = require("avvir-javascript-client").default;
+const Avvir = require("avvir-javascript-client");
 // Make sure to replace the credentials with your actual username and password
 const username = "you@example.com";
 const password = "yourPassw0rd123";
@@ -71,7 +71,7 @@ const uploadProjectFile = async () => {
    });
 
    //This will make the external file reference available to you in the avvir portal in on the files page
-   let fileRef = await AvvirApi.files.createProjectFile({projectId}, apiCloudFile, user);
+   let fileRef = await AvvirApi.files.createProjectFile({ projectId }, apiCloudFile, user);
    console.log(fileRef)
    let pipeline: ApiPipelineArgument = new ApiPipeline({
       name: Pipelines.INGEST_PROJECT_FILE,
