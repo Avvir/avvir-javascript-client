@@ -207,6 +207,13 @@ var ElementApi = /*#__PURE__*/function () {
         newElements: newElements
       });
     }
+  }, {
+    key: "updatePlannedBuildingElements",
+    value: function updatePlannedBuildingElements(_ref9, elements, user) {
+      var projectId = _ref9.projectId,
+          floorId = _ref9.floorId;
+      return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch("".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/planned-building-elements"), user, elements);
+    }
   }]);
 
   return ElementApi;
@@ -3687,6 +3694,13 @@ var Pipelines;
 
 (function (Pipelines) {
   Pipelines["INGEST_PROJECT_FILE"] = "ingest-project-file";
+  Pipelines["PIPELINE_STEPS"] = "pipeline-steps";
+  Pipelines["DOWNSAMPLE_SCAN"] = "downsample-scan";
+  Pipelines["CONVERT_IFC_AND_PROCESS_SCANS"] = "convert-ifc-and-process-scans";
+  Pipelines["DOWNLOAD_AND_ZIP_PROJECT_FILES_FOLDER"] = "download-and-zip-project-files-folder";
+  Pipelines["INGEST_EXTERNAL_PHOTO_PROJECT_DATA"] = "ingest-external-photo-project-data";
+  Pipelines["GENERATE_IFC"] = "generate-ifc";
+  Pipelines["CREATE_AND_PROCESS_SVF"] = "create-and-process-svf";
 })(Pipelines || (Pipelines = {}));
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Pipelines);
@@ -4199,9 +4213,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
-
-
+ // import node_fetch from "node-fetch";
 // const fetch = fetch || node_fetch;
+
 var Http = /*#__PURE__*/function () {
   function Http() {
     _classCallCheck(this, Http);

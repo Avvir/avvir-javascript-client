@@ -71,6 +71,14 @@ export default class ElementApi {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/match`;
     return Http.post(url, user, { matches, newElements });
   }
+
+
+  static updatePlannedBuildingElements({ projectId, floorId }: AssociationIds, elements: ApiPlannedElement[], user: User) {
+    return Http.patch(`${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements`,
+      user,
+      elements
+    )
+  }
 }
 
 makeErrorsPretty(ElementApi);

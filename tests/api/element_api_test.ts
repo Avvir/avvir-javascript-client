@@ -7,8 +7,9 @@ import ElementApi from "../../source/api/element_api";
 import Http from "../../source/utilities/http";
 import { DETECTED, INCLUDED } from "../../source/models/enums/deviation_status";
 import { DEVIATED } from "../../source/models/enums/scan_label";
-import { GATEWAY_JWT } from "../../source/models/enums/user_auth_type";
+import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
 import { USER } from "../../source/models/enums/user_role";
+import ApiPlannedElement from "../../source/models/api/api_planned_element";
 
 describe("ElementApi", () => {
   describe("::updateDeviationStatus", () => {
@@ -483,5 +484,55 @@ describe("ElementApi", () => {
         expect(runningProcess.startDate).not.to.eq(null);
       });
     });
+  });
+
+
+  describe("#updatePlannedBuildingElements", () => {
+    let user;
+    beforeEach(() => {
+      user = {
+        authType: FIREBASE,
+        firebaseUser:{ idToken: "some-firebase.id.token" }
+      };
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements`, 200);
+    });
+
+    it("makes a call to the endpoint", () => {
+      ElementApi.updatePlannedBuildingElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id"
+      }, [new ApiPlannedElement({
+        globalId: "some-global-id",
+        name: "some-name"
+      })], user);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(lastFetchOpts.headers).to.include.key("Content-Type");
+      expect(lastFetchOpts.headers["Content-Type"]).to.eq("application/json");
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements`);
+      expect(fetchCall[1].body).to.deep.eq(JSON.stringify([new ApiPlannedElement({
+            globalId: "some-global-id",
+            name: "some-name"
+          })]
+      ));
+    });
+
+    it("sends the request with authorization headers", () => {
+      ElementApi.updatePlannedBuildingElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id"
+      }, [{
+        globalId: "some-global-id",
+        name: "some-name"
+      }], user);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements`);
+      expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+
   });
 });
