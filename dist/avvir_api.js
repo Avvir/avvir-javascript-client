@@ -396,6 +396,14 @@ var FloorApi = /*#__PURE__*/function () {
       var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId, "/reorder/").concat(ordinal);
       return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, null);
     }
+  }, {
+    key: "deleteFloor",
+    value: function deleteFloor(_ref4, user) {
+      var projectId = _ref4.projectId,
+          floorId = _ref4.floorId;
+      var url = "".concat(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl(), "/projects/").concat(projectId, "/floors/").concat(floorId);
+      return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.delete(url, user);
+    }
   }]);
 
   return FloorApi;
