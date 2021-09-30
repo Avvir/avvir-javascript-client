@@ -1,4 +1,4 @@
-declare const enum DeviationStatus {
+export declare enum DeviationStatus {
     DETECTED = "DETECTED",
     DISMISSED = "DISMISSED",
     INCLUDED = "INCLUDED",

@@ -1,4 +1,4 @@
-const enum DeviationStatus {
+export enum DeviationStatus {
   DETECTED = "DETECTED",
   DISMISSED = "DISMISSED",
   INCLUDED = "INCLUDED",

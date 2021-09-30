@@ -161,6 +161,10 @@ var ElementApi = /** @class */ (function () {
         var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/planned-building-elements/match";
         return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, { matches: matches, newElements: newElements });
     };
+    ElementApi.updatePlannedBuildingElements = function (_a, elements, user) {
+        var projectId = _a.projectId, floorId = _a.floorId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/planned-building-elements", user, elements);
+    };
     return ElementApi;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ElementApi);
@@ -280,6 +284,11 @@ var FloorApi = /** @class */ (function () {
         var projectId = _a.projectId, floorId = _a.floorId;
         var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/reorder/" + ordinal;
         return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, null);
+    };
+    FloorApi.deleteFloor = function (_a, user) {
+        var projectId = _a.projectId, floorId = _a.floorId;
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.delete(url, user);
     };
     return FloorApi;
 }());
@@ -2314,19 +2323,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "isDeviationScanResult": () => (/* binding */ isDeviationScanResult),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _enums_scan_label__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2252);
+/* harmony import */ var _enums_deviation_status__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9142);
+/* harmony import */ var _enums_scan_label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2252);
+
 
 var Deviation = /** @class */ (function () {
     function Deviation() {
         this.deviationVectorMeters = { x: 0.0, y: 0.0, z: 0.0 };
         this.deviationMeters = 0;
-        this.status = "DETECTED" /* DETECTED */;
+        this.status = _enums_deviation_status__WEBPACK_IMPORTED_MODULE_0__.default.DETECTED;
     }
     return Deviation;
 }());
 
 var isDeviationScanResult = function (scanResult) {
-    return (scanResult === null || scanResult === void 0 ? void 0 : scanResult.scanLabel) === _enums_scan_label__WEBPACK_IMPORTED_MODULE_0__.DEVIATED;
+    return (scanResult === null || scanResult === void 0 ? void 0 : scanResult.scanLabel) === _enums_scan_label__WEBPACK_IMPORTED_MODULE_1__.DEVIATED;
 };
 var DetailedElement = /** @class */ (function () {
     function DetailedElement(ifcType, globalId, scanResult) {
@@ -2645,15 +2656,25 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DeviationStatus": () => (/* binding */ DeviationStatus),
 /* harmony export */   "DETECTED": () => (/* binding */ DETECTED),
 /* harmony export */   "DISMISSED": () => (/* binding */ DISMISSED),
 /* harmony export */   "INCLUDED": () => (/* binding */ INCLUDED),
-/* harmony export */   "FIXED": () => (/* binding */ FIXED)
+/* harmony export */   "FIXED": () => (/* binding */ FIXED),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-var DETECTED = "DETECTED" /* DETECTED */;
-var DISMISSED = "DISMISSED" /* DISMISSED */;
-var INCLUDED = "INCLUDED" /* INCLUDED */;
-var FIXED = "FIXED" /* FIXED */;
+var DeviationStatus;
+(function (DeviationStatus) {
+    DeviationStatus["DETECTED"] = "DETECTED";
+    DeviationStatus["DISMISSED"] = "DISMISSED";
+    DeviationStatus["INCLUDED"] = "INCLUDED";
+    DeviationStatus["FIXED"] = "FIXED";
+})(DeviationStatus || (DeviationStatus = {}));
+var DETECTED = DeviationStatus.DETECTED;
+var DISMISSED = DeviationStatus.DISMISSED;
+var INCLUDED = DeviationStatus.INCLUDED;
+var FIXED = DeviationStatus.FIXED;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DeviationStatus);
 
 
 /***/ }),
@@ -3471,7 +3492,7 @@ module.exports = JSON.parse('{"100":"Continue","101":"Switching Protocol","102":
 
 /***/ }),
 
-/***/ 1976:
+/***/ 5422:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
@@ -3568,7 +3589,7 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 1976;
+webpackContext.id = 5422;
 
 /***/ }),
 
@@ -3706,7 +3727,7 @@ function importAll(directoryContext, target) {
 
 
 // skip .d.ts files because some use syntax our webpack settings don't support
-importAll(__webpack_require__(1976), Avvir);
+importAll(__webpack_require__(5422), Avvir);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Avvir);
 

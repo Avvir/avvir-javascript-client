@@ -15,4 +15,5 @@ export default class ElementApi {
     static matchPlannedBuildingElements({ projectId, floorId }: AssociationIds, matches: {
         [v1Id: string]: string;
     }, newElements: ApiPlannedElement[], user: User): Promise<RunningProcess>;
+    static updatePlannedBuildingElements({ projectId, floorId }: AssociationIds, elements: ApiPlannedElement[], user: User): Promise<Response>;
 }

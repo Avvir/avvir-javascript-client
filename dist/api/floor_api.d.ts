@@ -7,4 +7,8 @@ export default class FloorApi {
     static getFloor({ projectId, floorId }: AssociationIds, user: User): Promise<ApiFloor[]>;
     static updateFloor({ projectId, floorId }: AssociationIds, floor: ApiFloor, user: User): Promise<void>;
     static updateFloorOrder({ projectId, floorId }: AssociationIds, ordinal: number, user: User): Promise<void>;
+    static deleteFloor({ projectId, floorId }: {
+        projectId: any;
+        floorId: any;
+    }, user: User): Promise<ApiFloor[]>;
 }
