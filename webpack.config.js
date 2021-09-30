@@ -56,7 +56,7 @@ const nodeConfig = {
   target: "node",
   output: {
     path: path.join(__dirname, "dist"),
-    filename: `avvir_api.node.js`,
+    filename: `node.js`,
     libraryTarget: "umd",
     libraryExport: "default",
   },
@@ -79,7 +79,7 @@ const browserConfig = {
   target: "browserslist",
   output: {
     path: path.join(__dirname, "dist"),
-    filename: `avvir_api.web.js`,
+    filename: `browser.js`,
     libraryTarget: "umd",
     libraryExport: "default",
     globalObject: "this",

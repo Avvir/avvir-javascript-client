@@ -1,0 +1,10 @@
+tests
+integration_tests
+manual_acceptance_tests
+samples
+source
+scripts
+.circleci/
+dist
+
+
