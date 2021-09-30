@@ -3,8 +3,8 @@
   "repository": "git@github.com:Avvir/avvir-javascript-client.git",
   "version": "0.0.1",
   "description": "Javascript client for Avvir APIs",
-  "module": "dist/avvir_api.js",
-  "main": "dist/avvir_api.js",
+  "module": "dist/avvir_api.node.js",
+  "main": "dist/avvir_api.node.js",
   "browserslist": [
     "> 1%",
     "IE 11",
