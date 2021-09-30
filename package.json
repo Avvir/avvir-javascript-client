@@ -1,5 +1,5 @@
 {
-  "name": "avvir-javascript-client",
+  "name": "avvir",
   "repository": "git@github.com:Avvir/avvir-javascript-client.git",
   "version": "0.0.1",
   "description": "Javascript client for Avvir APIs",
@@ -11,8 +11,10 @@
     "Firefox ESR"
   ],
   "scripts": {
+    "expose:cmd": "mv -v dist/* ./",
     "build": "yarn run webpack",
-    "test": "NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn run build"
+    "test": "NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn run build",
+    "prepublishOnly": "yarn build && yarn run expose:cmd"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.8",
