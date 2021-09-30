@@ -114,9 +114,46 @@ const browserConfig = {
   ],
 };
 
+const moduleConfig = {
+  target: "browserslist",
+  output: {
+    path: path.join(__dirname, "dist"),
+    filename: `module.js`,
+    libraryTarget: "umd",
+    libraryExport: "default"
+  },
+  resolve: {
+    // Add `.ts` and `.js` as a resolvable extension
+    extensions: [".ts", ".js"],
+    alias: {
+      buffer: "buffer",
+      crypto: "crypto-browserify",
+      process: "process/browser.js",
+      stream: "stream-browserify",
+      util: "util/util.js",
+    }
+  },
+  plugins: [
+    // Moment.js is an extremely popular library that bundles large locale files
+    // by default due to how Webpack interprets its code. This is a practical
+    // solution that requires the user to opt into importing specific locales.
+    // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
+    // You can remove this if you don't use Moment.js:
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    // Makes some environment variables available to the JS code, for example:
+    // if (process.env.NODE_ENV === 'production') { ... }.
+    new webpack.DefinePlugin(env.stringified),
+    new webpack.ProvidePlugin({
+      process: "process/browser.js",
+      Buffer: ["buffer", "Buffer"]
+    })
+  ],
+};
+
 module.exports = (env, argv) => {
   Object.assign(nodeConfig, generalConfig);
   Object.assign(browserConfig, generalConfig);
+  Object.assign(moduleConfig, generalConfig);
 
-  return [browserConfig, nodeConfig];
+  return [browserConfig, nodeConfig, moduleConfig];
 };
