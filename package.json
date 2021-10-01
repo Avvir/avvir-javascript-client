@@ -8,13 +8,14 @@
     "IE 11",
     "Firefox ESR"
   ],
+  "main": "./dist/node.js",
+  "browser": "./dist/module.js",
+  "types": "./dist/avvir_api.d.ts",
   "scripts": {
-    "expose:cmd": "mv -v dist/* ./",
     "start": "yarn run webpack --watch --progress",
     "build": "yarn run webpack",
     "test": "NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn run build",
-    "prepublishOnly": "yarn build && yarn run expose:cmd",
-    "postpublish": "rm -r browser.js node.js module.js config.d.ts avvir_api.d.ts  ./utilities ./mixins ./converters ./api ./models"
+    "prepublishOnly": "yarn build"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.8",
@@ -26,7 +27,6 @@
     "@babel/register": "^7.12.1",
     "@types/chai-datetime": "^0.0.37",
     "@types/mocha": "^9.0.0",
-    "@types/moment": "^2.13.0",
     "@types/node": "^16.10.2",
     "@types/sinon": "^9.0.0",
     "@types/sinon-chai": "^3.2.4",
