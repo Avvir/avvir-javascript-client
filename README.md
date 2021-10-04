@@ -1,4 +1,4 @@
-# avvir-javascript-client
+# Avvir
 
 ## Getting Started
 
@@ -23,8 +23,9 @@ yarn install
 
 As a basic example this code will retrieve all the areas associated with a project along with their capture datasets and log the results to the console. [This example](./samples/areas-and-capture-datasets.js) as well as others can be found in the [samples](./samples) directory.
 
+
 ```javascript
-const Avvir = require("avvir-javascript-client");
+const AvvirApi = require("avvir");
 // Make sure to replace the credentials with your actual username and password
 const username = "you@example.com";
 const password = "yourPassw0rd123";
@@ -33,15 +34,15 @@ const password = "yourPassw0rd123";
 const projectId = "your-project-id";
 
 async function printAreasAndCaptureDatasets() {
-   const user = await Avvir.api.auth.login(username, password);
-   const areas = await Avvir.api.floors.listFloorsForProject(projectId, user);
+   const user = await AvvirApi.api.auth.login(username, password);
+   const areas = await AvvirApi.api.floors.listFloorsForProject(projectId, user);
 
    for (const area of areas) {
       console.log(`Area: ${area.floorNumber}`);
       console.log(area);
 
       console.log(`\nCapture Datasets for area ${area.floorNumber}: [`)
-      const captureDatasets = await Avvir.api.scanDatasets.listScanDatasetsForFloor({projectId, floorId: area.firebaseId}, user);
+      const captureDatasets = await AvvirApi.api.scanDatasets.listScanDatasetsForFloor({projectId, floorId: area.firebaseId}, user);
       for (const dataset of captureDatasets) {
          console.log(dataset);
       }
@@ -50,6 +51,20 @@ async function printAreasAndCaptureDatasets() {
 }
 
 printAreasAndCaptureDatasets();
+```
+
+## Using in the Browser
+If you are using avvir in the browser, either use the cdn source in a script tag
+```html
+<script src="https://unpkg.com/avvir/browser.js"></script>
+```
+
+or use ES imports with the source `module.js`
+
+```html
+<script type="module">
+   import AvvirApi from "https://unpkg.com/avvir/module.js";
+</script>
 ```
 
 ## Uploading a Project File
@@ -63,7 +78,7 @@ Where the `projectId` should be replaced with the projectID acquired through the
 
 ```javascript
 const uploadProjectFile = async () => {
-   const user = await Avvir.api.auth.login(username, password);
+   const user = await AvvirApi.api.auth.login(username, password);
    //create the payload for creating a project file
    const apiCloudFile: ApiCloudFile = new ApiCloudFile({
       url: 'https://some-external-host.com/scan-file.las',
@@ -99,6 +114,36 @@ const uploadProjectFile = async () => {
 }
 uploadProjectFile();
 ```
+## Uploading a BIM file to an area
+
+Using the files api, you have the ability to upload a bim to an area to be viewable in the 3d Viewer. The bim can be either an `.nwd` file or an `.ifc` file. 
+
+To begin uploading a bim to an area, first get your project id and area id from the area you would like to upload the bim to. Then, do the following: 
+
+```javascript
+const AvvirApi = require("avvir");
+//The instructions above details how to get the following variables
+let username = "<You-User-Login>";
+let password = "<Your-Password>";
+let projectId = "<Your-Project-ID>";
+
+//use the instructions above to get area id
+const areaId = '<Your-Area-Id>';
+
+const uploadBim = async () => {
+   const user = await AvvirApi.api.auth.login(username, password);
+   let floorId = areaId;
+
+   const apiCloudFile = new AvvirApi.ApiCloudFile({
+      url: 'https://some-external-host.com/scan-file.nwd',
+      purposeType: BIM_NWD //Can also be BIM_IFC if your uploading an ifc
+   });
+   let file = await AvvirApi.api.files.saveFloorFile({projectId, floorId}, apiCloudFile, user);
+   //check the pipeline to check on your the file upload status of the bim.
+   console.log(file);
+}
+
+```
 
 ## Associating a Scan File to a Project Area
 Once a scan file has be ingested by the portal, you can now associate a scan to an area's scan dataset. By doing this, you gain the ability to run analysis on the scan to determine deviations and progress for the given area. 
@@ -110,7 +155,7 @@ https://portal.avvir.io/admin/organizations/{organizationId}/projects/{projectId
 Or can create a floor programatically:
 ```javascript
 const createFloor = async () => {
-  return await Avvir.api.floors.createFloor(projectId, "<Any Area Name>", user);
+  return await AvvirApi.api.floors.createFloor(projectId, "<Any Area Name>", user);
 }
 let area = await createFloor()
 let areaId = area.firebaseId;
@@ -122,7 +167,7 @@ Then, assuming you've already uploaded a scan file to your project, apply the fo
 
 ```javascript
 
-const Avvir = require("avvir-javascript-client").default;
+const AvvirApi = require("avvir");
 //The instructions above details how to get the following variables
 let username = "<You-User-Login>";
 let password = "<Your-Password>";
@@ -134,16 +179,16 @@ const areaId = '<Your-Area-Id>';
 const fileUrl = 'https://some-file-source.com/scan.las';
 
 const associateScan = async (areaId, fileUrl) => {
-   const user = await Avvir.api.auth.login(username, password);
+   const user = await AvvirApi.api.auth.login(username, password);
    let floorId = areaId;
    //this creates a new scan on the area you've selected.
-   const scanDataset = await Avvir.api.scanDatasets.createScanDataset({ projectId, floorId }, user);
-   const cloudFile = new Avvir.ApiCloudFile({
+   const scanDataset = await AvvirApi.api.scanDatasets.createScanDataset({ projectId, floorId }, user);
+   const cloudFile = new AvvirApi.ApiCloudFile({
       url: fileUrl,
       purposeType: 'PREPROCESSED_SCAN'
    });
    let scanDatasetId = scanDataset.firebaseId;
-   await Avvir.api.files.saveScanDatasetFile({ projectId, floorId, scanDatasetId }, cloudFile, user);
+   await AvvirApi.api.files.saveScanDatasetFile({ projectId, floorId, scanDatasetId }, cloudFile, user);
    console.log(`Go to Scan #${scanDataset.scanNumber} in the scan datasets dropdown of the portal under your selected floor`);
    console.log(`Completed associating scan dataset...`)
 }
@@ -173,8 +218,8 @@ const processSteps = async ( type ) => {
      steps = ["compute-deviations", "compute-progress"]
    }
    
-   let user = await Avvir.auth.login(username, password)
-   let pipeline: ApiPipelineArgument = new Avvir.ApiPipeline({
+   let user = await AvvirApi.auth.login(username, password)
+   let pipeline: ApiPipelineArgument = new AvvirApi.ApiPipeline({
       name: "pipeline-steps",
       firebaseProjectId: projectId,
       firebaseFloorId: areaId,
@@ -229,7 +274,7 @@ After the pipeline has completed processing your scan, you should be able to nav
 
 
 ## Contributing 
-Read our [contributing guide](./CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to avvir-javascript-client.
+Read our [contributing guide](./CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to avvir.
 
 ## Api Reference
 ___
@@ -244,7 +289,7 @@ Get a list of all the floors for a given project
 1. `Promise<ApiFloor[]>` - list of floors from that specific project
 #### Example
 ```javascript
-Avvir.api.floors.listFloorsForProject(projectId, user).then((response) => {
+AvvirApi.api.floors.listFloorsForProject(projectId, user).then((response) => {
    console.log(response);
 });
 ```
@@ -259,7 +304,7 @@ Creates a floor for a given project
 1. `Promise<ApiFloor[]>` - An api object which represents the meta data of a floor. 
 #### Example
 ```typescript
-Avvir.api.floors.createFloor(projectId, "<Any Area Name>", user).then((floor) => {
+AvvirApi.api.floors.createFloor(projectId, "<Any Area Name>", user).then((floor) => {
   console.log(floor)
 })
 ```
@@ -276,7 +321,7 @@ gets a floor by a given projectId and floorId
 #### Example
 ```typescript
 const associationIds: AssociationIds = { projectId: '-MiR1yIeEPw0l8-gxr01', floorId: '-MiRiAGSt7-S1kt_xBRY'};
-Avvir.api.floors.getFloor(associationIds, user).then((response) => {
+AvvirApi.api.floors.getFloor(associationIds, user).then((response) => {
     console.log(response);
 });
 ```
