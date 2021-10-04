@@ -25,7 +25,7 @@ As a basic example this code will retrieve all the areas associated with a proje
 
 
 ```javascript
-const AvvirApi = require("avvir");
+const AvvirApi = require("avvir/node");
 // Make sure to replace the credentials with your actual username and password
 const username = "you@example.com";
 const password = "yourPassw0rd123";
@@ -63,7 +63,7 @@ or use ES imports with the source `module.js`
 
 ```html
 <script type="module">
-   import AvvirApi from "https://unpkg.com/avvir/module.js";
+   import AvvirApi from "https://unpkg.com/avvir/module";
 </script>
 ```
 
@@ -121,7 +121,7 @@ Using the files api, you have the ability to upload a bim to an area to be viewa
 To begin uploading a bim to an area, first get your project id and area id from the area you would like to upload the bim to. Then, do the following: 
 
 ```javascript
-const AvvirApi = require("avvir");
+const AvvirApi = require("avvir/node");
 //The instructions above details how to get the following variables
 let username = "<You-User-Login>";
 let password = "<Your-Password>";
@@ -167,7 +167,7 @@ Then, assuming you've already uploaded a scan file to your project, apply the fo
 
 ```javascript
 
-const AvvirApi = require("avvir");
+const AvvirApi = require("avvir/node");
 //The instructions above details how to get the following variables
 let username = "<You-User-Login>";
 let password = "<Your-Password>";
