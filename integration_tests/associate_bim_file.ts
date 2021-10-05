@@ -1,7 +1,7 @@
 import AuthApi from "../source/api/auth_api";
 import {describe} from "mocha";
 import ApiCloudFile from "../source/models/api/api_cloud_file";
-import {ScanDatasetPurposeType} from "../source/models/enums/purpose_type";
+import {BIM_NWD, OTHER, ScanDatasetPurposeType} from "../source/models/enums/purpose_type";
 import {expect} from "chai";
 import {User} from "../source/utilities/get_authorization_headers";
 import FileInformationApi from "../source/api/file_information_api";
@@ -11,12 +11,12 @@ import Config from "../source/config";
 
 describe("Assocate Project file to scan dataset files test", () => {
   let projectId: string, user: User, email: string, password: string, checkPipeline, checkPipelineTimeout: number,
-    checkPipelineIterations: number, fileUrl: string;
+      checkPipelineIterations: number, fileUrl: string;
   beforeEach(() => {
     email = process.env.AVVIR_SANDBOX_EMAIL
     password = process.env.AVVIR_SANDBOX_PASSWORD
     projectId = '-Mk8kNkZoSOVlAewkBqc';
-    fileUrl = "https://firebasestorage.googleapis.com/v0/b/avvir-portal-acceptance.appspot.com/o/project_uploads%2F-Mk8kNkZoSOVlAewkBqc%2Fbenchmarks_floor-6-of-9-walls-built_scan-1_processed-scan_fkdo_gfog.las?alt=media&token=09791114-ddc6-4330-813e-b25ce5a6bad7"
+    fileUrl = "https://storage.googleapis.com/avvir-public-readonly/old_bim.nwd"
     checkPipelineTimeout = 1000;
     checkPipelineIterations = 100
     sandbox.stub(Config, "sharedErrorHandler");
@@ -33,22 +33,21 @@ describe("Assocate Project file to scan dataset files test", () => {
       console.log("starting...")
       AuthApi.login(email, password)
           .then((user) => {
-            console.log("user logged in")
-            let scanDatasetId = '-Mk8vy1VMMMtaPNltVdg';
-            let floorId = '-Mk8kPX_ISw-nO_5QZ1';
+            console.log("user logged in");
+            let floorId = '-Mk8kPX_ISw-nO_5QZ10';
             let cloudFile = new ApiCloudFile({
               url: fileUrl,
-              purposeType: ScanDatasetPurposeType.PREPROCESSED_SCAN
+              purposeType: OTHER
             });
 
-            FileInformationApi.saveScanDatasetFile({ projectId, floorId, scanDatasetId }, cloudFile, user)
-                .then((scanDatasetCloudFile: ApiCloudFile)=>{
-                  console.log("saving")
-                  expect(scanDatasetCloudFile.purposeType).to.be.eq(ScanDatasetPurposeType.PREPROCESSED_SCAN);
-                  expect(scanDatasetCloudFile.url).to.be.eq(fileUrl);
-                }).catch(console.log).then(()=> {
-                  console.log("caught");
-                });
+            FileInformationApi.saveFloorFile({ projectId, floorId }, cloudFile, user)
+                .then((floorFile: ApiCloudFile)=>{
+                  console.log("saving", floorFile);
+                }).catch((e)=>{
+                  console.log(e);
+            }).then(()=> {
+              console.log("caught");
+            });
           }).catch(console.log)
 
 
