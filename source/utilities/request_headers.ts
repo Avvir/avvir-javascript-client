@@ -28,9 +28,9 @@ interface HttpGetHeaders extends Record<string, string> {
   "Accept": string
 }
 
-function makeGetHeaders(contentType: string) {
+function makeGetHeaders(contentType?: string) {
   return {
-    "Accept": "application/json",
+    "Accept": contentType || "application/json",
   };
 }
 

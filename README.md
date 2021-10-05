@@ -303,6 +303,18 @@ processScan();
 After the pipeline has completed processing your scan, you should be able to navigate to the 3d viewer in the portal,
 and view your scan by changing viewer's mode to `Inspection Mode` in the left panel, and toggling `View Point Cloud`.
 
+## Getting Project Deviation Tsv 
+There exists a tab separated file that users can export from the portal which provides deviation metrics for the entire project. To download this file, use `getProjectDeviationsReportTsv` and it will return a plaintext response with the contents of the file.
+
+```javascript
+const getTsv = async () => {
+  let user = await Avvir.api.auth.login(email, password);
+  let projectId = "<your-project-id>";
+  let tsv = await Avvir.api.projects.getProjectDeviationsReportTsv({projectId}, user);
+  return tsv;
+}
+```
+
 ## Contributing
 
 Read our [contributing guide](./CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and

@@ -83,7 +83,12 @@ class ProjectApi {
 
   static getProjectDeviationsReportTsvUrl({ projectId }: AssociationIds, fileName: string, user: User): string {
     const baseUrl = `${Http.baseUrl()}/projects/${projectId}/${fileName}_deviation-report.tsv`;
-    return Http.addAuthToDownloadUrl(baseUrl, user);
+    return Promise.resolve(Http.addAuthToDownloadUrl(baseUrl, user));
+  }
+
+  static  getProjectDeviationsReportTsv({ projectId }: AssociationIds, user: User): Promise<string> {
+    const baseUrl = `${Http.baseUrl()}/projects/${projectId}/project_deviation-report.tsv`;
+    return Http.get(baseUrl, user, "text/tab-separated-values; charset=utf-8");
   }
 }
 

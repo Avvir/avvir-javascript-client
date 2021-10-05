@@ -3,6 +3,9 @@ import responseStatusText from "../resources/response_statuses.json";
 import Http from "./http";
 
 const checkFetchStatus = <R extends string | {}>(response: Response): Promise<R | never> => {
+  //@ts-ignore
+  if(typeof response == "string") return Promise.resolve(response);
+
   const requestPath = response.url.split(Http.baseUrl()).join("..."); // split and join to replace text
   if (response.headers.has("Warning")) {
     console.warn(`Warning present in response: ${response.headers.get("Warning")}
@@ -16,9 +19,6 @@ from: \`${requestPath}\``);
       }) as Promise<R>;
     } else {
       return response.text().then(text => {
-        if (text) {
-          console.warn(`API returned non-json body from: \`${requestPath}\``);
-        }
         return text;
       }) as Promise<R>;
     }
