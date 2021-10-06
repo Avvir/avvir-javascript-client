@@ -1,11 +1,8 @@
 import AuthApi from "../source/api/auth_api";
 import {describe} from "mocha";
-import AvvirApi from "../source/avvir_api";
 import ApiCloudFile from "../source/models/api/api_cloud_file";
-import {ProjectPurposeType, ScanDatasetPurposeType} from "../source/models/enums/purpose_type";
-import ApiPipeline from "../source/models/api/api_pipeline";
+import {ScanDatasetPurposeType} from "../source/models/enums/purpose_type";
 import {expect} from "chai";
-import RunningProcessStatus from "../source/models/enums/running_process_status";
 import {User} from "../source/utilities/get_authorization_headers";
 import FileInformationApi from "../source/api/file_information_api";
 import {sandbox} from "../tests/test_utils/setup_tests";
@@ -53,6 +50,7 @@ describe("Assocate Project file to scan dataset files test", () => {
                   console.log("caught");
                 });
           }).catch(console.log)
+
 
 
     });

@@ -140,10 +140,12 @@ Using the files api, you have the ability to upload a bim to an area to be viewa
 either an `.nwd` file or an `.ifc` file.
 
 To begin uploading a bim to an area, first get your project id and area id from the area you would like to upload the
-bim to. Then, do the following:
+bim to. You will need to ingest the file first before saving it to the floor. 
 
 ```javascript
 const AvvirApi = require("avvir/node");
+const {Pipelines, ApiFloorPurposeType} = AvvirApi;
+
 //The instructions above details how to get the following variables
 let username = "<You-User-Login>";
 let password = "<Your-Password>";
@@ -151,6 +153,24 @@ let projectId = "<Your-Project-ID>";
 
 //use the instructions above to get area id
 const areaId = '<Your-Area-Id>';
+
+//helper function to poll the pipeline
+const checkPipeline = (pipelineResponse, user, index = 0) => {
+  console.log("Checking Pipeline:", index + " of " + checkPipelineIterations + " iterations");
+  return new Promise((resolve, reject) => {
+    AvvirApi.other.checkPipelineStatus({projectId}, pipelineResponse.id, user)
+      .then((response) => {
+        // console.log(index, response);
+        if (index > checkPipelineIterations) {
+          reject("Too Many Calls: Check endpoint to make sure the implementation isn't flawed.")
+        } else if (response.status !== RunningProcessStatus.COMPLETED) {
+          setTimeout( () => resolve(checkPipeline(response, user,  ++index)), checkPipelineTimeout );
+        } else {
+          resolve(response);
+        }
+      })
+  })
+}
 
 const uploadBim = async () => {
   const user = await AvvirApi.api.auth.login(username, password);
@@ -160,9 +180,50 @@ const uploadBim = async () => {
     url: 'https://some-external-host.com/scan-file.nwd',
     purposeType: BIM_NWD //Can also be BIM_IFC if your uploading an ifc
   });
-  let file = await AvvirApi.api.files.saveFloorFile({ projectId, floorId }, apiCloudFile, user);
+  
+  //Creates the project file and associates it the project
+  //can view by navigating to the files page in the portal
+  const projectFile = await AvvirApi.files.createProjectFile({projectId}, cloudFile, user);
+  let pipeline: ApiPipelineArgument = new ApiPipeline({
+    name: Pipelines.INGEST_PROJECT_FILE,
+    firebaseProjectId: projectId,
+    options: {
+      url: apiCloudFile.url,
+      fileType: 'nwd'
+    }
+  });
+  const pipelineResponse = await AvvirApi.pipelines.triggerPipeline(pipeline, user);
+  console.log("Check Pipeline: ", pipelineResponse.externalUrl);
+  await checkPipeline(pipelineResponse, user);
+  
+  //get the bim file from the project files list
+  const allProjectfiles = await AvvirApi.files.listProjectFiles({projectId}, user);
+  const bimFile = allProjectfiles[allProjectfiles.length - 1];
+  const newFile = new ApiCloudFile({
+    url: bimFile.url,
+    purposeType: ApiFloorPurposeType.BIM_NWD
+  });
+  
+  //save the project file as a floor file
+  let file = await AvvirApi.api.files.saveFloorFile({ projectId, floorId }, newFile, user);
   //check the pipeline to check on your the file upload status of the bim.
   console.log(file);
+
+  pipeline = new ApiPipeline({
+    name: Pipelines.CREATE_AND_PROCESS_SVF,
+    firebaseProjectId: projectId,
+    firebaseFloorId: floorId,
+    options: {
+      matchAndUpdateElements: false
+    }
+  });
+
+  pipelineResponse = await PipelineApi.triggerPipeline(pipeline, user);
+  console.log("Check Pipeline: ", pipelineResponse.externalUrl);
+  await checkPipeline(pipelineResponse, user);
+  
+  //check the floor for updated bim and check the viewer to make sure it is "viewable"
+  
 }
 
 ```

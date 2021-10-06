@@ -29,7 +29,7 @@ export default class FileInformationApi {
     return Http.get(url, user);
   }
 
-  static saveFloorFile({ projectId, floorId }: AssociationIds, apiFile: ApiCloudFile, user: User) :Promise<void>{
+  static saveFloorFile({ projectId, floorId }: AssociationIds, apiFile: ApiCloudFile, user: User) :Promise<ApiCloudFile|void>{
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/file`;
     return Http.post(url, user, apiFile);
   }
