@@ -501,7 +501,12 @@ var ProjectApi = /** @class */ (function () {
     ProjectApi.getProjectDeviationsReportTsvUrl = function (_a, fileName, user) {
         var projectId = _a.projectId;
         var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/" + fileName + "_deviation-report.tsv";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.addAuthToDownloadUrl(baseUrl, user);
+        return Promise.resolve(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.addAuthToDownloadUrl(baseUrl, user));
+    };
+    ProjectApi.getProjectDeviationsReportTsv = function (_a, user) {
+        var projectId = _a.projectId;
+        var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/project_deviation-report.tsv";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(baseUrl, user, "text/tab-separated-values; charset=utf-8");
     };
     return ProjectApi;
 }());
@@ -3172,6 +3177,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var checkFetchStatus = function (response) {
+    //@ts-ignore
+    if (typeof response == "string")
+        return Promise.resolve(response);
     var requestPath = response.url.split(_http__WEBPACK_IMPORTED_MODULE_2__.default.baseUrl()).join("..."); // split and join to replace text
     if (response.headers.has("Warning")) {
         console.warn("Warning present in response: " + response.headers.get("Warning") + "\nfrom: `" + requestPath + "`");
@@ -3185,9 +3193,6 @@ var checkFetchStatus = function (response) {
         }
         else {
             return response.text().then(function (text) {
-                if (text) {
-                    console.warn("API returned non-json body from: `" + requestPath + "`");
-                }
                 return text;
             });
         }
@@ -3453,7 +3458,7 @@ makePostHeaders["Content-Type"] = "application/json";
 var httpPostHeaders = makePostHeaders;
 function makeGetHeaders(contentType) {
     return {
-        "Accept": "application/json",
+        "Accept": contentType || "application/json",
     };
 }
 makeGetHeaders.Accept = "application/json";

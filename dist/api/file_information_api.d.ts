@@ -8,7 +8,7 @@ export default class FileInformationApi {
     static listProjectFiles({ projectId }: AssociationIds, user: User): Promise<ApiCloudFile[]>;
     static zipProjectFolder(folderName: string, { projectId }: AssociationIds, user: User): Promise<ApiArgoResponse>;
     static listPhotoAreaFiles({ projectId, photoAreaId }: AssociationIds, user: User): Promise<ApiCloudFile[]>;
-    static saveFloorFile({ projectId, floorId }: AssociationIds, apiFile: ApiCloudFile, user: User): Promise<void>;
+    static saveFloorFile({ projectId, floorId }: AssociationIds, apiFile: ApiCloudFile, user: User): Promise<ApiCloudFile | void>;
     static listFloorFiles({ projectId, floorId }: AssociationIds, user: User): Promise<AvvirApiFiles<FloorPurposeType>>;
     static saveScanDatasetFile({ projectId, floorId, scanDatasetId }: AssociationIds, apiFile: ApiCloudFile, user: User): Promise<ApiCloudFile>;
     static getScanDatasetFiles({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<{
