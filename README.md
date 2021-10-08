@@ -153,18 +153,19 @@ let projectId = "<Your-Project-ID>";
 
 //use the instructions above to get area id
 const areaId = '<Your-Area-Id>';
-
+const pollIterations = 100;
+const pollTimeout = 1000; //milliseconds
 //helper function to poll the pipeline
 const checkPipeline = (pipelineResponse, user, index = 0) => {
-  console.log("Checking Pipeline:", index + " of " + checkPipelineIterations + " iterations");
+  console.log("Checking Pipeline:", index + " of " + pollIterations + " iterations");
   return new Promise((resolve, reject) => {
     AvvirApi.other.checkPipelineStatus({projectId}, pipelineResponse.id, user)
       .then((response) => {
         // console.log(index, response);
-        if (index > checkPipelineIterations) {
+        if (index > pollIterations) {
           reject("Too Many Calls: Check endpoint to make sure the implementation isn't flawed.")
         } else if (response.status !== RunningProcessStatus.COMPLETED) {
-          setTimeout( () => resolve(checkPipeline(response, user,  ++index)), checkPipelineTimeout );
+          setTimeout( () => resolve(checkPipeline(response, user,  ++index)), pollTimeout);
         } else {
           resolve(response);
         }
@@ -193,7 +194,7 @@ const uploadBim = async () => {
     }
   });
   const pipelineResponse = await AvvirApi.pipelines.triggerPipeline(pipeline, user);
-  console.log("Check Pipeline: ", pipelineResponse.externalUrl);
+  console.log("Check Ingest Project File Pipeline: ", pipelineResponse.externalUrl);
   await checkPipeline(pipelineResponse, user);
   
   //get the bim file from the project files list
@@ -219,13 +220,15 @@ const uploadBim = async () => {
   });
 
   pipelineResponse = await PipelineApi.triggerPipeline(pipeline, user);
-  console.log("Check Pipeline: ", pipelineResponse.externalUrl);
+  console.log("Check Bim Processing Pipeline: ", pipelineResponse.externalUrl);
   await checkPipeline(pipelineResponse, user);
   
   //check the floor for updated bim and check the viewer to make sure it is "viewable"
   
 }
 
+//call the method
+uploadBim();
 ```
 
 ## Associating a Scan File to a Project Area
