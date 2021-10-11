@@ -293,6 +293,8 @@ Given you have a scan associated to a scan dataset on your area, to get analysis
 the `process-steps` pipeline, with the type of analysis you wish to compute.
 
 ```javascript
+let Avvir = require("avvir-javscript-client");
+let AvvirApi = Avvir.api;
 let username = "<You-User-Login>";
 let password = "<Your-Password>";
 let projectId = "<Your-Project-ID>";
@@ -310,7 +312,7 @@ const processSteps = async (type) => {
   }
 
   let user = await AvvirApi.auth.login(username, password)
-  let pipeline = new AvvirApi.ApiPipeline({
+  let pipeline = new Avvir.ApiPipeline({
     name: "pipeline-steps",
     firebaseProjectId: projectId,
     firebaseFloorId: areaId,
@@ -319,7 +321,7 @@ const processSteps = async (type) => {
       steps
     }
   })
-  let response = await PipelineApi.triggerPipeline(pipeline, user);
+  let response = await AvvirApi.pipelines.triggerPipeline(pipeline, user);
   console.log(response.status);
 }
 
