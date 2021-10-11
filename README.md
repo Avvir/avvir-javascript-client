@@ -371,12 +371,18 @@ and view your scan by changing viewer's mode to `Inspection Mode` in the left pa
 There exists a tab separated file that users can export from the portal which provides deviation metrics for the entire project. To download this file, use `getProjectDeviationsReportTsv` and it will return a plaintext response with the contents of the file.
 
 ```javascript
+const Avvir = require("avvir-javascript-client");
+const email = "youremail@email.com"
+const password = "yourpassword";
+const projectId = "<your-project-id>";
+
 const getTsv = async () => {
   let user = await Avvir.api.auth.login(email, password);
-  let projectId = "<your-project-id>";
   let tsv = await Avvir.api.projects.getProjectDeviationsReportTsv({projectId}, user);
   return tsv;
 }
+
+getTsv().then(console.log);
 ```
 
 ## Contributing
