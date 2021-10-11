@@ -506,7 +506,9 @@ var ProjectApi = /** @class */ (function () {
     ProjectApi.getProjectDeviationsReportTsv = function (_a, user) {
         var projectId = _a.projectId;
         var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/project_deviation-report.tsv";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(baseUrl, user, "text/tab-separated-values; charset=utf-8");
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.addAuthToDownloadUrl(baseUrl, user);
+        console.log(url);
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user, "text/tab-separated-values; charset=utf-8");
     };
     return ProjectApi;
 }());
@@ -3303,10 +3305,11 @@ var Http = /** @class */ (function () {
         }
         return fetch(url, data);
     };
-    Http.get = function (url, user) {
+    Http.get = function (url, user, contentType) {
+        if (contentType === void 0) { contentType = "application/json"; }
         return Http.fetch(url, {
             method: "GET",
-            headers: __assign(__assign({}, _request_headers__WEBPACK_IMPORTED_MODULE_1__.httpPostHeaders), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user))
+            headers: __assign(__assign({}, (0,_request_headers__WEBPACK_IMPORTED_MODULE_1__.httpGetHeaders)(contentType)), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user))
         });
     };
     Http.delete = function (url, user) {
