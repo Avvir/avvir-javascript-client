@@ -1,5 +1,5 @@
 import getAuthorizationHeaders, { User } from "./get_authorization_headers";
-import { httpPostHeaders } from "./request_headers";
+import {httpGetHeaders, httpPostHeaders} from "./request_headers";
 import { isFirebaseUser, isGatewayUser } from "./reduce_user_session";
 import Config from "../config";
 
@@ -13,11 +13,11 @@ export default class Http {
     return fetch(url, data);
   }
 
-  static get(url, user) {
+  static get(url, user, contentType = "application/json") {
     return Http.fetch(url, {
       method: "GET",
       headers: {
-        ...httpPostHeaders,
+        ...httpGetHeaders(contentType),
         ...getAuthorizationHeaders(user)
       }
     });
