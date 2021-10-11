@@ -99,7 +99,7 @@ Where the `projectId` should be replaced with the projectID acquired through the
 const uploadProjectFile = async () => {
   const user = await AvvirApi.api.auth.login(username, password);
   //create the payload for creating a project file
-  const apiCloudFile: ApiCloudFile = new ApiCloudFile({
+  const apiCloudFile = new ApiCloudFile({
     url: 'https://some-external-host.com/scan-file.las',
     purposeType: OTHER
   });
@@ -107,7 +107,7 @@ const uploadProjectFile = async () => {
   //This will make the external file reference available to you in the avvir portal in on the files page
   let fileRef = await AvvirApi.files.createProjectFile({ projectId }, apiCloudFile, user);
   console.log(fileRef)
-  let pipeline: ApiPipelineArgument = new ApiPipeline({
+  let pipeline = new ApiPipeline({
     name: Pipelines.INGEST_PROJECT_FILE,
     firebaseProjectId: projectId,
     options: {
@@ -185,7 +185,7 @@ const uploadBim = async () => {
   //Creates the project file and associates it the project
   //can view by navigating to the files page in the portal
   const projectFile = await AvvirApi.files.createProjectFile({projectId}, cloudFile, user);
-  let pipeline: ApiPipelineArgument = new ApiPipeline({
+  let pipeline = new ApiPipeline({
     name: Pipelines.INGEST_PROJECT_FILE,
     firebaseProjectId: projectId,
     options: {
@@ -310,7 +310,7 @@ const processSteps = async (type) => {
   }
 
   let user = await AvvirApi.auth.login(username, password)
-  let pipeline: ApiPipelineArgument = new AvvirApi.ApiPipeline({
+  let pipeline = new AvvirApi.ApiPipeline({
     name: "pipeline-steps",
     firebaseProjectId: projectId,
     firebaseFloorId: areaId,
@@ -457,7 +457,7 @@ gets a floor by a given projectId and floorId
 #### Example
 
 ```typescript
-const associationIds: AssociationIds = { projectId: '-MiR1yIeEPw0l8-gxr01', floorId: '-MiRiAGSt7-S1kt_xBRY' };
+const associationIds = { projectId: '-MiR1yIeEPw0l8-gxr01', floorId: '-MiRiAGSt7-S1kt_xBRY' };
 AvvirApi.api.floors.getFloor(associationIds, user).then((response) => {
   console.log(response);
 });
