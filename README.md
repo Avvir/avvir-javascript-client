@@ -144,7 +144,7 @@ bim to. You will need to ingest the file first before saving it to the floor.
 
 ```javascript
 const AvvirApi = require("avvir/node");
-const {Pipelines, ApiFloorPurposeType} = AvvirApi;
+const {Pipelines, ApiFloorPurposeType, ApiCloudFile, ApiPipeline} = AvvirApi;
 
 //The instructions above details how to get the following variables
 let username = "<You-User-Login>";
@@ -167,7 +167,7 @@ const checkPipeline = (pipelineResponse, user, index = 0) => {
         // console.log(index, response);
         if (index > pollIterations) {
           reject("Too Many Calls: Check endpoint to make sure the implementation isn't flawed.")
-        } else if (response.status !== RunningProcessStatus.COMPLETED) {
+        } else if (response.status !== 'COMPLETED') {
           setTimeout( () => resolve(checkPipeline(response, user,  ++index)), pollTimeout);
         } else {
           resolve(response);
@@ -180,9 +180,9 @@ const uploadBim = async () => {
   const user = await AvvirApi.api.auth.login(username, password);
   let floorId = areaId;
 
-  const apiCloudFile = new AvvirApi.ApiCloudFile({
+  const apiCloudFile = new ApiCloudFile({
     url: fileUrl,
-    purposeType: BIM_NWD //Can also be BIM_IFC if your uploading an ifc
+    purposeType: ApiFloorPurposeType.BIM_NWD //Can also be BIM_IFC if your uploading an ifc
   });
   
   //Creates the project file and associates it the project
@@ -196,7 +196,7 @@ const uploadBim = async () => {
       fileType: 'nwd'
     }
   });
-  const pipelineResponse = await AvvirApi.pipelines.triggerPipeline(pipeline, user);
+  const pipelineResponse = await AvvirApi.api.pipelines.triggerPipeline(pipeline, user);
   console.log("Check Ingest Project File Pipeline: ", pipelineResponse.externalUrl);
   await checkPipeline(pipelineResponse, user);
   
@@ -211,7 +211,7 @@ const uploadBim = async () => {
   //save the project file as a floor file
   let file = await AvvirApi.api.files.saveFloorFile({ projectId, floorId }, newFile, user);
   //check the pipeline to check on your the file upload status of the bim.
-  console.log(file);
+  console.log(file, "\n");
 
   pipeline = new ApiPipeline({
     name: Pipelines.CREATE_AND_PROCESS_SVF,
@@ -222,7 +222,7 @@ const uploadBim = async () => {
     }
   });
 
-  pipelineResponse = await PipelineApi.triggerPipeline(pipeline, user);
+  pipelineResponse = await AvvirApi.api.pipelines.triggerPipeline(pipeline, user);
   console.log("Check Bim Processing Pipeline: ", pipelineResponse.externalUrl);
   await checkPipeline(pipelineResponse, user);
   
