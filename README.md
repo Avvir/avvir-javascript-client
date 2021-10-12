@@ -162,7 +162,7 @@ const pollTimeout = 1000; //milliseconds
 const checkPipeline = (pipelineResponse, user, index = 0) => {
   console.log("Checking Pipeline:", index + " of " + pollIterations + " iterations");
   return new Promise((resolve, reject) => {
-    AvvirApi.other.checkPipelineStatus({projectId}, pipelineResponse.id, user)
+    AvvirApi.api.other.checkPipelineStatus({projectId}, pipelineResponse.id, user)
       .then((response) => {
         // console.log(index, response);
         if (index > pollIterations) {
@@ -187,7 +187,7 @@ const uploadBim = async () => {
   
   //Creates the project file and associates it the project
   //can view by navigating to the files page in the portal
-  const projectFile = await AvvirApi.files.createProjectFile({projectId}, cloudFile, user);
+  const projectFile = await AvvirApi.api.files.createProjectFile({projectId}, apiCloudFile, user);
   let pipeline = new ApiPipeline({
     name: Pipelines.INGEST_PROJECT_FILE,
     firebaseProjectId: projectId,
@@ -196,12 +196,12 @@ const uploadBim = async () => {
       fileType: 'nwd'
     }
   });
-  const pipelineResponse = await AvvirApi.api.pipelines.triggerPipeline(pipeline, user);
+  let pipelineResponse = await AvvirApi.api.pipelines.triggerPipeline(pipeline, user);
   console.log("Check Ingest Project File Pipeline: ", pipelineResponse.externalUrl);
   await checkPipeline(pipelineResponse, user);
   
   //get the bim file from the project files list
-  const allProjectfiles = await AvvirApi.files.listProjectFiles({projectId}, user);
+  const allProjectfiles = await AvvirApi.api.files.listProjectFiles({projectId}, user);
   const bimFile = allProjectfiles[allProjectfiles.length - 1];
   const newFile = new ApiCloudFile({
     url: bimFile.url,
