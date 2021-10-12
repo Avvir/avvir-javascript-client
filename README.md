@@ -153,6 +153,9 @@ let projectId = "<Your-Project-ID>";
 
 //use the instructions above to get area id
 const areaId = '<Your-Area-Id>';
+//replace this with an actual bim file. 
+const fileUrl = 'https://some-external-host.com/bim-file.nwd';
+
 const pollIterations = 100;
 const pollTimeout = 1000; //milliseconds
 //helper function to poll the pipeline
@@ -178,7 +181,7 @@ const uploadBim = async () => {
   let floorId = areaId;
 
   const apiCloudFile = new AvvirApi.ApiCloudFile({
-    url: 'https://some-external-host.com/scan-file.nwd',
+    url: fileUrl,
     purposeType: BIM_NWD //Can also be BIM_IFC if your uploading an ifc
   });
   
@@ -224,7 +227,6 @@ const uploadBim = async () => {
   await checkPipeline(pipelineResponse, user);
   
   //check the floor for updated bim and check the viewer to make sure it is "viewable"
-  
 }
 
 //call the method
