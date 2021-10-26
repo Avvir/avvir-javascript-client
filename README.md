@@ -389,6 +389,32 @@ const getTsv = async () => {
 getTsv().then(console.log);
 ```
 
+
+## Saving and Converting E57 Files to project
+Avvir portal gateway utilizes scans to detect clashes and deviances in the Bim. The portal only ingests scans that are in las format utilizing `saveScanDatasetFile()`. 
+
+If you have a scan that is in e57 format, there is a different method which will convert your e57 file before ingesting it into the portal.
+
+```javascript
+const Avvir = require("avvir-javascript-client");
+const email = "youremail@email.com"
+const password = "yourpassword";
+const projectId = "<your-project-id>";
+const url = "some-url.com/external-e57-point-cloud.e57"
+
+const saveAndConvertE57 = async () => {
+  let user = await Avvir.api.auth.login(email, password);
+  let apiFile = new ApiCloudFile({
+    url,
+    purposeType: OTHER
+  });
+  return await Avvir.api.files.saveAndConvertE57ProjectFile({projectId}, apiFile, user);
+}
+
+saveAndConvertE57()
+```
+
+
 ## Contributing
 
 Read our [contributing guide](./CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and

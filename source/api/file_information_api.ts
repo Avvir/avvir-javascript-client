@@ -7,6 +7,12 @@ import makeErrorsPretty from "../utilities/make_errors_pretty";
 import {User} from "../utilities/get_authorization_headers";
 import {FloorPurposeType, PurposeType} from "../models/enums/purpose_type";
 import ApiArgoResponse from "../models/api/api_argo_response";
+import ApiPipeline, {ApiPipelineArgument} from "../models/api/api_pipeline";
+import Pipelines from "../models/enums/pipeline_types";
+import AvvirApi from "../avvir_api";
+import {pollPipeline} from "../utilities/pollPipeline";
+import PipelineApi from "./pipeline_api";
+
 
 export default class FileInformationApi {
   static createProjectFile({ projectId }: AssociationIds, apiFile: ApiCloudFile, user: User) : Promise<ApiCloudFile>{
@@ -56,6 +62,51 @@ export default class FileInformationApi {
     }
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/files${query}`;
     return Http.get(url, user);
+  }
+
+  static saveAndIngestE57ProjectFile({ projectId }: AssociationIds, apiFile: ApiCloudFile,  user: User): Promise<ApiCloudFile> {
+    return FileInformationApi.createProjectFile({ projectId }, apiFile, user).then((cloudFile)=>{
+      let pipeline: ApiPipelineArgument = new ApiPipeline({
+        name: Pipelines.INGEST_PROJECT_FILE,
+        firebaseProjectId: projectId,
+        options: {
+          url: apiFile.url,
+          fileType: 'e57'
+        }
+      });
+      return  PipelineApi.triggerPipeline(pipeline, user)
+          .then((pipelineResponse) => {
+            return pollPipeline(pipelineResponse, user).then(()=>{
+              //pipeline is finished, return cloudfile
+              return FileInformationApi.listProjectFiles({projectId}, user).then((projectFiles) => {
+                let file = projectFiles.slice(-1)[0];
+                return file;
+              })
+            })
+          });
+    })
+  }
+  static saveAndConvertE57ProjectFile({ projectId, floorId, scanDatasetId }: AssociationIds, apiFile: ApiCloudFile,  user: User): Promise<ApiCloudFile> {
+    return FileInformationApi.saveAndIngestE57ProjectFile({projectId}, apiFile, user).then((e57CloudFile)=>{
+      let pipeline: ApiPipelineArgument = new ApiPipeline({
+        name: Pipelines.CONVERT_E57_TO_LAS,
+        firebaseProjectId: projectId,
+        options: {
+          fileUri: e57CloudFile.url,
+          url: `acceptance/projects/${projectId}/photo-areas/None`
+        }
+      });
+      return AvvirApi.pipelines.triggerPipeline(pipeline, user)
+          .then((pipelineResponse) => {
+            return pollPipeline(pipelineResponse, user).then(()=>{
+              //pipeline is finished, return cloudfile
+              return FileInformationApi.listProjectFiles({projectId}, user).then((projectFiles) => {
+                let file = projectFiles.slice(-1)[0];
+                return file;
+              })
+            })
+          });
+    })
   }
 }
 

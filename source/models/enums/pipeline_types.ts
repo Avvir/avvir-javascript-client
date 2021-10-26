@@ -7,7 +7,8 @@ export type PipelineName = "downsample-scan" |
     "download-and-zip-project-files-folder" |
     "pipeline-steps" |
     "ingest-external-photo-project-data" |
-    "ingest-project-file";
+    "ingest-project-file" |
+    "convert-e57-to-las";
 
 export enum Pipelines {
     INGEST_PROJECT_FILE = "ingest-project-file",
@@ -17,7 +18,8 @@ export enum Pipelines {
     DOWNLOAD_AND_ZIP_PROJECT_FILES_FOLDER = "download-and-zip-project-files-folder",
     INGEST_EXTERNAL_PHOTO_PROJECT_DATA = "ingest-external-photo-project-data",
     GENERATE_IFC = "generate-ifc",
-    CREATE_AND_PROCESS_SVF = "create-and-process-svf"
+    CREATE_AND_PROCESS_SVF = "create-and-process-svf",
+    CONVERT_E57_TO_LAS = "convert-e57-to-las"
 }
 
 export default Pipelines;

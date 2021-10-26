@@ -4,7 +4,7 @@ import Http from "./http";
 
 const checkFetchStatus = <R extends string | {}>(response: Response): Promise<R | never> => {
   //@ts-ignore
-  if(typeof response == "string") return Promise.resolve(response);
+  if(typeof response == "string" || !response.headers) return Promise.resolve(response);
 
   const requestPath = response.url.split(Http.baseUrl()).join("..."); // split and join to replace text
   if (response.headers.has("Warning")) {
