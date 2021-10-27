@@ -432,6 +432,70 @@ const createArea = async () => {
 
 createArea().then(console.log)
 ```
+### Updating Elements in BIM
+Once you have a bim and or scan associated to a floor on your project, you may have the need to update elements which may have been mislabeled, or some other metadata exists which needs correcting. Avvir provides a method `updatePlannedElements` which allows you to update the elements through the api.
+
+The following meta fields may be updated through this method: 
+
+```
+  name: string;
+  ifcType?: string;
+  uniformat?: UniformatId;
+  itemId?: string;
+  discipline?: string;
+  primaryUnitOfMeasurement?: string;
+  primaryMeasurement?: number;
+```
+
+
+Below is a demonstration of how an authenticated user can update a planned building element utilizing this method. 
+```javascript
+const Avvir = require("avvir-javascript-client");
+const { ApiPlannedElement } = Avvir;
+
+const email = "youremail@email.com"
+const password = "yourpassword";
+const projectId = "<your-project-id>";
+const floorId = "<some-floor-id-with-processed-bim>";
+const globalId = "Obj9999"; //reference your bim or project export for the global id for the element you wish to update. 
+
+//make an array of the planned elements you wish to change
+const elements = [
+  new ApiPlannedElement({
+    globalId,
+    name: 'Wall',
+    ifcType: 'some-ifc-type',
+    uniformat: "A1010.10"
+  })
+]
+
+const updatePlannedElement = async (user) => {
+  //supply the elements to the update method
+  await Avvir.api.elements.updatePlannedBuildingElements(
+    {projectId, floorNumber}, 
+    elements,
+    user);
+}
+
+const getPlannedElements = async (user) => {
+  //get all planned elements from floor.
+  return await Avvir.api.elements.getPlannedBuildingElements(
+    {projectId, floorNumber},
+    user);
+}
+
+const updateAndGetPlannedElements = async () => {
+  //login
+  let user = await Avvir.api.auth.login(email, password);
+  //update and get
+  await updatePlannedElement(user);
+  return await getPlannedElements(user)
+}
+updateAndGetPlannedElements().then((elements) =>{
+  let updatedElement = elements.filter(element => element.globalId == globalId);
+  console.log(updatedElement) // the element you updated
+}) //
+```
 
 ## Contributing
 

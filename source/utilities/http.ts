@@ -2,7 +2,7 @@ import getAuthorizationHeaders, { User } from "./get_authorization_headers";
 import {httpGetHeaders, httpPostHeaders} from "./request_headers";
 import { isFirebaseUser, isGatewayUser } from "./reduce_user_session";
 import Config from "../config";
-
+import fetch from 'node-fetch';
 export default class Http {
   static baseUrl = (): string => Config.getConfiguration().AVVIR_GATEWAY_URL;
 
