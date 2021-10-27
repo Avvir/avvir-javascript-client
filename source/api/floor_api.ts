@@ -11,7 +11,7 @@ export default class FloorApi {
     return Http.get(url, user);
   }
 
-  static createFloor(projectId: string, floorNumber: string, user: User): Promise<ApiFloor[]> {
+  static createFloor(projectId: string, floorNumber: string, user: User): Promise<ApiFloor> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors`;
     return Http.post(url, user, {text: floorNumber});
   }

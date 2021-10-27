@@ -414,6 +414,24 @@ const saveAndConvertE57 = async () => {
 saveAndConvertE57().then(console.log)
 ```
 
+## Creating New Area
+
+If you are an authenticated user on a project, the API allows you to create an area.
+
+```javascript
+const Avvir = require("avvir-javascript-client");
+const email = "youremail@email.com"
+const password = "yourpassword";
+const projectId = "<your-project-id>";
+const floorNumber = "some-floor-number";
+
+const createArea = async () => {
+  let user = await Avvir.api.auth.login(email, password);
+  return await Avvir.api.floors.createFloor(projectId, floorNumber, user);
+}
+
+createArea().then(console.log)
+```
 
 ## Contributing
 
