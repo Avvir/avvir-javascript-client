@@ -96,6 +96,7 @@ export default class FileInformationApi {
           url: `acceptance/projects/${projectId}/photo-areas/None`
         }
       });
+
       return AvvirApi.pipelines.triggerPipeline(pipeline, user)
           .then((pipelineResponse) => {
             return pollPipeline(pipelineResponse, user).then(()=>{

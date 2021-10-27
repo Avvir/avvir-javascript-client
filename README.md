@@ -404,14 +404,14 @@ const url = "some-url.com/external-e57-point-cloud.e57"
 
 const saveAndConvertE57 = async () => {
   let user = await Avvir.api.auth.login(email, password);
-  let apiFile = new ApiCloudFile({
+  let apiFile = new Avvir.ApiCloudFile({
     url,
-    purposeType: OTHER
+    purposeType: 'OTHER'
   });
   return await Avvir.api.files.saveAndConvertE57ProjectFile({projectId}, apiFile, user);
 }
 
-saveAndConvertE57()
+saveAndConvertE57().then(console.log)
 ```
 
 

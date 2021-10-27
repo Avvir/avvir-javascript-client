@@ -28,8 +28,8 @@ const external_jsonwebtoken_namespaceObject = require("jsonwebtoken");;
 var external_jsonwebtoken_default = /*#__PURE__*/__webpack_require__.n(external_jsonwebtoken_namespaceObject);
 // EXTERNAL MODULE: ./source/utilities/get_authorization_headers.ts
 var get_authorization_headers = __webpack_require__(5561);
-// EXTERNAL MODULE: ./source/utilities/http.ts
-var http = __webpack_require__(5562);
+// EXTERNAL MODULE: ./source/utilities/http.ts + 1 modules
+var http = __webpack_require__(933);
 // EXTERNAL MODULE: ./source/models/response_error.ts + 1 modules
 var response_error = __webpack_require__(8445);
 // EXTERNAL MODULE: ./source/resources/response_statuses.json
@@ -107,7 +107,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5562);
+/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(933);
 /* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6289);
 
 
@@ -182,8 +182,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _converters_purpose_type_converter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6154);
-/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5562);
+/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(933);
 /* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6289);
+/* harmony import */ var _models_api_api_pipeline__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5621);
+/* harmony import */ var _models_enums_pipeline_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5019);
+/* harmony import */ var _avvir_api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5489);
+/* harmony import */ var _utilities_pollPipeline__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(541);
+/* harmony import */ var _pipeline_api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(4393);
+
+
+
+
+
 
 
 
@@ -239,6 +249,52 @@ var FileInformationApi = /** @class */ (function () {
         var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/files" + query;
         return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
     };
+    FileInformationApi.saveAndIngestE57ProjectFile = function (_a, apiFile, user) {
+        var projectId = _a.projectId;
+        return FileInformationApi.createProjectFile({ projectId: projectId }, apiFile, user).then(function (cloudFile) {
+            var pipeline = new _models_api_api_pipeline__WEBPACK_IMPORTED_MODULE_3__.default({
+                name: _models_enums_pipeline_types__WEBPACK_IMPORTED_MODULE_4__.default.INGEST_PROJECT_FILE,
+                firebaseProjectId: projectId,
+                options: {
+                    url: apiFile.url,
+                    fileType: 'e57'
+                }
+            });
+            return _pipeline_api__WEBPACK_IMPORTED_MODULE_7__.default.triggerPipeline(pipeline, user)
+                .then(function (pipelineResponse) {
+                return (0,_utilities_pollPipeline__WEBPACK_IMPORTED_MODULE_6__.pollPipeline)(pipelineResponse, user).then(function () {
+                    //pipeline is finished, return cloudfile
+                    return FileInformationApi.listProjectFiles({ projectId: projectId }, user).then(function (projectFiles) {
+                        var file = projectFiles.slice(-1)[0];
+                        return file;
+                    });
+                });
+            });
+        });
+    };
+    FileInformationApi.saveAndConvertE57ProjectFile = function (_a, apiFile, user) {
+        var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
+        return FileInformationApi.saveAndIngestE57ProjectFile({ projectId: projectId }, apiFile, user).then(function (e57CloudFile) {
+            var pipeline = new _models_api_api_pipeline__WEBPACK_IMPORTED_MODULE_3__.default({
+                name: _models_enums_pipeline_types__WEBPACK_IMPORTED_MODULE_4__.default.CONVERT_E57_TO_LAS,
+                firebaseProjectId: projectId,
+                options: {
+                    fileUri: e57CloudFile.url,
+                    url: "acceptance/projects/" + projectId + "/photo-areas/None"
+                }
+            });
+            return _avvir_api__WEBPACK_IMPORTED_MODULE_5__.default.pipelines.triggerPipeline(pipeline, user)
+                .then(function (pipelineResponse) {
+                return (0,_utilities_pollPipeline__WEBPACK_IMPORTED_MODULE_6__.pollPipeline)(pipelineResponse, user).then(function () {
+                    //pipeline is finished, return cloudfile
+                    return FileInformationApi.listProjectFiles({ projectId: projectId }, user).then(function (projectFiles) {
+                        var file = projectFiles.slice(-1)[0];
+                        return file;
+                    });
+                });
+            });
+        });
+    };
     return FileInformationApi;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FileInformationApi);
@@ -255,7 +311,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5562);
+/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(933);
 /* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6289);
 
 
@@ -306,7 +362,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5562);
+/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(933);
 /* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6289);
 
 
@@ -349,7 +405,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6289);
-/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5562);
+/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(933);
 
 
 var PhotoAreaApi = /** @class */ (function () {
@@ -389,7 +445,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5562);
+/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(933);
 /* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6289);
 
 
@@ -427,7 +483,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5562);
+/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(933);
 /* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6289);
 
 
@@ -525,7 +581,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5562);
+/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(933);
 /* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6289);
 
 
@@ -590,7 +646,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _utilities_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5561);
-/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5562);
+/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(933);
 /* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6289);
 /* harmony import */ var _models_enums_user_auth_type__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6132);
 /* harmony import */ var _utilities_request_headers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(4446);
@@ -1970,7 +2026,7 @@ var ApiPlannedElement = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 933:
+/***/ 4274:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2819,6 +2875,7 @@ var Pipelines;
     Pipelines["INGEST_EXTERNAL_PHOTO_PROJECT_DATA"] = "ingest-external-photo-project-data";
     Pipelines["GENERATE_IFC"] = "generate-ifc";
     Pipelines["CREATE_AND_PROCESS_SVF"] = "create-and-process-svf";
+    Pipelines["CONVERT_E57_TO_LAS"] = "convert-e57-to-las";
 })(Pipelines || (Pipelines = {}));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Pipelines);
 
@@ -3174,13 +3231,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _models_response_error__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8445);
 /* harmony import */ var _resources_response_statuses_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(297);
-/* harmony import */ var _http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5562);
+/* harmony import */ var _http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(933);
 
 
 
 var checkFetchStatus = function (response) {
     //@ts-ignore
-    if (typeof response == "string")
+    if (typeof response == "string" || !response.headers)
         return Promise.resolve(response);
     var requestPath = response.url.split(_http__WEBPACK_IMPORTED_MODULE_2__.default.baseUrl()).join("..."); // split and join to replace text
     if (response.headers.has("Warning")) {
@@ -3268,19 +3325,30 @@ var getAuthorizationHeaders = function (user) {
 
 /***/ }),
 
-/***/ 5562:
+/***/ 933:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5561);
-/* harmony import */ var _request_headers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4446);
-/* harmony import */ var _reduce_user_session__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5397);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5508);
-/* provided dependency */ var fetch = __webpack_require__(6786);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "default": () => (/* binding */ http)
+});
+
+// EXTERNAL MODULE: ./source/utilities/get_authorization_headers.ts
+var get_authorization_headers = __webpack_require__(5561);
+// EXTERNAL MODULE: ./source/utilities/request_headers.ts
+var request_headers = __webpack_require__(4446);
+// EXTERNAL MODULE: ./source/utilities/reduce_user_session.ts
+var reduce_user_session = __webpack_require__(5397);
+// EXTERNAL MODULE: ./source/config.ts
+var config = __webpack_require__(5508);
+;// CONCATENATED MODULE: external "node-fetch"
+const external_node_fetch_namespaceObject = require("node-fetch");;
+var external_node_fetch_default = /*#__PURE__*/__webpack_require__.n(external_node_fetch_namespaceObject);
+;// CONCATENATED MODULE: ./source/utilities/http.ts
 var __assign = (undefined && undefined.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -3296,48 +3364,49 @@ var __assign = (undefined && undefined.__assign) || function () {
 
 
 
+
 var Http = /** @class */ (function () {
     function Http() {
     }
     Http.fetch = function (url, data) {
-        if (_config__WEBPACK_IMPORTED_MODULE_2__.default.getConfiguration().logFetch) {
+        if (config.default.getConfiguration().logFetch) {
             console.log("Calling fetch with:", url, data);
         }
-        return fetch(url, data);
+        return external_node_fetch_default()(url, data);
     };
     Http.get = function (url, user, contentType) {
         if (contentType === void 0) { contentType = "application/json"; }
         return Http.fetch(url, {
             method: "GET",
-            headers: __assign(__assign({}, (0,_request_headers__WEBPACK_IMPORTED_MODULE_1__.httpGetHeaders)(contentType)), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user))
+            headers: __assign(__assign({}, (0,request_headers.httpGetHeaders)(contentType)), (0,get_authorization_headers.default)(user))
         });
     };
     Http.delete = function (url, user) {
         return Http.fetch(url, {
             method: "DELETE",
-            headers: __assign(__assign({}, _request_headers__WEBPACK_IMPORTED_MODULE_1__.httpPostHeaders), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user))
+            headers: __assign(__assign({}, request_headers.httpPostHeaders), (0,get_authorization_headers.default)(user))
         });
     };
     Http.post = function (url, user, body) {
         return Http.fetch(url, {
             method: "POST",
-            headers: __assign(__assign({}, _request_headers__WEBPACK_IMPORTED_MODULE_1__.httpPostHeaders), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user)),
+            headers: __assign(__assign({}, request_headers.httpPostHeaders), (0,get_authorization_headers.default)(user)),
             body: JSON.stringify(body)
         });
     };
     Http.patch = function (url, user, body) {
         return Http.fetch(url, {
             method: "PATCH",
-            headers: __assign(__assign({}, _request_headers__WEBPACK_IMPORTED_MODULE_1__.httpPostHeaders), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user)),
+            headers: __assign(__assign({}, request_headers.httpPostHeaders), (0,get_authorization_headers.default)(user)),
             body: JSON.stringify(body)
         });
     };
     Http.addAuthToDownloadUrl = function (baseUrl, user) {
         if (user) {
-            if ((0,_reduce_user_session__WEBPACK_IMPORTED_MODULE_3__.isGatewayUser)(user)) {
+            if ((0,reduce_user_session.isGatewayUser)(user)) {
                 return baseUrl + "?auth=" + user.gatewayUser.idToken;
             }
-            else if ((0,_reduce_user_session__WEBPACK_IMPORTED_MODULE_3__.isFirebaseUser)(user)) {
+            else if ((0,reduce_user_session.isFirebaseUser)(user)) {
                 return baseUrl + "?firebaseAuth=" + user.firebaseUser.idToken;
             }
         }
@@ -3345,10 +3414,10 @@ var Http = /** @class */ (function () {
             return baseUrl;
         }
     };
-    Http.baseUrl = function () { return _config__WEBPACK_IMPORTED_MODULE_2__.default.getConfiguration().AVVIR_GATEWAY_URL; };
+    Http.baseUrl = function () { return config.default.getConfiguration().AVVIR_GATEWAY_URL; };
     return Http;
 }());
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Http);
+/* harmony default export */ const http = (Http);
 
 
 /***/ }),
@@ -3422,6 +3491,44 @@ var makeErrorsPretty = function (apiClass, options) {
     return apiClass;
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (makeErrorsPretty);
+
+
+/***/ }),
+
+/***/ 541:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "pollPipeline": () => (/* binding */ pollPipeline)
+/* harmony export */ });
+/* harmony import */ var _avvir_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5489);
+/* harmony import */ var _models_enums_running_process_status__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2990);
+
+
+var pollPipeline = function (pipelineResponse, user, maxIterations, pollTimeout, index) {
+    if (maxIterations === void 0) { maxIterations = 200; }
+    if (pollTimeout === void 0) { pollTimeout = 1000; }
+    if (index === void 0) { index = 0; }
+    console.log("Checking Pipeline:", index + " of " + maxIterations + " iterations");
+    var projectId = pipelineResponse.firebaseProjectId;
+    return new Promise(function (resolve, reject) {
+        _avvir_api__WEBPACK_IMPORTED_MODULE_0__.default.other.checkPipelineStatus({ projectId: projectId }, pipelineResponse.id, user)
+            .then(function (response) {
+            // console.log(index, response);
+            if (index > maxIterations) {
+                reject("Too Many Calls: Check endpoint to make sure the implementation isn't flawed.");
+            }
+            else if (response.status !== _models_enums_running_process_status__WEBPACK_IMPORTED_MODULE_1__.default.COMPLETED) {
+                setTimeout(function () { return resolve(pollPipeline(response, user, maxIterations, pollTimeout, ++index)); }, pollTimeout);
+            }
+            else {
+                resolve(response);
+            }
+        });
+    });
+};
 
 
 /***/ }),
@@ -3539,7 +3646,7 @@ var map = {
 	"./models/api/api_photo_session.ts": 3379,
 	"./models/api/api_pipeline.ts": 5621,
 	"./models/api/api_planned_element.ts": 6099,
-	"./models/api/api_project.ts": 933,
+	"./models/api/api_project.ts": 4274,
 	"./models/api/api_project_cost_analysis_progress.ts": 4819,
 	"./models/api/api_project_masterformat_progress.ts": 6061,
 	"./models/api/api_purpose_type.ts": 3979,
@@ -3572,8 +3679,9 @@ var map = {
 	"./models/response_error.ts": 8445,
 	"./utilities/check_fetch_status.ts": 7583,
 	"./utilities/get_authorization_headers.ts": 5561,
-	"./utilities/http.ts": 5562,
+	"./utilities/http.ts": 933,
 	"./utilities/make_errors_pretty.ts": 6289,
+	"./utilities/pollPipeline.ts": 541,
 	"./utilities/reduce_user_session.ts": 5397,
 	"./utilities/request_headers.ts": 4446,
 	"./utilities/serialize_form.ts": 1848
@@ -3606,14 +3714,6 @@ webpackContext.id = 5422;
 
 "use strict";
 module.exports = require("moment");;
-
-/***/ }),
-
-/***/ 6786:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("node-fetch");;
 
 /***/ }),
 

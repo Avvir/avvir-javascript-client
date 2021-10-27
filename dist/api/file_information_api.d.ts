@@ -17,4 +17,6 @@ export default class FileInformationApi {
     static getScanDatasetFiles({ projectId, floorId, scanDatasetId }: AssociationIds, purposeType: PurposeType, user: User): Promise<{
         files: ApiCloudFile[];
     }>;
+    static saveAndIngestE57ProjectFile({ projectId }: AssociationIds, apiFile: ApiCloudFile, user: User): Promise<ApiCloudFile>;
+    static saveAndConvertE57ProjectFile({ projectId, floorId, scanDatasetId }: AssociationIds, apiFile: ApiCloudFile, user: User): Promise<ApiCloudFile>;
 }
