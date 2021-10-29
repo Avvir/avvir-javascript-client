@@ -140,7 +140,7 @@ Using the files api, you have the ability to upload a bim to an area to be viewa
 either an `.nwd` file or an `.ifc` file.
 
 To begin uploading a bim to an area, first get your project id and area id from the area you would like to upload the
-bim to. You will need to ingest the file first before saving it to the floor. 
+bim to. You will need to ingest the file first before saving it to the floor.
 
 ```javascript
 const AvvirApi = require("avvir/node");
@@ -184,7 +184,7 @@ const uploadBim = async () => {
     url: fileUrl,
     purposeType: ApiFloorPurposeType.BIM_NWD //Can also be BIM_IFC if your uploading an ifc
   });
-  
+
   //Creates the project file and associates it the project
   //can view by navigating to the files page in the portal
   const projectFile = await AvvirApi.api.files.createProjectFile({projectId}, apiCloudFile, user);
@@ -199,7 +199,7 @@ const uploadBim = async () => {
   let pipelineResponse = await AvvirApi.api.pipelines.triggerPipeline(pipeline, user);
   console.log("Check Ingest Project File Pipeline: ", pipelineResponse.externalUrl);
   await checkPipeline(pipelineResponse, user);
-  
+
   //get the bim file from the project files list
   const allProjectfiles = await AvvirApi.api.files.listProjectFiles({projectId}, user);
   const bimFile = allProjectfiles[allProjectfiles.length - 1];
@@ -207,7 +207,7 @@ const uploadBim = async () => {
     url: bimFile.url,
     purposeType: ApiFloorPurposeType.BIM_NWD
   });
-  
+
   //save the project file as a floor file
   let file = await AvvirApi.api.files.saveFloorFile({ projectId, floorId }, newFile, user);
   //check the pipeline to check on your the file upload status of the bim.
@@ -225,12 +225,34 @@ const uploadBim = async () => {
   pipelineResponse = await AvvirApi.api.pipelines.triggerPipeline(pipeline, user);
   console.log("Check Bim Processing Pipeline: ", pipelineResponse.externalUrl);
   await checkPipeline(pipelineResponse, user);
-  
+
   //check the floor for updated bim and check the viewer to make sure it is "viewable"
 }
 
 //call the method
 uploadBim();
+```
+
+## Creating a Capture Dataset
+
+If you are an authenticated user, you have the ability to create a scan dataset via the API.
+
+```javascript
+const AvvirApi = require("avvir/node");
+//The instructions above details how to get the following variables
+let username = "<You-User-Login>";
+let password = "<Your-Password>";
+let projectId = "<Your-Project-ID>";
+//use the instructions above to get area id
+const areaId = '<Your-Area-Id>';
+
+const createScanDataset = async () => {
+  const user = await AvvirApi.api.auth.login(username, password);
+  const scanDataset = await AvvirApi.api.scanDatasets.createScanDataset({ projectId, floorId: areaId }, user);
+  return scanDataset
+}
+
+createScanDataset().then(console.log)
 ```
 
 ## Associating a Scan File to a Project Area
@@ -371,7 +393,7 @@ processScan();
 After the pipeline has completed processing your scan, you should be able to navigate to the 3d viewer in the portal,
 and view your scan by changing viewer's mode to `Inspection Mode` in the left panel, and toggling `View Point Cloud`.
 
-## Getting Project Deviation Tsv 
+## Getting Project Deviation Tsv
 There exists a tab separated file that users can export from the portal which provides deviation metrics for the entire project. To download this file, use `getProjectDeviationsReportTsv` and it will return a plaintext response with the contents of the file.
 
 ```javascript
@@ -391,7 +413,7 @@ getTsv().then(console.log);
 
 
 ## Saving and Converting E57 Files to project
-Avvir portal gateway utilizes scans to detect clashes and deviances in the Bim. The portal only ingests scans that are in las format utilizing `saveScanDatasetFile()`. 
+Avvir portal gateway utilizes scans to detect clashes and deviances in the Bim. The portal only ingests scans that are in las format utilizing `saveScanDatasetFile()`.
 
 If you have a scan that is in e57 format, there is a different method which will convert your e57 file before ingesting it into the portal.
 
@@ -435,7 +457,7 @@ createArea().then(console.log)
 ### Updating Elements in BIM
 Once you have a bim and or scan associated to a floor on your project, you may have the need to update elements which may have been mislabeled, or some other metadata exists which needs correcting. Avvir provides a method `updatePlannedElements` which allows you to update the elements through the api.
 
-The following meta fields may be updated through this method: 
+The following meta fields may be updated through this method:
 
 ```
   name: string;
@@ -448,7 +470,7 @@ The following meta fields may be updated through this method:
 ```
 
 
-Below is a demonstration of how an authenticated user can update a planned building element utilizing this method. 
+Below is a demonstration of how an authenticated user can update a planned building element utilizing this method.
 ```javascript
 const Avvir = require("avvir-javascript-client");
 const { ApiPlannedElement } = Avvir;
@@ -472,7 +494,7 @@ const elements = [
 const updatePlannedElement = async (user) => {
   //supply the elements to the update method
   await Avvir.api.elements.updatePlannedBuildingElements(
-    {projectId, floorNumber}, 
+    {projectId, floorNumber},
     elements,
     user);
 }
@@ -547,7 +569,7 @@ Creates a floor for a given project
 
 ```typescript
 AvvirApi.api.floors.createFloor(projectId, "<Any Area Name>", user).then((floor) => {
-  console.log(floor)
+    console.log(floor)
 })
 ```
 
@@ -571,7 +593,7 @@ gets a floor by a given projectId and floorId
 ```typescript
 const associationIds = { projectId: '-MiR1yIeEPw0l8-gxr01', floorId: '-MiRiAGSt7-S1kt_xBRY' };
 AvvirApi.api.floors.getFloor(associationIds, user).then((response) => {
-  console.log(response);
+    console.log(response);
 });
 ```
 
