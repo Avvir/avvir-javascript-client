@@ -11,7 +11,7 @@
 return /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 320:
+/***/ 9815:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -24,16 +24,16 @@ __webpack_require__.d(__webpack_exports__, {
 });
 
 ;// CONCATENATED MODULE: external "jsonwebtoken"
-const external_jsonwebtoken_namespaceObject = require("jsonwebtoken");;
+const external_jsonwebtoken_namespaceObject = require("jsonwebtoken");
 var external_jsonwebtoken_default = /*#__PURE__*/__webpack_require__.n(external_jsonwebtoken_namespaceObject);
 // EXTERNAL MODULE: ./source/utilities/get_authorization_headers.ts
 var get_authorization_headers = __webpack_require__(5561);
 // EXTERNAL MODULE: ./source/utilities/http.ts
 var http = __webpack_require__(5562);
 // EXTERNAL MODULE: ./source/models/response_error.ts + 1 modules
-var response_error = __webpack_require__(8445);
+var response_error = __webpack_require__(6119);
 // EXTERNAL MODULE: ./source/resources/response_statuses.json
-var response_statuses = __webpack_require__(297);
+var response_statuses = __webpack_require__(9164);
 // EXTERNAL MODULE: ./source/models/enums/user_auth_type.ts
 var user_auth_type = __webpack_require__(6132);
 // EXTERNAL MODULE: ./source/utilities/request_headers.ts
@@ -62,13 +62,13 @@ var AuthApi = /** @class */ (function () {
     }
     AuthApi.login = function (username, password) {
         var user = {
-            authType: user_auth_type.default.BASIC,
+            authType: user_auth_type["default"].BASIC,
             username: username,
             password: password
         };
-        var headers = __assign(__assign({}, request_headers.httpGetHeaders), (0,get_authorization_headers.default)(user));
-        var url = http.default.baseUrl() + "/login";
-        return http.default.fetch(url, {
+        var headers = __assign(__assign({}, request_headers.httpGetHeaders), (0,get_authorization_headers["default"])(user));
+        var url = http["default"].baseUrl() + "/login";
+        return http["default"].fetch(url, {
             headers: headers
         }).then(function (response) {
             return response.json()
@@ -85,7 +85,7 @@ var AuthApi = /** @class */ (function () {
                     var message = body.message;
                     var statusMessage = response_statuses[response.status];
                     var verboseMessage = response.status + " " + statusMessage + ": '" + message + "' at `/login`";
-                    var error = new response_error.default(message, verboseMessage, response, body);
+                    var error = new response_error["default"](message, verboseMessage, response, body);
                     console.error(error);
                     throw error;
                 }
@@ -116,59 +116,59 @@ var ElementApi = /** @class */ (function () {
     }
     ElementApi.getPlannedBuildingElements = function (_a, user) {
         var projectId = _a.projectId, floorId = _a.floorId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/planned-building-elements";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/planned-building-elements";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     ElementApi.updateDeviationStatus = function (_a, deviationGlobalId, status, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/deviation-status";
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/deviation-status";
         var deviation = {
             globalId: deviationGlobalId,
             status: status
         };
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, deviation);
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].patch(url, user, deviation);
     };
     ElementApi.getDetailedElement = function (_a, elementGlobalId, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/element/" + elementGlobalId;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/element/" + elementGlobalId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     ElementApi.getDetailedElements = function (_a, user, viewerIds) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/building-elements";
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/building-elements";
         if (viewerIds) {
             url += "?viewerIds=" + viewerIds.join(",");
         }
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     ElementApi.updateElement = function (_a, element, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId, globalId = _a.globalId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/elements/" + globalId;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, element);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/elements/" + globalId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].patch(url, user, element);
     };
     ElementApi.updateManyElements = function (_a, elements, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/detailed-elements";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, elements);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/detailed-elements";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].patch(url, user, elements);
     };
     ElementApi.createElements = function (_a, elements, user) {
         var projectId = _a.projectId, floorId = _a.floorId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/planned-building-elements";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, elements);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/planned-building-elements";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, user, elements);
     };
     ElementApi.matchPlannedBuildingElements = function (_a, matches, newElements, user) {
         var projectId = _a.projectId, floorId = _a.floorId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/planned-building-elements/match";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, { matches: matches, newElements: newElements });
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/planned-building-elements/match";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, user, { matches: matches, newElements: newElements });
     };
     ElementApi.updatePlannedBuildingElements = function (_a, elements, user) {
         var projectId = _a.projectId, floorId = _a.floorId;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/planned-building-elements", user, elements);
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].patch(_utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/planned-building-elements", user, elements);
     };
     return ElementApi;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ElementApi);
-(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__.default)(ElementApi);
+(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(ElementApi);
 
 
 /***/ }),
@@ -202,65 +202,65 @@ var FileInformationApi = /** @class */ (function () {
     }
     FileInformationApi.createProjectFile = function (_a, apiFile, user) {
         var projectId = _a.projectId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/files";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.post(url, user, apiFile);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/files";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, apiFile);
     };
     FileInformationApi.listProjectFiles = function (_a, user) {
         var projectId = _a.projectId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/files";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/files";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
     ;
     FileInformationApi.zipProjectFolder = function (folderName, _a, user) {
         var projectId = _a.projectId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/zip-project-folder?folder-prefix=" + folderName;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.post(url, user, null);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/zip-project-folder?folder-prefix=" + folderName;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, null);
     };
     FileInformationApi.listPhotoAreaFiles = function (_a, user) {
         var projectId = _a.projectId, photoAreaId = _a.photoAreaId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/photo-areas/" + photoAreaId + "/files";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/photo-areas/" + photoAreaId + "/files";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
     FileInformationApi.saveFloorFile = function (_a, apiFile, user) {
         var projectId = _a.projectId, floorId = _a.floorId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/file";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.post(url, user, apiFile);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/file";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, apiFile);
     };
     FileInformationApi.listFloorFiles = function (_a, user) {
         var projectId = _a.projectId, floorId = _a.floorId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/files";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/files";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
     FileInformationApi.saveScanDatasetFile = function (_a, apiFile, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/file";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.post(url, user, apiFile);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/file";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, apiFile);
     };
     FileInformationApi.getScanDatasetFiles = function (_a, purposeType, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
         var query;
         if (typeof purposeType === "string") {
-            query = "?purposeType=" + _converters_purpose_type_converter__WEBPACK_IMPORTED_MODULE_0__.default.toApiPurposeType(purposeType);
+            query = "?purposeType=" + _converters_purpose_type_converter__WEBPACK_IMPORTED_MODULE_0__["default"].toApiPurposeType(purposeType);
         }
         else {
             query = "";
             user = purposeType;
         }
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/files" + query;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/files" + query;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
     FileInformationApi.saveAndIngestE57ProjectFile = function (_a, apiFile, user) {
         var projectId = _a.projectId;
         return FileInformationApi.createProjectFile({ projectId: projectId }, apiFile, user).then(function (cloudFile) {
-            var pipeline = new _models_api_api_pipeline__WEBPACK_IMPORTED_MODULE_3__.default({
-                name: _models_enums_pipeline_types__WEBPACK_IMPORTED_MODULE_4__.default.INGEST_PROJECT_FILE,
+            var pipeline = new _models_api_api_pipeline__WEBPACK_IMPORTED_MODULE_3__["default"]({
+                name: _models_enums_pipeline_types__WEBPACK_IMPORTED_MODULE_4__["default"].INGEST_PROJECT_FILE,
                 firebaseProjectId: projectId,
                 options: {
                     url: apiFile.url,
                     fileType: 'e57'
                 }
             });
-            return _pipeline_api__WEBPACK_IMPORTED_MODULE_7__.default.triggerPipeline(pipeline, user)
+            return _pipeline_api__WEBPACK_IMPORTED_MODULE_7__["default"].triggerPipeline(pipeline, user)
                 .then(function (pipelineResponse) {
                 return (0,_utilities_pollPipeline__WEBPACK_IMPORTED_MODULE_6__.pollPipeline)(pipelineResponse, user).then(function () {
                     //pipeline is finished, return cloudfile
@@ -275,15 +275,15 @@ var FileInformationApi = /** @class */ (function () {
     FileInformationApi.saveAndConvertE57ProjectFile = function (_a, apiFile, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
         return FileInformationApi.saveAndIngestE57ProjectFile({ projectId: projectId }, apiFile, user).then(function (e57CloudFile) {
-            var pipeline = new _models_api_api_pipeline__WEBPACK_IMPORTED_MODULE_3__.default({
-                name: _models_enums_pipeline_types__WEBPACK_IMPORTED_MODULE_4__.default.CONVERT_E57_TO_LAS,
+            var pipeline = new _models_api_api_pipeline__WEBPACK_IMPORTED_MODULE_3__["default"]({
+                name: _models_enums_pipeline_types__WEBPACK_IMPORTED_MODULE_4__["default"].CONVERT_E57_TO_LAS,
                 firebaseProjectId: projectId,
                 options: {
                     fileUri: e57CloudFile.url,
                     url: "acceptance/projects/" + projectId + "/photo-areas/None"
                 }
             });
-            return _avvir_api__WEBPACK_IMPORTED_MODULE_5__.default.pipelines.triggerPipeline(pipeline, user)
+            return _avvir_api__WEBPACK_IMPORTED_MODULE_5__["default"].pipelines.triggerPipeline(pipeline, user)
                 .then(function (pipelineResponse) {
                 return (0,_utilities_pollPipeline__WEBPACK_IMPORTED_MODULE_6__.pollPipeline)(pipelineResponse, user).then(function () {
                     //pipeline is finished, return cloudfile
@@ -298,7 +298,7 @@ var FileInformationApi = /** @class */ (function () {
     return FileInformationApi;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FileInformationApi);
-(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_2__.default)(FileInformationApi);
+(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_2__["default"])(FileInformationApi);
 
 
 /***/ }),
@@ -319,37 +319,37 @@ var FloorApi = /** @class */ (function () {
     function FloorApi() {
     }
     FloorApi.listFloorsForProject = function (projectId, user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     FloorApi.createFloor = function (projectId, floorNumber, user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, { text: floorNumber });
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, user, { text: floorNumber });
     };
     FloorApi.getFloor = function (_a, user) {
         var projectId = _a.projectId, floorId = _a.floorId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     FloorApi.updateFloor = function (_a, floor, user) {
         var projectId = _a.projectId, floorId = _a.floorId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, floor);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].patch(url, user, floor);
     };
     FloorApi.updateFloorOrder = function (_a, ordinal, user) {
         var projectId = _a.projectId, floorId = _a.floorId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/reorder/" + ordinal;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, null);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/reorder/" + ordinal;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].patch(url, user, null);
     };
     FloorApi.deleteFloor = function (_a, user) {
         var projectId = _a.projectId, floorId = _a.floorId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.delete(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"](url, user);
     };
     return FloorApi;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FloorApi);
-(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__.default)(FloorApi);
+(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(FloorApi);
 
 
 /***/ }),
@@ -370,28 +370,28 @@ var OrganizationApi = /** @class */ (function () {
     function OrganizationApi() {
     }
     OrganizationApi.listOrganizations = function (user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/client-accounts";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/client-accounts";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     OrganizationApi.getOrganization = function (organizationId, user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/client-accounts/" + organizationId;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/client-accounts/" + organizationId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     OrganizationApi.getOrganizationName = function (organizationId, user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/client-accounts/" + organizationId + "/name";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/client-accounts/" + organizationId + "/name";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     OrganizationApi.createOrganization = function (organization, user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/client-accounts";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, organization);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/client-accounts";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, user, organization);
     };
     OrganizationApi.updateOrganization = function (accountId, organization, user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/client-accounts/" + accountId;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, organization);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/client-accounts/" + accountId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].patch(url, user, organization);
     };
     return OrganizationApi;
 }());
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__.default)(OrganizationApi));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(OrganizationApi));
 
 
 /***/ }),
@@ -413,26 +413,26 @@ var PhotoAreaApi = /** @class */ (function () {
     }
     PhotoAreaApi.listPhotoAreasForProject = function (_a, user) {
         var projectId = _a.projectId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/photo-areas";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/photo-areas";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
     PhotoAreaApi.listPhotoLocations = function (_a, user) {
         var projectId = _a.projectId, photoAreaId = _a.photoAreaId, photoSessionId = _a.photoSessionId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/photo-areas/" + photoAreaId + "/locations";
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/photo-areas/" + photoAreaId + "/locations";
         if (photoSessionId) {
             url += "?photoSessionId=" + photoSessionId;
         }
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
     PhotoAreaApi.listPhotoSessionsForPhotoArea = function (_a, user) {
         var projectId = _a.projectId, photoAreaId = _a.photoAreaId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/photo-areas/" + photoAreaId + "/sessions";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/photo-areas/" + photoAreaId + "/sessions";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
     return PhotoAreaApi;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PhotoAreaApi);
-(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_0__.default)(PhotoAreaApi);
+(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_0__["default"])(PhotoAreaApi);
 
 
 /***/ }),
@@ -455,13 +455,13 @@ var PipelineApi = /** @class */ (function () {
     PipelineApi.triggerJobStepsPipeline = function (associationIds, body, user) {
         if (body === void 0) { body = {}; }
         var accountId = associationIds.accountId, projectId = associationIds.projectId, floorId = associationIds.floorId, scanDatasetId = associationIds.scanDatasetId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/pipeline/" + accountId + "/" + projectId + "/" + floorId + "/" + scanDatasetId + "/trigger";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, body);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/pipeline/" + accountId + "/" + projectId + "/" + floorId + "/" + scanDatasetId + "/trigger";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, user, body);
     };
     PipelineApi.triggerPipeline = function (body, user) {
         if (body === void 0) { body = {}; }
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/pipelines";
-        var response = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, body);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/pipelines";
+        var response = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, user, body);
         return response;
     };
     PipelineApi.checkPipelinesApi = function (name) {
@@ -469,7 +469,7 @@ var PipelineApi = /** @class */ (function () {
     };
     return PipelineApi;
 }());
-(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__.default)(PipelineApi);
+(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(PipelineApi);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PipelineApi);
 
 
@@ -491,84 +491,84 @@ var ProjectApi = /** @class */ (function () {
     function ProjectApi() {
     }
     ProjectApi.listProjectsForOrganization = function (accountId, user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/client-accounts/" + accountId + "/projects";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/client-accounts/" + accountId + "/projects";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     ProjectApi.listAllProjectsForUser = function (user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/list-user-projects";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/list-user-projects";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     // deprecated. Call getProject and listProjectsForOrganization instead
     ProjectApi.listProjects = function (projectId, user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/list";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/list";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     ProjectApi.getProject = function (projectId, user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     ProjectApi.createProject = function (accountId, project, user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/client-accounts/" + accountId + "/projects";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, project);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/client-accounts/" + accountId + "/projects";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, user, project);
     };
     ProjectApi.updateProject = function (projectId, project, user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, project);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].patch(url, user, project);
     };
     ProjectApi.archiveProject = function (accountId, projectId, user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/archive";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, null);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/archive";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, user, null);
     };
     ProjectApi.saveProjectCostAnalysisProgress = function (_a, progress, user) {
         var projectId = _a.projectId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/cost-analysis-progress";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, progress);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/cost-analysis-progress";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, user, progress);
     };
     ProjectApi.saveScannedProjectMasterformatProgress = function (_a, progress, user) {
         var projectId = _a.projectId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/masterformat-progress";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, progress);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/masterformat-progress";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, user, progress);
     };
     ProjectApi.saveScheduledProjectMasterformatProgress = function (_a, progress, user) {
         var projectId = _a.projectId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/scheduled-masterformat-progress";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, progress);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/scheduled-masterformat-progress";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, user, progress);
     };
     ProjectApi.getProjectCostAnalysisProgress = function (_a, user) {
         var projectId = _a.projectId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/cost-analysis-progress";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/cost-analysis-progress";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     ProjectApi.getScannedProjectMasterformatProgress = function (_a, user) {
         var projectId = _a.projectId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/masterformat-progress";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/masterformat-progress";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     ProjectApi.getScheduledProjectMasterformatProgress = function (_a, user) {
         var projectId = _a.projectId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/scheduled-masterformat-progress";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/scheduled-masterformat-progress";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     ProjectApi.listProjectFloorFiles = function (_a, user) {
         var projectId = _a.projectId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floor-files";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floor-files";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     ProjectApi.getProjectDeviationsReportTsvUrl = function (_a, fileName, user) {
         var projectId = _a.projectId;
-        var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/" + fileName + "_deviation-report.tsv";
-        return Promise.resolve(_utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.addAuthToDownloadUrl(baseUrl, user));
+        var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/" + fileName + "_deviation-report.tsv";
+        return Promise.resolve(_utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].addAuthToDownloadUrl(baseUrl, user));
     };
     ProjectApi.getProjectDeviationsReportTsv = function (_a, user) {
         var projectId = _a.projectId;
-        var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/project_deviation-report.tsv";
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.addAuthToDownloadUrl(baseUrl, user);
+        var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/project_deviation-report.tsv";
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].addAuthToDownloadUrl(baseUrl, user);
         console.log(url);
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user, "text/tab-separated-values; charset=utf-8");
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user, "text/tab-separated-values; charset=utf-8");
     };
     return ProjectApi;
 }());
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__.default)(ProjectApi));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(ProjectApi));
 
 
 /***/ }),
@@ -590,48 +590,48 @@ var ScanDatasetApi = /** @class */ (function () {
     }
     ScanDatasetApi.listScanDatasetsForFloor = function (_a, user) {
         var projectId = _a.projectId, floorId = _a.floorId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     ScanDatasetApi.updateScanDataset = function (_a, scanDataset, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.patch(url, user, scanDataset);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].patch(url, user, scanDataset);
     };
     ScanDatasetApi.createScanDataset = function (_a, user) {
         var projectId = _a.projectId, floorId = _a.floorId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, null);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, user, null);
     };
     ScanDatasetApi.deleteScanDataset = function (_a, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.delete(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"](url, user);
     };
     ;
     ScanDatasetApi.saveScanAnalysis = function (_a, analysis, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/analysis?enforceBuiltPersistence=false";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.post(url, user, analysis);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/analysis?enforceBuiltPersistence=false";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, user, analysis);
     };
     ScanDatasetApi.getScanDataset = function (_a, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     ScanDatasetApi.getViewerDetailedElementsForScanDataset = function (_a, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/detailed-elements/viewer";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/detailed-elements/viewer";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     ScanDatasetApi.getProgressReportForScanDataset = function (_a, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/progress";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/progress";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
     return ScanDatasetApi;
 }());
-(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__.default)(ScanDatasetApi);
+(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(ScanDatasetApi);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScanDatasetApi);
 
 
@@ -671,70 +671,70 @@ var WebGatewayApi = /** @class */ (function () {
     }
     WebGatewayApi.connectProjectToStructionSite = function (_a, structionSiteProjectUrl, token, user) {
         var projectId = _a.projectId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/connect-to-structionsite?structionsite-access-token=" + token + "&structionsite-project-url=" + structionSiteProjectUrl;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.post(url, user, null);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/connect-to-structionsite?structionsite-access-token=" + token + "&structionsite-project-url=" + structionSiteProjectUrl;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, null);
     };
     WebGatewayApi.checkPipelineStatus = function (_a, pipelineId, user) {
         var projectId = _a.projectId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/pipelines/" + pipelineId;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/pipelines/" + pipelineId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
     WebGatewayApi.createInvitation = function (inviteeEmail, role, organizationId, user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/users/invitations";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.post(url, user, { userEmail: inviteeEmail, role: role, clientAccountId: organizationId });
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/users/invitations";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, { userEmail: inviteeEmail, role: role, clientAccountId: organizationId });
     };
     WebGatewayApi.getInvitation = function (invitationToken, user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/users/invitations/" + invitationToken;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/users/invitations/" + invitationToken;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
     WebGatewayApi.getProgressReportPdfUrl = function (projectId, user) {
-        var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/progress-report.pdf";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.addAuthToDownloadUrl(baseUrl, user);
+        var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/progress-report.pdf";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].addAuthToDownloadUrl(baseUrl, user);
     };
     WebGatewayApi.getQualityControlReportPdfUrl = function (projectId) {
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/report.pdf";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/report.pdf";
     };
     WebGatewayApi.getPlannedElementsTsvUrl = function (_a, fileName, user) {
         var projectId = _a.projectId, floorId = _a.floorId;
-        var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/" + fileName + "_planned-building-elements.tsv";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.addAuthToDownloadUrl(baseUrl, user);
+        var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/" + fileName + "_planned-building-elements.tsv";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].addAuthToDownloadUrl(baseUrl, user);
     };
     WebGatewayApi.getDeviationsReportTsvUrl = function (_a, fileName, user) {
         var projectId = _a.projectId, floorId = _a.floorId;
-        var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/" + fileName + "_deviation-report.tsv";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.addAuthToDownloadUrl(baseUrl, user);
+        var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/" + fileName + "_deviation-report.tsv";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].addAuthToDownloadUrl(baseUrl, user);
     };
     WebGatewayApi.getScanAnalysisUrl = function (_a, fileName, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
-        var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/" + fileName + "_scan-analysis.tsv";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.addAuthToDownloadUrl(baseUrl, user);
+        var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/" + fileName + "_scan-analysis.tsv";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].addAuthToDownloadUrl(baseUrl, user);
     };
     WebGatewayApi.checkProcoreAccessToken = function (projectId, procoreAccessToken, user) {
         if (!projectId) {
             return Promise.reject(new Error("Project not loaded yet"));
         }
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/procore?procore-access-token=" + procoreAccessToken;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/procore?procore-access-token=" + procoreAccessToken;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
     WebGatewayApi.pushPdfToProcore = function (_a, procoreProjectId, procoreAccessToken, pdfType, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
         if (!projectId) {
             return Promise.reject(new Error("Project not loaded yet"));
         }
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/push-report-to-procore/" + pdfType + "?procore-project-id=" + procoreProjectId + "&procore-access-token=" + procoreAccessToken;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.post(url, user, null);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/push-report-to-procore/" + pdfType + "?procore-project-id=" + procoreProjectId + "&procore-access-token=" + procoreAccessToken;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, null);
     };
     WebGatewayApi.getProcoreProjects = function (projectId, procoreAccessToken, user) {
         if (!projectId) {
             return Promise.reject(new Error("Project not loaded yet"));
         }
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/procore-projects?procore-access-token=" + procoreAccessToken;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/procore-projects?procore-access-token=" + procoreAccessToken;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
     // TODO: rename / move
     WebGatewayApi.getCustomFirebaseToken = function (user) {
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.fetch(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/login", {
-            headers: __assign(__assign({}, _utilities_request_headers__WEBPACK_IMPORTED_MODULE_4__.httpGetHeaders), (0,_utilities_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user))
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].fetch(_utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/login", {
+            headers: __assign(__assign({}, _utilities_request_headers__WEBPACK_IMPORTED_MODULE_4__.httpGetHeaders), (0,_utilities_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__["default"])(user))
         }).then(function (response) {
             return response.json()
                 .then(function (body) {
@@ -746,12 +746,12 @@ var WebGatewayApi = /** @class */ (function () {
     // deprectated. use AuthApi.login instead
     WebGatewayApi.login = function (username, password) {
         var user = {
-            authType: _models_enums_user_auth_type__WEBPACK_IMPORTED_MODULE_3__.default.BASIC,
+            authType: _models_enums_user_auth_type__WEBPACK_IMPORTED_MODULE_3__["default"].BASIC,
             username: username,
             password: password
         };
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.fetch(_utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/login", {
-            headers: __assign(__assign({}, _utilities_request_headers__WEBPACK_IMPORTED_MODULE_4__.httpGetHeaders), (0,_utilities_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user))
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].fetch(_utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/login", {
+            headers: __assign(__assign({}, _utilities_request_headers__WEBPACK_IMPORTED_MODULE_4__.httpGetHeaders), (0,_utilities_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__["default"])(user))
         }).then(function (response) {
             return response.json()
                 .then(function (body) {
@@ -762,62 +762,62 @@ var WebGatewayApi = /** @class */ (function () {
     };
     // TODO move to auth api
     WebGatewayApi.acceptInvitation = function (token, password) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/users/accept-invitation";
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/users/accept-invitation";
         var invitationForm = { invitationToken: token, password: password };
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.post(url, null, invitationForm);
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, null, invitationForm);
     };
     WebGatewayApi.exportIfc = function (_a, type, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/export-ifc?type=" + type;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.post(url, user, null);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/export-ifc?type=" + type;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, null);
     };
     // TODO unify with pipeline api
     WebGatewayApi.checkExportedIfc = function (_a, workflowName, type, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/export-ifc/" + workflowName + "?type=" + type;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/export-ifc/" + workflowName + "?type=" + type;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
     WebGatewayApi.downsampleScan = function (_a, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/downsample-scan";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.post(url, user, null);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/downsample-scan";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, null);
     };
     //TODO move to AuthApi
     WebGatewayApi.getGcpBearerToken = function (_a, user) {
         var projectId = _a.projectId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/gcpAccessToken";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/gcpAccessToken";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
     WebGatewayApi.getMasterformat = function (version) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/masterformats/" + version;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, null);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/masterformats/" + version;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, null);
     };
     WebGatewayApi.triggerArgoRunProgressAndDeviations = function (_a, deviationsFlag, bimSourceFileExtension, user) {
         var projectId = _a.projectId, floorId = _a.floorId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/run-progress-and-deviations?deviationsFlag=" + deviationsFlag + "&bimSourceFileExtension=" + bimSourceFileExtension;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.post(url, user, null);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/run-progress-and-deviations?deviationsFlag=" + deviationsFlag + "&bimSourceFileExtension=" + bimSourceFileExtension;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, null);
     };
     WebGatewayApi.triggerArgoRunNwdConvert = function (_a, user) {
         var projectId = _a.projectId, floorId = _a.floorId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/nwd-convert";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.post(url, user, null);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/nwd-convert";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, null);
     };
     WebGatewayApi.recordUserActions = function (type, userActions, user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/user-actions";
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/user-actions";
         var actionForm = {
             type: type,
             payload: userActions
         };
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.post(url, user, actionForm);
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, actionForm);
     };
     WebGatewayApi.checkRunningProcess = function (processId, user) {
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.baseUrl() + "/running-processes/" + processId;
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__.default.get(url, user);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/running-processes/" + processId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
     return WebGatewayApi;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WebGatewayApi);
-(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_2__.default)(WebGatewayApi, { exclude: ["getCustomFirebaseToken", "login"] });
+(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_2__["default"])(WebGatewayApi, { exclude: ["getCustomFirebaseToken", "login"] });
 
 
 /***/ }),
@@ -830,7 +830,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _api_auth_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(320);
+/* harmony import */ var _api_auth_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9815);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5508);
 /* harmony import */ var _api_element_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7325);
 /* harmony import */ var _api_file_information_api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9513);
@@ -853,17 +853,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-    auth: _api_auth_api__WEBPACK_IMPORTED_MODULE_0__.default,
-    config: _config__WEBPACK_IMPORTED_MODULE_1__.default,
-    elements: _api_element_api__WEBPACK_IMPORTED_MODULE_2__.default,
-    files: _api_file_information_api__WEBPACK_IMPORTED_MODULE_3__.default,
-    floors: _api_floor_api__WEBPACK_IMPORTED_MODULE_4__.default,
-    organizations: _api_organization_api__WEBPACK_IMPORTED_MODULE_5__.default,
-    photos: _api_photo_area_api__WEBPACK_IMPORTED_MODULE_6__.default,
-    pipelines: _api_pipeline_api__WEBPACK_IMPORTED_MODULE_7__.default,
-    projects: _api_project_api__WEBPACK_IMPORTED_MODULE_8__.default,
-    scanDatasets: _api_scan_dataset_api__WEBPACK_IMPORTED_MODULE_9__.default,
-    other: _api_web_gateway_api__WEBPACK_IMPORTED_MODULE_10__.default,
+    auth: _api_auth_api__WEBPACK_IMPORTED_MODULE_0__["default"],
+    config: _config__WEBPACK_IMPORTED_MODULE_1__["default"],
+    elements: _api_element_api__WEBPACK_IMPORTED_MODULE_2__["default"],
+    files: _api_file_information_api__WEBPACK_IMPORTED_MODULE_3__["default"],
+    floors: _api_floor_api__WEBPACK_IMPORTED_MODULE_4__["default"],
+    organizations: _api_organization_api__WEBPACK_IMPORTED_MODULE_5__["default"],
+    photos: _api_photo_area_api__WEBPACK_IMPORTED_MODULE_6__["default"],
+    pipelines: _api_pipeline_api__WEBPACK_IMPORTED_MODULE_7__["default"],
+    projects: _api_project_api__WEBPACK_IMPORTED_MODULE_8__["default"],
+    scanDatasets: _api_scan_dataset_api__WEBPACK_IMPORTED_MODULE_9__["default"],
+    other: _api_web_gateway_api__WEBPACK_IMPORTED_MODULE_10__["default"],
 });
 
 
@@ -877,7 +877,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-var _ = __webpack_require__(2164);
+var _ = __webpack_require__(2681);
 var configuration = { logFetch: false };
 var addEnvironmentVariablesToConfiguration = function () {
     _.forEach(configuration, function (value, varName) {
@@ -950,7 +950,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2470);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2245);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 
 var DateFormatter = /** @class */ (function () {
@@ -1050,7 +1050,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2293);
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2248);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _models_api_api_matrix_3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7494);
 var __read = (undefined && undefined.__read) || function (o, n) {
@@ -1131,7 +1131,7 @@ var Matrix3Converter = /** @class */ (function () {
     Matrix3Converter.fromMatrix3ToApiMatrix3 = function (matrix3) {
         if (matrix3) {
             var _a = __read(matrix3.toArray(), 9), x1 = _a[0], y1 = _a[1], z1 = _a[2], x2 = _a[3], y2 = _a[4], z2 = _a[5], x3 = _a[6], y3 = _a[7], z3 = _a[8];
-            return new _models_api_api_matrix_3__WEBPACK_IMPORTED_MODULE_1__.default({
+            return new _models_api_api_matrix_3__WEBPACK_IMPORTED_MODULE_1__["default"]({
                 x1: x1, x2: x2, x3: x3,
                 y1: y1, y2: y2, y3: y3,
                 z1: z1, z2: z2, z3: z3
@@ -1156,7 +1156,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2293);
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2248);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _models_api_api_matrix_4__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6645);
 var __read = (undefined && undefined.__read) || function (o, n) {
@@ -1237,7 +1237,7 @@ var Matrix4Converter = /** @class */ (function () {
     Matrix4Converter.fromMatrix4ToApiMatrix = function (matrix4) {
         if (matrix4) {
             var _a = __read(matrix4.toArray(), 16), x1 = _a[0], y1 = _a[1], z1 = _a[2], w1 = _a[3], x2 = _a[4], y2 = _a[5], z2 = _a[6], w2 = _a[7], x3 = _a[8], y3 = _a[9], z3 = _a[10], w3 = _a[11], x4 = _a[12], y4 = _a[13], z4 = _a[14], w4 = _a[15];
-            return new _models_api_api_matrix_4__WEBPACK_IMPORTED_MODULE_1__.default({
+            return new _models_api_api_matrix_4__WEBPACK_IMPORTED_MODULE_1__["default"]({
                 x1: x1, x2: x2, x3: x3, x4: x4,
                 y1: y1, y2: y2, y3: y3, y4: y4,
                 z1: z1, z2: z2, z3: z3, z4: z4,
@@ -1263,13 +1263,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2164);
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2681);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(underscore__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _models_enums_purpose_type__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5295);
 
 
-var apiPurposeTypeByPurposeType = underscore__WEBPACK_IMPORTED_MODULE_0___default().invert(_models_enums_purpose_type__WEBPACK_IMPORTED_MODULE_1__.default);
-var purposeTypeByApiPurposeType = _models_enums_purpose_type__WEBPACK_IMPORTED_MODULE_1__.default;
+var apiPurposeTypeByPurposeType = underscore__WEBPACK_IMPORTED_MODULE_0___default().invert(_models_enums_purpose_type__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var purposeTypeByApiPurposeType = _models_enums_purpose_type__WEBPACK_IMPORTED_MODULE_1__["default"];
 var PurposeTypeConverter = /** @class */ (function () {
     function PurposeTypeConverter() {
     }
@@ -1294,7 +1294,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2470);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2245);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _converters_date_converter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2024);
 
@@ -1316,7 +1316,7 @@ function addDateGetterAndSetterToDomainModel(target, propertyName) {
                 val.toDate();
             }
             else {
-                dateVal = _converters_date_converter__WEBPACK_IMPORTED_MODULE_1__.default.instantToDate(val) || _converters_date_converter__WEBPACK_IMPORTED_MODULE_1__.default.millisecondsToDate(val) || null;
+                dateVal = _converters_date_converter__WEBPACK_IMPORTED_MODULE_1__["default"].instantToDate(val) || _converters_date_converter__WEBPACK_IMPORTED_MODULE_1__["default"].millisecondsToDate(val) || null;
             }
         },
         enumerable: true
@@ -1335,7 +1335,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2470);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2245);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _converters_date_converter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2024);
 
@@ -1348,10 +1348,10 @@ var addInstantGetterAndSetterToApiModel = function (modelInstance, propertyName)
         },
         set: function (val) {
             if (typeof val === "string") {
-                dateVal = _converters_date_converter__WEBPACK_IMPORTED_MODULE_1__.default.dateToInstant(moment__WEBPACK_IMPORTED_MODULE_0___default()(val, "MMM D, YYYY").toDate());
+                dateVal = _converters_date_converter__WEBPACK_IMPORTED_MODULE_1__["default"].dateToInstant(moment__WEBPACK_IMPORTED_MODULE_0___default()(val, "MMM D, YYYY").toDate());
             }
             else if (val instanceof Date || moment__WEBPACK_IMPORTED_MODULE_0___default().isMoment(val)) {
-                dateVal = _converters_date_converter__WEBPACK_IMPORTED_MODULE_1__.default.dateToInstant(val);
+                dateVal = _converters_date_converter__WEBPACK_IMPORTED_MODULE_1__["default"].dateToInstant(val);
             }
             else {
                 dateVal = val;
@@ -1373,7 +1373,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2164);
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2681);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(underscore__WEBPACK_IMPORTED_MODULE_0__);
 var __read = (undefined && undefined.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
@@ -1504,11 +1504,11 @@ var ApiCloudFile = /** @class */ (function () {
         var url = _a.url, id = _a.id, lastModified = _a.lastModified, createdAt = _a.createdAt, purposeType = _a.purposeType, fileType = _a.fileType;
         this.lastModified = null;
         this.createdAt = null;
-        this.purposeType = _api_purpose_type__WEBPACK_IMPORTED_MODULE_1__.default.OTHER;
-        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, "lastModified");
-        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, "createdAt");
-        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_4__.default)(this, { url: url, id: id, fileType: fileType });
-        var purposeTypeVal = _api_purpose_type__WEBPACK_IMPORTED_MODULE_1__.default.OTHER;
+        this.purposeType = _api_purpose_type__WEBPACK_IMPORTED_MODULE_1__["default"].OTHER;
+        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "lastModified");
+        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "createdAt");
+        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_4__["default"])(this, { url: url, id: id, fileType: fileType });
+        var purposeTypeVal = _api_purpose_type__WEBPACK_IMPORTED_MODULE_1__["default"].OTHER;
         Object.defineProperties(this, {
             purposeType: {
                 get: function () {
@@ -1520,7 +1520,7 @@ var ApiCloudFile = /** @class */ (function () {
                             purposeTypeVal = val;
                         }
                         else if ((0,_enums_purpose_type__WEBPACK_IMPORTED_MODULE_2__.isPurposeType)(val)) {
-                            purposeTypeVal = _converters_purpose_type_converter__WEBPACK_IMPORTED_MODULE_3__.default.toApiPurposeType(val);
+                            purposeTypeVal = _converters_purpose_type_converter__WEBPACK_IMPORTED_MODULE_3__["default"].toApiPurposeType(val);
                         }
                     }
                 },
@@ -1559,7 +1559,7 @@ var ApiConstructionGrid = /** @class */ (function () {
         this.axisULines = [];
         this.axisVLines = [];
         this.firebaseFloorId = null;
-        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, { id: id, firebaseFloorId: firebaseFloorId, globalId: globalId });
+        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, { id: id, firebaseFloorId: firebaseFloorId, globalId: globalId });
         this.axisULines = axisULines;
         this.axisVLines = axisVLines;
     }
@@ -1580,7 +1580,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1142);
 /* harmony import */ var _mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5025);
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2293);
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2248);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _converters_matrix_3_converter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(28);
 
@@ -1601,8 +1601,8 @@ var ApiFloor = /** @class */ (function () {
         this.photoAreaId = null;
         this.photoAreaMinimapPixelToBimMinimapPixel = null;
         this.bimMinimapToWorld = null;
-        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, "scanDate");
-        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_3__.default)(this, { id: id, firebaseId: firebaseId, firebaseProjectId: firebaseProjectId });
+        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "scanDate");
+        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_3__["default"])(this, { id: id, firebaseId: firebaseId, firebaseProjectId: firebaseProjectId });
         var offsetVal, photoMinimapToBimMinimapTransformVal, bimMinimapToWorldTransformVal;
         Object.defineProperties(this, {
             offset: {
@@ -1625,7 +1625,7 @@ var ApiFloor = /** @class */ (function () {
                 },
                 set: function (val) {
                     if (val instanceof three__WEBPACK_IMPORTED_MODULE_1__.Matrix3) {
-                        photoMinimapToBimMinimapTransformVal = _converters_matrix_3_converter__WEBPACK_IMPORTED_MODULE_2__.default.fromMatrix3ToApiMatrix3(val);
+                        photoMinimapToBimMinimapTransformVal = _converters_matrix_3_converter__WEBPACK_IMPORTED_MODULE_2__["default"].fromMatrix3ToApiMatrix3(val);
                     }
                     else if (val) {
                         photoMinimapToBimMinimapTransformVal = val;
@@ -1642,7 +1642,7 @@ var ApiFloor = /** @class */ (function () {
                 },
                 set: function (val) {
                     if (val instanceof three__WEBPACK_IMPORTED_MODULE_1__.Matrix3) {
-                        bimMinimapToWorldTransformVal = _converters_matrix_3_converter__WEBPACK_IMPORTED_MODULE_2__.default.fromMatrix3ToApiMatrix3(val);
+                        bimMinimapToWorldTransformVal = _converters_matrix_3_converter__WEBPACK_IMPORTED_MODULE_2__["default"].fromMatrix3ToApiMatrix3(val);
                     }
                     else if (val) {
                         bimMinimapToWorldTransformVal = val;
@@ -1685,7 +1685,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2293);
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2248);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
 
 var ApiGridLine = /** @class */ (function () {
@@ -1868,7 +1868,7 @@ var ApiOrganization = /** @class */ (function () {
         this.name = null;
         this.notes = null;
         this.firebaseProjectIds = [];
-        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, { id: id, firebaseId: firebaseId });
+        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, { id: id, firebaseId: firebaseId });
         this.city = city;
         this.country = country;
         this.addressLine1 = addressLine1;
@@ -1903,7 +1903,7 @@ __webpack_require__.r(__webpack_exports__);
 var ApiPhotoArea = /** @class */ (function () {
     function ApiPhotoArea(_a) {
         var name = _a.name, id = _a.id, firebaseProjectId = _a.firebaseProjectId, structionsiteProjectUrl = _a.structionsiteProjectUrl;
-        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, { id: id, firebaseProjectId: firebaseProjectId });
+        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, { id: id, firebaseProjectId: firebaseProjectId });
         this.name = name;
         this.structionsiteProjectUrl = structionsiteProjectUrl;
     }
@@ -1947,8 +1947,8 @@ __webpack_require__.r(__webpack_exports__);
 var ApiPhotoSession = /** @class */ (function () {
     function ApiPhotoSession(_a) {
         var _b = _a === void 0 ? {} : _a, id = _b.id, photoAreaId = _b.photoAreaId, sessionDate = _b.sessionDate;
-        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_1__.default)(this, { id: id, photoAreaId: photoAreaId });
-        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, "sessionDate");
+        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_1__["default"])(this, { id: id, photoAreaId: photoAreaId });
+        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "sessionDate");
         // @ts-ignore
         this.sessionDate = sessionDate;
     }
@@ -1974,9 +1974,9 @@ __webpack_require__.r(__webpack_exports__);
 var ApiPipeline = /** @class */ (function () {
     function ApiPipeline(_a) {
         var _b = _a === void 0 ? {} : _a, id = _b.id, name = _b.name, externalId = _b.externalId, externalUrl = _b.externalUrl, startTime = _b.startTime, endTime = _b.endTime, firebaseProjectId = _b.firebaseProjectId, firebaseFloorId = _b.firebaseFloorId, firebaseScanDatasetId = _b.firebaseScanDatasetId, options = _b.options, status = _b.status;
-        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_1__.default)(this, { id: id });
-        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, "startTime");
-        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, "endTime");
+        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_1__["default"])(this, { id: id });
+        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "startTime");
+        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "endTime");
         this.name = name || null;
         this.externalId = externalId || null;
         this.externalUrl = externalUrl || null;
@@ -2010,7 +2010,7 @@ __webpack_require__.r(__webpack_exports__);
 var ApiPlannedElement = /** @class */ (function () {
     function ApiPlannedElement(_a) {
         var _b = _a === void 0 ? {} : _a, globalId = _b.globalId, name = _b.name, ifcType = _b.ifcType, uniformat = _b.uniformat, itemId = _b.itemId, discipline = _b.discipline, primaryUnitOfMeasurement = _b.primaryUnitOfMeasurement, primaryMeasurement = _b.primaryMeasurement;
-        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, { globalId: globalId });
+        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, { globalId: globalId });
         this.name = name;
         this.ifcType = ifcType;
         this.uniformat = uniformat;
@@ -2063,10 +2063,10 @@ var ApiProject = /** @class */ (function () {
         this.progressNotes = null;
         this.avvirAnalysisNotes = null;
         this.sourceAnalysisNotes = null;
-        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, "startDate");
-        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, "endDate");
-        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, "archivedAt");
-        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_2__.default)(this, { firebaseId: firebaseId, clientAccountId: clientAccountId, id: id });
+        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "startDate");
+        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "endDate");
+        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "archivedAt");
+        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_2__["default"])(this, { firebaseId: firebaseId, clientAccountId: clientAccountId, id: id });
         this.firebaseFloorIds = firebaseFloorIds || [];
         this.defaultFirebaseFloorId = defaultFirebaseFloorId || null;
         this.city = city || null;
@@ -2125,7 +2125,7 @@ var ApiProjectCostAnalysisProgress = /** @class */ (function () {
         this.installedQuantity = null;
         this.installedCost = null;
         this.analysisDate = null;
-        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, "analysisDate");
+        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "analysisDate");
         this.masterformatCode = masterformatCode;
         this.sequence = sequence;
         this.name = name;
@@ -2165,9 +2165,9 @@ var ApiProjectMasterformatProgress = /** @class */ (function () {
         this.masterformat = null;
         this.percentComplete = null;
         this.scanDate = null;
-        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, "scanDate");
+        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "scanDate");
         if (masterformat) {
-            this.masterformat = new _api_masterformat__WEBPACK_IMPORTED_MODULE_1__.default(masterformat.version, masterformat.code);
+            this.masterformat = new _api_masterformat__WEBPACK_IMPORTED_MODULE_1__["default"](masterformat.version, masterformat.code);
         }
         else {
             this.masterformat = null;
@@ -2280,7 +2280,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2293);
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2248);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1142);
 /* harmony import */ var _mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5025);
@@ -2300,8 +2300,8 @@ var ApiScanDataset = /** @class */ (function () {
         this.fineAlignmentMatrix = null;
         this.notes = null;
         this.name = null;
-        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_1__.default)(this, "scanDate");
-        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_3__.default)(this, { id: id, firebaseId: firebaseId, firebaseFloorId: firebaseFloorId, scanNumber: scanNumber });
+        (0,_mixins_add_instant_getter_and_setter_to_api_model__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "scanDate");
+        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_3__["default"])(this, { id: id, firebaseId: firebaseId, firebaseFloorId: firebaseFloorId, scanNumber: scanNumber });
         var coarseAlignmentMatrixVal, fineAlignmentMatrixVal;
         Object.defineProperties(this, {
             coarseAlignmentMatrix: {
@@ -2310,10 +2310,10 @@ var ApiScanDataset = /** @class */ (function () {
                 },
                 set: function (val) {
                     if (typeof val === "string") {
-                        coarseAlignmentMatrixVal = _converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__.default.fromMatrix4ToApiMatrix(_converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__.default.fromStringToMatrix4(val));
+                        coarseAlignmentMatrixVal = _converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__["default"].fromMatrix4ToApiMatrix(_converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__["default"].fromStringToMatrix4(val));
                     }
                     else if (val instanceof three__WEBPACK_IMPORTED_MODULE_0__.Matrix4) {
-                        coarseAlignmentMatrixVal = _converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__.default.fromMatrix4ToApiMatrix(val);
+                        coarseAlignmentMatrixVal = _converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__["default"].fromMatrix4ToApiMatrix(val);
                     }
                     else {
                         coarseAlignmentMatrixVal = val;
@@ -2327,10 +2327,10 @@ var ApiScanDataset = /** @class */ (function () {
                 },
                 set: function (val) {
                     if (typeof val === "string") {
-                        fineAlignmentMatrixVal = _converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__.default.fromMatrix4ToApiMatrix(_converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__.default.fromStringToMatrix4(val));
+                        fineAlignmentMatrixVal = _converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__["default"].fromMatrix4ToApiMatrix(_converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__["default"].fromStringToMatrix4(val));
                     }
                     else if (val instanceof three__WEBPACK_IMPORTED_MODULE_0__.Matrix4) {
-                        fineAlignmentMatrixVal = _converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__.default.fromMatrix4ToApiMatrix(val);
+                        fineAlignmentMatrixVal = _converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__["default"].fromMatrix4ToApiMatrix(val);
                     }
                     else {
                         fineAlignmentMatrixVal = val;
@@ -2394,7 +2394,7 @@ var Deviation = /** @class */ (function () {
     function Deviation() {
         this.deviationVectorMeters = { x: 0.0, y: 0.0, z: 0.0 };
         this.deviationMeters = 0;
-        this.status = _enums_deviation_status__WEBPACK_IMPORTED_MODULE_0__.default.DETECTED;
+        this.status = _enums_deviation_status__WEBPACK_IMPORTED_MODULE_0__["default"].DETECTED;
     }
     return Deviation;
 }());
@@ -2449,7 +2449,7 @@ __webpack_require__.r(__webpack_exports__);
 var PhotoArea = /** @class */ (function () {
     function PhotoArea(_a) {
         var _b = _a === void 0 ? {} : _a, name = _b.name, id = _b.id, files = _b.files, firebaseProjectId = _b.firebaseProjectId, structionsiteProjectUrl = _b.structionsiteProjectUrl;
-        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, { id: id, firebaseProjectId: firebaseProjectId });
+        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, { id: id, firebaseProjectId: firebaseProjectId });
         this.name = name;
         this.structionsiteProjectUrl = structionsiteProjectUrl;
         // @ts-ignore
@@ -2470,9 +2470,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2293);
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2248);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2164);
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2681);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(underscore__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5025);
 /* harmony import */ var _converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2908);
@@ -2495,7 +2495,7 @@ var PhotoLocation = /** @class */ (function () {
     function PhotoLocation(_a) {
         var _b = _a === void 0 ? {} : _a, id = _b.id, photoAreaId = _b.photoAreaId, photoSessionId = _b.photoSessionId, fileId = _b.fileId, minimapCoordinates = _b.minimapCoordinates, minimapBearing = _b.minimapBearing, projectionType = _b.projectionType, cameraWorldMatrix = _b.cameraWorldMatrix, yawOffset = _b.yawOffset;
         this.yawOffset = 0;
-        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_3__.default)(this, { id: id, photoAreaId: photoAreaId, photoSessionId: photoSessionId, fileId: fileId });
+        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_3__["default"])(this, { id: id, photoAreaId: photoAreaId, photoSessionId: photoSessionId, fileId: fileId });
         if (minimapCoordinates) {
             this.minimapCoordinates = new three__WEBPACK_IMPORTED_MODULE_0__.Vector2(minimapCoordinates.x, minimapCoordinates.y);
         }
@@ -2508,13 +2508,13 @@ var PhotoLocation = /** @class */ (function () {
                 },
                 set: function (val) {
                     if (typeof val === "string") {
-                        cameraWorldMatrixVal = _converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__.default.fromStringToMatrix4(val);
+                        cameraWorldMatrixVal = _converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__["default"].fromStringToMatrix4(val);
                     }
                     else if (val instanceof three__WEBPACK_IMPORTED_MODULE_0__.Matrix4) {
                         cameraWorldMatrixVal = val;
                     }
                     else {
-                        cameraWorldMatrixVal = _converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__.default.fromApiMatrixToMatrix4(val);
+                        cameraWorldMatrixVal = _converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__["default"].fromApiMatrixToMatrix4(val);
                     }
                 },
                 enumerable: true
@@ -2553,8 +2553,8 @@ __webpack_require__.r(__webpack_exports__);
 var PhotoSession = /** @class */ (function () {
     function PhotoSession(_a) {
         var _b = _a === void 0 ? {} : _a, id = _b.id, photoAreaId = _b.photoAreaId, sessionDate = _b.sessionDate;
-        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_1__.default)(this, { id: id, photoAreaId: photoAreaId });
-        (0,_mixins_add_date_getter_and_setter_to_domain_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, "sessionDate");
+        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_1__["default"])(this, { id: id, photoAreaId: photoAreaId });
+        (0,_mixins_add_date_getter_and_setter_to_domain_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "sessionDate");
         // @ts-ignore
         this.sessionDate = sessionDate;
     }
@@ -2627,7 +2627,7 @@ var ProjectCostAnalysisProgress = /** @class */ (function () {
         this.installedQuantity = null;
         this.installedCost = null;
         this.analysisDate = null;
-        (0,_mixins_add_date_getter_and_setter_to_domain_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, "analysisDate");
+        (0,_mixins_add_date_getter_and_setter_to_domain_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "analysisDate");
         this.masterformatCode = masterformatCode;
         this.sequence = sequence;
         this.name = name;
@@ -2665,7 +2665,7 @@ var ProjectMasterformatProgress = /** @class */ (function () {
         this.masterformat = null;
         this.percentComplete = null;
         this.scanDate = null;
-        (0,_mixins_add_date_getter_and_setter_to_domain_model__WEBPACK_IMPORTED_MODULE_0__.default)(this, "scanDate");
+        (0,_mixins_add_date_getter_and_setter_to_domain_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "scanDate");
         this.masterformat = masterformat || null;
         this.percentComplete = percentComplete || null;
         this.scanDate = scanDate;
@@ -3171,7 +3171,7 @@ var USER = UserRole.USER;
 
 /***/ }),
 
-/***/ 8445:
+/***/ 6119:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -3184,7 +3184,7 @@ __webpack_require__.d(__webpack_exports__, {
 });
 
 ;// CONCATENATED MODULE: external "extendable-error-class"
-const external_extendable_error_class_namespaceObject = require("extendable-error-class");;
+const external_extendable_error_class_namespaceObject = require("extendable-error-class");
 var external_extendable_error_class_default = /*#__PURE__*/__webpack_require__.n(external_extendable_error_class_namespaceObject);
 ;// CONCATENATED MODULE: ./source/models/response_error.ts
 var __extends = (undefined && undefined.__extends) || (function () {
@@ -3229,8 +3229,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _models_response_error__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8445);
-/* harmony import */ var _resources_response_statuses_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(297);
+/* harmony import */ var _models_response_error__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6119);
+/* harmony import */ var _resources_response_statuses_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9164);
 /* harmony import */ var _http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5562);
 
 
@@ -3239,7 +3239,7 @@ var checkFetchStatus = function (response) {
     //@ts-ignore
     if (typeof response == "string" || !response.headers)
         return Promise.resolve(response);
-    var requestPath = response.url.split(_http__WEBPACK_IMPORTED_MODULE_2__.default.baseUrl()).join("..."); // split and join to replace text
+    var requestPath = response.url.split(_http__WEBPACK_IMPORTED_MODULE_2__["default"].baseUrl()).join("..."); // split and join to replace text
     if (response.headers.has("Warning")) {
         console.warn("Warning present in response: " + response.headers.get("Warning") + "\nfrom: `" + requestPath + "`");
     }
@@ -3261,7 +3261,7 @@ var checkFetchStatus = function (response) {
             var message = errorBody.message;
             var statusMessage = _resources_response_statuses_json__WEBPACK_IMPORTED_MODULE_1__[response.status];
             var verboseMessage = response.status + " " + statusMessage + ": '" + message + "' at `" + requestPath + "`";
-            var error = new _models_response_error__WEBPACK_IMPORTED_MODULE_0__.default(message, verboseMessage, response, errorBody);
+            var error = new _models_response_error__WEBPACK_IMPORTED_MODULE_0__["default"](message, verboseMessage, response, errorBody);
             console.error(error);
             throw error;
         });
@@ -3337,7 +3337,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _request_headers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4446);
 /* harmony import */ var _reduce_user_session__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5397);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5508);
-/* provided dependency */ var fetch = __webpack_require__(6786);
+/* provided dependency */ var fetch = __webpack_require__(4809);
 var __assign = (undefined && undefined.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -3357,7 +3357,7 @@ var Http = /** @class */ (function () {
     function Http() {
     }
     Http.fetch = function (url, data) {
-        if (_config__WEBPACK_IMPORTED_MODULE_2__.default.getConfiguration().logFetch) {
+        if (_config__WEBPACK_IMPORTED_MODULE_2__["default"].getConfiguration().logFetch) {
             console.log("Calling fetch with:", url, data);
         }
         return fetch(url, data);
@@ -3366,26 +3366,26 @@ var Http = /** @class */ (function () {
         if (contentType === void 0) { contentType = "application/json"; }
         return Http.fetch(url, {
             method: "GET",
-            headers: __assign(__assign({}, (0,_request_headers__WEBPACK_IMPORTED_MODULE_1__.httpGetHeaders)(contentType)), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user))
+            headers: __assign(__assign({}, (0,_request_headers__WEBPACK_IMPORTED_MODULE_1__.httpGetHeaders)(contentType)), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__["default"])(user))
         });
     };
     Http.delete = function (url, user) {
         return Http.fetch(url, {
             method: "DELETE",
-            headers: __assign(__assign({}, _request_headers__WEBPACK_IMPORTED_MODULE_1__.httpPostHeaders), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user))
+            headers: __assign(__assign({}, _request_headers__WEBPACK_IMPORTED_MODULE_1__.httpPostHeaders), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__["default"])(user))
         });
     };
     Http.post = function (url, user, body) {
         return Http.fetch(url, {
             method: "POST",
-            headers: __assign(__assign({}, _request_headers__WEBPACK_IMPORTED_MODULE_1__.httpPostHeaders), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user)),
+            headers: __assign(__assign({}, _request_headers__WEBPACK_IMPORTED_MODULE_1__.httpPostHeaders), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__["default"])(user)),
             body: JSON.stringify(body)
         });
     };
     Http.patch = function (url, user, body) {
         return Http.fetch(url, {
             method: "PATCH",
-            headers: __assign(__assign({}, _request_headers__WEBPACK_IMPORTED_MODULE_1__.httpPostHeaders), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__.default)(user)),
+            headers: __assign(__assign({}, _request_headers__WEBPACK_IMPORTED_MODULE_1__.httpPostHeaders), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__["default"])(user)),
             body: JSON.stringify(body)
         });
     };
@@ -3402,7 +3402,7 @@ var Http = /** @class */ (function () {
             return baseUrl;
         }
     };
-    Http.baseUrl = function () { return _config__WEBPACK_IMPORTED_MODULE_2__.default.getConfiguration().AVVIR_GATEWAY_URL; };
+    Http.baseUrl = function () { return _config__WEBPACK_IMPORTED_MODULE_2__["default"].getConfiguration().AVVIR_GATEWAY_URL; };
     return Http;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Http);
@@ -3418,7 +3418,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2164);
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2681);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(underscore__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _check_fetch_status__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7583);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5508);
@@ -3452,9 +3452,9 @@ var makeErrorsPrettyForFunction = function (actionName, action) {
         for (var _i = 0; _i < arguments.length; _i++) {
             argumentList[_i] = arguments[_i];
         }
-        return action.apply(void 0, __spreadArray([], __read(argumentList))).then(_check_fetch_status__WEBPACK_IMPORTED_MODULE_1__.default)
+        return action.apply(void 0, __spreadArray([], __read(argumentList))).then(_check_fetch_status__WEBPACK_IMPORTED_MODULE_1__["default"])
             .catch(function (error) {
-            return _config__WEBPACK_IMPORTED_MODULE_2__.default.sharedErrorHandler({
+            return _config__WEBPACK_IMPORTED_MODULE_2__["default"].sharedErrorHandler({
                 error: error,
                 action: actionName,
                 arguments: argumentList
@@ -3502,13 +3502,13 @@ var pollPipeline = function (pipelineResponse, user, maxIterations, pollTimeout,
     console.log("Checking Pipeline:", index + " of " + maxIterations + " iterations");
     var projectId = pipelineResponse.firebaseProjectId;
     return new Promise(function (resolve, reject) {
-        _avvir_api__WEBPACK_IMPORTED_MODULE_0__.default.other.checkPipelineStatus({ projectId: projectId }, pipelineResponse.id, user)
+        _avvir_api__WEBPACK_IMPORTED_MODULE_0__["default"].other.checkPipelineStatus({ projectId: projectId }, pipelineResponse.id, user)
             .then(function (response) {
             // console.log(index, response);
             if (index > maxIterations) {
                 reject("Too Many Calls: Check endpoint to make sure the implementation isn't flawed.");
             }
-            else if (response.status !== _models_enums_running_process_status__WEBPACK_IMPORTED_MODULE_1__.default.COMPLETED) {
+            else if (response.status !== _models_enums_running_process_status__WEBPACK_IMPORTED_MODULE_1__["default"].COMPLETED) {
                 setTimeout(function () { return resolve(pollPipeline(response, user, maxIterations, pollTimeout, ++index)); }, pollTimeout);
             }
             else {
@@ -3573,7 +3573,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2164);
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2681);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(underscore__WEBPACK_IMPORTED_MODULE_0__);
 
 var serializeForm = function (form) {
@@ -3587,19 +3587,11 @@ var serializeForm = function (form) {
 
 /***/ }),
 
-/***/ 297:
-/***/ ((module) => {
-
-"use strict";
-module.exports = JSON.parse('{"100":"Continue","101":"Switching Protocol","102":"Processing (WebDAV)","103":"Early Hints","200":"OK","201":"Created","202":"Accepted","203":"Non-Authoritative Information","204":"No Content","205":"Reset Content","206":"Partial Content","207":"Multi-Status (WebDAV)","208":"Multi-Status (WebDAV)","226":"IM Used (HTTP Delta encoding)","300":"Multiple Choice","301":"Moved Permanently","302":"Found","303":"See Other","304":"Not Modified","305":"Use Proxy","306":"unused","307":"Temporary Redirect","308":"Permanent Redirect","400":"Bad Request","401":"Unauthorized","402":"Payment Required","403":"Forbidden","404":"Not Found","405":"Method Not Allowed","406":"Not Acceptable","407":"Proxy Authentication Required","408":"Request Timeout","409":"Conflict","410":"Gone","411":"Length Required","412":"Precondition Failed","413":"Payload Too Large","414":"URI Too Long","415":"Unsupported Media Type","416":"Requested Range Not Satisfiable","417":"Expectation Failed","418":"I\'m a teapot","421":"Misdirected Request","422":"Unprocessable Entity (WebDAV)","423":"Locked (WebDAV)","424":"Failed Dependency (WebDAV)","425":"Too Early","426":"Upgrade Required","428":"Precondition Required","429":"Too Many Requests","431":"Request Header Fields Too Large","451":"Unavailable For Legal Reasons","500":"Internal Server Error","501":"Not Implemented","502":"Bad Gateway","503":"Service Unavailable","504":"Gateway Timeout","505":"HTTP Version Not Supported","506":"Variant Also Negotiates","507":"Insufficient Storage","508":"Loop Detected (WebDAV)","510":"Not Extended","511":"Network Authentication Required","100_detailed":"This interim response indicates that everything so far is OK and that the client should continue with the request or ignore it if it is already finished.","101_detailed":"This code is sent in response to an Upgrade request header by the client, and indicates the protocol the server is switching to.","102_detailed":"This code indicates that the server has received and is processing the request, but no response is available yet.","103_detailed":"This status code is primarily intended to be used with the Link header to allow the user agent to start preloading resources while the server is still preparing a response.","200_detailed":"The request has succeeded. The meaning of a success varies depending on the HTTP method:\\n  GET: The resource has been fetched and is transmitted in the message body.\\n  HEAD: The entity headers are in the message body.\\n  PUT or POST: The resource describing the result of the action is transmitted in the message body.\\n  TRACE: The message body contains the request message as received by the server","201_detailed":"The request has succeeded and a new resource has been created as a result of it. This is typically the response sent after a POST request, or after some PUT requests.","202_detailed":"The request has been received but not yet acted upon. It is non-committal, meaning that there is no way in HTTP to later send an asynchronous response indicating the outcome of processing the request. It is intended for cases where another process or server handles the request, or for batch processing.","203_detailed":"This response code means returned meta-information set is not exact set as available from the origin server, but collected from a local or a third party copy. Except this condition, 200 OK response should be preferred instead of this response.","204_detailed":"There is no content to send for this request, but the headers may be useful. The user-agent may update its cached headers for this resource with the new ones.","205_detailed":"This response code is sent after accomplishing request to tell user agent reset document view which sent this request.","206_detailed":"This response code is used because of range header sent by the client to separate download into multiple streams.","207_detailed":"A Multi-Status response conveys information about multiple resources in situations where multiple status codes might be appropriate.","208_detailed":"Used inside a DAV: propstat response element to avoid enumerating the internal members of multiple bindings to the same collection repeatedly.","226_detailed":"The server has fulfilled a GET request for the resource, and the response is a representation of the result of one or more instance-manipulations applied to the current instance.","300_detailed":"The request has more than one possible response. The user-agent or user should choose one of them. There is no standardized way of choosing one of the responses.","301_detailed":"This response code means that the URI of the requested resource has been changed. Probably, the new URI would be given in the response.","302_detailed":"This response code means that the URI of requested resource has been changed temporarily. New changes in the URI might be made in the future. Therefore, this same URI should be used by the client in future requests.","303_detailed":"The server sent this response to direct the client to get the requested resource at another URI with a GET request.","304_detailed":"This is used for caching purposes. It tells the client that the response has not been modified, so the client can continue to use the same cached version of the response.","305_detailed":"Was defined in a previous version of the HTTP specification to indicate that a requested response must be accessed by a proxy. It has been deprecated due to security concerns regarding in-band configuration of a proxy.","306_detailed":"This response code is no longer used, it is just reserved currently. It was used in a previous version of the HTTP 1.1 specification.","307_detailed":"The server sends this response to direct the client to get the requested resource at another URI with same method that was used in the prior request. This has the same semantics as the 302 Found HTTP response code, with the exception that the user agent must not change the HTTP method used: If a POST was used in the first request, a POST must be used in the second request.","308_detailed":"This means that the resource is now permanently located at another URI, specified by the Location: HTTP Response header. This has the same semantics as the 301 Moved Permanently HTTP response code, with the exception that the user agent must not change the HTTP method used: If a POST was used in the first request, a POST must be used in the second request.","400_detailed":"This response means that server could not understand the request due to invalid syntax.","401_detailed":"Although the HTTP standard specifies \\"unauthorized\\", semantically this response means \\"unauthenticated\\". That is, the client must authenticate itself to get the requested response.","402_detailed":"This response code is reserved for future use. Initial aim for creating this code was using it for digital payment systems however this is not used currently.","403_detailed":"The client does not have access rights to the content, i.e. they are unauthorized, so server is rejecting to give proper response. Unlike 401, the client\'s identity is known to the server.","404_detailed":"The server can not find requested resource. In the browser, this means the URL is not recognized. In an API, this can also mean that the endpoint is valid but the resource itself does not exist. Servers may also send this response instead of 403 to hide the existence of a resource from an unauthorized client. This response code is probably the most famous one due to its frequent occurence on the web.","405_detailed":"The request method is known by the server but has been disabled and cannot be used. For example, an API may forbid DELETE-ing a resource. The two mandatory methods, GET and HEAD, must never be disabled and should not return this error code.","406_detailed":"This response is sent when the web server, after performing server-driven content negotiation, doesn\'t find any content following the criteria given by the user agent.","407_detailed":"This is similar to 401 but authentication is needed to be done by a proxy.","408_detailed":"This response is sent on an idle connection by some servers, even without any previous request by the client. It means that the server would like to shut down this unused connection. This response is used much more since some browsers, like Chrome, Firefox 27+, or IE9, use HTTP pre-connection mechanisms to speed up surfing. Also note that some servers merely shut down the connection without sending this message.","409_detailed":"This response is sent when a request conflicts with the current state of the server.","410_detailed":"This response would be sent when the requested content has been permanently deleted from server, with no forwarding address. Clients are expected to remove their caches and links to the resource. The HTTP specification intends this status code to be used for \\"limited-time, promotional services\\". APIs should not feel compelled to indicate resources that have been deleted with this status code.","411_detailed":"Server rejected the request because the Content-Length header field is not defined and the server requires it.","412_detailed":"The client has indicated preconditions in its headers which the server does not meet.","413_detailed":"Request entity is larger than limits defined by server; the server might close the connection or return an Retry-After header field.","414_detailed":"The URI requested by the client is longer than the server is willing to interpret.","415_detailed":"The media format of the requested data is not supported by the server, so the server is rejecting the request.","416_detailed":"The range specified by the Range header field in the request can\'t be fulfilled; it\'s possible that the range is outside the size of the target URI\'s data.","417_detailed":"This response code means the expectation indicated by the Expect request header field can\'t be met by the server.","418_detailed":"The server refuses the attempt to brew coffee with a teapot.","421_detailed":"The request was directed at a server that is not able to produce a response. This can be sent by a server that is not configured to produce responses for the combination of scheme and authority that are included in the request URI.","422_detailed":"The request was well-formed but was unable to be followed due to semantic errors.","423_detailed":"The resource that is being accessed is locked.","424_detailed":"The request failed due to failure of a previous request.","425_detailed":"Indicates that the server is unwilling to risk processing a request that might be replayed.","426_detailed":"The server refuses to perform the request using the current protocol but might be willing to do so after the client upgrades to a different protocol. The server sends an Upgrade header in a 426 response to indicate the required protocol(s).","428_detailed":"The origin server requires the request to be conditional. Intended to prevent the \'lost update\' problem, where a client GETs a resource\'s state, modifies it, and PUTs it back to the server, when meanwhile a third party has modified the state on the server, leading to a conflict.","429_detailed":"The user has sent too many requests in a given amount of time (\\"rate limiting\\").","431_detailed":"The server is unwilling to process the request because its header fields are too large. The request MAY be resubmitted after reducing the size of the request header fields.","451_detailed":"The user requests an illegal resource, such as a web page censored by a government.","500_detailed":"The server has encountered a situation it doesn\'t know how to handle.","501_detailed":"The request method is not supported by the server and cannot be handled. The only methods that servers are required to support (and therefore that must not return this code) are GET and HEAD.","502_detailed":"This error response means that the server, while working as a gateway to get a response needed to handle the request, got an invalid response.","503_detailed":"The server is not ready to handle the request. Common causes are a server that is down for maintenance or that is overloaded. Note that together with this response, a user-friendly page explaining the problem should be sent. This responses should be used for temporary conditions and the Retry-After: HTTP header should, if possible, contain the estimated time before the recovery of the service. The webmaster must also take care about the caching-related headers that are sent along with this response, as these temporary condition responses should usually not be cached.","504_detailed":"This error response is given when the server is acting as a gateway and cannot get a response in time.","505_detailed":"The HTTP version used in the request is not supported by the server.","506_detailed":"The server has an internal configuration error: transparent content negotiation for the request results in a circular reference.","507_detailed":"The server has an internal configuration error: the chosen variant resource is configured to engage in transparent content negotiation itself, and is therefore not a proper end point in the negotiation process.","508_detailed":"The server detected an infinite loop while processing the request.","510_detailed":"Further extensions to the request are required for the server to fulfill it.","511_detailed":"The 511 status code indicates that the client needs to authenticate to gain network access."}');
-
-/***/ }),
-
 /***/ 5422:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
-	"./api/auth_api.ts": 320,
+	"./api/auth_api.ts": 9815,
 	"./api/element_api.ts": 7325,
 	"./api/file_information_api.ts": 9513,
 	"./api/floor_api.ts": 2010,
@@ -3664,7 +3656,7 @@ var map = {
 	"./models/enums/uploader_status.ts": 9884,
 	"./models/enums/user_auth_type.ts": 6132,
 	"./models/enums/user_role.ts": 1922,
-	"./models/response_error.ts": 8445,
+	"./models/response_error.ts": 6119,
 	"./utilities/check_fetch_status.ts": 7583,
 	"./utilities/get_authorization_headers.ts": 5561,
 	"./utilities/http.ts": 5562,
@@ -3697,35 +3689,43 @@ webpackContext.id = 5422;
 
 /***/ }),
 
-/***/ 2470:
+/***/ 2245:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("moment");;
+module.exports = require("moment");
 
 /***/ }),
 
-/***/ 6786:
+/***/ 4809:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("node-fetch");;
+module.exports = require("node-fetch");
 
 /***/ }),
 
-/***/ 2293:
+/***/ 2248:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("three");;
+module.exports = require("three");
 
 /***/ }),
 
-/***/ 2164:
+/***/ 2681:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("underscore");;
+module.exports = require("underscore");
+
+/***/ }),
+
+/***/ 9164:
+/***/ ((module) => {
+
+"use strict";
+module.exports = JSON.parse('{"100":"Continue","101":"Switching Protocol","102":"Processing (WebDAV)","103":"Early Hints","200":"OK","201":"Created","202":"Accepted","203":"Non-Authoritative Information","204":"No Content","205":"Reset Content","206":"Partial Content","207":"Multi-Status (WebDAV)","208":"Multi-Status (WebDAV)","226":"IM Used (HTTP Delta encoding)","300":"Multiple Choice","301":"Moved Permanently","302":"Found","303":"See Other","304":"Not Modified","305":"Use Proxy","306":"unused","307":"Temporary Redirect","308":"Permanent Redirect","400":"Bad Request","401":"Unauthorized","402":"Payment Required","403":"Forbidden","404":"Not Found","405":"Method Not Allowed","406":"Not Acceptable","407":"Proxy Authentication Required","408":"Request Timeout","409":"Conflict","410":"Gone","411":"Length Required","412":"Precondition Failed","413":"Payload Too Large","414":"URI Too Long","415":"Unsupported Media Type","416":"Requested Range Not Satisfiable","417":"Expectation Failed","418":"I\'m a teapot","421":"Misdirected Request","422":"Unprocessable Entity (WebDAV)","423":"Locked (WebDAV)","424":"Failed Dependency (WebDAV)","425":"Too Early","426":"Upgrade Required","428":"Precondition Required","429":"Too Many Requests","431":"Request Header Fields Too Large","451":"Unavailable For Legal Reasons","500":"Internal Server Error","501":"Not Implemented","502":"Bad Gateway","503":"Service Unavailable","504":"Gateway Timeout","505":"HTTP Version Not Supported","506":"Variant Also Negotiates","507":"Insufficient Storage","508":"Loop Detected (WebDAV)","510":"Not Extended","511":"Network Authentication Required","100_detailed":"This interim response indicates that everything so far is OK and that the client should continue with the request or ignore it if it is already finished.","101_detailed":"This code is sent in response to an Upgrade request header by the client, and indicates the protocol the server is switching to.","102_detailed":"This code indicates that the server has received and is processing the request, but no response is available yet.","103_detailed":"This status code is primarily intended to be used with the Link header to allow the user agent to start preloading resources while the server is still preparing a response.","200_detailed":"The request has succeeded. The meaning of a success varies depending on the HTTP method:\\n  GET: The resource has been fetched and is transmitted in the message body.\\n  HEAD: The entity headers are in the message body.\\n  PUT or POST: The resource describing the result of the action is transmitted in the message body.\\n  TRACE: The message body contains the request message as received by the server","201_detailed":"The request has succeeded and a new resource has been created as a result of it. This is typically the response sent after a POST request, or after some PUT requests.","202_detailed":"The request has been received but not yet acted upon. It is non-committal, meaning that there is no way in HTTP to later send an asynchronous response indicating the outcome of processing the request. It is intended for cases where another process or server handles the request, or for batch processing.","203_detailed":"This response code means returned meta-information set is not exact set as available from the origin server, but collected from a local or a third party copy. Except this condition, 200 OK response should be preferred instead of this response.","204_detailed":"There is no content to send for this request, but the headers may be useful. The user-agent may update its cached headers for this resource with the new ones.","205_detailed":"This response code is sent after accomplishing request to tell user agent reset document view which sent this request.","206_detailed":"This response code is used because of range header sent by the client to separate download into multiple streams.","207_detailed":"A Multi-Status response conveys information about multiple resources in situations where multiple status codes might be appropriate.","208_detailed":"Used inside a DAV: propstat response element to avoid enumerating the internal members of multiple bindings to the same collection repeatedly.","226_detailed":"The server has fulfilled a GET request for the resource, and the response is a representation of the result of one or more instance-manipulations applied to the current instance.","300_detailed":"The request has more than one possible response. The user-agent or user should choose one of them. There is no standardized way of choosing one of the responses.","301_detailed":"This response code means that the URI of the requested resource has been changed. Probably, the new URI would be given in the response.","302_detailed":"This response code means that the URI of requested resource has been changed temporarily. New changes in the URI might be made in the future. Therefore, this same URI should be used by the client in future requests.","303_detailed":"The server sent this response to direct the client to get the requested resource at another URI with a GET request.","304_detailed":"This is used for caching purposes. It tells the client that the response has not been modified, so the client can continue to use the same cached version of the response.","305_detailed":"Was defined in a previous version of the HTTP specification to indicate that a requested response must be accessed by a proxy. It has been deprecated due to security concerns regarding in-band configuration of a proxy.","306_detailed":"This response code is no longer used, it is just reserved currently. It was used in a previous version of the HTTP 1.1 specification.","307_detailed":"The server sends this response to direct the client to get the requested resource at another URI with same method that was used in the prior request. This has the same semantics as the 302 Found HTTP response code, with the exception that the user agent must not change the HTTP method used: If a POST was used in the first request, a POST must be used in the second request.","308_detailed":"This means that the resource is now permanently located at another URI, specified by the Location: HTTP Response header. This has the same semantics as the 301 Moved Permanently HTTP response code, with the exception that the user agent must not change the HTTP method used: If a POST was used in the first request, a POST must be used in the second request.","400_detailed":"This response means that server could not understand the request due to invalid syntax.","401_detailed":"Although the HTTP standard specifies \\"unauthorized\\", semantically this response means \\"unauthenticated\\". That is, the client must authenticate itself to get the requested response.","402_detailed":"This response code is reserved for future use. Initial aim for creating this code was using it for digital payment systems however this is not used currently.","403_detailed":"The client does not have access rights to the content, i.e. they are unauthorized, so server is rejecting to give proper response. Unlike 401, the client\'s identity is known to the server.","404_detailed":"The server can not find requested resource. In the browser, this means the URL is not recognized. In an API, this can also mean that the endpoint is valid but the resource itself does not exist. Servers may also send this response instead of 403 to hide the existence of a resource from an unauthorized client. This response code is probably the most famous one due to its frequent occurence on the web.","405_detailed":"The request method is known by the server but has been disabled and cannot be used. For example, an API may forbid DELETE-ing a resource. The two mandatory methods, GET and HEAD, must never be disabled and should not return this error code.","406_detailed":"This response is sent when the web server, after performing server-driven content negotiation, doesn\'t find any content following the criteria given by the user agent.","407_detailed":"This is similar to 401 but authentication is needed to be done by a proxy.","408_detailed":"This response is sent on an idle connection by some servers, even without any previous request by the client. It means that the server would like to shut down this unused connection. This response is used much more since some browsers, like Chrome, Firefox 27+, or IE9, use HTTP pre-connection mechanisms to speed up surfing. Also note that some servers merely shut down the connection without sending this message.","409_detailed":"This response is sent when a request conflicts with the current state of the server.","410_detailed":"This response would be sent when the requested content has been permanently deleted from server, with no forwarding address. Clients are expected to remove their caches and links to the resource. The HTTP specification intends this status code to be used for \\"limited-time, promotional services\\". APIs should not feel compelled to indicate resources that have been deleted with this status code.","411_detailed":"Server rejected the request because the Content-Length header field is not defined and the server requires it.","412_detailed":"The client has indicated preconditions in its headers which the server does not meet.","413_detailed":"Request entity is larger than limits defined by server; the server might close the connection or return an Retry-After header field.","414_detailed":"The URI requested by the client is longer than the server is willing to interpret.","415_detailed":"The media format of the requested data is not supported by the server, so the server is rejecting the request.","416_detailed":"The range specified by the Range header field in the request can\'t be fulfilled; it\'s possible that the range is outside the size of the target URI\'s data.","417_detailed":"This response code means the expectation indicated by the Expect request header field can\'t be met by the server.","418_detailed":"The server refuses the attempt to brew coffee with a teapot.","421_detailed":"The request was directed at a server that is not able to produce a response. This can be sent by a server that is not configured to produce responses for the combination of scheme and authority that are included in the request URI.","422_detailed":"The request was well-formed but was unable to be followed due to semantic errors.","423_detailed":"The resource that is being accessed is locked.","424_detailed":"The request failed due to failure of a previous request.","425_detailed":"Indicates that the server is unwilling to risk processing a request that might be replayed.","426_detailed":"The server refuses to perform the request using the current protocol but might be willing to do so after the client upgrades to a different protocol. The server sends an Upgrade header in a 426 response to indicate the required protocol(s).","428_detailed":"The origin server requires the request to be conditional. Intended to prevent the \'lost update\' problem, where a client GETs a resource\'s state, modifies it, and PUTs it back to the server, when meanwhile a third party has modified the state on the server, leading to a conflict.","429_detailed":"The user has sent too many requests in a given amount of time (\\"rate limiting\\").","431_detailed":"The server is unwilling to process the request because its header fields are too large. The request MAY be resubmitted after reducing the size of the request header fields.","451_detailed":"The user requests an illegal resource, such as a web page censored by a government.","500_detailed":"The server has encountered a situation it doesn\'t know how to handle.","501_detailed":"The request method is not supported by the server and cannot be handled. The only methods that servers are required to support (and therefore that must not return this code) are GET and HEAD.","502_detailed":"This error response means that the server, while working as a gateway to get a response needed to handle the request, got an invalid response.","503_detailed":"The server is not ready to handle the request. Common causes are a server that is down for maintenance or that is overloaded. Note that together with this response, a user-friendly page explaining the problem should be sent. This responses should be used for temporary conditions and the Retry-After: HTTP header should, if possible, contain the estimated time before the recovery of the service. The webmaster must also take care about the caching-related headers that are sent along with this response, as these temporary condition responses should usually not be cached.","504_detailed":"This error response is given when the server is acting as a gateway and cannot get a response in time.","505_detailed":"The HTTP version used in the request is not supported by the server.","506_detailed":"The server has an internal configuration error: transparent content negotiation for the request results in a circular reference.","507_detailed":"The server has an internal configuration error: the chosen variant resource is configured to engage in transparent content negotiation itself, and is therefore not a proper end point in the negotiation process.","508_detailed":"The server detected an infinite loop while processing the request.","510_detailed":"Further extensions to the request are required for the server to fulfill it.","511_detailed":"The 511 status code indicates that the client needs to authenticate to gain network access."}');
 
 /***/ })
 
@@ -3805,13 +3805,13 @@ var __webpack_exports__ = {};
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _source_avvir_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5489);
-/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2164);
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2681);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(underscore__WEBPACK_IMPORTED_MODULE_1__);
 
 
 
 const Avvir = {
-  api: _source_avvir_api__WEBPACK_IMPORTED_MODULE_0__.default
+  api: _source_avvir_api__WEBPACK_IMPORTED_MODULE_0__["default"]
 };
 
 function importAll(directoryContext, target) {
@@ -3837,7 +3837,7 @@ importAll(__webpack_require__(5422), Avvir);
 
 })();
 
-__webpack_exports__ = __webpack_exports__.default;
+__webpack_exports__ = __webpack_exports__["default"];
 /******/ 	return __webpack_exports__;
 /******/ })()
 ;
