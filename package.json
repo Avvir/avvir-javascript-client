@@ -56,7 +56,7 @@
     "node-fetch": "^2.6.1",
     "process": "^0.11.10",
     "stream-browserify": "^3.0.0",
-    "three": "^0.123.0",
+    "three": "^0.125.0",
     "underscore": "^1.12.0",
     "util": "^0.12.4"
   }
