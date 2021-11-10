@@ -238,7 +238,7 @@ uploadBim();
 If you are an authenticated user, you have the ability to create a scan dataset via the API.
 
 ```javascript
-const AvvirApi = require("avvir/node");
+const AvvirApi = require("avvir-javascript-client");
 //The instructions above details how to get the following variables
 let username = "<You-User-Login>";
 let password = "<Your-Password>";
