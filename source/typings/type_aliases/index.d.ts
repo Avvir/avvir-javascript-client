@@ -24,6 +24,7 @@ declare type Spied<T> = { [Key in keyof T]: T[Key] extends Function ? SinonSpy :
 declare type DateLike = Moment | Date | number | string | null;
 declare type Vector2Like = { x: number, y: number };
 declare type Vector3Like = { x: number, y: number, z: number };
+declare type Vector4Like = { a: number, b: number, c: number, d: number};
 declare type Matrix3Like = ApiMatrix3 | Matrix3 | null
 declare type Matrix4Like = ApiMatrix4 | Matrix4 | null
 declare type ErrorLike = Error | ResponseError | { message: string }
