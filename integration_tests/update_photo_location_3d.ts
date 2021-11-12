@@ -23,7 +23,7 @@ describe("When a user is authenticated for a project", () => {
     sandbox.stub(Config, "sharedErrorHandler");
   })
 
-    it("should create a floor",  function (done) {
+    it("should update a photo location",  function (done) {
         this.timeout(0)
         console.log("starting...")
         AuthApi.login(email, password)
@@ -31,7 +31,8 @@ describe("When a user is authenticated for a project", () => {
                 PhotoAreaApi.updatePhotoLocationCoordinates({projectId, photoAreaId, photoLocationId}, photoLocation3d, user)
                     .then((photoLocation) => {
                         console.log(photoLocation);
-                        expect(photoLocation.bimLocation).is.deep.eq(photoLocation3d);
+                        expect(photoLocation.bimLocation.position).is.deep.eq(photoLocation3d.position);
+                        expect(photoLocation.bimLocation.orientation).is.deep.eq(photoLocation3d.orientation);
                         done()
                     })
             }).catch(console.log)
