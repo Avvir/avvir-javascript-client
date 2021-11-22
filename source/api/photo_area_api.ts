@@ -27,7 +27,7 @@ export default class PhotoAreaApi {
     return Http.get(url, user);
   }
 
-  static updatePhotoLocationCoordinates({ projectId, photoAreaId, photoLocationId }: AssociationIds, coordinates : ApiPhotoLocation3d, user): Promise<ApiPhotoLocation> {
+  static updatePhotoLocationPositionAndOrientation({ projectId, photoAreaId, photoLocationId }: AssociationIds, coordinates : ApiPhotoLocation3d, user): Promise<ApiPhotoLocation> {
     let url = `${Http.baseUrl()}/projects/${projectId}/photo-areas/${photoAreaId}/locations/${photoLocationId}/bim`;
     return Http.patch(url, user, coordinates);
   }

@@ -429,6 +429,11 @@ var PhotoAreaApi = /** @class */ (function () {
         var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/photo-areas/" + photoAreaId + "/sessions";
         return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
+    PhotoAreaApi.updatePhotoLocationPositionAndOrientation = function (_a, coordinates, user) {
+        var projectId = _a.projectId, photoAreaId = _a.photoAreaId, photoLocationId = _a.photoLocationId;
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/photo-areas/" + photoAreaId + "/locations/" + photoLocationId + "/bim";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].patch(url, user, coordinates);
+    };
     return PhotoAreaApi;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PhotoAreaApi);
@@ -1932,6 +1937,30 @@ var ApiPhotoLocation = /** @class */ (function () {
 
 /***/ }),
 
+/***/ 7801:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5025);
+
+var ApiPhotoLocation3d = /** @class */ (function () {
+    function ApiPhotoLocation3d(_a) {
+        var id = _a.id, position = _a.position, orientation = _a.orientation;
+        (0,_mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_0__["default"])(this, { id: id });
+        this.position = position;
+        this.orientation = orientation;
+    }
+    return ApiPhotoLocation3d;
+}());
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ApiPhotoLocation3d);
+
+
+/***/ }),
+
 /***/ 3379:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3353,6 +3382,7 @@ var __assign = (undefined && undefined.__assign) || function () {
 
 
 
+// import fetch from 'node-fetch';
 var Http = /** @class */ (function () {
     function Http() {
     }
@@ -3623,6 +3653,7 @@ var map = {
 	"./models/api/api_organization.ts": 6835,
 	"./models/api/api_photo_area.ts": 9297,
 	"./models/api/api_photo_location.ts": 1390,
+	"./models/api/api_photo_location_3d.ts": 7801,
 	"./models/api/api_photo_session.ts": 3379,
 	"./models/api/api_pipeline.ts": 5621,
 	"./models/api/api_planned_element.ts": 6099,

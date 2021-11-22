@@ -24,11 +24,10 @@ describe("When a user is authenticated for a project", () => {
   })
 
     it("should update a photo location",  function (done) {
-        this.timeout(0)
-        console.log("starting...")
+        this.timeout(0);
         AuthApi.login(email, password)
             .then((user) => {
-                PhotoAreaApi.updatePhotoLocationCoordinates({projectId, photoAreaId, photoLocationId}, photoLocation3d, user)
+                PhotoAreaApi.updatePhotoLocationPositionAndOrientation({projectId, photoAreaId, photoLocationId}, photoLocation3d, user)
                     .then((photoLocation) => {
                         console.log(photoLocation);
                         expect(photoLocation.bimLocation.position).is.deep.eq(photoLocation3d.position);
