@@ -372,10 +372,15 @@ let password = "<Your-Password>";
 let projectId = "<Your-Project-ID>";
 let photoAreaId = 1234; //some photo area id (can be sourced from url in portal when location is selected)
 let photoLocationId = 1234; //some photo location id (can be sourced from url in portal when location is selected)
-Avvir.api.photos.updatePhotoLocationPositionAndOrientation({projectId, photoAreaId, photoLocationId}, photoLocation3d, user)
-.then(console.log)
 
+Avvir.api.login(username, password).then(async ()=>{
+  let photolocation = await Avvir.api.photos
+    .updatePhotoLocationPositionAndOrientatvvirion({projectId, photoAreaId, photoLocationId}, photoLocation3d, user);
+  console.log(photoLocation);
+})
 ```
+
+
 ## Process scan for 3d Viewer
 
 Given you have associated a scan to a scan dataset, using the same scan dataset id and credentials as above, if you want
