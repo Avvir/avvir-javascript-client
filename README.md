@@ -357,30 +357,6 @@ After the pipeline has finished processing your scans, you should be able to nav
 deviations displayed in the model. You can also view progress data by exporting the `Progress Pdf` from
 the `Exports & Reports` dropdown on the upper right of the viewer.
 
-
-### Updating the Position and Orientation of a Photo Location
-
-`PhotoLocations` are points in a scan where a 360 photo was taken of the area. These photo locations are placed within the portal at designated positions within the bim, and oriented to align with the view of the bim. 
-
-Given a `PhotoLocation` is out of alignment with the bim either rotationally or positionally, we've provided a method on our photo api called `updatePhotoLocationPositionAndOrientation` which allows for a location to have its coordinate data updated.
-
-```javascript
-const Avvir = require("avvir/node");
-
-let username = "<You-User-Login>";
-let password = "<Your-Password>";
-let projectId = "<Your-Project-ID>";
-let photoAreaId = 1234; //some photo area id (can be sourced from url in portal when location is selected)
-let photoLocationId = 1234; //some photo location id (can be sourced from url in portal when location is selected)
-
-Avvir.api.login(username, password).then(async ()=>{
-  let photolocation = await Avvir.api.photos
-    .updatePhotoLocationPositionAndOrientatvvirion({projectId, photoAreaId, photoLocationId}, photoLocation3d, user);
-  console.log(photoLocation);
-})
-```
-
-
 ## Process scan for 3d Viewer
 
 Given you have associated a scan to a scan dataset, using the same scan dataset id and credentials as above, if you want
@@ -542,6 +518,56 @@ updateAndGetPlannedElements().then((elements) =>{
   console.log(updatedElement) // the element you updated
 }) //
 ```
+
+
+### Realigning of a Photo Location (Experimental)
+> This api is still labelled experimental, and should be used with caution if integrating into existing project.
+
+`PhotoLocations` are points in a scan where a 360 photo was taken of the area. These photo locations are placed within the portal at designated positions within the bim, and oriented to align with the view of the bim.
+
+Given a `PhotoLocation` is out of alignment with the bim either rotationally or positionally, we've provided a method on our photo api called `updatePhotoLocationPositionAndOrientation` which allows for a location to have its coordinate data updated.
+
+```javascript
+const Avvir = require("avvir/node");
+
+let username = "<You-User-Login>";
+let password = "<Your-Password>";
+let projectId = "<Your-Project-ID>";
+let photoAreaId = 1234; //some photo area id (can be sourced from url in portal when location is selected)
+let photoLocationId = 1234; //some photo location id (can be sourced from url in portal when location is selected)
+
+Avvir.api.login(username, password).then(async (user)=>{
+  let pitch = Math.PI/2; //90 deg
+  let yaw = 0
+  let roll = 0
+  let c1 = Math.cos(pitch/2)
+  let c2 = Math.cos(yaw/2)
+  let c3 = Math.cos(roll/2)
+  let s1 = Math.sin(pitch/2)
+  let s2 = Math.sin(yaw/2)
+  let s3 = Math.sin(roll/2)
+  
+  let orientation = { 
+    a: (s1*s2*c3) + (c1*c2*s3), 
+    b: (s1*c2*c3) + (c1*s2*s3), 
+    c: (c1*s2*c3) - (s1*c2*s3), 
+    d: (c1*c2*c3) - (s1*s2*s3)
+  };
+
+  let locationData = new ApiPhotoLocation3d({
+    position: {x: 2, y: 1, z: 1},
+    orientation
+  });
+  
+  let photolocation = await Avvir.api.photos
+    .updatePhotoLocationPositionAndOrientatvvirion({projectId, photoAreaId, photoLocationId}, locationData, user);
+  console.log("check the location in your project to see it realigned: \n", `${Avvir.Http.baseUrl()}/projects/${projectId}?photoLocationId=${photoLocationId}`);
+  console.log(photoLocation)
+})
+```
+
+
+
 ## Contributing
 
 Read our [contributing guide](./CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and
