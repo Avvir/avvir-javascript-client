@@ -536,7 +536,7 @@ let projectId = "<Your-Project-ID>";
 let photoAreaId = 1234; //some photo area id (can be sourced from url in portal when location is selected)
 let photoLocationId = 1234; //some photo location id (can be sourced from url in portal when location is selected)
 
-Avvir.api.login(username, password).then(async (user)=>{
+Avvir.api.auth.login(username, password).then(async (user)=>{
   let pitch = Math.PI/2; //90 deg
   let yaw = 0
   let roll = 0
