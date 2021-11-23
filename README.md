@@ -357,6 +357,30 @@ After the pipeline has finished processing your scans, you should be able to nav
 deviations displayed in the model. You can also view progress data by exporting the `Progress Pdf` from
 the `Exports & Reports` dropdown on the upper right of the viewer.
 
+
+### Updating the Position and Orientation of a Photo Location
+
+`PhotoLocations` are points in a scan where a 360 photo was taken of the area. These photo locations are placed within the portal at designated positions within the bim, and oriented to align with the view of the bim. 
+
+Given a `PhotoLocation` is out of alignment with the bim either rotationally or positionally, we've provided a method on our photo api called `updatePhotoLocationPositionAndOrientation` which allows for a location to have its coordinate data updated.
+
+```javascript
+const Avvir = require("avvir/node");
+
+let username = "<You-User-Login>";
+let password = "<Your-Password>";
+let projectId = "<Your-Project-ID>";
+let photoAreaId = 1234; //some photo area id (can be sourced from url in portal when location is selected)
+let photoLocationId = 1234; //some photo location id (can be sourced from url in portal when location is selected)
+
+Avvir.api.login(username, password).then(async ()=>{
+  let photolocation = await Avvir.api.photos
+    .updatePhotoLocationPositionAndOrientatvvirion({projectId, photoAreaId, photoLocationId}, photoLocation3d, user);
+  console.log(photoLocation);
+})
+```
+
+
 ## Process scan for 3d Viewer
 
 Given you have associated a scan to a scan dataset, using the same scan dataset id and credentials as above, if you want
@@ -518,7 +542,6 @@ updateAndGetPlannedElements().then((elements) =>{
   console.log(updatedElement) // the element you updated
 }) //
 ```
-
 ## Contributing
 
 Read our [contributing guide](./CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and
