@@ -2,6 +2,12 @@
 
 ## Getting Started
 
+Install the library by running:
+
+```bash
+yarn install avvir
+```
+
 ### Definitions
 
 - [Project](./source/models/api/api_project.ts) - Groups together all of the information related to a construction
@@ -25,12 +31,6 @@ Get your project id:
     - ex: https://portal.avvir.io/admin/organizations/{organizationId}/projects/{projectId}
 
 ### Sample client code (node)
-
-Before running any sample code make sure the project dependencies are available by running:
-
-```bash
-yarn install
-```
 
 As a basic example this code will retrieve all the areas associated with a project along with their capture datasets and
 log the results to the console. [This example](./samples/areas-and-capture-datasets.js) as well as others can be found
@@ -560,7 +560,7 @@ Avvir.api.login(username, password).then(async (user)=>{
   });
   
   let photolocation = await Avvir.api.photos
-    .updatePhotoLocationPositionAndOrientatvvirion({projectId, photoAreaId, photoLocationId}, locationData, user);
+    .updatePhotoLocationPositionAndOrientation({projectId, photoAreaId, photoLocationId}, locationData, user);
   console.log("check the location in your project to see it realigned: \n", `${Avvir.Http.baseUrl()}/projects/${projectId}?photoLocationId=${photoLocationId}`);
   console.log(photoLocation)
 })
