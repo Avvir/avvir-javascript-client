@@ -1137,9 +1137,15 @@ var Matrix3Converter = /** @class */ (function () {
         if (matrix3) {
             var _a = __read(matrix3.toArray(), 9), x1 = _a[0], y1 = _a[1], z1 = _a[2], x2 = _a[3], y2 = _a[4], z2 = _a[5], x3 = _a[6], y3 = _a[7], z3 = _a[8];
             return new _models_api_api_matrix_3__WEBPACK_IMPORTED_MODULE_1__["default"]({
-                x1: x1, x2: x2, x3: x3,
-                y1: y1, y2: y2, y3: y3,
-                z1: z1, z2: z2, z3: z3
+                x1: x1,
+                x2: x2,
+                x3: x3,
+                y1: y1,
+                y2: y2,
+                y3: y3,
+                z1: z1,
+                z2: z2,
+                z3: z3
             });
         }
         else {
@@ -1243,10 +1249,22 @@ var Matrix4Converter = /** @class */ (function () {
         if (matrix4) {
             var _a = __read(matrix4.toArray(), 16), x1 = _a[0], y1 = _a[1], z1 = _a[2], w1 = _a[3], x2 = _a[4], y2 = _a[5], z2 = _a[6], w2 = _a[7], x3 = _a[8], y3 = _a[9], z3 = _a[10], w3 = _a[11], x4 = _a[12], y4 = _a[13], z4 = _a[14], w4 = _a[15];
             return new _models_api_api_matrix_4__WEBPACK_IMPORTED_MODULE_1__["default"]({
-                x1: x1, x2: x2, x3: x3, x4: x4,
-                y1: y1, y2: y2, y3: y3, y4: y4,
-                z1: z1, z2: z2, z3: z3, z4: z4,
-                w1: w1, w2: w2, w3: w3, w4: w4
+                x1: x1,
+                x2: x2,
+                x3: x3,
+                x4: x4,
+                y1: y1,
+                y2: y2,
+                y3: y3,
+                y4: y4,
+                z1: z1,
+                z2: z2,
+                z3: z3,
+                z4: z4,
+                w1: w1,
+                w2: w2,
+                w3: w3,
+                w4: w4
             });
         }
         else {
@@ -1396,17 +1414,21 @@ var __read = (undefined && undefined.__read) || function (o, n) {
     }
     return ar;
 };
-var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 
 var addLoggingToInstanceMethods = function (instance, instanceName, ignoredMethods) {
     var _a;
     var instanceMethods = underscore__WEBPACK_IMPORTED_MODULE_0___default().methods(instance);
     if (ignoredMethods) {
-        instanceMethods = (_a = underscore__WEBPACK_IMPORTED_MODULE_0___default()(instanceMethods)).without.apply(_a, __spreadArray([], __read(ignoredMethods)));
+        instanceMethods = (_a = underscore__WEBPACK_IMPORTED_MODULE_0___default()(instanceMethods)).without.apply(_a, __spreadArray([], __read(ignoredMethods), false));
     }
     instanceMethods.forEach(function (methodName) {
         if (!ignoredMethods.includes(methodName)) {
@@ -1420,7 +1442,7 @@ var addLoggingToInstanceMethods = function (instance, instanceName, ignoredMetho
                             args[_i] = arguments[_i];
                         }
                         console.log("calling " + instanceName + "." + methodName + "(" + args + ")");
-                        return originalMethod_1.call.apply(originalMethod_1, __spreadArray([instance], __read(args)));
+                        return originalMethod_1.call.apply(originalMethod_1, __spreadArray([instance], __read(args), false));
                     },
                     enumerable: true,
                     configurable: false
@@ -3468,10 +3490,14 @@ var __read = (undefined && undefined.__read) || function (o, n) {
     }
     return ar;
 };
-var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 
 
@@ -3482,7 +3508,7 @@ var makeErrorsPrettyForFunction = function (actionName, action) {
         for (var _i = 0; _i < arguments.length; _i++) {
             argumentList[_i] = arguments[_i];
         }
-        return action.apply(void 0, __spreadArray([], __read(argumentList))).then(_check_fetch_status__WEBPACK_IMPORTED_MODULE_1__["default"])
+        return action.apply(void 0, __spreadArray([], __read(argumentList), false)).then(_check_fetch_status__WEBPACK_IMPORTED_MODULE_1__["default"])
             .catch(function (error) {
             return _config__WEBPACK_IMPORTED_MODULE_2__["default"].sharedErrorHandler({
                 error: error,
@@ -3495,7 +3521,7 @@ var makeErrorsPrettyForFunction = function (actionName, action) {
 var getFunctionNames = function (clazz) {
     var builtinProperties = ["length", "constructor", "name", "prototype"];
     // TODO it might make sense to check the type of each property
-    return underscore__WEBPACK_IMPORTED_MODULE_0___default().without.apply((underscore__WEBPACK_IMPORTED_MODULE_0___default()), __spreadArray([Object.getOwnPropertyNames(clazz)], __read(builtinProperties)));
+    return underscore__WEBPACK_IMPORTED_MODULE_0___default().without.apply((underscore__WEBPACK_IMPORTED_MODULE_0___default()), __spreadArray([Object.getOwnPropertyNames(clazz)], __read(builtinProperties), false));
 };
 var makeErrorsPretty = function (apiClass, options) {
     if (options === void 0) { options = { exclude: [] }; }
