@@ -97,7 +97,7 @@ export default class WebGatewayApi {
     }) as Promise<{ headers: Headers, body: { storageToken: string } }>;
   }
 
-  // deprectated. use AuthApi.login instead
+  // deprecated. use AuthApi.login instead
   static login(username: string, password: string) {
     const user: BasicUser = {
       authType: UserAuthType.BASIC,

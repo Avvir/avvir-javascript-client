@@ -8,8 +8,8 @@ import ApiPhotoLocation from "../models/api/api_photo_location";
 import ApiPhotoSession from "../models/api/api_photo_session";
 import ApiPhotoLocation3d from "../models/api/api_photo_location_3d";
 
-export default class PhotoAreaApi {
-  static listPhotoAreasForProject({ projectId }: AssociationIds, user: User) :Promise<ApiPhotoArea[]>{
+class PhotoAreaApi {
+  static listPhotoAreasForProject({ projectId }: AssociationIds, user: User): Promise<ApiPhotoArea[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/photo-areas`;
     return Http.get(url, user);
   }
@@ -22,14 +22,17 @@ export default class PhotoAreaApi {
     return Http.get(url, user);
   }
 
-  static listPhotoSessionsForPhotoArea({ projectId, photoAreaId }: AssociationIds, user): Promise<ApiPhotoSession[]> {
+  static listPhotoSessionsForPhotoArea({ projectId, photoAreaId }: AssociationIds, user: User): Promise<ApiPhotoSession[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/photo-areas/${photoAreaId}/sessions`;
     return Http.get(url, user);
   }
 
-  static updatePhotoLocationPositionAndOrientation({ projectId, photoAreaId, photoLocationId }: AssociationIds, coordinates : ApiPhotoLocation3d, user): Promise<ApiPhotoLocation> {
-    let url = `${Http.baseUrl()}/projects/${projectId}/photo-areas/${photoAreaId}/locations/${photoLocationId}/bim`;
+  static updatePhotoLocationPositionAndOrientation({ projectId, floorId, photoLocationId }: AssociationIds,
+                                                   coordinates: ApiPhotoLocation3d,
+                                                   user: User): Promise<ApiPhotoLocation> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/photo-locations/${photoLocationId}/bim`;
     return Http.patch(url, user, coordinates);
   }
 }
-makeErrorsPretty(PhotoAreaApi);
+
+export default makeErrorsPretty(PhotoAreaApi);
