@@ -5,6 +5,7 @@
   "description": "Javascript client for Avvir APIs",
   "module": "dist/avvir_api.node.js",
   "main": "dist/avvir_api.node.js",
+  "types": "dist/avvir_api.d.ts",
   "browserslist": [
     "> 1%",
     "IE 11",
