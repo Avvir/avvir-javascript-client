@@ -1,4 +1,4 @@
-import THREE from "three";
+import { Vector3 } from "three";
 import { DateLike, ModifyPartial, Vector3Like } from "type_aliases";
 import addDateGetterAndSetterToDomainModel from "../../mixins/add_date_getter_and_setter_to_domain_model";
 import { UniformatId } from "uniformat";
@@ -30,12 +30,12 @@ type ViewCameraParameter = ModifyPartial<ViewCamera, { position: Vector3Like, ta
 class ViewCamera {
     constructor(camera: ViewCameraParameter = {}) {
         const { position, target } = camera;
-        this.position = new THREE.Vector3(position?.x, position?.y, position?.z);
-        this.target = new THREE.Vector3(target?.x, target?.y, target?.z);
+        this.position = new Vector3(position?.x, position?.y, position?.z);
+        this.target = new Vector3(target?.x, target?.y, target?.z);
     }
 
-    position: THREE.Vector3;
-    target: THREE.Vector3;
+    position: Vector3;
+    target: Vector3;
 }
 
 class ViewFilters {
