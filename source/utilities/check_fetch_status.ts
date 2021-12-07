@@ -24,7 +24,7 @@ from: \`${requestPath}\``);
     }
   } else {
     return response.json().then((errorBody) => {
-      let message = errorBody.message;
+      let message = errorBody.errorDetails || errorBody.message;
       let statusMessage = responseStatusText[response.status];
       let verboseMessage = `${response.status} ${statusMessage}: '${message}' at \`${requestPath}\``;
       const error = new ResponseError(

@@ -3,10 +3,7 @@ import {expect} from "chai";
 import fetchMock from "fetch-mock";
 
 import ApiPipeline from "../../source/models/api/api_pipeline";
-import DetailedElement from "../../source/models/domain/detailed_element";
 import WebGatewayApi from "../../source/api/web_gateway_api";
-import {DETECTED, INCLUDED} from "../../source/models/enums/deviation_status";
-import {DEVIATED} from "../../source/models/enums/scan_label";
 import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
 import {SUPERADMIN, USER} from "../../source/models/enums/user_role";
 import {ELEMENTS_STATUSES_UPDATED} from "../../source/models/enums/event_types";
@@ -156,7 +153,7 @@ describe("WebGatewayApi", () => {
     });
 
     it("makes a call to the invitation generation endpoint", () => {
-      WebGatewayApi.createInvitation("someone@example.com", "USER", "some-organization-id", {
+      WebGatewayApi.createInvitation("someone@example.com", "USER", "some-organization-id", "some-project", {
         authType: GATEWAY_JWT,
         gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
@@ -170,13 +167,14 @@ describe("WebGatewayApi", () => {
           {
             userEmail: "someone@example.com",
             role: "USER",
-            clientAccountId: "some-organization-id"
+            clientAccountId: "some-organization-id",
+            projectId: "some-project"
           }
       ));
     });
 
     it("sends the request with an Authorization header", () => {
-      WebGatewayApi.createInvitation("someone@example.com", "USER", "some-organization-id", {
+      WebGatewayApi.createInvitation("someone@example.com", "USER", "some-organization-id", "some-project", {
         authType: GATEWAY_JWT,
         gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
@@ -437,7 +435,7 @@ describe("WebGatewayApi", () => {
     let dispatchSpy;
     beforeEach(() => {
       dispatchSpy = sandbox.spy();
-      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/push-report-to-procore/progress?procore-project-id=some-procore-project-id&procore-access-token=some-procore-access-token`,
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/push-report-to-procore/progress?procore-project-id=some-procore-project-id&procore-company-id=some-company-id&procore-access-token=some-procore-access-token`,
           200);
     });
 
@@ -448,6 +446,7 @@ describe("WebGatewayApi", () => {
             scanDatasetId: "some-scan-dataset-id"
           },
           "some-procore-project-id",
+          "some-company-id",
           "some-procore-access-token",
           "progress",
           {
@@ -466,6 +465,7 @@ describe("WebGatewayApi", () => {
             scanDatasetId: "some-scan-dataset-id"
           },
           "some-procore-project-id",
+          "some-company-id",
           "some-procore-access-token",
           "progress",
           {
@@ -477,7 +477,7 @@ describe("WebGatewayApi", () => {
 
       expect(fetchCall[0])
           .to
-          .eq(`${Http.baseUrl()}/projects/some-project-id/push-report-to-procore/progress?procore-project-id=some-procore-project-id&procore-access-token=some-procore-access-token`);
+          .eq(`${Http.baseUrl()}/projects/some-project-id/push-report-to-procore/progress?procore-project-id=some-procore-project-id&procore-company-id=some-company-id&procore-access-token=some-procore-access-token`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
   });

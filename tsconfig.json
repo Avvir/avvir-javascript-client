@@ -1,37 +1,7 @@
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": "./",
-    "downlevelIteration": true,
-    "declaration": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "module": "esnext",
-    "moduleResolution": "node",
-    "noImplicitAny": false,
-    "outDir": "dist",
-    "paths": {
-      "*": [
-        "source/typings/*"
-      ],
-      "type_aliases": [
-        "source/typings/type_aliases"
-      ],
-      "uniformat": [
-        "source/typings/uniformat"
-      ]
-    },
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
+    "declaration": false,
     "target": "es5"
-  },
-  "include": [
-    "./source"
-  ]
+  }
 }

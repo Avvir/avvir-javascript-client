@@ -8,7 +8,7 @@ import ApiPhotoLocation from "../models/api/api_photo_location";
 import ApiPhotoSession from "../models/api/api_photo_session";
 import ApiPhotoLocation3d from "../models/api/api_photo_location_3d";
 
-class PhotoAreaApi {
+export default class PhotoAreaApi {
   static listPhotoAreasForProject({ projectId }: AssociationIds, user: User): Promise<ApiPhotoArea[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/photo-areas`;
     return Http.get(url, user);
@@ -35,4 +35,4 @@ class PhotoAreaApi {
   }
 }
 
-export default makeErrorsPretty(PhotoAreaApi);
+makeErrorsPretty(PhotoAreaApi);

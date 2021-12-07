@@ -5,15 +5,15 @@ import { Moment } from "moment";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { Action as RoutingAction, Meta, Query } from "redux-first-router";
 
-import ApiCloudFile from "../../javascript/models/api/api_cloud_file";
-import ApiMatrix4 from "../../javascript/models/api/api_matrix_4";
-import CloudFile from "../../javascript/models/domain/cloud_file";
-import ResponseError from "../../javascript/models/response_error";
-import { PurposeType } from "../../javascript/models/domain/enums/purpose_type";
+import ApiCloudFile from "../../models/api/api_cloud_file";
+import ApiMatrix4 from "../../models/api/api_matrix_4";
+import CloudFile from "../../models/domain/cloud_file";
+import ResponseError from "../../models/response_error";
+import { PurposeType } from "../../models/domain/enums/purpose_type";
 import { OutputParametricSelector } from "reselect";
-import { ReduxStore } from "../../javascript/services/reducers/root_reducer";
+import { ReduxStore } from "../../services/reducers/root_reducer";
 import { SinonSpy, SinonStub } from "sinon";
-import ApiMatrix3 from "../../javascript/models/api/api_matrix_3";
+import ApiMatrix3 from "../../models/api/api_matrix_3";
 
 declare type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]>; } : T;
 declare type Modify<T, R> = Omit<T, keyof R> & R

@@ -24,6 +24,17 @@ export default class Http {
     });
   }
 
+  static put(url, user, body, contentType = "application/json") {
+    return Http.fetch(url, {
+      method: "PUT",
+      headers: {
+        ...httpGetHeaders(contentType),
+        ...getAuthorizationHeaders(user)
+      },
+      body: JSON.stringify(body)
+    });
+  }
+
   static delete(url, user) {
     return Http.fetch(url, {
       method: "DELETE",

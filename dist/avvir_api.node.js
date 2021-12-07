@@ -60,6 +60,17 @@ var __assign = (undefined && undefined.__assign) || function () {
 var AuthApi = /** @class */ (function () {
     function AuthApi() {
     }
+    AuthApi.getCustomFirebaseToken = function (user) {
+        return http["default"].fetch(http["default"].baseUrl() + "/login", {
+            headers: __assign(__assign({}, request_headers.httpGetHeaders), (0,get_authorization_headers["default"])(user))
+        }).then(function (response) {
+            return response.json()
+                .then(function (body) {
+                var headers = response.headers;
+                return { headers: headers, body: body };
+            });
+        });
+    };
     AuthApi.login = function (username, password) {
         var user = {
             authType: user_auth_type["default"].BASIC,
@@ -74,12 +85,11 @@ var AuthApi = /** @class */ (function () {
             return response.json()
                 .then(function (body) {
                 if (response.ok) {
-                    var storageToken = body.storageToken; //TODO attach to user object and let users upload from this lib
                     var authHeader = response.headers.get("Authorization");
                     var jwt = authHeader.substr("Bearer ".length);
                     var decodedJwt = external_jsonwebtoken_default().decode(jwt, { complete: true });
                     var role = decodedJwt.payload.role;
-                    return new get_authorization_headers.GatewayUser(user_auth_type.GATEWAY_JWT, jwt, role);
+                    return new get_authorization_headers.GatewayUser(user_auth_type.GATEWAY_JWT, jwt, role, body.storageToken, body.redirectUrl);
                 }
                 else {
                     var message = body.message;
@@ -354,6 +364,51 @@ var FloorApi = /** @class */ (function () {
 
 /***/ }),
 
+/***/ 4645:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AuthApi": () => (/* reexport safe */ _auth_api__WEBPACK_IMPORTED_MODULE_0__["default"]),
+/* harmony export */   "ElementApi": () => (/* reexport safe */ _element_api__WEBPACK_IMPORTED_MODULE_1__["default"]),
+/* harmony export */   "FileInformationApi": () => (/* reexport safe */ _file_information_api__WEBPACK_IMPORTED_MODULE_2__["default"]),
+/* harmony export */   "FloorApi": () => (/* reexport safe */ _floor_api__WEBPACK_IMPORTED_MODULE_3__["default"]),
+/* harmony export */   "OrganizationApi": () => (/* reexport safe */ _organization_api__WEBPACK_IMPORTED_MODULE_4__["default"]),
+/* harmony export */   "PhotoAreaApi": () => (/* reexport safe */ _photo_area_api__WEBPACK_IMPORTED_MODULE_5__["default"]),
+/* harmony export */   "PipelineApi": () => (/* reexport safe */ _pipeline_api__WEBPACK_IMPORTED_MODULE_6__["default"]),
+/* harmony export */   "ProjectApi": () => (/* reexport safe */ _project_api__WEBPACK_IMPORTED_MODULE_7__["default"]),
+/* harmony export */   "ScanDatasetApi": () => (/* reexport safe */ _scan_dataset_api__WEBPACK_IMPORTED_MODULE_8__["default"]),
+/* harmony export */   "WebGatewayApi": () => (/* reexport safe */ _web_gateway_api__WEBPACK_IMPORTED_MODULE_9__["default"]),
+/* harmony export */   "UserApi": () => (/* reexport safe */ _user_api__WEBPACK_IMPORTED_MODULE_10__["default"])
+/* harmony export */ });
+/* harmony import */ var _auth_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9815);
+/* harmony import */ var _element_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7325);
+/* harmony import */ var _file_information_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9513);
+/* harmony import */ var _floor_api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2010);
+/* harmony import */ var _organization_api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9940);
+/* harmony import */ var _photo_area_api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5817);
+/* harmony import */ var _pipeline_api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(4393);
+/* harmony import */ var _project_api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(555);
+/* harmony import */ var _scan_dataset_api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(4835);
+/* harmony import */ var _web_gateway_api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(7146);
+/* harmony import */ var _user_api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(3867);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
 /***/ 9940:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -391,7 +446,8 @@ var OrganizationApi = /** @class */ (function () {
     };
     return OrganizationApi;
 }());
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(OrganizationApi));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (OrganizationApi);
+(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(OrganizationApi);
 
 
 /***/ }),
@@ -430,8 +486,8 @@ var PhotoAreaApi = /** @class */ (function () {
         return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
     PhotoAreaApi.updatePhotoLocationPositionAndOrientation = function (_a, coordinates, user) {
-        var projectId = _a.projectId, photoAreaId = _a.photoAreaId, photoLocationId = _a.photoLocationId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/photo-areas/" + photoAreaId + "/locations/" + photoLocationId + "/bim";
+        var projectId = _a.projectId, floorId = _a.floorId, photoLocationId = _a.photoLocationId;
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/photo-locations/" + photoLocationId + "/bim";
         return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].patch(url, user, coordinates);
     };
     return PhotoAreaApi;
@@ -568,12 +624,12 @@ var ProjectApi = /** @class */ (function () {
         var projectId = _a.projectId;
         var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/project_deviation-report.tsv";
         var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].addAuthToDownloadUrl(baseUrl, user);
-        console.log(url);
         return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user, "text/tab-separated-values; charset=utf-8");
     };
     return ProjectApi;
 }());
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(ProjectApi));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProjectApi);
+(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(ProjectApi);
 
 
 /***/ }),
@@ -634,10 +690,62 @@ var ScanDatasetApi = /** @class */ (function () {
         var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/progress";
         return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
+    ScanDatasetApi.getScanRepresentation = function (_a, user) {
+        var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/files/scan-representation";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
+    };
+    ScanDatasetApi.createView = function (_a, view, user) {
+        var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/views";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, user, view);
+    };
+    ScanDatasetApi.getView = function (_a, viewId, user) {
+        var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/views/" + viewId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
+    };
     return ScanDatasetApi;
 }());
 (0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(ScanDatasetApi);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScanDatasetApi);
+
+
+/***/ }),
+
+/***/ 3867:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5562);
+/* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6289);
+
+
+var UserApi = /** @class */ (function () {
+    function UserApi() {
+    }
+    UserApi.createInvitation = function (forms, user) {
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/users/invitations";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, user, forms);
+    };
+    UserApi.getUserAccount = function (email, role, user) {
+        var encodedEmail = encodeURIComponent(email);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl + "/users/accounts/" + encodedEmail + "/" + role;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
+    };
+    UserApi.updateUserAccount = function (email, role, apiUser, user) {
+        var encodedEmail = encodeURIComponent(email);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl + "/users/accounts/" + encodedEmail + "/" + role;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].put(url, user, apiUser);
+    };
+    return UserApi;
+}());
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserApi);
+(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(UserApi);
 
 
 /***/ }),
@@ -684,16 +792,16 @@ var WebGatewayApi = /** @class */ (function () {
         var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/pipelines/" + pipelineId;
         return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
-    WebGatewayApi.createInvitation = function (inviteeEmail, role, organizationId, user) {
+    WebGatewayApi.createInvitation = function (inviteeEmail, role, organizationId, projectId, user) {
         var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/users/invitations";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, { userEmail: inviteeEmail, role: role, clientAccountId: organizationId });
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, { userEmail: inviteeEmail, role: role, clientAccountId: organizationId, projectId: projectId });
     };
     WebGatewayApi.getInvitation = function (invitationToken, user) {
         var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/users/invitations/" + invitationToken;
         return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
-    WebGatewayApi.getProgressReportPdfUrl = function (projectId, user) {
-        var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/progress-report.pdf";
+    WebGatewayApi.getProgressReportPdfUrl = function (projectId, floorId, user) {
+        var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/progress-report.pdf";
         return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].addAuthToDownloadUrl(baseUrl, user);
     };
     WebGatewayApi.getQualityControlReportPdfUrl = function (projectId) {
@@ -721,12 +829,12 @@ var WebGatewayApi = /** @class */ (function () {
         var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/procore?procore-access-token=" + procoreAccessToken;
         return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
-    WebGatewayApi.pushPdfToProcore = function (_a, procoreProjectId, procoreAccessToken, pdfType, user) {
+    WebGatewayApi.pushPdfToProcore = function (_a, procoreProjectId, procoreCompanyId, procoreAccessToken, pdfType, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
         if (!projectId) {
             return Promise.reject(new Error("Project not loaded yet"));
         }
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/push-report-to-procore/" + pdfType + "?procore-project-id=" + procoreProjectId + "&procore-access-token=" + procoreAccessToken;
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/push-report-to-procore/" + pdfType + "?procore-project-id=" + procoreProjectId + "&procore-company-id=" + procoreCompanyId + "&procore-access-token=" + procoreAccessToken;
         return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, null);
     };
     WebGatewayApi.getProcoreProjects = function (projectId, procoreAccessToken, user) {
@@ -748,7 +856,7 @@ var WebGatewayApi = /** @class */ (function () {
             });
         });
     };
-    // deprectated. use AuthApi.login instead
+    // deprecated. use AuthApi.login instead
     WebGatewayApi.login = function (username, password) {
         var user = {
             authType: _models_enums_user_auth_type__WEBPACK_IMPORTED_MODULE_3__["default"].BASIC,
@@ -846,6 +954,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_project_api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(555);
 /* harmony import */ var _api_scan_dataset_api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(4835);
 /* harmony import */ var _api_web_gateway_api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(7146);
+/* harmony import */ var _api_user_api__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(3867);
+
 
 
 
@@ -869,6 +979,7 @@ __webpack_require__.r(__webpack_exports__);
     projects: _api_project_api__WEBPACK_IMPORTED_MODULE_8__["default"],
     scanDatasets: _api_scan_dataset_api__WEBPACK_IMPORTED_MODULE_9__["default"],
     other: _api_web_gateway_api__WEBPACK_IMPORTED_MODULE_10__["default"],
+    user: _api_user_api__WEBPACK_IMPORTED_MODULE_11__["default"]
 });
 
 
@@ -1309,6 +1420,130 @@ var PurposeTypeConverter = /** @class */ (function () {
 
 /***/ }),
 
+/***/ 2352:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GatewayUser": () => (/* reexport safe */ _utilities_get_authorization_headers__WEBPACK_IMPORTED_MODULE_13__.GatewayUser),
+/* harmony export */   "UserRole": () => (/* reexport safe */ _models_enums_user_role__WEBPACK_IMPORTED_MODULE_14__["default"]),
+/* harmony export */   "ApiArgoResponse": () => (/* reexport safe */ _models_api_api_argo_response__WEBPACK_IMPORTED_MODULE_15__["default"]),
+/* harmony export */   "ApiCloudFile": () => (/* reexport safe */ _models_api_api_cloud_file__WEBPACK_IMPORTED_MODULE_16__["default"]),
+/* harmony export */   "ApiConstructionGrid": () => (/* reexport safe */ _models_api_api_construction_grid__WEBPACK_IMPORTED_MODULE_17__["default"]),
+/* harmony export */   "ApiFloor": () => (/* reexport safe */ _models_api_api_floor__WEBPACK_IMPORTED_MODULE_18__["default"]),
+/* harmony export */   "ApiGridLine": () => (/* reexport safe */ _models_api_api_grid_line__WEBPACK_IMPORTED_MODULE_19__["default"]),
+/* harmony export */   "ApiInvitation": () => (/* reexport safe */ _models_api_api_invitation__WEBPACK_IMPORTED_MODULE_20__["default"]),
+/* harmony export */   "ApiMasterformat": () => (/* reexport safe */ _models_api_api_masterformat__WEBPACK_IMPORTED_MODULE_21__["default"]),
+/* harmony export */   "ApiMatrix3": () => (/* reexport safe */ _models_api_api_matrix_3__WEBPACK_IMPORTED_MODULE_22__["default"]),
+/* harmony export */   "ApiMatrix4": () => (/* reexport safe */ _models_api_api_matrix_4__WEBPACK_IMPORTED_MODULE_23__["default"]),
+/* harmony export */   "ApiOrganization": () => (/* reexport safe */ _models_api_api_organization__WEBPACK_IMPORTED_MODULE_24__["default"]),
+/* harmony export */   "ApiPhotoArea": () => (/* reexport safe */ _models_api_api_photo_area__WEBPACK_IMPORTED_MODULE_25__["default"]),
+/* harmony export */   "ApiPhotoLocation": () => (/* reexport safe */ _models_api_api_photo_location__WEBPACK_IMPORTED_MODULE_26__["default"]),
+/* harmony export */   "ApiPhotoLocation3d": () => (/* reexport safe */ _models_api_api_photo_location_3d__WEBPACK_IMPORTED_MODULE_27__["default"]),
+/* harmony export */   "ApiPhotoSession": () => (/* reexport safe */ _models_api_api_photo_session__WEBPACK_IMPORTED_MODULE_28__["default"]),
+/* harmony export */   "ApiPipeline": () => (/* reexport safe */ _models_api_api_pipeline__WEBPACK_IMPORTED_MODULE_29__["default"]),
+/* harmony export */   "ApiPlannedElement": () => (/* reexport safe */ _models_api_api_planned_element__WEBPACK_IMPORTED_MODULE_30__["default"]),
+/* harmony export */   "ApiProject": () => (/* reexport safe */ _models_api_api_project__WEBPACK_IMPORTED_MODULE_31__["default"]),
+/* harmony export */   "ApiProjectCostAnalysisProgress": () => (/* reexport safe */ _models_api_api_project_cost_analysis_progress__WEBPACK_IMPORTED_MODULE_32__["default"]),
+/* harmony export */   "ApiProjectMasterformatProgress": () => (/* reexport safe */ _models_api_api_project_masterformat_progress__WEBPACK_IMPORTED_MODULE_33__["default"]),
+/* harmony export */   "ApiProjectPurposeType": () => (/* reexport safe */ _models_api_api_purpose_type__WEBPACK_IMPORTED_MODULE_35__.ApiProjectPurposeType),
+/* harmony export */   "ApiFloorPurposeType": () => (/* reexport safe */ _models_api_api_purpose_type__WEBPACK_IMPORTED_MODULE_35__.ApiFloorPurposeType),
+/* harmony export */   "ApiScanDatasetPurposeType": () => (/* reexport safe */ _models_api_api_purpose_type__WEBPACK_IMPORTED_MODULE_35__.ApiScanDatasetPurposeType),
+/* harmony export */   "ApiPhotoAreaPurposeType": () => (/* reexport safe */ _models_api_api_purpose_type__WEBPACK_IMPORTED_MODULE_35__.ApiPhotoAreaPurposeType),
+/* harmony export */   "ApiUser": () => (/* reexport safe */ _models_api_api_user__WEBPACK_IMPORTED_MODULE_34__["default"]),
+/* harmony export */   "AuthApi": () => (/* reexport safe */ _api_auth_api__WEBPACK_IMPORTED_MODULE_1__["default"]),
+/* harmony export */   "Config": () => (/* reexport safe */ _config__WEBPACK_IMPORTED_MODULE_2__["default"]),
+/* harmony export */   "ElementApi": () => (/* reexport safe */ _api_element_api__WEBPACK_IMPORTED_MODULE_3__["default"]),
+/* harmony export */   "FileInformationApi": () => (/* reexport safe */ _api_file_information_api__WEBPACK_IMPORTED_MODULE_4__["default"]),
+/* harmony export */   "FloorApi": () => (/* reexport safe */ _api_floor_api__WEBPACK_IMPORTED_MODULE_5__["default"]),
+/* harmony export */   "OrganizationApi": () => (/* reexport safe */ _api_organization_api__WEBPACK_IMPORTED_MODULE_6__["default"]),
+/* harmony export */   "PhotoAreaApi": () => (/* reexport safe */ _api_photo_area_api__WEBPACK_IMPORTED_MODULE_7__["default"]),
+/* harmony export */   "PipelineApi": () => (/* reexport safe */ _api_pipeline_api__WEBPACK_IMPORTED_MODULE_8__["default"]),
+/* harmony export */   "ProjectApi": () => (/* reexport safe */ _api_project_api__WEBPACK_IMPORTED_MODULE_9__["default"]),
+/* harmony export */   "ScanDatasetApi": () => (/* reexport safe */ _api_scan_dataset_api__WEBPACK_IMPORTED_MODULE_10__["default"]),
+/* harmony export */   "WebGatewayApi": () => (/* reexport safe */ _api_web_gateway_api__WEBPACK_IMPORTED_MODULE_11__["default"]),
+/* harmony export */   "UserApi": () => (/* reexport safe */ _api_user_api__WEBPACK_IMPORTED_MODULE_12__["default"]),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _avvir_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5489);
+/* harmony import */ var _api_auth_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9815);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5508);
+/* harmony import */ var _api_element_api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(7325);
+/* harmony import */ var _api_file_information_api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9513);
+/* harmony import */ var _api_floor_api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(2010);
+/* harmony import */ var _api_organization_api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9940);
+/* harmony import */ var _api_photo_area_api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(5817);
+/* harmony import */ var _api_pipeline_api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(4393);
+/* harmony import */ var _api_project_api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(555);
+/* harmony import */ var _api_scan_dataset_api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(4835);
+/* harmony import */ var _api_web_gateway_api__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(7146);
+/* harmony import */ var _api_user_api__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(3867);
+/* harmony import */ var _utilities_get_authorization_headers__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(5561);
+/* harmony import */ var _models_enums_user_role__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(1922);
+/* harmony import */ var _models_api_api_argo_response__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(8450);
+/* harmony import */ var _models_api_api_cloud_file__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(277);
+/* harmony import */ var _models_api_api_construction_grid__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(7117);
+/* harmony import */ var _models_api_api_floor__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(1596);
+/* harmony import */ var _models_api_api_grid_line__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(2179);
+/* harmony import */ var _models_api_api_invitation__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(5515);
+/* harmony import */ var _models_api_api_masterformat__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(8069);
+/* harmony import */ var _models_api_api_matrix_3__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(7494);
+/* harmony import */ var _models_api_api_matrix_4__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(6645);
+/* harmony import */ var _models_api_api_organization__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(6835);
+/* harmony import */ var _models_api_api_photo_area__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(9297);
+/* harmony import */ var _models_api_api_photo_location__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(1390);
+/* harmony import */ var _models_api_api_photo_location_3d__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(7801);
+/* harmony import */ var _models_api_api_photo_session__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(3379);
+/* harmony import */ var _models_api_api_pipeline__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(5621);
+/* harmony import */ var _models_api_api_planned_element__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(6099);
+/* harmony import */ var _models_api_api_project__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(933);
+/* harmony import */ var _models_api_api_project_cost_analysis_progress__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(4819);
+/* harmony import */ var _models_api_api_project_masterformat_progress__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(6061);
+/* harmony import */ var _models_api_api_user__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(9217);
+/* harmony import */ var _models_api_api_purpose_type__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(3979);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_avvir_api__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+/***/ }),
+
 /***/ 6553:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -1593,6 +1828,16 @@ var ApiConstructionGrid = /** @class */ (function () {
     return ApiConstructionGrid;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ApiConstructionGrid);
+
+
+/***/ }),
+
+/***/ 2844:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
 
 
 /***/ }),
@@ -2409,6 +2654,30 @@ var ApiScanDataset = /** @class */ (function () {
 
 /***/ }),
 
+/***/ 9217:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var ApiUser = /** @class */ (function () {
+    function ApiUser(_a) {
+        var _b = _a === void 0 ? {} : _a, name = _b.name, userOrganization = _b.userOrganization, email = _b.email, role = _b.role, projectId = _b.projectId;
+        this.name = name;
+        this.userOrganization = userOrganization;
+        this.email = email;
+        this.role = role;
+        this.projectId = projectId;
+    }
+    return ApiUser;
+}());
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ApiUser);
+
+
+/***/ }),
+
 /***/ 6732:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2764,6 +3033,90 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 9127:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DeviationTolerance": () => (/* binding */ DeviationTolerance),
+/* harmony export */   "ViewAttributes": () => (/* binding */ ViewAttributes),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2248);
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mixins_add_date_getter_and_setter_to_domain_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6553);
+
+
+var DeviationTolerance = /** @class */ (function () {
+    function DeviationTolerance(tolerance) {
+        if (tolerance === void 0) { tolerance = {}; }
+        var value = tolerance.value, systemOfMeasurement = tolerance.systemOfMeasurement;
+        this.value = value;
+        this.systemOfMeasurement = systemOfMeasurement;
+    }
+    return DeviationTolerance;
+}());
+
+var ViewTrades = /** @class */ (function () {
+    function ViewTrades(trades) {
+        if (trades === void 0) { trades = {}; }
+        var shownUniformatCodes = trades.shownUniformatCodes;
+        this.shownUniformatCodes = shownUniformatCodes;
+    }
+    return ViewTrades;
+}());
+var ViewCamera = /** @class */ (function () {
+    function ViewCamera(camera) {
+        if (camera === void 0) { camera = {}; }
+        var position = camera.position, target = camera.target;
+        this.position = new (three__WEBPACK_IMPORTED_MODULE_0___default().Vector3)(position === null || position === void 0 ? void 0 : position.x, position === null || position === void 0 ? void 0 : position.y, position === null || position === void 0 ? void 0 : position.z);
+        this.target = new (three__WEBPACK_IMPORTED_MODULE_0___default().Vector3)(target === null || target === void 0 ? void 0 : target.x, target === null || target === void 0 ? void 0 : target.y, target === null || target === void 0 ? void 0 : target.z);
+    }
+    return ViewCamera;
+}());
+var ViewFilters = /** @class */ (function () {
+    function ViewFilters(filters) {
+        if (filters === void 0) { filters = {}; }
+        var trades = filters.trades, deviationTolerance = filters.deviationTolerance;
+        this.trades = new ViewTrades(trades);
+        this.deviationTolerance = new DeviationTolerance(deviationTolerance);
+    }
+    return ViewFilters;
+}());
+var ViewAttributes = /** @class */ (function () {
+    function ViewAttributes(attributes) {
+        if (attributes === void 0) { attributes = {}; }
+        var camera = attributes.camera, filters = attributes.filters, selectedElements = attributes.selectedElements, inspectionMode = attributes.inspectionMode;
+        this.camera = new ViewCamera(camera);
+        this.filters = new ViewFilters(filters);
+        this.selectedElements = selectedElements;
+        this.inspectionMode = inspectionMode;
+    }
+    return ViewAttributes;
+}());
+
+var View = /** @class */ (function () {
+    function View(view) {
+        if (view === void 0) { view = {}; }
+        var id = view.id, firebaseProjectId = view.firebaseProjectId, firebaseFloorId = view.firebaseFloorId, firebaseScanDatasetId = view.firebaseScanDatasetId, viewAttributes = view.viewAttributes, createdBy = view.createdBy, createdAt = view.createdAt;
+        (0,_mixins_add_date_getter_and_setter_to_domain_model__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "createdAt");
+        this.id = id;
+        this.firebaseProjectId = firebaseProjectId;
+        this.firebaseFloorId = firebaseFloorId;
+        this.firebaseScanDatasetId = firebaseScanDatasetId;
+        this.viewAttributes = new ViewAttributes(viewAttributes);
+        this.createdBy = createdBy;
+        // @ts-ignore
+        this.createdAt = createdAt;
+    }
+    return View;
+}());
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (View);
+
+
+/***/ }),
+
 /***/ 9142:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2806,6 +3159,41 @@ __webpack_require__.r(__webpack_exports__);
 var ELEMENTS_STATUSES_UPDATED = "elements_statuses_updated";
 var API_FAILURE = "api_failure";
 var UPLOAD_FAILED = "upload_failed";
+
+
+/***/ }),
+
+/***/ 941:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "InspectionMode": () => (/* binding */ InspectionMode),
+/* harmony export */   "qualityControlBimLegacy": () => (/* binding */ qualityControlBimLegacy),
+/* harmony export */   "qualityControlBim": () => (/* binding */ qualityControlBim),
+/* harmony export */   "fullBim": () => (/* binding */ fullBim),
+/* harmony export */   "monitorBim": () => (/* binding */ monitorBim),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var InspectionMode;
+(function (InspectionMode) {
+    InspectionMode["qualityControlBimLegacy"] = "qualityControlBimLegacy";
+    InspectionMode["qualityControlBim"] = "qualityControlBim";
+    InspectionMode["fullBim"] = "fullBim";
+    InspectionMode["monitorBim"] = "monitorBim";
+})(InspectionMode || (InspectionMode = {}));
+var qualityControlBimLegacy = InspectionMode.qualityControlBimLegacy;
+var qualityControlBim = InspectionMode.qualityControlBim;
+var fullBim = InspectionMode.fullBim;
+var monitorBim = InspectionMode.monitorBim;
+var inspectionModes = [
+    { displayName: "Avvir Inspect (Legacy)", value: qualityControlBimLegacy },
+    { displayName: "Avvir Inspect", value: qualityControlBim },
+    { displayName: "Basic BIM", value: fullBim },
+    { displayName: "Avvir Progress", value: monitorBim },
+];
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (inspectionModes);
 
 
 /***/ }),
@@ -3208,15 +3596,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SUPERADMIN": () => (/* binding */ SUPERADMIN),
 /* harmony export */   "USER": () => (/* binding */ USER),
+/* harmony export */   "SUBCONTRACTOR": () => (/* binding */ SUBCONTRACTOR),
+/* harmony export */   "VDC_MANAGER": () => (/* binding */ VDC_MANAGER),
+/* harmony export */   "GENERAL_CONTRACTOR": () => (/* binding */ GENERAL_CONTRACTOR),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var UserRole;
 (function (UserRole) {
     UserRole["SUPERADMIN"] = "SUPERADMIN";
     UserRole["USER"] = "USER";
+    UserRole["SUBCONTRACTOR"] = "SUBCONTRACTOR";
+    UserRole["VDC_MANAGER"] = "VDC_MANAGER";
+    UserRole["GENERAL_CONTRACTOR"] = "GENERAL_CONTRACTOR";
 })(UserRole || (UserRole = {}));
 var SUPERADMIN = UserRole.SUPERADMIN;
 var USER = UserRole.USER;
+var SUBCONTRACTOR = UserRole.SUBCONTRACTOR;
+var VDC_MANAGER = UserRole.VDC_MANAGER;
+var GENERAL_CONTRACTOR = UserRole.GENERAL_CONTRACTOR;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserRole);
 
 
@@ -3309,7 +3706,7 @@ var checkFetchStatus = function (response) {
     }
     else {
         return response.json().then(function (errorBody) {
-            var message = errorBody.message;
+            var message = errorBody.errorDetails || errorBody.message;
             var statusMessage = _resources_response_statuses_json__WEBPACK_IMPORTED_MODULE_1__[response.status];
             var verboseMessage = response.status + " " + statusMessage + ": '" + message + "' at `" + requestPath + "`";
             var error = new _models_response_error__WEBPACK_IMPORTED_MODULE_0__["default"](message, verboseMessage, response, errorBody);
@@ -3335,11 +3732,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _models_enums_user_auth_type__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6132);
 
 var GatewayUser = /** @class */ (function () {
-    function GatewayUser(authType, idToken, role) {
+    function GatewayUser(authType, idToken, role, storageToken, redirectUrl) {
         this.authType = authType;
         this.gatewayUser = {
             idToken: idToken,
-            role: role
+            role: role,
+            storageToken: storageToken,
+            redirectUrl: redirectUrl
         };
     }
     return GatewayUser;
@@ -3419,6 +3818,14 @@ var Http = /** @class */ (function () {
         return Http.fetch(url, {
             method: "GET",
             headers: __assign(__assign({}, (0,_request_headers__WEBPACK_IMPORTED_MODULE_1__.httpGetHeaders)(contentType)), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__["default"])(user))
+        });
+    };
+    Http.put = function (url, user, body, contentType) {
+        if (contentType === void 0) { contentType = "application/json"; }
+        return Http.fetch(url, {
+            method: "PUT",
+            headers: __assign(__assign({}, (0,_request_headers__WEBPACK_IMPORTED_MODULE_1__.httpGetHeaders)(contentType)), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__["default"])(user)),
+            body: JSON.stringify(body)
         });
     };
     Http.delete = function (url, user) {
@@ -3651,11 +4058,13 @@ var map = {
 	"./api/element_api.ts": 7325,
 	"./api/file_information_api.ts": 9513,
 	"./api/floor_api.ts": 2010,
+	"./api/index.ts": 4645,
 	"./api/organization_api.ts": 9940,
 	"./api/photo_area_api.ts": 5817,
 	"./api/pipeline_api.ts": 4393,
 	"./api/project_api.ts": 555,
 	"./api/scan_dataset_api.ts": 4835,
+	"./api/user_api.ts": 3867,
 	"./api/web_gateway_api.ts": 7146,
 	"./avvir_api.ts": 5489,
 	"./config.ts": 5508,
@@ -3663,6 +4072,7 @@ var map = {
 	"./converters/matrix_3_converter.ts": 28,
 	"./converters/matrix_4_converter.ts": 2908,
 	"./converters/purpose_type_converter.ts": 6154,
+	"./index.ts": 2352,
 	"./mixins/add_date_getter_and_setter_to_domain_model.ts": 6553,
 	"./mixins/add_instant_getter_and_setter_to_api_model.ts": 1142,
 	"./mixins/add_logging_to_instance_methods.ts": 5953,
@@ -3670,6 +4080,7 @@ var map = {
 	"./models/api/api_argo_response.ts": 8450,
 	"./models/api/api_cloud_file.ts": 277,
 	"./models/api/api_construction_grid.ts": 7117,
+	"./models/api/api_create_invitation_form.ts": 2844,
 	"./models/api/api_floor.ts": 1596,
 	"./models/api/api_grid_line.ts": 2179,
 	"./models/api/api_invitation.ts": 5515,
@@ -3688,6 +4099,7 @@ var map = {
 	"./models/api/api_project_masterformat_progress.ts": 6061,
 	"./models/api/api_purpose_type.ts": 3979,
 	"./models/api/api_scan_dataset.ts": 1866,
+	"./models/api/api_user.ts": 9217,
 	"./models/api/deprecated_api_pipeline.ts": 6732,
 	"./models/domain/detailed_element.ts": 7073,
 	"./models/domain/masterformat.ts": 8643,
@@ -3700,8 +4112,10 @@ var map = {
 	"./models/domain/progress/project_masterformat_progress.ts": 9459,
 	"./models/domain/progress/time_series_tsv_analysis_types.ts": 2224,
 	"./models/domain/running_process.ts": 2933,
+	"./models/domain/view.ts": 9127,
 	"./models/enums/deviation_status.ts": 9142,
 	"./models/enums/event_types.ts": 8367,
+	"./models/enums/inspection_modes.ts": 941,
 	"./models/enums/notification_level.ts": 2453,
 	"./models/enums/page_names.ts": 8322,
 	"./models/enums/photo_projection_type.ts": 6975,

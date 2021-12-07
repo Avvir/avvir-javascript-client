@@ -5,14 +5,18 @@ export class GatewayUser {
   authType: typeof GATEWAY_JWT
   gatewayUser?: {
     idToken?: string,
-    role?: UserRole
+    role?: UserRole,
+    redirectUrl?: string,
+    storageToken?: string
   }
 
-  constructor(authType, idToken, role) {
+  constructor(authType, idToken, role, storageToken?, redirectUrl?) {
     this.authType = authType;
     this.gatewayUser = {
       idToken,
-      role
+      role,
+      storageToken,
+      redirectUrl
     }
   }
 }
