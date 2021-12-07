@@ -9,86 +9,7 @@ import PipelineApi from "./api/pipeline_api";
 import ProjectApi from "./api/project_api";
 import ScanDatasetApi from "./api/scan_dataset_api";
 import WebGatewayApi from "./api/web_gateway_api";
-
-import {AssociationIds, AvvirApiFiles} from "type_aliases";
-import {BasicUser, FirebaseUser, GatewayUser, User} from "./utilities/get_authorization_headers";
-import UserRole from "./models/enums/user_role";
-import ApiArgoResponse from "./models/api/api_argo_response";
-import ApiCloudFile from "./models/api/api_cloud_file";
-import ApiConstructionGrid from "./models/api/api_construction_grid";
-import ApiFloor from "./models/api/api_floor";
-import ApiGridLine from "./models/api/api_grid_line";
-import ApiInvitation from "./models/api/api_invitation";
-import ApiMasterformat from "./models/api/api_masterformat";
-import ApiMatrix3 from "./models/api/api_matrix_3";
-import ApiMatrix4 from "./models/api/api_matrix_4";
-import ApiOrganization from "./models/api/api_organization";
-import ApiPhotoArea from "./models/api/api_photo_area";
-import ApiPhotoLocation from "./models/api/api_photo_location";
-import ApiPhotoLocation3d from "./models/api/api_photo_location_3d";
-import ApiPhotoSession from "./models/api/api_photo_session";
-import ApiPipeline, {ApiPipelineArgument} from "./models/api/api_pipeline";
-import ApiPlannedElement from "./models/api/api_planned_element";
-import ApiProject from "./models/api/api_project";
-import ApiProjectCostAnalysisProgress from "./models/api/api_project_cost_analysis_progress";
-import ApiProjectMasterformatProgress from "./models/api/api_project_masterformat_progress";
-
-import {
-    ApiProjectPurposeType,
-    ApiFloorPurposeType,
-    ApiScanDatasetPurposeType,
-    ApiPhotoAreaPurposeType,
-    ApiPurposeType
-} from "./models/api/api_purpose_type";
-
-export {
-    BasicUser,
-    FirebaseUser,
-    GatewayUser,
-    User,
-    UserRole,
-
-    AssociationIds,
-    AvvirApiFiles,
-
-    ApiArgoResponse,
-    ApiCloudFile,
-    ApiConstructionGrid,
-    ApiFloor,
-    ApiGridLine,
-    ApiInvitation,
-    ApiMasterformat,
-    ApiMatrix3,
-    ApiMatrix4,
-    ApiOrganization,
-    ApiPhotoArea,
-    ApiPhotoLocation,
-    ApiPhotoLocation3d,
-    ApiPhotoSession,
-    ApiPipeline,
-    ApiPipelineArgument,
-    ApiPlannedElement,
-    ApiProject,
-    ApiProjectCostAnalysisProgress,
-    ApiProjectMasterformatProgress,
-    ApiProjectPurposeType,
-    ApiPurposeType,
-    ApiFloorPurposeType,
-    ApiScanDatasetPurposeType,
-    ApiPhotoAreaPurposeType,
-
-    AuthApi,
-    Config,
-    ElementApi,
-    FileInformationApi,
-    FloorApi,
-    OrganizationApi,
-    PhotoAreaApi,
-    PipelineApi,
-    ProjectApi,
-    ScanDatasetApi,
-    WebGatewayApi
-};
+import UserApi from "./api/user_api";
 
 export default {
     auth: AuthApi,
@@ -102,4 +23,5 @@ export default {
     projects: ProjectApi,
     scanDatasets: ScanDatasetApi,
     other: WebGatewayApi,
+    user: UserApi
 }

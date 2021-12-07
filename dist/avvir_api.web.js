@@ -25609,9 +25609,9 @@ exports = module.exports = SemVer
 var debug
 /* istanbul ignore next */
 if (typeof process === 'object' &&
-    ({"NODE_ENV":"development","NVM_INC":"/Users/tira/.nvm/versions/node/v12.13.1/include/node","NODE":"/Users/tira/.nvm/versions/node/v12.13.1/bin/node","npm_package_dependencies_process":"^0.11.10","INIT_CWD":"/Users/tira/dev/avvir/avvir-javascript-client","NVM_CD_FLAGS":"","npm_package_dependencies_moment":"^2.29.1","npm_package_devDependencies_typescript":"^4.1.2","npm_package_devDependencies_sinon":"^11.1.2","npm_config_version_git_tag":"true","TERM":"xterm-256color","SHELL":"/bin/bash","npm_package_devDependencies_mocha":"^8.2.1","HISTSIZE":"5000","TMPDIR":"/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/","PIPENV_VENV_IN_PROJECT":"true#","npm_package_devDependencies__babel_preset_typescript":"^7.12.7","npm_config_init_license":"MIT","npm_package_devDependencies_babel_plugin_module_resolver":"^4.1.0","GIT_HOSTING":"git@git.domain.com","npm_package_devDependencies_chai_almost":"^1.0.1","npm_package_devDependencies__types_mocha":"^9.0.0","npm_config_registry":"https://registry.yarnpkg.com","npm_package_devDependencies_sinon_chai":"^3.5.0","npm_package_repository_url":"git@github.com:Avvir/avvir-javascript-client.git","npm_package_readmeFilename":"README.md","USER":"tira","NVM_DIR":"/Users/tira/.nvm","npm_package_devDependencies_webpack":"5.61.0","npm_package_devDependencies_chai_things":"^0.2.0","npm_package_devDependencies__babel_plugin_transform_runtime":"^7.12.10","npm_package_description":"Javascript client for Avvir APIs","npm_config_python":"/usr/bin/python","npm_package_devDependencies_webpack_cli":"^4.2.0","npm_package_devDependencies__types_chai_datetime":"^0.0.37","COMMAND_MODE":"unix2003","BASH_IT_THEME":"bobby","npm_package_devDependencies_chai_datetime":"^1.7.0","npm_package_devDependencies__babel_core":"^7.12.9","SSH_AUTH_SOCK":"/private/tmp/com.apple.launchd.ltYKi71bmC/Listeners","SCM_CHECK":"true","npm_package_dependencies_stream_browserify":"^3.0.0","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0","npm_package_dependencies_buffer":"^6.0.3","npm_execpath":"/usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js","npm_package_dependencies_node_fetch":"^2.6.1","AUTOFEATURE":"true autotest","npm_package_dependencies_util":"^0.12.4","npm_package_module":"dist/avvir_api.node.js","BASH_IT":"/Users/tira/.bash_it","AVVIR_ENVIRONMENT":"acceptance","LSCOLORS":"Gxfxcxdxdxegedabagacad","npm_package_devDependencies_chai_spies":"^1.0.0","PATH":"/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387238410-0.235470333478351:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387238077-0.5699721185585229:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387229494-0.5675910285460073:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin","npm_config_argv":"{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}","npm_package_dependencies_underscore":"^1.12.0","npm_package_devDependencies_fetch_mock":"^9.11.0","TERMINAL_EMULATOR":"JetBrains-JediTerm","npm_package_devDependencies__types_sinon_chai":"^3.2.4","_":"/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin/webpack","LaunchInstanceID":"DE5B7E1A-368B-46D6-A106-A7138355768A","npm_package_devDependencies_tolerant_deep_eql":"git+http://git@github.com/TiraO/deep-eql.git#06a376d","PWD":"/Users/tira/dev/avvir/avvir-javascript-client","npm_package_devDependencies_webpack_node_externals":"^2.5.2","npm_package_devDependencies__babel_polyfill":"^7.12.1","npm_lifecycle_event":"webpack","npm_package_devDependencies_chai":"^4.2.0","npm_package_repository_type":"git","npm_package_name":"avvir-javascript-client","npm_package_devDependencies__babel_preset_env":"^7.12.7","npm_package_devDependencies__babel_cli":"^7.12.8","npm_package_scripts_build":"yarn run webpack","npm_config_version_commit_hooks":"true","XPC_FLAGS":"0x0","npm_package_devDependencies_ts_loader":"^9.2.6","npm_config_bin_links":"true","npm_config_wrap_output":"","npm_package_main":"dist/avvir_api.node.js","XPC_SERVICE_NAME":"0","HISTCONTROL":"ignorespace:erasedups","npm_package_version":"0.0.1","HOME":"/Users/tira","SHLVL":"4","FLYWAY_CONFIG_FILES":"config/flyway.generated.conf","npm_package_devDependencies_deepmerge":"^4.2.2","npm_package_scripts_test":"NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn run build","npm_package_dependencies_three":"^0.123.0","npm_config_save_prefix":"^","npm_config_strict_ssl":"true","npm_package_devDependencies_chai_roughly":"^1.0.0","npm_config_version_git_message":"v%s","NPM_CONFIG_PYTHON":"/usr/bin/python","npm_package_devDependencies_chai_json_equal":"^0.0.1","npm_package_browserslist_2":"Firefox ESR","npm_package_browserslist_1":"IE 11","LOGNAME":"tira","YARN_WRAP_OUTPUT":"false","npm_package_devDependencies__babel_register":"^7.12.1","npm_package_browserslist_0":"> 1%","PREFIX":"/usr/local","npm_lifecycle_script":"yarn run webpack","LC_CTYPE":"en_US.UTF-8","npm_package_devDependencies__types_sinon":"^9.0.0","NVM_BIN":"/Users/tira/.nvm/versions/node/v12.13.1/bin","TODO":"t","npm_config_version_git_sign":"","npm_config_ignore_scripts":"","npm_config_user_agent":"yarn/1.22.4 npm/? node/v12.13.1 darwin x64","npm_package_devDependencies__types_node":"^16.10.2","IRC_CLIENT":"irssi","npm_package_dependencies_jsonwebtoken":"^8.5.1","npm_package_dependencies_extendable_error_class":"^0.1.2","npm_package_dependencies_crypto_browserify":"^3.12.0","npm_config_init_version":"1.0.0","npm_config_ignore_optional":"","SECURITYSESSIONID":"186a9","npm_node_execpath":"/Users/tira/.nvm/versions/node/v12.13.1/bin/node","npm_config_version_tag_prefix":"v"}) &&
-    ({"NODE_ENV":"development","NVM_INC":"/Users/tira/.nvm/versions/node/v12.13.1/include/node","NODE":"/Users/tira/.nvm/versions/node/v12.13.1/bin/node","npm_package_dependencies_process":"^0.11.10","INIT_CWD":"/Users/tira/dev/avvir/avvir-javascript-client","NVM_CD_FLAGS":"","npm_package_dependencies_moment":"^2.29.1","npm_package_devDependencies_typescript":"^4.1.2","npm_package_devDependencies_sinon":"^11.1.2","npm_config_version_git_tag":"true","TERM":"xterm-256color","SHELL":"/bin/bash","npm_package_devDependencies_mocha":"^8.2.1","HISTSIZE":"5000","TMPDIR":"/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/","PIPENV_VENV_IN_PROJECT":"true#","npm_package_devDependencies__babel_preset_typescript":"^7.12.7","npm_config_init_license":"MIT","npm_package_devDependencies_babel_plugin_module_resolver":"^4.1.0","GIT_HOSTING":"git@git.domain.com","npm_package_devDependencies_chai_almost":"^1.0.1","npm_package_devDependencies__types_mocha":"^9.0.0","npm_config_registry":"https://registry.yarnpkg.com","npm_package_devDependencies_sinon_chai":"^3.5.0","npm_package_repository_url":"git@github.com:Avvir/avvir-javascript-client.git","npm_package_readmeFilename":"README.md","USER":"tira","NVM_DIR":"/Users/tira/.nvm","npm_package_devDependencies_webpack":"5.61.0","npm_package_devDependencies_chai_things":"^0.2.0","npm_package_devDependencies__babel_plugin_transform_runtime":"^7.12.10","npm_package_description":"Javascript client for Avvir APIs","npm_config_python":"/usr/bin/python","npm_package_devDependencies_webpack_cli":"^4.2.0","npm_package_devDependencies__types_chai_datetime":"^0.0.37","COMMAND_MODE":"unix2003","BASH_IT_THEME":"bobby","npm_package_devDependencies_chai_datetime":"^1.7.0","npm_package_devDependencies__babel_core":"^7.12.9","SSH_AUTH_SOCK":"/private/tmp/com.apple.launchd.ltYKi71bmC/Listeners","SCM_CHECK":"true","npm_package_dependencies_stream_browserify":"^3.0.0","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0","npm_package_dependencies_buffer":"^6.0.3","npm_execpath":"/usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js","npm_package_dependencies_node_fetch":"^2.6.1","AUTOFEATURE":"true autotest","npm_package_dependencies_util":"^0.12.4","npm_package_module":"dist/avvir_api.node.js","BASH_IT":"/Users/tira/.bash_it","AVVIR_ENVIRONMENT":"acceptance","LSCOLORS":"Gxfxcxdxdxegedabagacad","npm_package_devDependencies_chai_spies":"^1.0.0","PATH":"/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387238410-0.235470333478351:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387238077-0.5699721185585229:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387229494-0.5675910285460073:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin","npm_config_argv":"{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}","npm_package_dependencies_underscore":"^1.12.0","npm_package_devDependencies_fetch_mock":"^9.11.0","TERMINAL_EMULATOR":"JetBrains-JediTerm","npm_package_devDependencies__types_sinon_chai":"^3.2.4","_":"/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin/webpack","LaunchInstanceID":"DE5B7E1A-368B-46D6-A106-A7138355768A","npm_package_devDependencies_tolerant_deep_eql":"git+http://git@github.com/TiraO/deep-eql.git#06a376d","PWD":"/Users/tira/dev/avvir/avvir-javascript-client","npm_package_devDependencies_webpack_node_externals":"^2.5.2","npm_package_devDependencies__babel_polyfill":"^7.12.1","npm_lifecycle_event":"webpack","npm_package_devDependencies_chai":"^4.2.0","npm_package_repository_type":"git","npm_package_name":"avvir-javascript-client","npm_package_devDependencies__babel_preset_env":"^7.12.7","npm_package_devDependencies__babel_cli":"^7.12.8","npm_package_scripts_build":"yarn run webpack","npm_config_version_commit_hooks":"true","XPC_FLAGS":"0x0","npm_package_devDependencies_ts_loader":"^9.2.6","npm_config_bin_links":"true","npm_config_wrap_output":"","npm_package_main":"dist/avvir_api.node.js","XPC_SERVICE_NAME":"0","HISTCONTROL":"ignorespace:erasedups","npm_package_version":"0.0.1","HOME":"/Users/tira","SHLVL":"4","FLYWAY_CONFIG_FILES":"config/flyway.generated.conf","npm_package_devDependencies_deepmerge":"^4.2.2","npm_package_scripts_test":"NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn run build","npm_package_dependencies_three":"^0.123.0","npm_config_save_prefix":"^","npm_config_strict_ssl":"true","npm_package_devDependencies_chai_roughly":"^1.0.0","npm_config_version_git_message":"v%s","NPM_CONFIG_PYTHON":"/usr/bin/python","npm_package_devDependencies_chai_json_equal":"^0.0.1","npm_package_browserslist_2":"Firefox ESR","npm_package_browserslist_1":"IE 11","LOGNAME":"tira","YARN_WRAP_OUTPUT":"false","npm_package_devDependencies__babel_register":"^7.12.1","npm_package_browserslist_0":"> 1%","PREFIX":"/usr/local","npm_lifecycle_script":"yarn run webpack","LC_CTYPE":"en_US.UTF-8","npm_package_devDependencies__types_sinon":"^9.0.0","NVM_BIN":"/Users/tira/.nvm/versions/node/v12.13.1/bin","TODO":"t","npm_config_version_git_sign":"","npm_config_ignore_scripts":"","npm_config_user_agent":"yarn/1.22.4 npm/? node/v12.13.1 darwin x64","npm_package_devDependencies__types_node":"^16.10.2","IRC_CLIENT":"irssi","npm_package_dependencies_jsonwebtoken":"^8.5.1","npm_package_dependencies_extendable_error_class":"^0.1.2","npm_package_dependencies_crypto_browserify":"^3.12.0","npm_config_init_version":"1.0.0","npm_config_ignore_optional":"","SECURITYSESSIONID":"186a9","npm_node_execpath":"/Users/tira/.nvm/versions/node/v12.13.1/bin/node","npm_config_version_tag_prefix":"v"}).NODE_DEBUG &&
-    /\bsemver\b/i.test(({"NODE_ENV":"development","NVM_INC":"/Users/tira/.nvm/versions/node/v12.13.1/include/node","NODE":"/Users/tira/.nvm/versions/node/v12.13.1/bin/node","npm_package_dependencies_process":"^0.11.10","INIT_CWD":"/Users/tira/dev/avvir/avvir-javascript-client","NVM_CD_FLAGS":"","npm_package_dependencies_moment":"^2.29.1","npm_package_devDependencies_typescript":"^4.1.2","npm_package_devDependencies_sinon":"^11.1.2","npm_config_version_git_tag":"true","TERM":"xterm-256color","SHELL":"/bin/bash","npm_package_devDependencies_mocha":"^8.2.1","HISTSIZE":"5000","TMPDIR":"/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/","PIPENV_VENV_IN_PROJECT":"true#","npm_package_devDependencies__babel_preset_typescript":"^7.12.7","npm_config_init_license":"MIT","npm_package_devDependencies_babel_plugin_module_resolver":"^4.1.0","GIT_HOSTING":"git@git.domain.com","npm_package_devDependencies_chai_almost":"^1.0.1","npm_package_devDependencies__types_mocha":"^9.0.0","npm_config_registry":"https://registry.yarnpkg.com","npm_package_devDependencies_sinon_chai":"^3.5.0","npm_package_repository_url":"git@github.com:Avvir/avvir-javascript-client.git","npm_package_readmeFilename":"README.md","USER":"tira","NVM_DIR":"/Users/tira/.nvm","npm_package_devDependencies_webpack":"5.61.0","npm_package_devDependencies_chai_things":"^0.2.0","npm_package_devDependencies__babel_plugin_transform_runtime":"^7.12.10","npm_package_description":"Javascript client for Avvir APIs","npm_config_python":"/usr/bin/python","npm_package_devDependencies_webpack_cli":"^4.2.0","npm_package_devDependencies__types_chai_datetime":"^0.0.37","COMMAND_MODE":"unix2003","BASH_IT_THEME":"bobby","npm_package_devDependencies_chai_datetime":"^1.7.0","npm_package_devDependencies__babel_core":"^7.12.9","SSH_AUTH_SOCK":"/private/tmp/com.apple.launchd.ltYKi71bmC/Listeners","SCM_CHECK":"true","npm_package_dependencies_stream_browserify":"^3.0.0","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0","npm_package_dependencies_buffer":"^6.0.3","npm_execpath":"/usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js","npm_package_dependencies_node_fetch":"^2.6.1","AUTOFEATURE":"true autotest","npm_package_dependencies_util":"^0.12.4","npm_package_module":"dist/avvir_api.node.js","BASH_IT":"/Users/tira/.bash_it","AVVIR_ENVIRONMENT":"acceptance","LSCOLORS":"Gxfxcxdxdxegedabagacad","npm_package_devDependencies_chai_spies":"^1.0.0","PATH":"/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387238410-0.235470333478351:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387238077-0.5699721185585229:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387229494-0.5675910285460073:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin","npm_config_argv":"{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}","npm_package_dependencies_underscore":"^1.12.0","npm_package_devDependencies_fetch_mock":"^9.11.0","TERMINAL_EMULATOR":"JetBrains-JediTerm","npm_package_devDependencies__types_sinon_chai":"^3.2.4","_":"/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin/webpack","LaunchInstanceID":"DE5B7E1A-368B-46D6-A106-A7138355768A","npm_package_devDependencies_tolerant_deep_eql":"git+http://git@github.com/TiraO/deep-eql.git#06a376d","PWD":"/Users/tira/dev/avvir/avvir-javascript-client","npm_package_devDependencies_webpack_node_externals":"^2.5.2","npm_package_devDependencies__babel_polyfill":"^7.12.1","npm_lifecycle_event":"webpack","npm_package_devDependencies_chai":"^4.2.0","npm_package_repository_type":"git","npm_package_name":"avvir-javascript-client","npm_package_devDependencies__babel_preset_env":"^7.12.7","npm_package_devDependencies__babel_cli":"^7.12.8","npm_package_scripts_build":"yarn run webpack","npm_config_version_commit_hooks":"true","XPC_FLAGS":"0x0","npm_package_devDependencies_ts_loader":"^9.2.6","npm_config_bin_links":"true","npm_config_wrap_output":"","npm_package_main":"dist/avvir_api.node.js","XPC_SERVICE_NAME":"0","HISTCONTROL":"ignorespace:erasedups","npm_package_version":"0.0.1","HOME":"/Users/tira","SHLVL":"4","FLYWAY_CONFIG_FILES":"config/flyway.generated.conf","npm_package_devDependencies_deepmerge":"^4.2.2","npm_package_scripts_test":"NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn run build","npm_package_dependencies_three":"^0.123.0","npm_config_save_prefix":"^","npm_config_strict_ssl":"true","npm_package_devDependencies_chai_roughly":"^1.0.0","npm_config_version_git_message":"v%s","NPM_CONFIG_PYTHON":"/usr/bin/python","npm_package_devDependencies_chai_json_equal":"^0.0.1","npm_package_browserslist_2":"Firefox ESR","npm_package_browserslist_1":"IE 11","LOGNAME":"tira","YARN_WRAP_OUTPUT":"false","npm_package_devDependencies__babel_register":"^7.12.1","npm_package_browserslist_0":"> 1%","PREFIX":"/usr/local","npm_lifecycle_script":"yarn run webpack","LC_CTYPE":"en_US.UTF-8","npm_package_devDependencies__types_sinon":"^9.0.0","NVM_BIN":"/Users/tira/.nvm/versions/node/v12.13.1/bin","TODO":"t","npm_config_version_git_sign":"","npm_config_ignore_scripts":"","npm_config_user_agent":"yarn/1.22.4 npm/? node/v12.13.1 darwin x64","npm_package_devDependencies__types_node":"^16.10.2","IRC_CLIENT":"irssi","npm_package_dependencies_jsonwebtoken":"^8.5.1","npm_package_dependencies_extendable_error_class":"^0.1.2","npm_package_dependencies_crypto_browserify":"^3.12.0","npm_config_init_version":"1.0.0","npm_config_ignore_optional":"","SECURITYSESSIONID":"186a9","npm_node_execpath":"/Users/tira/.nvm/versions/node/v12.13.1/bin/node","npm_config_version_tag_prefix":"v"}).NODE_DEBUG)) {
+    ({"NODE_ENV":"development","NVM_INC":"/Users/bgroves/.nvm/versions/node/v12.13.1/include/node","PROJ_LIB":"/opt/miniconda3/share/proj","ARGO_NAMESPACE":"argo","NODE":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node","SPRING_DATASOURCE_USERNAME":"avvir","npm_package_dependencies_process":"^0.11.10","INIT_CWD":"/Users/bgroves/avvir/repos/avvir-javascript-client","NVM_CD_FLAGS":"","PYENV_ROOT":"/Users/bgroves/.pyenv","AVVIR_GATEWAY_URL":"https://acceptance-api.avvir.io","npm_package_dependencies_moment":"^2.29.1","npm_package_devDependencies_typescript":"^4.1.2","npm_package_devDependencies_sinon":"^11.1.2","npm_config_version_git_tag":"true","SHELL":"/bin/bash","TERM":"xterm-256color","npm_package_devDependencies_mocha":"^8.2.1","_printf_cmd":"printf","ARGO_BASE_HREF":"","SPRING_DATASOURCE_URL":"jdbc:postgresql://localhost:5432/gatewaytest","TMPDIR":"/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/","AVVIR_SANDBOX_PASSWORD":"Peanut rung dismi$$al","PIPENV_VENV_IN_PROJECT":"1","REACT_APP_STORAGE_BUCKET":"avvir-portal-acceptance.appspot.com","REACT_APP_ENABLE_PROJECT_TEAM":"true","CONDA_SHLVL":"1","npm_package_devDependencies__babel_preset_typescript":"^7.12.7","npm_config_init_license":"MIT","AVVIR_CLIENT_PASSWORD":"Peanut rung dismi$$al","CONDA_PROMPT_MODIFIER":"(base) ","npm_package_devDependencies_babel_plugin_module_resolver":"^4.1.0","GIT_HOSTING":"git@git.domain.com","npm_package_devDependencies_chai_almost":"^1.0.1","TERM_SESSION_ID":"1edc0f5d-1219-4990-b535-f7f1880c9e96","REACT_APP_PROJECT_ID":"avvir-portal-acceptance","npm_package_devDependencies__types_mocha":"^9.0.0","AVVIR_HOME":"/Users/bgroves/avvir/repos","ARGO_INSECURE_SKIP_VERIFY":"true","REACT_APP_PROCORE_URL":"https://sandbox.procore.com","npm_config_registry":"https://registry.yarnpkg.com","SPRING_DATASOURCE_PASSWORD":"passw0rd","npm_package_devDependencies_sinon_chai":"^3.5.0","npm_package_exports___api_import":"./dist/esm/api/index.js","npm_package_repository_url":"git@github.com:Avvir/avvir-javascript-client.git","npm_package_readmeFilename":"README.md","USER":"bgroves","NVM_DIR":"/Users/bgroves/.nvm","PIPENV_IGNORE_VIRTUALENVS":"1","REACT_APP_AUTH_DOMAIN":"avvir-portal-acceptance.firebaseapp.com","npm_package_devDependencies_webpack":"5.61.0","npm_package_devDependencies_chai_things":"^0.2.0","npm_package_devDependencies__babel_plugin_transform_runtime":"^7.12.10","npm_package_description":"Javascript client for Avvir APIs","npm_config_python":"/usr/local/opt/python@3.9/bin/python3","npm_package_devDependencies_webpack_cli":"^4.2.0","npm_package_devDependencies__types_chai_datetime":"^0.0.37","npm_package_scripts_build_esm":"tsc --project tsconfig.esm.json","COMMAND_MODE":"unix2003","BASH_IT_THEME":"bobby","CONDA_EXE":"/opt/miniconda3/bin/conda","npm_package_exports___import":"./dist/esm/index.js","ARGO_SECURE":"true","KUBECONFIG":"/dev/null","SPRING_PROFILES_ACTIVE":"test","npm_package_devDependencies_chai_datetime":"^1.7.0","npm_package_devDependencies__babel_core":"^7.12.9","SSH_AUTH_SOCK":"/private/tmp/com.apple.launchd.tPqztlIlhT/Listeners","SCM_CHECK":"true","npm_package_dependencies_stream_browserify":"^3.0.0","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0","npm_package_dependencies_buffer":"^6.0.3","BASH_SILENCE_DEPRECATION_WARNING":"1","REACT_APP_GOOGLE_API_KEY":"AIzaSyBqHVFoIhvaCW2UWEwS-5kOfchVAH9Dv2k","npm_execpath":"/usr/local/Cellar/yarn/1.22.17/libexec/bin/yarn.js","npm_package_dependencies_node_fetch":"^2.6.1","SPRING_DATASOURCE_JDBC_URL":"jdbc:postgresql://localhost:5432/gatewaytest","_CONDA_SET_PDAL_PYTHON_DRIVER_PATH":"/opt/miniconda3/lib","npm_package_dependencies_util":"^0.12.4","npm_package_module":"dist/esm/index.js","BASH_IT":"/Users/bgroves/.bash_it","AVVIR_ENVIRONMENT":"acceptance","LSCOLORS":"Gxfxcxdxdxegedabagacad","REACT_APP_DATADOG_API":"pub89cf48730665a1e1e21b1866f3c28b48","_CE_CONDA":"","npm_package_devDependencies_chai_spies":"^1.0.0","PATH":"/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895419721-0.6519376669217916:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895419313-0.9027215765385588:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895415125-0.6933772538305296:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895414556-0.6399316525062433:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895410959-0.2580938600693723:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/Users/bgroves/google-cloud-sdk/bin:/Users/bgroves/.pyenv/shims:/Users/bgroves/.pyenv/bin:/Users/bgroves/.jenv/shims:/Users/bgroves/.jenv/bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/usr/local/opt/postgresql@10/bin:/usr/local/texlive/2018/bin/x86_64-darwin","AVVIR_SANDBOX_EMAIL":"avvir-sandbox@example.com","CPL_ZIP_ENCODING":"UTF-8","npm_config_argv":"{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}","npm_package_dependencies_underscore":"^1.12.0","npm_package_devDependencies_fetch_mock":"^9.11.0","npm_package_scripts_build_web":"yarn run webpack","TERMINAL_EMULATOR":"JetBrains-JediTerm","BASH_IT_LOG_LEVEL_ALL":"3","REACT_APP_PROCORE_CLIENT_ID":"2f9880fc992354445771d02c4ace7241aa0c40088d47d732c116ef986e1ae6db","PROJ_NETWORK":"ON","npm_package_devDependencies__types_sinon_chai":"^3.2.4","_":"/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin/webpack","LaunchInstanceID":"C2C6C49A-11CD-4D4B-9B13-50348705B5BF","npm_package_devDependencies_tolerant_deep_eql":"git+http://git@github.com/TiraO/deep-eql.git#06a376d","__CFBundleIdentifier":"com.jetbrains.WebStorm","CONDA_PREFIX":"/opt/miniconda3","PWD":"/Users/bgroves/avvir/repos/avvir-javascript-client","JENV_LOADED":"1","npm_package_devDependencies_webpack_node_externals":"^2.5.2","npm_package_devDependencies__babel_polyfill":"^7.12.1","STRUCTION_SITE_TEST_PASSWORD":"GjFUqb4oAQV8-_xsY!j*","REACT_APP_WEB_API_GATEWAY_DOMAIN":"https://acceptance-api.avvir.io","npm_lifecycle_event":"webpack","npm_package_devDependencies_chai":"^4.2.0","npm_package_types":"dist/esm/index.d.ts","npm_package_repository_type":"git","npm_package_name":"avvir-javascript-client","BASH_IT_LOG_LEVEL_ERROR":"1","AVVIR_CLIENT_USERNAME":"avvir-sandbox@example.com","npm_package_devDependencies__babel_preset_env":"^7.12.7","TIME_MULTIPLIER_FOR_PERFORMANCE_TESTS":"1","npm_package_devDependencies__babel_cli":"^7.12.8","npm_package_scripts_build":"yarn build-esm && yarn build-web","npm_config_version_commit_hooks":"true","XPC_FLAGS":"0x0","npm_package_devDependencies_ts_loader":"^9.2.6","npm_config_bin_links":"true","GDAL_DATA":"/opt/miniconda3/share/gdal","npm_config_wrap_output":"","REACT_APP_ENABLE_MESH_STREAMING":"true","npm_package_main":"dist/avvir_api.node.js","XPC_SERVICE_NAME":"0","_CE_M":"","npm_package_version":"0.0.1","HOME":"/Users/bgroves","SHLVL":"6","ARGO_TOKEN":"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Inozc2tteVh5UjZoSHdOYWhFdzBIZ3BVdlVrcHl2VHA5WVpUQjJ5aThncnMifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJhcmdvIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImFyZ28tdG9rZW4tNGpiNnoiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiYXJnbyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjA0NjFkNjAxLWNjZWYtNDU3ZC05YTM5LWRiMzVlNjY3M2Q0YyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDphcmdvOmFyZ28ifQ.semSE6eZ1pHuai14GRksq0b5MEl5jF2quNo6gukBFL4VhkRj2KX0hCmVNnP7ntkBwCakKmqCQipMrJCwZnldnzM0VR8YKuvbKhU108XZFUc9UfXwqpgFvm7SxZanNwWSHXsajSMASAzT5V9FWAK9mpH519MzOYk7TTF_alAQHEV6Is6yrsQp18WZr5IQn7mk-EHmnLjBFO278vjkM851zPQ8PWyxaPI_kMinxKx0ajZJ7GVtyC3ucSoc_SBCRJEuNlUpDDOSQFOWbcX8ZJSn_k8jvM1m2y9lSbQ2hIcmGqx4MG-6n8QJzNhTctYa3UstXdKNNiw4ZTBcskTk5g97Dg","STRUCTION_SITE_TEST_USERNAME":"matt@avvir.io","PDAL_DRIVER_PATH":"/opt/miniconda3/lib:/opt/miniconda3/lib/python3.9/site-packages/lib:/opt/miniconda3/lib/python3.9/site-packages/lib64:/opt/miniconda3/lib/python3.9/site-packages/pdal","npm_package_devDependencies_deepmerge":"^4.2.2","npm_package_scripts_test":"NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn rebuild","TSC_COMPILE_ON_ERROR":"true","npm_package_dependencies_three":"^0.123.0","npm_package_scripts_rebuild":"yarn clean && yarn build","npm_config_save_prefix":"^","npm_config_strict_ssl":"true","REACT_APP_MESSAGING_SENDER_ID":"28849523821","REACT_APP_PROCORE_API_DOMAIN":"https://sandbox.procore.com","npm_package_devDependencies_chai_roughly":"^1.0.0","npm_config_version_git_message":"v%s","NPM_CONFIG_PYTHON":"/usr/local/opt/python@3.9/bin/python3","npm_package_devDependencies_chai_json_equal":"^0.0.1","npm_package_browserslist_2":"Firefox ESR","npm_package_browserslist_1":"IE 11","LOGNAME":"bgroves","BASH_IT_LOG_LEVEL_WARNING":"2","REACT_APP_PROJECT_TEAM_ALLOWLIST":"-MkchJZoC8vJTPpWwlTP","CONDA_PYTHON_EXE":"/opt/miniconda3/bin/python","YARN_WRAP_OUTPUT":"false","npm_package_devDependencies__babel_register":"^7.12.1","npm_package_browserslist_0":"> 1%","PREFIX":"/usr/local","JENV_SHELL":"bash","npm_lifecycle_script":"yarn run webpack","npm_package_exports___require":"./dist/avvir_api.node.js","LC_CTYPE":"en_US.UTF-8","npm_package_devDependencies__types_sinon":"^9.0.0","ARGO_SERVER":"pipelines.avvir.io:443","NVM_BIN":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin","CONDA_DEFAULT_ENV":"base","npm_package_browser":"dist/avvir_api.web.js","TODO":"t","npm_config_version_git_sign":"","npm_config_ignore_scripts":"","npm_config_user_agent":"yarn/1.22.17 npm/? node/v12.13.1 darwin x64","npm_package_devDependencies__types_node":"^16.10.2","IRC_CLIENT":"irssi","npm_package_dependencies_jsonwebtoken":"^8.5.1","ARGO_HTTP1":"true","npm_package_dependencies_extendable_error_class":"^0.1.2","npm_package_dependencies_crypto_browserify":"^3.12.0","npm_package_files_0":"./dist","AVVIR_CLIENT_PROJECT_ID":"-MhsVwqU0U439Dpfx00U","npm_config_init_version":"1.0.0","npm_config_ignore_optional":"","SECURITYSESSIONID":"186a9","npm_package_scripts_clean":"rm -r ./dist","REACT_APP_MIXPANEL_TOKEN":"b1d53b0b983bab92eaa0f13f9f0449f6","npm_node_execpath":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node","npm_config_version_tag_prefix":"v"}) &&
+    ({"NODE_ENV":"development","NVM_INC":"/Users/bgroves/.nvm/versions/node/v12.13.1/include/node","PROJ_LIB":"/opt/miniconda3/share/proj","ARGO_NAMESPACE":"argo","NODE":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node","SPRING_DATASOURCE_USERNAME":"avvir","npm_package_dependencies_process":"^0.11.10","INIT_CWD":"/Users/bgroves/avvir/repos/avvir-javascript-client","NVM_CD_FLAGS":"","PYENV_ROOT":"/Users/bgroves/.pyenv","AVVIR_GATEWAY_URL":"https://acceptance-api.avvir.io","npm_package_dependencies_moment":"^2.29.1","npm_package_devDependencies_typescript":"^4.1.2","npm_package_devDependencies_sinon":"^11.1.2","npm_config_version_git_tag":"true","SHELL":"/bin/bash","TERM":"xterm-256color","npm_package_devDependencies_mocha":"^8.2.1","_printf_cmd":"printf","ARGO_BASE_HREF":"","SPRING_DATASOURCE_URL":"jdbc:postgresql://localhost:5432/gatewaytest","TMPDIR":"/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/","AVVIR_SANDBOX_PASSWORD":"Peanut rung dismi$$al","PIPENV_VENV_IN_PROJECT":"1","REACT_APP_STORAGE_BUCKET":"avvir-portal-acceptance.appspot.com","REACT_APP_ENABLE_PROJECT_TEAM":"true","CONDA_SHLVL":"1","npm_package_devDependencies__babel_preset_typescript":"^7.12.7","npm_config_init_license":"MIT","AVVIR_CLIENT_PASSWORD":"Peanut rung dismi$$al","CONDA_PROMPT_MODIFIER":"(base) ","npm_package_devDependencies_babel_plugin_module_resolver":"^4.1.0","GIT_HOSTING":"git@git.domain.com","npm_package_devDependencies_chai_almost":"^1.0.1","TERM_SESSION_ID":"1edc0f5d-1219-4990-b535-f7f1880c9e96","REACT_APP_PROJECT_ID":"avvir-portal-acceptance","npm_package_devDependencies__types_mocha":"^9.0.0","AVVIR_HOME":"/Users/bgroves/avvir/repos","ARGO_INSECURE_SKIP_VERIFY":"true","REACT_APP_PROCORE_URL":"https://sandbox.procore.com","npm_config_registry":"https://registry.yarnpkg.com","SPRING_DATASOURCE_PASSWORD":"passw0rd","npm_package_devDependencies_sinon_chai":"^3.5.0","npm_package_exports___api_import":"./dist/esm/api/index.js","npm_package_repository_url":"git@github.com:Avvir/avvir-javascript-client.git","npm_package_readmeFilename":"README.md","USER":"bgroves","NVM_DIR":"/Users/bgroves/.nvm","PIPENV_IGNORE_VIRTUALENVS":"1","REACT_APP_AUTH_DOMAIN":"avvir-portal-acceptance.firebaseapp.com","npm_package_devDependencies_webpack":"5.61.0","npm_package_devDependencies_chai_things":"^0.2.0","npm_package_devDependencies__babel_plugin_transform_runtime":"^7.12.10","npm_package_description":"Javascript client for Avvir APIs","npm_config_python":"/usr/local/opt/python@3.9/bin/python3","npm_package_devDependencies_webpack_cli":"^4.2.0","npm_package_devDependencies__types_chai_datetime":"^0.0.37","npm_package_scripts_build_esm":"tsc --project tsconfig.esm.json","COMMAND_MODE":"unix2003","BASH_IT_THEME":"bobby","CONDA_EXE":"/opt/miniconda3/bin/conda","npm_package_exports___import":"./dist/esm/index.js","ARGO_SECURE":"true","KUBECONFIG":"/dev/null","SPRING_PROFILES_ACTIVE":"test","npm_package_devDependencies_chai_datetime":"^1.7.0","npm_package_devDependencies__babel_core":"^7.12.9","SSH_AUTH_SOCK":"/private/tmp/com.apple.launchd.tPqztlIlhT/Listeners","SCM_CHECK":"true","npm_package_dependencies_stream_browserify":"^3.0.0","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0","npm_package_dependencies_buffer":"^6.0.3","BASH_SILENCE_DEPRECATION_WARNING":"1","REACT_APP_GOOGLE_API_KEY":"AIzaSyBqHVFoIhvaCW2UWEwS-5kOfchVAH9Dv2k","npm_execpath":"/usr/local/Cellar/yarn/1.22.17/libexec/bin/yarn.js","npm_package_dependencies_node_fetch":"^2.6.1","SPRING_DATASOURCE_JDBC_URL":"jdbc:postgresql://localhost:5432/gatewaytest","_CONDA_SET_PDAL_PYTHON_DRIVER_PATH":"/opt/miniconda3/lib","npm_package_dependencies_util":"^0.12.4","npm_package_module":"dist/esm/index.js","BASH_IT":"/Users/bgroves/.bash_it","AVVIR_ENVIRONMENT":"acceptance","LSCOLORS":"Gxfxcxdxdxegedabagacad","REACT_APP_DATADOG_API":"pub89cf48730665a1e1e21b1866f3c28b48","_CE_CONDA":"","npm_package_devDependencies_chai_spies":"^1.0.0","PATH":"/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895419721-0.6519376669217916:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895419313-0.9027215765385588:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895415125-0.6933772538305296:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895414556-0.6399316525062433:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895410959-0.2580938600693723:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/Users/bgroves/google-cloud-sdk/bin:/Users/bgroves/.pyenv/shims:/Users/bgroves/.pyenv/bin:/Users/bgroves/.jenv/shims:/Users/bgroves/.jenv/bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/usr/local/opt/postgresql@10/bin:/usr/local/texlive/2018/bin/x86_64-darwin","AVVIR_SANDBOX_EMAIL":"avvir-sandbox@example.com","CPL_ZIP_ENCODING":"UTF-8","npm_config_argv":"{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}","npm_package_dependencies_underscore":"^1.12.0","npm_package_devDependencies_fetch_mock":"^9.11.0","npm_package_scripts_build_web":"yarn run webpack","TERMINAL_EMULATOR":"JetBrains-JediTerm","BASH_IT_LOG_LEVEL_ALL":"3","REACT_APP_PROCORE_CLIENT_ID":"2f9880fc992354445771d02c4ace7241aa0c40088d47d732c116ef986e1ae6db","PROJ_NETWORK":"ON","npm_package_devDependencies__types_sinon_chai":"^3.2.4","_":"/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin/webpack","LaunchInstanceID":"C2C6C49A-11CD-4D4B-9B13-50348705B5BF","npm_package_devDependencies_tolerant_deep_eql":"git+http://git@github.com/TiraO/deep-eql.git#06a376d","__CFBundleIdentifier":"com.jetbrains.WebStorm","CONDA_PREFIX":"/opt/miniconda3","PWD":"/Users/bgroves/avvir/repos/avvir-javascript-client","JENV_LOADED":"1","npm_package_devDependencies_webpack_node_externals":"^2.5.2","npm_package_devDependencies__babel_polyfill":"^7.12.1","STRUCTION_SITE_TEST_PASSWORD":"GjFUqb4oAQV8-_xsY!j*","REACT_APP_WEB_API_GATEWAY_DOMAIN":"https://acceptance-api.avvir.io","npm_lifecycle_event":"webpack","npm_package_devDependencies_chai":"^4.2.0","npm_package_types":"dist/esm/index.d.ts","npm_package_repository_type":"git","npm_package_name":"avvir-javascript-client","BASH_IT_LOG_LEVEL_ERROR":"1","AVVIR_CLIENT_USERNAME":"avvir-sandbox@example.com","npm_package_devDependencies__babel_preset_env":"^7.12.7","TIME_MULTIPLIER_FOR_PERFORMANCE_TESTS":"1","npm_package_devDependencies__babel_cli":"^7.12.8","npm_package_scripts_build":"yarn build-esm && yarn build-web","npm_config_version_commit_hooks":"true","XPC_FLAGS":"0x0","npm_package_devDependencies_ts_loader":"^9.2.6","npm_config_bin_links":"true","GDAL_DATA":"/opt/miniconda3/share/gdal","npm_config_wrap_output":"","REACT_APP_ENABLE_MESH_STREAMING":"true","npm_package_main":"dist/avvir_api.node.js","XPC_SERVICE_NAME":"0","_CE_M":"","npm_package_version":"0.0.1","HOME":"/Users/bgroves","SHLVL":"6","ARGO_TOKEN":"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Inozc2tteVh5UjZoSHdOYWhFdzBIZ3BVdlVrcHl2VHA5WVpUQjJ5aThncnMifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJhcmdvIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImFyZ28tdG9rZW4tNGpiNnoiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiYXJnbyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjA0NjFkNjAxLWNjZWYtNDU3ZC05YTM5LWRiMzVlNjY3M2Q0YyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDphcmdvOmFyZ28ifQ.semSE6eZ1pHuai14GRksq0b5MEl5jF2quNo6gukBFL4VhkRj2KX0hCmVNnP7ntkBwCakKmqCQipMrJCwZnldnzM0VR8YKuvbKhU108XZFUc9UfXwqpgFvm7SxZanNwWSHXsajSMASAzT5V9FWAK9mpH519MzOYk7TTF_alAQHEV6Is6yrsQp18WZr5IQn7mk-EHmnLjBFO278vjkM851zPQ8PWyxaPI_kMinxKx0ajZJ7GVtyC3ucSoc_SBCRJEuNlUpDDOSQFOWbcX8ZJSn_k8jvM1m2y9lSbQ2hIcmGqx4MG-6n8QJzNhTctYa3UstXdKNNiw4ZTBcskTk5g97Dg","STRUCTION_SITE_TEST_USERNAME":"matt@avvir.io","PDAL_DRIVER_PATH":"/opt/miniconda3/lib:/opt/miniconda3/lib/python3.9/site-packages/lib:/opt/miniconda3/lib/python3.9/site-packages/lib64:/opt/miniconda3/lib/python3.9/site-packages/pdal","npm_package_devDependencies_deepmerge":"^4.2.2","npm_package_scripts_test":"NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn rebuild","TSC_COMPILE_ON_ERROR":"true","npm_package_dependencies_three":"^0.123.0","npm_package_scripts_rebuild":"yarn clean && yarn build","npm_config_save_prefix":"^","npm_config_strict_ssl":"true","REACT_APP_MESSAGING_SENDER_ID":"28849523821","REACT_APP_PROCORE_API_DOMAIN":"https://sandbox.procore.com","npm_package_devDependencies_chai_roughly":"^1.0.0","npm_config_version_git_message":"v%s","NPM_CONFIG_PYTHON":"/usr/local/opt/python@3.9/bin/python3","npm_package_devDependencies_chai_json_equal":"^0.0.1","npm_package_browserslist_2":"Firefox ESR","npm_package_browserslist_1":"IE 11","LOGNAME":"bgroves","BASH_IT_LOG_LEVEL_WARNING":"2","REACT_APP_PROJECT_TEAM_ALLOWLIST":"-MkchJZoC8vJTPpWwlTP","CONDA_PYTHON_EXE":"/opt/miniconda3/bin/python","YARN_WRAP_OUTPUT":"false","npm_package_devDependencies__babel_register":"^7.12.1","npm_package_browserslist_0":"> 1%","PREFIX":"/usr/local","JENV_SHELL":"bash","npm_lifecycle_script":"yarn run webpack","npm_package_exports___require":"./dist/avvir_api.node.js","LC_CTYPE":"en_US.UTF-8","npm_package_devDependencies__types_sinon":"^9.0.0","ARGO_SERVER":"pipelines.avvir.io:443","NVM_BIN":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin","CONDA_DEFAULT_ENV":"base","npm_package_browser":"dist/avvir_api.web.js","TODO":"t","npm_config_version_git_sign":"","npm_config_ignore_scripts":"","npm_config_user_agent":"yarn/1.22.17 npm/? node/v12.13.1 darwin x64","npm_package_devDependencies__types_node":"^16.10.2","IRC_CLIENT":"irssi","npm_package_dependencies_jsonwebtoken":"^8.5.1","ARGO_HTTP1":"true","npm_package_dependencies_extendable_error_class":"^0.1.2","npm_package_dependencies_crypto_browserify":"^3.12.0","npm_package_files_0":"./dist","AVVIR_CLIENT_PROJECT_ID":"-MhsVwqU0U439Dpfx00U","npm_config_init_version":"1.0.0","npm_config_ignore_optional":"","SECURITYSESSIONID":"186a9","npm_package_scripts_clean":"rm -r ./dist","REACT_APP_MIXPANEL_TOKEN":"b1d53b0b983bab92eaa0f13f9f0449f6","npm_node_execpath":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node","npm_config_version_tag_prefix":"v"}).NODE_DEBUG &&
+    /\bsemver\b/i.test(({"NODE_ENV":"development","NVM_INC":"/Users/bgroves/.nvm/versions/node/v12.13.1/include/node","PROJ_LIB":"/opt/miniconda3/share/proj","ARGO_NAMESPACE":"argo","NODE":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node","SPRING_DATASOURCE_USERNAME":"avvir","npm_package_dependencies_process":"^0.11.10","INIT_CWD":"/Users/bgroves/avvir/repos/avvir-javascript-client","NVM_CD_FLAGS":"","PYENV_ROOT":"/Users/bgroves/.pyenv","AVVIR_GATEWAY_URL":"https://acceptance-api.avvir.io","npm_package_dependencies_moment":"^2.29.1","npm_package_devDependencies_typescript":"^4.1.2","npm_package_devDependencies_sinon":"^11.1.2","npm_config_version_git_tag":"true","SHELL":"/bin/bash","TERM":"xterm-256color","npm_package_devDependencies_mocha":"^8.2.1","_printf_cmd":"printf","ARGO_BASE_HREF":"","SPRING_DATASOURCE_URL":"jdbc:postgresql://localhost:5432/gatewaytest","TMPDIR":"/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/","AVVIR_SANDBOX_PASSWORD":"Peanut rung dismi$$al","PIPENV_VENV_IN_PROJECT":"1","REACT_APP_STORAGE_BUCKET":"avvir-portal-acceptance.appspot.com","REACT_APP_ENABLE_PROJECT_TEAM":"true","CONDA_SHLVL":"1","npm_package_devDependencies__babel_preset_typescript":"^7.12.7","npm_config_init_license":"MIT","AVVIR_CLIENT_PASSWORD":"Peanut rung dismi$$al","CONDA_PROMPT_MODIFIER":"(base) ","npm_package_devDependencies_babel_plugin_module_resolver":"^4.1.0","GIT_HOSTING":"git@git.domain.com","npm_package_devDependencies_chai_almost":"^1.0.1","TERM_SESSION_ID":"1edc0f5d-1219-4990-b535-f7f1880c9e96","REACT_APP_PROJECT_ID":"avvir-portal-acceptance","npm_package_devDependencies__types_mocha":"^9.0.0","AVVIR_HOME":"/Users/bgroves/avvir/repos","ARGO_INSECURE_SKIP_VERIFY":"true","REACT_APP_PROCORE_URL":"https://sandbox.procore.com","npm_config_registry":"https://registry.yarnpkg.com","SPRING_DATASOURCE_PASSWORD":"passw0rd","npm_package_devDependencies_sinon_chai":"^3.5.0","npm_package_exports___api_import":"./dist/esm/api/index.js","npm_package_repository_url":"git@github.com:Avvir/avvir-javascript-client.git","npm_package_readmeFilename":"README.md","USER":"bgroves","NVM_DIR":"/Users/bgroves/.nvm","PIPENV_IGNORE_VIRTUALENVS":"1","REACT_APP_AUTH_DOMAIN":"avvir-portal-acceptance.firebaseapp.com","npm_package_devDependencies_webpack":"5.61.0","npm_package_devDependencies_chai_things":"^0.2.0","npm_package_devDependencies__babel_plugin_transform_runtime":"^7.12.10","npm_package_description":"Javascript client for Avvir APIs","npm_config_python":"/usr/local/opt/python@3.9/bin/python3","npm_package_devDependencies_webpack_cli":"^4.2.0","npm_package_devDependencies__types_chai_datetime":"^0.0.37","npm_package_scripts_build_esm":"tsc --project tsconfig.esm.json","COMMAND_MODE":"unix2003","BASH_IT_THEME":"bobby","CONDA_EXE":"/opt/miniconda3/bin/conda","npm_package_exports___import":"./dist/esm/index.js","ARGO_SECURE":"true","KUBECONFIG":"/dev/null","SPRING_PROFILES_ACTIVE":"test","npm_package_devDependencies_chai_datetime":"^1.7.0","npm_package_devDependencies__babel_core":"^7.12.9","SSH_AUTH_SOCK":"/private/tmp/com.apple.launchd.tPqztlIlhT/Listeners","SCM_CHECK":"true","npm_package_dependencies_stream_browserify":"^3.0.0","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0","npm_package_dependencies_buffer":"^6.0.3","BASH_SILENCE_DEPRECATION_WARNING":"1","REACT_APP_GOOGLE_API_KEY":"AIzaSyBqHVFoIhvaCW2UWEwS-5kOfchVAH9Dv2k","npm_execpath":"/usr/local/Cellar/yarn/1.22.17/libexec/bin/yarn.js","npm_package_dependencies_node_fetch":"^2.6.1","SPRING_DATASOURCE_JDBC_URL":"jdbc:postgresql://localhost:5432/gatewaytest","_CONDA_SET_PDAL_PYTHON_DRIVER_PATH":"/opt/miniconda3/lib","npm_package_dependencies_util":"^0.12.4","npm_package_module":"dist/esm/index.js","BASH_IT":"/Users/bgroves/.bash_it","AVVIR_ENVIRONMENT":"acceptance","LSCOLORS":"Gxfxcxdxdxegedabagacad","REACT_APP_DATADOG_API":"pub89cf48730665a1e1e21b1866f3c28b48","_CE_CONDA":"","npm_package_devDependencies_chai_spies":"^1.0.0","PATH":"/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895419721-0.6519376669217916:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895419313-0.9027215765385588:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895415125-0.6933772538305296:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895414556-0.6399316525062433:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895410959-0.2580938600693723:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/Users/bgroves/google-cloud-sdk/bin:/Users/bgroves/.pyenv/shims:/Users/bgroves/.pyenv/bin:/Users/bgroves/.jenv/shims:/Users/bgroves/.jenv/bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/usr/local/opt/postgresql@10/bin:/usr/local/texlive/2018/bin/x86_64-darwin","AVVIR_SANDBOX_EMAIL":"avvir-sandbox@example.com","CPL_ZIP_ENCODING":"UTF-8","npm_config_argv":"{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}","npm_package_dependencies_underscore":"^1.12.0","npm_package_devDependencies_fetch_mock":"^9.11.0","npm_package_scripts_build_web":"yarn run webpack","TERMINAL_EMULATOR":"JetBrains-JediTerm","BASH_IT_LOG_LEVEL_ALL":"3","REACT_APP_PROCORE_CLIENT_ID":"2f9880fc992354445771d02c4ace7241aa0c40088d47d732c116ef986e1ae6db","PROJ_NETWORK":"ON","npm_package_devDependencies__types_sinon_chai":"^3.2.4","_":"/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin/webpack","LaunchInstanceID":"C2C6C49A-11CD-4D4B-9B13-50348705B5BF","npm_package_devDependencies_tolerant_deep_eql":"git+http://git@github.com/TiraO/deep-eql.git#06a376d","__CFBundleIdentifier":"com.jetbrains.WebStorm","CONDA_PREFIX":"/opt/miniconda3","PWD":"/Users/bgroves/avvir/repos/avvir-javascript-client","JENV_LOADED":"1","npm_package_devDependencies_webpack_node_externals":"^2.5.2","npm_package_devDependencies__babel_polyfill":"^7.12.1","STRUCTION_SITE_TEST_PASSWORD":"GjFUqb4oAQV8-_xsY!j*","REACT_APP_WEB_API_GATEWAY_DOMAIN":"https://acceptance-api.avvir.io","npm_lifecycle_event":"webpack","npm_package_devDependencies_chai":"^4.2.0","npm_package_types":"dist/esm/index.d.ts","npm_package_repository_type":"git","npm_package_name":"avvir-javascript-client","BASH_IT_LOG_LEVEL_ERROR":"1","AVVIR_CLIENT_USERNAME":"avvir-sandbox@example.com","npm_package_devDependencies__babel_preset_env":"^7.12.7","TIME_MULTIPLIER_FOR_PERFORMANCE_TESTS":"1","npm_package_devDependencies__babel_cli":"^7.12.8","npm_package_scripts_build":"yarn build-esm && yarn build-web","npm_config_version_commit_hooks":"true","XPC_FLAGS":"0x0","npm_package_devDependencies_ts_loader":"^9.2.6","npm_config_bin_links":"true","GDAL_DATA":"/opt/miniconda3/share/gdal","npm_config_wrap_output":"","REACT_APP_ENABLE_MESH_STREAMING":"true","npm_package_main":"dist/avvir_api.node.js","XPC_SERVICE_NAME":"0","_CE_M":"","npm_package_version":"0.0.1","HOME":"/Users/bgroves","SHLVL":"6","ARGO_TOKEN":"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Inozc2tteVh5UjZoSHdOYWhFdzBIZ3BVdlVrcHl2VHA5WVpUQjJ5aThncnMifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJhcmdvIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImFyZ28tdG9rZW4tNGpiNnoiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiYXJnbyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjA0NjFkNjAxLWNjZWYtNDU3ZC05YTM5LWRiMzVlNjY3M2Q0YyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDphcmdvOmFyZ28ifQ.semSE6eZ1pHuai14GRksq0b5MEl5jF2quNo6gukBFL4VhkRj2KX0hCmVNnP7ntkBwCakKmqCQipMrJCwZnldnzM0VR8YKuvbKhU108XZFUc9UfXwqpgFvm7SxZanNwWSHXsajSMASAzT5V9FWAK9mpH519MzOYk7TTF_alAQHEV6Is6yrsQp18WZr5IQn7mk-EHmnLjBFO278vjkM851zPQ8PWyxaPI_kMinxKx0ajZJ7GVtyC3ucSoc_SBCRJEuNlUpDDOSQFOWbcX8ZJSn_k8jvM1m2y9lSbQ2hIcmGqx4MG-6n8QJzNhTctYa3UstXdKNNiw4ZTBcskTk5g97Dg","STRUCTION_SITE_TEST_USERNAME":"matt@avvir.io","PDAL_DRIVER_PATH":"/opt/miniconda3/lib:/opt/miniconda3/lib/python3.9/site-packages/lib:/opt/miniconda3/lib/python3.9/site-packages/lib64:/opt/miniconda3/lib/python3.9/site-packages/pdal","npm_package_devDependencies_deepmerge":"^4.2.2","npm_package_scripts_test":"NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn rebuild","TSC_COMPILE_ON_ERROR":"true","npm_package_dependencies_three":"^0.123.0","npm_package_scripts_rebuild":"yarn clean && yarn build","npm_config_save_prefix":"^","npm_config_strict_ssl":"true","REACT_APP_MESSAGING_SENDER_ID":"28849523821","REACT_APP_PROCORE_API_DOMAIN":"https://sandbox.procore.com","npm_package_devDependencies_chai_roughly":"^1.0.0","npm_config_version_git_message":"v%s","NPM_CONFIG_PYTHON":"/usr/local/opt/python@3.9/bin/python3","npm_package_devDependencies_chai_json_equal":"^0.0.1","npm_package_browserslist_2":"Firefox ESR","npm_package_browserslist_1":"IE 11","LOGNAME":"bgroves","BASH_IT_LOG_LEVEL_WARNING":"2","REACT_APP_PROJECT_TEAM_ALLOWLIST":"-MkchJZoC8vJTPpWwlTP","CONDA_PYTHON_EXE":"/opt/miniconda3/bin/python","YARN_WRAP_OUTPUT":"false","npm_package_devDependencies__babel_register":"^7.12.1","npm_package_browserslist_0":"> 1%","PREFIX":"/usr/local","JENV_SHELL":"bash","npm_lifecycle_script":"yarn run webpack","npm_package_exports___require":"./dist/avvir_api.node.js","LC_CTYPE":"en_US.UTF-8","npm_package_devDependencies__types_sinon":"^9.0.0","ARGO_SERVER":"pipelines.avvir.io:443","NVM_BIN":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin","CONDA_DEFAULT_ENV":"base","npm_package_browser":"dist/avvir_api.web.js","TODO":"t","npm_config_version_git_sign":"","npm_config_ignore_scripts":"","npm_config_user_agent":"yarn/1.22.17 npm/? node/v12.13.1 darwin x64","npm_package_devDependencies__types_node":"^16.10.2","IRC_CLIENT":"irssi","npm_package_dependencies_jsonwebtoken":"^8.5.1","ARGO_HTTP1":"true","npm_package_dependencies_extendable_error_class":"^0.1.2","npm_package_dependencies_crypto_browserify":"^3.12.0","npm_package_files_0":"./dist","AVVIR_CLIENT_PROJECT_ID":"-MhsVwqU0U439Dpfx00U","npm_config_init_version":"1.0.0","npm_config_ignore_optional":"","SECURITYSESSIONID":"186a9","npm_package_scripts_clean":"rm -r ./dist","REACT_APP_MIXPANEL_TOKEN":"b1d53b0b983bab92eaa0f13f9f0449f6","npm_node_execpath":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node","npm_config_version_tag_prefix":"v"}).NODE_DEBUG)) {
   debug = function () {
     var args = Array.prototype.slice.call(arguments, 0)
     args.unshift('SEMVER')
@@ -93471,6 +93471,17 @@ var __assign = (undefined && undefined.__assign) || function () {
 var AuthApi = /** @class */ (function () {
     function AuthApi() {
     }
+    AuthApi.getCustomFirebaseToken = function (user) {
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_2__["default"].fetch(_utilities_http__WEBPACK_IMPORTED_MODULE_2__["default"].baseUrl() + "/login", {
+            headers: __assign(__assign({}, _utilities_request_headers__WEBPACK_IMPORTED_MODULE_6__.httpGetHeaders), (0,_utilities_get_authorization_headers__WEBPACK_IMPORTED_MODULE_1__["default"])(user))
+        }).then(function (response) {
+            return response.json()
+                .then(function (body) {
+                var headers = response.headers;
+                return { headers: headers, body: body };
+            });
+        });
+    };
     AuthApi.login = function (username, password) {
         var user = {
             authType: _models_enums_user_auth_type__WEBPACK_IMPORTED_MODULE_5__["default"].BASIC,
@@ -93485,12 +93496,11 @@ var AuthApi = /** @class */ (function () {
             return response.json()
                 .then(function (body) {
                 if (response.ok) {
-                    var storageToken = body.storageToken; //TODO attach to user object and let users upload from this lib
                     var authHeader = response.headers.get("Authorization");
                     var jwt = authHeader.substr("Bearer ".length);
                     var decodedJwt = jsonwebtoken__WEBPACK_IMPORTED_MODULE_0___default().decode(jwt, { complete: true });
                     var role = decodedJwt.payload.role;
-                    return new _utilities_get_authorization_headers__WEBPACK_IMPORTED_MODULE_1__.GatewayUser(_models_enums_user_auth_type__WEBPACK_IMPORTED_MODULE_5__.GATEWAY_JWT, jwt, role);
+                    return new _utilities_get_authorization_headers__WEBPACK_IMPORTED_MODULE_1__.GatewayUser(_models_enums_user_auth_type__WEBPACK_IMPORTED_MODULE_5__.GATEWAY_JWT, jwt, role, body.storageToken, body.redirectUrl);
                 }
                 else {
                     var message = body.message;
@@ -93756,6 +93766,51 @@ var FloorApi = /** @class */ (function () {
 
 /***/ }),
 
+/***/ 4645:
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AuthApi": function() { return /* reexport safe */ _auth_api__WEBPACK_IMPORTED_MODULE_0__["default"]; },
+/* harmony export */   "ElementApi": function() { return /* reexport safe */ _element_api__WEBPACK_IMPORTED_MODULE_1__["default"]; },
+/* harmony export */   "FileInformationApi": function() { return /* reexport safe */ _file_information_api__WEBPACK_IMPORTED_MODULE_2__["default"]; },
+/* harmony export */   "FloorApi": function() { return /* reexport safe */ _floor_api__WEBPACK_IMPORTED_MODULE_3__["default"]; },
+/* harmony export */   "OrganizationApi": function() { return /* reexport safe */ _organization_api__WEBPACK_IMPORTED_MODULE_4__["default"]; },
+/* harmony export */   "PhotoAreaApi": function() { return /* reexport safe */ _photo_area_api__WEBPACK_IMPORTED_MODULE_5__["default"]; },
+/* harmony export */   "PipelineApi": function() { return /* reexport safe */ _pipeline_api__WEBPACK_IMPORTED_MODULE_6__["default"]; },
+/* harmony export */   "ProjectApi": function() { return /* reexport safe */ _project_api__WEBPACK_IMPORTED_MODULE_7__["default"]; },
+/* harmony export */   "ScanDatasetApi": function() { return /* reexport safe */ _scan_dataset_api__WEBPACK_IMPORTED_MODULE_8__["default"]; },
+/* harmony export */   "WebGatewayApi": function() { return /* reexport safe */ _web_gateway_api__WEBPACK_IMPORTED_MODULE_9__["default"]; },
+/* harmony export */   "UserApi": function() { return /* reexport safe */ _user_api__WEBPACK_IMPORTED_MODULE_10__["default"]; }
+/* harmony export */ });
+/* harmony import */ var _auth_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(829);
+/* harmony import */ var _element_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7325);
+/* harmony import */ var _file_information_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9513);
+/* harmony import */ var _floor_api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(972);
+/* harmony import */ var _organization_api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9940);
+/* harmony import */ var _photo_area_api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5817);
+/* harmony import */ var _pipeline_api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(4393);
+/* harmony import */ var _project_api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(555);
+/* harmony import */ var _scan_dataset_api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(4835);
+/* harmony import */ var _web_gateway_api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(7146);
+/* harmony import */ var _user_api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(3867);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
 /***/ 9940:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -93790,7 +93845,8 @@ var OrganizationApi = /** @class */ (function () {
     };
     return OrganizationApi;
 }());
-/* harmony default export */ __webpack_exports__["default"] = ((0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(OrganizationApi));
+/* harmony default export */ __webpack_exports__["default"] = (OrganizationApi);
+(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(OrganizationApi);
 
 
 /***/ }),
@@ -93826,8 +93882,8 @@ var PhotoAreaApi = /** @class */ (function () {
         return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
     PhotoAreaApi.updatePhotoLocationPositionAndOrientation = function (_a, coordinates, user) {
-        var projectId = _a.projectId, photoAreaId = _a.photoAreaId, photoLocationId = _a.photoLocationId;
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/photo-areas/" + photoAreaId + "/locations/" + photoLocationId + "/bim";
+        var projectId = _a.projectId, floorId = _a.floorId, photoLocationId = _a.photoLocationId;
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/photo-locations/" + photoLocationId + "/bim";
         return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].patch(url, user, coordinates);
     };
     return PhotoAreaApi;
@@ -93958,12 +94014,12 @@ var ProjectApi = /** @class */ (function () {
         var projectId = _a.projectId;
         var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/project_deviation-report.tsv";
         var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].addAuthToDownloadUrl(baseUrl, user);
-        console.log(url);
         return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user, "text/tab-separated-values; charset=utf-8");
     };
     return ProjectApi;
 }());
-/* harmony default export */ __webpack_exports__["default"] = ((0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(ProjectApi));
+/* harmony default export */ __webpack_exports__["default"] = (ProjectApi);
+(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(ProjectApi);
 
 
 /***/ }),
@@ -94021,10 +94077,59 @@ var ScanDatasetApi = /** @class */ (function () {
         var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/progress";
         return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
     };
+    ScanDatasetApi.getScanRepresentation = function (_a, user) {
+        var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/files/scan-representation";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
+    };
+    ScanDatasetApi.createView = function (_a, view, user) {
+        var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/views";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, user, view);
+    };
+    ScanDatasetApi.getView = function (_a, viewId, user) {
+        var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl + "/projects/" + projectId + "/floors/" + floorId + "/scan-datasets/" + scanDatasetId + "/views/" + viewId;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
+    };
     return ScanDatasetApi;
 }());
 (0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(ScanDatasetApi);
 /* harmony default export */ __webpack_exports__["default"] = (ScanDatasetApi);
+
+
+/***/ }),
+
+/***/ 3867:
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utilities_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5562);
+/* harmony import */ var _utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6289);
+
+
+var UserApi = /** @class */ (function () {
+    function UserApi() {
+    }
+    UserApi.createInvitation = function (forms, user) {
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl() + "/users/invitations";
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, user, forms);
+    };
+    UserApi.getUserAccount = function (email, role, user) {
+        var encodedEmail = encodeURIComponent(email);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl + "/users/accounts/" + encodedEmail + "/" + role;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].get(url, user);
+    };
+    UserApi.updateUserAccount = function (email, role, apiUser, user) {
+        var encodedEmail = encodeURIComponent(email);
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].baseUrl + "/users/accounts/" + encodedEmail + "/" + role;
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_0__["default"].put(url, user, apiUser);
+    };
+    return UserApi;
+}());
+/* harmony default export */ __webpack_exports__["default"] = (UserApi);
+(0,_utilities_make_errors_pretty__WEBPACK_IMPORTED_MODULE_1__["default"])(UserApi);
 
 
 /***/ }),
@@ -94068,16 +94173,16 @@ var WebGatewayApi = /** @class */ (function () {
         var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/pipelines/" + pipelineId;
         return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
-    WebGatewayApi.createInvitation = function (inviteeEmail, role, organizationId, user) {
+    WebGatewayApi.createInvitation = function (inviteeEmail, role, organizationId, projectId, user) {
         var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/users/invitations";
-        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, { userEmail: inviteeEmail, role: role, clientAccountId: organizationId });
+        return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, { userEmail: inviteeEmail, role: role, clientAccountId: organizationId, projectId: projectId });
     };
     WebGatewayApi.getInvitation = function (invitationToken, user) {
         var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/users/invitations/" + invitationToken;
         return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
-    WebGatewayApi.getProgressReportPdfUrl = function (projectId, user) {
-        var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/progress-report.pdf";
+    WebGatewayApi.getProgressReportPdfUrl = function (projectId, floorId, user) {
+        var baseUrl = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/floors/" + floorId + "/progress-report.pdf";
         return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].addAuthToDownloadUrl(baseUrl, user);
     };
     WebGatewayApi.getQualityControlReportPdfUrl = function (projectId) {
@@ -94105,12 +94210,12 @@ var WebGatewayApi = /** @class */ (function () {
         var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/procore?procore-access-token=" + procoreAccessToken;
         return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, user);
     };
-    WebGatewayApi.pushPdfToProcore = function (_a, procoreProjectId, procoreAccessToken, pdfType, user) {
+    WebGatewayApi.pushPdfToProcore = function (_a, procoreProjectId, procoreCompanyId, procoreAccessToken, pdfType, user) {
         var projectId = _a.projectId, floorId = _a.floorId, scanDatasetId = _a.scanDatasetId;
         if (!projectId) {
             return Promise.reject(new Error("Project not loaded yet"));
         }
-        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/push-report-to-procore/" + pdfType + "?procore-project-id=" + procoreProjectId + "&procore-access-token=" + procoreAccessToken;
+        var url = _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].baseUrl() + "/projects/" + projectId + "/push-report-to-procore/" + pdfType + "?procore-project-id=" + procoreProjectId + "&procore-company-id=" + procoreCompanyId + "&procore-access-token=" + procoreAccessToken;
         return _utilities_http__WEBPACK_IMPORTED_MODULE_1__["default"].post(url, user, null);
     };
     WebGatewayApi.getProcoreProjects = function (projectId, procoreAccessToken, user) {
@@ -94132,7 +94237,7 @@ var WebGatewayApi = /** @class */ (function () {
             });
         });
     };
-    // deprectated. use AuthApi.login instead
+    // deprecated. use AuthApi.login instead
     WebGatewayApi.login = function (username, password) {
         var user = {
             authType: _models_enums_user_auth_type__WEBPACK_IMPORTED_MODULE_3__["default"].BASIC,
@@ -94227,6 +94332,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_project_api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(555);
 /* harmony import */ var _api_scan_dataset_api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(4835);
 /* harmony import */ var _api_web_gateway_api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(7146);
+/* harmony import */ var _api_user_api__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(3867);
+
 
 
 
@@ -94250,6 +94357,7 @@ __webpack_require__.r(__webpack_exports__);
     projects: _api_project_api__WEBPACK_IMPORTED_MODULE_8__["default"],
     scanDatasets: _api_scan_dataset_api__WEBPACK_IMPORTED_MODULE_9__["default"],
     other: _api_web_gateway_api__WEBPACK_IMPORTED_MODULE_10__["default"],
+    user: _api_user_api__WEBPACK_IMPORTED_MODULE_11__["default"]
 });
 
 
@@ -94260,12 +94368,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _ = __webpack_require__(6419);
+var _ = __webpack_require__(1271);
 var configuration = { logFetch: false };
 var addEnvironmentVariablesToConfiguration = function () {
     _.forEach(configuration, function (value, varName) {
-        if (({"NODE_ENV":"development","NVM_INC":"/Users/tira/.nvm/versions/node/v12.13.1/include/node","NODE":"/Users/tira/.nvm/versions/node/v12.13.1/bin/node","npm_package_dependencies_process":"^0.11.10","INIT_CWD":"/Users/tira/dev/avvir/avvir-javascript-client","NVM_CD_FLAGS":"","npm_package_dependencies_moment":"^2.29.1","npm_package_devDependencies_typescript":"^4.1.2","npm_package_devDependencies_sinon":"^11.1.2","npm_config_version_git_tag":"true","TERM":"xterm-256color","SHELL":"/bin/bash","npm_package_devDependencies_mocha":"^8.2.1","HISTSIZE":"5000","TMPDIR":"/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/","PIPENV_VENV_IN_PROJECT":"true#","npm_package_devDependencies__babel_preset_typescript":"^7.12.7","npm_config_init_license":"MIT","npm_package_devDependencies_babel_plugin_module_resolver":"^4.1.0","GIT_HOSTING":"git@git.domain.com","npm_package_devDependencies_chai_almost":"^1.0.1","npm_package_devDependencies__types_mocha":"^9.0.0","npm_config_registry":"https://registry.yarnpkg.com","npm_package_devDependencies_sinon_chai":"^3.5.0","npm_package_repository_url":"git@github.com:Avvir/avvir-javascript-client.git","npm_package_readmeFilename":"README.md","USER":"tira","NVM_DIR":"/Users/tira/.nvm","npm_package_devDependencies_webpack":"5.61.0","npm_package_devDependencies_chai_things":"^0.2.0","npm_package_devDependencies__babel_plugin_transform_runtime":"^7.12.10","npm_package_description":"Javascript client for Avvir APIs","npm_config_python":"/usr/bin/python","npm_package_devDependencies_webpack_cli":"^4.2.0","npm_package_devDependencies__types_chai_datetime":"^0.0.37","COMMAND_MODE":"unix2003","BASH_IT_THEME":"bobby","npm_package_devDependencies_chai_datetime":"^1.7.0","npm_package_devDependencies__babel_core":"^7.12.9","SSH_AUTH_SOCK":"/private/tmp/com.apple.launchd.ltYKi71bmC/Listeners","SCM_CHECK":"true","npm_package_dependencies_stream_browserify":"^3.0.0","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0","npm_package_dependencies_buffer":"^6.0.3","npm_execpath":"/usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js","npm_package_dependencies_node_fetch":"^2.6.1","AUTOFEATURE":"true autotest","npm_package_dependencies_util":"^0.12.4","npm_package_module":"dist/avvir_api.node.js","BASH_IT":"/Users/tira/.bash_it","AVVIR_ENVIRONMENT":"acceptance","LSCOLORS":"Gxfxcxdxdxegedabagacad","npm_package_devDependencies_chai_spies":"^1.0.0","PATH":"/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387238410-0.235470333478351:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387238077-0.5699721185585229:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387229494-0.5675910285460073:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin","npm_config_argv":"{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}","npm_package_dependencies_underscore":"^1.12.0","npm_package_devDependencies_fetch_mock":"^9.11.0","TERMINAL_EMULATOR":"JetBrains-JediTerm","npm_package_devDependencies__types_sinon_chai":"^3.2.4","_":"/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin/webpack","LaunchInstanceID":"DE5B7E1A-368B-46D6-A106-A7138355768A","npm_package_devDependencies_tolerant_deep_eql":"git+http://git@github.com/TiraO/deep-eql.git#06a376d","PWD":"/Users/tira/dev/avvir/avvir-javascript-client","npm_package_devDependencies_webpack_node_externals":"^2.5.2","npm_package_devDependencies__babel_polyfill":"^7.12.1","npm_lifecycle_event":"webpack","npm_package_devDependencies_chai":"^4.2.0","npm_package_repository_type":"git","npm_package_name":"avvir-javascript-client","npm_package_devDependencies__babel_preset_env":"^7.12.7","npm_package_devDependencies__babel_cli":"^7.12.8","npm_package_scripts_build":"yarn run webpack","npm_config_version_commit_hooks":"true","XPC_FLAGS":"0x0","npm_package_devDependencies_ts_loader":"^9.2.6","npm_config_bin_links":"true","npm_config_wrap_output":"","npm_package_main":"dist/avvir_api.node.js","XPC_SERVICE_NAME":"0","HISTCONTROL":"ignorespace:erasedups","npm_package_version":"0.0.1","HOME":"/Users/tira","SHLVL":"4","FLYWAY_CONFIG_FILES":"config/flyway.generated.conf","npm_package_devDependencies_deepmerge":"^4.2.2","npm_package_scripts_test":"NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn run build","npm_package_dependencies_three":"^0.123.0","npm_config_save_prefix":"^","npm_config_strict_ssl":"true","npm_package_devDependencies_chai_roughly":"^1.0.0","npm_config_version_git_message":"v%s","NPM_CONFIG_PYTHON":"/usr/bin/python","npm_package_devDependencies_chai_json_equal":"^0.0.1","npm_package_browserslist_2":"Firefox ESR","npm_package_browserslist_1":"IE 11","LOGNAME":"tira","YARN_WRAP_OUTPUT":"false","npm_package_devDependencies__babel_register":"^7.12.1","npm_package_browserslist_0":"> 1%","PREFIX":"/usr/local","npm_lifecycle_script":"yarn run webpack","LC_CTYPE":"en_US.UTF-8","npm_package_devDependencies__types_sinon":"^9.0.0","NVM_BIN":"/Users/tira/.nvm/versions/node/v12.13.1/bin","TODO":"t","npm_config_version_git_sign":"","npm_config_ignore_scripts":"","npm_config_user_agent":"yarn/1.22.4 npm/? node/v12.13.1 darwin x64","npm_package_devDependencies__types_node":"^16.10.2","IRC_CLIENT":"irssi","npm_package_dependencies_jsonwebtoken":"^8.5.1","npm_package_dependencies_extendable_error_class":"^0.1.2","npm_package_dependencies_crypto_browserify":"^3.12.0","npm_config_init_version":"1.0.0","npm_config_ignore_optional":"","SECURITYSESSIONID":"186a9","npm_node_execpath":"/Users/tira/.nvm/versions/node/v12.13.1/bin/node","npm_config_version_tag_prefix":"v"})[varName] != null && ({"NODE_ENV":"development","NVM_INC":"/Users/tira/.nvm/versions/node/v12.13.1/include/node","NODE":"/Users/tira/.nvm/versions/node/v12.13.1/bin/node","npm_package_dependencies_process":"^0.11.10","INIT_CWD":"/Users/tira/dev/avvir/avvir-javascript-client","NVM_CD_FLAGS":"","npm_package_dependencies_moment":"^2.29.1","npm_package_devDependencies_typescript":"^4.1.2","npm_package_devDependencies_sinon":"^11.1.2","npm_config_version_git_tag":"true","TERM":"xterm-256color","SHELL":"/bin/bash","npm_package_devDependencies_mocha":"^8.2.1","HISTSIZE":"5000","TMPDIR":"/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/","PIPENV_VENV_IN_PROJECT":"true#","npm_package_devDependencies__babel_preset_typescript":"^7.12.7","npm_config_init_license":"MIT","npm_package_devDependencies_babel_plugin_module_resolver":"^4.1.0","GIT_HOSTING":"git@git.domain.com","npm_package_devDependencies_chai_almost":"^1.0.1","npm_package_devDependencies__types_mocha":"^9.0.0","npm_config_registry":"https://registry.yarnpkg.com","npm_package_devDependencies_sinon_chai":"^3.5.0","npm_package_repository_url":"git@github.com:Avvir/avvir-javascript-client.git","npm_package_readmeFilename":"README.md","USER":"tira","NVM_DIR":"/Users/tira/.nvm","npm_package_devDependencies_webpack":"5.61.0","npm_package_devDependencies_chai_things":"^0.2.0","npm_package_devDependencies__babel_plugin_transform_runtime":"^7.12.10","npm_package_description":"Javascript client for Avvir APIs","npm_config_python":"/usr/bin/python","npm_package_devDependencies_webpack_cli":"^4.2.0","npm_package_devDependencies__types_chai_datetime":"^0.0.37","COMMAND_MODE":"unix2003","BASH_IT_THEME":"bobby","npm_package_devDependencies_chai_datetime":"^1.7.0","npm_package_devDependencies__babel_core":"^7.12.9","SSH_AUTH_SOCK":"/private/tmp/com.apple.launchd.ltYKi71bmC/Listeners","SCM_CHECK":"true","npm_package_dependencies_stream_browserify":"^3.0.0","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0","npm_package_dependencies_buffer":"^6.0.3","npm_execpath":"/usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js","npm_package_dependencies_node_fetch":"^2.6.1","AUTOFEATURE":"true autotest","npm_package_dependencies_util":"^0.12.4","npm_package_module":"dist/avvir_api.node.js","BASH_IT":"/Users/tira/.bash_it","AVVIR_ENVIRONMENT":"acceptance","LSCOLORS":"Gxfxcxdxdxegedabagacad","npm_package_devDependencies_chai_spies":"^1.0.0","PATH":"/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387238410-0.235470333478351:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387238077-0.5699721185585229:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387229494-0.5675910285460073:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin","npm_config_argv":"{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}","npm_package_dependencies_underscore":"^1.12.0","npm_package_devDependencies_fetch_mock":"^9.11.0","TERMINAL_EMULATOR":"JetBrains-JediTerm","npm_package_devDependencies__types_sinon_chai":"^3.2.4","_":"/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin/webpack","LaunchInstanceID":"DE5B7E1A-368B-46D6-A106-A7138355768A","npm_package_devDependencies_tolerant_deep_eql":"git+http://git@github.com/TiraO/deep-eql.git#06a376d","PWD":"/Users/tira/dev/avvir/avvir-javascript-client","npm_package_devDependencies_webpack_node_externals":"^2.5.2","npm_package_devDependencies__babel_polyfill":"^7.12.1","npm_lifecycle_event":"webpack","npm_package_devDependencies_chai":"^4.2.0","npm_package_repository_type":"git","npm_package_name":"avvir-javascript-client","npm_package_devDependencies__babel_preset_env":"^7.12.7","npm_package_devDependencies__babel_cli":"^7.12.8","npm_package_scripts_build":"yarn run webpack","npm_config_version_commit_hooks":"true","XPC_FLAGS":"0x0","npm_package_devDependencies_ts_loader":"^9.2.6","npm_config_bin_links":"true","npm_config_wrap_output":"","npm_package_main":"dist/avvir_api.node.js","XPC_SERVICE_NAME":"0","HISTCONTROL":"ignorespace:erasedups","npm_package_version":"0.0.1","HOME":"/Users/tira","SHLVL":"4","FLYWAY_CONFIG_FILES":"config/flyway.generated.conf","npm_package_devDependencies_deepmerge":"^4.2.2","npm_package_scripts_test":"NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn run build","npm_package_dependencies_three":"^0.123.0","npm_config_save_prefix":"^","npm_config_strict_ssl":"true","npm_package_devDependencies_chai_roughly":"^1.0.0","npm_config_version_git_message":"v%s","NPM_CONFIG_PYTHON":"/usr/bin/python","npm_package_devDependencies_chai_json_equal":"^0.0.1","npm_package_browserslist_2":"Firefox ESR","npm_package_browserslist_1":"IE 11","LOGNAME":"tira","YARN_WRAP_OUTPUT":"false","npm_package_devDependencies__babel_register":"^7.12.1","npm_package_browserslist_0":"> 1%","PREFIX":"/usr/local","npm_lifecycle_script":"yarn run webpack","LC_CTYPE":"en_US.UTF-8","npm_package_devDependencies__types_sinon":"^9.0.0","NVM_BIN":"/Users/tira/.nvm/versions/node/v12.13.1/bin","TODO":"t","npm_config_version_git_sign":"","npm_config_ignore_scripts":"","npm_config_user_agent":"yarn/1.22.4 npm/? node/v12.13.1 darwin x64","npm_package_devDependencies__types_node":"^16.10.2","IRC_CLIENT":"irssi","npm_package_dependencies_jsonwebtoken":"^8.5.1","npm_package_dependencies_extendable_error_class":"^0.1.2","npm_package_dependencies_crypto_browserify":"^3.12.0","npm_config_init_version":"1.0.0","npm_config_ignore_optional":"","SECURITYSESSIONID":"186a9","npm_node_execpath":"/Users/tira/.nvm/versions/node/v12.13.1/bin/node","npm_config_version_tag_prefix":"v"})[varName] != '') {
-            configuration[varName] = ({"NODE_ENV":"development","NVM_INC":"/Users/tira/.nvm/versions/node/v12.13.1/include/node","NODE":"/Users/tira/.nvm/versions/node/v12.13.1/bin/node","npm_package_dependencies_process":"^0.11.10","INIT_CWD":"/Users/tira/dev/avvir/avvir-javascript-client","NVM_CD_FLAGS":"","npm_package_dependencies_moment":"^2.29.1","npm_package_devDependencies_typescript":"^4.1.2","npm_package_devDependencies_sinon":"^11.1.2","npm_config_version_git_tag":"true","TERM":"xterm-256color","SHELL":"/bin/bash","npm_package_devDependencies_mocha":"^8.2.1","HISTSIZE":"5000","TMPDIR":"/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/","PIPENV_VENV_IN_PROJECT":"true#","npm_package_devDependencies__babel_preset_typescript":"^7.12.7","npm_config_init_license":"MIT","npm_package_devDependencies_babel_plugin_module_resolver":"^4.1.0","GIT_HOSTING":"git@git.domain.com","npm_package_devDependencies_chai_almost":"^1.0.1","npm_package_devDependencies__types_mocha":"^9.0.0","npm_config_registry":"https://registry.yarnpkg.com","npm_package_devDependencies_sinon_chai":"^3.5.0","npm_package_repository_url":"git@github.com:Avvir/avvir-javascript-client.git","npm_package_readmeFilename":"README.md","USER":"tira","NVM_DIR":"/Users/tira/.nvm","npm_package_devDependencies_webpack":"5.61.0","npm_package_devDependencies_chai_things":"^0.2.0","npm_package_devDependencies__babel_plugin_transform_runtime":"^7.12.10","npm_package_description":"Javascript client for Avvir APIs","npm_config_python":"/usr/bin/python","npm_package_devDependencies_webpack_cli":"^4.2.0","npm_package_devDependencies__types_chai_datetime":"^0.0.37","COMMAND_MODE":"unix2003","BASH_IT_THEME":"bobby","npm_package_devDependencies_chai_datetime":"^1.7.0","npm_package_devDependencies__babel_core":"^7.12.9","SSH_AUTH_SOCK":"/private/tmp/com.apple.launchd.ltYKi71bmC/Listeners","SCM_CHECK":"true","npm_package_dependencies_stream_browserify":"^3.0.0","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0","npm_package_dependencies_buffer":"^6.0.3","npm_execpath":"/usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js","npm_package_dependencies_node_fetch":"^2.6.1","AUTOFEATURE":"true autotest","npm_package_dependencies_util":"^0.12.4","npm_package_module":"dist/avvir_api.node.js","BASH_IT":"/Users/tira/.bash_it","AVVIR_ENVIRONMENT":"acceptance","LSCOLORS":"Gxfxcxdxdxegedabagacad","npm_package_devDependencies_chai_spies":"^1.0.0","PATH":"/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387238410-0.235470333478351:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387238077-0.5699721185585229:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387229494-0.5675910285460073:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin","npm_config_argv":"{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}","npm_package_dependencies_underscore":"^1.12.0","npm_package_devDependencies_fetch_mock":"^9.11.0","TERMINAL_EMULATOR":"JetBrains-JediTerm","npm_package_devDependencies__types_sinon_chai":"^3.2.4","_":"/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin/webpack","LaunchInstanceID":"DE5B7E1A-368B-46D6-A106-A7138355768A","npm_package_devDependencies_tolerant_deep_eql":"git+http://git@github.com/TiraO/deep-eql.git#06a376d","PWD":"/Users/tira/dev/avvir/avvir-javascript-client","npm_package_devDependencies_webpack_node_externals":"^2.5.2","npm_package_devDependencies__babel_polyfill":"^7.12.1","npm_lifecycle_event":"webpack","npm_package_devDependencies_chai":"^4.2.0","npm_package_repository_type":"git","npm_package_name":"avvir-javascript-client","npm_package_devDependencies__babel_preset_env":"^7.12.7","npm_package_devDependencies__babel_cli":"^7.12.8","npm_package_scripts_build":"yarn run webpack","npm_config_version_commit_hooks":"true","XPC_FLAGS":"0x0","npm_package_devDependencies_ts_loader":"^9.2.6","npm_config_bin_links":"true","npm_config_wrap_output":"","npm_package_main":"dist/avvir_api.node.js","XPC_SERVICE_NAME":"0","HISTCONTROL":"ignorespace:erasedups","npm_package_version":"0.0.1","HOME":"/Users/tira","SHLVL":"4","FLYWAY_CONFIG_FILES":"config/flyway.generated.conf","npm_package_devDependencies_deepmerge":"^4.2.2","npm_package_scripts_test":"NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn run build","npm_package_dependencies_three":"^0.123.0","npm_config_save_prefix":"^","npm_config_strict_ssl":"true","npm_package_devDependencies_chai_roughly":"^1.0.0","npm_config_version_git_message":"v%s","NPM_CONFIG_PYTHON":"/usr/bin/python","npm_package_devDependencies_chai_json_equal":"^0.0.1","npm_package_browserslist_2":"Firefox ESR","npm_package_browserslist_1":"IE 11","LOGNAME":"tira","YARN_WRAP_OUTPUT":"false","npm_package_devDependencies__babel_register":"^7.12.1","npm_package_browserslist_0":"> 1%","PREFIX":"/usr/local","npm_lifecycle_script":"yarn run webpack","LC_CTYPE":"en_US.UTF-8","npm_package_devDependencies__types_sinon":"^9.0.0","NVM_BIN":"/Users/tira/.nvm/versions/node/v12.13.1/bin","TODO":"t","npm_config_version_git_sign":"","npm_config_ignore_scripts":"","npm_config_user_agent":"yarn/1.22.4 npm/? node/v12.13.1 darwin x64","npm_package_devDependencies__types_node":"^16.10.2","IRC_CLIENT":"irssi","npm_package_dependencies_jsonwebtoken":"^8.5.1","npm_package_dependencies_extendable_error_class":"^0.1.2","npm_package_dependencies_crypto_browserify":"^3.12.0","npm_config_init_version":"1.0.0","npm_config_ignore_optional":"","SECURITYSESSIONID":"186a9","npm_node_execpath":"/Users/tira/.nvm/versions/node/v12.13.1/bin/node","npm_config_version_tag_prefix":"v"})[varName];
+        if (({"NODE_ENV":"development","NVM_INC":"/Users/bgroves/.nvm/versions/node/v12.13.1/include/node","PROJ_LIB":"/opt/miniconda3/share/proj","ARGO_NAMESPACE":"argo","NODE":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node","SPRING_DATASOURCE_USERNAME":"avvir","npm_package_dependencies_process":"^0.11.10","INIT_CWD":"/Users/bgroves/avvir/repos/avvir-javascript-client","NVM_CD_FLAGS":"","PYENV_ROOT":"/Users/bgroves/.pyenv","AVVIR_GATEWAY_URL":"https://acceptance-api.avvir.io","npm_package_dependencies_moment":"^2.29.1","npm_package_devDependencies_typescript":"^4.1.2","npm_package_devDependencies_sinon":"^11.1.2","npm_config_version_git_tag":"true","SHELL":"/bin/bash","TERM":"xterm-256color","npm_package_devDependencies_mocha":"^8.2.1","_printf_cmd":"printf","ARGO_BASE_HREF":"","SPRING_DATASOURCE_URL":"jdbc:postgresql://localhost:5432/gatewaytest","TMPDIR":"/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/","AVVIR_SANDBOX_PASSWORD":"Peanut rung dismi$$al","PIPENV_VENV_IN_PROJECT":"1","REACT_APP_STORAGE_BUCKET":"avvir-portal-acceptance.appspot.com","REACT_APP_ENABLE_PROJECT_TEAM":"true","CONDA_SHLVL":"1","npm_package_devDependencies__babel_preset_typescript":"^7.12.7","npm_config_init_license":"MIT","AVVIR_CLIENT_PASSWORD":"Peanut rung dismi$$al","CONDA_PROMPT_MODIFIER":"(base) ","npm_package_devDependencies_babel_plugin_module_resolver":"^4.1.0","GIT_HOSTING":"git@git.domain.com","npm_package_devDependencies_chai_almost":"^1.0.1","TERM_SESSION_ID":"1edc0f5d-1219-4990-b535-f7f1880c9e96","REACT_APP_PROJECT_ID":"avvir-portal-acceptance","npm_package_devDependencies__types_mocha":"^9.0.0","AVVIR_HOME":"/Users/bgroves/avvir/repos","ARGO_INSECURE_SKIP_VERIFY":"true","REACT_APP_PROCORE_URL":"https://sandbox.procore.com","npm_config_registry":"https://registry.yarnpkg.com","SPRING_DATASOURCE_PASSWORD":"passw0rd","npm_package_devDependencies_sinon_chai":"^3.5.0","npm_package_exports___api_import":"./dist/esm/api/index.js","npm_package_repository_url":"git@github.com:Avvir/avvir-javascript-client.git","npm_package_readmeFilename":"README.md","USER":"bgroves","NVM_DIR":"/Users/bgroves/.nvm","PIPENV_IGNORE_VIRTUALENVS":"1","REACT_APP_AUTH_DOMAIN":"avvir-portal-acceptance.firebaseapp.com","npm_package_devDependencies_webpack":"5.61.0","npm_package_devDependencies_chai_things":"^0.2.0","npm_package_devDependencies__babel_plugin_transform_runtime":"^7.12.10","npm_package_description":"Javascript client for Avvir APIs","npm_config_python":"/usr/local/opt/python@3.9/bin/python3","npm_package_devDependencies_webpack_cli":"^4.2.0","npm_package_devDependencies__types_chai_datetime":"^0.0.37","npm_package_scripts_build_esm":"tsc --project tsconfig.esm.json","COMMAND_MODE":"unix2003","BASH_IT_THEME":"bobby","CONDA_EXE":"/opt/miniconda3/bin/conda","npm_package_exports___import":"./dist/esm/index.js","ARGO_SECURE":"true","KUBECONFIG":"/dev/null","SPRING_PROFILES_ACTIVE":"test","npm_package_devDependencies_chai_datetime":"^1.7.0","npm_package_devDependencies__babel_core":"^7.12.9","SSH_AUTH_SOCK":"/private/tmp/com.apple.launchd.tPqztlIlhT/Listeners","SCM_CHECK":"true","npm_package_dependencies_stream_browserify":"^3.0.0","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0","npm_package_dependencies_buffer":"^6.0.3","BASH_SILENCE_DEPRECATION_WARNING":"1","REACT_APP_GOOGLE_API_KEY":"AIzaSyBqHVFoIhvaCW2UWEwS-5kOfchVAH9Dv2k","npm_execpath":"/usr/local/Cellar/yarn/1.22.17/libexec/bin/yarn.js","npm_package_dependencies_node_fetch":"^2.6.1","SPRING_DATASOURCE_JDBC_URL":"jdbc:postgresql://localhost:5432/gatewaytest","_CONDA_SET_PDAL_PYTHON_DRIVER_PATH":"/opt/miniconda3/lib","npm_package_dependencies_util":"^0.12.4","npm_package_module":"dist/esm/index.js","BASH_IT":"/Users/bgroves/.bash_it","AVVIR_ENVIRONMENT":"acceptance","LSCOLORS":"Gxfxcxdxdxegedabagacad","REACT_APP_DATADOG_API":"pub89cf48730665a1e1e21b1866f3c28b48","_CE_CONDA":"","npm_package_devDependencies_chai_spies":"^1.0.0","PATH":"/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895419721-0.6519376669217916:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895419313-0.9027215765385588:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895415125-0.6933772538305296:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895414556-0.6399316525062433:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895410959-0.2580938600693723:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/Users/bgroves/google-cloud-sdk/bin:/Users/bgroves/.pyenv/shims:/Users/bgroves/.pyenv/bin:/Users/bgroves/.jenv/shims:/Users/bgroves/.jenv/bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/usr/local/opt/postgresql@10/bin:/usr/local/texlive/2018/bin/x86_64-darwin","AVVIR_SANDBOX_EMAIL":"avvir-sandbox@example.com","CPL_ZIP_ENCODING":"UTF-8","npm_config_argv":"{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}","npm_package_dependencies_underscore":"^1.12.0","npm_package_devDependencies_fetch_mock":"^9.11.0","npm_package_scripts_build_web":"yarn run webpack","TERMINAL_EMULATOR":"JetBrains-JediTerm","BASH_IT_LOG_LEVEL_ALL":"3","REACT_APP_PROCORE_CLIENT_ID":"2f9880fc992354445771d02c4ace7241aa0c40088d47d732c116ef986e1ae6db","PROJ_NETWORK":"ON","npm_package_devDependencies__types_sinon_chai":"^3.2.4","_":"/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin/webpack","LaunchInstanceID":"C2C6C49A-11CD-4D4B-9B13-50348705B5BF","npm_package_devDependencies_tolerant_deep_eql":"git+http://git@github.com/TiraO/deep-eql.git#06a376d","__CFBundleIdentifier":"com.jetbrains.WebStorm","CONDA_PREFIX":"/opt/miniconda3","PWD":"/Users/bgroves/avvir/repos/avvir-javascript-client","JENV_LOADED":"1","npm_package_devDependencies_webpack_node_externals":"^2.5.2","npm_package_devDependencies__babel_polyfill":"^7.12.1","STRUCTION_SITE_TEST_PASSWORD":"GjFUqb4oAQV8-_xsY!j*","REACT_APP_WEB_API_GATEWAY_DOMAIN":"https://acceptance-api.avvir.io","npm_lifecycle_event":"webpack","npm_package_devDependencies_chai":"^4.2.0","npm_package_types":"dist/esm/index.d.ts","npm_package_repository_type":"git","npm_package_name":"avvir-javascript-client","BASH_IT_LOG_LEVEL_ERROR":"1","AVVIR_CLIENT_USERNAME":"avvir-sandbox@example.com","npm_package_devDependencies__babel_preset_env":"^7.12.7","TIME_MULTIPLIER_FOR_PERFORMANCE_TESTS":"1","npm_package_devDependencies__babel_cli":"^7.12.8","npm_package_scripts_build":"yarn build-esm && yarn build-web","npm_config_version_commit_hooks":"true","XPC_FLAGS":"0x0","npm_package_devDependencies_ts_loader":"^9.2.6","npm_config_bin_links":"true","GDAL_DATA":"/opt/miniconda3/share/gdal","npm_config_wrap_output":"","REACT_APP_ENABLE_MESH_STREAMING":"true","npm_package_main":"dist/avvir_api.node.js","XPC_SERVICE_NAME":"0","_CE_M":"","npm_package_version":"0.0.1","HOME":"/Users/bgroves","SHLVL":"6","ARGO_TOKEN":"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Inozc2tteVh5UjZoSHdOYWhFdzBIZ3BVdlVrcHl2VHA5WVpUQjJ5aThncnMifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJhcmdvIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImFyZ28tdG9rZW4tNGpiNnoiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiYXJnbyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjA0NjFkNjAxLWNjZWYtNDU3ZC05YTM5LWRiMzVlNjY3M2Q0YyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDphcmdvOmFyZ28ifQ.semSE6eZ1pHuai14GRksq0b5MEl5jF2quNo6gukBFL4VhkRj2KX0hCmVNnP7ntkBwCakKmqCQipMrJCwZnldnzM0VR8YKuvbKhU108XZFUc9UfXwqpgFvm7SxZanNwWSHXsajSMASAzT5V9FWAK9mpH519MzOYk7TTF_alAQHEV6Is6yrsQp18WZr5IQn7mk-EHmnLjBFO278vjkM851zPQ8PWyxaPI_kMinxKx0ajZJ7GVtyC3ucSoc_SBCRJEuNlUpDDOSQFOWbcX8ZJSn_k8jvM1m2y9lSbQ2hIcmGqx4MG-6n8QJzNhTctYa3UstXdKNNiw4ZTBcskTk5g97Dg","STRUCTION_SITE_TEST_USERNAME":"matt@avvir.io","PDAL_DRIVER_PATH":"/opt/miniconda3/lib:/opt/miniconda3/lib/python3.9/site-packages/lib:/opt/miniconda3/lib/python3.9/site-packages/lib64:/opt/miniconda3/lib/python3.9/site-packages/pdal","npm_package_devDependencies_deepmerge":"^4.2.2","npm_package_scripts_test":"NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn rebuild","TSC_COMPILE_ON_ERROR":"true","npm_package_dependencies_three":"^0.123.0","npm_package_scripts_rebuild":"yarn clean && yarn build","npm_config_save_prefix":"^","npm_config_strict_ssl":"true","REACT_APP_MESSAGING_SENDER_ID":"28849523821","REACT_APP_PROCORE_API_DOMAIN":"https://sandbox.procore.com","npm_package_devDependencies_chai_roughly":"^1.0.0","npm_config_version_git_message":"v%s","NPM_CONFIG_PYTHON":"/usr/local/opt/python@3.9/bin/python3","npm_package_devDependencies_chai_json_equal":"^0.0.1","npm_package_browserslist_2":"Firefox ESR","npm_package_browserslist_1":"IE 11","LOGNAME":"bgroves","BASH_IT_LOG_LEVEL_WARNING":"2","REACT_APP_PROJECT_TEAM_ALLOWLIST":"-MkchJZoC8vJTPpWwlTP","CONDA_PYTHON_EXE":"/opt/miniconda3/bin/python","YARN_WRAP_OUTPUT":"false","npm_package_devDependencies__babel_register":"^7.12.1","npm_package_browserslist_0":"> 1%","PREFIX":"/usr/local","JENV_SHELL":"bash","npm_lifecycle_script":"yarn run webpack","npm_package_exports___require":"./dist/avvir_api.node.js","LC_CTYPE":"en_US.UTF-8","npm_package_devDependencies__types_sinon":"^9.0.0","ARGO_SERVER":"pipelines.avvir.io:443","NVM_BIN":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin","CONDA_DEFAULT_ENV":"base","npm_package_browser":"dist/avvir_api.web.js","TODO":"t","npm_config_version_git_sign":"","npm_config_ignore_scripts":"","npm_config_user_agent":"yarn/1.22.17 npm/? node/v12.13.1 darwin x64","npm_package_devDependencies__types_node":"^16.10.2","IRC_CLIENT":"irssi","npm_package_dependencies_jsonwebtoken":"^8.5.1","ARGO_HTTP1":"true","npm_package_dependencies_extendable_error_class":"^0.1.2","npm_package_dependencies_crypto_browserify":"^3.12.0","npm_package_files_0":"./dist","AVVIR_CLIENT_PROJECT_ID":"-MhsVwqU0U439Dpfx00U","npm_config_init_version":"1.0.0","npm_config_ignore_optional":"","SECURITYSESSIONID":"186a9","npm_package_scripts_clean":"rm -r ./dist","REACT_APP_MIXPANEL_TOKEN":"b1d53b0b983bab92eaa0f13f9f0449f6","npm_node_execpath":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node","npm_config_version_tag_prefix":"v"})[varName] != null && ({"NODE_ENV":"development","NVM_INC":"/Users/bgroves/.nvm/versions/node/v12.13.1/include/node","PROJ_LIB":"/opt/miniconda3/share/proj","ARGO_NAMESPACE":"argo","NODE":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node","SPRING_DATASOURCE_USERNAME":"avvir","npm_package_dependencies_process":"^0.11.10","INIT_CWD":"/Users/bgroves/avvir/repos/avvir-javascript-client","NVM_CD_FLAGS":"","PYENV_ROOT":"/Users/bgroves/.pyenv","AVVIR_GATEWAY_URL":"https://acceptance-api.avvir.io","npm_package_dependencies_moment":"^2.29.1","npm_package_devDependencies_typescript":"^4.1.2","npm_package_devDependencies_sinon":"^11.1.2","npm_config_version_git_tag":"true","SHELL":"/bin/bash","TERM":"xterm-256color","npm_package_devDependencies_mocha":"^8.2.1","_printf_cmd":"printf","ARGO_BASE_HREF":"","SPRING_DATASOURCE_URL":"jdbc:postgresql://localhost:5432/gatewaytest","TMPDIR":"/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/","AVVIR_SANDBOX_PASSWORD":"Peanut rung dismi$$al","PIPENV_VENV_IN_PROJECT":"1","REACT_APP_STORAGE_BUCKET":"avvir-portal-acceptance.appspot.com","REACT_APP_ENABLE_PROJECT_TEAM":"true","CONDA_SHLVL":"1","npm_package_devDependencies__babel_preset_typescript":"^7.12.7","npm_config_init_license":"MIT","AVVIR_CLIENT_PASSWORD":"Peanut rung dismi$$al","CONDA_PROMPT_MODIFIER":"(base) ","npm_package_devDependencies_babel_plugin_module_resolver":"^4.1.0","GIT_HOSTING":"git@git.domain.com","npm_package_devDependencies_chai_almost":"^1.0.1","TERM_SESSION_ID":"1edc0f5d-1219-4990-b535-f7f1880c9e96","REACT_APP_PROJECT_ID":"avvir-portal-acceptance","npm_package_devDependencies__types_mocha":"^9.0.0","AVVIR_HOME":"/Users/bgroves/avvir/repos","ARGO_INSECURE_SKIP_VERIFY":"true","REACT_APP_PROCORE_URL":"https://sandbox.procore.com","npm_config_registry":"https://registry.yarnpkg.com","SPRING_DATASOURCE_PASSWORD":"passw0rd","npm_package_devDependencies_sinon_chai":"^3.5.0","npm_package_exports___api_import":"./dist/esm/api/index.js","npm_package_repository_url":"git@github.com:Avvir/avvir-javascript-client.git","npm_package_readmeFilename":"README.md","USER":"bgroves","NVM_DIR":"/Users/bgroves/.nvm","PIPENV_IGNORE_VIRTUALENVS":"1","REACT_APP_AUTH_DOMAIN":"avvir-portal-acceptance.firebaseapp.com","npm_package_devDependencies_webpack":"5.61.0","npm_package_devDependencies_chai_things":"^0.2.0","npm_package_devDependencies__babel_plugin_transform_runtime":"^7.12.10","npm_package_description":"Javascript client for Avvir APIs","npm_config_python":"/usr/local/opt/python@3.9/bin/python3","npm_package_devDependencies_webpack_cli":"^4.2.0","npm_package_devDependencies__types_chai_datetime":"^0.0.37","npm_package_scripts_build_esm":"tsc --project tsconfig.esm.json","COMMAND_MODE":"unix2003","BASH_IT_THEME":"bobby","CONDA_EXE":"/opt/miniconda3/bin/conda","npm_package_exports___import":"./dist/esm/index.js","ARGO_SECURE":"true","KUBECONFIG":"/dev/null","SPRING_PROFILES_ACTIVE":"test","npm_package_devDependencies_chai_datetime":"^1.7.0","npm_package_devDependencies__babel_core":"^7.12.9","SSH_AUTH_SOCK":"/private/tmp/com.apple.launchd.tPqztlIlhT/Listeners","SCM_CHECK":"true","npm_package_dependencies_stream_browserify":"^3.0.0","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0","npm_package_dependencies_buffer":"^6.0.3","BASH_SILENCE_DEPRECATION_WARNING":"1","REACT_APP_GOOGLE_API_KEY":"AIzaSyBqHVFoIhvaCW2UWEwS-5kOfchVAH9Dv2k","npm_execpath":"/usr/local/Cellar/yarn/1.22.17/libexec/bin/yarn.js","npm_package_dependencies_node_fetch":"^2.6.1","SPRING_DATASOURCE_JDBC_URL":"jdbc:postgresql://localhost:5432/gatewaytest","_CONDA_SET_PDAL_PYTHON_DRIVER_PATH":"/opt/miniconda3/lib","npm_package_dependencies_util":"^0.12.4","npm_package_module":"dist/esm/index.js","BASH_IT":"/Users/bgroves/.bash_it","AVVIR_ENVIRONMENT":"acceptance","LSCOLORS":"Gxfxcxdxdxegedabagacad","REACT_APP_DATADOG_API":"pub89cf48730665a1e1e21b1866f3c28b48","_CE_CONDA":"","npm_package_devDependencies_chai_spies":"^1.0.0","PATH":"/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895419721-0.6519376669217916:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895419313-0.9027215765385588:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895415125-0.6933772538305296:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895414556-0.6399316525062433:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895410959-0.2580938600693723:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/Users/bgroves/google-cloud-sdk/bin:/Users/bgroves/.pyenv/shims:/Users/bgroves/.pyenv/bin:/Users/bgroves/.jenv/shims:/Users/bgroves/.jenv/bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/usr/local/opt/postgresql@10/bin:/usr/local/texlive/2018/bin/x86_64-darwin","AVVIR_SANDBOX_EMAIL":"avvir-sandbox@example.com","CPL_ZIP_ENCODING":"UTF-8","npm_config_argv":"{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}","npm_package_dependencies_underscore":"^1.12.0","npm_package_devDependencies_fetch_mock":"^9.11.0","npm_package_scripts_build_web":"yarn run webpack","TERMINAL_EMULATOR":"JetBrains-JediTerm","BASH_IT_LOG_LEVEL_ALL":"3","REACT_APP_PROCORE_CLIENT_ID":"2f9880fc992354445771d02c4ace7241aa0c40088d47d732c116ef986e1ae6db","PROJ_NETWORK":"ON","npm_package_devDependencies__types_sinon_chai":"^3.2.4","_":"/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin/webpack","LaunchInstanceID":"C2C6C49A-11CD-4D4B-9B13-50348705B5BF","npm_package_devDependencies_tolerant_deep_eql":"git+http://git@github.com/TiraO/deep-eql.git#06a376d","__CFBundleIdentifier":"com.jetbrains.WebStorm","CONDA_PREFIX":"/opt/miniconda3","PWD":"/Users/bgroves/avvir/repos/avvir-javascript-client","JENV_LOADED":"1","npm_package_devDependencies_webpack_node_externals":"^2.5.2","npm_package_devDependencies__babel_polyfill":"^7.12.1","STRUCTION_SITE_TEST_PASSWORD":"GjFUqb4oAQV8-_xsY!j*","REACT_APP_WEB_API_GATEWAY_DOMAIN":"https://acceptance-api.avvir.io","npm_lifecycle_event":"webpack","npm_package_devDependencies_chai":"^4.2.0","npm_package_types":"dist/esm/index.d.ts","npm_package_repository_type":"git","npm_package_name":"avvir-javascript-client","BASH_IT_LOG_LEVEL_ERROR":"1","AVVIR_CLIENT_USERNAME":"avvir-sandbox@example.com","npm_package_devDependencies__babel_preset_env":"^7.12.7","TIME_MULTIPLIER_FOR_PERFORMANCE_TESTS":"1","npm_package_devDependencies__babel_cli":"^7.12.8","npm_package_scripts_build":"yarn build-esm && yarn build-web","npm_config_version_commit_hooks":"true","XPC_FLAGS":"0x0","npm_package_devDependencies_ts_loader":"^9.2.6","npm_config_bin_links":"true","GDAL_DATA":"/opt/miniconda3/share/gdal","npm_config_wrap_output":"","REACT_APP_ENABLE_MESH_STREAMING":"true","npm_package_main":"dist/avvir_api.node.js","XPC_SERVICE_NAME":"0","_CE_M":"","npm_package_version":"0.0.1","HOME":"/Users/bgroves","SHLVL":"6","ARGO_TOKEN":"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Inozc2tteVh5UjZoSHdOYWhFdzBIZ3BVdlVrcHl2VHA5WVpUQjJ5aThncnMifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJhcmdvIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImFyZ28tdG9rZW4tNGpiNnoiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiYXJnbyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjA0NjFkNjAxLWNjZWYtNDU3ZC05YTM5LWRiMzVlNjY3M2Q0YyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDphcmdvOmFyZ28ifQ.semSE6eZ1pHuai14GRksq0b5MEl5jF2quNo6gukBFL4VhkRj2KX0hCmVNnP7ntkBwCakKmqCQipMrJCwZnldnzM0VR8YKuvbKhU108XZFUc9UfXwqpgFvm7SxZanNwWSHXsajSMASAzT5V9FWAK9mpH519MzOYk7TTF_alAQHEV6Is6yrsQp18WZr5IQn7mk-EHmnLjBFO278vjkM851zPQ8PWyxaPI_kMinxKx0ajZJ7GVtyC3ucSoc_SBCRJEuNlUpDDOSQFOWbcX8ZJSn_k8jvM1m2y9lSbQ2hIcmGqx4MG-6n8QJzNhTctYa3UstXdKNNiw4ZTBcskTk5g97Dg","STRUCTION_SITE_TEST_USERNAME":"matt@avvir.io","PDAL_DRIVER_PATH":"/opt/miniconda3/lib:/opt/miniconda3/lib/python3.9/site-packages/lib:/opt/miniconda3/lib/python3.9/site-packages/lib64:/opt/miniconda3/lib/python3.9/site-packages/pdal","npm_package_devDependencies_deepmerge":"^4.2.2","npm_package_scripts_test":"NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn rebuild","TSC_COMPILE_ON_ERROR":"true","npm_package_dependencies_three":"^0.123.0","npm_package_scripts_rebuild":"yarn clean && yarn build","npm_config_save_prefix":"^","npm_config_strict_ssl":"true","REACT_APP_MESSAGING_SENDER_ID":"28849523821","REACT_APP_PROCORE_API_DOMAIN":"https://sandbox.procore.com","npm_package_devDependencies_chai_roughly":"^1.0.0","npm_config_version_git_message":"v%s","NPM_CONFIG_PYTHON":"/usr/local/opt/python@3.9/bin/python3","npm_package_devDependencies_chai_json_equal":"^0.0.1","npm_package_browserslist_2":"Firefox ESR","npm_package_browserslist_1":"IE 11","LOGNAME":"bgroves","BASH_IT_LOG_LEVEL_WARNING":"2","REACT_APP_PROJECT_TEAM_ALLOWLIST":"-MkchJZoC8vJTPpWwlTP","CONDA_PYTHON_EXE":"/opt/miniconda3/bin/python","YARN_WRAP_OUTPUT":"false","npm_package_devDependencies__babel_register":"^7.12.1","npm_package_browserslist_0":"> 1%","PREFIX":"/usr/local","JENV_SHELL":"bash","npm_lifecycle_script":"yarn run webpack","npm_package_exports___require":"./dist/avvir_api.node.js","LC_CTYPE":"en_US.UTF-8","npm_package_devDependencies__types_sinon":"^9.0.0","ARGO_SERVER":"pipelines.avvir.io:443","NVM_BIN":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin","CONDA_DEFAULT_ENV":"base","npm_package_browser":"dist/avvir_api.web.js","TODO":"t","npm_config_version_git_sign":"","npm_config_ignore_scripts":"","npm_config_user_agent":"yarn/1.22.17 npm/? node/v12.13.1 darwin x64","npm_package_devDependencies__types_node":"^16.10.2","IRC_CLIENT":"irssi","npm_package_dependencies_jsonwebtoken":"^8.5.1","ARGO_HTTP1":"true","npm_package_dependencies_extendable_error_class":"^0.1.2","npm_package_dependencies_crypto_browserify":"^3.12.0","npm_package_files_0":"./dist","AVVIR_CLIENT_PROJECT_ID":"-MhsVwqU0U439Dpfx00U","npm_config_init_version":"1.0.0","npm_config_ignore_optional":"","SECURITYSESSIONID":"186a9","npm_package_scripts_clean":"rm -r ./dist","REACT_APP_MIXPANEL_TOKEN":"b1d53b0b983bab92eaa0f13f9f0449f6","npm_node_execpath":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node","npm_config_version_tag_prefix":"v"})[varName] != '') {
+            configuration[varName] = ({"NODE_ENV":"development","NVM_INC":"/Users/bgroves/.nvm/versions/node/v12.13.1/include/node","PROJ_LIB":"/opt/miniconda3/share/proj","ARGO_NAMESPACE":"argo","NODE":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node","SPRING_DATASOURCE_USERNAME":"avvir","npm_package_dependencies_process":"^0.11.10","INIT_CWD":"/Users/bgroves/avvir/repos/avvir-javascript-client","NVM_CD_FLAGS":"","PYENV_ROOT":"/Users/bgroves/.pyenv","AVVIR_GATEWAY_URL":"https://acceptance-api.avvir.io","npm_package_dependencies_moment":"^2.29.1","npm_package_devDependencies_typescript":"^4.1.2","npm_package_devDependencies_sinon":"^11.1.2","npm_config_version_git_tag":"true","SHELL":"/bin/bash","TERM":"xterm-256color","npm_package_devDependencies_mocha":"^8.2.1","_printf_cmd":"printf","ARGO_BASE_HREF":"","SPRING_DATASOURCE_URL":"jdbc:postgresql://localhost:5432/gatewaytest","TMPDIR":"/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/","AVVIR_SANDBOX_PASSWORD":"Peanut rung dismi$$al","PIPENV_VENV_IN_PROJECT":"1","REACT_APP_STORAGE_BUCKET":"avvir-portal-acceptance.appspot.com","REACT_APP_ENABLE_PROJECT_TEAM":"true","CONDA_SHLVL":"1","npm_package_devDependencies__babel_preset_typescript":"^7.12.7","npm_config_init_license":"MIT","AVVIR_CLIENT_PASSWORD":"Peanut rung dismi$$al","CONDA_PROMPT_MODIFIER":"(base) ","npm_package_devDependencies_babel_plugin_module_resolver":"^4.1.0","GIT_HOSTING":"git@git.domain.com","npm_package_devDependencies_chai_almost":"^1.0.1","TERM_SESSION_ID":"1edc0f5d-1219-4990-b535-f7f1880c9e96","REACT_APP_PROJECT_ID":"avvir-portal-acceptance","npm_package_devDependencies__types_mocha":"^9.0.0","AVVIR_HOME":"/Users/bgroves/avvir/repos","ARGO_INSECURE_SKIP_VERIFY":"true","REACT_APP_PROCORE_URL":"https://sandbox.procore.com","npm_config_registry":"https://registry.yarnpkg.com","SPRING_DATASOURCE_PASSWORD":"passw0rd","npm_package_devDependencies_sinon_chai":"^3.5.0","npm_package_exports___api_import":"./dist/esm/api/index.js","npm_package_repository_url":"git@github.com:Avvir/avvir-javascript-client.git","npm_package_readmeFilename":"README.md","USER":"bgroves","NVM_DIR":"/Users/bgroves/.nvm","PIPENV_IGNORE_VIRTUALENVS":"1","REACT_APP_AUTH_DOMAIN":"avvir-portal-acceptance.firebaseapp.com","npm_package_devDependencies_webpack":"5.61.0","npm_package_devDependencies_chai_things":"^0.2.0","npm_package_devDependencies__babel_plugin_transform_runtime":"^7.12.10","npm_package_description":"Javascript client for Avvir APIs","npm_config_python":"/usr/local/opt/python@3.9/bin/python3","npm_package_devDependencies_webpack_cli":"^4.2.0","npm_package_devDependencies__types_chai_datetime":"^0.0.37","npm_package_scripts_build_esm":"tsc --project tsconfig.esm.json","COMMAND_MODE":"unix2003","BASH_IT_THEME":"bobby","CONDA_EXE":"/opt/miniconda3/bin/conda","npm_package_exports___import":"./dist/esm/index.js","ARGO_SECURE":"true","KUBECONFIG":"/dev/null","SPRING_PROFILES_ACTIVE":"test","npm_package_devDependencies_chai_datetime":"^1.7.0","npm_package_devDependencies__babel_core":"^7.12.9","SSH_AUTH_SOCK":"/private/tmp/com.apple.launchd.tPqztlIlhT/Listeners","SCM_CHECK":"true","npm_package_dependencies_stream_browserify":"^3.0.0","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0","npm_package_dependencies_buffer":"^6.0.3","BASH_SILENCE_DEPRECATION_WARNING":"1","REACT_APP_GOOGLE_API_KEY":"AIzaSyBqHVFoIhvaCW2UWEwS-5kOfchVAH9Dv2k","npm_execpath":"/usr/local/Cellar/yarn/1.22.17/libexec/bin/yarn.js","npm_package_dependencies_node_fetch":"^2.6.1","SPRING_DATASOURCE_JDBC_URL":"jdbc:postgresql://localhost:5432/gatewaytest","_CONDA_SET_PDAL_PYTHON_DRIVER_PATH":"/opt/miniconda3/lib","npm_package_dependencies_util":"^0.12.4","npm_package_module":"dist/esm/index.js","BASH_IT":"/Users/bgroves/.bash_it","AVVIR_ENVIRONMENT":"acceptance","LSCOLORS":"Gxfxcxdxdxegedabagacad","REACT_APP_DATADOG_API":"pub89cf48730665a1e1e21b1866f3c28b48","_CE_CONDA":"","npm_package_devDependencies_chai_spies":"^1.0.0","PATH":"/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895419721-0.6519376669217916:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895419313-0.9027215765385588:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895415125-0.6933772538305296:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895414556-0.6399316525062433:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895410959-0.2580938600693723:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/Users/bgroves/google-cloud-sdk/bin:/Users/bgroves/.pyenv/shims:/Users/bgroves/.pyenv/bin:/Users/bgroves/.jenv/shims:/Users/bgroves/.jenv/bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/usr/local/opt/postgresql@10/bin:/usr/local/texlive/2018/bin/x86_64-darwin","AVVIR_SANDBOX_EMAIL":"avvir-sandbox@example.com","CPL_ZIP_ENCODING":"UTF-8","npm_config_argv":"{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}","npm_package_dependencies_underscore":"^1.12.0","npm_package_devDependencies_fetch_mock":"^9.11.0","npm_package_scripts_build_web":"yarn run webpack","TERMINAL_EMULATOR":"JetBrains-JediTerm","BASH_IT_LOG_LEVEL_ALL":"3","REACT_APP_PROCORE_CLIENT_ID":"2f9880fc992354445771d02c4ace7241aa0c40088d47d732c116ef986e1ae6db","PROJ_NETWORK":"ON","npm_package_devDependencies__types_sinon_chai":"^3.2.4","_":"/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin/webpack","LaunchInstanceID":"C2C6C49A-11CD-4D4B-9B13-50348705B5BF","npm_package_devDependencies_tolerant_deep_eql":"git+http://git@github.com/TiraO/deep-eql.git#06a376d","__CFBundleIdentifier":"com.jetbrains.WebStorm","CONDA_PREFIX":"/opt/miniconda3","PWD":"/Users/bgroves/avvir/repos/avvir-javascript-client","JENV_LOADED":"1","npm_package_devDependencies_webpack_node_externals":"^2.5.2","npm_package_devDependencies__babel_polyfill":"^7.12.1","STRUCTION_SITE_TEST_PASSWORD":"GjFUqb4oAQV8-_xsY!j*","REACT_APP_WEB_API_GATEWAY_DOMAIN":"https://acceptance-api.avvir.io","npm_lifecycle_event":"webpack","npm_package_devDependencies_chai":"^4.2.0","npm_package_types":"dist/esm/index.d.ts","npm_package_repository_type":"git","npm_package_name":"avvir-javascript-client","BASH_IT_LOG_LEVEL_ERROR":"1","AVVIR_CLIENT_USERNAME":"avvir-sandbox@example.com","npm_package_devDependencies__babel_preset_env":"^7.12.7","TIME_MULTIPLIER_FOR_PERFORMANCE_TESTS":"1","npm_package_devDependencies__babel_cli":"^7.12.8","npm_package_scripts_build":"yarn build-esm && yarn build-web","npm_config_version_commit_hooks":"true","XPC_FLAGS":"0x0","npm_package_devDependencies_ts_loader":"^9.2.6","npm_config_bin_links":"true","GDAL_DATA":"/opt/miniconda3/share/gdal","npm_config_wrap_output":"","REACT_APP_ENABLE_MESH_STREAMING":"true","npm_package_main":"dist/avvir_api.node.js","XPC_SERVICE_NAME":"0","_CE_M":"","npm_package_version":"0.0.1","HOME":"/Users/bgroves","SHLVL":"6","ARGO_TOKEN":"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Inozc2tteVh5UjZoSHdOYWhFdzBIZ3BVdlVrcHl2VHA5WVpUQjJ5aThncnMifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJhcmdvIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImFyZ28tdG9rZW4tNGpiNnoiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiYXJnbyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjA0NjFkNjAxLWNjZWYtNDU3ZC05YTM5LWRiMzVlNjY3M2Q0YyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDphcmdvOmFyZ28ifQ.semSE6eZ1pHuai14GRksq0b5MEl5jF2quNo6gukBFL4VhkRj2KX0hCmVNnP7ntkBwCakKmqCQipMrJCwZnldnzM0VR8YKuvbKhU108XZFUc9UfXwqpgFvm7SxZanNwWSHXsajSMASAzT5V9FWAK9mpH519MzOYk7TTF_alAQHEV6Is6yrsQp18WZr5IQn7mk-EHmnLjBFO278vjkM851zPQ8PWyxaPI_kMinxKx0ajZJ7GVtyC3ucSoc_SBCRJEuNlUpDDOSQFOWbcX8ZJSn_k8jvM1m2y9lSbQ2hIcmGqx4MG-6n8QJzNhTctYa3UstXdKNNiw4ZTBcskTk5g97Dg","STRUCTION_SITE_TEST_USERNAME":"matt@avvir.io","PDAL_DRIVER_PATH":"/opt/miniconda3/lib:/opt/miniconda3/lib/python3.9/site-packages/lib:/opt/miniconda3/lib/python3.9/site-packages/lib64:/opt/miniconda3/lib/python3.9/site-packages/pdal","npm_package_devDependencies_deepmerge":"^4.2.2","npm_package_scripts_test":"NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn rebuild","TSC_COMPILE_ON_ERROR":"true","npm_package_dependencies_three":"^0.123.0","npm_package_scripts_rebuild":"yarn clean && yarn build","npm_config_save_prefix":"^","npm_config_strict_ssl":"true","REACT_APP_MESSAGING_SENDER_ID":"28849523821","REACT_APP_PROCORE_API_DOMAIN":"https://sandbox.procore.com","npm_package_devDependencies_chai_roughly":"^1.0.0","npm_config_version_git_message":"v%s","NPM_CONFIG_PYTHON":"/usr/local/opt/python@3.9/bin/python3","npm_package_devDependencies_chai_json_equal":"^0.0.1","npm_package_browserslist_2":"Firefox ESR","npm_package_browserslist_1":"IE 11","LOGNAME":"bgroves","BASH_IT_LOG_LEVEL_WARNING":"2","REACT_APP_PROJECT_TEAM_ALLOWLIST":"-MkchJZoC8vJTPpWwlTP","CONDA_PYTHON_EXE":"/opt/miniconda3/bin/python","YARN_WRAP_OUTPUT":"false","npm_package_devDependencies__babel_register":"^7.12.1","npm_package_browserslist_0":"> 1%","PREFIX":"/usr/local","JENV_SHELL":"bash","npm_lifecycle_script":"yarn run webpack","npm_package_exports___require":"./dist/avvir_api.node.js","LC_CTYPE":"en_US.UTF-8","npm_package_devDependencies__types_sinon":"^9.0.0","ARGO_SERVER":"pipelines.avvir.io:443","NVM_BIN":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin","CONDA_DEFAULT_ENV":"base","npm_package_browser":"dist/avvir_api.web.js","TODO":"t","npm_config_version_git_sign":"","npm_config_ignore_scripts":"","npm_config_user_agent":"yarn/1.22.17 npm/? node/v12.13.1 darwin x64","npm_package_devDependencies__types_node":"^16.10.2","IRC_CLIENT":"irssi","npm_package_dependencies_jsonwebtoken":"^8.5.1","ARGO_HTTP1":"true","npm_package_dependencies_extendable_error_class":"^0.1.2","npm_package_dependencies_crypto_browserify":"^3.12.0","npm_package_files_0":"./dist","AVVIR_CLIENT_PROJECT_ID":"-MhsVwqU0U439Dpfx00U","npm_config_init_version":"1.0.0","npm_config_ignore_optional":"","SECURITYSESSIONID":"186a9","npm_package_scripts_clean":"rm -r ./dist","REACT_APP_MIXPANEL_TOKEN":"b1d53b0b983bab92eaa0f13f9f0449f6","npm_node_execpath":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node","npm_config_version_tag_prefix":"v"})[varName];
         }
     });
 };
@@ -94642,11 +94750,11 @@ var Matrix4Converter = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9050);
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1271);
 /* harmony import */ var _models_enums_purpose_type__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5295);
 
 
-var apiPurposeTypeByPurposeType = underscore__WEBPACK_IMPORTED_MODULE_0__/* ["default"].invert */ .ZP.invert(_models_enums_purpose_type__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var apiPurposeTypeByPurposeType = underscore__WEBPACK_IMPORTED_MODULE_0__["default"].invert(_models_enums_purpose_type__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var purposeTypeByApiPurposeType = _models_enums_purpose_type__WEBPACK_IMPORTED_MODULE_1__["default"];
 var PurposeTypeConverter = /** @class */ (function () {
     function PurposeTypeConverter() {
@@ -94660,6 +94768,129 @@ var PurposeTypeConverter = /** @class */ (function () {
     return PurposeTypeConverter;
 }());
 /* harmony default export */ __webpack_exports__["default"] = (PurposeTypeConverter);
+
+
+/***/ }),
+
+/***/ 2352:
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GatewayUser": function() { return /* reexport safe */ _utilities_get_authorization_headers__WEBPACK_IMPORTED_MODULE_13__.GatewayUser; },
+/* harmony export */   "UserRole": function() { return /* reexport safe */ _models_enums_user_role__WEBPACK_IMPORTED_MODULE_14__["default"]; },
+/* harmony export */   "ApiArgoResponse": function() { return /* reexport safe */ _models_api_api_argo_response__WEBPACK_IMPORTED_MODULE_15__["default"]; },
+/* harmony export */   "ApiCloudFile": function() { return /* reexport safe */ _models_api_api_cloud_file__WEBPACK_IMPORTED_MODULE_16__["default"]; },
+/* harmony export */   "ApiConstructionGrid": function() { return /* reexport safe */ _models_api_api_construction_grid__WEBPACK_IMPORTED_MODULE_17__["default"]; },
+/* harmony export */   "ApiFloor": function() { return /* reexport safe */ _models_api_api_floor__WEBPACK_IMPORTED_MODULE_18__["default"]; },
+/* harmony export */   "ApiGridLine": function() { return /* reexport safe */ _models_api_api_grid_line__WEBPACK_IMPORTED_MODULE_19__["default"]; },
+/* harmony export */   "ApiInvitation": function() { return /* reexport safe */ _models_api_api_invitation__WEBPACK_IMPORTED_MODULE_20__["default"]; },
+/* harmony export */   "ApiMasterformat": function() { return /* reexport safe */ _models_api_api_masterformat__WEBPACK_IMPORTED_MODULE_21__["default"]; },
+/* harmony export */   "ApiMatrix3": function() { return /* reexport safe */ _models_api_api_matrix_3__WEBPACK_IMPORTED_MODULE_22__["default"]; },
+/* harmony export */   "ApiMatrix4": function() { return /* reexport safe */ _models_api_api_matrix_4__WEBPACK_IMPORTED_MODULE_23__["default"]; },
+/* harmony export */   "ApiOrganization": function() { return /* reexport safe */ _models_api_api_organization__WEBPACK_IMPORTED_MODULE_24__["default"]; },
+/* harmony export */   "ApiPhotoArea": function() { return /* reexport safe */ _models_api_api_photo_area__WEBPACK_IMPORTED_MODULE_25__["default"]; },
+/* harmony export */   "ApiPhotoLocation": function() { return /* reexport safe */ _models_api_api_photo_location__WEBPACK_IMPORTED_MODULE_26__["default"]; },
+/* harmony export */   "ApiPhotoLocation3d": function() { return /* reexport safe */ _models_api_api_photo_location_3d__WEBPACK_IMPORTED_MODULE_27__["default"]; },
+/* harmony export */   "ApiPhotoSession": function() { return /* reexport safe */ _models_api_api_photo_session__WEBPACK_IMPORTED_MODULE_28__["default"]; },
+/* harmony export */   "ApiPipeline": function() { return /* reexport safe */ _models_api_api_pipeline__WEBPACK_IMPORTED_MODULE_29__["default"]; },
+/* harmony export */   "ApiPlannedElement": function() { return /* reexport safe */ _models_api_api_planned_element__WEBPACK_IMPORTED_MODULE_30__["default"]; },
+/* harmony export */   "ApiProject": function() { return /* reexport safe */ _models_api_api_project__WEBPACK_IMPORTED_MODULE_31__["default"]; },
+/* harmony export */   "ApiProjectCostAnalysisProgress": function() { return /* reexport safe */ _models_api_api_project_cost_analysis_progress__WEBPACK_IMPORTED_MODULE_32__["default"]; },
+/* harmony export */   "ApiProjectMasterformatProgress": function() { return /* reexport safe */ _models_api_api_project_masterformat_progress__WEBPACK_IMPORTED_MODULE_33__["default"]; },
+/* harmony export */   "ApiProjectPurposeType": function() { return /* reexport safe */ _models_api_api_purpose_type__WEBPACK_IMPORTED_MODULE_35__.ApiProjectPurposeType; },
+/* harmony export */   "ApiFloorPurposeType": function() { return /* reexport safe */ _models_api_api_purpose_type__WEBPACK_IMPORTED_MODULE_35__.ApiFloorPurposeType; },
+/* harmony export */   "ApiScanDatasetPurposeType": function() { return /* reexport safe */ _models_api_api_purpose_type__WEBPACK_IMPORTED_MODULE_35__.ApiScanDatasetPurposeType; },
+/* harmony export */   "ApiPhotoAreaPurposeType": function() { return /* reexport safe */ _models_api_api_purpose_type__WEBPACK_IMPORTED_MODULE_35__.ApiPhotoAreaPurposeType; },
+/* harmony export */   "ApiUser": function() { return /* reexport safe */ _models_api_api_user__WEBPACK_IMPORTED_MODULE_34__["default"]; },
+/* harmony export */   "AuthApi": function() { return /* reexport safe */ _api_auth_api__WEBPACK_IMPORTED_MODULE_1__["default"]; },
+/* harmony export */   "Config": function() { return /* reexport safe */ _config__WEBPACK_IMPORTED_MODULE_2__["default"]; },
+/* harmony export */   "ElementApi": function() { return /* reexport safe */ _api_element_api__WEBPACK_IMPORTED_MODULE_3__["default"]; },
+/* harmony export */   "FileInformationApi": function() { return /* reexport safe */ _api_file_information_api__WEBPACK_IMPORTED_MODULE_4__["default"]; },
+/* harmony export */   "FloorApi": function() { return /* reexport safe */ _api_floor_api__WEBPACK_IMPORTED_MODULE_5__["default"]; },
+/* harmony export */   "OrganizationApi": function() { return /* reexport safe */ _api_organization_api__WEBPACK_IMPORTED_MODULE_6__["default"]; },
+/* harmony export */   "PhotoAreaApi": function() { return /* reexport safe */ _api_photo_area_api__WEBPACK_IMPORTED_MODULE_7__["default"]; },
+/* harmony export */   "PipelineApi": function() { return /* reexport safe */ _api_pipeline_api__WEBPACK_IMPORTED_MODULE_8__["default"]; },
+/* harmony export */   "ProjectApi": function() { return /* reexport safe */ _api_project_api__WEBPACK_IMPORTED_MODULE_9__["default"]; },
+/* harmony export */   "ScanDatasetApi": function() { return /* reexport safe */ _api_scan_dataset_api__WEBPACK_IMPORTED_MODULE_10__["default"]; },
+/* harmony export */   "WebGatewayApi": function() { return /* reexport safe */ _api_web_gateway_api__WEBPACK_IMPORTED_MODULE_11__["default"]; },
+/* harmony export */   "UserApi": function() { return /* reexport safe */ _api_user_api__WEBPACK_IMPORTED_MODULE_12__["default"]; }
+/* harmony export */ });
+/* harmony import */ var _avvir_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5489);
+/* harmony import */ var _api_auth_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(829);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5508);
+/* harmony import */ var _api_element_api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(7325);
+/* harmony import */ var _api_file_information_api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9513);
+/* harmony import */ var _api_floor_api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(972);
+/* harmony import */ var _api_organization_api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9940);
+/* harmony import */ var _api_photo_area_api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(5817);
+/* harmony import */ var _api_pipeline_api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(4393);
+/* harmony import */ var _api_project_api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(555);
+/* harmony import */ var _api_scan_dataset_api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(4835);
+/* harmony import */ var _api_web_gateway_api__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(7146);
+/* harmony import */ var _api_user_api__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(3867);
+/* harmony import */ var _utilities_get_authorization_headers__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(5561);
+/* harmony import */ var _models_enums_user_role__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(2076);
+/* harmony import */ var _models_api_api_argo_response__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(8450);
+/* harmony import */ var _models_api_api_cloud_file__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(277);
+/* harmony import */ var _models_api_api_construction_grid__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(7117);
+/* harmony import */ var _models_api_api_floor__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(1596);
+/* harmony import */ var _models_api_api_grid_line__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(2179);
+/* harmony import */ var _models_api_api_invitation__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(5515);
+/* harmony import */ var _models_api_api_masterformat__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(8069);
+/* harmony import */ var _models_api_api_matrix_3__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(7494);
+/* harmony import */ var _models_api_api_matrix_4__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(6645);
+/* harmony import */ var _models_api_api_organization__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(6835);
+/* harmony import */ var _models_api_api_photo_area__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(9297);
+/* harmony import */ var _models_api_api_photo_location__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(1390);
+/* harmony import */ var _models_api_api_photo_location_3d__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(7801);
+/* harmony import */ var _models_api_api_photo_session__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(3379);
+/* harmony import */ var _models_api_api_pipeline__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(5621);
+/* harmony import */ var _models_api_api_planned_element__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(6099);
+/* harmony import */ var _models_api_api_project__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(933);
+/* harmony import */ var _models_api_api_project_cost_analysis_progress__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(4819);
+/* harmony import */ var _models_api_api_project_masterformat_progress__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(6061);
+/* harmony import */ var _models_api_api_user__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(9217);
+/* harmony import */ var _models_api_api_purpose_type__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(3979);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_avvir_api__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
 /***/ }),
@@ -94742,7 +94973,7 @@ var addInstantGetterAndSetterToApiModel = function (modelInstance, propertyName)
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9050);
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1271);
 var __read = (undefined && undefined.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
     if (!m) return o;
@@ -94771,9 +95002,9 @@ var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from
 
 var addLoggingToInstanceMethods = function (instance, instanceName, ignoredMethods) {
     var _a;
-    var instanceMethods = underscore__WEBPACK_IMPORTED_MODULE_0__/* ["default"].methods */ .ZP.methods(instance);
+    var instanceMethods = underscore__WEBPACK_IMPORTED_MODULE_0__["default"].methods(instance);
     if (ignoredMethods) {
-        instanceMethods = (_a = (0,underscore__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .ZP)(instanceMethods)).without.apply(_a, __spreadArray([], __read(ignoredMethods), false));
+        instanceMethods = (_a = (0,underscore__WEBPACK_IMPORTED_MODULE_0__["default"])(instanceMethods)).without.apply(_a, __spreadArray([], __read(ignoredMethods), false));
     }
     instanceMethods.forEach(function (methodName) {
         if (!ignoredMethods.includes(methodName)) {
@@ -94926,6 +95157,16 @@ var ApiConstructionGrid = /** @class */ (function () {
     return ApiConstructionGrid;
 }());
 /* harmony default export */ __webpack_exports__["default"] = (ApiConstructionGrid);
+
+
+/***/ }),
+
+/***/ 2844:
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
 
 
 /***/ }),
@@ -95687,6 +95928,27 @@ var ApiScanDataset = /** @class */ (function () {
 
 /***/ }),
 
+/***/ 9217:
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var ApiUser = /** @class */ (function () {
+    function ApiUser(_a) {
+        var _b = _a === void 0 ? {} : _a, name = _b.name, userOrganization = _b.userOrganization, email = _b.email, role = _b.role, projectId = _b.projectId;
+        this.name = name;
+        this.userOrganization = userOrganization;
+        this.email = email;
+        this.role = role;
+        this.projectId = projectId;
+    }
+    return ApiUser;
+}());
+/* harmony default export */ __webpack_exports__["default"] = (ApiUser);
+
+
+/***/ }),
+
 /***/ 6732:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -95787,7 +96049,7 @@ var PhotoArea = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2212);
-/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9050);
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1271);
 /* harmony import */ var _mixins_add_read_only_properties_to_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5025);
 /* harmony import */ var _converters_matrix_4_converter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2908);
 var __assign = (undefined && undefined.__assign) || function () {
@@ -95840,7 +96102,7 @@ var PhotoLocation = /** @class */ (function () {
         this.yawOffset = yawOffset;
     }
     PhotoLocation.fromApi = function (apiPhotoLocation) {
-        return new PhotoLocation(__assign(__assign({}, underscore__WEBPACK_IMPORTED_MODULE_1__/* ["default"].omit */ .ZP.omit(apiPhotoLocation, "minimapX", "minimapY", "file")), { fileId: apiPhotoLocation.file.id, minimapCoordinates: {
+        return new PhotoLocation(__assign(__assign({}, underscore__WEBPACK_IMPORTED_MODULE_1__["default"].omit(apiPhotoLocation, "minimapX", "minimapY", "file")), { fileId: apiPhotoLocation.file.id, minimapCoordinates: {
                 x: apiPhotoLocation.minimapX,
                 y: apiPhotoLocation.minimapY
             } }));
@@ -96012,6 +96274,88 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 9127:
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DeviationTolerance": function() { return /* binding */ DeviationTolerance; },
+/* harmony export */   "ViewAttributes": function() { return /* binding */ ViewAttributes; }
+/* harmony export */ });
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2212);
+/* harmony import */ var _mixins_add_date_getter_and_setter_to_domain_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6553);
+
+
+var DeviationTolerance = /** @class */ (function () {
+    function DeviationTolerance(tolerance) {
+        if (tolerance === void 0) { tolerance = {}; }
+        var value = tolerance.value, systemOfMeasurement = tolerance.systemOfMeasurement;
+        this.value = value;
+        this.systemOfMeasurement = systemOfMeasurement;
+    }
+    return DeviationTolerance;
+}());
+
+var ViewTrades = /** @class */ (function () {
+    function ViewTrades(trades) {
+        if (trades === void 0) { trades = {}; }
+        var shownUniformatCodes = trades.shownUniformatCodes;
+        this.shownUniformatCodes = shownUniformatCodes;
+    }
+    return ViewTrades;
+}());
+var ViewCamera = /** @class */ (function () {
+    function ViewCamera(camera) {
+        if (camera === void 0) { camera = {}; }
+        var position = camera.position, target = camera.target;
+        this.position = new three__WEBPACK_IMPORTED_MODULE_0__["default"].Vector3(position === null || position === void 0 ? void 0 : position.x, position === null || position === void 0 ? void 0 : position.y, position === null || position === void 0 ? void 0 : position.z);
+        this.target = new three__WEBPACK_IMPORTED_MODULE_0__["default"].Vector3(target === null || target === void 0 ? void 0 : target.x, target === null || target === void 0 ? void 0 : target.y, target === null || target === void 0 ? void 0 : target.z);
+    }
+    return ViewCamera;
+}());
+var ViewFilters = /** @class */ (function () {
+    function ViewFilters(filters) {
+        if (filters === void 0) { filters = {}; }
+        var trades = filters.trades, deviationTolerance = filters.deviationTolerance;
+        this.trades = new ViewTrades(trades);
+        this.deviationTolerance = new DeviationTolerance(deviationTolerance);
+    }
+    return ViewFilters;
+}());
+var ViewAttributes = /** @class */ (function () {
+    function ViewAttributes(attributes) {
+        if (attributes === void 0) { attributes = {}; }
+        var camera = attributes.camera, filters = attributes.filters, selectedElements = attributes.selectedElements, inspectionMode = attributes.inspectionMode;
+        this.camera = new ViewCamera(camera);
+        this.filters = new ViewFilters(filters);
+        this.selectedElements = selectedElements;
+        this.inspectionMode = inspectionMode;
+    }
+    return ViewAttributes;
+}());
+
+var View = /** @class */ (function () {
+    function View(view) {
+        if (view === void 0) { view = {}; }
+        var id = view.id, firebaseProjectId = view.firebaseProjectId, firebaseFloorId = view.firebaseFloorId, firebaseScanDatasetId = view.firebaseScanDatasetId, viewAttributes = view.viewAttributes, createdBy = view.createdBy, createdAt = view.createdAt;
+        (0,_mixins_add_date_getter_and_setter_to_domain_model__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "createdAt");
+        this.id = id;
+        this.firebaseProjectId = firebaseProjectId;
+        this.firebaseFloorId = firebaseFloorId;
+        this.firebaseScanDatasetId = firebaseScanDatasetId;
+        this.viewAttributes = new ViewAttributes(viewAttributes);
+        this.createdBy = createdBy;
+        // @ts-ignore
+        this.createdAt = createdAt;
+    }
+    return View;
+}());
+/* harmony default export */ __webpack_exports__["default"] = (View);
+
+
+/***/ }),
+
 /***/ 9142:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -96053,6 +96397,40 @@ __webpack_require__.r(__webpack_exports__);
 var ELEMENTS_STATUSES_UPDATED = "elements_statuses_updated";
 var API_FAILURE = "api_failure";
 var UPLOAD_FAILED = "upload_failed";
+
+
+/***/ }),
+
+/***/ 941:
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "InspectionMode": function() { return /* binding */ InspectionMode; },
+/* harmony export */   "qualityControlBimLegacy": function() { return /* binding */ qualityControlBimLegacy; },
+/* harmony export */   "qualityControlBim": function() { return /* binding */ qualityControlBim; },
+/* harmony export */   "fullBim": function() { return /* binding */ fullBim; },
+/* harmony export */   "monitorBim": function() { return /* binding */ monitorBim; }
+/* harmony export */ });
+var InspectionMode;
+(function (InspectionMode) {
+    InspectionMode["qualityControlBimLegacy"] = "qualityControlBimLegacy";
+    InspectionMode["qualityControlBim"] = "qualityControlBim";
+    InspectionMode["fullBim"] = "fullBim";
+    InspectionMode["monitorBim"] = "monitorBim";
+})(InspectionMode || (InspectionMode = {}));
+var qualityControlBimLegacy = InspectionMode.qualityControlBimLegacy;
+var qualityControlBim = InspectionMode.qualityControlBim;
+var fullBim = InspectionMode.fullBim;
+var monitorBim = InspectionMode.monitorBim;
+var inspectionModes = [
+    { displayName: "Avvir Inspect (Legacy)", value: qualityControlBimLegacy },
+    { displayName: "Avvir Inspect", value: qualityControlBim },
+    { displayName: "Basic BIM", value: fullBim },
+    { displayName: "Avvir Progress", value: monitorBim },
+];
+/* harmony default export */ __webpack_exports__["default"] = (inspectionModes);
 
 
 /***/ }),
@@ -96440,15 +96818,24 @@ var FIREBASE = UserAuthType.FIREBASE;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SUPERADMIN": function() { return /* binding */ SUPERADMIN; },
-/* harmony export */   "USER": function() { return /* binding */ USER; }
+/* harmony export */   "USER": function() { return /* binding */ USER; },
+/* harmony export */   "SUBCONTRACTOR": function() { return /* binding */ SUBCONTRACTOR; },
+/* harmony export */   "VDC_MANAGER": function() { return /* binding */ VDC_MANAGER; },
+/* harmony export */   "GENERAL_CONTRACTOR": function() { return /* binding */ GENERAL_CONTRACTOR; }
 /* harmony export */ });
 var UserRole;
 (function (UserRole) {
     UserRole["SUPERADMIN"] = "SUPERADMIN";
     UserRole["USER"] = "USER";
+    UserRole["SUBCONTRACTOR"] = "SUBCONTRACTOR";
+    UserRole["VDC_MANAGER"] = "VDC_MANAGER";
+    UserRole["GENERAL_CONTRACTOR"] = "GENERAL_CONTRACTOR";
 })(UserRole || (UserRole = {}));
 var SUPERADMIN = UserRole.SUPERADMIN;
 var USER = UserRole.USER;
+var SUBCONTRACTOR = UserRole.SUBCONTRACTOR;
+var VDC_MANAGER = UserRole.VDC_MANAGER;
+var GENERAL_CONTRACTOR = UserRole.GENERAL_CONTRACTOR;
 /* harmony default export */ __webpack_exports__["default"] = (UserRole);
 
 
@@ -96529,7 +96916,7 @@ var checkFetchStatus = function (response) {
     }
     else {
         return response.json().then(function (errorBody) {
-            var message = errorBody.message;
+            var message = errorBody.errorDetails || errorBody.message;
             var statusMessage = _resources_response_statuses_json__WEBPACK_IMPORTED_MODULE_1__[response.status];
             var verboseMessage = response.status + " " + statusMessage + ": '" + message + "' at `" + requestPath + "`";
             var error = new _models_response_error__WEBPACK_IMPORTED_MODULE_0__["default"](message, verboseMessage, response, errorBody);
@@ -96555,11 +96942,13 @@ __webpack_require__.r(__webpack_exports__);
 /* provided dependency */ var Buffer = __webpack_require__(8764)["Buffer"];
 
 var GatewayUser = /** @class */ (function () {
-    function GatewayUser(authType, idToken, role) {
+    function GatewayUser(authType, idToken, role, storageToken, redirectUrl) {
         this.authType = authType;
         this.gatewayUser = {
             idToken: idToken,
-            role: role
+            role: role,
+            storageToken: storageToken,
+            redirectUrl: redirectUrl
         };
     }
     return GatewayUser;
@@ -96637,6 +97026,14 @@ var Http = /** @class */ (function () {
             headers: __assign(__assign({}, (0,_request_headers__WEBPACK_IMPORTED_MODULE_1__.httpGetHeaders)(contentType)), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__["default"])(user))
         });
     };
+    Http.put = function (url, user, body, contentType) {
+        if (contentType === void 0) { contentType = "application/json"; }
+        return Http.fetch(url, {
+            method: "PUT",
+            headers: __assign(__assign({}, (0,_request_headers__WEBPACK_IMPORTED_MODULE_1__.httpGetHeaders)(contentType)), (0,_get_authorization_headers__WEBPACK_IMPORTED_MODULE_0__["default"])(user)),
+            body: JSON.stringify(body)
+        });
+    };
     Http.delete = function (url, user) {
         return Http.fetch(url, {
             method: "DELETE",
@@ -96683,7 +97080,7 @@ var Http = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9050);
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1271);
 /* harmony import */ var _check_fetch_status__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7583);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5508);
 var __read = (undefined && undefined.__read) || function (o, n) {
@@ -96733,12 +97130,12 @@ var makeErrorsPrettyForFunction = function (actionName, action) {
 var getFunctionNames = function (clazz) {
     var builtinProperties = ["length", "constructor", "name", "prototype"];
     // TODO it might make sense to check the type of each property
-    return underscore__WEBPACK_IMPORTED_MODULE_0__/* ["default"].without.apply */ .ZP.without.apply(underscore__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .ZP, __spreadArray([Object.getOwnPropertyNames(clazz)], __read(builtinProperties), false));
+    return underscore__WEBPACK_IMPORTED_MODULE_0__["default"].without.apply(underscore__WEBPACK_IMPORTED_MODULE_0__["default"], __spreadArray([Object.getOwnPropertyNames(clazz)], __read(builtinProperties), false));
 };
 var makeErrorsPretty = function (apiClass, options) {
     if (options === void 0) { options = { exclude: [] }; }
     var functionNames = getFunctionNames(apiClass);
-    underscore__WEBPACK_IMPORTED_MODULE_0__/* ["default"].forEach */ .ZP.forEach(functionNames, function (functionName) {
+    underscore__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(functionNames, function (functionName) {
         var isExcluded = options.exclude && options.exclude.includes(functionName);
         if (!isExcluded) {
             apiClass[functionName] = makeErrorsPrettyForFunction(functionName, apiClass[functionName]);
@@ -96838,10 +97235,10 @@ var httpGetHeaders = makeGetHeaders;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9050);
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1271);
 
 var serializeForm = function (form) {
-    return (0,underscore__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .ZP)(form).reduce(function (piecesSoFar, value, field) {
+    return (0,underscore__WEBPACK_IMPORTED_MODULE_0__["default"])(form).reduce(function (piecesSoFar, value, field) {
         piecesSoFar.push(encodeURIComponent(field) + "=" + encodeURIComponent(value));
         return piecesSoFar;
     }, []).join("&");
@@ -96851,1425 +97248,162 @@ var serializeForm = function (form) {
 
 /***/ }),
 
-/***/ 4927:
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
-
-
-/**
- * Module exports.
- */
-
-module.exports = deprecate;
-
-/**
- * Mark that a method should not be used.
- * Returns a modified function which warns once by default.
- *
- * If `localStorage.noDeprecation = true` is set, then it is a no-op.
- *
- * If `localStorage.throwDeprecation = true` is set, then deprecated functions
- * will throw an Error when invoked.
- *
- * If `localStorage.traceDeprecation = true` is set, then deprecated functions
- * will invoke `console.trace()` instead of `console.error()`.
- *
- * @param {Function} fn - the function to deprecate
- * @param {String} msg - the string to print to the console when `fn` is invoked
- * @returns {Function} a new "deprecated" version of `fn`
- * @api public
- */
-
-function deprecate (fn, msg) {
-  if (config('noDeprecation')) {
-    return fn;
-  }
-
-  var warned = false;
-  function deprecated() {
-    if (!warned) {
-      if (config('throwDeprecation')) {
-        throw new Error(msg);
-      } else if (config('traceDeprecation')) {
-        console.trace(msg);
-      } else {
-        console.warn(msg);
-      }
-      warned = true;
-    }
-    return fn.apply(this, arguments);
-  }
-
-  return deprecated;
-}
-
-/**
- * Checks `localStorage` for boolean values for the given `name`.
- *
- * @param {String} name
- * @returns {Boolean}
- * @api private
- */
-
-function config (name) {
-  // accessing global.localStorage can trigger a DOMException in sandboxed iframes
-  try {
-    if (!__webpack_require__.g.localStorage) return false;
-  } catch (_) {
-    return false;
-  }
-  var val = __webpack_require__.g.localStorage[name];
-  if (null == val) return false;
-  return String(val).toLowerCase() === 'true';
-}
-
-
-/***/ }),
-
-/***/ 384:
-/***/ (function(module) {
-
-module.exports = function isBuffer(arg) {
-  return arg && typeof arg === 'object'
-    && typeof arg.copy === 'function'
-    && typeof arg.fill === 'function'
-    && typeof arg.readUInt8 === 'function';
-}
-
-/***/ }),
-
-/***/ 5955:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ 1271:
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// Currently in sync with Node.js lib/internal/util/types.js
-// https://github.com/nodejs/node/commit/112cc7c27551254aa2b17098fb774867f05ed0d9
-
-
-
-var isArgumentsObject = __webpack_require__(2584);
-var isGeneratorFunction = __webpack_require__(8662);
-var whichTypedArray = __webpack_require__(6430);
-var isTypedArray = __webpack_require__(5692);
-
-function uncurryThis(f) {
-  return f.call.bind(f);
-}
-
-var BigIntSupported = typeof BigInt !== 'undefined';
-var SymbolSupported = typeof Symbol !== 'undefined';
-
-var ObjectToString = uncurryThis(Object.prototype.toString);
-
-var numberValue = uncurryThis(Number.prototype.valueOf);
-var stringValue = uncurryThis(String.prototype.valueOf);
-var booleanValue = uncurryThis(Boolean.prototype.valueOf);
-
-if (BigIntSupported) {
-  var bigIntValue = uncurryThis(BigInt.prototype.valueOf);
-}
-
-if (SymbolSupported) {
-  var symbolValue = uncurryThis(Symbol.prototype.valueOf);
-}
-
-function checkBoxedPrimitive(value, prototypeValueOf) {
-  if (typeof value !== 'object') {
-    return false;
-  }
-  try {
-    prototypeValueOf(value);
-    return true;
-  } catch(e) {
-    return false;
-  }
-}
-
-exports.isArgumentsObject = isArgumentsObject;
-exports.isGeneratorFunction = isGeneratorFunction;
-exports.isTypedArray = isTypedArray;
-
-// Taken from here and modified for better browser support
-// https://github.com/sindresorhus/p-is-promise/blob/cda35a513bda03f977ad5cde3a079d237e82d7ef/index.js
-function isPromise(input) {
-	return (
-		(
-			typeof Promise !== 'undefined' &&
-			input instanceof Promise
-		) ||
-		(
-			input !== null &&
-			typeof input === 'object' &&
-			typeof input.then === 'function' &&
-			typeof input.catch === 'function'
-		)
-	);
-}
-exports.isPromise = isPromise;
-
-function isArrayBufferView(value) {
-  if (typeof ArrayBuffer !== 'undefined' && ArrayBuffer.isView) {
-    return ArrayBuffer.isView(value);
-  }
-
-  return (
-    isTypedArray(value) ||
-    isDataView(value)
-  );
-}
-exports.isArrayBufferView = isArrayBufferView;
-
-
-function isUint8Array(value) {
-  return whichTypedArray(value) === 'Uint8Array';
-}
-exports.isUint8Array = isUint8Array;
-
-function isUint8ClampedArray(value) {
-  return whichTypedArray(value) === 'Uint8ClampedArray';
-}
-exports.isUint8ClampedArray = isUint8ClampedArray;
-
-function isUint16Array(value) {
-  return whichTypedArray(value) === 'Uint16Array';
-}
-exports.isUint16Array = isUint16Array;
-
-function isUint32Array(value) {
-  return whichTypedArray(value) === 'Uint32Array';
-}
-exports.isUint32Array = isUint32Array;
-
-function isInt8Array(value) {
-  return whichTypedArray(value) === 'Int8Array';
-}
-exports.isInt8Array = isInt8Array;
-
-function isInt16Array(value) {
-  return whichTypedArray(value) === 'Int16Array';
-}
-exports.isInt16Array = isInt16Array;
-
-function isInt32Array(value) {
-  return whichTypedArray(value) === 'Int32Array';
-}
-exports.isInt32Array = isInt32Array;
-
-function isFloat32Array(value) {
-  return whichTypedArray(value) === 'Float32Array';
-}
-exports.isFloat32Array = isFloat32Array;
-
-function isFloat64Array(value) {
-  return whichTypedArray(value) === 'Float64Array';
-}
-exports.isFloat64Array = isFloat64Array;
-
-function isBigInt64Array(value) {
-  return whichTypedArray(value) === 'BigInt64Array';
-}
-exports.isBigInt64Array = isBigInt64Array;
-
-function isBigUint64Array(value) {
-  return whichTypedArray(value) === 'BigUint64Array';
-}
-exports.isBigUint64Array = isBigUint64Array;
-
-function isMapToString(value) {
-  return ObjectToString(value) === '[object Map]';
-}
-isMapToString.working = (
-  typeof Map !== 'undefined' &&
-  isMapToString(new Map())
-);
-
-function isMap(value) {
-  if (typeof Map === 'undefined') {
-    return false;
-  }
-
-  return isMapToString.working
-    ? isMapToString(value)
-    : value instanceof Map;
-}
-exports.isMap = isMap;
-
-function isSetToString(value) {
-  return ObjectToString(value) === '[object Set]';
-}
-isSetToString.working = (
-  typeof Set !== 'undefined' &&
-  isSetToString(new Set())
-);
-function isSet(value) {
-  if (typeof Set === 'undefined') {
-    return false;
-  }
-
-  return isSetToString.working
-    ? isSetToString(value)
-    : value instanceof Set;
-}
-exports.isSet = isSet;
-
-function isWeakMapToString(value) {
-  return ObjectToString(value) === '[object WeakMap]';
-}
-isWeakMapToString.working = (
-  typeof WeakMap !== 'undefined' &&
-  isWeakMapToString(new WeakMap())
-);
-function isWeakMap(value) {
-  if (typeof WeakMap === 'undefined') {
-    return false;
-  }
-
-  return isWeakMapToString.working
-    ? isWeakMapToString(value)
-    : value instanceof WeakMap;
-}
-exports.isWeakMap = isWeakMap;
-
-function isWeakSetToString(value) {
-  return ObjectToString(value) === '[object WeakSet]';
-}
-isWeakSetToString.working = (
-  typeof WeakSet !== 'undefined' &&
-  isWeakSetToString(new WeakSet())
-);
-function isWeakSet(value) {
-  return isWeakSetToString(value);
-}
-exports.isWeakSet = isWeakSet;
-
-function isArrayBufferToString(value) {
-  return ObjectToString(value) === '[object ArrayBuffer]';
-}
-isArrayBufferToString.working = (
-  typeof ArrayBuffer !== 'undefined' &&
-  isArrayBufferToString(new ArrayBuffer())
-);
-function isArrayBuffer(value) {
-  if (typeof ArrayBuffer === 'undefined') {
-    return false;
-  }
-
-  return isArrayBufferToString.working
-    ? isArrayBufferToString(value)
-    : value instanceof ArrayBuffer;
-}
-exports.isArrayBuffer = isArrayBuffer;
-
-function isDataViewToString(value) {
-  return ObjectToString(value) === '[object DataView]';
-}
-isDataViewToString.working = (
-  typeof ArrayBuffer !== 'undefined' &&
-  typeof DataView !== 'undefined' &&
-  isDataViewToString(new DataView(new ArrayBuffer(1), 0, 1))
-);
-function isDataView(value) {
-  if (typeof DataView === 'undefined') {
-    return false;
-  }
-
-  return isDataViewToString.working
-    ? isDataViewToString(value)
-    : value instanceof DataView;
-}
-exports.isDataView = isDataView;
-
-// Store a copy of SharedArrayBuffer in case it's deleted elsewhere
-var SharedArrayBufferCopy = typeof SharedArrayBuffer !== 'undefined' ? SharedArrayBuffer : undefined;
-function isSharedArrayBufferToString(value) {
-  return ObjectToString(value) === '[object SharedArrayBuffer]';
-}
-function isSharedArrayBuffer(value) {
-  if (typeof SharedArrayBufferCopy === 'undefined') {
-    return false;
-  }
-
-  if (typeof isSharedArrayBufferToString.working === 'undefined') {
-    isSharedArrayBufferToString.working = isSharedArrayBufferToString(new SharedArrayBufferCopy());
-  }
-
-  return isSharedArrayBufferToString.working
-    ? isSharedArrayBufferToString(value)
-    : value instanceof SharedArrayBufferCopy;
-}
-exports.isSharedArrayBuffer = isSharedArrayBuffer;
-
-function isAsyncFunction(value) {
-  return ObjectToString(value) === '[object AsyncFunction]';
-}
-exports.isAsyncFunction = isAsyncFunction;
-
-function isMapIterator(value) {
-  return ObjectToString(value) === '[object Map Iterator]';
-}
-exports.isMapIterator = isMapIterator;
-
-function isSetIterator(value) {
-  return ObjectToString(value) === '[object Set Iterator]';
-}
-exports.isSetIterator = isSetIterator;
-
-function isGeneratorObject(value) {
-  return ObjectToString(value) === '[object Generator]';
-}
-exports.isGeneratorObject = isGeneratorObject;
-
-function isWebAssemblyCompiledModule(value) {
-  return ObjectToString(value) === '[object WebAssembly.Module]';
-}
-exports.isWebAssemblyCompiledModule = isWebAssemblyCompiledModule;
-
-function isNumberObject(value) {
-  return checkBoxedPrimitive(value, numberValue);
-}
-exports.isNumberObject = isNumberObject;
-
-function isStringObject(value) {
-  return checkBoxedPrimitive(value, stringValue);
-}
-exports.isStringObject = isStringObject;
-
-function isBooleanObject(value) {
-  return checkBoxedPrimitive(value, booleanValue);
-}
-exports.isBooleanObject = isBooleanObject;
-
-function isBigIntObject(value) {
-  return BigIntSupported && checkBoxedPrimitive(value, bigIntValue);
-}
-exports.isBigIntObject = isBigIntObject;
-
-function isSymbolObject(value) {
-  return SymbolSupported && checkBoxedPrimitive(value, symbolValue);
-}
-exports.isSymbolObject = isSymbolObject;
-
-function isBoxedPrimitive(value) {
-  return (
-    isNumberObject(value) ||
-    isStringObject(value) ||
-    isBooleanObject(value) ||
-    isBigIntObject(value) ||
-    isSymbolObject(value)
-  );
-}
-exports.isBoxedPrimitive = isBoxedPrimitive;
-
-function isAnyArrayBuffer(value) {
-  return typeof Uint8Array !== 'undefined' && (
-    isArrayBuffer(value) ||
-    isSharedArrayBuffer(value)
-  );
-}
-exports.isAnyArrayBuffer = isAnyArrayBuffer;
-
-['isProxy', 'isExternal', 'isModuleNamespaceObject'].forEach(function(method) {
-  Object.defineProperty(exports, method, {
-    enumerable: false,
-    value: function() {
-      throw new Error(method + ' is not supported in userland');
-    }
-  });
-});
-
-
-/***/ }),
-
-/***/ 9539:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-/* provided dependency */ var process = __webpack_require__(4155);
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-var getOwnPropertyDescriptors = Object.getOwnPropertyDescriptors ||
-  function getOwnPropertyDescriptors(obj) {
-    var keys = Object.keys(obj);
-    var descriptors = {};
-    for (var i = 0; i < keys.length; i++) {
-      descriptors[keys[i]] = Object.getOwnPropertyDescriptor(obj, keys[i]);
-    }
-    return descriptors;
-  };
-
-var formatRegExp = /%[sdj%]/g;
-exports.format = function(f) {
-  if (!isString(f)) {
-    var objects = [];
-    for (var i = 0; i < arguments.length; i++) {
-      objects.push(inspect(arguments[i]));
-    }
-    return objects.join(' ');
-  }
-
-  var i = 1;
-  var args = arguments;
-  var len = args.length;
-  var str = String(f).replace(formatRegExp, function(x) {
-    if (x === '%%') return '%';
-    if (i >= len) return x;
-    switch (x) {
-      case '%s': return String(args[i++]);
-      case '%d': return Number(args[i++]);
-      case '%j':
-        try {
-          return JSON.stringify(args[i++]);
-        } catch (_) {
-          return '[Circular]';
-        }
-      default:
-        return x;
-    }
-  });
-  for (var x = args[i]; i < len; x = args[++i]) {
-    if (isNull(x) || !isObject(x)) {
-      str += ' ' + x;
-    } else {
-      str += ' ' + inspect(x);
-    }
-  }
-  return str;
-};
-
-
-// Mark that a method should not be used.
-// Returns a modified function which warns once by default.
-// If --no-deprecation is set, then it is a no-op.
-exports.deprecate = function(fn, msg) {
-  if (typeof process !== 'undefined' && process.noDeprecation === true) {
-    return fn;
-  }
-
-  // Allow for deprecating things in the process of starting up.
-  if (typeof process === 'undefined') {
-    return function() {
-      return exports.deprecate(fn, msg).apply(this, arguments);
-    };
-  }
-
-  var warned = false;
-  function deprecated() {
-    if (!warned) {
-      if (process.throwDeprecation) {
-        throw new Error(msg);
-      } else if (process.traceDeprecation) {
-        console.trace(msg);
-      } else {
-        console.error(msg);
-      }
-      warned = true;
-    }
-    return fn.apply(this, arguments);
-  }
-
-  return deprecated;
-};
-
-
-var debugs = {};
-var debugEnvRegex = /^$/;
-
-if (({"NODE_ENV":"development","NVM_INC":"/Users/tira/.nvm/versions/node/v12.13.1/include/node","NODE":"/Users/tira/.nvm/versions/node/v12.13.1/bin/node","npm_package_dependencies_process":"^0.11.10","INIT_CWD":"/Users/tira/dev/avvir/avvir-javascript-client","NVM_CD_FLAGS":"","npm_package_dependencies_moment":"^2.29.1","npm_package_devDependencies_typescript":"^4.1.2","npm_package_devDependencies_sinon":"^11.1.2","npm_config_version_git_tag":"true","TERM":"xterm-256color","SHELL":"/bin/bash","npm_package_devDependencies_mocha":"^8.2.1","HISTSIZE":"5000","TMPDIR":"/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/","PIPENV_VENV_IN_PROJECT":"true#","npm_package_devDependencies__babel_preset_typescript":"^7.12.7","npm_config_init_license":"MIT","npm_package_devDependencies_babel_plugin_module_resolver":"^4.1.0","GIT_HOSTING":"git@git.domain.com","npm_package_devDependencies_chai_almost":"^1.0.1","npm_package_devDependencies__types_mocha":"^9.0.0","npm_config_registry":"https://registry.yarnpkg.com","npm_package_devDependencies_sinon_chai":"^3.5.0","npm_package_repository_url":"git@github.com:Avvir/avvir-javascript-client.git","npm_package_readmeFilename":"README.md","USER":"tira","NVM_DIR":"/Users/tira/.nvm","npm_package_devDependencies_webpack":"5.61.0","npm_package_devDependencies_chai_things":"^0.2.0","npm_package_devDependencies__babel_plugin_transform_runtime":"^7.12.10","npm_package_description":"Javascript client for Avvir APIs","npm_config_python":"/usr/bin/python","npm_package_devDependencies_webpack_cli":"^4.2.0","npm_package_devDependencies__types_chai_datetime":"^0.0.37","COMMAND_MODE":"unix2003","BASH_IT_THEME":"bobby","npm_package_devDependencies_chai_datetime":"^1.7.0","npm_package_devDependencies__babel_core":"^7.12.9","SSH_AUTH_SOCK":"/private/tmp/com.apple.launchd.ltYKi71bmC/Listeners","SCM_CHECK":"true","npm_package_dependencies_stream_browserify":"^3.0.0","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0","npm_package_dependencies_buffer":"^6.0.3","npm_execpath":"/usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js","npm_package_dependencies_node_fetch":"^2.6.1","AUTOFEATURE":"true autotest","npm_package_dependencies_util":"^0.12.4","npm_package_module":"dist/avvir_api.node.js","BASH_IT":"/Users/tira/.bash_it","AVVIR_ENVIRONMENT":"acceptance","LSCOLORS":"Gxfxcxdxdxegedabagacad","npm_package_devDependencies_chai_spies":"^1.0.0","PATH":"/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387238410-0.235470333478351:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387238077-0.5699721185585229:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387229494-0.5675910285460073:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin","npm_config_argv":"{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}","npm_package_dependencies_underscore":"^1.12.0","npm_package_devDependencies_fetch_mock":"^9.11.0","TERMINAL_EMULATOR":"JetBrains-JediTerm","npm_package_devDependencies__types_sinon_chai":"^3.2.4","_":"/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin/webpack","LaunchInstanceID":"DE5B7E1A-368B-46D6-A106-A7138355768A","npm_package_devDependencies_tolerant_deep_eql":"git+http://git@github.com/TiraO/deep-eql.git#06a376d","PWD":"/Users/tira/dev/avvir/avvir-javascript-client","npm_package_devDependencies_webpack_node_externals":"^2.5.2","npm_package_devDependencies__babel_polyfill":"^7.12.1","npm_lifecycle_event":"webpack","npm_package_devDependencies_chai":"^4.2.0","npm_package_repository_type":"git","npm_package_name":"avvir-javascript-client","npm_package_devDependencies__babel_preset_env":"^7.12.7","npm_package_devDependencies__babel_cli":"^7.12.8","npm_package_scripts_build":"yarn run webpack","npm_config_version_commit_hooks":"true","XPC_FLAGS":"0x0","npm_package_devDependencies_ts_loader":"^9.2.6","npm_config_bin_links":"true","npm_config_wrap_output":"","npm_package_main":"dist/avvir_api.node.js","XPC_SERVICE_NAME":"0","HISTCONTROL":"ignorespace:erasedups","npm_package_version":"0.0.1","HOME":"/Users/tira","SHLVL":"4","FLYWAY_CONFIG_FILES":"config/flyway.generated.conf","npm_package_devDependencies_deepmerge":"^4.2.2","npm_package_scripts_test":"NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn run build","npm_package_dependencies_three":"^0.123.0","npm_config_save_prefix":"^","npm_config_strict_ssl":"true","npm_package_devDependencies_chai_roughly":"^1.0.0","npm_config_version_git_message":"v%s","NPM_CONFIG_PYTHON":"/usr/bin/python","npm_package_devDependencies_chai_json_equal":"^0.0.1","npm_package_browserslist_2":"Firefox ESR","npm_package_browserslist_1":"IE 11","LOGNAME":"tira","YARN_WRAP_OUTPUT":"false","npm_package_devDependencies__babel_register":"^7.12.1","npm_package_browserslist_0":"> 1%","PREFIX":"/usr/local","npm_lifecycle_script":"yarn run webpack","LC_CTYPE":"en_US.UTF-8","npm_package_devDependencies__types_sinon":"^9.0.0","NVM_BIN":"/Users/tira/.nvm/versions/node/v12.13.1/bin","TODO":"t","npm_config_version_git_sign":"","npm_config_ignore_scripts":"","npm_config_user_agent":"yarn/1.22.4 npm/? node/v12.13.1 darwin x64","npm_package_devDependencies__types_node":"^16.10.2","IRC_CLIENT":"irssi","npm_package_dependencies_jsonwebtoken":"^8.5.1","npm_package_dependencies_extendable_error_class":"^0.1.2","npm_package_dependencies_crypto_browserify":"^3.12.0","npm_config_init_version":"1.0.0","npm_config_ignore_optional":"","SECURITYSESSIONID":"186a9","npm_node_execpath":"/Users/tira/.nvm/versions/node/v12.13.1/bin/node","npm_config_version_tag_prefix":"v"}).NODE_DEBUG) {
-  var debugEnv = ({"NODE_ENV":"development","NVM_INC":"/Users/tira/.nvm/versions/node/v12.13.1/include/node","NODE":"/Users/tira/.nvm/versions/node/v12.13.1/bin/node","npm_package_dependencies_process":"^0.11.10","INIT_CWD":"/Users/tira/dev/avvir/avvir-javascript-client","NVM_CD_FLAGS":"","npm_package_dependencies_moment":"^2.29.1","npm_package_devDependencies_typescript":"^4.1.2","npm_package_devDependencies_sinon":"^11.1.2","npm_config_version_git_tag":"true","TERM":"xterm-256color","SHELL":"/bin/bash","npm_package_devDependencies_mocha":"^8.2.1","HISTSIZE":"5000","TMPDIR":"/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/","PIPENV_VENV_IN_PROJECT":"true#","npm_package_devDependencies__babel_preset_typescript":"^7.12.7","npm_config_init_license":"MIT","npm_package_devDependencies_babel_plugin_module_resolver":"^4.1.0","GIT_HOSTING":"git@git.domain.com","npm_package_devDependencies_chai_almost":"^1.0.1","npm_package_devDependencies__types_mocha":"^9.0.0","npm_config_registry":"https://registry.yarnpkg.com","npm_package_devDependencies_sinon_chai":"^3.5.0","npm_package_repository_url":"git@github.com:Avvir/avvir-javascript-client.git","npm_package_readmeFilename":"README.md","USER":"tira","NVM_DIR":"/Users/tira/.nvm","npm_package_devDependencies_webpack":"5.61.0","npm_package_devDependencies_chai_things":"^0.2.0","npm_package_devDependencies__babel_plugin_transform_runtime":"^7.12.10","npm_package_description":"Javascript client for Avvir APIs","npm_config_python":"/usr/bin/python","npm_package_devDependencies_webpack_cli":"^4.2.0","npm_package_devDependencies__types_chai_datetime":"^0.0.37","COMMAND_MODE":"unix2003","BASH_IT_THEME":"bobby","npm_package_devDependencies_chai_datetime":"^1.7.0","npm_package_devDependencies__babel_core":"^7.12.9","SSH_AUTH_SOCK":"/private/tmp/com.apple.launchd.ltYKi71bmC/Listeners","SCM_CHECK":"true","npm_package_dependencies_stream_browserify":"^3.0.0","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0","npm_package_dependencies_buffer":"^6.0.3","npm_execpath":"/usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js","npm_package_dependencies_node_fetch":"^2.6.1","AUTOFEATURE":"true autotest","npm_package_dependencies_util":"^0.12.4","npm_package_module":"dist/avvir_api.node.js","BASH_IT":"/Users/tira/.bash_it","AVVIR_ENVIRONMENT":"acceptance","LSCOLORS":"Gxfxcxdxdxegedabagacad","npm_package_devDependencies_chai_spies":"^1.0.0","PATH":"/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387238410-0.235470333478351:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387238077-0.5699721185585229:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/fl/ws9b87bx777834897bzzz34r0000gn/T/yarn--1638387229494-0.5675910285460073:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin:/Users/tira/.config/yarn/link/node_modules/.bin:/Users/tira/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/Users/tira/.nvm/versions/node/v12.13.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin","npm_config_argv":"{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}","npm_package_dependencies_underscore":"^1.12.0","npm_package_devDependencies_fetch_mock":"^9.11.0","TERMINAL_EMULATOR":"JetBrains-JediTerm","npm_package_devDependencies__types_sinon_chai":"^3.2.4","_":"/Users/tira/dev/avvir/avvir-javascript-client/node_modules/.bin/webpack","LaunchInstanceID":"DE5B7E1A-368B-46D6-A106-A7138355768A","npm_package_devDependencies_tolerant_deep_eql":"git+http://git@github.com/TiraO/deep-eql.git#06a376d","PWD":"/Users/tira/dev/avvir/avvir-javascript-client","npm_package_devDependencies_webpack_node_externals":"^2.5.2","npm_package_devDependencies__babel_polyfill":"^7.12.1","npm_lifecycle_event":"webpack","npm_package_devDependencies_chai":"^4.2.0","npm_package_repository_type":"git","npm_package_name":"avvir-javascript-client","npm_package_devDependencies__babel_preset_env":"^7.12.7","npm_package_devDependencies__babel_cli":"^7.12.8","npm_package_scripts_build":"yarn run webpack","npm_config_version_commit_hooks":"true","XPC_FLAGS":"0x0","npm_package_devDependencies_ts_loader":"^9.2.6","npm_config_bin_links":"true","npm_config_wrap_output":"","npm_package_main":"dist/avvir_api.node.js","XPC_SERVICE_NAME":"0","HISTCONTROL":"ignorespace:erasedups","npm_package_version":"0.0.1","HOME":"/Users/tira","SHLVL":"4","FLYWAY_CONFIG_FILES":"config/flyway.generated.conf","npm_package_devDependencies_deepmerge":"^4.2.2","npm_package_scripts_test":"NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn run build","npm_package_dependencies_three":"^0.123.0","npm_config_save_prefix":"^","npm_config_strict_ssl":"true","npm_package_devDependencies_chai_roughly":"^1.0.0","npm_config_version_git_message":"v%s","NPM_CONFIG_PYTHON":"/usr/bin/python","npm_package_devDependencies_chai_json_equal":"^0.0.1","npm_package_browserslist_2":"Firefox ESR","npm_package_browserslist_1":"IE 11","LOGNAME":"tira","YARN_WRAP_OUTPUT":"false","npm_package_devDependencies__babel_register":"^7.12.1","npm_package_browserslist_0":"> 1%","PREFIX":"/usr/local","npm_lifecycle_script":"yarn run webpack","LC_CTYPE":"en_US.UTF-8","npm_package_devDependencies__types_sinon":"^9.0.0","NVM_BIN":"/Users/tira/.nvm/versions/node/v12.13.1/bin","TODO":"t","npm_config_version_git_sign":"","npm_config_ignore_scripts":"","npm_config_user_agent":"yarn/1.22.4 npm/? node/v12.13.1 darwin x64","npm_package_devDependencies__types_node":"^16.10.2","IRC_CLIENT":"irssi","npm_package_dependencies_jsonwebtoken":"^8.5.1","npm_package_dependencies_extendable_error_class":"^0.1.2","npm_package_dependencies_crypto_browserify":"^3.12.0","npm_config_init_version":"1.0.0","npm_config_ignore_optional":"","SECURITYSESSIONID":"186a9","npm_node_execpath":"/Users/tira/.nvm/versions/node/v12.13.1/bin/node","npm_config_version_tag_prefix":"v"}).NODE_DEBUG;
-  debugEnv = debugEnv.replace(/[|\\{}()[\]^$+?.]/g, '\\$&')
-    .replace(/\*/g, '.*')
-    .replace(/,/g, '$|^')
-    .toUpperCase();
-  debugEnvRegex = new RegExp('^' + debugEnv + '$', 'i');
-}
-exports.debuglog = function(set) {
-  set = set.toUpperCase();
-  if (!debugs[set]) {
-    if (debugEnvRegex.test(set)) {
-      var pid = process.pid;
-      debugs[set] = function() {
-        var msg = exports.format.apply(exports, arguments);
-        console.error('%s %d: %s', set, pid, msg);
-      };
-    } else {
-      debugs[set] = function() {};
-    }
-  }
-  return debugs[set];
-};
-
-
-/**
- * Echos the value of a value. Trys to print the value out
- * in the best way possible given the different types.
- *
- * @param {Object} obj The object to print out.
- * @param {Object} opts Optional options object that alters the output.
- */
-/* legacy: obj, showHidden, depth, colors*/
-function inspect(obj, opts) {
-  // default options
-  var ctx = {
-    seen: [],
-    stylize: stylizeNoColor
-  };
-  // legacy...
-  if (arguments.length >= 3) ctx.depth = arguments[2];
-  if (arguments.length >= 4) ctx.colors = arguments[3];
-  if (isBoolean(opts)) {
-    // legacy...
-    ctx.showHidden = opts;
-  } else if (opts) {
-    // got an "options" object
-    exports._extend(ctx, opts);
-  }
-  // set default options
-  if (isUndefined(ctx.showHidden)) ctx.showHidden = false;
-  if (isUndefined(ctx.depth)) ctx.depth = 2;
-  if (isUndefined(ctx.colors)) ctx.colors = false;
-  if (isUndefined(ctx.customInspect)) ctx.customInspect = true;
-  if (ctx.colors) ctx.stylize = stylizeWithColor;
-  return formatValue(ctx, obj, ctx.depth);
-}
-exports.inspect = inspect;
-
-
-// http://en.wikipedia.org/wiki/ANSI_escape_code#graphics
-inspect.colors = {
-  'bold' : [1, 22],
-  'italic' : [3, 23],
-  'underline' : [4, 24],
-  'inverse' : [7, 27],
-  'white' : [37, 39],
-  'grey' : [90, 39],
-  'black' : [30, 39],
-  'blue' : [34, 39],
-  'cyan' : [36, 39],
-  'green' : [32, 39],
-  'magenta' : [35, 39],
-  'red' : [31, 39],
-  'yellow' : [33, 39]
-};
-
-// Don't use 'blue' not visible on cmd.exe
-inspect.styles = {
-  'special': 'cyan',
-  'number': 'yellow',
-  'boolean': 'yellow',
-  'undefined': 'grey',
-  'null': 'bold',
-  'string': 'green',
-  'date': 'magenta',
-  // "name": intentionally not styling
-  'regexp': 'red'
-};
-
-
-function stylizeWithColor(str, styleType) {
-  var style = inspect.styles[styleType];
-
-  if (style) {
-    return '\u001b[' + inspect.colors[style][0] + 'm' + str +
-           '\u001b[' + inspect.colors[style][1] + 'm';
-  } else {
-    return str;
-  }
-}
-
-
-function stylizeNoColor(str, styleType) {
-  return str;
-}
-
-
-function arrayToHash(array) {
-  var hash = {};
-
-  array.forEach(function(val, idx) {
-    hash[val] = true;
-  });
-
-  return hash;
-}
-
-
-function formatValue(ctx, value, recurseTimes) {
-  // Provide a hook for user-specified inspect functions.
-  // Check that value is an object with an inspect function on it
-  if (ctx.customInspect &&
-      value &&
-      isFunction(value.inspect) &&
-      // Filter out the util module, it's inspect function is special
-      value.inspect !== exports.inspect &&
-      // Also filter out any prototype objects using the circular check.
-      !(value.constructor && value.constructor.prototype === value)) {
-    var ret = value.inspect(recurseTimes, ctx);
-    if (!isString(ret)) {
-      ret = formatValue(ctx, ret, recurseTimes);
-    }
-    return ret;
-  }
-
-  // Primitive types cannot have properties
-  var primitive = formatPrimitive(ctx, value);
-  if (primitive) {
-    return primitive;
-  }
-
-  // Look up the keys of the object.
-  var keys = Object.keys(value);
-  var visibleKeys = arrayToHash(keys);
-
-  if (ctx.showHidden) {
-    keys = Object.getOwnPropertyNames(value);
-  }
-
-  // IE doesn't make error fields non-enumerable
-  // http://msdn.microsoft.com/en-us/library/ie/dww52sbt(v=vs.94).aspx
-  if (isError(value)
-      && (keys.indexOf('message') >= 0 || keys.indexOf('description') >= 0)) {
-    return formatError(value);
-  }
-
-  // Some type of object without properties can be shortcutted.
-  if (keys.length === 0) {
-    if (isFunction(value)) {
-      var name = value.name ? ': ' + value.name : '';
-      return ctx.stylize('[Function' + name + ']', 'special');
-    }
-    if (isRegExp(value)) {
-      return ctx.stylize(RegExp.prototype.toString.call(value), 'regexp');
-    }
-    if (isDate(value)) {
-      return ctx.stylize(Date.prototype.toString.call(value), 'date');
-    }
-    if (isError(value)) {
-      return formatError(value);
-    }
-  }
-
-  var base = '', array = false, braces = ['{', '}'];
-
-  // Make Array say that they are Array
-  if (isArray(value)) {
-    array = true;
-    braces = ['[', ']'];
-  }
-
-  // Make functions say that they are functions
-  if (isFunction(value)) {
-    var n = value.name ? ': ' + value.name : '';
-    base = ' [Function' + n + ']';
-  }
-
-  // Make RegExps say that they are RegExps
-  if (isRegExp(value)) {
-    base = ' ' + RegExp.prototype.toString.call(value);
-  }
-
-  // Make dates with properties first say the date
-  if (isDate(value)) {
-    base = ' ' + Date.prototype.toUTCString.call(value);
-  }
-
-  // Make error with message first say the error
-  if (isError(value)) {
-    base = ' ' + formatError(value);
-  }
-
-  if (keys.length === 0 && (!array || value.length == 0)) {
-    return braces[0] + base + braces[1];
-  }
-
-  if (recurseTimes < 0) {
-    if (isRegExp(value)) {
-      return ctx.stylize(RegExp.prototype.toString.call(value), 'regexp');
-    } else {
-      return ctx.stylize('[Object]', 'special');
-    }
-  }
-
-  ctx.seen.push(value);
-
-  var output;
-  if (array) {
-    output = formatArray(ctx, value, recurseTimes, visibleKeys, keys);
-  } else {
-    output = keys.map(function(key) {
-      return formatProperty(ctx, value, recurseTimes, visibleKeys, key, array);
-    });
-  }
-
-  ctx.seen.pop();
-
-  return reduceToSingleString(output, base, braces);
-}
-
-
-function formatPrimitive(ctx, value) {
-  if (isUndefined(value))
-    return ctx.stylize('undefined', 'undefined');
-  if (isString(value)) {
-    var simple = '\'' + JSON.stringify(value).replace(/^"|"$/g, '')
-                                             .replace(/'/g, "\\'")
-                                             .replace(/\\"/g, '"') + '\'';
-    return ctx.stylize(simple, 'string');
-  }
-  if (isNumber(value))
-    return ctx.stylize('' + value, 'number');
-  if (isBoolean(value))
-    return ctx.stylize('' + value, 'boolean');
-  // For some reason typeof null is "object", so special case here.
-  if (isNull(value))
-    return ctx.stylize('null', 'null');
-}
-
-
-function formatError(value) {
-  return '[' + Error.prototype.toString.call(value) + ']';
-}
-
-
-function formatArray(ctx, value, recurseTimes, visibleKeys, keys) {
-  var output = [];
-  for (var i = 0, l = value.length; i < l; ++i) {
-    if (hasOwnProperty(value, String(i))) {
-      output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
-          String(i), true));
-    } else {
-      output.push('');
-    }
-  }
-  keys.forEach(function(key) {
-    if (!key.match(/^\d+$/)) {
-      output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
-          key, true));
-    }
-  });
-  return output;
-}
-
-
-function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
-  var name, str, desc;
-  desc = Object.getOwnPropertyDescriptor(value, key) || { value: value[key] };
-  if (desc.get) {
-    if (desc.set) {
-      str = ctx.stylize('[Getter/Setter]', 'special');
-    } else {
-      str = ctx.stylize('[Getter]', 'special');
-    }
-  } else {
-    if (desc.set) {
-      str = ctx.stylize('[Setter]', 'special');
-    }
-  }
-  if (!hasOwnProperty(visibleKeys, key)) {
-    name = '[' + key + ']';
-  }
-  if (!str) {
-    if (ctx.seen.indexOf(desc.value) < 0) {
-      if (isNull(recurseTimes)) {
-        str = formatValue(ctx, desc.value, null);
-      } else {
-        str = formatValue(ctx, desc.value, recurseTimes - 1);
-      }
-      if (str.indexOf('\n') > -1) {
-        if (array) {
-          str = str.split('\n').map(function(line) {
-            return '  ' + line;
-          }).join('\n').substr(2);
-        } else {
-          str = '\n' + str.split('\n').map(function(line) {
-            return '   ' + line;
-          }).join('\n');
-        }
-      }
-    } else {
-      str = ctx.stylize('[Circular]', 'special');
-    }
-  }
-  if (isUndefined(name)) {
-    if (array && key.match(/^\d+$/)) {
-      return str;
-    }
-    name = JSON.stringify('' + key);
-    if (name.match(/^"([a-zA-Z_][a-zA-Z_0-9]*)"$/)) {
-      name = name.substr(1, name.length - 2);
-      name = ctx.stylize(name, 'name');
-    } else {
-      name = name.replace(/'/g, "\\'")
-                 .replace(/\\"/g, '"')
-                 .replace(/(^"|"$)/g, "'");
-      name = ctx.stylize(name, 'string');
-    }
-  }
-
-  return name + ': ' + str;
-}
-
-
-function reduceToSingleString(output, base, braces) {
-  var numLinesEst = 0;
-  var length = output.reduce(function(prev, cur) {
-    numLinesEst++;
-    if (cur.indexOf('\n') >= 0) numLinesEst++;
-    return prev + cur.replace(/\u001b\[\d\d?m/g, '').length + 1;
-  }, 0);
-
-  if (length > 60) {
-    return braces[0] +
-           (base === '' ? '' : base + '\n ') +
-           ' ' +
-           output.join(',\n  ') +
-           ' ' +
-           braces[1];
-  }
-
-  return braces[0] + base + ' ' + output.join(', ') + ' ' + braces[1];
-}
-
-
-// NOTE: These type checking functions intentionally don't use `instanceof`
-// because it is fragile and can be easily faked with `Object.create()`.
-exports.types = __webpack_require__(5955);
-
-function isArray(ar) {
-  return Array.isArray(ar);
-}
-exports.isArray = isArray;
-
-function isBoolean(arg) {
-  return typeof arg === 'boolean';
-}
-exports.isBoolean = isBoolean;
-
-function isNull(arg) {
-  return arg === null;
-}
-exports.isNull = isNull;
-
-function isNullOrUndefined(arg) {
-  return arg == null;
-}
-exports.isNullOrUndefined = isNullOrUndefined;
-
-function isNumber(arg) {
-  return typeof arg === 'number';
-}
-exports.isNumber = isNumber;
-
-function isString(arg) {
-  return typeof arg === 'string';
-}
-exports.isString = isString;
-
-function isSymbol(arg) {
-  return typeof arg === 'symbol';
-}
-exports.isSymbol = isSymbol;
-
-function isUndefined(arg) {
-  return arg === void 0;
-}
-exports.isUndefined = isUndefined;
-
-function isRegExp(re) {
-  return isObject(re) && objectToString(re) === '[object RegExp]';
-}
-exports.isRegExp = isRegExp;
-exports.types.isRegExp = isRegExp;
-
-function isObject(arg) {
-  return typeof arg === 'object' && arg !== null;
-}
-exports.isObject = isObject;
-
-function isDate(d) {
-  return isObject(d) && objectToString(d) === '[object Date]';
-}
-exports.isDate = isDate;
-exports.types.isDate = isDate;
-
-function isError(e) {
-  return isObject(e) &&
-      (objectToString(e) === '[object Error]' || e instanceof Error);
-}
-exports.isError = isError;
-exports.types.isNativeError = isError;
-
-function isFunction(arg) {
-  return typeof arg === 'function';
-}
-exports.isFunction = isFunction;
-
-function isPrimitive(arg) {
-  return arg === null ||
-         typeof arg === 'boolean' ||
-         typeof arg === 'number' ||
-         typeof arg === 'string' ||
-         typeof arg === 'symbol' ||  // ES6 symbol
-         typeof arg === 'undefined';
-}
-exports.isPrimitive = isPrimitive;
-
-exports.isBuffer = __webpack_require__(384);
-
-function objectToString(o) {
-  return Object.prototype.toString.call(o);
-}
-
-
-function pad(n) {
-  return n < 10 ? '0' + n.toString(10) : n.toString(10);
-}
-
-
-var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
-              'Oct', 'Nov', 'Dec'];
-
-// 26 Feb 16:19:34
-function timestamp() {
-  var d = new Date();
-  var time = [pad(d.getHours()),
-              pad(d.getMinutes()),
-              pad(d.getSeconds())].join(':');
-  return [d.getDate(), months[d.getMonth()], time].join(' ');
-}
-
-
-// log is just a thin wrapper to console.log that prepends a timestamp
-exports.log = function() {
-  console.log('%s - %s', timestamp(), exports.format.apply(exports, arguments));
-};
-
-
-/**
- * Inherit the prototype methods from one constructor into another.
- *
- * The Function.prototype.inherits from lang.js rewritten as a standalone
- * function (not on Function.prototype). NOTE: If this file is to be loaded
- * during bootstrapping this function needs to be rewritten using some native
- * functions as prototype setup using normal JavaScript does not work as
- * expected during bootstrapping (see mirror.js in r114903).
- *
- * @param {function} ctor Constructor function which needs to inherit the
- *     prototype.
- * @param {function} superCtor Constructor function to inherit prototype from.
- */
-exports.inherits = __webpack_require__(5717);
-
-exports._extend = function(origin, add) {
-  // Don't do anything if add isn't an object
-  if (!add || !isObject(add)) return origin;
-
-  var keys = Object.keys(add);
-  var i = keys.length;
-  while (i--) {
-    origin[keys[i]] = add[keys[i]];
-  }
-  return origin;
-};
-
-function hasOwnProperty(obj, prop) {
-  return Object.prototype.hasOwnProperty.call(obj, prop);
-}
-
-var kCustomPromisifiedSymbol = typeof Symbol !== 'undefined' ? Symbol('util.promisify.custom') : undefined;
-
-exports.promisify = function promisify(original) {
-  if (typeof original !== 'function')
-    throw new TypeError('The "original" argument must be of type Function');
-
-  if (kCustomPromisifiedSymbol && original[kCustomPromisifiedSymbol]) {
-    var fn = original[kCustomPromisifiedSymbol];
-    if (typeof fn !== 'function') {
-      throw new TypeError('The "util.promisify.custom" argument must be of type Function');
-    }
-    Object.defineProperty(fn, kCustomPromisifiedSymbol, {
-      value: fn, enumerable: false, writable: false, configurable: true
-    });
-    return fn;
-  }
-
-  function fn() {
-    var promiseResolve, promiseReject;
-    var promise = new Promise(function (resolve, reject) {
-      promiseResolve = resolve;
-      promiseReject = reject;
-    });
-
-    var args = [];
-    for (var i = 0; i < arguments.length; i++) {
-      args.push(arguments[i]);
-    }
-    args.push(function (err, value) {
-      if (err) {
-        promiseReject(err);
-      } else {
-        promiseResolve(value);
-      }
-    });
-
-    try {
-      original.apply(this, args);
-    } catch (err) {
-      promiseReject(err);
-    }
-
-    return promise;
-  }
-
-  Object.setPrototypeOf(fn, Object.getPrototypeOf(original));
-
-  if (kCustomPromisifiedSymbol) Object.defineProperty(fn, kCustomPromisifiedSymbol, {
-    value: fn, enumerable: false, writable: false, configurable: true
-  });
-  return Object.defineProperties(
-    fn,
-    getOwnPropertyDescriptors(original)
-  );
-}
-
-exports.promisify.custom = kCustomPromisifiedSymbol
-
-function callbackifyOnRejected(reason, cb) {
-  // `!reason` guard inspired by bluebird (Ref: https://goo.gl/t5IS6M).
-  // Because `null` is a special error value in callbacks which means "no error
-  // occurred", we error-wrap so the callback consumer can distinguish between
-  // "the promise rejected with null" or "the promise fulfilled with undefined".
-  if (!reason) {
-    var newReason = new Error('Promise was rejected with a falsy value');
-    newReason.reason = reason;
-    reason = newReason;
-  }
-  return cb(reason);
-}
-
-function callbackify(original) {
-  if (typeof original !== 'function') {
-    throw new TypeError('The "original" argument must be of type Function');
-  }
-
-  // We DO NOT return the promise as it gives the user a false sense that
-  // the promise is actually somehow related to the callback's execution
-  // and that the callback throwing will reject the promise.
-  function callbackified() {
-    var args = [];
-    for (var i = 0; i < arguments.length; i++) {
-      args.push(arguments[i]);
-    }
-
-    var maybeCb = args.pop();
-    if (typeof maybeCb !== 'function') {
-      throw new TypeError('The last argument must be of type Function');
-    }
-    var self = this;
-    var cb = function() {
-      return maybeCb.apply(self, arguments);
-    };
-    // In true node style we process the callback on `nextTick` with all the
-    // implications (stack, `uncaughtException`, `async_hooks`)
-    original.apply(this, args)
-      .then(function(ret) { process.nextTick(cb.bind(null, null, ret)) },
-            function(rej) { process.nextTick(callbackifyOnRejected.bind(null, rej, cb)) });
-  }
-
-  Object.setPrototypeOf(callbackified, Object.getPrototypeOf(original));
-  Object.defineProperties(callbackified,
-                          getOwnPropertyDescriptors(original));
-  return callbackified;
-}
-exports.callbackify = callbackify;
-
-
-/***/ }),
-
-/***/ 6430:
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
-
-"use strict";
-
-
-var forEach = __webpack_require__(9804);
-var availableTypedArrays = __webpack_require__(3083);
-var callBound = __webpack_require__(1924);
-
-var $toString = callBound('Object.prototype.toString');
-var hasToStringTag = __webpack_require__(6410)();
-
-var g = typeof globalThis === 'undefined' ? __webpack_require__.g : globalThis;
-var typedArrays = availableTypedArrays();
-
-var $slice = callBound('String.prototype.slice');
-var toStrTags = {};
-var gOPD = __webpack_require__(882);
-var getPrototypeOf = Object.getPrototypeOf; // require('getprototypeof');
-if (hasToStringTag && gOPD && getPrototypeOf) {
-	forEach(typedArrays, function (typedArray) {
-		if (typeof g[typedArray] === 'function') {
-			var arr = new g[typedArray]();
-			if (Symbol.toStringTag in arr) {
-				var proto = getPrototypeOf(arr);
-				var descriptor = gOPD(proto, Symbol.toStringTag);
-				if (!descriptor) {
-					var superProto = getPrototypeOf(proto);
-					descriptor = gOPD(superProto, Symbol.toStringTag);
-				}
-				toStrTags[typedArray] = descriptor.get;
-			}
-		}
-	});
-}
-
-var tryTypedArrays = function tryAllTypedArrays(value) {
-	var foundName = false;
-	forEach(toStrTags, function (getter, typedArray) {
-		if (!foundName) {
-			try {
-				var name = getter.call(value);
-				if (name === typedArray) {
-					foundName = name;
-				}
-			} catch (e) {}
-		}
-	});
-	return foundName;
-};
-
-var isTypedArray = __webpack_require__(5692);
-
-module.exports = function whichTypedArray(value) {
-	if (!isTypedArray(value)) { return false; }
-	if (!hasToStringTag || !(Symbol.toStringTag in value)) { return $slice($toString(value), 8, -1); }
-	return tryTypedArrays(value);
-};
-
-
-/***/ }),
-
-/***/ 5422:
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
-
-var map = {
-	"./api/auth_api.ts": 829,
-	"./api/element_api.ts": 7325,
-	"./api/file_information_api.ts": 9513,
-	"./api/floor_api.ts": 972,
-	"./api/organization_api.ts": 9940,
-	"./api/photo_area_api.ts": 5817,
-	"./api/pipeline_api.ts": 4393,
-	"./api/project_api.ts": 555,
-	"./api/scan_dataset_api.ts": 4835,
-	"./api/web_gateway_api.ts": 7146,
-	"./avvir_api.ts": 5489,
-	"./config.ts": 5508,
-	"./converters/date_converter.ts": 2024,
-	"./converters/matrix_3_converter.ts": 28,
-	"./converters/matrix_4_converter.ts": 2908,
-	"./converters/purpose_type_converter.ts": 6154,
-	"./mixins/add_date_getter_and_setter_to_domain_model.ts": 6553,
-	"./mixins/add_instant_getter_and_setter_to_api_model.ts": 1142,
-	"./mixins/add_logging_to_instance_methods.ts": 5953,
-	"./mixins/add_read_only_properties_to_model.ts": 5025,
-	"./models/api/api_argo_response.ts": 8450,
-	"./models/api/api_cloud_file.ts": 277,
-	"./models/api/api_construction_grid.ts": 7117,
-	"./models/api/api_floor.ts": 1596,
-	"./models/api/api_grid_line.ts": 2179,
-	"./models/api/api_invitation.ts": 5515,
-	"./models/api/api_masterformat.ts": 8069,
-	"./models/api/api_matrix_3.ts": 7494,
-	"./models/api/api_matrix_4.ts": 6645,
-	"./models/api/api_organization.ts": 6835,
-	"./models/api/api_photo_area.ts": 9297,
-	"./models/api/api_photo_location.ts": 1390,
-	"./models/api/api_photo_location_3d.ts": 7801,
-	"./models/api/api_photo_session.ts": 3379,
-	"./models/api/api_pipeline.ts": 5621,
-	"./models/api/api_planned_element.ts": 6099,
-	"./models/api/api_project.ts": 933,
-	"./models/api/api_project_cost_analysis_progress.ts": 4819,
-	"./models/api/api_project_masterformat_progress.ts": 6061,
-	"./models/api/api_purpose_type.ts": 3979,
-	"./models/api/api_scan_dataset.ts": 1866,
-	"./models/api/deprecated_api_pipeline.ts": 6732,
-	"./models/domain/detailed_element.ts": 7073,
-	"./models/domain/masterformat.ts": 8643,
-	"./models/domain/photos/photo_area.ts": 3946,
-	"./models/domain/photos/photo_location.ts": 5445,
-	"./models/domain/photos/photo_session.ts": 4519,
-	"./models/domain/progress/progress_category.ts": 6418,
-	"./models/domain/progress/progress_report_for_scan_dataset.ts": 8817,
-	"./models/domain/progress/project_cost_analysis_progress.ts": 5605,
-	"./models/domain/progress/project_masterformat_progress.ts": 9459,
-	"./models/domain/progress/time_series_tsv_analysis_types.ts": 2224,
-	"./models/domain/running_process.ts": 2933,
-	"./models/enums/deviation_status.ts": 9142,
-	"./models/enums/event_types.ts": 8367,
-	"./models/enums/notification_level.ts": 2453,
-	"./models/enums/page_names.ts": 8322,
-	"./models/enums/photo_projection_type.ts": 6975,
-	"./models/enums/pipeline_types.ts": 5019,
-	"./models/enums/purpose_type.ts": 5295,
-	"./models/enums/running_process_status.ts": 2990,
-	"./models/enums/scan_label.ts": 2252,
-	"./models/enums/system_of_measurement.ts": 9875,
-	"./models/enums/uploader_status.ts": 9884,
-	"./models/enums/user_auth_type.ts": 6132,
-	"./models/enums/user_role.ts": 2076,
-	"./models/response_error.ts": 2696,
-	"./utilities/check_fetch_status.ts": 7583,
-	"./utilities/get_authorization_headers.ts": 5561,
-	"./utilities/http.ts": 5562,
-	"./utilities/make_errors_pretty.ts": 6289,
-	"./utilities/pollPipeline.ts": 541,
-	"./utilities/reduce_user_session.ts": 5397,
-	"./utilities/request_headers.ts": 4446,
-	"./utilities/serialize_form.ts": 1848
-};
-
-
-function webpackContext(req) {
-	var id = webpackContextResolve(req);
-	return __webpack_require__(id);
-}
-function webpackContextResolve(req) {
-	if(!__webpack_require__.o(map, req)) {
-		var e = new Error("Cannot find module '" + req + "'");
-		e.code = 'MODULE_NOT_FOUND';
-		throw e;
-	}
-	return map[req];
-}
-webpackContext.keys = function webpackContextKeys() {
-	return Object.keys(map);
-};
-webpackContext.resolve = webpackContextResolve;
-module.exports = webpackContext;
-webpackContext.id = 5422;
-
-/***/ }),
-
-/***/ 6601:
-/***/ (function() {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 1922:
-/***/ (function() {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 2363:
-/***/ (function() {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 3083:
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
-
-"use strict";
-
-
-var possibleNames = [
-	'BigInt64Array',
-	'BigUint64Array',
-	'Float32Array',
-	'Float64Array',
-	'Int16Array',
-	'Int32Array',
-	'Int8Array',
-	'Uint16Array',
-	'Uint32Array',
-	'Uint8Array',
-	'Uint8ClampedArray'
-];
-
-var g = typeof globalThis === 'undefined' ? __webpack_require__.g : globalThis;
-
-module.exports = function availableTypedArrays() {
-	var out = [];
-	for (var i = 0; i < possibleNames.length; i++) {
-		if (typeof g[possibleNames[i]] === 'function') {
-			out[out.length] = possibleNames[i];
-		}
-	}
-	return out;
-};
-
-
-/***/ }),
-
-/***/ 882:
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
-
-"use strict";
-
-
-var GetIntrinsic = __webpack_require__(210);
-
-var $gOPD = GetIntrinsic('%Object.getOwnPropertyDescriptor%', true);
-if ($gOPD) {
-	try {
-		$gOPD([], 'length');
-	} catch (e) {
-		// IE 8 has a broken gOPD
-		$gOPD = null;
-	}
-}
-
-module.exports = $gOPD;
-
-
-/***/ }),
-
-/***/ 6419:
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
-
-!function(n,r){ true?module.exports=r():0}(this,(function(){
-//     Underscore.js 1.13.1
-//     https://underscorejs.org
-//     (c) 2009-2021 Jeremy Ashkenas, Julian Gonggrijp, and DocumentCloud and Investigative Reporters & Editors
-//     Underscore may be freely distributed under the MIT license.
-var n="1.13.1",r="object"==typeof self&&self.self===self&&self||"object"==typeof __webpack_require__.g&&__webpack_require__.g.global===__webpack_require__.g&&__webpack_require__.g||Function("return this")()||{},t=Array.prototype,e=Object.prototype,u="undefined"!=typeof Symbol?Symbol.prototype:null,o=t.push,i=t.slice,a=e.toString,f=e.hasOwnProperty,c="undefined"!=typeof ArrayBuffer,l="undefined"!=typeof DataView,s=Array.isArray,p=Object.keys,v=Object.create,h=c&&ArrayBuffer.isView,y=isNaN,d=isFinite,g=!{toString:null}.propertyIsEnumerable("toString"),b=["valueOf","isPrototypeOf","toString","propertyIsEnumerable","hasOwnProperty","toLocaleString"],m=Math.pow(2,53)-1;function j(n,r){return r=null==r?n.length-1:+r,function(){for(var t=Math.max(arguments.length-r,0),e=Array(t),u=0;u<t;u++)e[u]=arguments[u+r];switch(r){case 0:return n.call(this,e);case 1:return n.call(this,arguments[0],e);case 2:return n.call(this,arguments[0],arguments[1],e)}var o=Array(r+1);for(u=0;u<r;u++)o[u]=arguments[u];return o[r]=e,n.apply(this,o)}}function _(n){var r=typeof n;return"function"===r||"object"===r&&!!n}function w(n){return void 0===n}function A(n){return!0===n||!1===n||"[object Boolean]"===a.call(n)}function x(n){var r="[object "+n+"]";return function(n){return a.call(n)===r}}var S=x("String"),O=x("Number"),M=x("Date"),E=x("RegExp"),B=x("Error"),N=x("Symbol"),I=x("ArrayBuffer"),T=x("Function"),k=r.document&&r.document.childNodes; true&&"object"!=typeof Int8Array&&"function"!=typeof k&&(T=function(n){return"function"==typeof n||!1});var D=T,R=x("Object"),F=l&&R(new DataView(new ArrayBuffer(8))),V="undefined"!=typeof Map&&R(new Map),P=x("DataView");var q=F?function(n){return null!=n&&D(n.getInt8)&&I(n.buffer)}:P,U=s||x("Array");function W(n,r){return null!=n&&f.call(n,r)}var z=x("Arguments");!function(){z(arguments)||(z=function(n){return W(n,"callee")})}();var L=z;function $(n){return O(n)&&y(n)}function C(n){return function(){return n}}function K(n){return function(r){var t=n(r);return"number"==typeof t&&t>=0&&t<=m}}function J(n){return function(r){return null==r?void 0:r[n]}}var G=J("byteLength"),H=K(G),Q=/\[object ((I|Ui)nt(8|16|32)|Float(32|64)|Uint8Clamped|Big(I|Ui)nt64)Array\]/;var X=c?function(n){return h?h(n)&&!q(n):H(n)&&Q.test(a.call(n))}:C(!1),Y=J("length");function Z(n,r){r=function(n){for(var r={},t=n.length,e=0;e<t;++e)r[n[e]]=!0;return{contains:function(n){return r[n]},push:function(t){return r[t]=!0,n.push(t)}}}(r);var t=b.length,u=n.constructor,o=D(u)&&u.prototype||e,i="constructor";for(W(n,i)&&!r.contains(i)&&r.push(i);t--;)(i=b[t])in n&&n[i]!==o[i]&&!r.contains(i)&&r.push(i)}function nn(n){if(!_(n))return[];if(p)return p(n);var r=[];for(var t in n)W(n,t)&&r.push(t);return g&&Z(n,r),r}function rn(n,r){var t=nn(r),e=t.length;if(null==n)return!e;for(var u=Object(n),o=0;o<e;o++){var i=t[o];if(r[i]!==u[i]||!(i in u))return!1}return!0}function tn(n){return n instanceof tn?n:this instanceof tn?void(this._wrapped=n):new tn(n)}function en(n){return new Uint8Array(n.buffer||n,n.byteOffset||0,G(n))}tn.VERSION=n,tn.prototype.value=function(){return this._wrapped},tn.prototype.valueOf=tn.prototype.toJSON=tn.prototype.value,tn.prototype.toString=function(){return String(this._wrapped)};var un="[object DataView]";function on(n,r,t,e){if(n===r)return 0!==n||1/n==1/r;if(null==n||null==r)return!1;if(n!=n)return r!=r;var o=typeof n;return("function"===o||"object"===o||"object"==typeof r)&&function n(r,t,e,o){r instanceof tn&&(r=r._wrapped);t instanceof tn&&(t=t._wrapped);var i=a.call(r);if(i!==a.call(t))return!1;if(F&&"[object Object]"==i&&q(r)){if(!q(t))return!1;i=un}switch(i){case"[object RegExp]":case"[object String]":return""+r==""+t;case"[object Number]":return+r!=+r?+t!=+t:0==+r?1/+r==1/t:+r==+t;case"[object Date]":case"[object Boolean]":return+r==+t;case"[object Symbol]":return u.valueOf.call(r)===u.valueOf.call(t);case"[object ArrayBuffer]":case un:return n(en(r),en(t),e,o)}var f="[object Array]"===i;if(!f&&X(r)){if(G(r)!==G(t))return!1;if(r.buffer===t.buffer&&r.byteOffset===t.byteOffset)return!0;f=!0}if(!f){if("object"!=typeof r||"object"!=typeof t)return!1;var c=r.constructor,l=t.constructor;if(c!==l&&!(D(c)&&c instanceof c&&D(l)&&l instanceof l)&&"constructor"in r&&"constructor"in t)return!1}o=o||[];var s=(e=e||[]).length;for(;s--;)if(e[s]===r)return o[s]===t;if(e.push(r),o.push(t),f){if((s=r.length)!==t.length)return!1;for(;s--;)if(!on(r[s],t[s],e,o))return!1}else{var p,v=nn(r);if(s=v.length,nn(t).length!==s)return!1;for(;s--;)if(p=v[s],!W(t,p)||!on(r[p],t[p],e,o))return!1}return e.pop(),o.pop(),!0}(n,r,t,e)}function an(n){if(!_(n))return[];var r=[];for(var t in n)r.push(t);return g&&Z(n,r),r}function fn(n){var r=Y(n);return function(t){if(null==t)return!1;var e=an(t);if(Y(e))return!1;for(var u=0;u<r;u++)if(!D(t[n[u]]))return!1;return n!==hn||!D(t[cn])}}var cn="forEach",ln="has",sn=["clear","delete"],pn=["get",ln,"set"],vn=sn.concat(cn,pn),hn=sn.concat(pn),yn=["add"].concat(sn,cn,ln),dn=V?fn(vn):x("Map"),gn=V?fn(hn):x("WeakMap"),bn=V?fn(yn):x("Set"),mn=x("WeakSet");function jn(n){for(var r=nn(n),t=r.length,e=Array(t),u=0;u<t;u++)e[u]=n[r[u]];return e}function _n(n){for(var r={},t=nn(n),e=0,u=t.length;e<u;e++)r[n[t[e]]]=t[e];return r}function wn(n){var r=[];for(var t in n)D(n[t])&&r.push(t);return r.sort()}function An(n,r){return function(t){var e=arguments.length;if(r&&(t=Object(t)),e<2||null==t)return t;for(var u=1;u<e;u++)for(var o=arguments[u],i=n(o),a=i.length,f=0;f<a;f++){var c=i[f];r&&void 0!==t[c]||(t[c]=o[c])}return t}}var xn=An(an),Sn=An(nn),On=An(an,!0);function Mn(n){if(!_(n))return{};if(v)return v(n);var r=function(){};r.prototype=n;var t=new r;return r.prototype=null,t}function En(n){return _(n)?U(n)?n.slice():xn({},n):n}function Bn(n){return U(n)?n:[n]}function Nn(n){return tn.toPath(n)}function In(n,r){for(var t=r.length,e=0;e<t;e++){if(null==n)return;n=n[r[e]]}return t?n:void 0}function Tn(n,r,t){var e=In(n,Nn(r));return w(e)?t:e}function kn(n){return n}function Dn(n){return n=Sn({},n),function(r){return rn(r,n)}}function Rn(n){return n=Nn(n),function(r){return In(r,n)}}function Fn(n,r,t){if(void 0===r)return n;switch(null==t?3:t){case 1:return function(t){return n.call(r,t)};case 3:return function(t,e,u){return n.call(r,t,e,u)};case 4:return function(t,e,u,o){return n.call(r,t,e,u,o)}}return function(){return n.apply(r,arguments)}}function Vn(n,r,t){return null==n?kn:D(n)?Fn(n,r,t):_(n)&&!U(n)?Dn(n):Rn(n)}function Pn(n,r){return Vn(n,r,1/0)}function qn(n,r,t){return tn.iteratee!==Pn?tn.iteratee(n,r):Vn(n,r,t)}function Un(){}function Wn(n,r){return null==r&&(r=n,n=0),n+Math.floor(Math.random()*(r-n+1))}tn.toPath=Bn,tn.iteratee=Pn;var zn=Date.now||function(){return(new Date).getTime()};function Ln(n){var r=function(r){return n[r]},t="(?:"+nn(n).join("|")+")",e=RegExp(t),u=RegExp(t,"g");return function(n){return n=null==n?"":""+n,e.test(n)?n.replace(u,r):n}}var $n={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#x27;","`":"&#x60;"},Cn=Ln($n),Kn=Ln(_n($n)),Jn=tn.templateSettings={evaluate:/<%([\s\S]+?)%>/g,interpolate:/<%=([\s\S]+?)%>/g,escape:/<%-([\s\S]+?)%>/g},Gn=/(.)^/,Hn={"'":"'","\\":"\\","\r":"r","\n":"n","\u2028":"u2028","\u2029":"u2029"},Qn=/\\|'|\r|\n|\u2028|\u2029/g;function Xn(n){return"\\"+Hn[n]}var Yn=/^\s*(\w|\$)+\s*$/;var Zn=0;function nr(n,r,t,e,u){if(!(e instanceof r))return n.apply(t,u);var o=Mn(n.prototype),i=n.apply(o,u);return _(i)?i:o}var rr=j((function(n,r){var t=rr.placeholder,e=function(){for(var u=0,o=r.length,i=Array(o),a=0;a<o;a++)i[a]=r[a]===t?arguments[u++]:r[a];for(;u<arguments.length;)i.push(arguments[u++]);return nr(n,e,this,this,i)};return e}));rr.placeholder=tn;var tr=j((function(n,r,t){if(!D(n))throw new TypeError("Bind must be called on a function");var e=j((function(u){return nr(n,e,r,this,t.concat(u))}));return e})),er=K(Y);function ur(n,r,t,e){if(e=e||[],r||0===r){if(r<=0)return e.concat(n)}else r=1/0;for(var u=e.length,o=0,i=Y(n);o<i;o++){var a=n[o];if(er(a)&&(U(a)||L(a)))if(r>1)ur(a,r-1,t,e),u=e.length;else for(var f=0,c=a.length;f<c;)e[u++]=a[f++];else t||(e[u++]=a)}return e}var or=j((function(n,r){var t=(r=ur(r,!1,!1)).length;if(t<1)throw new Error("bindAll must be passed function names");for(;t--;){var e=r[t];n[e]=tr(n[e],n)}return n}));var ir=j((function(n,r,t){return setTimeout((function(){return n.apply(null,t)}),r)})),ar=rr(ir,tn,1);function fr(n){return function(){return!n.apply(this,arguments)}}function cr(n,r){var t;return function(){return--n>0&&(t=r.apply(this,arguments)),n<=1&&(r=null),t}}var lr=rr(cr,2);function sr(n,r,t){r=qn(r,t);for(var e,u=nn(n),o=0,i=u.length;o<i;o++)if(r(n[e=u[o]],e,n))return e}function pr(n){return function(r,t,e){t=qn(t,e);for(var u=Y(r),o=n>0?0:u-1;o>=0&&o<u;o+=n)if(t(r[o],o,r))return o;return-1}}var vr=pr(1),hr=pr(-1);function yr(n,r,t,e){for(var u=(t=qn(t,e,1))(r),o=0,i=Y(n);o<i;){var a=Math.floor((o+i)/2);t(n[a])<u?o=a+1:i=a}return o}function dr(n,r,t){return function(e,u,o){var a=0,f=Y(e);if("number"==typeof o)n>0?a=o>=0?o:Math.max(o+f,a):f=o>=0?Math.min(o+1,f):o+f+1;else if(t&&o&&f)return e[o=t(e,u)]===u?o:-1;if(u!=u)return(o=r(i.call(e,a,f),$))>=0?o+a:-1;for(o=n>0?a:f-1;o>=0&&o<f;o+=n)if(e[o]===u)return o;return-1}}var gr=dr(1,vr,yr),br=dr(-1,hr);function mr(n,r,t){var e=(er(n)?vr:sr)(n,r,t);if(void 0!==e&&-1!==e)return n[e]}function jr(n,r,t){var e,u;if(r=Fn(r,t),er(n))for(e=0,u=n.length;e<u;e++)r(n[e],e,n);else{var o=nn(n);for(e=0,u=o.length;e<u;e++)r(n[o[e]],o[e],n)}return n}function _r(n,r,t){r=qn(r,t);for(var e=!er(n)&&nn(n),u=(e||n).length,o=Array(u),i=0;i<u;i++){var a=e?e[i]:i;o[i]=r(n[a],a,n)}return o}function wr(n){var r=function(r,t,e,u){var o=!er(r)&&nn(r),i=(o||r).length,a=n>0?0:i-1;for(u||(e=r[o?o[a]:a],a+=n);a>=0&&a<i;a+=n){var f=o?o[a]:a;e=t(e,r[f],f,r)}return e};return function(n,t,e,u){var o=arguments.length>=3;return r(n,Fn(t,u,4),e,o)}}var Ar=wr(1),xr=wr(-1);function Sr(n,r,t){var e=[];return r=qn(r,t),jr(n,(function(n,t,u){r(n,t,u)&&e.push(n)})),e}function Or(n,r,t){r=qn(r,t);for(var e=!er(n)&&nn(n),u=(e||n).length,o=0;o<u;o++){var i=e?e[o]:o;if(!r(n[i],i,n))return!1}return!0}function Mr(n,r,t){r=qn(r,t);for(var e=!er(n)&&nn(n),u=(e||n).length,o=0;o<u;o++){var i=e?e[o]:o;if(r(n[i],i,n))return!0}return!1}function Er(n,r,t,e){return er(n)||(n=jn(n)),("number"!=typeof t||e)&&(t=0),gr(n,r,t)>=0}var Br=j((function(n,r,t){var e,u;return D(r)?u=r:(r=Nn(r),e=r.slice(0,-1),r=r[r.length-1]),_r(n,(function(n){var o=u;if(!o){if(e&&e.length&&(n=In(n,e)),null==n)return;o=n[r]}return null==o?o:o.apply(n,t)}))}));function Nr(n,r){return _r(n,Rn(r))}function Ir(n,r,t){var e,u,o=-1/0,i=-1/0;if(null==r||"number"==typeof r&&"object"!=typeof n[0]&&null!=n)for(var a=0,f=(n=er(n)?n:jn(n)).length;a<f;a++)null!=(e=n[a])&&e>o&&(o=e);else r=qn(r,t),jr(n,(function(n,t,e){((u=r(n,t,e))>i||u===-1/0&&o===-1/0)&&(o=n,i=u)}));return o}function Tr(n,r,t){if(null==r||t)return er(n)||(n=jn(n)),n[Wn(n.length-1)];var e=er(n)?En(n):jn(n),u=Y(e);r=Math.max(Math.min(r,u),0);for(var o=u-1,i=0;i<r;i++){var a=Wn(i,o),f=e[i];e[i]=e[a],e[a]=f}return e.slice(0,r)}function kr(n,r){return function(t,e,u){var o=r?[[],[]]:{};return e=qn(e,u),jr(t,(function(r,u){var i=e(r,u,t);n(o,r,i)})),o}}var Dr=kr((function(n,r,t){W(n,t)?n[t].push(r):n[t]=[r]})),Rr=kr((function(n,r,t){n[t]=r})),Fr=kr((function(n,r,t){W(n,t)?n[t]++:n[t]=1})),Vr=kr((function(n,r,t){n[t?0:1].push(r)}),!0),Pr=/[^\ud800-\udfff]|[\ud800-\udbff][\udc00-\udfff]|[\ud800-\udfff]/g;function qr(n,r,t){return r in t}var Ur=j((function(n,r){var t={},e=r[0];if(null==n)return t;D(e)?(r.length>1&&(e=Fn(e,r[1])),r=an(n)):(e=qr,r=ur(r,!1,!1),n=Object(n));for(var u=0,o=r.length;u<o;u++){var i=r[u],a=n[i];e(a,i,n)&&(t[i]=a)}return t})),Wr=j((function(n,r){var t,e=r[0];return D(e)?(e=fr(e),r.length>1&&(t=r[1])):(r=_r(ur(r,!1,!1),String),e=function(n,t){return!Er(r,t)}),Ur(n,e,t)}));function zr(n,r,t){return i.call(n,0,Math.max(0,n.length-(null==r||t?1:r)))}function Lr(n,r,t){return null==n||n.length<1?null==r||t?void 0:[]:null==r||t?n[0]:zr(n,n.length-r)}function $r(n,r,t){return i.call(n,null==r||t?1:r)}var Cr=j((function(n,r){return r=ur(r,!0,!0),Sr(n,(function(n){return!Er(r,n)}))})),Kr=j((function(n,r){return Cr(n,r)}));function Jr(n,r,t,e){A(r)||(e=t,t=r,r=!1),null!=t&&(t=qn(t,e));for(var u=[],o=[],i=0,a=Y(n);i<a;i++){var f=n[i],c=t?t(f,i,n):f;r&&!t?(i&&o===c||u.push(f),o=c):t?Er(o,c)||(o.push(c),u.push(f)):Er(u,f)||u.push(f)}return u}var Gr=j((function(n){return Jr(ur(n,!0,!0))}));function Hr(n){for(var r=n&&Ir(n,Y).length||0,t=Array(r),e=0;e<r;e++)t[e]=Nr(n,e);return t}var Qr=j(Hr);function Xr(n,r){return n._chain?tn(r).chain():r}function Yr(n){return jr(wn(n),(function(r){var t=tn[r]=n[r];tn.prototype[r]=function(){var n=[this._wrapped];return o.apply(n,arguments),Xr(this,t.apply(tn,n))}})),tn}jr(["pop","push","reverse","shift","sort","splice","unshift"],(function(n){var r=t[n];tn.prototype[n]=function(){var t=this._wrapped;return null!=t&&(r.apply(t,arguments),"shift"!==n&&"splice"!==n||0!==t.length||delete t[0]),Xr(this,t)}})),jr(["concat","join","slice"],(function(n){var r=t[n];tn.prototype[n]=function(){var n=this._wrapped;return null!=n&&(n=r.apply(n,arguments)),Xr(this,n)}}));var Zr=Yr({__proto__:null,VERSION:n,restArguments:j,isObject:_,isNull:function(n){return null===n},isUndefined:w,isBoolean:A,isElement:function(n){return!(!n||1!==n.nodeType)},isString:S,isNumber:O,isDate:M,isRegExp:E,isError:B,isSymbol:N,isArrayBuffer:I,isDataView:q,isArray:U,isFunction:D,isArguments:L,isFinite:function(n){return!N(n)&&d(n)&&!isNaN(parseFloat(n))},isNaN:$,isTypedArray:X,isEmpty:function(n){if(null==n)return!0;var r=Y(n);return"number"==typeof r&&(U(n)||S(n)||L(n))?0===r:0===Y(nn(n))},isMatch:rn,isEqual:function(n,r){return on(n,r)},isMap:dn,isWeakMap:gn,isSet:bn,isWeakSet:mn,keys:nn,allKeys:an,values:jn,pairs:function(n){for(var r=nn(n),t=r.length,e=Array(t),u=0;u<t;u++)e[u]=[r[u],n[r[u]]];return e},invert:_n,functions:wn,methods:wn,extend:xn,extendOwn:Sn,assign:Sn,defaults:On,create:function(n,r){var t=Mn(n);return r&&Sn(t,r),t},clone:En,tap:function(n,r){return r(n),n},get:Tn,has:function(n,r){for(var t=(r=Nn(r)).length,e=0;e<t;e++){var u=r[e];if(!W(n,u))return!1;n=n[u]}return!!t},mapObject:function(n,r,t){r=qn(r,t);for(var e=nn(n),u=e.length,o={},i=0;i<u;i++){var a=e[i];o[a]=r(n[a],a,n)}return o},identity:kn,constant:C,noop:Un,toPath:Bn,property:Rn,propertyOf:function(n){return null==n?Un:function(r){return Tn(n,r)}},matcher:Dn,matches:Dn,times:function(n,r,t){var e=Array(Math.max(0,n));r=Fn(r,t,1);for(var u=0;u<n;u++)e[u]=r(u);return e},random:Wn,now:zn,escape:Cn,unescape:Kn,templateSettings:Jn,template:function(n,r,t){!r&&t&&(r=t),r=On({},r,tn.templateSettings);var e=RegExp([(r.escape||Gn).source,(r.interpolate||Gn).source,(r.evaluate||Gn).source].join("|")+"|$","g"),u=0,o="__p+='";n.replace(e,(function(r,t,e,i,a){return o+=n.slice(u,a).replace(Qn,Xn),u=a+r.length,t?o+="'+\n((__t=("+t+"))==null?'':_.escape(__t))+\n'":e?o+="'+\n((__t=("+e+"))==null?'':__t)+\n'":i&&(o+="';\n"+i+"\n__p+='"),r})),o+="';\n";var i,a=r.variable;if(a){if(!Yn.test(a))throw new Error("variable is not a bare identifier: "+a)}else o="with(obj||{}){\n"+o+"}\n",a="obj";o="var __t,__p='',__j=Array.prototype.join,"+"print=function(){__p+=__j.call(arguments,'');};\n"+o+"return __p;\n";try{i=new Function(a,"_",o)}catch(n){throw n.source=o,n}var f=function(n){return i.call(this,n,tn)};return f.source="function("+a+"){\n"+o+"}",f},result:function(n,r,t){var e=(r=Nn(r)).length;if(!e)return D(t)?t.call(n):t;for(var u=0;u<e;u++){var o=null==n?void 0:n[r[u]];void 0===o&&(o=t,u=e),n=D(o)?o.call(n):o}return n},uniqueId:function(n){var r=++Zn+"";return n?n+r:r},chain:function(n){var r=tn(n);return r._chain=!0,r},iteratee:Pn,partial:rr,bind:tr,bindAll:or,memoize:function(n,r){var t=function(e){var u=t.cache,o=""+(r?r.apply(this,arguments):e);return W(u,o)||(u[o]=n.apply(this,arguments)),u[o]};return t.cache={},t},delay:ir,defer:ar,throttle:function(n,r,t){var e,u,o,i,a=0;t||(t={});var f=function(){a=!1===t.leading?0:zn(),e=null,i=n.apply(u,o),e||(u=o=null)},c=function(){var c=zn();a||!1!==t.leading||(a=c);var l=r-(c-a);return u=this,o=arguments,l<=0||l>r?(e&&(clearTimeout(e),e=null),a=c,i=n.apply(u,o),e||(u=o=null)):e||!1===t.trailing||(e=setTimeout(f,l)),i};return c.cancel=function(){clearTimeout(e),a=0,e=u=o=null},c},debounce:function(n,r,t){var e,u,o,i,a,f=function(){var c=zn()-u;r>c?e=setTimeout(f,r-c):(e=null,t||(i=n.apply(a,o)),e||(o=a=null))},c=j((function(c){return a=this,o=c,u=zn(),e||(e=setTimeout(f,r),t&&(i=n.apply(a,o))),i}));return c.cancel=function(){clearTimeout(e),e=o=a=null},c},wrap:function(n,r){return rr(r,n)},negate:fr,compose:function(){var n=arguments,r=n.length-1;return function(){for(var t=r,e=n[r].apply(this,arguments);t--;)e=n[t].call(this,e);return e}},after:function(n,r){return function(){if(--n<1)return r.apply(this,arguments)}},before:cr,once:lr,findKey:sr,findIndex:vr,findLastIndex:hr,sortedIndex:yr,indexOf:gr,lastIndexOf:br,find:mr,detect:mr,findWhere:function(n,r){return mr(n,Dn(r))},each:jr,forEach:jr,map:_r,collect:_r,reduce:Ar,foldl:Ar,inject:Ar,reduceRight:xr,foldr:xr,filter:Sr,select:Sr,reject:function(n,r,t){return Sr(n,fr(qn(r)),t)},every:Or,all:Or,some:Mr,any:Mr,contains:Er,includes:Er,include:Er,invoke:Br,pluck:Nr,where:function(n,r){return Sr(n,Dn(r))},max:Ir,min:function(n,r,t){var e,u,o=1/0,i=1/0;if(null==r||"number"==typeof r&&"object"!=typeof n[0]&&null!=n)for(var a=0,f=(n=er(n)?n:jn(n)).length;a<f;a++)null!=(e=n[a])&&e<o&&(o=e);else r=qn(r,t),jr(n,(function(n,t,e){((u=r(n,t,e))<i||u===1/0&&o===1/0)&&(o=n,i=u)}));return o},shuffle:function(n){return Tr(n,1/0)},sample:Tr,sortBy:function(n,r,t){var e=0;return r=qn(r,t),Nr(_r(n,(function(n,t,u){return{value:n,index:e++,criteria:r(n,t,u)}})).sort((function(n,r){var t=n.criteria,e=r.criteria;if(t!==e){if(t>e||void 0===t)return 1;if(t<e||void 0===e)return-1}return n.index-r.index})),"value")},groupBy:Dr,indexBy:Rr,countBy:Fr,partition:Vr,toArray:function(n){return n?U(n)?i.call(n):S(n)?n.match(Pr):er(n)?_r(n,kn):jn(n):[]},size:function(n){return null==n?0:er(n)?n.length:nn(n).length},pick:Ur,omit:Wr,first:Lr,head:Lr,take:Lr,initial:zr,last:function(n,r,t){return null==n||n.length<1?null==r||t?void 0:[]:null==r||t?n[n.length-1]:$r(n,Math.max(0,n.length-r))},rest:$r,tail:$r,drop:$r,compact:function(n){return Sr(n,Boolean)},flatten:function(n,r){return ur(n,r,!1)},without:Kr,uniq:Jr,unique:Jr,union:Gr,intersection:function(n){for(var r=[],t=arguments.length,e=0,u=Y(n);e<u;e++){var o=n[e];if(!Er(r,o)){var i;for(i=1;i<t&&Er(arguments[i],o);i++);i===t&&r.push(o)}}return r},difference:Cr,unzip:Hr,transpose:Hr,zip:Qr,object:function(n,r){for(var t={},e=0,u=Y(n);e<u;e++)r?t[n[e]]=r[e]:t[n[e][0]]=n[e][1];return t},range:function(n,r,t){null==r&&(r=n||0,n=0),t||(t=r<n?-1:1);for(var e=Math.max(Math.ceil((r-n)/t),0),u=Array(e),o=0;o<e;o++,n+=t)u[o]=n;return u},chunk:function(n,r){if(null==r||r<1)return[];for(var t=[],e=0,u=n.length;e<u;)t.push(i.call(n,e,e+=r));return t},mixin:Yr,default:tn});return Zr._=Zr,Zr}));
-
-/***/ }),
-
-/***/ 9050:
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "ZP": function() { return /* reexport */ index_default; }
+  "VERSION": function() { return /* reexport */ VERSION; },
+  "after": function() { return /* reexport */ after; },
+  "all": function() { return /* reexport */ every; },
+  "allKeys": function() { return /* reexport */ allKeys; },
+  "any": function() { return /* reexport */ some; },
+  "assign": function() { return /* reexport */ extendOwn; },
+  "before": function() { return /* reexport */ before; },
+  "bind": function() { return /* reexport */ bind; },
+  "bindAll": function() { return /* reexport */ bindAll; },
+  "chain": function() { return /* reexport */ chain; },
+  "chunk": function() { return /* reexport */ chunk; },
+  "clone": function() { return /* reexport */ clone; },
+  "collect": function() { return /* reexport */ map; },
+  "compact": function() { return /* reexport */ compact; },
+  "compose": function() { return /* reexport */ compose; },
+  "constant": function() { return /* reexport */ constant; },
+  "contains": function() { return /* reexport */ contains; },
+  "countBy": function() { return /* reexport */ countBy; },
+  "create": function() { return /* reexport */ create; },
+  "debounce": function() { return /* reexport */ debounce; },
+  "default": function() { return /* reexport */ index_default; },
+  "defaults": function() { return /* reexport */ defaults; },
+  "defer": function() { return /* reexport */ defer; },
+  "delay": function() { return /* reexport */ delay; },
+  "detect": function() { return /* reexport */ find; },
+  "difference": function() { return /* reexport */ difference; },
+  "drop": function() { return /* reexport */ rest; },
+  "each": function() { return /* reexport */ each; },
+  "escape": function() { return /* reexport */ modules_escape; },
+  "every": function() { return /* reexport */ every; },
+  "extend": function() { return /* reexport */ extend; },
+  "extendOwn": function() { return /* reexport */ extendOwn; },
+  "filter": function() { return /* reexport */ filter; },
+  "find": function() { return /* reexport */ find; },
+  "findIndex": function() { return /* reexport */ findIndex; },
+  "findKey": function() { return /* reexport */ findKey; },
+  "findLastIndex": function() { return /* reexport */ findLastIndex; },
+  "findWhere": function() { return /* reexport */ findWhere; },
+  "first": function() { return /* reexport */ first; },
+  "flatten": function() { return /* reexport */ flatten_flatten; },
+  "foldl": function() { return /* reexport */ reduce; },
+  "foldr": function() { return /* reexport */ reduceRight; },
+  "forEach": function() { return /* reexport */ each; },
+  "functions": function() { return /* reexport */ functions; },
+  "get": function() { return /* reexport */ get; },
+  "groupBy": function() { return /* reexport */ groupBy; },
+  "has": function() { return /* reexport */ has_has; },
+  "head": function() { return /* reexport */ first; },
+  "identity": function() { return /* reexport */ identity; },
+  "include": function() { return /* reexport */ contains; },
+  "includes": function() { return /* reexport */ contains; },
+  "indexBy": function() { return /* reexport */ indexBy; },
+  "indexOf": function() { return /* reexport */ indexOf; },
+  "initial": function() { return /* reexport */ initial; },
+  "inject": function() { return /* reexport */ reduce; },
+  "intersection": function() { return /* reexport */ intersection; },
+  "invert": function() { return /* reexport */ invert; },
+  "invoke": function() { return /* reexport */ invoke; },
+  "isArguments": function() { return /* reexport */ modules_isArguments; },
+  "isArray": function() { return /* reexport */ isArray; },
+  "isArrayBuffer": function() { return /* reexport */ isArrayBuffer; },
+  "isBoolean": function() { return /* reexport */ isBoolean; },
+  "isDataView": function() { return /* reexport */ modules_isDataView; },
+  "isDate": function() { return /* reexport */ isDate; },
+  "isElement": function() { return /* reexport */ isElement; },
+  "isEmpty": function() { return /* reexport */ isEmpty; },
+  "isEqual": function() { return /* reexport */ isEqual; },
+  "isError": function() { return /* reexport */ isError; },
+  "isFinite": function() { return /* reexport */ isFinite_isFinite; },
+  "isFunction": function() { return /* reexport */ modules_isFunction; },
+  "isMap": function() { return /* reexport */ isMap; },
+  "isMatch": function() { return /* reexport */ isMatch; },
+  "isNaN": function() { return /* reexport */ isNaN_isNaN; },
+  "isNull": function() { return /* reexport */ isNull; },
+  "isNumber": function() { return /* reexport */ isNumber; },
+  "isObject": function() { return /* reexport */ isObject; },
+  "isRegExp": function() { return /* reexport */ isRegExp; },
+  "isSet": function() { return /* reexport */ isSet; },
+  "isString": function() { return /* reexport */ isString; },
+  "isSymbol": function() { return /* reexport */ isSymbol; },
+  "isTypedArray": function() { return /* reexport */ modules_isTypedArray; },
+  "isUndefined": function() { return /* reexport */ isUndefined; },
+  "isWeakMap": function() { return /* reexport */ isWeakMap; },
+  "isWeakSet": function() { return /* reexport */ isWeakSet; },
+  "iteratee": function() { return /* reexport */ iteratee; },
+  "keys": function() { return /* reexport */ keys; },
+  "last": function() { return /* reexport */ last; },
+  "lastIndexOf": function() { return /* reexport */ lastIndexOf; },
+  "map": function() { return /* reexport */ map; },
+  "mapObject": function() { return /* reexport */ mapObject; },
+  "matcher": function() { return /* reexport */ matcher; },
+  "matches": function() { return /* reexport */ matcher; },
+  "max": function() { return /* reexport */ max; },
+  "memoize": function() { return /* reexport */ memoize; },
+  "methods": function() { return /* reexport */ functions; },
+  "min": function() { return /* reexport */ min; },
+  "mixin": function() { return /* reexport */ mixin; },
+  "negate": function() { return /* reexport */ negate; },
+  "noop": function() { return /* reexport */ noop; },
+  "now": function() { return /* reexport */ now; },
+  "object": function() { return /* reexport */ object; },
+  "omit": function() { return /* reexport */ omit; },
+  "once": function() { return /* reexport */ once; },
+  "pairs": function() { return /* reexport */ pairs; },
+  "partial": function() { return /* reexport */ modules_partial; },
+  "partition": function() { return /* reexport */ partition; },
+  "pick": function() { return /* reexport */ pick; },
+  "pluck": function() { return /* reexport */ pluck; },
+  "property": function() { return /* reexport */ property; },
+  "propertyOf": function() { return /* reexport */ propertyOf; },
+  "random": function() { return /* reexport */ random; },
+  "range": function() { return /* reexport */ range; },
+  "reduce": function() { return /* reexport */ reduce; },
+  "reduceRight": function() { return /* reexport */ reduceRight; },
+  "reject": function() { return /* reexport */ reject; },
+  "rest": function() { return /* reexport */ rest; },
+  "restArguments": function() { return /* reexport */ restArguments; },
+  "result": function() { return /* reexport */ result; },
+  "sample": function() { return /* reexport */ sample; },
+  "select": function() { return /* reexport */ filter; },
+  "shuffle": function() { return /* reexport */ shuffle; },
+  "size": function() { return /* reexport */ size; },
+  "some": function() { return /* reexport */ some; },
+  "sortBy": function() { return /* reexport */ sortBy; },
+  "sortedIndex": function() { return /* reexport */ sortedIndex; },
+  "tail": function() { return /* reexport */ rest; },
+  "take": function() { return /* reexport */ first; },
+  "tap": function() { return /* reexport */ tap; },
+  "template": function() { return /* reexport */ template; },
+  "templateSettings": function() { return /* reexport */ templateSettings; },
+  "throttle": function() { return /* reexport */ throttle; },
+  "times": function() { return /* reexport */ times; },
+  "toArray": function() { return /* reexport */ toArray; },
+  "toPath": function() { return /* reexport */ toPath; },
+  "transpose": function() { return /* reexport */ unzip; },
+  "unescape": function() { return /* reexport */ modules_unescape; },
+  "union": function() { return /* reexport */ union; },
+  "uniq": function() { return /* reexport */ uniq; },
+  "unique": function() { return /* reexport */ uniq; },
+  "uniqueId": function() { return /* reexport */ uniqueId; },
+  "unzip": function() { return /* reexport */ unzip; },
+  "values": function() { return /* reexport */ values; },
+  "where": function() { return /* reexport */ where; },
+  "without": function() { return /* reexport */ without; },
+  "wrap": function() { return /* reexport */ wrap; },
+  "zip": function() { return /* reexport */ zip; }
 });
-
-// UNUSED EXPORTS: VERSION, after, all, allKeys, any, assign, before, bind, bindAll, chain, chunk, clone, collect, compact, compose, constant, contains, countBy, create, debounce, defaults, defer, delay, detect, difference, drop, each, escape, every, extend, extendOwn, filter, find, findIndex, findKey, findLastIndex, findWhere, first, flatten, foldl, foldr, forEach, functions, get, groupBy, has, head, identity, include, includes, indexBy, indexOf, initial, inject, intersection, invert, invoke, isArguments, isArray, isArrayBuffer, isBoolean, isDataView, isDate, isElement, isEmpty, isEqual, isError, isFinite, isFunction, isMap, isMatch, isNaN, isNull, isNumber, isObject, isRegExp, isSet, isString, isSymbol, isTypedArray, isUndefined, isWeakMap, isWeakSet, iteratee, keys, last, lastIndexOf, map, mapObject, matcher, matches, max, memoize, methods, min, mixin, negate, noop, now, object, omit, once, pairs, partial, partition, pick, pluck, property, propertyOf, random, range, reduce, reduceRight, reject, rest, restArguments, result, sample, select, shuffle, size, some, sortBy, sortedIndex, tail, take, tap, template, templateSettings, throttle, times, toArray, toPath, transpose, unescape, union, uniq, unique, uniqueId, unzip, values, where, without, wrap, zip
 
 // NAMESPACE OBJECT: ./node_modules/underscore/modules/index.js
 var modules_namespaceObject = {};
@@ -98425,13 +97559,13 @@ __webpack_require__.d(modules_namespaceObject, {
 
 ;// CONCATENATED MODULE: ./node_modules/underscore/modules/_setup.js
 // Current version.
-var VERSION = '1.13.1';
+var VERSION = '1.12.0';
 
 // Establish the root object, `window` (`self`) in the browser, `global`
 // on the server, or `this` in some virtual machines. We use `self`
 // instead of `window` for `WebWorker` support.
 var root = typeof self == 'object' && self.self === self && self ||
-          typeof global == 'object' && global.global === global && global ||
+          typeof __webpack_require__.g == 'object' && __webpack_require__.g.global === __webpack_require__.g && __webpack_require__.g ||
           Function('return this')() ||
           {};
 
@@ -99559,13 +98693,6 @@ function escapeChar(match) {
   return '\\' + escapes[match];
 }
 
-// In order to prevent third-party code injection through
-// `_.templateSettings.variable`, we test it against the following regular
-// expression. It is intentionally a bit more liberal than just matching valid
-// identifiers, but still prevents possible loopholes through defaults or
-// destructuring assignment.
-var bareIdentifier = /^\s*(\w|\$)+\s*$/;
-
 // JavaScript micro-templating, similar to John Resig's implementation.
 // Underscore templating handles arbitrary delimiters, preserves whitespace,
 // and correctly escapes quotes within interpolated code.
@@ -99601,17 +98728,8 @@ function template(text, settings, oldSettings) {
   });
   source += "';\n";
 
-  var argument = settings.variable;
-  if (argument) {
-    // Insure against third-party code injection. (CVE-2021-23358)
-    if (!bareIdentifier.test(argument)) throw new Error(
-      'variable is not a bare identifier: ' + argument
-    );
-  } else {
-    // If a variable is not specified, place data values in local scope.
-    source = 'with(obj||{}){\n' + source + '}\n';
-    argument = 'obj';
-  }
+  // If a variable is not specified, place data values in local scope.
+  if (!settings.variable) source = 'with(obj||{}){\n' + source + '}\n';
 
   source = "var __t,__p='',__j=Array.prototype.join," +
     "print=function(){__p+=__j.call(arguments,'');};\n" +
@@ -99619,7 +98737,7 @@ function template(text, settings, oldSettings) {
 
   var render;
   try {
-    render = new Function(argument, '_', source);
+    render = new Function(settings.variable || 'obj', '_', source);
   } catch (e) {
     e.source = source;
     throw e;
@@ -99630,6 +98748,7 @@ function template(text, settings, oldSettings) {
   };
 
   // Provide the compiled source as a convenience for precompilation.
+  var argument = settings.variable || 'obj';
   template.source = 'function(' + argument + '){\n' + source + '}';
 
   return template;
@@ -99889,34 +99008,29 @@ function throttle(func, wait, options) {
 // parameter. If `immediate` is passed, the argument function will be
 // triggered at the beginning of the sequence instead of at the end.
 function debounce(func, wait, immediate) {
-  var timeout, previous, args, result, context;
+  var timeout, result;
 
-  var later = function() {
-    var passed = now() - previous;
-    if (wait > passed) {
-      timeout = setTimeout(later, wait - passed);
-    } else {
-      timeout = null;
-      if (!immediate) result = func.apply(context, args);
-      // This check is needed because `func` can recursively invoke `debounced`.
-      if (!timeout) args = context = null;
-    }
+  var later = function(context, args) {
+    timeout = null;
+    if (args) result = func.apply(context, args);
   };
 
-  var debounced = restArguments(function(_args) {
-    context = this;
-    args = _args;
-    previous = now();
-    if (!timeout) {
+  var debounced = restArguments(function(args) {
+    if (timeout) clearTimeout(timeout);
+    if (immediate) {
+      var callNow = !timeout;
       timeout = setTimeout(later, wait);
-      if (immediate) result = func.apply(context, args);
+      if (callNow) result = func.apply(this, args);
+    } else {
+      timeout = delay(later, wait, this, args);
     }
+
     return result;
   });
 
   debounced.cancel = function() {
     clearTimeout(timeout);
-    timeout = args = context = null;
+    timeout = null;
   };
 
   return debounced;
@@ -100893,9 +100007,9 @@ each(['concat', 'join', 'slice'], function(name) {
 // Named Exports
 // =============
 
-//     Underscore.js 1.13.1
+//     Underscore.js 1.12.0
 //     https://underscorejs.org
-//     (c) 2009-2021 Jeremy Ashkenas, Julian Gonggrijp, and DocumentCloud and Investigative Reporters & Editors
+//     (c) 2009-2020 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
 
 // Baseline setup.
@@ -101123,6 +100237,1409 @@ index_default_._ = index_default_;
 
 /***/ }),
 
+/***/ 4927:
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+
+/**
+ * Module exports.
+ */
+
+module.exports = deprecate;
+
+/**
+ * Mark that a method should not be used.
+ * Returns a modified function which warns once by default.
+ *
+ * If `localStorage.noDeprecation = true` is set, then it is a no-op.
+ *
+ * If `localStorage.throwDeprecation = true` is set, then deprecated functions
+ * will throw an Error when invoked.
+ *
+ * If `localStorage.traceDeprecation = true` is set, then deprecated functions
+ * will invoke `console.trace()` instead of `console.error()`.
+ *
+ * @param {Function} fn - the function to deprecate
+ * @param {String} msg - the string to print to the console when `fn` is invoked
+ * @returns {Function} a new "deprecated" version of `fn`
+ * @api public
+ */
+
+function deprecate (fn, msg) {
+  if (config('noDeprecation')) {
+    return fn;
+  }
+
+  var warned = false;
+  function deprecated() {
+    if (!warned) {
+      if (config('throwDeprecation')) {
+        throw new Error(msg);
+      } else if (config('traceDeprecation')) {
+        console.trace(msg);
+      } else {
+        console.warn(msg);
+      }
+      warned = true;
+    }
+    return fn.apply(this, arguments);
+  }
+
+  return deprecated;
+}
+
+/**
+ * Checks `localStorage` for boolean values for the given `name`.
+ *
+ * @param {String} name
+ * @returns {Boolean}
+ * @api private
+ */
+
+function config (name) {
+  // accessing global.localStorage can trigger a DOMException in sandboxed iframes
+  try {
+    if (!__webpack_require__.g.localStorage) return false;
+  } catch (_) {
+    return false;
+  }
+  var val = __webpack_require__.g.localStorage[name];
+  if (null == val) return false;
+  return String(val).toLowerCase() === 'true';
+}
+
+
+/***/ }),
+
+/***/ 384:
+/***/ (function(module) {
+
+module.exports = function isBuffer(arg) {
+  return arg && typeof arg === 'object'
+    && typeof arg.copy === 'function'
+    && typeof arg.fill === 'function'
+    && typeof arg.readUInt8 === 'function';
+}
+
+/***/ }),
+
+/***/ 5955:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+// Currently in sync with Node.js lib/internal/util/types.js
+// https://github.com/nodejs/node/commit/112cc7c27551254aa2b17098fb774867f05ed0d9
+
+
+
+var isArgumentsObject = __webpack_require__(2584);
+var isGeneratorFunction = __webpack_require__(8662);
+var whichTypedArray = __webpack_require__(6430);
+var isTypedArray = __webpack_require__(5692);
+
+function uncurryThis(f) {
+  return f.call.bind(f);
+}
+
+var BigIntSupported = typeof BigInt !== 'undefined';
+var SymbolSupported = typeof Symbol !== 'undefined';
+
+var ObjectToString = uncurryThis(Object.prototype.toString);
+
+var numberValue = uncurryThis(Number.prototype.valueOf);
+var stringValue = uncurryThis(String.prototype.valueOf);
+var booleanValue = uncurryThis(Boolean.prototype.valueOf);
+
+if (BigIntSupported) {
+  var bigIntValue = uncurryThis(BigInt.prototype.valueOf);
+}
+
+if (SymbolSupported) {
+  var symbolValue = uncurryThis(Symbol.prototype.valueOf);
+}
+
+function checkBoxedPrimitive(value, prototypeValueOf) {
+  if (typeof value !== 'object') {
+    return false;
+  }
+  try {
+    prototypeValueOf(value);
+    return true;
+  } catch(e) {
+    return false;
+  }
+}
+
+exports.isArgumentsObject = isArgumentsObject;
+exports.isGeneratorFunction = isGeneratorFunction;
+exports.isTypedArray = isTypedArray;
+
+// Taken from here and modified for better browser support
+// https://github.com/sindresorhus/p-is-promise/blob/cda35a513bda03f977ad5cde3a079d237e82d7ef/index.js
+function isPromise(input) {
+	return (
+		(
+			typeof Promise !== 'undefined' &&
+			input instanceof Promise
+		) ||
+		(
+			input !== null &&
+			typeof input === 'object' &&
+			typeof input.then === 'function' &&
+			typeof input.catch === 'function'
+		)
+	);
+}
+exports.isPromise = isPromise;
+
+function isArrayBufferView(value) {
+  if (typeof ArrayBuffer !== 'undefined' && ArrayBuffer.isView) {
+    return ArrayBuffer.isView(value);
+  }
+
+  return (
+    isTypedArray(value) ||
+    isDataView(value)
+  );
+}
+exports.isArrayBufferView = isArrayBufferView;
+
+
+function isUint8Array(value) {
+  return whichTypedArray(value) === 'Uint8Array';
+}
+exports.isUint8Array = isUint8Array;
+
+function isUint8ClampedArray(value) {
+  return whichTypedArray(value) === 'Uint8ClampedArray';
+}
+exports.isUint8ClampedArray = isUint8ClampedArray;
+
+function isUint16Array(value) {
+  return whichTypedArray(value) === 'Uint16Array';
+}
+exports.isUint16Array = isUint16Array;
+
+function isUint32Array(value) {
+  return whichTypedArray(value) === 'Uint32Array';
+}
+exports.isUint32Array = isUint32Array;
+
+function isInt8Array(value) {
+  return whichTypedArray(value) === 'Int8Array';
+}
+exports.isInt8Array = isInt8Array;
+
+function isInt16Array(value) {
+  return whichTypedArray(value) === 'Int16Array';
+}
+exports.isInt16Array = isInt16Array;
+
+function isInt32Array(value) {
+  return whichTypedArray(value) === 'Int32Array';
+}
+exports.isInt32Array = isInt32Array;
+
+function isFloat32Array(value) {
+  return whichTypedArray(value) === 'Float32Array';
+}
+exports.isFloat32Array = isFloat32Array;
+
+function isFloat64Array(value) {
+  return whichTypedArray(value) === 'Float64Array';
+}
+exports.isFloat64Array = isFloat64Array;
+
+function isBigInt64Array(value) {
+  return whichTypedArray(value) === 'BigInt64Array';
+}
+exports.isBigInt64Array = isBigInt64Array;
+
+function isBigUint64Array(value) {
+  return whichTypedArray(value) === 'BigUint64Array';
+}
+exports.isBigUint64Array = isBigUint64Array;
+
+function isMapToString(value) {
+  return ObjectToString(value) === '[object Map]';
+}
+isMapToString.working = (
+  typeof Map !== 'undefined' &&
+  isMapToString(new Map())
+);
+
+function isMap(value) {
+  if (typeof Map === 'undefined') {
+    return false;
+  }
+
+  return isMapToString.working
+    ? isMapToString(value)
+    : value instanceof Map;
+}
+exports.isMap = isMap;
+
+function isSetToString(value) {
+  return ObjectToString(value) === '[object Set]';
+}
+isSetToString.working = (
+  typeof Set !== 'undefined' &&
+  isSetToString(new Set())
+);
+function isSet(value) {
+  if (typeof Set === 'undefined') {
+    return false;
+  }
+
+  return isSetToString.working
+    ? isSetToString(value)
+    : value instanceof Set;
+}
+exports.isSet = isSet;
+
+function isWeakMapToString(value) {
+  return ObjectToString(value) === '[object WeakMap]';
+}
+isWeakMapToString.working = (
+  typeof WeakMap !== 'undefined' &&
+  isWeakMapToString(new WeakMap())
+);
+function isWeakMap(value) {
+  if (typeof WeakMap === 'undefined') {
+    return false;
+  }
+
+  return isWeakMapToString.working
+    ? isWeakMapToString(value)
+    : value instanceof WeakMap;
+}
+exports.isWeakMap = isWeakMap;
+
+function isWeakSetToString(value) {
+  return ObjectToString(value) === '[object WeakSet]';
+}
+isWeakSetToString.working = (
+  typeof WeakSet !== 'undefined' &&
+  isWeakSetToString(new WeakSet())
+);
+function isWeakSet(value) {
+  return isWeakSetToString(value);
+}
+exports.isWeakSet = isWeakSet;
+
+function isArrayBufferToString(value) {
+  return ObjectToString(value) === '[object ArrayBuffer]';
+}
+isArrayBufferToString.working = (
+  typeof ArrayBuffer !== 'undefined' &&
+  isArrayBufferToString(new ArrayBuffer())
+);
+function isArrayBuffer(value) {
+  if (typeof ArrayBuffer === 'undefined') {
+    return false;
+  }
+
+  return isArrayBufferToString.working
+    ? isArrayBufferToString(value)
+    : value instanceof ArrayBuffer;
+}
+exports.isArrayBuffer = isArrayBuffer;
+
+function isDataViewToString(value) {
+  return ObjectToString(value) === '[object DataView]';
+}
+isDataViewToString.working = (
+  typeof ArrayBuffer !== 'undefined' &&
+  typeof DataView !== 'undefined' &&
+  isDataViewToString(new DataView(new ArrayBuffer(1), 0, 1))
+);
+function isDataView(value) {
+  if (typeof DataView === 'undefined') {
+    return false;
+  }
+
+  return isDataViewToString.working
+    ? isDataViewToString(value)
+    : value instanceof DataView;
+}
+exports.isDataView = isDataView;
+
+// Store a copy of SharedArrayBuffer in case it's deleted elsewhere
+var SharedArrayBufferCopy = typeof SharedArrayBuffer !== 'undefined' ? SharedArrayBuffer : undefined;
+function isSharedArrayBufferToString(value) {
+  return ObjectToString(value) === '[object SharedArrayBuffer]';
+}
+function isSharedArrayBuffer(value) {
+  if (typeof SharedArrayBufferCopy === 'undefined') {
+    return false;
+  }
+
+  if (typeof isSharedArrayBufferToString.working === 'undefined') {
+    isSharedArrayBufferToString.working = isSharedArrayBufferToString(new SharedArrayBufferCopy());
+  }
+
+  return isSharedArrayBufferToString.working
+    ? isSharedArrayBufferToString(value)
+    : value instanceof SharedArrayBufferCopy;
+}
+exports.isSharedArrayBuffer = isSharedArrayBuffer;
+
+function isAsyncFunction(value) {
+  return ObjectToString(value) === '[object AsyncFunction]';
+}
+exports.isAsyncFunction = isAsyncFunction;
+
+function isMapIterator(value) {
+  return ObjectToString(value) === '[object Map Iterator]';
+}
+exports.isMapIterator = isMapIterator;
+
+function isSetIterator(value) {
+  return ObjectToString(value) === '[object Set Iterator]';
+}
+exports.isSetIterator = isSetIterator;
+
+function isGeneratorObject(value) {
+  return ObjectToString(value) === '[object Generator]';
+}
+exports.isGeneratorObject = isGeneratorObject;
+
+function isWebAssemblyCompiledModule(value) {
+  return ObjectToString(value) === '[object WebAssembly.Module]';
+}
+exports.isWebAssemblyCompiledModule = isWebAssemblyCompiledModule;
+
+function isNumberObject(value) {
+  return checkBoxedPrimitive(value, numberValue);
+}
+exports.isNumberObject = isNumberObject;
+
+function isStringObject(value) {
+  return checkBoxedPrimitive(value, stringValue);
+}
+exports.isStringObject = isStringObject;
+
+function isBooleanObject(value) {
+  return checkBoxedPrimitive(value, booleanValue);
+}
+exports.isBooleanObject = isBooleanObject;
+
+function isBigIntObject(value) {
+  return BigIntSupported && checkBoxedPrimitive(value, bigIntValue);
+}
+exports.isBigIntObject = isBigIntObject;
+
+function isSymbolObject(value) {
+  return SymbolSupported && checkBoxedPrimitive(value, symbolValue);
+}
+exports.isSymbolObject = isSymbolObject;
+
+function isBoxedPrimitive(value) {
+  return (
+    isNumberObject(value) ||
+    isStringObject(value) ||
+    isBooleanObject(value) ||
+    isBigIntObject(value) ||
+    isSymbolObject(value)
+  );
+}
+exports.isBoxedPrimitive = isBoxedPrimitive;
+
+function isAnyArrayBuffer(value) {
+  return typeof Uint8Array !== 'undefined' && (
+    isArrayBuffer(value) ||
+    isSharedArrayBuffer(value)
+  );
+}
+exports.isAnyArrayBuffer = isAnyArrayBuffer;
+
+['isProxy', 'isExternal', 'isModuleNamespaceObject'].forEach(function(method) {
+  Object.defineProperty(exports, method, {
+    enumerable: false,
+    value: function() {
+      throw new Error(method + ' is not supported in userland');
+    }
+  });
+});
+
+
+/***/ }),
+
+/***/ 9539:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+/* provided dependency */ var process = __webpack_require__(4155);
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+var getOwnPropertyDescriptors = Object.getOwnPropertyDescriptors ||
+  function getOwnPropertyDescriptors(obj) {
+    var keys = Object.keys(obj);
+    var descriptors = {};
+    for (var i = 0; i < keys.length; i++) {
+      descriptors[keys[i]] = Object.getOwnPropertyDescriptor(obj, keys[i]);
+    }
+    return descriptors;
+  };
+
+var formatRegExp = /%[sdj%]/g;
+exports.format = function(f) {
+  if (!isString(f)) {
+    var objects = [];
+    for (var i = 0; i < arguments.length; i++) {
+      objects.push(inspect(arguments[i]));
+    }
+    return objects.join(' ');
+  }
+
+  var i = 1;
+  var args = arguments;
+  var len = args.length;
+  var str = String(f).replace(formatRegExp, function(x) {
+    if (x === '%%') return '%';
+    if (i >= len) return x;
+    switch (x) {
+      case '%s': return String(args[i++]);
+      case '%d': return Number(args[i++]);
+      case '%j':
+        try {
+          return JSON.stringify(args[i++]);
+        } catch (_) {
+          return '[Circular]';
+        }
+      default:
+        return x;
+    }
+  });
+  for (var x = args[i]; i < len; x = args[++i]) {
+    if (isNull(x) || !isObject(x)) {
+      str += ' ' + x;
+    } else {
+      str += ' ' + inspect(x);
+    }
+  }
+  return str;
+};
+
+
+// Mark that a method should not be used.
+// Returns a modified function which warns once by default.
+// If --no-deprecation is set, then it is a no-op.
+exports.deprecate = function(fn, msg) {
+  if (typeof process !== 'undefined' && process.noDeprecation === true) {
+    return fn;
+  }
+
+  // Allow for deprecating things in the process of starting up.
+  if (typeof process === 'undefined') {
+    return function() {
+      return exports.deprecate(fn, msg).apply(this, arguments);
+    };
+  }
+
+  var warned = false;
+  function deprecated() {
+    if (!warned) {
+      if (process.throwDeprecation) {
+        throw new Error(msg);
+      } else if (process.traceDeprecation) {
+        console.trace(msg);
+      } else {
+        console.error(msg);
+      }
+      warned = true;
+    }
+    return fn.apply(this, arguments);
+  }
+
+  return deprecated;
+};
+
+
+var debugs = {};
+var debugEnvRegex = /^$/;
+
+if (({"NODE_ENV":"development","NVM_INC":"/Users/bgroves/.nvm/versions/node/v12.13.1/include/node","PROJ_LIB":"/opt/miniconda3/share/proj","ARGO_NAMESPACE":"argo","NODE":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node","SPRING_DATASOURCE_USERNAME":"avvir","npm_package_dependencies_process":"^0.11.10","INIT_CWD":"/Users/bgroves/avvir/repos/avvir-javascript-client","NVM_CD_FLAGS":"","PYENV_ROOT":"/Users/bgroves/.pyenv","AVVIR_GATEWAY_URL":"https://acceptance-api.avvir.io","npm_package_dependencies_moment":"^2.29.1","npm_package_devDependencies_typescript":"^4.1.2","npm_package_devDependencies_sinon":"^11.1.2","npm_config_version_git_tag":"true","SHELL":"/bin/bash","TERM":"xterm-256color","npm_package_devDependencies_mocha":"^8.2.1","_printf_cmd":"printf","ARGO_BASE_HREF":"","SPRING_DATASOURCE_URL":"jdbc:postgresql://localhost:5432/gatewaytest","TMPDIR":"/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/","AVVIR_SANDBOX_PASSWORD":"Peanut rung dismi$$al","PIPENV_VENV_IN_PROJECT":"1","REACT_APP_STORAGE_BUCKET":"avvir-portal-acceptance.appspot.com","REACT_APP_ENABLE_PROJECT_TEAM":"true","CONDA_SHLVL":"1","npm_package_devDependencies__babel_preset_typescript":"^7.12.7","npm_config_init_license":"MIT","AVVIR_CLIENT_PASSWORD":"Peanut rung dismi$$al","CONDA_PROMPT_MODIFIER":"(base) ","npm_package_devDependencies_babel_plugin_module_resolver":"^4.1.0","GIT_HOSTING":"git@git.domain.com","npm_package_devDependencies_chai_almost":"^1.0.1","TERM_SESSION_ID":"1edc0f5d-1219-4990-b535-f7f1880c9e96","REACT_APP_PROJECT_ID":"avvir-portal-acceptance","npm_package_devDependencies__types_mocha":"^9.0.0","AVVIR_HOME":"/Users/bgroves/avvir/repos","ARGO_INSECURE_SKIP_VERIFY":"true","REACT_APP_PROCORE_URL":"https://sandbox.procore.com","npm_config_registry":"https://registry.yarnpkg.com","SPRING_DATASOURCE_PASSWORD":"passw0rd","npm_package_devDependencies_sinon_chai":"^3.5.0","npm_package_exports___api_import":"./dist/esm/api/index.js","npm_package_repository_url":"git@github.com:Avvir/avvir-javascript-client.git","npm_package_readmeFilename":"README.md","USER":"bgroves","NVM_DIR":"/Users/bgroves/.nvm","PIPENV_IGNORE_VIRTUALENVS":"1","REACT_APP_AUTH_DOMAIN":"avvir-portal-acceptance.firebaseapp.com","npm_package_devDependencies_webpack":"5.61.0","npm_package_devDependencies_chai_things":"^0.2.0","npm_package_devDependencies__babel_plugin_transform_runtime":"^7.12.10","npm_package_description":"Javascript client for Avvir APIs","npm_config_python":"/usr/local/opt/python@3.9/bin/python3","npm_package_devDependencies_webpack_cli":"^4.2.0","npm_package_devDependencies__types_chai_datetime":"^0.0.37","npm_package_scripts_build_esm":"tsc --project tsconfig.esm.json","COMMAND_MODE":"unix2003","BASH_IT_THEME":"bobby","CONDA_EXE":"/opt/miniconda3/bin/conda","npm_package_exports___import":"./dist/esm/index.js","ARGO_SECURE":"true","KUBECONFIG":"/dev/null","SPRING_PROFILES_ACTIVE":"test","npm_package_devDependencies_chai_datetime":"^1.7.0","npm_package_devDependencies__babel_core":"^7.12.9","SSH_AUTH_SOCK":"/private/tmp/com.apple.launchd.tPqztlIlhT/Listeners","SCM_CHECK":"true","npm_package_dependencies_stream_browserify":"^3.0.0","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0","npm_package_dependencies_buffer":"^6.0.3","BASH_SILENCE_DEPRECATION_WARNING":"1","REACT_APP_GOOGLE_API_KEY":"AIzaSyBqHVFoIhvaCW2UWEwS-5kOfchVAH9Dv2k","npm_execpath":"/usr/local/Cellar/yarn/1.22.17/libexec/bin/yarn.js","npm_package_dependencies_node_fetch":"^2.6.1","SPRING_DATASOURCE_JDBC_URL":"jdbc:postgresql://localhost:5432/gatewaytest","_CONDA_SET_PDAL_PYTHON_DRIVER_PATH":"/opt/miniconda3/lib","npm_package_dependencies_util":"^0.12.4","npm_package_module":"dist/esm/index.js","BASH_IT":"/Users/bgroves/.bash_it","AVVIR_ENVIRONMENT":"acceptance","LSCOLORS":"Gxfxcxdxdxegedabagacad","REACT_APP_DATADOG_API":"pub89cf48730665a1e1e21b1866f3c28b48","_CE_CONDA":"","npm_package_devDependencies_chai_spies":"^1.0.0","PATH":"/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895419721-0.6519376669217916:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895419313-0.9027215765385588:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895415125-0.6933772538305296:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895414556-0.6399316525062433:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895410959-0.2580938600693723:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/Users/bgroves/google-cloud-sdk/bin:/Users/bgroves/.pyenv/shims:/Users/bgroves/.pyenv/bin:/Users/bgroves/.jenv/shims:/Users/bgroves/.jenv/bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/usr/local/opt/postgresql@10/bin:/usr/local/texlive/2018/bin/x86_64-darwin","AVVIR_SANDBOX_EMAIL":"avvir-sandbox@example.com","CPL_ZIP_ENCODING":"UTF-8","npm_config_argv":"{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}","npm_package_dependencies_underscore":"^1.12.0","npm_package_devDependencies_fetch_mock":"^9.11.0","npm_package_scripts_build_web":"yarn run webpack","TERMINAL_EMULATOR":"JetBrains-JediTerm","BASH_IT_LOG_LEVEL_ALL":"3","REACT_APP_PROCORE_CLIENT_ID":"2f9880fc992354445771d02c4ace7241aa0c40088d47d732c116ef986e1ae6db","PROJ_NETWORK":"ON","npm_package_devDependencies__types_sinon_chai":"^3.2.4","_":"/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin/webpack","LaunchInstanceID":"C2C6C49A-11CD-4D4B-9B13-50348705B5BF","npm_package_devDependencies_tolerant_deep_eql":"git+http://git@github.com/TiraO/deep-eql.git#06a376d","__CFBundleIdentifier":"com.jetbrains.WebStorm","CONDA_PREFIX":"/opt/miniconda3","PWD":"/Users/bgroves/avvir/repos/avvir-javascript-client","JENV_LOADED":"1","npm_package_devDependencies_webpack_node_externals":"^2.5.2","npm_package_devDependencies__babel_polyfill":"^7.12.1","STRUCTION_SITE_TEST_PASSWORD":"GjFUqb4oAQV8-_xsY!j*","REACT_APP_WEB_API_GATEWAY_DOMAIN":"https://acceptance-api.avvir.io","npm_lifecycle_event":"webpack","npm_package_devDependencies_chai":"^4.2.0","npm_package_types":"dist/esm/index.d.ts","npm_package_repository_type":"git","npm_package_name":"avvir-javascript-client","BASH_IT_LOG_LEVEL_ERROR":"1","AVVIR_CLIENT_USERNAME":"avvir-sandbox@example.com","npm_package_devDependencies__babel_preset_env":"^7.12.7","TIME_MULTIPLIER_FOR_PERFORMANCE_TESTS":"1","npm_package_devDependencies__babel_cli":"^7.12.8","npm_package_scripts_build":"yarn build-esm && yarn build-web","npm_config_version_commit_hooks":"true","XPC_FLAGS":"0x0","npm_package_devDependencies_ts_loader":"^9.2.6","npm_config_bin_links":"true","GDAL_DATA":"/opt/miniconda3/share/gdal","npm_config_wrap_output":"","REACT_APP_ENABLE_MESH_STREAMING":"true","npm_package_main":"dist/avvir_api.node.js","XPC_SERVICE_NAME":"0","_CE_M":"","npm_package_version":"0.0.1","HOME":"/Users/bgroves","SHLVL":"6","ARGO_TOKEN":"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Inozc2tteVh5UjZoSHdOYWhFdzBIZ3BVdlVrcHl2VHA5WVpUQjJ5aThncnMifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJhcmdvIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImFyZ28tdG9rZW4tNGpiNnoiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiYXJnbyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjA0NjFkNjAxLWNjZWYtNDU3ZC05YTM5LWRiMzVlNjY3M2Q0YyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDphcmdvOmFyZ28ifQ.semSE6eZ1pHuai14GRksq0b5MEl5jF2quNo6gukBFL4VhkRj2KX0hCmVNnP7ntkBwCakKmqCQipMrJCwZnldnzM0VR8YKuvbKhU108XZFUc9UfXwqpgFvm7SxZanNwWSHXsajSMASAzT5V9FWAK9mpH519MzOYk7TTF_alAQHEV6Is6yrsQp18WZr5IQn7mk-EHmnLjBFO278vjkM851zPQ8PWyxaPI_kMinxKx0ajZJ7GVtyC3ucSoc_SBCRJEuNlUpDDOSQFOWbcX8ZJSn_k8jvM1m2y9lSbQ2hIcmGqx4MG-6n8QJzNhTctYa3UstXdKNNiw4ZTBcskTk5g97Dg","STRUCTION_SITE_TEST_USERNAME":"matt@avvir.io","PDAL_DRIVER_PATH":"/opt/miniconda3/lib:/opt/miniconda3/lib/python3.9/site-packages/lib:/opt/miniconda3/lib/python3.9/site-packages/lib64:/opt/miniconda3/lib/python3.9/site-packages/pdal","npm_package_devDependencies_deepmerge":"^4.2.2","npm_package_scripts_test":"NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn rebuild","TSC_COMPILE_ON_ERROR":"true","npm_package_dependencies_three":"^0.123.0","npm_package_scripts_rebuild":"yarn clean && yarn build","npm_config_save_prefix":"^","npm_config_strict_ssl":"true","REACT_APP_MESSAGING_SENDER_ID":"28849523821","REACT_APP_PROCORE_API_DOMAIN":"https://sandbox.procore.com","npm_package_devDependencies_chai_roughly":"^1.0.0","npm_config_version_git_message":"v%s","NPM_CONFIG_PYTHON":"/usr/local/opt/python@3.9/bin/python3","npm_package_devDependencies_chai_json_equal":"^0.0.1","npm_package_browserslist_2":"Firefox ESR","npm_package_browserslist_1":"IE 11","LOGNAME":"bgroves","BASH_IT_LOG_LEVEL_WARNING":"2","REACT_APP_PROJECT_TEAM_ALLOWLIST":"-MkchJZoC8vJTPpWwlTP","CONDA_PYTHON_EXE":"/opt/miniconda3/bin/python","YARN_WRAP_OUTPUT":"false","npm_package_devDependencies__babel_register":"^7.12.1","npm_package_browserslist_0":"> 1%","PREFIX":"/usr/local","JENV_SHELL":"bash","npm_lifecycle_script":"yarn run webpack","npm_package_exports___require":"./dist/avvir_api.node.js","LC_CTYPE":"en_US.UTF-8","npm_package_devDependencies__types_sinon":"^9.0.0","ARGO_SERVER":"pipelines.avvir.io:443","NVM_BIN":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin","CONDA_DEFAULT_ENV":"base","npm_package_browser":"dist/avvir_api.web.js","TODO":"t","npm_config_version_git_sign":"","npm_config_ignore_scripts":"","npm_config_user_agent":"yarn/1.22.17 npm/? node/v12.13.1 darwin x64","npm_package_devDependencies__types_node":"^16.10.2","IRC_CLIENT":"irssi","npm_package_dependencies_jsonwebtoken":"^8.5.1","ARGO_HTTP1":"true","npm_package_dependencies_extendable_error_class":"^0.1.2","npm_package_dependencies_crypto_browserify":"^3.12.0","npm_package_files_0":"./dist","AVVIR_CLIENT_PROJECT_ID":"-MhsVwqU0U439Dpfx00U","npm_config_init_version":"1.0.0","npm_config_ignore_optional":"","SECURITYSESSIONID":"186a9","npm_package_scripts_clean":"rm -r ./dist","REACT_APP_MIXPANEL_TOKEN":"b1d53b0b983bab92eaa0f13f9f0449f6","npm_node_execpath":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node","npm_config_version_tag_prefix":"v"}).NODE_DEBUG) {
+  var debugEnv = ({"NODE_ENV":"development","NVM_INC":"/Users/bgroves/.nvm/versions/node/v12.13.1/include/node","PROJ_LIB":"/opt/miniconda3/share/proj","ARGO_NAMESPACE":"argo","NODE":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node","SPRING_DATASOURCE_USERNAME":"avvir","npm_package_dependencies_process":"^0.11.10","INIT_CWD":"/Users/bgroves/avvir/repos/avvir-javascript-client","NVM_CD_FLAGS":"","PYENV_ROOT":"/Users/bgroves/.pyenv","AVVIR_GATEWAY_URL":"https://acceptance-api.avvir.io","npm_package_dependencies_moment":"^2.29.1","npm_package_devDependencies_typescript":"^4.1.2","npm_package_devDependencies_sinon":"^11.1.2","npm_config_version_git_tag":"true","SHELL":"/bin/bash","TERM":"xterm-256color","npm_package_devDependencies_mocha":"^8.2.1","_printf_cmd":"printf","ARGO_BASE_HREF":"","SPRING_DATASOURCE_URL":"jdbc:postgresql://localhost:5432/gatewaytest","TMPDIR":"/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/","AVVIR_SANDBOX_PASSWORD":"Peanut rung dismi$$al","PIPENV_VENV_IN_PROJECT":"1","REACT_APP_STORAGE_BUCKET":"avvir-portal-acceptance.appspot.com","REACT_APP_ENABLE_PROJECT_TEAM":"true","CONDA_SHLVL":"1","npm_package_devDependencies__babel_preset_typescript":"^7.12.7","npm_config_init_license":"MIT","AVVIR_CLIENT_PASSWORD":"Peanut rung dismi$$al","CONDA_PROMPT_MODIFIER":"(base) ","npm_package_devDependencies_babel_plugin_module_resolver":"^4.1.0","GIT_HOSTING":"git@git.domain.com","npm_package_devDependencies_chai_almost":"^1.0.1","TERM_SESSION_ID":"1edc0f5d-1219-4990-b535-f7f1880c9e96","REACT_APP_PROJECT_ID":"avvir-portal-acceptance","npm_package_devDependencies__types_mocha":"^9.0.0","AVVIR_HOME":"/Users/bgroves/avvir/repos","ARGO_INSECURE_SKIP_VERIFY":"true","REACT_APP_PROCORE_URL":"https://sandbox.procore.com","npm_config_registry":"https://registry.yarnpkg.com","SPRING_DATASOURCE_PASSWORD":"passw0rd","npm_package_devDependencies_sinon_chai":"^3.5.0","npm_package_exports___api_import":"./dist/esm/api/index.js","npm_package_repository_url":"git@github.com:Avvir/avvir-javascript-client.git","npm_package_readmeFilename":"README.md","USER":"bgroves","NVM_DIR":"/Users/bgroves/.nvm","PIPENV_IGNORE_VIRTUALENVS":"1","REACT_APP_AUTH_DOMAIN":"avvir-portal-acceptance.firebaseapp.com","npm_package_devDependencies_webpack":"5.61.0","npm_package_devDependencies_chai_things":"^0.2.0","npm_package_devDependencies__babel_plugin_transform_runtime":"^7.12.10","npm_package_description":"Javascript client for Avvir APIs","npm_config_python":"/usr/local/opt/python@3.9/bin/python3","npm_package_devDependencies_webpack_cli":"^4.2.0","npm_package_devDependencies__types_chai_datetime":"^0.0.37","npm_package_scripts_build_esm":"tsc --project tsconfig.esm.json","COMMAND_MODE":"unix2003","BASH_IT_THEME":"bobby","CONDA_EXE":"/opt/miniconda3/bin/conda","npm_package_exports___import":"./dist/esm/index.js","ARGO_SECURE":"true","KUBECONFIG":"/dev/null","SPRING_PROFILES_ACTIVE":"test","npm_package_devDependencies_chai_datetime":"^1.7.0","npm_package_devDependencies__babel_core":"^7.12.9","SSH_AUTH_SOCK":"/private/tmp/com.apple.launchd.tPqztlIlhT/Listeners","SCM_CHECK":"true","npm_package_dependencies_stream_browserify":"^3.0.0","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0","npm_package_dependencies_buffer":"^6.0.3","BASH_SILENCE_DEPRECATION_WARNING":"1","REACT_APP_GOOGLE_API_KEY":"AIzaSyBqHVFoIhvaCW2UWEwS-5kOfchVAH9Dv2k","npm_execpath":"/usr/local/Cellar/yarn/1.22.17/libexec/bin/yarn.js","npm_package_dependencies_node_fetch":"^2.6.1","SPRING_DATASOURCE_JDBC_URL":"jdbc:postgresql://localhost:5432/gatewaytest","_CONDA_SET_PDAL_PYTHON_DRIVER_PATH":"/opt/miniconda3/lib","npm_package_dependencies_util":"^0.12.4","npm_package_module":"dist/esm/index.js","BASH_IT":"/Users/bgroves/.bash_it","AVVIR_ENVIRONMENT":"acceptance","LSCOLORS":"Gxfxcxdxdxegedabagacad","REACT_APP_DATADOG_API":"pub89cf48730665a1e1e21b1866f3c28b48","_CE_CONDA":"","npm_package_devDependencies_chai_spies":"^1.0.0","PATH":"/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895419721-0.6519376669217916:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895419313-0.9027215765385588:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895415125-0.6933772538305296:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895414556-0.6399316525062433:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/var/folders/6r/41nqckb563b009h3dxl6kvhm0000gn/T/yarn--1638895410959-0.2580938600693723:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/Users/bgroves/.config/yarn/link/node_modules/.bin:/Users/bgroves/.nvm/versions/node/v12.13.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node_modules/npm/bin/node-gyp-bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/Users/bgroves/google-cloud-sdk/bin:/Users/bgroves/.pyenv/shims:/Users/bgroves/.pyenv/bin:/Users/bgroves/.jenv/shims:/Users/bgroves/.jenv/bin:/Users/bgroves/.nvm/versions/node/v12.13.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin:/usr/local/opt/postgresql@10/bin:/usr/local/texlive/2018/bin/x86_64-darwin","AVVIR_SANDBOX_EMAIL":"avvir-sandbox@example.com","CPL_ZIP_ENCODING":"UTF-8","npm_config_argv":"{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}","npm_package_dependencies_underscore":"^1.12.0","npm_package_devDependencies_fetch_mock":"^9.11.0","npm_package_scripts_build_web":"yarn run webpack","TERMINAL_EMULATOR":"JetBrains-JediTerm","BASH_IT_LOG_LEVEL_ALL":"3","REACT_APP_PROCORE_CLIENT_ID":"2f9880fc992354445771d02c4ace7241aa0c40088d47d732c116ef986e1ae6db","PROJ_NETWORK":"ON","npm_package_devDependencies__types_sinon_chai":"^3.2.4","_":"/Users/bgroves/avvir/repos/avvir-javascript-client/node_modules/.bin/webpack","LaunchInstanceID":"C2C6C49A-11CD-4D4B-9B13-50348705B5BF","npm_package_devDependencies_tolerant_deep_eql":"git+http://git@github.com/TiraO/deep-eql.git#06a376d","__CFBundleIdentifier":"com.jetbrains.WebStorm","CONDA_PREFIX":"/opt/miniconda3","PWD":"/Users/bgroves/avvir/repos/avvir-javascript-client","JENV_LOADED":"1","npm_package_devDependencies_webpack_node_externals":"^2.5.2","npm_package_devDependencies__babel_polyfill":"^7.12.1","STRUCTION_SITE_TEST_PASSWORD":"GjFUqb4oAQV8-_xsY!j*","REACT_APP_WEB_API_GATEWAY_DOMAIN":"https://acceptance-api.avvir.io","npm_lifecycle_event":"webpack","npm_package_devDependencies_chai":"^4.2.0","npm_package_types":"dist/esm/index.d.ts","npm_package_repository_type":"git","npm_package_name":"avvir-javascript-client","BASH_IT_LOG_LEVEL_ERROR":"1","AVVIR_CLIENT_USERNAME":"avvir-sandbox@example.com","npm_package_devDependencies__babel_preset_env":"^7.12.7","TIME_MULTIPLIER_FOR_PERFORMANCE_TESTS":"1","npm_package_devDependencies__babel_cli":"^7.12.8","npm_package_scripts_build":"yarn build-esm && yarn build-web","npm_config_version_commit_hooks":"true","XPC_FLAGS":"0x0","npm_package_devDependencies_ts_loader":"^9.2.6","npm_config_bin_links":"true","GDAL_DATA":"/opt/miniconda3/share/gdal","npm_config_wrap_output":"","REACT_APP_ENABLE_MESH_STREAMING":"true","npm_package_main":"dist/avvir_api.node.js","XPC_SERVICE_NAME":"0","_CE_M":"","npm_package_version":"0.0.1","HOME":"/Users/bgroves","SHLVL":"6","ARGO_TOKEN":"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Inozc2tteVh5UjZoSHdOYWhFdzBIZ3BVdlVrcHl2VHA5WVpUQjJ5aThncnMifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJhcmdvIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImFyZ28tdG9rZW4tNGpiNnoiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiYXJnbyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjA0NjFkNjAxLWNjZWYtNDU3ZC05YTM5LWRiMzVlNjY3M2Q0YyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDphcmdvOmFyZ28ifQ.semSE6eZ1pHuai14GRksq0b5MEl5jF2quNo6gukBFL4VhkRj2KX0hCmVNnP7ntkBwCakKmqCQipMrJCwZnldnzM0VR8YKuvbKhU108XZFUc9UfXwqpgFvm7SxZanNwWSHXsajSMASAzT5V9FWAK9mpH519MzOYk7TTF_alAQHEV6Is6yrsQp18WZr5IQn7mk-EHmnLjBFO278vjkM851zPQ8PWyxaPI_kMinxKx0ajZJ7GVtyC3ucSoc_SBCRJEuNlUpDDOSQFOWbcX8ZJSn_k8jvM1m2y9lSbQ2hIcmGqx4MG-6n8QJzNhTctYa3UstXdKNNiw4ZTBcskTk5g97Dg","STRUCTION_SITE_TEST_USERNAME":"matt@avvir.io","PDAL_DRIVER_PATH":"/opt/miniconda3/lib:/opt/miniconda3/lib/python3.9/site-packages/lib:/opt/miniconda3/lib/python3.9/site-packages/lib64:/opt/miniconda3/lib/python3.9/site-packages/pdal","npm_package_devDependencies_deepmerge":"^4.2.2","npm_package_scripts_test":"NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn rebuild","TSC_COMPILE_ON_ERROR":"true","npm_package_dependencies_three":"^0.123.0","npm_package_scripts_rebuild":"yarn clean && yarn build","npm_config_save_prefix":"^","npm_config_strict_ssl":"true","REACT_APP_MESSAGING_SENDER_ID":"28849523821","REACT_APP_PROCORE_API_DOMAIN":"https://sandbox.procore.com","npm_package_devDependencies_chai_roughly":"^1.0.0","npm_config_version_git_message":"v%s","NPM_CONFIG_PYTHON":"/usr/local/opt/python@3.9/bin/python3","npm_package_devDependencies_chai_json_equal":"^0.0.1","npm_package_browserslist_2":"Firefox ESR","npm_package_browserslist_1":"IE 11","LOGNAME":"bgroves","BASH_IT_LOG_LEVEL_WARNING":"2","REACT_APP_PROJECT_TEAM_ALLOWLIST":"-MkchJZoC8vJTPpWwlTP","CONDA_PYTHON_EXE":"/opt/miniconda3/bin/python","YARN_WRAP_OUTPUT":"false","npm_package_devDependencies__babel_register":"^7.12.1","npm_package_browserslist_0":"> 1%","PREFIX":"/usr/local","JENV_SHELL":"bash","npm_lifecycle_script":"yarn run webpack","npm_package_exports___require":"./dist/avvir_api.node.js","LC_CTYPE":"en_US.UTF-8","npm_package_devDependencies__types_sinon":"^9.0.0","ARGO_SERVER":"pipelines.avvir.io:443","NVM_BIN":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin","CONDA_DEFAULT_ENV":"base","npm_package_browser":"dist/avvir_api.web.js","TODO":"t","npm_config_version_git_sign":"","npm_config_ignore_scripts":"","npm_config_user_agent":"yarn/1.22.17 npm/? node/v12.13.1 darwin x64","npm_package_devDependencies__types_node":"^16.10.2","IRC_CLIENT":"irssi","npm_package_dependencies_jsonwebtoken":"^8.5.1","ARGO_HTTP1":"true","npm_package_dependencies_extendable_error_class":"^0.1.2","npm_package_dependencies_crypto_browserify":"^3.12.0","npm_package_files_0":"./dist","AVVIR_CLIENT_PROJECT_ID":"-MhsVwqU0U439Dpfx00U","npm_config_init_version":"1.0.0","npm_config_ignore_optional":"","SECURITYSESSIONID":"186a9","npm_package_scripts_clean":"rm -r ./dist","REACT_APP_MIXPANEL_TOKEN":"b1d53b0b983bab92eaa0f13f9f0449f6","npm_node_execpath":"/Users/bgroves/.nvm/versions/node/v12.13.1/bin/node","npm_config_version_tag_prefix":"v"}).NODE_DEBUG;
+  debugEnv = debugEnv.replace(/[|\\{}()[\]^$+?.]/g, '\\$&')
+    .replace(/\*/g, '.*')
+    .replace(/,/g, '$|^')
+    .toUpperCase();
+  debugEnvRegex = new RegExp('^' + debugEnv + '$', 'i');
+}
+exports.debuglog = function(set) {
+  set = set.toUpperCase();
+  if (!debugs[set]) {
+    if (debugEnvRegex.test(set)) {
+      var pid = process.pid;
+      debugs[set] = function() {
+        var msg = exports.format.apply(exports, arguments);
+        console.error('%s %d: %s', set, pid, msg);
+      };
+    } else {
+      debugs[set] = function() {};
+    }
+  }
+  return debugs[set];
+};
+
+
+/**
+ * Echos the value of a value. Trys to print the value out
+ * in the best way possible given the different types.
+ *
+ * @param {Object} obj The object to print out.
+ * @param {Object} opts Optional options object that alters the output.
+ */
+/* legacy: obj, showHidden, depth, colors*/
+function inspect(obj, opts) {
+  // default options
+  var ctx = {
+    seen: [],
+    stylize: stylizeNoColor
+  };
+  // legacy...
+  if (arguments.length >= 3) ctx.depth = arguments[2];
+  if (arguments.length >= 4) ctx.colors = arguments[3];
+  if (isBoolean(opts)) {
+    // legacy...
+    ctx.showHidden = opts;
+  } else if (opts) {
+    // got an "options" object
+    exports._extend(ctx, opts);
+  }
+  // set default options
+  if (isUndefined(ctx.showHidden)) ctx.showHidden = false;
+  if (isUndefined(ctx.depth)) ctx.depth = 2;
+  if (isUndefined(ctx.colors)) ctx.colors = false;
+  if (isUndefined(ctx.customInspect)) ctx.customInspect = true;
+  if (ctx.colors) ctx.stylize = stylizeWithColor;
+  return formatValue(ctx, obj, ctx.depth);
+}
+exports.inspect = inspect;
+
+
+// http://en.wikipedia.org/wiki/ANSI_escape_code#graphics
+inspect.colors = {
+  'bold' : [1, 22],
+  'italic' : [3, 23],
+  'underline' : [4, 24],
+  'inverse' : [7, 27],
+  'white' : [37, 39],
+  'grey' : [90, 39],
+  'black' : [30, 39],
+  'blue' : [34, 39],
+  'cyan' : [36, 39],
+  'green' : [32, 39],
+  'magenta' : [35, 39],
+  'red' : [31, 39],
+  'yellow' : [33, 39]
+};
+
+// Don't use 'blue' not visible on cmd.exe
+inspect.styles = {
+  'special': 'cyan',
+  'number': 'yellow',
+  'boolean': 'yellow',
+  'undefined': 'grey',
+  'null': 'bold',
+  'string': 'green',
+  'date': 'magenta',
+  // "name": intentionally not styling
+  'regexp': 'red'
+};
+
+
+function stylizeWithColor(str, styleType) {
+  var style = inspect.styles[styleType];
+
+  if (style) {
+    return '\u001b[' + inspect.colors[style][0] + 'm' + str +
+           '\u001b[' + inspect.colors[style][1] + 'm';
+  } else {
+    return str;
+  }
+}
+
+
+function stylizeNoColor(str, styleType) {
+  return str;
+}
+
+
+function arrayToHash(array) {
+  var hash = {};
+
+  array.forEach(function(val, idx) {
+    hash[val] = true;
+  });
+
+  return hash;
+}
+
+
+function formatValue(ctx, value, recurseTimes) {
+  // Provide a hook for user-specified inspect functions.
+  // Check that value is an object with an inspect function on it
+  if (ctx.customInspect &&
+      value &&
+      isFunction(value.inspect) &&
+      // Filter out the util module, it's inspect function is special
+      value.inspect !== exports.inspect &&
+      // Also filter out any prototype objects using the circular check.
+      !(value.constructor && value.constructor.prototype === value)) {
+    var ret = value.inspect(recurseTimes, ctx);
+    if (!isString(ret)) {
+      ret = formatValue(ctx, ret, recurseTimes);
+    }
+    return ret;
+  }
+
+  // Primitive types cannot have properties
+  var primitive = formatPrimitive(ctx, value);
+  if (primitive) {
+    return primitive;
+  }
+
+  // Look up the keys of the object.
+  var keys = Object.keys(value);
+  var visibleKeys = arrayToHash(keys);
+
+  if (ctx.showHidden) {
+    keys = Object.getOwnPropertyNames(value);
+  }
+
+  // IE doesn't make error fields non-enumerable
+  // http://msdn.microsoft.com/en-us/library/ie/dww52sbt(v=vs.94).aspx
+  if (isError(value)
+      && (keys.indexOf('message') >= 0 || keys.indexOf('description') >= 0)) {
+    return formatError(value);
+  }
+
+  // Some type of object without properties can be shortcutted.
+  if (keys.length === 0) {
+    if (isFunction(value)) {
+      var name = value.name ? ': ' + value.name : '';
+      return ctx.stylize('[Function' + name + ']', 'special');
+    }
+    if (isRegExp(value)) {
+      return ctx.stylize(RegExp.prototype.toString.call(value), 'regexp');
+    }
+    if (isDate(value)) {
+      return ctx.stylize(Date.prototype.toString.call(value), 'date');
+    }
+    if (isError(value)) {
+      return formatError(value);
+    }
+  }
+
+  var base = '', array = false, braces = ['{', '}'];
+
+  // Make Array say that they are Array
+  if (isArray(value)) {
+    array = true;
+    braces = ['[', ']'];
+  }
+
+  // Make functions say that they are functions
+  if (isFunction(value)) {
+    var n = value.name ? ': ' + value.name : '';
+    base = ' [Function' + n + ']';
+  }
+
+  // Make RegExps say that they are RegExps
+  if (isRegExp(value)) {
+    base = ' ' + RegExp.prototype.toString.call(value);
+  }
+
+  // Make dates with properties first say the date
+  if (isDate(value)) {
+    base = ' ' + Date.prototype.toUTCString.call(value);
+  }
+
+  // Make error with message first say the error
+  if (isError(value)) {
+    base = ' ' + formatError(value);
+  }
+
+  if (keys.length === 0 && (!array || value.length == 0)) {
+    return braces[0] + base + braces[1];
+  }
+
+  if (recurseTimes < 0) {
+    if (isRegExp(value)) {
+      return ctx.stylize(RegExp.prototype.toString.call(value), 'regexp');
+    } else {
+      return ctx.stylize('[Object]', 'special');
+    }
+  }
+
+  ctx.seen.push(value);
+
+  var output;
+  if (array) {
+    output = formatArray(ctx, value, recurseTimes, visibleKeys, keys);
+  } else {
+    output = keys.map(function(key) {
+      return formatProperty(ctx, value, recurseTimes, visibleKeys, key, array);
+    });
+  }
+
+  ctx.seen.pop();
+
+  return reduceToSingleString(output, base, braces);
+}
+
+
+function formatPrimitive(ctx, value) {
+  if (isUndefined(value))
+    return ctx.stylize('undefined', 'undefined');
+  if (isString(value)) {
+    var simple = '\'' + JSON.stringify(value).replace(/^"|"$/g, '')
+                                             .replace(/'/g, "\\'")
+                                             .replace(/\\"/g, '"') + '\'';
+    return ctx.stylize(simple, 'string');
+  }
+  if (isNumber(value))
+    return ctx.stylize('' + value, 'number');
+  if (isBoolean(value))
+    return ctx.stylize('' + value, 'boolean');
+  // For some reason typeof null is "object", so special case here.
+  if (isNull(value))
+    return ctx.stylize('null', 'null');
+}
+
+
+function formatError(value) {
+  return '[' + Error.prototype.toString.call(value) + ']';
+}
+
+
+function formatArray(ctx, value, recurseTimes, visibleKeys, keys) {
+  var output = [];
+  for (var i = 0, l = value.length; i < l; ++i) {
+    if (hasOwnProperty(value, String(i))) {
+      output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
+          String(i), true));
+    } else {
+      output.push('');
+    }
+  }
+  keys.forEach(function(key) {
+    if (!key.match(/^\d+$/)) {
+      output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
+          key, true));
+    }
+  });
+  return output;
+}
+
+
+function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
+  var name, str, desc;
+  desc = Object.getOwnPropertyDescriptor(value, key) || { value: value[key] };
+  if (desc.get) {
+    if (desc.set) {
+      str = ctx.stylize('[Getter/Setter]', 'special');
+    } else {
+      str = ctx.stylize('[Getter]', 'special');
+    }
+  } else {
+    if (desc.set) {
+      str = ctx.stylize('[Setter]', 'special');
+    }
+  }
+  if (!hasOwnProperty(visibleKeys, key)) {
+    name = '[' + key + ']';
+  }
+  if (!str) {
+    if (ctx.seen.indexOf(desc.value) < 0) {
+      if (isNull(recurseTimes)) {
+        str = formatValue(ctx, desc.value, null);
+      } else {
+        str = formatValue(ctx, desc.value, recurseTimes - 1);
+      }
+      if (str.indexOf('\n') > -1) {
+        if (array) {
+          str = str.split('\n').map(function(line) {
+            return '  ' + line;
+          }).join('\n').substr(2);
+        } else {
+          str = '\n' + str.split('\n').map(function(line) {
+            return '   ' + line;
+          }).join('\n');
+        }
+      }
+    } else {
+      str = ctx.stylize('[Circular]', 'special');
+    }
+  }
+  if (isUndefined(name)) {
+    if (array && key.match(/^\d+$/)) {
+      return str;
+    }
+    name = JSON.stringify('' + key);
+    if (name.match(/^"([a-zA-Z_][a-zA-Z_0-9]*)"$/)) {
+      name = name.substr(1, name.length - 2);
+      name = ctx.stylize(name, 'name');
+    } else {
+      name = name.replace(/'/g, "\\'")
+                 .replace(/\\"/g, '"')
+                 .replace(/(^"|"$)/g, "'");
+      name = ctx.stylize(name, 'string');
+    }
+  }
+
+  return name + ': ' + str;
+}
+
+
+function reduceToSingleString(output, base, braces) {
+  var numLinesEst = 0;
+  var length = output.reduce(function(prev, cur) {
+    numLinesEst++;
+    if (cur.indexOf('\n') >= 0) numLinesEst++;
+    return prev + cur.replace(/\u001b\[\d\d?m/g, '').length + 1;
+  }, 0);
+
+  if (length > 60) {
+    return braces[0] +
+           (base === '' ? '' : base + '\n ') +
+           ' ' +
+           output.join(',\n  ') +
+           ' ' +
+           braces[1];
+  }
+
+  return braces[0] + base + ' ' + output.join(', ') + ' ' + braces[1];
+}
+
+
+// NOTE: These type checking functions intentionally don't use `instanceof`
+// because it is fragile and can be easily faked with `Object.create()`.
+exports.types = __webpack_require__(5955);
+
+function isArray(ar) {
+  return Array.isArray(ar);
+}
+exports.isArray = isArray;
+
+function isBoolean(arg) {
+  return typeof arg === 'boolean';
+}
+exports.isBoolean = isBoolean;
+
+function isNull(arg) {
+  return arg === null;
+}
+exports.isNull = isNull;
+
+function isNullOrUndefined(arg) {
+  return arg == null;
+}
+exports.isNullOrUndefined = isNullOrUndefined;
+
+function isNumber(arg) {
+  return typeof arg === 'number';
+}
+exports.isNumber = isNumber;
+
+function isString(arg) {
+  return typeof arg === 'string';
+}
+exports.isString = isString;
+
+function isSymbol(arg) {
+  return typeof arg === 'symbol';
+}
+exports.isSymbol = isSymbol;
+
+function isUndefined(arg) {
+  return arg === void 0;
+}
+exports.isUndefined = isUndefined;
+
+function isRegExp(re) {
+  return isObject(re) && objectToString(re) === '[object RegExp]';
+}
+exports.isRegExp = isRegExp;
+exports.types.isRegExp = isRegExp;
+
+function isObject(arg) {
+  return typeof arg === 'object' && arg !== null;
+}
+exports.isObject = isObject;
+
+function isDate(d) {
+  return isObject(d) && objectToString(d) === '[object Date]';
+}
+exports.isDate = isDate;
+exports.types.isDate = isDate;
+
+function isError(e) {
+  return isObject(e) &&
+      (objectToString(e) === '[object Error]' || e instanceof Error);
+}
+exports.isError = isError;
+exports.types.isNativeError = isError;
+
+function isFunction(arg) {
+  return typeof arg === 'function';
+}
+exports.isFunction = isFunction;
+
+function isPrimitive(arg) {
+  return arg === null ||
+         typeof arg === 'boolean' ||
+         typeof arg === 'number' ||
+         typeof arg === 'string' ||
+         typeof arg === 'symbol' ||  // ES6 symbol
+         typeof arg === 'undefined';
+}
+exports.isPrimitive = isPrimitive;
+
+exports.isBuffer = __webpack_require__(384);
+
+function objectToString(o) {
+  return Object.prototype.toString.call(o);
+}
+
+
+function pad(n) {
+  return n < 10 ? '0' + n.toString(10) : n.toString(10);
+}
+
+
+var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+              'Oct', 'Nov', 'Dec'];
+
+// 26 Feb 16:19:34
+function timestamp() {
+  var d = new Date();
+  var time = [pad(d.getHours()),
+              pad(d.getMinutes()),
+              pad(d.getSeconds())].join(':');
+  return [d.getDate(), months[d.getMonth()], time].join(' ');
+}
+
+
+// log is just a thin wrapper to console.log that prepends a timestamp
+exports.log = function() {
+  console.log('%s - %s', timestamp(), exports.format.apply(exports, arguments));
+};
+
+
+/**
+ * Inherit the prototype methods from one constructor into another.
+ *
+ * The Function.prototype.inherits from lang.js rewritten as a standalone
+ * function (not on Function.prototype). NOTE: If this file is to be loaded
+ * during bootstrapping this function needs to be rewritten using some native
+ * functions as prototype setup using normal JavaScript does not work as
+ * expected during bootstrapping (see mirror.js in r114903).
+ *
+ * @param {function} ctor Constructor function which needs to inherit the
+ *     prototype.
+ * @param {function} superCtor Constructor function to inherit prototype from.
+ */
+exports.inherits = __webpack_require__(5717);
+
+exports._extend = function(origin, add) {
+  // Don't do anything if add isn't an object
+  if (!add || !isObject(add)) return origin;
+
+  var keys = Object.keys(add);
+  var i = keys.length;
+  while (i--) {
+    origin[keys[i]] = add[keys[i]];
+  }
+  return origin;
+};
+
+function hasOwnProperty(obj, prop) {
+  return Object.prototype.hasOwnProperty.call(obj, prop);
+}
+
+var kCustomPromisifiedSymbol = typeof Symbol !== 'undefined' ? Symbol('util.promisify.custom') : undefined;
+
+exports.promisify = function promisify(original) {
+  if (typeof original !== 'function')
+    throw new TypeError('The "original" argument must be of type Function');
+
+  if (kCustomPromisifiedSymbol && original[kCustomPromisifiedSymbol]) {
+    var fn = original[kCustomPromisifiedSymbol];
+    if (typeof fn !== 'function') {
+      throw new TypeError('The "util.promisify.custom" argument must be of type Function');
+    }
+    Object.defineProperty(fn, kCustomPromisifiedSymbol, {
+      value: fn, enumerable: false, writable: false, configurable: true
+    });
+    return fn;
+  }
+
+  function fn() {
+    var promiseResolve, promiseReject;
+    var promise = new Promise(function (resolve, reject) {
+      promiseResolve = resolve;
+      promiseReject = reject;
+    });
+
+    var args = [];
+    for (var i = 0; i < arguments.length; i++) {
+      args.push(arguments[i]);
+    }
+    args.push(function (err, value) {
+      if (err) {
+        promiseReject(err);
+      } else {
+        promiseResolve(value);
+      }
+    });
+
+    try {
+      original.apply(this, args);
+    } catch (err) {
+      promiseReject(err);
+    }
+
+    return promise;
+  }
+
+  Object.setPrototypeOf(fn, Object.getPrototypeOf(original));
+
+  if (kCustomPromisifiedSymbol) Object.defineProperty(fn, kCustomPromisifiedSymbol, {
+    value: fn, enumerable: false, writable: false, configurable: true
+  });
+  return Object.defineProperties(
+    fn,
+    getOwnPropertyDescriptors(original)
+  );
+}
+
+exports.promisify.custom = kCustomPromisifiedSymbol
+
+function callbackifyOnRejected(reason, cb) {
+  // `!reason` guard inspired by bluebird (Ref: https://goo.gl/t5IS6M).
+  // Because `null` is a special error value in callbacks which means "no error
+  // occurred", we error-wrap so the callback consumer can distinguish between
+  // "the promise rejected with null" or "the promise fulfilled with undefined".
+  if (!reason) {
+    var newReason = new Error('Promise was rejected with a falsy value');
+    newReason.reason = reason;
+    reason = newReason;
+  }
+  return cb(reason);
+}
+
+function callbackify(original) {
+  if (typeof original !== 'function') {
+    throw new TypeError('The "original" argument must be of type Function');
+  }
+
+  // We DO NOT return the promise as it gives the user a false sense that
+  // the promise is actually somehow related to the callback's execution
+  // and that the callback throwing will reject the promise.
+  function callbackified() {
+    var args = [];
+    for (var i = 0; i < arguments.length; i++) {
+      args.push(arguments[i]);
+    }
+
+    var maybeCb = args.pop();
+    if (typeof maybeCb !== 'function') {
+      throw new TypeError('The last argument must be of type Function');
+    }
+    var self = this;
+    var cb = function() {
+      return maybeCb.apply(self, arguments);
+    };
+    // In true node style we process the callback on `nextTick` with all the
+    // implications (stack, `uncaughtException`, `async_hooks`)
+    original.apply(this, args)
+      .then(function(ret) { process.nextTick(cb.bind(null, null, ret)) },
+            function(rej) { process.nextTick(callbackifyOnRejected.bind(null, rej, cb)) });
+  }
+
+  Object.setPrototypeOf(callbackified, Object.getPrototypeOf(original));
+  Object.defineProperties(callbackified,
+                          getOwnPropertyDescriptors(original));
+  return callbackified;
+}
+exports.callbackify = callbackify;
+
+
+/***/ }),
+
+/***/ 6430:
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+
+
+var forEach = __webpack_require__(9804);
+var availableTypedArrays = __webpack_require__(3083);
+var callBound = __webpack_require__(1924);
+
+var $toString = callBound('Object.prototype.toString');
+var hasToStringTag = __webpack_require__(6410)();
+
+var g = typeof globalThis === 'undefined' ? __webpack_require__.g : globalThis;
+var typedArrays = availableTypedArrays();
+
+var $slice = callBound('String.prototype.slice');
+var toStrTags = {};
+var gOPD = __webpack_require__(882);
+var getPrototypeOf = Object.getPrototypeOf; // require('getprototypeof');
+if (hasToStringTag && gOPD && getPrototypeOf) {
+	forEach(typedArrays, function (typedArray) {
+		if (typeof g[typedArray] === 'function') {
+			var arr = new g[typedArray]();
+			if (Symbol.toStringTag in arr) {
+				var proto = getPrototypeOf(arr);
+				var descriptor = gOPD(proto, Symbol.toStringTag);
+				if (!descriptor) {
+					var superProto = getPrototypeOf(proto);
+					descriptor = gOPD(superProto, Symbol.toStringTag);
+				}
+				toStrTags[typedArray] = descriptor.get;
+			}
+		}
+	});
+}
+
+var tryTypedArrays = function tryAllTypedArrays(value) {
+	var foundName = false;
+	forEach(toStrTags, function (getter, typedArray) {
+		if (!foundName) {
+			try {
+				var name = getter.call(value);
+				if (name === typedArray) {
+					foundName = name;
+				}
+			} catch (e) {}
+		}
+	});
+	return foundName;
+};
+
+var isTypedArray = __webpack_require__(5692);
+
+module.exports = function whichTypedArray(value) {
+	if (!isTypedArray(value)) { return false; }
+	if (!hasToStringTag || !(Symbol.toStringTag in value)) { return $slice($toString(value), 8, -1); }
+	return tryTypedArrays(value);
+};
+
+
+/***/ }),
+
+/***/ 5422:
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+var map = {
+	"./api/auth_api.ts": 829,
+	"./api/element_api.ts": 7325,
+	"./api/file_information_api.ts": 9513,
+	"./api/floor_api.ts": 972,
+	"./api/index.ts": 4645,
+	"./api/organization_api.ts": 9940,
+	"./api/photo_area_api.ts": 5817,
+	"./api/pipeline_api.ts": 4393,
+	"./api/project_api.ts": 555,
+	"./api/scan_dataset_api.ts": 4835,
+	"./api/user_api.ts": 3867,
+	"./api/web_gateway_api.ts": 7146,
+	"./avvir_api.ts": 5489,
+	"./config.ts": 5508,
+	"./converters/date_converter.ts": 2024,
+	"./converters/matrix_3_converter.ts": 28,
+	"./converters/matrix_4_converter.ts": 2908,
+	"./converters/purpose_type_converter.ts": 6154,
+	"./index.ts": 2352,
+	"./mixins/add_date_getter_and_setter_to_domain_model.ts": 6553,
+	"./mixins/add_instant_getter_and_setter_to_api_model.ts": 1142,
+	"./mixins/add_logging_to_instance_methods.ts": 5953,
+	"./mixins/add_read_only_properties_to_model.ts": 5025,
+	"./models/api/api_argo_response.ts": 8450,
+	"./models/api/api_cloud_file.ts": 277,
+	"./models/api/api_construction_grid.ts": 7117,
+	"./models/api/api_create_invitation_form.ts": 2844,
+	"./models/api/api_floor.ts": 1596,
+	"./models/api/api_grid_line.ts": 2179,
+	"./models/api/api_invitation.ts": 5515,
+	"./models/api/api_masterformat.ts": 8069,
+	"./models/api/api_matrix_3.ts": 7494,
+	"./models/api/api_matrix_4.ts": 6645,
+	"./models/api/api_organization.ts": 6835,
+	"./models/api/api_photo_area.ts": 9297,
+	"./models/api/api_photo_location.ts": 1390,
+	"./models/api/api_photo_location_3d.ts": 7801,
+	"./models/api/api_photo_session.ts": 3379,
+	"./models/api/api_pipeline.ts": 5621,
+	"./models/api/api_planned_element.ts": 6099,
+	"./models/api/api_project.ts": 933,
+	"./models/api/api_project_cost_analysis_progress.ts": 4819,
+	"./models/api/api_project_masterformat_progress.ts": 6061,
+	"./models/api/api_purpose_type.ts": 3979,
+	"./models/api/api_scan_dataset.ts": 1866,
+	"./models/api/api_user.ts": 9217,
+	"./models/api/deprecated_api_pipeline.ts": 6732,
+	"./models/domain/detailed_element.ts": 7073,
+	"./models/domain/masterformat.ts": 8643,
+	"./models/domain/photos/photo_area.ts": 3946,
+	"./models/domain/photos/photo_location.ts": 5445,
+	"./models/domain/photos/photo_session.ts": 4519,
+	"./models/domain/progress/progress_category.ts": 6418,
+	"./models/domain/progress/progress_report_for_scan_dataset.ts": 8817,
+	"./models/domain/progress/project_cost_analysis_progress.ts": 5605,
+	"./models/domain/progress/project_masterformat_progress.ts": 9459,
+	"./models/domain/progress/time_series_tsv_analysis_types.ts": 2224,
+	"./models/domain/running_process.ts": 2933,
+	"./models/domain/view.ts": 9127,
+	"./models/enums/deviation_status.ts": 9142,
+	"./models/enums/event_types.ts": 8367,
+	"./models/enums/inspection_modes.ts": 941,
+	"./models/enums/notification_level.ts": 2453,
+	"./models/enums/page_names.ts": 8322,
+	"./models/enums/photo_projection_type.ts": 6975,
+	"./models/enums/pipeline_types.ts": 5019,
+	"./models/enums/purpose_type.ts": 5295,
+	"./models/enums/running_process_status.ts": 2990,
+	"./models/enums/scan_label.ts": 2252,
+	"./models/enums/system_of_measurement.ts": 9875,
+	"./models/enums/uploader_status.ts": 9884,
+	"./models/enums/user_auth_type.ts": 6132,
+	"./models/enums/user_role.ts": 2076,
+	"./models/response_error.ts": 2696,
+	"./utilities/check_fetch_status.ts": 7583,
+	"./utilities/get_authorization_headers.ts": 5561,
+	"./utilities/http.ts": 5562,
+	"./utilities/make_errors_pretty.ts": 6289,
+	"./utilities/pollPipeline.ts": 541,
+	"./utilities/reduce_user_session.ts": 5397,
+	"./utilities/request_headers.ts": 4446,
+	"./utilities/serialize_form.ts": 1848
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 5422;
+
+/***/ }),
+
+/***/ 6601:
+/***/ (function() {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 1922:
+/***/ (function() {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 2363:
+/***/ (function() {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 3083:
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+
+
+var possibleNames = [
+	'BigInt64Array',
+	'BigUint64Array',
+	'Float32Array',
+	'Float64Array',
+	'Int16Array',
+	'Int32Array',
+	'Int8Array',
+	'Uint16Array',
+	'Uint32Array',
+	'Uint8Array',
+	'Uint8ClampedArray'
+];
+
+var g = typeof globalThis === 'undefined' ? __webpack_require__.g : globalThis;
+
+module.exports = function availableTypedArrays() {
+	var out = [];
+	for (var i = 0; i < possibleNames.length; i++) {
+		if (typeof g[possibleNames[i]] === 'function') {
+			out[out.length] = possibleNames[i];
+		}
+	}
+	return out;
+};
+
+
+/***/ }),
+
+/***/ 882:
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+
+
+var GetIntrinsic = __webpack_require__(210);
+
+var $gOPD = GetIntrinsic('%Object.getOwnPropertyDescriptor%', true);
+if ($gOPD) {
+	try {
+		$gOPD([], 'length');
+	} catch (e) {
+		// IE 8 has a broken gOPD
+		$gOPD = null;
+	}
+}
+
+module.exports = $gOPD;
+
+
+/***/ }),
+
 /***/ 4946:
 /***/ (function(module) {
 
@@ -101276,7 +101793,7 @@ var __webpack_exports__ = {};
 !function() {
 "use strict";
 /* harmony import */ var _source_avvir_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5489);
-/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9050);
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1271);
 
 
 
@@ -101288,7 +101805,7 @@ function importAll(directoryContext, target) {
   directoryContext.keys().forEach(filePath => {
 
     let moduleExports = directoryContext(filePath);
-    underscore__WEBPACK_IMPORTED_MODULE_1__/* ["default"].forEach */ .ZP.forEach(moduleExports, (moduleExport, exportName) => {
+    underscore__WEBPACK_IMPORTED_MODULE_1__["default"].forEach(moduleExports, (moduleExport, exportName) => {
       // if (exportName !== 'default') {
         target[exportName] = moduleExport;
       // }

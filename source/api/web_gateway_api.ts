@@ -10,6 +10,7 @@ import UserAuthType from "../models/enums/user_auth_type";
 import { AssociationIds } from "type_aliases";
 import { httpGetHeaders } from "../utilities/request_headers";
 import { RunningProcess } from "../models/domain/running_process";
+import buildFileName from "../utilities/build_file_name";
 
 export default class WebGatewayApi {
 
@@ -23,9 +24,9 @@ export default class WebGatewayApi {
     return Http.get(url, user);
   }
 
-  static createInvitation(inviteeEmail: string, role: string, organizationId: string, user: User): Promise<ApiInvitation> {
+  static createInvitation(inviteeEmail: string, role: string, organizationId: string, projectId: string, user: User): Promise<ApiInvitation> {
     const url = `${Http.baseUrl()}/users/invitations`;
-    return Http.post(url, user, { userEmail: inviteeEmail, role, clientAccountId: organizationId });
+    return Http.post(url, user, { userEmail: inviteeEmail, role, clientAccountId: organizationId, projectId });
   }
 
   static getInvitation(invitationToken: string, user: User) : Promise<ApiInvitation>{
@@ -33,8 +34,8 @@ export default class WebGatewayApi {
     return Http.get(url, user);
   }
 
-  static getProgressReportPdfUrl(projectId: string, user: User): string {
-    const baseUrl = `${Http.baseUrl()}/projects/${projectId}/progress-report.pdf`;
+  static getProgressReportPdfUrl(projectId: string, floorId: string, user: User): string {
+    const baseUrl = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/progress-report.pdf`;
     return Http.addAuthToDownloadUrl(baseUrl, user);
   }
 
@@ -57,6 +58,16 @@ export default class WebGatewayApi {
     return Http.addAuthToDownloadUrl(baseUrl, user);
   }
 
+  static getUniformatSummaryTsvUrl({ projectId }: AssociationIds, projectName: string, user: User): string {
+    const baseUrl = `${Http.baseUrl}/projects/${projectId}/${buildFileName(projectName)}_uniformat-summary.tsv`
+    return Http.addAuthToDownloadUrl(baseUrl, user);
+  }
+
+  static getScannedProjectMasterformatProgressUrl({ projectId }: AssociationIds, fileName: string, fileDate: string, user: User): string {
+    const baseUrl = `${Http.baseUrl}/projects/${projectId}/${fileName}_4d-progress_${fileDate}_2016.tsv`;
+    return Http.addAuthToDownloadUrl(baseUrl, user);
+  }
+
   static checkProcoreAccessToken(projectId: string, procoreAccessToken: string, user: User):Promise<{ expiresInSeconds: number }> {
     if (!projectId) {
       return Promise.reject(new Error("Project not loaded yet"));
@@ -65,12 +76,12 @@ export default class WebGatewayApi {
     return Http.get(url, user);
   }
 
-  static pushPdfToProcore({ projectId, floorId, scanDatasetId }: AssociationIds, procoreProjectId: string, procoreAccessToken: string, pdfType: string, user: User): Promise<void> {
+  static pushPdfToProcore({ projectId, floorId, scanDatasetId }: AssociationIds, procoreProjectId: string, procoreCompanyId: string, procoreAccessToken: string, pdfType: string, user: User): Promise<{body: {id: number}}> {
     if (!projectId) {
       return Promise.reject(new Error("Project not loaded yet"));
     }
-    const url = `${Http.baseUrl()}/projects/${projectId}/push-report-to-procore/${pdfType}?procore-project-id=${procoreProjectId}&procore-access-token=${procoreAccessToken}`;
-    return Http.post(url, user, null);
+    const url = `${Http.baseUrl()}/projects/${projectId}/push-report-to-procore/${pdfType}?procore-project-id=${procoreProjectId}&procore-company-id=${procoreCompanyId}&procore-access-token=${procoreAccessToken}`;
+    return Http.post(url, user, null) as Promise<{ body: { id: number } }>;
   }
 
   static getProcoreProjects(projectId: string, procoreAccessToken: string, user: User):Promise<{ lastUpdated: number, projectId: string | number }[]> {

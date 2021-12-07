@@ -3,17 +3,24 @@
   "repository": "git@github.com:Avvir/avvir-javascript-client.git",
   "version": "0.0.1",
   "description": "Javascript client for Avvir APIs",
-  "module": "dist/avvir_api.node.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "browser": "dist/avvir_api.web.js",
   "main": "dist/avvir_api.node.js",
-  "types": "dist/avvir_api.d.ts",
+  "files": ["./dist"],
   "browserslist": [
     "> 1%",
     "IE 11",
     "Firefox ESR"
   ],
   "scripts": {
-    "build": "yarn run webpack",
-    "test": "NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive && yarn run build"
+    "build": "yarn build-esm && yarn build-web",
+    "build-esm": "tsc --project tsconfig.esm.json",
+    "build-web": "yarn run webpack",
+    "clean": "rm -r ./dist",
+    "prepublish": "yarn rebuild",
+    "rebuild": "yarn clean && yarn build",
+    "test": "NODE_ENV=test AVVIR_ENVIRONMENT=acceptance mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.8",

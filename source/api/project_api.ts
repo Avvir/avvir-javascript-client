@@ -2,14 +2,13 @@
 import ApiProject from "../models/api/api_project";
 import ApiProjectMasterformatProgress from "../models/api/api_project_masterformat_progress";
 import {User} from "../utilities/get_authorization_headers";
-import WebGatewayApi from "./web_gateway_api";
 import {AssociationIds} from "type_aliases";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import ApiProjectCostAnalysisProgress from "../models/api/api_project_cost_analysis_progress";
 import ApiCloudFile from "../models/api/api_cloud_file";
 
-class ProjectApi {
+export default class ProjectApi {
   static listProjectsForOrganization(accountId: string, user: User) : Promise<ApiProject[]>{
     let url = `${Http.baseUrl()}/client-accounts/${accountId}/projects`;
     return Http.get(url, user);
@@ -89,9 +88,8 @@ class ProjectApi {
   static  getProjectDeviationsReportTsv({ projectId }: AssociationIds, user: User): Promise<string> {
     const baseUrl = `${Http.baseUrl()}/projects/${projectId}/project_deviation-report.tsv`;
     const url = Http.addAuthToDownloadUrl(baseUrl, user);
-    console.log(url);
     return Http.get(url, user, "text/tab-separated-values; charset=utf-8");
   }
 }
 
-export default makeErrorsPretty(ProjectApi);
+makeErrorsPretty(ProjectApi);

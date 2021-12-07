@@ -1,12 +1,11 @@
 // @ts-nocheck
 import ApiOrganization from "../models/api/api_organization";
 import {User} from "../utilities/get_authorization_headers";
-import WebGatewayApi from "./web_gateway_api";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 
-class OrganizationApi {
-  static listOrganizations(user: User):Promise<ApiOrganization[]> {
+export default class OrganizationApi {
+  static listOrganizations(user: User): Promise<ApiOrganization[]> {
     let url = `${Http.baseUrl()}/client-accounts`;
     return Http.get(url, user);
   }
@@ -32,4 +31,4 @@ class OrganizationApi {
   }
 }
 
-export default makeErrorsPretty(OrganizationApi);
+makeErrorsPretty(OrganizationApi);
