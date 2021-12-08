@@ -1,14 +1,14 @@
 import ApiScanDataset from "../models/api/api_scan_dataset";
 import {User} from "../utilities/get_authorization_headers";
 import {AssociationIds} from "type_aliases";
-import {ScanLabelValues} from "../models/enums/scan_label";
+import {ScanLabelValues} from "../models";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import ProgressReportForScanDataset from "../models/domain/progress/progress_report_for_scan_dataset";
 import DetailedElement from "../models/domain/detailed_element";
 import View, {ViewParameter} from "../models/domain/view";
 
-class ScanDatasetApi {
+export default class ScanDatasetApi {
   static listScanDatasetsForFloor({ projectId, floorId }: AssociationIds, user: User): Promise<ApiScanDataset[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets`;
     return Http.get(url, user) as unknown as Promise<ApiScanDataset[]>;
@@ -55,17 +55,15 @@ class ScanDatasetApi {
   }
 
   static createView({ projectId, floorId, scanDatasetId }: AssociationIds, view: View, user: User): Promise<ViewParameter> {
-    const url = `${Http.baseUrl}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/views`;
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/views`;
     return Http.post(url, user, view) as Promise<ViewParameter>;
   }
 
   static getView({ projectId, floorId, scanDatasetId }: AssociationIds, viewId: number, user: User): Promise<ViewParameter> {
-    const url = `${Http.baseUrl}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/views/${viewId}`;
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/views/${viewId}`;
     return Http.get(url, user) as Promise<ViewParameter>;
   }
 
 }
 
 makeErrorsPretty(ScanDatasetApi);
-
-export default ScanDatasetApi;

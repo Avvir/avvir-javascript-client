@@ -12,11 +12,12 @@ export const qualityControlBim = InspectionMode.qualityControlBim;
 export const fullBim = InspectionMode.fullBim;
 export const monitorBim = InspectionMode.monitorBim;
 
-const inspectionModes: Array<{ displayName: string, value: InspectionMode }> = [
+export const AllInspectionModes: Array<{ displayName: string, value: InspectionMode }> = [
     { displayName: "Avvir Inspect (Legacy)", value: qualityControlBimLegacy },
     { displayName: "Avvir Inspect", value: qualityControlBim },
     { displayName: "Basic BIM", value: fullBim },
     { displayName: "Avvir Progress", value: monitorBim },
 ];
 
-export default inspectionModes;
+export default AllInspectionModes;
+

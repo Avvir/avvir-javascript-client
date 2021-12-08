@@ -1,4 +1,4 @@
-type ArgoMetadata = {
+export type ArgoMetadata = {
   name: string
   generateName: string
   namespace: string
@@ -8,7 +8,8 @@ type ArgoMetadata = {
   generation: number
   creationTimestamp: string
 }
-export default class ApiArgoResponse {
+
+export class ApiArgoResponse {
   constructor({ name, generateName, namespace, selfLink, uid, resourceVersion, generation, creationTimestamp }: Partial<ArgoMetadata> = {}) {
     this.metadata = {
       name,
@@ -24,3 +25,5 @@ export default class ApiArgoResponse {
 
   metadata: ArgoMetadata;
 }
+
+export default ApiArgoResponse;

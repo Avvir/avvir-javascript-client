@@ -7,7 +7,6 @@ import UserRole from "../models/enums/user_role";
 import ApiInvitation from "../models/api/api_invitation";
 import ApiCreateInvitationForm from "../models/api/api_create_invitation_form";
 
-
 export default class UserApi {
 
     static createInvitation(forms: ApiCreateInvitationForm[], user: User): Promise<ApiInvitation[]> {
@@ -15,15 +14,20 @@ export default class UserApi {
         return Http.post(url, user, forms);
     }
 
+    static getInvitation(invitationToken: string, user: User): Promise<ApiInvitation> {
+        const url = `${Http.baseUrl()}/users/invitations/${invitationToken}`;
+        return Http.get(url, user);
+    }
+
     static getUserAccount(email: string, role: UserRole, user: User): Promise<ApiUser> {
         const encodedEmail = encodeURIComponent(email);
-        const url = `${Http.baseUrl}/users/accounts/${encodedEmail}/${role}`;
+        const url = `${Http.baseUrl()}/users/accounts/${encodedEmail}/${role}`;
         return Http.get(url, user);
     }
 
     static updateUserAccount(email: string, role: UserRole, apiUser: ApiUser, user: User): Promise<ApiUser> {
         const encodedEmail = encodeURIComponent(email);
-        const url = `${Http.baseUrl}/users/accounts/${encodedEmail}/${role}`;
+        const url = `${Http.baseUrl()}/users/accounts/${encodedEmail}/${role}`;
         return Http.put(url, user, apiUser);
     }
 

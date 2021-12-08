@@ -4,11 +4,12 @@ import fetchMock from "fetch-mock";
 import _, { Dictionary } from "underscore";
 
 import PipelineApi from "../../source/api/pipeline_api";
-import {FIREBASE} from "../../source/models/enums/user_auth_type";
+import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
 import Config from "../../source/config";
 import Http from "../../source/utilities/http";
 import ApiPipeline from "../../source/models/api/api_pipeline";
 import RunningProcessStatus from "../../source/models/enums/running_process_status";
+import {USER} from "../../source/models/enums/user_role";
 
 describe("PipelineApi", () => {
   let user;
@@ -38,9 +39,8 @@ describe("PipelineApi", () => {
       );
     });
     describe("#triggerPipeline", () => {
-      let request;
       beforeEach(() => {
-        fetchMock.post(`${Http.baseUrl()}/pipelines`,(url, req, opts)=>{
+        fetchMock.post(`${Http.baseUrl()}/pipelines`,(url, req)=>{
           const { name, id } = req.body;
           const apiResponse = new ApiPipeline({
             status: RunningProcessStatus.RUNNING,
@@ -88,6 +88,33 @@ describe("PipelineApi", () => {
       })
 
     });
+
+
+    describe("::checkPipelineStatus", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/pipelines/10`, {...new ApiPipeline({id: 10, name: "pipeline-steps"})});
+      });
+
+      it("makes a request to the gateway", () => {
+        PipelineApi.checkPipelineStatus({projectId: "some-project-id"}, 10, {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+
+        expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/pipelines/10`);
+        expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+      });
+
+      it("includes the authorization headers", () => {
+        PipelineApi.checkPipelineStatus({projectId: "some-project-id"}, 10, {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+
+        expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      });
+    });
+
     describe("when the pipeline fails to trigger", () => {
       beforeEach(() => {
         const alreadyRunningResponse = {
@@ -136,7 +163,7 @@ describe("PipelineApi", () => {
       });
 
       it("rejects the promise and calls the shared error handler", () => {
-        fetchMock.mock(`begin:${Http.baseUrl()}/pipeline/`, (url) => {
+        fetchMock.mock(`begin:${Http.baseUrl()}/pipeline/`, () => {
           return {
               status: 500,  body: {message: "some unfortunate error"},
               headers: {"ContentType": "application/json"}

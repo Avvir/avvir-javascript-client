@@ -6,7 +6,7 @@ import {User} from "../utilities/get_authorization_headers";
 import ApiArgoResponse from "../models/api/api_argo_response";
 import ApiPipeline, { ApiPipelineArgument } from "../models/api/api_pipeline";
 
-class PipelineApi {
+export default class PipelineApi {
   static triggerJobStepsPipeline(associationIds: AssociationIds, body = {}, user: User): Promise<ApiArgoResponse> {
     let {accountId, projectId, floorId, scanDatasetId} = associationIds;
     const url = `${Http.baseUrl()}/pipeline/${accountId}/${projectId}/${floorId}/${scanDatasetId}/trigger`;
@@ -15,16 +15,13 @@ class PipelineApi {
 
   static triggerPipeline (body: ApiPipelineArgument = {}, user: User ): Promise<ApiPipeline> {
     const url = `${Http.baseUrl()}/pipelines`;
-    let response = Http.post(url, user, body);
-    return response;
+    return Http.post(url, user, body);
   }
 
-  static checkPipelinesApi ( name ) {
-    //TODO: move from web_gateway_api
+  static checkPipelineStatus({ projectId }: AssociationIds, pipelineId: number, user: User): Promise<ApiPipeline> {
+    const url = `${Http.baseUrl()}/pipelines/${pipelineId}`;
+    return Http.get(url, user);
   }
 }
 
 makeErrorsPretty(PipelineApi)
-export default PipelineApi;
-
-

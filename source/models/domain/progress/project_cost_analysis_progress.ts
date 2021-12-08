@@ -5,7 +5,7 @@ interface ProjectCostAnalysisProgressArgument extends Partial<Modify<ProjectCost
   analysisDate?: DateLike
 }>> {}
 
-export default class ProjectCostAnalysisProgress {
+export class ProjectCostAnalysisProgress {
   constructor({
     masterformatCode,
     sequence,
@@ -52,3 +52,5 @@ export default class ProjectCostAnalysisProgress {
   installedCost: number | null = null;
   analysisDate: Date | null = null;
 }
+
+export default ProjectCostAnalysisProgress;

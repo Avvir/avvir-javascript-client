@@ -1,4 +1,4 @@
-enum UploaderStatus {
+export enum UploaderStatus {
   NONE = "none",
   LOADING = "loading",
   ERROR = "error"

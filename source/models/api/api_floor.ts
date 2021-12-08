@@ -6,13 +6,13 @@ import ApiMatrix3 from "./api_matrix_3";
 import { Matrix3 } from "three";
 import Matrix3Converter from "../../converters/matrix_3_converter";
 
-interface ApiFloorArgument extends Partial<Modify<ApiFloor, {
+export interface ApiFloorArgument extends Partial<Modify<ApiFloor, {
   scanDate?: DateLike,
   photoAreaMinimapPixelToBimMinimapPixel?: Matrix3Like;
   bimMinimapToWorld?: Matrix3Like;
 }>> {}
 
-export default class ApiFloor {
+export class ApiFloor {
   constructor({
     id,
     firebaseId,
@@ -140,3 +140,5 @@ export default class ApiFloor {
   bimMinimapToWorld: ApiMatrix3 | null = null;
   floorElevation: number | null;
 }
+
+export default ApiFloor;

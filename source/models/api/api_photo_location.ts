@@ -3,7 +3,7 @@ import PhotoProjectionType from "../enums/photo_projection_type";
 import ApiCloudFile from "./api_cloud_file";
 import ApiPhotoLocation3d from "./api_photo_location_3d";
 
-export default class ApiPhotoLocation {
+export class ApiPhotoLocation {
   readonly id: number;
   readonly photoAreaId: number;
   readonly photoSessionId?: number;
@@ -15,3 +15,5 @@ export default class ApiPhotoLocation {
   cameraWorldMatrix: Matrix4Like;
   bimLocation: ApiPhotoLocation3d;
 }
+
+export default ApiPhotoLocation;

@@ -1,9 +1,5 @@
-import AvvirApi from "./source/avvir_api";
+import Avvir from "./source/index";
 import _ from 'underscore';
-
-const Avvir = {
-  api: AvvirApi
-};
 
 function importAll(directoryContext, target) {
   directoryContext.keys().forEach(filePath => {
@@ -22,6 +18,7 @@ function importAll(directoryContext, target) {
 
 
 // skip .d.ts files because some use syntax our webpack settings don't support
+//@ts-ignore
 importAll(require.context('./source', true, /(?<!\.d)\.ts$/), Avvir);
 
 export default Avvir;

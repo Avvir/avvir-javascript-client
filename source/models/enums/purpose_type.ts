@@ -73,7 +73,7 @@ type FloorTypeMap = { [type in FloorTypeKeys]: FloorPurposeType };
 type ScanDatasetTypeMap = { [type in ScanDatasetTypeKeys]: ScanDatasetPurposeType };
 type PhotoAreaTypeMap = { [type in PhotoAreaTypeKeys]: PhotoAreaPurposeType };
 
-const PurposeTypeMap: ProjectTypeMap & Omit<FloorTypeMap, "OTHER"> & Omit<ScanDatasetTypeMap, "OTHER"> & Omit<PhotoAreaTypeMap, "OTHER"> = {
+export const PurposeTypeMap: ProjectTypeMap & Omit<FloorTypeMap, "OTHER"> & Omit<ScanDatasetTypeMap, "OTHER"> & Omit<PhotoAreaTypeMap, "OTHER"> = {
   MINIMAP: PhotoAreaPurposeType.MINIMAP,
   THREE_SIXTY_PHOTO: PhotoAreaPurposeType.THREE_SIXTY_PHOTO,
 

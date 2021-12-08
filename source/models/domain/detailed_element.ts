@@ -50,7 +50,7 @@ export const isDeviationScanResult = (scanResult: ScanResult<ApiScanLabels>): sc
 
 export type ScanResult<Label extends ApiScanLabels> = ScanResultByScanLabel[Label]
 
-export default class DetailedElement<Label extends ApiScanLabels = ApiScanLabels> {
+export class DetailedElement<Label extends ApiScanLabels = ApiScanLabels> {
   constructor(ifcType: string, globalId: string, scanResult: ScanResult<Label>) {
     this.ifcType = ifcType;
     this.globalId = globalId;
@@ -70,3 +70,5 @@ export default class DetailedElement<Label extends ApiScanLabels = ApiScanLabels
 }
 
 export type DeviatedDetailedElement = DetailedElement<typeof DEVIATED>
+
+export default DetailedElement;

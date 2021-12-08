@@ -1,7 +1,7 @@
 import { Vector2 } from "three";
 import { Vector2Like } from "type_aliases";
 
-export default class ApiGridLine {
+export class ApiGridLine {
   constructor({ name, point1, point2 }: Partial<ApiGridLine>) {
     this.name = name || null;
     if (point1) {
@@ -21,3 +21,5 @@ export default class ApiGridLine {
   point1: Vector2Like | null = null;
   point2: Vector2Like | null = null;
 }
+
+export default ApiGridLine;

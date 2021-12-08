@@ -1,4 +1,4 @@
-enum NotificationLevel {
+export enum NotificationLevel {
   failure = "failure",
   success = "success",
 }
