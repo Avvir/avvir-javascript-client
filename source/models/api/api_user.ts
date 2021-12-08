@@ -1,6 +1,6 @@
 import UserRole from "../enums/user_role";
 
-export default class ApiUser {
+export class ApiUser {
     name: string
     userOrganization: string
     email: string
@@ -15,3 +15,5 @@ export default class ApiUser {
         this.projectId = projectId;
     }
 }
+
+export default ApiUser;

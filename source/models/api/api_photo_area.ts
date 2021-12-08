@@ -1,6 +1,6 @@
 import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 
-export default class ApiPhotoArea {
+export class ApiPhotoArea {
   constructor({ name, id, firebaseProjectId, structionsiteProjectUrl }: Partial<ApiPhotoArea>) {
     addReadOnlyPropertiesToModel(this, { id, firebaseProjectId });
     this.name = name;
@@ -12,3 +12,5 @@ export default class ApiPhotoArea {
   name: string;
   structionsiteProjectUrl: string;
 }
+
+export default ApiPhotoArea;

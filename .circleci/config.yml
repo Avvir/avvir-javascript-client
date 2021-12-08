@@ -36,8 +36,11 @@ jobs:
 
       # run tests!
       - run:
-          command: |
-            yarn test
+          command: yarn test
+      - run:
+          command: yarn build-web
+      - run:
+          command: yarn build-esm
 workflows:
   version: 2
   commit:

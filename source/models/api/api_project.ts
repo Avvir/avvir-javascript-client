@@ -5,13 +5,13 @@ import ApiProjectMasterformatProgress from "./api_project_masterformat_progress"
 import SystemOfMeasurement, { IMPERIAL } from "../enums/system_of_measurement";
 import { DateLike, Modify } from "type_aliases";
 
-interface ApiProjectArgument extends Partial<Modify<ApiProject, {
+export interface ApiProjectArgument extends Partial<Modify<ApiProject, {
   archivedAt?: DateLike
   startDate?: DateLike
   endDate?: DateLike
 }>> {}
 
-class ApiProject {
+export class ApiProject {
   constructor({
     city,
     country,

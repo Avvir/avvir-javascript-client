@@ -8,12 +8,12 @@ import PhotoProjectionType from "../../enums/photo_projection_type";
 import { Matrix4Like, Modify, Vector2Like } from "type_aliases";
 import ApiMatrix4 from "../../api/api_matrix_4";
 
-interface PhotoLocationArgument extends Partial<Modify<PhotoLocation, {
+export interface PhotoLocationArgument extends Partial<Modify<PhotoLocation, {
   cameraWorldMatrix?: Matrix4Like,
   minimapCoordinates?: Vector2Like
 }>> {}
 
-export default class PhotoLocation {
+export class PhotoLocation {
   constructor({
     id,
     photoAreaId,
@@ -75,3 +75,5 @@ export default class PhotoLocation {
     });
   };
 }
+
+export default PhotoLocation;

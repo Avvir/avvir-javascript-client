@@ -1,4 +1,4 @@
-enum UserAuthType {
+export enum UserAuthType {
   GATEWAY_JWT = "GATEWAY_JWT",
   BASIC = "BASIC",
   FIREBASE = "FIREBASE"

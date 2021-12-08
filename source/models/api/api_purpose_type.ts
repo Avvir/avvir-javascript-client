@@ -1,11 +1,10 @@
-import { FloorTypeKeys, ProjectTypeKeys, ScanDatasetTypeKeys, PhotoAreaTypeKeys} from "../enums/purpose_type";
+import { FloorTypeKeys, ProjectTypeKeys, ScanDatasetTypeKeys, PhotoAreaTypeKeys} from "../enums";
 
 export enum ApiProjectPurposeType {
   OTHER = "OTHER",
   RAW_PROJECT_BIM = "RAW_PROJECT_BIM",
   PROJECT_FOLDER_ZIP = "PROJECT_FOLDER_ZIP",
 }
-
 
 export enum ApiFloorPurposeType {
   BIM_IFC = "BIM_IFC",

@@ -3,7 +3,8 @@ import { DateLike, ModifyPartial } from "type_aliases";
 import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
 
 export type ApiPhotoSessionArgs = ModifyPartial<ApiPhotoSession, { sessionDate?: DateLike }>
-export default class ApiPhotoSession {
+
+export class ApiPhotoSession {
   constructor({ id, photoAreaId, sessionDate }: ApiPhotoSessionArgs = {}) {
     addReadOnlyPropertiesToModel(this, { id, photoAreaId });
     addInstantGetterAndSetterToApiModel(this, "sessionDate");
@@ -15,3 +16,5 @@ export default class ApiPhotoSession {
   readonly photoAreaId: number;
   readonly sessionDate: number;
 }
+
+export default ApiPhotoSession;

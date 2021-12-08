@@ -1,5 +1,3 @@
-import ApiPipeline from "../api/api_pipeline";
-
 export type PipelineName = "downsample-scan" |
     "convert-ifc-and-process-scans" |
     "generate-ifc" |

@@ -2,7 +2,7 @@ import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter
 import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 import RunningProcessStatus from "../enums/running_process_status";
 import { DateLike, ModifyPartial } from "type_aliases";
-import {PipelineName} from "../enums/pipeline_types";
+import {PipelineName} from "../enums";
 
 export interface ApiPipelineArgument extends ModifyPartial<ApiPipeline, {
   startTime?: DateLike
@@ -11,7 +11,7 @@ export interface ApiPipelineArgument extends ModifyPartial<ApiPipeline, {
   status?: RunningProcessStatus
 }> {}
 
-export default class ApiPipeline {
+export class ApiPipeline {
   constructor({
     id,
     name,
@@ -57,3 +57,5 @@ export default class ApiPipeline {
 
   status: RunningProcessStatus;
 }
+
+export default ApiPipeline;

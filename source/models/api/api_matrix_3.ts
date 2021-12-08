@@ -1,4 +1,4 @@
-export default class ApiMatrix3 {
+export class ApiMatrix3 {
   constructor({ x1 = 1, x2 = 0, x3 = 0,
                 y1 = 0, y2 = 1, y3 = 0,
                 z1 = 0, z2 = 0, z3 = 1}) {
@@ -23,3 +23,5 @@ export default class ApiMatrix3 {
   z2: number = 0;
   z3: number = 1;
 }
+
+export default ApiMatrix3;

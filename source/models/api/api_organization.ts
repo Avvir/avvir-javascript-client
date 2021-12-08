@@ -1,6 +1,6 @@
 import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 
-export default class ApiOrganization {
+export class ApiOrganization {
   constructor({
     id,
     firebaseId,
@@ -50,3 +50,5 @@ export default class ApiOrganization {
   notes?: string | null = null;
   firebaseProjectIds: Array<string> = [];
 }
+
+export default ApiOrganization;

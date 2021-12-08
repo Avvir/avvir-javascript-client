@@ -1,6 +1,6 @@
 import ExtendableError from "extendable-error-class";
 
-class ResponseError extends ExtendableError {
+export class ResponseError extends ExtendableError {
   constructor(message: string, verboseMessage: string, response: Response, responseBody: any) {
     super(message);
     this.name = "ResponseError";

@@ -1,4 +1,4 @@
-export default class ApiMasterformat {
+export class ApiMasterformat {
   constructor(version: number, code: string, description?: string) {
     this.version = version;
     this.code = code;
@@ -9,3 +9,5 @@ export default class ApiMasterformat {
   code: string;
   description?: string;
 }
+
+export default ApiMasterformat;

@@ -1,4 +1,4 @@
-enum UserRole {
+export enum UserRole {
   SUPERADMIN = "SUPERADMIN",
   USER = "USER",
   SUBCONTRACTOR = "SUBCONTRACTOR",

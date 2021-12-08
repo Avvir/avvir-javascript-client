@@ -3,7 +3,6 @@ import {describe} from "mocha";
 import ApiCloudFile from "../source/models/api/api_cloud_file";
 import {BIM_NWD} from "../source/models/enums/purpose_type";
 import {expect} from "chai";
-import {User} from "../source/utilities/get_authorization_headers";
 import FileInformationApi from "../source/api/file_information_api";
 import {sandbox} from "../tests/test_utils/setup_tests";
 import Config from "../source/config";
@@ -12,11 +11,10 @@ import ApiPipeline, {ApiPipelineArgument} from "../source/models/api/api_pipelin
 import Pipelines from "../source/models/enums/pipeline_types";
 import AvvirApi from "../source/avvir_api";
 import RunningProcessStatus from "../source/models/enums/running_process_status";
-import {ApiFloorPurposeType} from "../source/models/api/api_purpose_type";
-
+import {ApiFloorPurposeType} from "../source";
 
 describe("Assocate Project file to scan dataset files test", () => {
-  let projectId: string, user: User, email: string, password: string, checkPipeline, checkPipelineTimeout: number,
+  let projectId: string, email: string, password: string, checkPipeline, checkPipelineTimeout: number,
       checkPipelineIterations: number, fileUrl: string;
   beforeEach(() => {
     email = process.env.AVVIR_SANDBOX_EMAIL
@@ -45,7 +43,6 @@ describe("Assocate Project file to scan dataset files test", () => {
   })
 
   describe("when a project file has been ingested and a scan dataset exists",  () => {
-    let pipeline;
     beforeEach(()=>{
 
       // pipeline =
@@ -84,7 +81,7 @@ describe("Assocate Project file to scan dataset files test", () => {
                         });
 
                         return FileInformationApi.saveFloorFile({ projectId, floorId }, newFile, user)
-                            .then((floorFile: ApiCloudFile)=>{
+                            .then(() => {
 
                               let pipeline = new ApiPipeline({
                                 name: Pipelines.CREATE_AND_PROCESS_SVF,

@@ -1,12 +1,12 @@
 import addReadOnlyPropertiesToModel from "../../../mixins/add_read_only_properties_to_model";
 import { AvvirApiFiles, AvvirFiles, Modify } from "type_aliases";
-import { PhotoAreaPurposeType } from "../../enums/purpose_type";
+import { PhotoAreaPurposeType } from "../../enums";
 
-interface PhotoAreaArgs extends Partial<Modify<PhotoArea, {
+export interface PhotoAreaArgs extends Partial<Modify<PhotoArea, {
   files?: AvvirFiles<PhotoAreaPurposeType> | AvvirApiFiles<PhotoAreaPurposeType>
 }>> {}
 
-export default class PhotoArea {
+export class PhotoArea {
   constructor({ name, id, files, firebaseProjectId, structionsiteProjectUrl }: PhotoAreaArgs = {}) {
     addReadOnlyPropertiesToModel(this, { id, firebaseProjectId });
     this.name = name;
@@ -21,3 +21,5 @@ export default class PhotoArea {
   structionsiteProjectUrl?: string;
   files?: AvvirFiles<PhotoAreaPurposeType>;
 }
+
+export default PhotoArea;

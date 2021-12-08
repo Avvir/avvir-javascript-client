@@ -2,7 +2,7 @@ import { Vector3 } from "three";
 import { DateLike, ModifyPartial, Vector3Like } from "type_aliases";
 import addDateGetterAndSetterToDomainModel from "../../mixins/add_date_getter_and_setter_to_domain_model";
 import { UniformatId } from "uniformat";
-import { ApiInspectionModes } from "../enums/inspection_modes";
+import { ApiInspectionModes } from "../enums";
 import SystemOfMeasurement from "../enums/system_of_measurement";
 
 export class DeviationTolerance {
@@ -16,7 +16,7 @@ export class DeviationTolerance {
     systemOfMeasurement: SystemOfMeasurement
 }
 
-class ViewTrades {
+export class ViewTrades {
     constructor(trades: Partial<ViewTrades> = {}) {
         const { shownUniformatCodes } = trades;
         this.shownUniformatCodes = shownUniformatCodes;
@@ -25,9 +25,9 @@ class ViewTrades {
     shownUniformatCodes: UniformatId[];
 }
 
-type ViewCameraParameter = ModifyPartial<ViewCamera, { position: Vector3Like, target: Vector3Like }>
+export type ViewCameraParameter = ModifyPartial<ViewCamera, { position: Vector3Like, target: Vector3Like }>
 
-class ViewCamera {
+export class ViewCamera {
     constructor(camera: ViewCameraParameter = {}) {
         const { position, target } = camera;
         this.position = new Vector3(position?.x, position?.y, position?.z);
@@ -38,7 +38,7 @@ class ViewCamera {
     target: Vector3;
 }
 
-class ViewFilters {
+export class ViewFilters {
     constructor(filters: Partial<ViewFilters> = {}) {
         const { trades, deviationTolerance } = filters;
         this.trades = new ViewTrades(trades);
@@ -48,6 +48,7 @@ class ViewFilters {
     trades: ViewTrades;
     deviationTolerance: DeviationTolerance;
 }
+
 type SelectedElements = string[]
 type ViewAttributesParameter = ModifyPartial<ViewAttributes, { camera: ViewCameraParameter }>
 
@@ -68,7 +69,7 @@ export class ViewAttributes {
 
 export type ViewParameter = ModifyPartial<View, { viewAttributes: ViewAttributesParameter, createdAt: DateLike }>
 
-export default class View {
+export class View {
     constructor(view: ViewParameter = {}) {
         const { id, firebaseProjectId, firebaseFloorId, firebaseScanDatasetId, viewAttributes, createdBy, createdAt } = view;
         addDateGetterAndSetterToDomainModel(this, "createdAt");
@@ -90,3 +91,5 @@ export default class View {
     createdBy: string;
     createdAt: Date;
 }
+
+export default View;

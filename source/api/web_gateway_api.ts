@@ -3,14 +3,14 @@ import ApiInvitation from "../models/api/api_invitation";
 import ApiMasterformat from "../models/api/api_masterformat";
 import ApiPipeline from "../models/api/api_pipeline";
 import DeprecatedApiPipeline from "../models/api/deprecated_api_pipeline";
-import getAuthorizationHeaders, { BasicUser, User } from "../utilities/get_authorization_headers";
+import getAuthorizationHeaders, {BasicUser, User} from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import UserAuthType from "../models/enums/user_auth_type";
 import { AssociationIds } from "type_aliases";
-import { httpGetHeaders } from "../utilities/request_headers";
-import { RunningProcess } from "../models/domain/running_process";
+import { UserAuthType, RunningProcess } from "../models";
 import buildFileName from "../utilities/build_file_name";
+import AuthApi from "./auth_api";
+import {httpGetHeaders} from "../utilities/request_headers";
 
 export default class WebGatewayApi {
 
@@ -19,16 +19,25 @@ export default class WebGatewayApi {
     return Http.post(url, user, null);
   }
 
+  /**
+   * @deprecated Moved to PipelinesApi
+   */
   static checkPipelineStatus({ projectId }: AssociationIds, pipelineId: number, user: User):Promise<ApiPipeline> {
     const url = `${Http.baseUrl()}/pipelines/${pipelineId}`;
     return Http.get(url, user);
   }
 
+  /**
+   * @deprecated Moved to UserApi
+   */
   static createInvitation(inviteeEmail: string, role: string, organizationId: string, projectId: string, user: User): Promise<ApiInvitation> {
     const url = `${Http.baseUrl()}/users/invitations`;
     return Http.post(url, user, { userEmail: inviteeEmail, role, clientAccountId: organizationId, projectId });
   }
 
+  /**
+   * @deprecated Moved to UserApi
+   */
   static getInvitation(invitationToken: string, user: User) : Promise<ApiInvitation>{
     const url = `${Http.baseUrl()}/users/invitations/${invitationToken}`;
     return Http.get(url, user);
@@ -59,12 +68,12 @@ export default class WebGatewayApi {
   }
 
   static getUniformatSummaryTsvUrl({ projectId }: AssociationIds, projectName: string, user: User): string {
-    const baseUrl = `${Http.baseUrl}/projects/${projectId}/${buildFileName(projectName)}_uniformat-summary.tsv`
+    const baseUrl = `${Http.baseUrl()}/projects/${projectId}/${buildFileName(projectName)}_uniformat-summary.tsv`
     return Http.addAuthToDownloadUrl(baseUrl, user);
   }
 
   static getScannedProjectMasterformatProgressUrl({ projectId }: AssociationIds, fileName: string, fileDate: string, user: User): string {
-    const baseUrl = `${Http.baseUrl}/projects/${projectId}/${fileName}_4d-progress_${fileDate}_2016.tsv`;
+    const baseUrl = `${Http.baseUrl()}/projects/${projectId}/${fileName}_4d-progress_${fileDate}_2016.tsv`;
     return Http.addAuthToDownloadUrl(baseUrl, user);
   }
 
@@ -92,23 +101,16 @@ export default class WebGatewayApi {
     return Http.get(url, user);
   }
 
-  // TODO: rename / move
+  /**
+   * @deprecated Moved to AuthApi
+   */
   static getCustomFirebaseToken(user: User) {
-    return Http.fetch(`${Http.baseUrl()}/login`, {
-      headers: {
-        ...httpGetHeaders,
-        ...getAuthorizationHeaders(user)
-      }
-    }).then((response) => {
-      return response.json()
-        .then(body => {
-          const headers = response.headers;
-          return { headers, body };
-        });
-    }) as Promise<{ headers: Headers, body: { storageToken: string } }>;
+    return AuthApi.getCustomFirebaseToken(user);
   }
 
-  // deprecated. use AuthApi.login instead
+  /**
+   * @deprecated Moved to AuthApi
+   */
   static login(username: string, password: string) {
     const user: BasicUser = {
       authType: UserAuthType.BASIC,
@@ -189,4 +191,16 @@ export default class WebGatewayApi {
 
 }
 
-makeErrorsPretty(WebGatewayApi, {exclude: ["getCustomFirebaseToken", "login"]})
+makeErrorsPretty(WebGatewayApi, {
+    exclude: [
+        "getCustomFirebaseToken",
+        "login",
+        "getProgressReportPdfUrl",
+        "getQualityControlReportPdfUrl",
+        "getPlannedElementsTsvUrl",
+        "getDeviationsReportTsvUrl",
+        "getScanAnalysisUrl",
+        "getUniformatSummaryTsvUrl",
+        "getScannedProjectMasterformatProgressUrl"
+    ]
+});

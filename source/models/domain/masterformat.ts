@@ -1,4 +1,4 @@
-export default class Masterformat {
+export class Masterformat {
   constructor(version?: number, code?: string, description?: string) {
     this.version = version || null;
     this.code = code || null;
@@ -9,3 +9,5 @@ export default class Masterformat {
   code: string | null;
   description?: string;
 }
+
+export default Masterformat;

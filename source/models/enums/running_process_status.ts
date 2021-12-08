@@ -1,4 +1,4 @@
-enum RunningProcessStatus {
+export enum RunningProcessStatus {
   RUNNING = "RUNNING",
   COMPLETED = "COMPLETED"
 }

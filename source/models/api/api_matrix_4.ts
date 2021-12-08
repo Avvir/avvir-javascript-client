@@ -1,4 +1,4 @@
-export default class ApiMatrix4 {
+export class ApiMatrix4 {
   constructor({ x1 = 1, x2 = 0, x3 = 0, x4 = 0, y1 = 0, y2 = 1, y3 = 0, y4 = 0, z1 = 0, z2 = 0, z3 = 1, z4 = 0, w1 = 0, w2 = 0, w3 = 0, w4 = 1 } = {}) {
     this.x1 = x1;
     this.x2 = x2;
@@ -35,3 +35,5 @@ export default class ApiMatrix4 {
   w3: number = 0;
   w4: number = 1;
 }
+
+export default ApiMatrix4;

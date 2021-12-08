@@ -43,17 +43,20 @@ const useLocalConfiguration = () => {
 }
 
 const setConfigurationFromEnvironmentVariable = () => {
-  if(process.env.AVVIR_ENVIRONMENT === 'acceptance'){
+  setConfigurationForEnvironment(process.env.AVVIR_ENVIRONMENT);
+}
+
+const setConfigurationForEnvironment = (env) => {
+  if(env === 'acceptance'){
     useAcceptanceConfiguration()
-  } else if(process.env.AVVIR_ENVIRONMENT === 'local-production'){
+  } else if(env === 'local-production'){
     useLocalProductionConfiguration()
-  } else if(process.env.AVVIR_ENVIRONMENT === 'local'){
+  } else if(env === 'local'){
     useLocalConfiguration()
   } else {
     useProductionConfiguration()
   }
 }
-
 
 setConfigurationFromEnvironmentVariable()
 
@@ -65,6 +68,14 @@ const getConfiguration = () => {
   return configuration
 }
 
-const Config = {useAcceptanceConfiguration, useProductionConfiguration, useLocalProductionConfiguration, useLocalConfiguration, getConfiguration, sharedErrorHandler}
+const Config = {
+  useAcceptanceConfiguration,
+  useProductionConfiguration,
+  useLocalProductionConfiguration,
+  useLocalConfiguration,
+  getConfiguration,
+  sharedErrorHandler,
+  setConfigurationForEnvironment
+}
 
 export default Config

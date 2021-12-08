@@ -2,11 +2,10 @@ import {sandbox} from "../test_utils/setup_tests";
 import {expect} from "chai";
 import fetchMock from "fetch-mock";
 
-import ApiPipeline from "../../source/models/api/api_pipeline";
 import WebGatewayApi from "../../source/api/web_gateway_api";
 import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
 import {SUPERADMIN, USER} from "../../source/models/enums/user_role";
-import {ELEMENTS_STATUSES_UPDATED} from "../../source/models/enums/event_types";
+import {ELEMENTS_STATUSES_UPDATED} from "../../source";
 import Config from "../../source/config";
 import Http from "../../source/utilities/http";
 import {describe} from "mocha";
@@ -107,31 +106,6 @@ describe("WebGatewayApi", () => {
 
     it("includes the authorization headers", () => {
       WebGatewayApi.connectProjectToStructionSite({projectId: "some-project-id"}, "structionsite-url/projects/10", "some-structionsite-access-token", {
-        authType: GATEWAY_JWT,
-        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
-      });
-
-      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
-    });
-  });
-
-  describe("::checkPipelineStatus", () => {
-    beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl()}/pipelines/10`, {...new ApiPipeline({id: 10, name: "pipeline-steps"})});
-    });
-
-    it("makes a request to the gateway", () => {
-      WebGatewayApi.checkPipelineStatus({projectId: "some-project-id"}, 10, {
-        authType: GATEWAY_JWT,
-        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
-      });
-
-      expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/pipelines/10`);
-      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
-    });
-
-    it("includes the authorization headers", () => {
-      WebGatewayApi.checkPipelineStatus({projectId: "some-project-id"}, 10, {
         authType: GATEWAY_JWT,
         gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });

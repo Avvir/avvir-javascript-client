@@ -5,13 +5,13 @@ import ApiMatrix4 from "./api_matrix_4";
 import Matrix4Converter from "../../converters/matrix_4_converter";
 import { DateLike, Modify } from "type_aliases";
 
-interface ApiScanDatasetArgument extends Partial<Modify<ApiScanDataset, {
+export interface ApiScanDatasetArgument extends Partial<Modify<ApiScanDataset, {
   coarseAlignmentMatrix?: ApiMatrix4 | Matrix4 | string | null
   fineAlignmentMatrix?: ApiMatrix4 | Matrix4 | string | null
   scanDate?: DateLike
 }>> {}
 
-export default class ApiScanDataset {
+export class ApiScanDataset {
   constructor({
     id,
     firebaseId,
@@ -104,3 +104,5 @@ export default class ApiScanDataset {
   name: string | null = null;
 
 }
+
+export default ApiScanDataset;
