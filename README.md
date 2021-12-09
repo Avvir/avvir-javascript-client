@@ -37,7 +37,7 @@ log the results to the console. [This example](./samples/areas-and-capture-datas
 in the [samples](./samples) directory.
 
 ```javascript
-const AvvirApi = require("avvir/node");
+const AvvirApi = require("avvir");
 // Make sure to replace the credentials with your actual username and password
 const username = "you@example.com";
 const password = "yourPassw0rd123";
@@ -143,7 +143,7 @@ To begin uploading a bim to an area, first get your project id and area id from 
 bim to. You will need to ingest the file first before saving it to the floor.
 
 ```javascript
-const AvvirApi = require("avvir/node");
+const AvvirApi = require("avvir");
 const {Pipelines, ApiFloorPurposeType, ApiCloudFile, ApiPipeline} = AvvirApi;
 
 //The instructions above details how to get the following variables
@@ -238,7 +238,7 @@ uploadBim();
 If you are an authenticated user, you have the ability to create a scan dataset via the API.
 
 ```javascript
-const AvvirApi = require("avvir-javascript-client");
+const AvvirApi = require("avvir");
 //The instructions above details how to get the following variables
 let username = "<You-User-Login>";
 let password = "<Your-Password>";
@@ -282,7 +282,7 @@ an area.
 
 ```javascript
 
-const AvvirApi = require("avvir/node");
+const AvvirApi = require("avvir");
 //The instructions above details how to get the following variables
 let username = "<You-User-Login>";
 let password = "<Your-Password>";
@@ -317,7 +317,7 @@ Given you have a scan associated to a scan dataset on your area, to get analysis
 the `process-steps` pipeline, with the type of analysis you wish to compute.
 
 ```javascript
-let Avvir = require("avvir-javscript-client");
+let Avvir = require("avvir");
 let AvvirApi = Avvir.api;
 let username = "<You-User-Login>";
 let password = "<Your-Password>";
@@ -363,8 +363,8 @@ Given you have associated a scan to a scan dataset, using the same scan dataset 
 to view your scan in the viewer, you will need to run another pipeline.
 
 ```javascript
-const Avvir = require("avvir/node");
-const { ApiPipeline } = require("avvir/node");
+const Avvir = require("avvir");
+const { ApiPipeline } = require("avvir");
 
 let username = "<You-User-Login>";
 let password = "<Your-Password>";
@@ -397,7 +397,7 @@ and view your scan by changing viewer's mode to `Inspection Mode` in the left pa
 There exists a tab separated file that users can export from the portal which provides deviation metrics for the entire project. To download this file, use `getProjectDeviationsReportTsv` and it will return a plaintext response with the contents of the file.
 
 ```javascript
-const Avvir = require("avvir-javascript-client");
+const Avvir = require("avvir");
 const email = "youremail@email.com"
 const password = "yourpassword";
 const projectId = "<your-project-id>";
@@ -418,7 +418,7 @@ Avvir portal gateway utilizes scans to detect clashes and deviances in the Bim. 
 If you have a scan that is in e57 format, there is a different method which will convert your e57 file before ingesting it into the portal.
 
 ```javascript
-const Avvir = require("avvir-javascript-client");
+const Avvir = require("avvir");
 const email = "youremail@email.com"
 const password = "yourpassword";
 const projectId = "<your-project-id>";
@@ -441,7 +441,7 @@ saveAndConvertE57().then(console.log)
 If you are an authenticated user on a project, the API allows you to create an area.
 
 ```javascript
-const Avvir = require("avvir-javascript-client");
+const Avvir = require("avvir");
 const email = "youremail@email.com"
 const password = "yourpassword";
 const projectId = "<your-project-id>";
@@ -472,7 +472,7 @@ The following meta fields may be updated through this method:
 
 Below is a demonstration of how an authenticated user can update a planned building element utilizing this method.
 ```javascript
-const Avvir = require("avvir-javascript-client");
+const Avvir = require("avvir");
 const { ApiPlannedElement } = Avvir;
 
 const email = "youremail@email.com"
@@ -528,7 +528,7 @@ updateAndGetPlannedElements().then((elements) =>{
 Given a `PhotoLocation` is out of alignment with the bim either rotationally or positionally, we've provided a method on our photo api called `updatePhotoLocationPositionAndOrientation` which allows for a location to have its coordinate data updated.
 
 ```javascript
-const Avvir = require("avvir/node");
+const Avvir = require("avvir");
 
 let username = "<You-User-Login>";
 let password = "<Your-Password>";
