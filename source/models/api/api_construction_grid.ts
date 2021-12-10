@@ -1,4 +1,4 @@
-import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
+import {addReadOnlyPropertiesToModel} from "../../mixins";
 import ApiGridLine from "./api_grid_line";
 
 export class ApiConstructionGrid {

@@ -10,7 +10,7 @@ import { Matrix3 } from "three";
 
 import ApiMatrix3 from "../models/api/api_matrix_3";
 
-export default class Matrix3Converter {
+export class Matrix3Converter {
   private static convertMatrixStringToArray(matrixString: string): string[] {
     return matrixString.split("\n").join(" ").split(" ");
   }
@@ -98,3 +98,5 @@ ${z1} ${z2} ${z3}`;
     }
   }
 }
+
+export default Matrix3Converter;

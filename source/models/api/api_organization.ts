@@ -2,22 +2,24 @@ import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_
 
 export class ApiOrganization {
   constructor({
-    id,
-    firebaseId,
-    city,
-    country,
-    addressLine1,
-    addressLine2,
-    state,
-    zip,
-    contactEmail,
-    contactFirstName,
-    contactLastName,
-    contactPhoneNumber,
-    name,
-    notes,
-    firebaseProjectIds
-  }: Partial<ApiOrganization>) {
+                id,
+                firebaseId,
+                city,
+                country,
+                addressLine1,
+                addressLine2,
+                state,
+                zip,
+                contactEmail,
+                contactFirstName,
+                contactLastName,
+                contactPhoneNumber,
+                name,
+                notes,
+                firebaseProjectIds,
+                multivistaEmail,
+                multivistaPassword
+              }: Partial<ApiOrganization>) {
     addReadOnlyPropertiesToModel(this, { id, firebaseId });
     this.city = city;
     this.country = country;
@@ -32,6 +34,8 @@ export class ApiOrganization {
     this.name = name;
     this.notes = notes;
     this.firebaseProjectIds = firebaseProjectIds || [];
+    this.multivistaEmail = multivistaEmail;
+    this.multivistaPassword = multivistaPassword;
   }
 
   readonly id: number;
@@ -49,6 +53,8 @@ export class ApiOrganization {
   name?: string | null = null;
   notes?: string | null = null;
   firebaseProjectIds: Array<string> = [];
+  multivistaEmail?: string | null = null;
+  multivistaPassword?: string | null = null;
 }
 
 export default ApiOrganization;

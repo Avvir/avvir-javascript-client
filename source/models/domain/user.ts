@@ -40,4 +40,7 @@ export type BasicUser = {
 
 export type User = BasicUser | GatewayUser | FirebaseUser | null
 
+export const isFirebaseUser = (user: User): user is FirebaseUser => !!(user as FirebaseUser)?.firebaseUser;
+export const isGatewayUser = (user: User): user is GatewayUser => !!(user as GatewayUser)?.gatewayUser;
+
 export default User;

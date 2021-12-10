@@ -74,7 +74,7 @@ export default class FileInformationApi {
           fileType: 'e57'
         }
       });
-      return  PipelineApi.triggerPipeline(pipeline, user)
+      return PipelineApi.triggerPipeline(pipeline, user)
           .then((pipelineResponse) => {
             return pollPipeline(pipelineResponse, user).then(()=>{
               //pipeline is finished, return cloudfile

@@ -10,7 +10,7 @@ import { Matrix4 } from "three";
 
 import ApiMatrix4 from "../models/api/api_matrix_4";
 
-export default class Matrix4Converter {
+export class Matrix4Converter {
   private static convertMatrixStringToArray(matrixString: string): string[] {
     return matrixString.split("\n").join(" ").split(" ");
   }
@@ -106,3 +106,5 @@ ${w1} ${w2} ${w3} ${w4}`;
     }
   }
 }
+
+export default Matrix4Converter;

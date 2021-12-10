@@ -5,10 +5,10 @@ import fetchMock from "fetch-mock";
 import WebGatewayApi from "../../source/api/web_gateway_api";
 import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
 import {SUPERADMIN, USER} from "../../source/models/enums/user_role";
-import {ELEMENTS_STATUSES_UPDATED} from "../../source";
 import Config from "../../source/config";
 import Http from "../../source/utilities/http";
 import {describe} from "mocha";
+import {EventType} from "../../source";
 
 describe("WebGatewayApi", () => {
   describe("::login", () => {
@@ -524,7 +524,7 @@ describe("WebGatewayApi", () => {
     });
 
     it("makes a request to the gateway", () => {
-      WebGatewayApi.recordUserActions(ELEMENTS_STATUSES_UPDATED, [{projectId: "some-project"}, {projectId: "some-other-project"}], {
+      WebGatewayApi.recordUserActions(EventType.ELEMENTS_STATUSES_UPDATED, [{projectId: "some-project"}, {projectId: "some-other-project"}], {
         authType: GATEWAY_JWT,
         gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });

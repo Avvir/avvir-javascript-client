@@ -1,30 +1,28 @@
-import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
-import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
-import RunningProcessStatus from "../enums/running_process_status";
 import { DateLike, ModifyPartial } from "type_aliases";
-import {PipelineName} from "../enums";
+import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
+import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
+import {PipelineName, RunningProcessStatus} from "../enums";
 
 export interface ApiPipelineArgument extends ModifyPartial<ApiPipeline, {
   startTime?: DateLike
   endTime?: DateLike
-  options?: object
-  status?: RunningProcessStatus
 }> {}
 
 export class ApiPipeline {
   constructor({
-    id,
-    name,
-    externalId,
-    externalUrl,
-    startTime,
-    endTime,
-    firebaseProjectId,
-    firebaseFloorId,
-    firebaseScanDatasetId,
-    options,
-    status
-  }: ApiPipelineArgument = {}) {
+                id,
+                name,
+                externalId,
+                externalUrl,
+                startTime,
+                endTime,
+                firebaseClientAccountId,
+                firebaseProjectId,
+                firebaseFloorId,
+                firebaseScanDatasetId,
+                options,
+                status
+              }: ApiPipelineArgument = {}) {
     addReadOnlyPropertiesToModel(this, { id });
     addInstantGetterAndSetterToApiModel(this, "startTime");
     addInstantGetterAndSetterToApiModel(this, "endTime");
@@ -35,10 +33,11 @@ export class ApiPipeline {
     this.startTime = startTime;
     // @ts-ignore
     this.endTime = endTime;
+    this.firebaseClientAccountId = firebaseClientAccountId || null;
     this.firebaseProjectId = firebaseProjectId || null;
     this.firebaseFloorId = firebaseFloorId || null;
     this.firebaseScanDatasetId = firebaseScanDatasetId || null;
-    this.options = options || null;
+    this.options = options || {};
     this.status = status || null;
   }
 
@@ -49,11 +48,12 @@ export class ApiPipeline {
   startTime: number;
   endTime: number;
 
+  firebaseClientAccountId: string;
   firebaseProjectId: string;
   firebaseFloorId: string;
   firebaseScanDatasetId: string;
 
-  options: object;
+  options: any;
 
   status: RunningProcessStatus;
 }
