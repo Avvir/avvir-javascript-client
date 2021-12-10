@@ -1,26 +1,33 @@
 import { UniformatId } from "uniformat";
-import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 
 export class ApiPlannedElement {
-  constructor({ globalId, name, ifcType, uniformat, itemId, discipline, primaryUnitOfMeasurement, primaryMeasurement }: Partial<ApiPlannedElement> = {}) {
-    addReadOnlyPropertiesToModel(this, { globalId });
+  constructor({ globalId, name, ifcType, uniformat, masterformat, itemId, discipline, primaryUnitOfMeasurement, primaryMeasurement, navisworksGuid, floorSpan, subcontractorId }: Partial<ApiPlannedElement> = {}) {
+    this.globalId = globalId;
     this.name = name;
     this.ifcType = ifcType;
     this.uniformat = uniformat;
+    this.masterformat = masterformat;
     this.itemId = itemId;
     this.discipline = discipline;
     this.primaryUnitOfMeasurement = primaryUnitOfMeasurement;
     this.primaryMeasurement = primaryMeasurement;
+    this.navisworksGuid = navisworksGuid;
+    this.floorSpan = floorSpan;
+    this.subcontractorId = subcontractorId;
   }
 
-  readonly globalId: string;
-  name: string;
+  globalId: string;
+  name?: string;
   ifcType?: string;
   uniformat?: UniformatId;
-  itemId?: string;
+  masterformat?: string;
+  itemId?: string | null;
   discipline?: string;
   primaryUnitOfMeasurement?: string;
   primaryMeasurement?: number;
+  navisworksGuid?: string;
+  floorSpan?: number;
+  subcontractorId?: number;
 }
 
 export default ApiPlannedElement;

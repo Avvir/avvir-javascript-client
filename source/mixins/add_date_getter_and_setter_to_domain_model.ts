@@ -1,7 +1,7 @@
 import moment from "moment";
 import DateConverter from "../converters/date_converter";
 
-function addDateGetterAndSetterToDomainModel(target: Object, propertyName: string) {
+export function addDateGetterAndSetterToDomainModel(target: Object, propertyName: string) {
   let dateVal;
   Object.defineProperty(target, propertyName, {
     get() {

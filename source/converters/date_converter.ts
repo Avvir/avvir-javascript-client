@@ -1,6 +1,6 @@
 import moment, { Moment } from "moment";
 
-class DateFormatter {
+export class DateFormatter {
   constructor(format: string) {
     this.formatString = format;
   }
@@ -16,7 +16,7 @@ class DateFormatter {
   private readonly formatString: string;
 }
 
-export default class DateConverter {
+export class DateConverter {
   static getDateFormatter(format: string): DateFormatter {
     return new DateFormatter(format);
   }
@@ -80,3 +80,5 @@ export default class DateConverter {
     }
   }
 }
+
+export default DateConverter;

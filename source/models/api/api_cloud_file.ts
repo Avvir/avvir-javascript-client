@@ -1,23 +1,23 @@
-import { DateLike, Modify } from "type_aliases";
-import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
-import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
-import ApiTypesEnum, { ApiPurposeType, isApiPurposeType } from "./api_purpose_type";
-import { PurposeType, isPurposeType } from "../enums";
-import PurposeTypeConverter from "../../converters/purpose_type_converter";
+import {DateLike, Modify} from "type_aliases";
+import {addInstantGetterAndSetterToApiModel, addReadOnlyPropertiesToModel} from "../../mixins"
+import {ApiProjectPurposeType, ApiPurposeType, isApiPurposeType} from "./api_purpose_type";
+import {isPurposeType, PurposeType} from "../enums";
+import {PurposeTypeConverter} from "../../converters";
 
 export interface ApiCloudFileArgument extends Partial<Modify<ApiCloudFile, {
   lastModified?: DateLike
   createdAt?: DateLike
   purposeType: ApiPurposeType | PurposeType,
   fileType?: string
-}>> {}
+}>> {
+}
 
 export class ApiCloudFile {
-  constructor({ url, id, lastModified, createdAt, purposeType, fileType }: ApiCloudFileArgument) {
+  constructor({url, id, lastModified, createdAt, purposeType, fileType}: ApiCloudFileArgument) {
     addInstantGetterAndSetterToApiModel(this, "lastModified");
     addInstantGetterAndSetterToApiModel(this, "createdAt");
-    addReadOnlyPropertiesToModel(this, { url, id, fileType });
-    let purposeTypeVal: ApiPurposeType = ApiTypesEnum.OTHER;
+    addReadOnlyPropertiesToModel(this, {url, id, fileType});
+    let purposeTypeVal: ApiPurposeType = ApiProjectPurposeType.OTHER;
     Object.defineProperties(this, {
       purposeType: {
         get() {
@@ -47,7 +47,7 @@ export class ApiCloudFile {
   readonly id?: number
   lastModified?: number | null = null;
   createdAt?: number | null = null;
-  purposeType: ApiPurposeType = ApiTypesEnum.OTHER;
+  purposeType: ApiPurposeType = ApiProjectPurposeType.OTHER;
 }
 
 export default ApiCloudFile;

@@ -19,7 +19,9 @@ export default class ProjectApi {
     return Http.get(url, user);
   }
 
-  // deprecated. Call getProject and listProjectsForOrganization instead
+  /**
+   * @deprecated Call getProject and listProjectsForOrganization instead
+   */
   static listProjects(projectId: string, user: User):Promise<ApiProject[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/list`;
     return Http.get(url, user);
@@ -85,7 +87,7 @@ export default class ProjectApi {
     return Promise.resolve(Http.addAuthToDownloadUrl(baseUrl, user));
   }
 
-  static  getProjectDeviationsReportTsv({ projectId }: AssociationIds, user: User): Promise<string> {
+  static getProjectDeviationsReportTsv({ projectId }: AssociationIds, user: User): Promise<string> {
     const baseUrl = `${Http.baseUrl()}/projects/${projectId}/project_deviation-report.tsv`;
     const url = Http.addAuthToDownloadUrl(baseUrl, user);
     return Http.get(url, user, "text/tab-separated-values; charset=utf-8");

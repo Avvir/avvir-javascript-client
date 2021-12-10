@@ -4,6 +4,7 @@ import ApiProjectCostAnalysisProgress from "./api_project_cost_analysis_progress
 import ApiProjectMasterformatProgress from "./api_project_masterformat_progress";
 import SystemOfMeasurement, { IMPERIAL } from "../enums/system_of_measurement";
 import { DateLike, Modify } from "type_aliases";
+import ApiProjectReport from "./api_project_report";
 
 export interface ApiProjectArgument extends Partial<Modify<ApiProject, {
   archivedAt?: DateLike
@@ -13,31 +14,34 @@ export interface ApiProjectArgument extends Partial<Modify<ApiProject, {
 
 export class ApiProject {
   constructor({
-    city,
-    country,
-    addressLine1,
-    addressLine2,
-    state,
-    zip,
-    defaultFirebaseFloorId,
-    archivedAt,
-    progressNotes,
-    avvirAnalysisNotes,
-    endDate,
-    firebaseId,
-    name,
-    notes,
-    pricing,
-    sourceAnalysisNotes,
-    startDate,
-    systemOfMeasurement,
-    id,
-    clientAccountId,
-    scannedProjectMasterformatProgresses,
-    scheduledProjectMasterformatProgresses,
-    costAnalysisProgresses,
-    firebaseFloorIds
-  }: ApiProjectArgument = {}) {
+                city,
+                country,
+                addressLine1,
+                addressLine2,
+                state,
+                zip,
+                defaultFirebaseFloorId,
+                archivedAt,
+                progressNotes,
+                avvirAnalysisNotes,
+                endDate,
+                firebaseId,
+                name,
+                notes,
+                pricing,
+                sourceAnalysisNotes,
+                startDate,
+                systemOfMeasurement,
+                id,
+                clientAccountId,
+                scannedProjectMasterformatProgresses,
+                baselineProjectMasterformatProgresses,
+                currentProjectMasterformatProgresses,
+                costAnalysisProgresses,
+                projectReports,
+                firebaseFloorIds,
+                generateMasterformatProgressEnabled
+              }: ApiProjectArgument = {}) {
     addInstantGetterAndSetterToApiModel(this, "startDate");
     addInstantGetterAndSetterToApiModel(this, "endDate");
     addInstantGetterAndSetterToApiModel(this, "archivedAt");
@@ -59,8 +63,10 @@ export class ApiProject {
     this.avvirAnalysisNotes = avvirAnalysisNotes || null;
     this.sourceAnalysisNotes = sourceAnalysisNotes || null;
     this.scannedProjectMasterformatProgresses = scannedProjectMasterformatProgresses || [];
-    this.scheduledProjectMasterformatProgresses = scheduledProjectMasterformatProgresses || [];
+    this.baselineProjectMasterformatProgresses = baselineProjectMasterformatProgresses || [];
+    this.currentProjectMasterformatProgresses = currentProjectMasterformatProgresses || [];
     this.costAnalysisProgresses = costAnalysisProgresses || [];
+    this.projectReports = projectReports || [];
 
     this.systemOfMeasurement = systemOfMeasurement || IMPERIAL;
     // @ts-ignore
@@ -69,6 +75,7 @@ export class ApiProject {
     this.startDate = startDate || null;
     // @ts-ignore
     this.archivedAt = archivedAt || null;
+    this.generateMasterformatProgressEnabled = generateMasterformatProgressEnabled;
   }
 
   readonly id: number;
@@ -76,8 +83,10 @@ export class ApiProject {
   readonly clientAccountId: string;
   name: string;
   scannedProjectMasterformatProgresses: Array<ApiProjectMasterformatProgress> = [];
-  scheduledProjectMasterformatProgresses: Array<ApiProjectMasterformatProgress> = [];
+  baselineProjectMasterformatProgresses: Array<ApiProjectMasterformatProgress> = [];
+  currentProjectMasterformatProgresses: Array<ApiProjectMasterformatProgress> = [];
   costAnalysisProgresses: Array<ApiProjectCostAnalysisProgress> = [];
+  projectReports: Array<ApiProjectReport>;
   defaultFirebaseFloorId: string | null = null;
   firebaseFloorIds: string[] = [];
   addressLine1: string | null = null;
@@ -95,6 +104,7 @@ export class ApiProject {
   progressNotes: string | null = null;
   avvirAnalysisNotes: string | null = null;
   sourceAnalysisNotes: string | null = null;
+  generateMasterformatProgressEnabled: boolean | null;
 }
 
 export default ApiProject;

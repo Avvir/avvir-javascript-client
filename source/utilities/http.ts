@@ -1,6 +1,6 @@
 import getAuthorizationHeaders, { User } from "./get_authorization_headers";
 import {httpGetHeaders, httpPostHeaders} from "./request_headers";
-import { isFirebaseUser, isGatewayUser } from "./reduce_user_session";
+import {isFirebaseUser, isGatewayUser} from "../models";
 import Config from "../config";
 // import fetch from 'node-fetch';
 

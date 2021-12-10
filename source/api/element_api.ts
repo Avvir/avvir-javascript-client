@@ -6,7 +6,7 @@ import Http from "../utilities/http";
 import DeviationStatus from "../models/enums/deviation_status";
 import DetailedElement from "../models/domain/detailed_element";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import {RunningProcess} from "../models/domain/running_process";
+import {RunningProcess} from "../models";
 
 export default class ElementApi {
   static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User): Promise<ApiPlannedElement[]> {

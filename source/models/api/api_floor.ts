@@ -1,38 +1,41 @@
 import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
 import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 import ApiConstructionGrid from "./api_construction_grid";
-import { DateLike, Matrix3Like, Modify, Vector2Like } from "type_aliases";
+import {DateLike, Matrix3Like, Modify, Vector2Like} from "type_aliases";
 import ApiMatrix3 from "./api_matrix_3";
-import { Matrix3 } from "three";
+import {Matrix3} from "three";
 import Matrix3Converter from "../../converters/matrix_3_converter";
 
 export interface ApiFloorArgument extends Partial<Modify<ApiFloor, {
   scanDate?: DateLike,
   photoAreaMinimapPixelToBimMinimapPixel?: Matrix3Like;
   bimMinimapToWorld?: Matrix3Like;
-}>> {}
+}>> {
+}
 
 export class ApiFloor {
   constructor({
-    id,
-    firebaseId,
-    ordinal,
-    floorNumber,
-    defaultFirebaseScanDatasetId,
-    firebaseProjectId,
-    firebaseScanDatasetIds,
-    constructionGrid,
-    plannedElementCount,
-    scanDate,
-    photoAreaId,
-    offset,
-    photoAreaMinimapPixelToBimMinimapPixel,
-    bimMinimapToWorld,
-      floorElevation
-  }: ApiFloorArgument = {}) {
+                id,
+                firebaseId,
+                ordinal,
+                floorNumber,
+                defaultFirebaseScanDatasetId,
+                firebaseProjectId,
+                firebaseScanDatasetIds,
+                constructionGrid,
+                plannedElementCount,
+                scanDate,
+                photoAreaId,
+                offset,
+                photoAreaMinimapPixelToBimMinimapPixel,
+                bimMinimapToWorld,
+                floorElevation,
+                globalOffsetYaw
+              }: ApiFloorArgument = {}) {
     addInstantGetterAndSetterToApiModel(this, "scanDate");
-    addReadOnlyPropertiesToModel(this, { id, firebaseId, firebaseProjectId });
-    let offsetVal: Vector2Like, photoMinimapToBimMinimapTransformVal: ApiMatrix3, bimMinimapToWorldTransformVal: ApiMatrix3;
+    addReadOnlyPropertiesToModel(this, {id, firebaseId, firebaseProjectId});
+    let offsetVal: Vector2Like, photoMinimapToBimMinimapTransformVal: ApiMatrix3,
+      bimMinimapToWorldTransformVal: ApiMatrix3;
     Object.defineProperties(this, {
       offset: {
         get() {
@@ -40,7 +43,7 @@ export class ApiFloor {
         },
         set(val: Vector2Like) {
           if (val) {
-            offsetVal = { x: val.x, y: val.y };
+            offsetVal = {x: val.x, y: val.y};
           } else {
             offsetVal = null;
           }
@@ -94,6 +97,7 @@ export class ApiFloor {
     // @ts-ignore
     this.bimMinimapToWorld = bimMinimapToWorld || null;
     this.floorElevation = floorElevation || null;
+    this.globalOffsetYaw = globalOffsetYaw;
   }
 
   /**
@@ -139,6 +143,7 @@ export class ApiFloor {
   photoAreaMinimapPixelToBimMinimapPixel: ApiMatrix3 | null = null;
   bimMinimapToWorld: ApiMatrix3 | null = null;
   floorElevation: number | null;
+  globalOffsetYaw: number | null;
 }
 
 export default ApiFloor;

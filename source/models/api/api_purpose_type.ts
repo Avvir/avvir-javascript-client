@@ -26,6 +26,7 @@ export enum ApiScanDatasetPurposeType {
   BUILT_NOT_BUILT_BIM_IFC = "BUILT_NOT_BUILT_BIM_IFC",
   NEEDS_FURTHER_ANALYSIS = "NEEDS_FURTHER_ANALYSIS",
   PREPROCESSED_SCAN = "PREPROCESSED_SCAN",
+  PREPROCESSED_SCAN_E57 = "PREPROCESSED_SCAN_E57",
   INCLUDED_BIM_IFC = "INCLUDED_BIM_IFC",
   POTREE = "POTREE",
   DOWNSAMPLED_SCAN = "DOWNSAMPLED_SCAN",
@@ -40,9 +41,9 @@ export enum ApiPhotoAreaPurposeType {
 
 export type ApiPurposeType = ApiProjectPurposeType | ApiFloorPurposeType | ApiScanDatasetPurposeType | ApiPhotoAreaPurposeType
 type ApiProjectTypeMap = { [type in ProjectTypeKeys]: ApiProjectPurposeType }
-type ApiFloorTypeMap = Omit<{ [type in FloorTypeKeys]: ApiFloorPurposeType }, "OTHER">
-type ApiScanDatasetTypeMap = Omit<{ [type in ScanDatasetTypeKeys]: ApiScanDatasetPurposeType }, "OTHER">
-type ApiPhotoAreaTypeMap = Omit<{ [type in PhotoAreaTypeKeys]: ApiPhotoAreaPurposeType }, "OTHER">
+type ApiFloorTypeMap = { [type in FloorTypeKeys]: ApiFloorPurposeType }
+type ApiScanDatasetTypeMap = { [type in ScanDatasetTypeKeys]: ApiScanDatasetPurposeType }
+type ApiPhotoAreaTypeMap = { [type in PhotoAreaTypeKeys]: ApiPhotoAreaPurposeType }
 const ApiPurposeType = {
   RAW_SCAN: ApiScanDatasetPurposeType.RAW_SCAN,
   SCANNER_PATH: ApiScanDatasetPurposeType.SCANNER_PATH,
@@ -50,6 +51,7 @@ const ApiPurposeType = {
   BUILT_NOT_BUILT_BIM_IFC: ApiScanDatasetPurposeType.BUILT_NOT_BUILT_BIM_IFC,
   NEEDS_FURTHER_ANALYSIS: ApiScanDatasetPurposeType.NEEDS_FURTHER_ANALYSIS,
   PREPROCESSED_SCAN: ApiScanDatasetPurposeType.PREPROCESSED_SCAN,
+  PREPROCESSED_SCAN_E57: ApiScanDatasetPurposeType.PREPROCESSED_SCAN_E57,
   INCLUDED_BIM_IFC: ApiScanDatasetPurposeType.INCLUDED_BIM_IFC,
   POTREE: ApiScanDatasetPurposeType.POTREE,
   DOWNSAMPLED_SCAN: ApiScanDatasetPurposeType.DOWNSAMPLED_SCAN,
@@ -62,6 +64,7 @@ const ApiPurposeType = {
   BIM_MESH_GLB: ApiFloorPurposeType.BIM_MESH_GLB,
   BIM_MESH_OBJ: ApiFloorPurposeType.BIM_MESH_OBJ,
   BIM_TEXTURE_MTL: ApiFloorPurposeType.BIM_TEXTURE_MTL,
+  BIM_MINIMAP: ApiFloorPurposeType.BIM_MINIMAP,
   VIEWER_BIM_MESH_OBJ: ApiFloorPurposeType.VIEWER_BIM_MESH_OBJ,
   PLANNED_CLOUD_ZIP: ApiFloorPurposeType.PLANNED_CLOUD_ZIP,
   SVF: ApiFloorPurposeType.SVF,

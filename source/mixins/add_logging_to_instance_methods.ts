@@ -1,7 +1,7 @@
 import _ from "underscore";
 
 type Methods<Object, K extends keyof Object = keyof Object> = Object[K] extends Function ? K : never
-const addLoggingToInstanceMethods = <Instance extends { [key: string]: ((_: any) => any) | any }>(instance: Instance, instanceName: string, ignoredMethods?: Methods<Instance>[]) => {
+export function addLoggingToInstanceMethods<Instance extends { [key: string]: ((_: any) => any) | any }>(instance: Instance, instanceName: string, ignoredMethods?: Methods<Instance>[]) {
   let instanceMethods = _.methods(instance);
   if (ignoredMethods) {
     instanceMethods = _(instanceMethods).without(...ignoredMethods);
@@ -22,6 +22,6 @@ const addLoggingToInstanceMethods = <Instance extends { [key: string]: ((_: any)
       }
     }
   });
-};
+}
 
 export default addLoggingToInstanceMethods;

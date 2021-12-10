@@ -18,6 +18,8 @@ export class ApiScanDataset {
     firebaseFloorId,
     scanNumber,
     dataPresences,
+    analysisCompleted,
+    manualQcPresent,
     notes,
     name,
     coarseAlignmentMatrix,
@@ -70,6 +72,8 @@ export class ApiScanDataset {
     this.name = name || null;
     // @ts-ignore
     this.scanDate = scanDate;
+    this.analysisCompleted = analysisCompleted;
+    this.manualQcPresent = manualQcPresent;
   }
 
   /**
@@ -97,6 +101,8 @@ export class ApiScanDataset {
    */
   scanDate: number | null = null;
 
+  analysisCompleted: number | null;
+  manualQcPresent: number | null;
   coarseAlignmentMatrix: ApiMatrix4 | null = null;
   fineAlignmentMatrix: ApiMatrix4 | null = null;
   dataPresences?: { scanAnalysis?: boolean };

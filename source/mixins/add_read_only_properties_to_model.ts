@@ -1,4 +1,4 @@
-const addReadOnlyPropertiesToModel = (modelInstance, properties) => {
+export function addReadOnlyPropertiesToModel(modelInstance, properties) {
   Object.getOwnPropertyNames(properties).forEach((propertyName) => {
     Object.defineProperty(modelInstance, propertyName, {
       value: properties[propertyName],
@@ -7,6 +7,6 @@ const addReadOnlyPropertiesToModel = (modelInstance, properties) => {
       configurable: false
     });
   });
-};
+}
 
 export default addReadOnlyPropertiesToModel;

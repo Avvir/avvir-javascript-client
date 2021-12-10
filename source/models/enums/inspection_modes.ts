@@ -20,4 +20,3 @@ export const AllInspectionModes: Array<{ displayName: string, value: InspectionM
 ];
 
 export default AllInspectionModes;
-
