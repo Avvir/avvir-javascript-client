@@ -2,7 +2,6 @@ import getAuthorizationHeaders, { User } from "./get_authorization_headers";
 import {httpGetHeaders, httpPostHeaders} from "./request_headers";
 import {isFirebaseUser, isGatewayUser} from "../models";
 import Config from "../config";
-// import fetch from 'node-fetch';
 
 export default class Http {
   static baseUrl = (): string => Config.getConfiguration().AVVIR_GATEWAY_URL;
@@ -28,7 +27,7 @@ export default class Http {
     return Http.fetch(url, {
       method: "PUT",
       headers: {
-        ...httpGetHeaders(contentType),
+        ...httpPostHeaders(contentType),
         ...getAuthorizationHeaders(user)
       },
       body: JSON.stringify(body)
