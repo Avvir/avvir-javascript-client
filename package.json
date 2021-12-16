@@ -1,12 +1,11 @@
 {
   "name": "avvir",
   "repository": "git@github.com:Avvir/avvir-javascript-client.git",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Javascript client for Avvir APIs",
   "license": "Apache-2.0",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
-  "browser": "dist/avvir_api.web.js",
   "main": "dist/avvir_api.node.js",
   "files": [
     "dist/*",

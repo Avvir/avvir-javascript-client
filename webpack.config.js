@@ -119,7 +119,6 @@ const browserConfig = {
 
 module.exports = (env, argv) => {
   Object.assign(nodeConfig, generalConfig);
-  Object.assign(browserConfig, generalConfig);
 
-  return [browserConfig, nodeConfig];
+  return [nodeConfig];
 };
