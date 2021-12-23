@@ -5,6 +5,17 @@ import { UniformatId } from "uniformat";
 import { ApiInspectionModes } from "../enums";
 import SystemOfMeasurement from "../enums/system_of_measurement";
 
+export class PhotoViewerDetails {
+    constructor(photoViewerDetails: Partial<PhotoViewerDetails> = {}) {
+        const { photoSessionId, photoLocationId } = photoViewerDetails;
+        this.photoSessionId = photoSessionId;
+        this.photoLocationId = photoLocationId;
+    }
+
+    photoSessionId: number;
+    photoLocationId: number;
+}
+
 export class DeviationTolerance {
     constructor(tolerance: Partial<DeviationTolerance> = {}) {
         const { value, systemOfMeasurement } = tolerance;
@@ -48,27 +59,27 @@ export class ViewFilters {
     trades: ViewTrades;
     deviationTolerance: DeviationTolerance;
 }
-
-type SelectedElements = string[]
-type ViewAttributesParameter = ModifyPartial<ViewAttributes, { camera: ViewCameraParameter }>
+export type SelectedElements = string[]
+export type ViewAttributesParameter = ModifyPartial<ViewAttributes, { camera: ViewCameraParameter }>
 
 export class ViewAttributes {
     constructor(attributes: ViewAttributesParameter = {}) {
-        const { camera, filters, selectedElements, inspectionMode } = attributes;
+        const { camera, filters, selectedElements, inspectionMode, photoViewerDetails } = attributes;
         this.camera = new ViewCamera(camera);
         this.filters = new ViewFilters(filters);
         this.selectedElements = selectedElements;
         this.inspectionMode = inspectionMode;
+        this.photoViewerDetails = photoViewerDetails;
     }
 
     camera: ViewCamera;
     filters: ViewFilters;
     selectedElements: SelectedElements;
     inspectionMode: ApiInspectionModes;
+    photoViewerDetails: PhotoViewerDetails;
 }
 
 export type ViewParameter = ModifyPartial<View, { viewAttributes: ViewAttributesParameter, createdAt: DateLike }>
-
 export class View {
     constructor(view: ViewParameter = {}) {
         const { id, firebaseProjectId, firebaseFloorId, firebaseScanDatasetId, viewAttributes, createdBy, createdAt } = view;
