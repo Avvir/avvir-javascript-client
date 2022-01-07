@@ -529,6 +529,7 @@ Given a `PhotoLocation` is out of alignment with the bim either rotationally or 
 
 ```javascript
 const Avvir = require("avvir");
+const THREE = require("three"); //helper for working with angles
 
 let username = "<You-User-Login>";
 let password = "<Your-Password>";
@@ -537,21 +538,13 @@ let photoAreaId = 1234; //some photo area id (can be sourced from url in portal 
 let photoLocationId = 1234; //some photo location id (can be sourced from url in portal when location is selected)
 
 Avvir.api.auth.login(username, password).then(async (user)=>{
-  let pitch = Math.PI/2; //90 deg
-  let yaw = 0
-  let roll = 0
-  let c1 = Math.cos(pitch/2)
-  let c2 = Math.cos(yaw/2)
-  let c3 = Math.cos(roll/2)
-  let s1 = Math.sin(pitch/2)
-  let s2 = Math.sin(yaw/2)
-  let s3 = Math.sin(roll/2)
-  
+  let euler = new THREE.Euler(0,90,0); // 
+  let quaternion = new THREE.Quaternion().setFromEuler(euler);
   let orientation = { 
-    a: (s1*s2*c3) + (c1*c2*s3), 
-    b: (s1*c2*c3) + (c1*s2*s3), 
-    c: (c1*s2*c3) - (s1*c2*s3), 
-    d: (c1*c2*c3) - (s1*s2*s3)
+    a: quaternion.x, 
+    b: quaternion.y, 
+    c: quaternion.z, 
+    d: quaternion.w
   };
 
   let locationData = new ApiPhotoLocation3d({
