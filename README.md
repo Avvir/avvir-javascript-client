@@ -538,7 +538,7 @@ let photoAreaId = 1234; //some photo area id (can be sourced from url in portal 
 let photoLocationId = 1234; //some photo location id (can be sourced from url in portal when location is selected)
 
 Avvir.api.auth.login(username, password).then(async (user)=>{
-  let euler = new THREE.Euler(0,90,0); // 
+  let euler = new THREE.Euler(0,Math.PI/2,0); // 
   let quaternion = new THREE.Quaternion().setFromEuler(euler);
   let orientation = { 
     a: quaternion.x, 
