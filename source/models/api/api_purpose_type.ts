@@ -20,6 +20,7 @@ export enum ApiFloorPurposeType {
 }
 
 export enum ApiScanDatasetPurposeType {
+  /** @deprecated Raw scans are no longer supported. */
   RAW_SCAN = "RAW_SCAN",
   SCANNER_PATH = "SCANNER_PATH",
   FLOOR_FLATNESS_TOPO_MAP = "FLOOR_FLATNESS_TOPO_MAP",
@@ -44,7 +45,10 @@ type ApiProjectTypeMap = { [type in ProjectTypeKeys]: ApiProjectPurposeType }
 type ApiFloorTypeMap = { [type in FloorTypeKeys]: ApiFloorPurposeType }
 type ApiScanDatasetTypeMap = { [type in ScanDatasetTypeKeys]: ApiScanDatasetPurposeType }
 type ApiPhotoAreaTypeMap = { [type in PhotoAreaTypeKeys]: ApiPhotoAreaPurposeType }
+
+// noinspection JSDeprecatedSymbols
 const ApiPurposeType = {
+  /** @deprecated */
   RAW_SCAN: ApiScanDatasetPurposeType.RAW_SCAN,
   SCANNER_PATH: ApiScanDatasetPurposeType.SCANNER_PATH,
   FLOOR_FLATNESS_TOPO_MAP: ApiScanDatasetPurposeType.FLOOR_FLATNESS_TOPO_MAP,
