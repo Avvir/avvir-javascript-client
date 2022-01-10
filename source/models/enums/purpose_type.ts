@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols,JSDeprecatedSymbols
+
 export enum ProjectPurposeType {
   OTHER = "other",
   RAW_PROJECT_BIM = "rawProjectBim",
@@ -20,6 +22,7 @@ export enum FloorPurposeType {
 
 export enum ScanDatasetPurposeType {
   OTHER = "other",
+  /** @deprecated Raw scans are no longer supported. */
   RAW_SCAN = "rawScan",
   SCANNER_PATH = "scannerPath",
   FLOOR_FLATNESS_TOPO_MAP = "floorFlatnessTopoMap",
@@ -82,7 +85,9 @@ export const PurposeTypeMap: ProjectTypeMap & Omit<FloorTypeMap, "OTHER"> & Omit
   MINIMAP: PhotoAreaPurposeType.MINIMAP,
   THREE_SIXTY_PHOTO: PhotoAreaPurposeType.THREE_SIXTY_PHOTO,
 
+  /** @deprecated */
   RAW_SCAN: ScanDatasetPurposeType.RAW_SCAN,
+
   SCANNER_PATH: ScanDatasetPurposeType.SCANNER_PATH,
   FLOOR_FLATNESS_TOPO_MAP: ScanDatasetPurposeType.FLOOR_FLATNESS_TOPO_MAP,
   BUILT_NOT_BUILT_BIM_IFC: ScanDatasetPurposeType.BUILT_NOT_BUILT_BIM_IFC,
@@ -119,6 +124,7 @@ export const OTHER = ProjectPurposeType.OTHER;
 export const RAW_PROJECT_BIM = ProjectPurposeType.RAW_PROJECT_BIM;
 export const PROJECT_FOLDER_ZIP = ProjectPurposeType.PROJECT_FOLDER_ZIP;
 
+/** @deprecated */
 export const RAW_SCAN = ScanDatasetPurposeType.RAW_SCAN;
 export const SCANNER_PATH = ScanDatasetPurposeType.SCANNER_PATH;
 export const FLOOR_FLATNESS_TOPO_MAP = ScanDatasetPurposeType.FLOOR_FLATNESS_TOPO_MAP;
