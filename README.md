@@ -527,6 +527,12 @@ updateAndGetPlannedElements().then((elements) =>{
 
 Given a `PhotoLocation` is out of alignment with the bim either rotationally or positionally, we've provided a method on our photo api called `updatePhotoLocationPositionAndOrientation` which allows for a location to have its coordinate data updated.
 
+- The center of the image is aligned to a vector pointing horizontally to the north (positive Y), with positive Z being up. 
+- The X axis controls pitch, the Y axis controls roll, and the Z axis controls yaw.
+- Positive pitch moves the center of the image up.
+- Positive roll rotates clockwise around the center of the image.
+- Positive yaw moves the center of the image to the left.
+
 ```javascript
 const Avvir = require("avvir");
 const THREE = require("three"); //helper for working with angles
@@ -538,7 +544,15 @@ let photoAreaId = 1234; //some photo area id (can be sourced from url in portal 
 let photoLocationId = 1234; //some photo location id (can be sourced from url in portal when location is selected)
 
 Avvir.api.auth.login(username, password).then(async (user)=>{
-  let euler = new THREE.Euler(0,Math.PI/2,0); // 
+  // This angle will rotate the center of the image to the left 90 degrees
+  let euler = new THREE.Euler(0,0,Math.PI/2);
+
+  // This angle would pitch the image up 45 degrees
+  // let euler = new THREE.Euler(Math.PI/4,0,0);
+
+  // This angle would rotate the image clockwise about its center 90 degrees
+  // let euler = new THREE.Euler(0,Math.PI/2,0);
+
   let quaternion = new THREE.Quaternion().setFromEuler(euler);
   let orientation = { 
     a: quaternion.x, 
