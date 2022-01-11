@@ -77,6 +77,11 @@ export default class WebGatewayApi {
     return Http.addAuthToDownloadUrl(baseUrl, user);
   }
 
+  static getWbsHierarchyUrl({ projectId }: AssociationIds, fileName: string, user: User): string {
+    const baseUrl = `${Http.baseUrl()}/projects/${projectId}/${fileName}_wbs.tsv`;
+    return Http.addAuthToDownloadUrl(baseUrl, user);
+  }
+
   static checkProcoreAccessToken(projectId: string, procoreAccessToken: string, user: User):Promise<{ expiresInSeconds: number }> {
     if (!projectId) {
       return Promise.reject(new Error("Project not loaded yet"));
