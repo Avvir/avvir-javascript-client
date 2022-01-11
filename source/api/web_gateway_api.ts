@@ -82,7 +82,7 @@ export default class WebGatewayApi {
   }
 
   static addAuthToDownloadUrl(url: string, user: User): string {
-    return Http.addAuthToDownloadUrl(string, user);
+    return Http.addAuthToDownloadUrl(url, user);
   }
 
   static checkProcoreAccessToken(projectId: string, procoreAccessToken: string, user: User): Promise<{ expiresInSeconds: number }> {
