@@ -1,31 +1,37 @@
-import { Matrix4, Vector2 } from "three";
+import {Matrix4, Quaternion, Vector2, Vector3} from "three";
 import _ from "underscore";
 
 import addReadOnlyPropertiesToModel from "../../../mixins/add_read_only_properties_to_model";
 import ApiPhotoLocation from "../../api/api_photo_location";
 import Matrix4Converter from "../../../converters/matrix_4_converter";
 import PhotoProjectionType from "../../enums/photo_projection_type";
-import { Matrix4Like, Modify, Vector2Like } from "type_aliases";
+import {Matrix4Like, Modify, Vector2Like} from "type_aliases";
 import ApiMatrix4 from "../../api/api_matrix_4";
+import {PhotoRotationType} from "../../enums";
+import {Location3d} from "./location_3d";
+import {ApiPhotoLocationProperties} from "../../api";
 
 export interface PhotoLocationArgument extends Partial<Modify<PhotoLocation, {
   cameraWorldMatrix?: Matrix4Like,
-  minimapCoordinates?: Vector2Like
-}>> {}
+  minimapCoordinates?: Vector2Like,
+  bimLocation?: ApiPhotoLocationProperties
+}>> { }
 
 export class PhotoLocation {
   constructor({
-    id,
-    photoAreaId,
-    photoSessionId,
-    fileId,
-    minimapCoordinates,
-    minimapBearing,
-    projectionType,
-    cameraWorldMatrix,
-    yawOffset,
-  }: PhotoLocationArgument = {}) {
-    addReadOnlyPropertiesToModel(this, { id, photoAreaId, photoSessionId, fileId });
+                id,
+                photoAreaId,
+                photoSessionId,
+                fileId,
+                minimapCoordinates,
+                minimapBearing,
+                projectionType,
+                rotationType,
+                cameraWorldMatrix,
+                yawOffset,
+                bimLocation
+              }: PhotoLocationArgument = {}) {
+    addReadOnlyPropertiesToModel(this, {id, photoAreaId, photoSessionId, fileId});
     if (minimapCoordinates) {
       this.minimapCoordinates = new Vector2(minimapCoordinates.x, minimapCoordinates.y);
     }
@@ -52,6 +58,13 @@ export class PhotoLocation {
     this.cameraWorldMatrix = cameraWorldMatrix;
     this.projectionType = projectionType;
     this.yawOffset = yawOffset;
+    this.rotationType = rotationType;
+
+    if (bimLocation) {
+      let position = new Vector3(bimLocation.position.x, bimLocation.position.y, bimLocation.position.z);
+      let orientation = new Quaternion(bimLocation.orientation.a, bimLocation.orientation.b, bimLocation.orientation.c, bimLocation.orientation.d)
+      this.bimLocation = new Location3d(bimLocation.id, position, orientation);
+    }
   }
 
   readonly id: number;
@@ -60,9 +73,11 @@ export class PhotoLocation {
   readonly fileId: number;
   minimapCoordinates: Vector2;
   minimapBearing: number;
+  rotationType: PhotoRotationType;
   projectionType: PhotoProjectionType;
   cameraWorldMatrix: Matrix4;
   yawOffset: number = 0;
+  bimLocation?: Location3d
 
   static fromApi = (apiPhotoLocation: ApiPhotoLocation) => {
     return new PhotoLocation({
