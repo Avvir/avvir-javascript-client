@@ -36,6 +36,32 @@ describe("DateConverter", () => {
     });
   });
 
+  describe("#dateToISO", () => {
+    it("converts a Date to ISO format", () => {
+      const isoString = DateConverter.dateToISO(new Date("2022-01-01T12:34:00.000Z"));
+      expect(isoString).to.eql("2022-01-01T12:34:00.000Z");
+    });
+
+    it("converts a Moment to ISO format", () => {
+      const isoString = DateConverter.dateToISO(moment("2022-01-01T12:34:00.000Z"));
+      expect(isoString).to.eql("2022-01-01T12:34:00.000Z");
+    });
+
+    it("passes a string or number through", () => {
+      let isoString = DateConverter.dateToISO("2022-01-01T12:34:00.000Z");
+      expect(isoString).to.eql("2022-01-01T12:34:00.000Z");
+      isoString = DateConverter.dateToISO(123456);
+      expect(isoString).to.eql("123456");
+    });
+
+    it("converts null and undefined to an empty string", () => {
+      let isoString = DateConverter.dateToISO(null);
+      expect(isoString).to.eql("");
+      isoString = DateConverter.dateToISO(undefined);
+      expect(isoString).to.eql("");
+    });
+  });
+
   describe("#dateToText", () => {
     let date;
     beforeEach(() => {

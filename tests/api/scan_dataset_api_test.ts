@@ -52,6 +52,11 @@ describe("ScanDatasetApi", () => {
         status: 200,
         body: {}
       });
+
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets?scanDate=2022-01-01T12:34:00.000Z`, {
+        status: 200,
+        body: {}
+      });
     });
 
     it("makes an authenticated call to the scan dataset creation endpoint", () => {
@@ -65,6 +70,17 @@ describe("ScanDatasetApi", () => {
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets`);
       expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+
+    it("adds the scanDate parameter when it exists", () => {
+      ScanDatasetApi.createScanDataset({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDate: new Date("2022-01-01T12:34:00.0000Z")
+      }, user);
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets?scanDate=2022-01-01T12:34:00.000Z`);
     });
 
     describe("when the call fails", () => {
