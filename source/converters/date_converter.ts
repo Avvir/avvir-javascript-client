@@ -1,4 +1,5 @@
 import moment, { Moment } from "moment";
+import {DateLike} from "type_aliases";
 
 export class DateFormatter {
   constructor(format: string) {
@@ -46,6 +47,16 @@ export class DateConverter {
     } else {
       return null;
     }
+  }
+
+  static dateToISO(date: DateLike): string {
+    if (date == null) {
+      return ""
+    } else if (date instanceof Date || moment.isMoment(date)) {
+      return date.toISOString();
+    }
+
+    return date + "";
   }
 
   static dateToInstant(date: Date | Moment): number | null {

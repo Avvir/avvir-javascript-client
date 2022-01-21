@@ -1,12 +1,13 @@
 import ApiScanDataset from "../models/api/api_scan_dataset";
 import {User} from "../utilities/get_authorization_headers";
-import {AssociationIds} from "type_aliases";
+import {AssociationIds, DateLike} from "type_aliases";
 import {ScanLabelValues} from "../models";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import ProgressReportForScanDataset from "../models/domain/progress/progress_report_for_scan_dataset";
 import DetailedElement from "../models/domain/detailed_element";
 import View, {ViewParameter} from "../models/domain/view";
+import {DateConverter} from "../converters";
 
 export default class ScanDatasetApi {
   static listScanDatasetsForFloor({ projectId, floorId }: AssociationIds, user: User): Promise<ApiScanDataset[]> {
@@ -19,8 +20,11 @@ export default class ScanDatasetApi {
     return Http.patch(url, user, scanDataset) as unknown as Promise<void>;
   }
 
-  static createScanDataset({ projectId, floorId }: AssociationIds, user: User): Promise<ApiScanDataset>{
-    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets`;
+  static createScanDataset({ projectId, floorId, scanDate }: AssociationIds & {scanDate?: DateLike}, user: User): Promise<ApiScanDataset>{
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets`;
+    if (scanDate) {
+      url += `?scanDate=${DateConverter.dateToISO(scanDate)}`
+    }
     return Http.post(url, user, null) as unknown as Promise<ApiScanDataset>;
   }
 
