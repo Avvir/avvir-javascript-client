@@ -66,7 +66,7 @@
     "extendable-error-class": "^0.1.2",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.1.1",
     "process": "^0.11.10",
     "stream-browserify": "^3.0.0",
     "three": "^0.123.0",
