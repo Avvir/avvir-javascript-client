@@ -1,7 +1,7 @@
 import ApiScanDataset from "../models/api/api_scan_dataset";
 import {User} from "../utilities/get_authorization_headers";
 import {AssociationIds, DateLike} from "type_aliases";
-import {ScanLabelValues} from "../models";
+import {ApiPhotoSession, ScanLabelValues} from "../models";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import ProgressReportForScanDataset from "../models/domain/progress/progress_report_for_scan_dataset";
@@ -66,6 +66,11 @@ export default class ScanDatasetApi {
   static getView({ projectId, floorId, scanDatasetId }: AssociationIds, viewId: number, user: User): Promise<ViewParameter> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/views/${viewId}`;
     return Http.get(url, user) as Promise<ViewParameter>;
+  }
+
+  static getOrCreatePhotoSession({projectId, floorId, scanDatasetId}: AssociationIds, user: User): Promise<ApiPhotoSession> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/get-or-create-photo-session`;
+    return Http.post(url, user, null) as unknown as Promise<ApiPhotoSession>;
   }
 
 }
