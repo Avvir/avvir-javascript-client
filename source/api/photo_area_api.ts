@@ -9,6 +9,17 @@ import ApiPhotoSession from "../models/api/api_photo_session";
 import ApiPhotoLocation3d from "../models/api/api_photo_location_3d";
 
 export default class PhotoAreaApi {
+
+  static createPhotoLocations({ projectId, photoAreaId, photoSessionId}: AssociationIds,
+                              locations: ApiPhotoLocation[],
+                              user: User): Promise<ApiPhotoLocation[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/photo-areas/${photoAreaId}/locations`;
+    if (photoSessionId) {
+      url += `?photoSessionId=${photoSessionId}`
+    }
+    return Http.post(url, user, locations);
+  }
+
   static listPhotoAreasForProject({ projectId }: AssociationIds, user: User): Promise<ApiPhotoArea[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/photo-areas`;
     return Http.get(url, user);
