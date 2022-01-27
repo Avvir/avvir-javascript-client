@@ -5,7 +5,7 @@ import {AssociationIds, AvvirApiFiles} from "type_aliases";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import {User} from "../utilities/get_authorization_headers";
-import {FloorPurposeType, PurposeType} from "../models/enums/purpose_type";
+import {FloorPurposeType, PurposeType} from "../models";
 import ApiArgoResponse from "../models/api/api_argo_response";
 import ApiPipeline, {ApiPipelineArgument} from "../models/api/api_pipeline";
 import Pipelines from "../models/enums/pipeline_types";
@@ -45,6 +45,11 @@ export default class FileInformationApi {
     return Http.get(url, user);
   }
 
+  static savePhotoAreaFile({ projectId, photoAreaId }: AssociationIds, apiFile: ApiCloudFile, user: User): Promise<ApiCloudFile> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/photo-areas/${photoAreaId}/files`;
+    return Http.post(url, user, apiFile);
+  }
+
   static saveScanDatasetFile({ projectId, floorId, scanDatasetId }: AssociationIds, apiFile: ApiCloudFile, user: User):Promise<ApiCloudFile> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/file`;
     return Http.post(url, user, apiFile);
@@ -65,7 +70,7 @@ export default class FileInformationApi {
   }
 
   static saveAndIngestE57ProjectFile({ projectId }: AssociationIds, apiFile: ApiCloudFile,  user: User): Promise<ApiCloudFile> {
-    return FileInformationApi.createProjectFile({ projectId }, apiFile, user).then((cloudFile)=>{
+    return FileInformationApi.createProjectFile({ projectId }, apiFile, user).then(() => {
       let pipeline: ApiPipelineArgument = new ApiPipeline({
         name: Pipelines.INGEST_PROJECT_FILE,
         firebaseProjectId: projectId,
@@ -79,8 +84,7 @@ export default class FileInformationApi {
             return pollPipeline(pipelineResponse, user).then(()=>{
               //pipeline is finished, return cloudfile
               return FileInformationApi.listProjectFiles({projectId}, user).then((projectFiles) => {
-                let file = projectFiles.slice(-1)[0];
-                return file;
+                return projectFiles.slice(-1)[0];
               })
             })
           });
@@ -102,8 +106,7 @@ export default class FileInformationApi {
             return pollPipeline(pipelineResponse, user).then(()=>{
               //pipeline is finished, return cloudfile
               return FileInformationApi.listProjectFiles({projectId}, user).then((projectFiles) => {
-                let file = projectFiles.slice(-1)[0];
-                return file;
+                return projectFiles.slice(-1)[0];
               })
             })
           });
