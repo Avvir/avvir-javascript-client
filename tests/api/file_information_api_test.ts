@@ -1,15 +1,15 @@
-import { sandbox } from "../test_utils/setup_tests";
-import { expect } from "chai";
+import {sandbox} from "../test_utils/setup_tests";
+import {expect} from "chai";
 import fetchMock from "fetch-mock";
 import moment from "moment";
 
 import ApiCloudFile from "../../source/models/api/api_cloud_file";
 import DateConverter from "../../source/converters/date_converter";
 import FileInformationApi from "../../source/api/file_information_api";
-import { FIREBASE } from "../../source/models/enums/user_auth_type";
-import { makeFakeDispatch, makeStoreContents } from "../test_utils/test_factories";
-import { OTHER } from "../../source/models/enums/purpose_type";
-import { SUPERADMIN } from "../../source/models/enums/user_role";
+import {FIREBASE} from "../../source/models/enums/user_auth_type";
+import {makeFakeDispatch, makeStoreContents} from "../test_utils/test_factories";
+import {OTHER, PhotoAreaPurposeType} from "../../source/models/enums/purpose_type";
+import {SUPERADMIN} from "../../source/models/enums/user_role";
 import Config from "../../source/config";
 import Http from "../../source/utilities/http";
 
@@ -241,6 +241,36 @@ describe("FileInformationApi", () => {
         ).catch(() => {}).then(() => {
           expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({});
         });
+      });
+    });
+  });
+
+
+  describe("#savePhotoAreaFile", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/files`, 200);
+    });
+
+    it("makes a call to the scan dataset files endpoint", () => {
+      FileInformationApi.savePhotoAreaFile({
+          projectId: "some-project-id",
+          photoAreaId: 1
+        },
+        new ApiCloudFile({
+          purposeType: PhotoAreaPurposeType.THREE_SIXTY_PHOTO,
+          url: "some-download-url.com",
+          lastModified: moment("2018-04-01")
+        }),
+        user,
+      );
+      const request = fetchMock.lastCall();
+
+      expect(request["0"]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/files`);
+      expect(JSON.parse(request["1"].body as string)).to.deep.eq({
+        createdAt: null,
+        purposeType: "THREE_SIXTY_PHOTO",
+        url: "some-download-url.com",
+        lastModified: DateConverter.dateToInstant(moment("2018-04-01"))
       });
     });
   });
