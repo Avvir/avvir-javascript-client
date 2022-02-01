@@ -1,5 +1,5 @@
 export {DeviationStatus} from "./deviation_status"
-export {InspectionMode,ApiInspectionModes,AllInspectionModes} from "./inspection_modes";
+export {ApiInspectionModes} from "./inspection_modes";
 export {EventType} from "./event_type";
 export {NotificationLevel} from "./notification_level";
 export {PhotoProjectionType} from "./photo_projection_type";
