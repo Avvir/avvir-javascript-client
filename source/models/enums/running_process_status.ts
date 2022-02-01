@@ -1,6 +1,8 @@
 export enum RunningProcessStatus {
   RUNNING = "RUNNING",
-  COMPLETED = "COMPLETED"
+  COMPLETED = "COMPLETED",
+  UNKNOWN = "UNKNOWN",
+  FAILED = "FAILED"
 }
 
 export default RunningProcessStatus;
