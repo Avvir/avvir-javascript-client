@@ -1,51 +1,69 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-version: 2
-jobs:
-  build:
+version: 2.1
+
+executors:
+  docker-node:
     docker:
-      # specify the version you desire here
       - image: circleci/node
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
     working_directory: ~/repo
 
+commands:
+  install-dependencies:
     steps:
       - checkout
-
-      # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "yarn.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: sudo apt install xserver-xorg-dev libxi-dev libxext-dev libpango1.0-dev libcairo2-dev
-      - run: yarn install
-
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-
+      - run:
+          name: Install apt dependencies
+          command: sudo apt install xserver-xorg-dev libxi-dev libxext-dev libpango1.0-dev libcairo2-dev
+      - run:
+          name: Install yarn dependencies
+          command: yarn install
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
 
-      # run tests!
+jobs:
+  test:
+    executor: docker-node
+    steps:
+      - install-dependencies
       - run:
+          name: Run Tests
           command: yarn test
+      - when:
+          condition:
+            not:
+              # skip testing that building works since we're going to publish anyway
+              matches: {pattern: "^v[0-9]+", value: << pipeline.git.tag >>}
+          steps:
+            - run: yarn build
+
+  publish:
+    executor: docker-node
+    steps:
+      - install-dependencies
       - run:
-          command: yarn build-web
-      - run:
-          command: yarn build-esm
+          name: Publish to NPM with git tag version
+          command: |
+            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+            npm --no-git-tag-version version ${CIRCLE_TAG:1}
+            npm publish
+
 workflows:
-  version: 2
   commit:
     jobs:
-      - build
+      - test
+      - publish:
+          requires:
+            - test
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v[0-9]+(\.[0-9]+)*$/
   nightly:
     triggers:
       - schedule:
@@ -55,6 +73,4 @@ workflows:
               only:
                 - master
     jobs:
-      - build
-
-
+      - test
