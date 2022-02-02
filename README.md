@@ -573,12 +573,21 @@ Avvir.api.auth.login(username, password).then(async (user)=>{
 })
 ```
 
-
-
 ## Contributing
 
 Read our [contributing guide](./CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and
 improvements, and how to build and test your changes to avvir.
+
+## Publishing to NPM
+
+To publish to NPM (assuming you have the permission to create git tags), run the publish script:
+```shell
+./scripts/publish.js
+```
+
+The script will stash any uncommitted changes, switch to the master branch, and push a git tag to the repository.
+This will trigger Circle CI to run a job that will publish to the NPM registry if the tests pass.
+The version in package.json is intentionally set to 0.0.0 because the version is controlled by the most recent git tag version.
 
 ## Api Reference
 
