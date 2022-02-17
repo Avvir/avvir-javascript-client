@@ -59,8 +59,12 @@ export default class ElementApi {
 
   static createElements({ projectId, floorId }: AssociationIds,
                         elements: DetailedElement<any>[],
+                        incrementalUpdateSkipDelete: boolean,
                         user: User): Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements`;
+    if (incrementalUpdateSkipDelete) {
+      url += "?incrementalUpdateSkipDelete=true";
+    }
     return Http.post(url, user, elements);
   }
 
