@@ -1,7 +1,8 @@
 import moment from "moment";
 import DateConverter from "../converters/date_converter";
+import {DateLike} from "type_aliases";
 
-export function addInstantGetterAndSetterToApiModel(modelInstance, propertyName) {
+export function addInstantGetterAndSetterToApiModel(modelInstance, propertyName, initialValue?: DateLike) {
   let dateVal;
   Object.defineProperty(modelInstance, propertyName, {
     get() {
@@ -18,6 +19,10 @@ export function addInstantGetterAndSetterToApiModel(modelInstance, propertyName)
     },
     enumerable: true
   });
-};
+
+  if (initialValue) {
+    modelInstance[propertyName] = initialValue;
+  }
+}
 
 export default addInstantGetterAndSetterToApiModel;
