@@ -5,16 +5,19 @@ import addReadOnlyPropertiesToModel from "../../../mixins/add_read_only_properti
 import ApiPhotoLocation from "../../api/api_photo_location";
 import Matrix4Converter from "../../../converters/matrix_4_converter";
 import PhotoProjectionType from "../../enums/photo_projection_type";
-import {Matrix4Like, Modify, Vector2Like} from "type_aliases";
+import {DateLike, Matrix4Like, Modify, Vector2Like} from "type_aliases";
 import ApiMatrix4 from "../../api/api_matrix_4";
 import {PhotoRotationType} from "../../enums";
 import {Location3d} from "./location_3d";
 import {ApiPhotoLocationProperties} from "../../api";
+import addInstantGetterAndSetterToApiModel from "../../../mixins/add_instant_getter_and_setter_to_api_model";
 
 export interface PhotoLocationArgument extends Partial<Modify<PhotoLocation, {
   cameraWorldMatrix?: Matrix4Like,
   minimapCoordinates?: Vector2Like,
-  bimLocation?: ApiPhotoLocationProperties
+  bimLocation?: ApiPhotoLocationProperties,
+  createdAt?: DateLike,
+  updatedAt?: DateLike
 }>> { }
 
 export class PhotoLocation {
@@ -29,7 +32,9 @@ export class PhotoLocation {
                 rotationType,
                 cameraWorldMatrix,
                 yawOffset,
-                bimLocation
+                bimLocation,
+    createdAt,
+    updatedAt
               }: PhotoLocationArgument = {}) {
     addReadOnlyPropertiesToModel(this, {id, photoAreaId, photoSessionId, fileId});
     if (minimapCoordinates) {
@@ -65,6 +70,9 @@ export class PhotoLocation {
       let orientation = new Quaternion(bimLocation.orientation.a, bimLocation.orientation.b, bimLocation.orientation.c, bimLocation.orientation.d)
       this.bimLocation = new Location3d(bimLocation.id, position, orientation);
     }
+
+    addInstantGetterAndSetterToApiModel(this, "createdAt", createdAt);
+    addInstantGetterAndSetterToApiModel(this, "updatedAt", updatedAt);
   }
 
   readonly id: number;

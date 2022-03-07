@@ -44,6 +44,14 @@ export default class PhotoAreaApi {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/photo-locations/${photoLocationId}/bim`;
     return Http.patch(url, user, coordinates);
   }
+
+  static updatePhotoLocations({ projectId, photoAreaId }: AssociationIds,
+                              locations: ApiPhotoLocation[],
+                              user: User): Promise<ApiPhotoLocation[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/photo-areas/${photoAreaId}/locations`;
+    return Http.put(url, user, locations);
+  }
+
 }
 
 makeErrorsPretty(PhotoAreaApi);

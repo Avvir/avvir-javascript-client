@@ -28,7 +28,7 @@ describe("OrganizationApi", () => {
     });
 
     it("makes an authenticated call to the endpoint", () => {
-      OrganizationApi.createOrganization({ name: "Some Organization" }, user);
+      OrganizationApi.createOrganization({firebaseId: "", firebaseProjectIds: undefined, id: 0, name: "Some Organization" }, user);
 
       const fetchCall = fetchMock.lastCall();
       const lastFetchOpts = fetchMock.lastOptions();
