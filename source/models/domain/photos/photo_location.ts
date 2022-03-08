@@ -98,5 +98,3 @@ export class PhotoLocation {
     });
   };
 }
-
-export default PhotoLocation;
