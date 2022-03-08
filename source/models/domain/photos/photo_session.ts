@@ -5,14 +5,10 @@ import addDateGetterAndSetterToDomainModel from "../../../mixins/add_date_getter
 export class PhotoSession {
   constructor({ id, photoAreaId, sessionDate }: ApiPhotoSessionArgs = {}) {
     addReadOnlyPropertiesToModel(this, { id, photoAreaId });
-    addDateGetterAndSetterToDomainModel(this, "sessionDate");
-    // @ts-ignore
-    this.sessionDate = sessionDate;
+    addDateGetterAndSetterToDomainModel(this, "sessionDate", sessionDate);
   }
 
   readonly id: number;
   readonly photoAreaId: number;
   readonly sessionDate: Date;
 }
-
-export default PhotoSession;

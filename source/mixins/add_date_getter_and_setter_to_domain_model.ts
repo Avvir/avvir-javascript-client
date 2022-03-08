@@ -1,7 +1,8 @@
 import moment from "moment";
 import DateConverter from "../converters/date_converter";
+import {DateLike} from "type_aliases";
 
-export function addDateGetterAndSetterToDomainModel(target: Object, propertyName: string) {
+export function addDateGetterAndSetterToDomainModel(target: Object, propertyName: string, initialValue?: DateLike) {
   let dateVal;
   Object.defineProperty(target, propertyName, {
     get() {
@@ -20,6 +21,10 @@ export function addDateGetterAndSetterToDomainModel(target: Object, propertyName
     },
     enumerable: true
   });
+
+  if (initialValue) {
+    target[propertyName] = initialValue;
+  }
 }
 
 export default addDateGetterAndSetterToDomainModel;
