@@ -1,4 +1,6 @@
 export {ArgoMetadata, ApiArgoResponse} from "./api_argo_response";
+export {ApiComment} from "./api_comment";
+export {ApiCommentThread} from "./api_comment_thread";
 export {ApiCloudFileArgument, ApiCloudFile} from "./api_cloud_file";
 export {ApiConstructionGrid} from "./api_construction_grid";
 export {ApiCreateInvitationForm} from "./api_create_invitation_form";
