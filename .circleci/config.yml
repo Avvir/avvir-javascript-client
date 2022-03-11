@@ -3,7 +3,7 @@ version: 2.1
 executors:
   docker-node:
     docker:
-      - image: circleci/node
+      - image: cimg/node:16.14.0
     working_directory: ~/repo
 
 commands:
@@ -12,18 +12,15 @@ commands:
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "yarn.lock" }}
-            - v1-dependencies-
-      - run:
-          name: Install apt dependencies
-          command: sudo apt install xserver-xorg-dev libxi-dev libxext-dev libpango1.0-dev libcairo2-dev
+            - v2-dependencies-{{ checksum "yarn.lock" }}
+            - v2-dependencies-
       - run:
           name: Install yarn dependencies
-          command: yarn install
+          command: yarn install --frozen-lockfile
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "yarn.lock" }}
+          key: v2-dependencies-{{ checksum "yarn.lock" }}
 
 jobs:
   test:

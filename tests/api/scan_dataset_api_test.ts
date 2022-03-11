@@ -8,13 +8,15 @@ import DateConverter from "../../source/converters/date_converter";
 import ScanDatasetApi from "../../source/api/scan_dataset_api";
 import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
 import {makeStoreContents} from "../test_utils/test_factories";
-import {SUPERADMIN, USER} from "../../source/models/enums/user_role";
-import {User} from "../../source";
+import {SUPERADMIN, USER, UserRole} from "../../source/models/enums/user_role";
+import {ApiUser, User} from "../../source";
 import Config from "../../source/config";
 import {sandbox} from "../test_utils/setup_tests";
 import Http from "../../source/utilities/http";
 import {describe} from "mocha";
 import View from "../../source/models/domain/view";
+import {ApiCommentThread} from "../../source/models/api/api_comment_thread";
+import {ApiComment} from "../../source/models/api/api_comment";
 
 describe("ScanDatasetApi", () => {
   let user: User, fakeGetState;
@@ -86,7 +88,8 @@ describe("ScanDatasetApi", () => {
     describe("when the call fails", () => {
       beforeEach(() => {
         fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets`,
-          {status: 500, body: {some: "body"},
+          {
+            status: 500, body: {some: "body"},
             headers: {"ContentType": "application/json"}
           },
           {overwriteRoutes: true});
@@ -164,9 +167,10 @@ describe("ScanDatasetApi", () => {
     describe("when the call fails", () => {
       beforeEach(() => {
         fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/analysis?enforceBuiltPersistence=false`,
-          {status: 500, body: {some: "body"},
+          {
+            status: 500, body: {some: "body"},
             headers: {"ContentType": "application/json"}
-            },
+          },
           {overwriteRoutes: true});
       });
 
@@ -182,8 +186,7 @@ describe("ScanDatasetApi", () => {
         )
           .catch(_.noop)
           .finally(() => {
-            expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({
-            });
+            expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({});
           });
       });
     });
@@ -392,17 +395,21 @@ describe("ScanDatasetApi", () => {
         floorId: "some-floor-id",
         scanDatasetId: "some-scan-id"
       }, null)
-          .then((scan) => {
-            expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/files/scan-representation`);
-            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
-            expect(scan.url).to.eq("https://example.com/some-scan.glb");
-          });
+        .then((scan) => {
+          expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/files/scan-representation`);
+          expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+          expect(scan.url).to.eq("https://example.com/some-scan.glb");
+        });
     });
 
     it("includes the authorization headers", () => {
-      ScanDatasetApi.getScanRepresentation({ projectId: "some-project-id", floorId: "some-floor-id", scanDatasetId: "some-scan-id" }, {
+      ScanDatasetApi.getScanRepresentation({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
@@ -413,32 +420,50 @@ describe("ScanDatasetApi", () => {
   describe("::createView", () => {
     beforeEach(() => {
       fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/views`,
-          new View({ id: 4, viewAttributes: { camera: { position: { x: 1, y: 1, z: 1 }, target: { x: 0, y: 0, z: 0 } } } }));
+        new View({id: 4, viewAttributes: {camera: {position: {x: 1, y: 1, z: 1}, target: {x: 0, y: 0, z: 0}}}}));
     });
 
     it("makes a call to the endpoint", () => {
-      ScanDatasetApi.createView({ projectId: "some-project-id", floorId: "some-floor-id", scanDatasetId: "some-scan-dataset-id" },
-          new View({ viewAttributes: { camera: { position: { x: 1, y: 1, z: 1 }, target: { x: 0, y: 0, z: 0 } } } }),
-          {
-            authType: GATEWAY_JWT,
-            gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-          });
+      ScanDatasetApi.createView({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        },
+        new View({viewAttributes: {camera: {position: {x: 1, y: 1, z: 1}, target: {x: 0, y: 0, z: 0}}}}),
+        {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
 
       const fetchCall = fetchMock.lastCall();
 
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/views`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
       expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
-      expect(fetchMock.lastOptions().body).to.eq(JSON.stringify(new View({ viewAttributes: { camera: { position: { x: 1, y: 1, z: 1 }, target: { x: 0, y: 0, z: 0 } } } })));
+      expect(fetchMock.lastOptions().body).to.eq(JSON.stringify(new View({
+        viewAttributes: {
+          camera: {
+            position: {
+              x: 1,
+              y: 1,
+              z: 1
+            }, target: {x: 0, y: 0, z: 0}
+          }
+        }
+      })));
     });
 
     it("sends the request with an Authorization header", () => {
-      ScanDatasetApi.createView({ projectId: "some-project-id", floorId: "some-floor-id", scanDatasetId: "some-scan-dataset-id" },
-          new View({ viewAttributes: { camera: { position: { x: 1, y: 1, z: 1 }, target: { x: 0, y: 0, z: 0 } } } }),
-          {
-            authType: GATEWAY_JWT,
-            gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-          });
+      ScanDatasetApi.createView({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        },
+        new View({viewAttributes: {camera: {position: {x: 1, y: 1, z: 1}, target: {x: 0, y: 0, z: 0}}}}),
+        {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
@@ -447,16 +472,20 @@ describe("ScanDatasetApi", () => {
   describe("::getView", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/views/4`,
-          new View({ id: 4, viewAttributes: { camera: { position: { x: 1, y: 1, z: 1 }, target: { x: 0, y: 0, z: 0 } } } }));
+        new View({id: 4, viewAttributes: {camera: {position: {x: 1, y: 1, z: 1}, target: {x: 0, y: 0, z: 0}}}}));
     });
 
     it("makes a call to the endpoint", () => {
-      ScanDatasetApi.getView({ projectId: "some-project-id", floorId: "some-floor-id", scanDatasetId: "some-scan-dataset-id" },
-          4,
-          {
-            authType: GATEWAY_JWT,
-            gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-          });
+      ScanDatasetApi.getView({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        },
+        4,
+        {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
 
       const fetchCall = fetchMock.lastCall();
 
@@ -465,12 +494,256 @@ describe("ScanDatasetApi", () => {
     });
 
     it("sends the request with an Authorization header", () => {
-      ScanDatasetApi.getView({ projectId: "some-project-id", floorId: "some-floor-id", scanDatasetId: "some-scan-dataset-id" },
-          4,
-          {
-            authType: GATEWAY_JWT,
-            gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-          });
+      ScanDatasetApi.getView({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        },
+        4,
+        {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
+  describe("::getCommentThreadsForView", () => {
+    let author = new ApiUser({email: "some-user@email.com", role: UserRole.USER});
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/comments/threads-for-view/4`,
+        new ApiCommentThread({
+          id: 4,
+          author,
+          viewId: 7,
+          comments: [new ApiComment({
+            id: 1,
+            author,
+            text: "some text",
+            commentThreadId: 4,
+            date: 12345689
+          })]
+        }));
+    });
+
+    it("makes a call to the endpoint", () => {
+      ScanDatasetApi.getCommentThreadsForView({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        },
+        4,
+        {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/comments/threads-for-view/4`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("sends the request with an Authorization header", () => {
+      ScanDatasetApi.getCommentThreadsForView({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        },
+        4,
+        {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
+  describe("::createCommentThread", () => {
+    let author;
+    let apiThread;
+    beforeEach(() => {
+      author = new ApiUser({email: "some-user@email.com", role: UserRole.USER});
+      apiThread = new ApiCommentThread({
+        author,
+        viewId: 7,
+        comments: [new ApiComment({
+          id: 1,
+          author,
+          text: "some text",
+          commentThreadId: 4,
+          date: 12345689
+        })]
+      });
+
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/comments/threads-for-view/4`,
+        new ApiCommentThread({
+          id: 4,
+          author,
+          viewId: 7,
+          comments: [new ApiComment({
+            id: 1,
+            author,
+            text: "some text",
+            commentThreadId: 4,
+            date: 12345689
+          })]
+        }));
+    });
+
+    it("makes a call to the endpoint", () => {
+      ScanDatasetApi.createCommentThread({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        },
+        4,
+        apiThread,
+        {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/comments/threads-for-view/4`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("sends the request with an Authorization header", () => {
+      ScanDatasetApi.createCommentThread({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        },
+        4,
+        apiThread,
+        {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
+  describe("::createCommentForThread", () => {
+    let author;
+    let apiComment;
+    beforeEach(() => {
+      author = new ApiUser({email: "some-user@email.com", role: UserRole.USER});
+      apiComment = new ApiComment({
+        id: 1,
+        author,
+        text: "some text",
+        commentThreadId: 4,
+        date: 12345689
+      });
+
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/comments/threads/4`,
+        new ApiComment({
+          id: 1,
+          author,
+          text: "some text",
+          commentThreadId: 4,
+          date: 12345689
+        })
+      );
+    });
+
+    it("makes a call to the endpoint", () => {
+      ScanDatasetApi.createCommentForThread({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        },
+        4,
+        apiComment,
+        {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/comments/threads/4`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("sends the request with an Authorization header", () => {
+      ScanDatasetApi.createCommentForThread({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        },
+        4,
+        apiComment,
+        {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
+  describe("::updateComment", () => {
+    let author;
+    let apiComment;
+    beforeEach(() => {
+      author = new ApiUser({email: "some-user@email.com", role: UserRole.USER});
+      apiComment = new ApiComment({
+        id: 1,
+        author,
+        text: "some updated text",
+        commentThreadId: 4,
+        date: 12345689
+      });
+
+      fetchMock.put(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/comments/1`,
+        new ApiComment({
+          id: 1,
+          author,
+          text: "some updated text",
+          commentThreadId: 4,
+          date: 12345689
+        })
+      );
+    });
+
+    it("makes a call to the endpoint", () => {
+      ScanDatasetApi.updateComment({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        },
+        1,
+        apiComment,
+        {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/comments/1`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("sends the request with an Authorization header", () => {
+      ScanDatasetApi.updateComment({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        },
+        1,
+        apiComment,
+        {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
