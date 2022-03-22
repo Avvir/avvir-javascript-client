@@ -1,18 +1,18 @@
 import firebase from "firebase";
-import { Action } from "redux";
-import { Matrix3, Matrix4 } from "three";
-import { Moment } from "moment";
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { Action as RoutingAction, Meta, Query } from "redux-first-router";
+import {Action} from "redux";
+import {Matrix3, Matrix4} from "three";
+import {Moment} from "moment";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {Action as RoutingAction, Meta, Query} from "redux-first-router";
 
 import ApiCloudFile from "../../models/api/api_cloud_file";
 import ApiMatrix4 from "../../models/api/api_matrix_4";
 import CloudFile from "../../models/domain/cloud_file";
 import ResponseError from "../../models/response_error";
-import { PurposeType } from "../../models/domain/enums/purpose_type";
-import { OutputParametricSelector } from "reselect";
-import { ReduxStore } from "../../services/reducers/root_reducer";
-import { SinonSpy, SinonStub } from "sinon";
+import {PurposeType} from "../../models/domain/enums/purpose_type";
+import {OutputParametricSelector} from "reselect";
+import {ReduxStore} from "../../services/reducers/root_reducer";
+import {SinonSpy, SinonStub} from "sinon";
 import ApiMatrix3 from "../../models/api/api_matrix_3";
 
 declare type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]>; } : T;
@@ -24,7 +24,7 @@ declare type Spied<T> = { [Key in keyof T]: T[Key] extends Function ? SinonSpy :
 declare type DateLike = Moment | Date | number | string | null;
 declare type Vector2Like = { x: number, y: number };
 declare type Vector3Like = { x: number, y: number, z: number };
-declare type Vector4Like = { a: number, b: number, c: number, d: number};
+declare type Vector4Like = { a: number, b: number, c: number, d: number };
 declare type Matrix3Like = ApiMatrix3 | Matrix3 | null
 declare type Matrix4Like = ApiMatrix4 | Matrix4 | null
 declare type ErrorLike = Error | ResponseError | { message: string }
@@ -54,7 +54,20 @@ declare interface AvvirThunkAction<Return, State, Actions extends Action> extend
   (dispatch: ThunkDispatch<State, unknown, Actions>, getState?: () => State): Return
 }
 
-declare type AssociationIds = { accountId?: string, projectId?: string, floorId?: string, scanDatasetId?: string, globalId?: string, photoAreaId?: number, photoSessionId?: number, photoLocationId?: number }
+declare type AssociationIds = {
+  accountId?: string,
+  commentThreadId?: number,
+  commentId?: number,
+  projectId?: string
+  floorId?: string
+  scanDatasetId?: string,
+  globalId?: string,
+  photoAreaId?: number,
+  photoSessionId?: number,
+  photoLocationId?: number,
+  viewId?: number
+};
+
 declare type FirebaseUploadTask = firebase.storage.UploadTask
 declare type FirebaseRef = firebase.storage.Reference
 declare type ByFirebaseId<Model> = { [firebaseId: string]: Model }
@@ -78,8 +91,8 @@ declare interface AvvirPayloadlessRoutingEvent<Type extends string> extends Rout
 
 declare interface AvvirRoutingEvent<Type extends string, Payload> extends AvvirPayloadlessRoutingEvent<Type> {
   payload: {
-             query?: Query
-           } & Payload
+    query?: Query
+  } & Payload
 }
 
 declare type AvvirErrorEvent<Type extends string, Err extends ErrorLike = ErrorLike> = AvvirEvent<Type, { error: Err }>
