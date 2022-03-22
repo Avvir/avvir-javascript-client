@@ -1,4 +1,5 @@
 import AuthApi from "./auth_api";
+import CommentApi from "./comment_api";
 import ElementApi from "./element_api";
 import FileInformationApi from "./file_information_api";
 import FloorApi from "./floor_api";
@@ -11,15 +12,16 @@ import WebGatewayApi from "./web_gateway_api";
 import UserApi from "./user_api";
 
 export {
-    AuthApi,
-    ElementApi,
-    FileInformationApi,
-    FloorApi,
-    OrganizationApi,
-    PhotoAreaApi,
-    PipelineApi,
-    ProjectApi,
-    ScanDatasetApi,
-    WebGatewayApi,
-    UserApi
+  AuthApi,
+  CommentApi,
+  ElementApi,
+  FileInformationApi,
+  FloorApi,
+  OrganizationApi,
+  PhotoAreaApi,
+  PipelineApi,
+  ProjectApi,
+  ScanDatasetApi,
+  WebGatewayApi,
+  UserApi
 };

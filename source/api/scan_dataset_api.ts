@@ -8,8 +8,6 @@ import ProgressReportForScanDataset from "../models/domain/progress/progress_rep
 import DetailedElement from "../models/domain/detailed_element";
 import View, {ViewParameter} from "../models/domain/view";
 import {DateConverter} from "../converters";
-import {ApiCommentThread} from "../models/api/api_comment_thread";
-import {ApiComment} from "../models/api/api_comment";
 
 export default class ScanDatasetApi {
   static listScanDatasetsForFloor({ projectId, floorId }: AssociationIds, user: User): Promise<ApiScanDataset[]> {
@@ -70,24 +68,9 @@ export default class ScanDatasetApi {
     return Http.get(url, user) as Promise<ViewParameter>;
   }
 
-  static getCommentThreadsForView({ projectId, floorId, scanDatasetId }: AssociationIds, viewId: number, user: User): Promise<ApiCommentThread[]> {
-    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/comments/threads-for-view/${viewId}`;
-    return Http.get(url, user) as unknown as Promise<ApiCommentThread[]>;
-  }
-
-  static createCommentThread({ projectId, floorId, scanDatasetId }: AssociationIds, viewId: number, body: ApiCommentThread, user: User): Promise<ApiCommentThread> {
-    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/comments/threads-for-view/${viewId}`;
-    return Http.post(url, user, body) as unknown as Promise<ApiCommentThread>;
-  }
-
-  static createCommentForThread({ projectId, floorId, scanDatasetId }: AssociationIds, threadId: number, body: ApiComment, user: User): Promise<ApiComment> {
-    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/comments/threads/${threadId}`;
-    return Http.post(url, user, body) as unknown as Promise<ApiComment>;
-  }
-
-  static updateComment({ projectId, floorId, scanDatasetId }: AssociationIds, commentId: number, body: ApiComment, user: User): Promise<ApiComment> {
-    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/comments/${commentId}`;
-    return Http.put(url, user, body) as unknown as Promise<ApiComment>;
+  static getViewsForScanDataset({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<ViewParameter[]> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/views`;
+    return Http.get(url, user) as unknown as Promise<ViewParameter[]>;
   }
 
   static getOrCreatePhotoSession({projectId, floorId, scanDatasetId}: AssociationIds, user: User): Promise<ApiPhotoSession> {

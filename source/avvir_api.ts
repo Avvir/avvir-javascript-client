@@ -1,5 +1,6 @@
 import AuthApi from "./api/auth_api";
 import Config from "./config";
+import CommentApi from "./api/comment_api";
 import ElementApi from "./api/element_api";
 import FileInformationApi from "./api/file_information_api";
 import FloorApi from "./api/floor_api";
@@ -14,6 +15,7 @@ import UserApi from "./api/user_api";
 export default {
     auth: AuthApi,
     config: Config,
+    comments: CommentApi,
     elements: ElementApi,
     files: FileInformationApi,
     floors: FloorApi,
