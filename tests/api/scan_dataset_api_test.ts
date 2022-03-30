@@ -12,10 +12,9 @@ import Config from "../../source/config";
 import {sandbox} from "../test_utils/setup_tests";
 import Http from "../../source/utilities/http";
 import {describe} from "mocha";
-import View from "../../source/models/domain/view";
+import ApiView from "../../source/models/api/api_view";
 
 describe("ScanDatasetApi", () => {
-  let user: User, fakeGetState;
   beforeEach(() => {
     fetchMock.resetBehavior();
     user = {authType: UserAuthType.FIREBASE, firebaseUser: {uid: "some-uid", role: UserRole.SUPERADMIN, idToken: "some-firebase.id.token"}};
@@ -23,6 +22,7 @@ describe("ScanDatasetApi", () => {
       user,
     });
   });
+  let user: User, fakeGetState;
 
   describe("#getScanDataset", () => {
     beforeEach(() => {
@@ -416,7 +416,7 @@ describe("ScanDatasetApi", () => {
   describe("::createView", () => {
     beforeEach(() => {
       fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/views`,
-        new View({id: 4, viewAttributes: {camera: {position: {x: 1, y: 1, z: 1}, target: {x: 0, y: 0, z: 0}}}}));
+        new ApiView({id: 4, viewAttributes: {camera: {position: {x: 1, y: 1, z: 1}, target: {x: 0, y: 0, z: 0}}}}));
     });
 
     it("makes a call to the endpoint", () => {
@@ -425,7 +425,7 @@ describe("ScanDatasetApi", () => {
           floorId: "some-floor-id",
           scanDatasetId: "some-scan-dataset-id"
         },
-        new View({viewAttributes: {camera: {position: {x: 1, y: 1, z: 1}, target: {x: 0, y: 0, z: 0}}}}),
+        new ApiView({viewAttributes: {camera: {position: {x: 1, y: 1, z: 1}, target: {x: 0, y: 0, z: 0}}}}),
         {
           authType: UserAuthType.GATEWAY_JWT,
           gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
@@ -436,7 +436,7 @@ describe("ScanDatasetApi", () => {
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/views`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
       expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
-      expect(fetchMock.lastOptions().body).to.eq(JSON.stringify(new View({
+      expect(fetchMock.lastOptions().body).to.eq(JSON.stringify(new ApiView({
         viewAttributes: {
           camera: {
             position: {
@@ -455,7 +455,7 @@ describe("ScanDatasetApi", () => {
           floorId: "some-floor-id",
           scanDatasetId: "some-scan-dataset-id"
         },
-        new View({viewAttributes: {camera: {position: {x: 1, y: 1, z: 1}, target: {x: 0, y: 0, z: 0}}}}),
+        new ApiView({viewAttributes: {camera: {position: {x: 1, y: 1, z: 1}, target: {x: 0, y: 0, z: 0}}}}),
         {
           authType: UserAuthType.GATEWAY_JWT,
           gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
@@ -468,7 +468,7 @@ describe("ScanDatasetApi", () => {
   describe("::getView", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/views/4`,
-        new View({id: 4, viewAttributes: {camera: {position: {x: 1, y: 1, z: 1}, target: {x: 0, y: 0, z: 0}}}}));
+        new ApiView({id: 4, viewAttributes: {camera: {position: {x: 1, y: 1, z: 1}, target: {x: 0, y: 0, z: 0}}}}));
     });
 
     it("makes a call to the endpoint", () => {
@@ -508,8 +508,8 @@ describe("ScanDatasetApi", () => {
   describe("::getViewsForScanDataset", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/views`, [
-        new View({id: 4, viewAttributes: {camera: {position: {x: 1, y: 1, z: 1}, target: {x: 0, y: 0, z: 0}}}}),
-        new View({id: 5, viewAttributes: {camera: {position: {x: 1, y: 1, z: 1}, target: {x: 0, y: 0, z: 0}}}})
+        new ApiView({id: 4, viewAttributes: {camera: {position: {x: 1, y: 1, z: 1}, target: {x: 0, y: 0, z: 0}}}}),
+        new ApiView({id: 5, viewAttributes: {camera: {position: {x: 1, y: 1, z: 1}, target: {x: 0, y: 0, z: 0}}}})
         ]
       );
     });
@@ -571,4 +571,26 @@ describe("ScanDatasetApi", () => {
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
   });
+
+
+  describe("#getNewElementsForScanDataset", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/new-elements`, 200);
+    });
+
+    it("makes an authenticated call to the scan dataset new elements endpoint", () => {
+      ScanDatasetApi.getNewElementsForScanDataset({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, user);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/new-elements`);
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+  });
+
 });

@@ -80,9 +80,9 @@ export class ViewAttributes {
   photoViewerDetails: PhotoViewerDetails;
 }
 
-export type ViewParameter = ModifyPartial<View, { viewAttributes: ViewAttributesParameter, createdAt: DateLike }>
+export type ViewParameter = ModifyPartial<ApiView, { viewAttributes: ViewAttributesParameter, createdAt: DateLike }>
 
-export class View {
+export class ApiView {
   constructor({
                 id,
                 firebaseProjectId,
@@ -113,4 +113,4 @@ export class View {
   commentThreadIds: number[];
 }
 
-export default View;
+export default ApiView;

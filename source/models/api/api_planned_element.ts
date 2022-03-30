@@ -1,33 +1,52 @@
-import { UniformatId } from "uniformat";
+import {UniformatId} from "uniformat";
 
 export class ApiPlannedElement {
-  constructor({ globalId, name, ifcType, uniformat, masterformat, itemId, discipline, primaryUnitOfMeasurement, primaryMeasurement, navisworksGuid, floorSpan, subcontractorId }: Partial<ApiPlannedElement> = {}) {
+  constructor({
+                globalId,
+                name,
+                ifcType,
+                uniformat,
+                masterformat,
+                revitCategory,
+                revitFamily,
+                revitType,
+                itemId,
+                discipline,
+                primaryUnitOfMeasurement,
+                primaryMeasurement,
+                navisworksGuid,
+                issueId
+              }: Partial<ApiPlannedElement> = {}) {
     this.globalId = globalId;
     this.name = name;
     this.ifcType = ifcType;
     this.uniformat = uniformat;
     this.masterformat = masterformat;
+    this.revitCategory = revitCategory;
+    this.revitFamily = revitFamily;
+    this.revitType = revitType;
     this.itemId = itemId;
     this.discipline = discipline;
     this.primaryUnitOfMeasurement = primaryUnitOfMeasurement;
     this.primaryMeasurement = primaryMeasurement;
     this.navisworksGuid = navisworksGuid;
-    this.floorSpan = floorSpan;
-    this.subcontractorId = subcontractorId;
+    this.issueId = issueId;
   }
 
-  globalId: string;
   name?: string;
+  globalId: string;
+  itemId?: string | null;
   ifcType?: string;
+  discipline?: string;
   uniformat?: UniformatId;
   masterformat?: string;
-  itemId?: string | null;
-  discipline?: string;
+  revitFamily?: string;
+  revitType?: string;
+  revitCategory?: string;
   primaryUnitOfMeasurement?: string;
   primaryMeasurement?: number;
   navisworksGuid?: string;
-  floorSpan?: number;
-  subcontractorId?: number;
+  issueId?: number;
 }
 
 export default ApiPlannedElement;

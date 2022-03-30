@@ -1,11 +1,11 @@
 import { UniformatId } from "uniformat";
 
-export class ProgressCategory {
+export class ApiProgressCategory {
   uniformatId: UniformatId;
   total: number;
   built: number;
   label: string;
-  subCategories?: ProgressCategory[];
+  subCategories?: ApiProgressCategory[];
 }
 
-export default ProgressCategory;
+export default ApiProgressCategory;
