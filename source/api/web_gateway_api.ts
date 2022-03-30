@@ -7,7 +7,7 @@ import getAuthorizationHeaders, {BasicUser, User} from "../utilities/get_authori
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import {AssociationIds} from "type_aliases";
-import {UserAuthType, RunningProcess} from "../models";
+import {UserAuthType, ApiRunningProcess} from "../models";
 import buildFileName from "../utilities/build_file_name";
 import AuthApi from "./auth_api";
 import {httpGetHeaders} from "../utilities/request_headers";
@@ -207,7 +207,7 @@ export default class WebGatewayApi {
     return Http.post(url, user, actionForm);
   }
 
-  static checkRunningProcess(processId: number, user: User): Promise<RunningProcess> {
+  static checkRunningProcess(processId: number, user: User): Promise<ApiRunningProcess> {
     let url = `${Http.baseUrl()}/running-processes/${processId}`;
     return Http.get(url, user)
   }

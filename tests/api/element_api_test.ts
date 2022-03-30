@@ -1,15 +1,14 @@
 import fetchMock from "fetch-mock";
-import { expect } from "chai";
+import {expect} from "chai";
 import "../test_utils/setup_tests";
 
-import DetailedElement from "../../source/models/domain/detailed_element";
 import ElementApi from "../../source/api/element_api";
 import Http from "../../source/utilities/http";
-import { DETECTED, INCLUDED } from "../../source/models/enums/deviation_status";
-import { DEVIATED } from "../../source/models/enums/scan_label";
+import {DETECTED, DeviationStatus, INCLUDED} from "../../source/models/enums/deviation_status";
+import {DEVIATED, ApiBuiltStatus} from "../../source/models/enums/api_built_status";
 import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
-import { USER } from "../../source/models/enums/user_role";
-import ApiPlannedElement from "../../source/models/api/api_planned_element";
+import {USER} from "../../source/models/enums/user_role";
+import {ApiDetailedElement, ApiPlannedElement} from "../../source";
 
 describe("ElementApi", () => {
   describe("::updateDeviationStatus", () => {
@@ -66,15 +65,16 @@ describe("ElementApi", () => {
       }, {
         globalId: "some-element-id",
         scanResult: {
-          scanLabel: DEVIATED,
+          scanLabel: ApiBuiltStatus.DEVIATED,
           deviation: {
+            clashing: false,
             deviationVectorMeters: {
               x: 10,
               y: 0,
               z: 0.1
             },
             deviationMeters: 10,
-            status: DETECTED
+            status: DeviationStatus.DETECTED
           }
         }
       }, {
@@ -93,6 +93,7 @@ describe("ElementApi", () => {
         scanResult: {
           scanLabel: DEVIATED,
           deviation: {
+            clashing: false,
             deviationVectorMeters: {
               x: 10,
               y: 0,
@@ -111,7 +112,7 @@ describe("ElementApi", () => {
         floorId: "some-floor-id",
         scanDatasetId: "some-scan-id",
         globalId: "some-element-id"
-      }, {} as DetailedElement, {
+      }, {} as ApiDetailedElement, {
         authType: GATEWAY_JWT,
         gatewayUser: { idToken: "some-firebase.id.token", role: USER }
       }).then(() => {
@@ -134,15 +135,16 @@ describe("ElementApi", () => {
       }, [{
         globalId: "some-element-id",
         scanResult: {
-          scanLabel: DEVIATED,
+          scanLabel: ApiBuiltStatus.DEVIATED,
           deviation: {
+            clashing: false,
             deviationVectorMeters: {
               x: 10,
               y: 0,
               z: 0.1
             },
             deviationMeters: 10,
-            status: DETECTED
+            status: DeviationStatus.DETECTED
           }
         }
       }], {
@@ -161,6 +163,7 @@ describe("ElementApi", () => {
         scanResult: {
           scanLabel: DEVIATED,
           deviation: {
+            clashing: false,
             deviationVectorMeters: {
               x: 10,
               y: 0,
@@ -178,7 +181,7 @@ describe("ElementApi", () => {
         projectId: "some-project-id",
         floorId: "some-floor-id",
         scanDatasetId: "some-scan-id"
-      }, [{}] as DetailedElement[], {
+      }, [{}] as ApiDetailedElement[], {
         authType: GATEWAY_JWT,
         gatewayUser: { idToken: "some-firebase.id.token", role: USER }
       }).then(() => {

@@ -1,6 +1,7 @@
 import AvvirApi from "./avvir_api";
 
 export * from "./models";
+export * from "./mixins";
 
 export const Avvir = {
     api: AvvirApi

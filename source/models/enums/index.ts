@@ -8,7 +8,7 @@ export {PipelineName, Pipelines} from "./pipeline_types";
 export {ProjectPurposeType, FloorPurposeType, ScanDatasetPurposeType, PhotoAreaPurposeType, ProjectTypeKeys, FloorTypeKeys, ScanDatasetTypeKeys, PhotoAreaTypeKeys, PurposeTypeKeys, PurposeType, isPurposeType, UploadHistoryPurposeTypes, PurposeTypeMap, uploadHistoryPurposeTypes, floorPurposeTypes} from "./purpose_type";
 export {ProcessStatus} from "./process_status";
 export {RunningProcessStatus} from "./running_process_status";
-export {ScanLabel, ScanLabelValues, ApiScanLabels} from "./scan_label";
+export {ApiBuiltStatus} from "./api_built_status";
 export {SystemOfMeasurement} from "./system_of_measurement";
 export {UploaderStatus} from "./uploader_status";
 export {UserAuthType} from "./user_auth_type";
