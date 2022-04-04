@@ -15,7 +15,8 @@ export class ApiPlannedElement {
                 primaryUnitOfMeasurement,
                 primaryMeasurement,
                 navisworksGuid,
-                issueId
+                issueId,
+                excludeFromAnalysis
               }: Partial<ApiPlannedElement> = {}) {
     this.globalId = globalId;
     this.name = name;
@@ -31,6 +32,7 @@ export class ApiPlannedElement {
     this.primaryMeasurement = primaryMeasurement;
     this.navisworksGuid = navisworksGuid;
     this.issueId = issueId;
+    this.excludeFromAnalysis = excludeFromAnalysis;
   }
 
   name?: string;
@@ -47,6 +49,7 @@ export class ApiPlannedElement {
   primaryMeasurement?: number;
   navisworksGuid?: string;
   issueId?: number;
+  excludeFromAnalysis?: boolean;
 }
 
 export default ApiPlannedElement;
