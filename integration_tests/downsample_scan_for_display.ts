@@ -26,11 +26,11 @@ describe("Process an associated scan", () => {
       login = AuthApi.login(email, password);
     });
 
-    it("can downsample scan for display", () => {
+    it("can ingest scan for display", () => {
       // this.timeout(0)
       login.then((user) => {
         let pipeline: ApiPipelineArgument = new ApiPipeline({
-          name: "downsample-scan",
+          name: "ingest-scan",
           firebaseProjectId: projectId,
           firebaseFloorId: floorId,
           firebaseScanDatasetId: scanDatasetId

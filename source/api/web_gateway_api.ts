@@ -169,6 +169,7 @@ export default class WebGatewayApi {
     return Http.get(url, user);
   }
 
+  /** @deprecated **/
   static downsampleScan({projectId, floorId, scanDatasetId}: AssociationIds, user: User): Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/downsample-scan`;
     return Http.post(url, user, null);

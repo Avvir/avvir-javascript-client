@@ -32,7 +32,9 @@ export enum ScanDatasetPurposeType {
   PREPROCESSED_SCAN_E57 = "preprocessedScanE57",
   INCLUDED_BIM_IFC = "includedBimIfc",
   POTREE = "potree",
+  /** @deprecated use ingest scan instead*/
   DOWNSAMPLED_SCAN = "downsampledScan",
+  INGESTED_SCAN = "ingestedScan",
   ELEMENT_SNAPSHOT = "elementSnapshot",
   SITE_CUBE_PHOTO = "siteCubePhoto"
 }
@@ -68,6 +70,7 @@ export type ScanDatasetTypeKeys = "OTHER"
     | "INCLUDED_BIM_IFC"
     | "POTREE"
     | "DOWNSAMPLED_SCAN"
+    | "INGESTED_SCAN"
     | "ELEMENT_SNAPSHOT"
     | "SITE_CUBE_PHOTO"
 export type PhotoAreaTypeKeys = "OTHER"
@@ -96,7 +99,9 @@ export const PurposeTypeMap: ProjectTypeMap & Omit<FloorTypeMap, "OTHER"> & Omit
   PREPROCESSED_SCAN_E57: ScanDatasetPurposeType.PREPROCESSED_SCAN_E57,
   INCLUDED_BIM_IFC: ScanDatasetPurposeType.INCLUDED_BIM_IFC,
   POTREE: ScanDatasetPurposeType.POTREE,
+  /** @deprecated use ingest scan instead*/
   DOWNSAMPLED_SCAN: ScanDatasetPurposeType.DOWNSAMPLED_SCAN,
+  INGESTED_SCAN: ScanDatasetPurposeType.INGESTED_SCAN,
   ELEMENT_SNAPSHOT: ScanDatasetPurposeType.ELEMENT_SNAPSHOT,
   SITE_CUBE_PHOTO: ScanDatasetPurposeType.SITE_CUBE_PHOTO,
 
