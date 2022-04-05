@@ -1,4 +1,5 @@
 export type PipelineName = "downsample-scan" |
+  "ingest-scan" |
   "convert-ifc-and-process-scans" |
   "generate-ifc" |
   "create-and-process-svf" |
@@ -13,6 +14,7 @@ export enum Pipelines {
   INGEST_PROJECT_FILE = "ingest-project-file",
   PIPELINE_STEPS = "pipeline-steps",
   DOWNSAMPLE_SCAN = "downsample-scan",
+  INGEST_SCAN = "ingest-scan",
   CONVERT_IFC_AND_PROCESS_SCANS = "convert-ifc-and-process-scans",
   DOWNLOAD_AND_ZIP_PROJECT_FILES_FOLDER = "download-and-zip-project-files-folder",
   INGEST_EXTERNAL_PHOTO_PROJECT_DATA = "ingest-external-photo-project-data",
