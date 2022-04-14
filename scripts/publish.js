@@ -15,13 +15,7 @@ function toBumpedVersion(version, type) {
 }
 
 function getCurrentGitTag() {
-  return cp.execSync("git describe --tags --abbrev=0")
-    .toString()
-    .replace("\n", "");
-}
-
-function getCurrentRemoteGitTag() {
-  return cp.execSync("git describe origin --tags --abbrev=0")
+  return cp.execSync("git tag --list 'v*' --sort=version:refname | tail -1")
     .toString()
     .replace("\n", "");
 }
@@ -34,19 +28,18 @@ function pushCurrentGitTag(tag) {
   return cp.execSync(`git push origin ${tag}`);
 }
 
+cp.execSync("git fetch --tags");
+
+const currentTag = getCurrentGitTag();
 const bumpType = process.argv.length > 2 ? process.argv[2] : "patch";
-const newVersion = toBumpedVersion(getCurrentRemoteGitTag(), bumpType);
+const newVersion = toBumpedVersion(currentTag, bumpType);
 
 cp.execSync(`git stash push -m "Stashing changes to publish ${newVersion}"`);
 cp.execSync("git checkout master");
 cp.execSync("git pull -r");
 
-if (getCurrentGitTag() === newVersion) {
-  console.log(`Local tag ${newVersion} exists, skipping creation`);
-} else {
-  console.log(`Creating git tag: ${newVersion}`);
-  setCurrentGitTag(newVersion);
-}
+console.log(`Creating git tag: ${newVersion}`);
+setCurrentGitTag(newVersion);
 
 console.log(`Pushing git tag: ${newVersion}`);
 pushCurrentGitTag(newVersion);
