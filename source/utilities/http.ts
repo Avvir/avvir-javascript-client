@@ -6,14 +6,14 @@ import Config from "../config";
 export default class Http {
   static baseUrl = (): string => Config.getConfiguration().AVVIR_GATEWAY_URL;
 
-  static fetch(url, data) {
+  static fetch(url: RequestInfo, data) {
     if (Config.getConfiguration().logFetch) {
       console.log("Calling fetch with:", url, data);
     }
     return fetch(url, data);
   }
 
-  static get(url, user, contentType = "application/json") {
+  static get(url: RequestInfo, user: User, contentType = "application/json") {
     return Http.fetch(url, {
       method: "GET",
       headers: {
@@ -23,7 +23,7 @@ export default class Http {
     });
   }
 
-  static put(url, user, body, contentType = "application/json") {
+  static put(url: RequestInfo, user: User, body: any, contentType = "application/json") {
     return Http.fetch(url, {
       method: "PUT",
       headers: {
@@ -34,7 +34,7 @@ export default class Http {
     });
   }
 
-  static delete(url, user) {
+  static delete(url: RequestInfo, user: User) {
     return Http.fetch(url, {
       method: "DELETE",
       headers: {
@@ -44,7 +44,7 @@ export default class Http {
     });
   }
 
-  static post(url, user, body) {
+  static post(url: RequestInfo, user: User, body: any) {
     return Http.fetch(url, {
       method: "POST",
       headers: {
@@ -55,7 +55,7 @@ export default class Http {
     });
   }
 
-  static patch(url, user, body) {
+  static patch(url: RequestInfo, user: User, body: any) {
     return Http.fetch(url, {
       method: "PATCH",
       headers: {
