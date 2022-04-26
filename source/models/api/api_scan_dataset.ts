@@ -24,7 +24,8 @@ export class ApiScanDataset {
     name,
     coarseAlignmentMatrix,
     fineAlignmentMatrix,
-    scanDate
+    scanDate,
+    qaComplete,
   }: ApiScanDatasetArgument) {
     addInstantGetterAndSetterToApiModel(this, "scanDate");
     addReadOnlyPropertiesToModel(this, { id, firebaseId, firebaseFloorId, scanNumber });
@@ -74,6 +75,7 @@ export class ApiScanDataset {
     this.scanDate = scanDate;
     this.analysisCompleted = analysisCompleted;
     this.manualQcPresent = manualQcPresent;
+    this.qaComplete = qaComplete;
   }
 
   /**
@@ -108,7 +110,7 @@ export class ApiScanDataset {
   dataPresences?: { scanAnalysis?: boolean };
   notes: string | null = null;
   name: string | null = null;
-
+  qaComplete: Date | null = null;
 }
 
 export default ApiScanDataset;
