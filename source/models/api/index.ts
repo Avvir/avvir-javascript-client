@@ -32,3 +32,4 @@ export {DeprecatedApiPipeline} from "./deprecated_api_pipeline";
 export {ApiProgressCategory} from "./api_progress_category";
 export {ApiProgressScanDataset} from "./api_progress_scan_dataset";
 export {PhotoViewerDetails ,ViewCamera, ApiView, ViewAttributes, ViewParameter, ViewCameraParameter, ViewFilters, ViewTrades, DeviationTolerance} from "./api_view";
+export {ApiQueryResource} from "./api_query_resource";

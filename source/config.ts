@@ -4,8 +4,9 @@ let configuration: {[key: string]: any} = {logFetch: false};
 
 const addEnvironmentVariablesToConfiguration = () => {
   _.forEach(configuration, (value, varName) => {
-    if (process.env[varName] != null && process.env[varName] != '') {
-      configuration[varName] = process.env[varName];
+    const envValue = process.env[varName];
+    if (envValue && envValue != "") {
+      configuration[varName] = envValue;
     }
   });
 }
@@ -75,7 +76,8 @@ const Config = {
   useLocalConfiguration,
   getConfiguration,
   sharedErrorHandler,
-  setConfigurationForEnvironment
+  setConfigurationForEnvironment,
+  setConfigurationFromEnvironmentVariable
 }
 
 export default Config

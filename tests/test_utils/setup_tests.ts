@@ -5,7 +5,7 @@ import ChaiSpies from "chai-spies";
 import chaiAlmost from "chai-almost";
 import ChaiDatetime from "chai-datetime";
 import fetchMock from "fetch-mock";
-
+import Config from "../../source/config";
 import beVeryLike from "./chai_be_very_like";
 
 const chaiRoughly = require("chai-roughly");
@@ -26,6 +26,7 @@ export let sandbox: SinonSandbox;
 sandbox = sinon.createSandbox();
 
 beforeEach(() => {
+  Config.setConfigurationFromEnvironmentVariable();
   sandbox.restore();
 
   sandbox = sinon.createSandbox();
