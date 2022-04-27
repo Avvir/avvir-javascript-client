@@ -7,7 +7,7 @@ import getAuthorizationHeaders, {BasicUser, User} from "../utilities/get_authori
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import {AssociationIds} from "type_aliases";
-import {UserAuthType, ApiRunningProcess} from "../models";
+import {UserAuthType, ApiRunningProcess, ApiUserAction, UserActionType, ApiActionPayload} from "../models";
 import buildFileName from "../utilities/build_file_name";
 import AuthApi from "./auth_api";
 import {httpGetHeaders} from "../utilities/request_headers";
@@ -199,7 +199,7 @@ export default class WebGatewayApi {
     return Http.post(url, user, null);
   }
 
-  static recordUserActions(type, userActions, user: User): Promise<void> {
+  static recordUserActions(type: UserActionType, userActions: ApiActionPayload[], user: User): Promise<ApiUserAction[]> {
     let url = `${Http.baseUrl()}/user-actions`;
     let actionForm = {
       type,

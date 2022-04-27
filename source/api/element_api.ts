@@ -4,7 +4,7 @@ import {ApiPlannedElement} from "../models/api/api_planned_element";
 import Http from "../utilities/http";
 import DeviationStatus from "../models/enums/deviation_status";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import {ApiDetailedElement, ApiQueryResource, ApiRunningProcess} from "../models";
+import {ApiDetailedElement, ApiQueryResource, ApiRunningProcess, ApiUserAction} from "../models";
 
 export default class ElementApi {
   static getPlannedBuildingElements({projectId, floorId}: AssociationIds, user: User): Promise<ApiPlannedElement[]> {
@@ -105,6 +105,11 @@ export default class ElementApi {
       user,
       elements
     ) as unknown as Promise<ApiRunningProcess>;
+  }
+
+  static getUserActionsForElement({projectId, floorId, globalId}: AssociationIds, user: User): Promise<ApiUserAction[]> {
+    let url = `${Http.baseUrl()}/user-actions/projects/${projectId}/floors/${floorId}/element-history/${globalId}`;
+    return Http.get(url, user) as unknown as Promise<ApiUserAction[]>;
   }
 
 }

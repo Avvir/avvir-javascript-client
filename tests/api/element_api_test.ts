@@ -652,7 +652,6 @@ describe("ElementApi", () => {
     });
   });
 
-
   describe("#updatePlannedBuildingElements", () => {
     let user;
     beforeEach(() => {
@@ -699,4 +698,87 @@ describe("ElementApi", () => {
     });
 
   });
+
+
+  describe("::getUserActionsForElement", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/user-actions/projects/some-project-id/floors/some-floor-id/element-history/some-element-id`,
+        {
+          globalId: "some-element-id",
+          firebaseClientAcountId: "some-org-id",
+          firebaseProjectId: "some-project-id",
+          firebaseFloorId: "some-floor-id",
+          firebaseScanDatasetId: "some-scan-dataset-id",
+          photoAreaId: 345,
+          photoSessionId: 678,
+          photoLocationId: 980,
+          plannedBuildingElementId: 123,
+          behavioralData: {deviation: {x: 1, y: 1, z: 1}, cameraOrientation: null}
+        });
+    });
+
+    it("makes a request to the user actions for element endpoint", () => {
+      ElementApi.getUserActionsForElement({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        globalId: "some-element-id"
+      }, {
+        authType: GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+      });
+
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0])
+        .to
+        .eq(`${Http.baseUrl()}/user-actions/projects/some-project-id/floors/some-floor-id/element-history/some-element-id`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("returns the user actions for the element", () => {
+      return ElementApi.getUserActionsForElement({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        globalId: "some-element-id"
+      }, {
+        authType: GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+      })
+        .then((elementDetails) => {
+          expect(elementDetails).to.deep.eq({
+            globalId: "some-element-id",
+            firebaseClientAcountId: "some-org-id",
+            firebaseProjectId: "some-project-id",
+            firebaseFloorId: "some-floor-id",
+            firebaseScanDatasetId: "some-scan-dataset-id",
+            photoAreaId: 345,
+            photoSessionId: 678,
+            photoLocationId: 980,
+            plannedBuildingElementId: 123,
+            behavioralData: {deviation: {x: 1, y: 1, z: 1}, cameraOrientation: null}
+          });
+        });
+    });
+
+    describe("when the user is signed in", () => {
+      let user;
+      beforeEach(() => {
+        user = {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        };
+      });
+
+      it("authenticates the request", () => {
+        ElementApi.getUserActionsForElement({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          globalId: "some-element-id"
+        }, user);
+
+        const lastFetchOpts = fetchMock.lastOptions();
+        expect(lastFetchOpts.headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      });
+    });
+  });
+
 });
