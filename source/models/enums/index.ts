@@ -13,3 +13,4 @@ export {SystemOfMeasurement} from "./system_of_measurement";
 export {UploaderStatus} from "./uploader_status";
 export {UserAuthType} from "./user_auth_type";
 export {UserRole} from "./user_role";
+export {UserActionType} from "./user_action_type";
