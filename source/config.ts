@@ -11,6 +11,14 @@ const addEnvironmentVariablesToConfiguration = () => {
   });
 }
 
+const useQAConfiguration = () => {
+  configuration = {
+    AVVIR_GATEWAY_URL: "https://qa-api.avvir.io",
+    AVVIR_ENVIRONMENT: "qa"
+  }
+  addEnvironmentVariablesToConfiguration()
+}
+
 const useAcceptanceConfiguration = () => {
   configuration = {
     AVVIR_GATEWAY_URL: "https://acceptance-api.avvir.io",
@@ -54,6 +62,8 @@ const setConfigurationForEnvironment = (env) => {
     useLocalProductionConfiguration()
   } else if(env === 'local'){
     useLocalConfiguration()
+  } else if(env ==='qa') {
+    useQAConfiguration()
   } else {
     useProductionConfiguration()
   }
@@ -72,6 +82,7 @@ const getConfiguration = () => {
 const Config = {
   useAcceptanceConfiguration,
   useProductionConfiguration,
+  useQAConfiguration,
   useLocalProductionConfiguration,
   useLocalConfiguration,
   getConfiguration,
