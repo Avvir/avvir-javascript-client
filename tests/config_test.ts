@@ -55,6 +55,17 @@ describe("Config", () => {
       expect(conf["AVVIR_GATEWAY_URL"]).to.eq("http://some-url");
     });
 
+    it("has the correct values for qa", () => {
+      Config.setConfigurationForEnvironment("qa");
+      let conf = Config.getConfiguration();
+      expect(conf["AVVIR_GATEWAY_URL"]).to.eq("https://qa-api.avvir.io");
+      expect(conf["AVVIR_ENVIRONMENT"]).to.eq("qa");
+      process.env["AVVIR_GATEWAY_URL"] = "http://some-url";
+      Config.setConfigurationForEnvironment("qa");
+      conf = Config.getConfiguration();
+      expect(conf["AVVIR_GATEWAY_URL"]).to.eq("http://some-url");
+    });
+
     it("has the correct values for local", () => {
       Config.setConfigurationForEnvironment("local");
       let conf = Config.getConfiguration();
@@ -66,6 +77,7 @@ describe("Config", () => {
       // local built-in environment doesn't get overridden
       expect(conf["AVVIR_GATEWAY_URL"]).to.eq("http://localhost:8080");
     });
+
 
   });
 });
