@@ -56,6 +56,8 @@ async function main() {
 
     console.log(`Pushing git tag: ${newVersion}`);
     pushCurrentGitTag(newVersion);
+  } else {
+    console.log("Publishing to npm requires the new code to already be merged into master");
   }
 }
 
