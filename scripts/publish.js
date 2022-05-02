@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const cp = require("child_process");
+const readline = require("readline");
 
 function toBumpedVersion(version, type) {
   const regEx = /v(\d+)\.(\d+)\.(\d+)/;
@@ -28,18 +29,34 @@ function pushCurrentGitTag(tag) {
   return cp.execSync(`git push origin ${tag}`);
 }
 
-cp.execSync("git fetch --tags");
+async function main() {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
 
-const currentTag = getCurrentGitTag();
-const bumpType = process.argv.length > 2 ? process.argv[2] : "patch";
-const newVersion = toBumpedVersion(currentTag, bumpType);
+  const userResponse = await new Promise(resolve => rl.question("Have you merged your new code into master yet? (y/n) ", response => {
+    rl.close();
+    resolve(response);
+  }));
 
-cp.execSync(`git stash push -m "Stashing changes to publish ${newVersion}"`);
-cp.execSync("git checkout master");
-cp.execSync("git pull -r");
+  if (userResponse.toLowerCase() === "y" || userResponse.toLowerCase() === "yes") {
+    cp.execSync("git fetch --tags");
 
-console.log(`Creating git tag: ${newVersion}`);
-setCurrentGitTag(newVersion);
+    const currentTag = getCurrentGitTag();
+    const bumpType = process.argv.length > 2 ? process.argv[2] : "patch";
+    const newVersion = toBumpedVersion(currentTag, bumpType);
 
-console.log(`Pushing git tag: ${newVersion}`);
-pushCurrentGitTag(newVersion);
+    cp.execSync(`git stash push -m "Stashing changes to publish ${newVersion}"`);
+    cp.execSync("git checkout master");
+    cp.execSync("git pull -r");
+
+    console.log(`Creating git tag: ${newVersion}`);
+    setCurrentGitTag(newVersion);
+
+    console.log(`Pushing git tag: ${newVersion}`);
+    pushCurrentGitTag(newVersion);
+  }
+}
+
+main();
