@@ -63,7 +63,7 @@ declare type AssociationIds = {
   scanDatasetId?: string,
   globalId?: string,
   photoAreaId?: number,
-  photoSessionId?: number,
+  photoSessionId?: number | number[],
   photoLocationId?: number,
   viewId?: number
 };
