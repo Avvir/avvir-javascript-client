@@ -21,7 +21,7 @@ describe("PhotoAreaApi", () => {
         status: 200,
         body: {}
       });
-      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/locations?photoSessionId=2`, {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/locations?photoSessionId=2,3`, {
         status: 200,
         body: {}
       });
@@ -41,12 +41,12 @@ describe("PhotoAreaApi", () => {
       PhotoAreaApi.createPhotoLocations({
         projectId: "some-project-id",
         photoAreaId: 1,
-        photoSessionId: 2
+        photoSessionId: [2,3]
       }, [], user);
       const fetchCall = fetchMock.lastCall();
       const lastFetchOpts = fetchMock.lastOptions();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/locations?photoSessionId=2`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/locations?photoSessionId=2,3`);
       expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });

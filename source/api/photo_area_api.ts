@@ -1,4 +1,5 @@
 // @ts-nocheck
+import {isArray} from "underscore";
 import {AssociationIds} from "type_aliases";
 import {User} from "../utilities/get_authorization_headers";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
@@ -28,7 +29,11 @@ export default class PhotoAreaApi {
   static listPhotoLocations({ projectId, photoAreaId, photoSessionId }: AssociationIds, user: User): Promise<ApiPhotoLocation[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/photo-areas/${photoAreaId}/locations`;
     if (photoSessionId) {
-      url += `?photoSessionId=${photoSessionId}`;
+      if (isArray(photoSessionId)) {
+        url += `?photoSessionId=${photoSessionId.join(",")}`;
+      } else {
+        url += `?photoSessionId=${photoSessionId}`;
+      }
     }
     return Http.get(url, user);
   }
