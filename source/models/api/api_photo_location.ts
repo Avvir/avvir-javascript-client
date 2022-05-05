@@ -5,7 +5,11 @@ import ApiPhotoLocation3d from "./api_photo_location_3d";
 import {PhotoRotationType} from "../enums";
 import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
 
-export type ApiPhotoLocationArgs = ModifyPartial<ApiPhotoLocation, { createdAt?: DateLike, updatedAt?: DateLike }>;
+export type ApiPhotoLocationArgs = ModifyPartial<ApiPhotoLocation, {
+  createdAt?: DateLike,
+  updatedAt?: DateLike,
+  originalTimestamp?: DateLike
+}>;
 
 export class ApiPhotoLocation {
   constructor({
@@ -22,10 +26,12 @@ export class ApiPhotoLocation {
                 yawOffset,
                 rotationType,
                 createdAt,
-                updatedAt
+                updatedAt,
+                originalTimestamp
               }: ApiPhotoLocationArgs = {}) {
     addInstantGetterAndSetterToApiModel(this, "createdAt", createdAt);
     addInstantGetterAndSetterToApiModel(this, "updatedAt", updatedAt);
+    addInstantGetterAndSetterToApiModel(this, "originalTimestamp", originalTimestamp);
     this.id = id;
     this.photoAreaId = photoAreaId;
     this.photoSessionId = photoSessionId;
