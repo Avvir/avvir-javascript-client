@@ -1,5 +1,5 @@
 import "../test_utils/setup_tests";
-import {expect} from "chai";
+import { expect } from "chai";
 import fetchMock from "fetch-mock";
 import moment from "moment";
 
@@ -7,13 +7,10 @@ import ApiMasterformat from "../../source/models/api/api_masterformat";
 import ApiProjectCostAnalysisProgress from "../../source/models/api/api_project_cost_analysis_progress";
 import ApiProjectMasterformatProgress from "../../source/models/api/api_project_masterformat_progress";
 import DateConverter from "../../source/converters/date_converter";
-import ProjectApi from "../../source/api/project_api";
-import WebGatewayApi from "../../source/api/web_gateway_api";
-import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
-import {SUPERADMIN} from "../../source/models/enums/user_role";
-import {sandbox} from "../test_utils/setup_tests";
-import Config from "../../source/config";
 import Http from "../../source/utilities/http";
+import ProjectApi from "../../source/api/project_api";
+import { FIREBASE, GATEWAY_JWT } from "../../source/models/enums/user_auth_type";
+import { SUPERADMIN } from "../../source/models/enums/user_role";
 
 describe("ProjectApi", () => {
   let user;
@@ -177,15 +174,15 @@ describe("ProjectApi", () => {
           masterformatCode: "00 00 01",
           sequence: "100",
           name: "some-name",
-          description: "some-description",
+          componentDescription: "some-description",
           unitOfMeasure: "some-unit-of-measure",
-          unitCost: 100.1,
-          quantity: 0,
-          totalCost: 10000.24,
-          bimQuantity: 1,
-          reportedInstalled: 1,
-          installedQuantity: 1,
-          installedCost: 10000.24,
+          plannedUnitCost: 100.1,
+          plannedQuantity: 0,
+          plannedTotalCost: 10000.24,
+          modeledQuantity: 1,
+          reportedQuantity: 1,
+          scannedQuantity: 1,
+          scannedTotalCost: 10000.24,
           analysisDate: 0
         })]
       };
@@ -207,15 +204,15 @@ describe("ProjectApi", () => {
           masterformatCode: "00 00 01",
           sequence: "100",
           name: "some-name",
-          description: "some-description",
+          componentDescription: "some-description",
           unitOfMeasure: "some-unit-of-measure",
-          unitCost: 100.1,
-          quantity: 0,
-          totalCost: 10000.24,
-          bimQuantity: 1,
-          reportedInstalled: 1,
-          installedQuantity: 1,
-          installedCost: 10000.24,
+          plannedUnitCost: 100.1,
+          plannedQuantity: 0,
+          plannedTotalCost: 10000.24,
+          modeledQuantity: 1,
+          reportedQuantity: 1,
+          scannedQuantity: 1,
+          scannedTotalCost: 10000.24
         }]
       });
     });
