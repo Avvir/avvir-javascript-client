@@ -572,6 +572,31 @@ describe("ScanDatasetApi", () => {
     });
   });
 
+  describe("#updatePhotoSession", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/photo-session/123`, {
+        status: 200,
+        body: {
+          sessionDate: 1234567
+        }
+      });
+    });
+
+    it("makes an authenticated call to the update photo session endpoint", () => {
+      ScanDatasetApi.updatePhotoSession({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, {id: 123, photoAreaId: 111, sessionDate: 1234567 }, user);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/photo-session/123`);
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+  });
+
 
   describe("#getNewElementsForScanDataset", () => {
     beforeEach(() => {
