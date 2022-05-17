@@ -121,6 +121,16 @@ export default class ScanDatasetApi {
     return Http.post(url, user, null) as unknown as Promise<ApiPhotoSession>;
   }
 
+  static updatePhotoSession({
+                              projectId,
+                              floorId,
+                              scanDatasetId
+                            }: AssociationIds, { id, photoAreaId, sessionDate }:ApiPhotoSession, user: User): Promise<ApiPhotoSession> {
+
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/photo-session/${id}`;
+    return Http.post(url, user, {sessionDate}) as unknown as Promise<ApiPhotoSession>;
+  }
+
 }
 
 makeErrorsPretty(ScanDatasetApi);
