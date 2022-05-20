@@ -2,7 +2,7 @@ import ApiUser from "./api_user";
 import {ApiComment} from "./api_comment";
 
 export class ApiCommentThread {
-  constructor({id, author, viewId, comments, projectId, floorId, scanDatasetId}: Partial<ApiCommentThread> = {}) {
+  constructor({id, author, viewId, comments, projectId, floorId, scanDatasetId, wbsCode}: Partial<ApiCommentThread> = {}) {
     this.id = id;
     this.author = author;
     this.viewId = viewId;
@@ -10,6 +10,7 @@ export class ApiCommentThread {
     this.projectId = projectId;
     this.floorId = floorId;
     this.scanDatasetId = scanDatasetId;
+    this.wbsCode = wbsCode;
   }
 
   id: number;
@@ -19,4 +20,5 @@ export class ApiCommentThread {
   projectId: string;
   floorId?: string;
   scanDatasetId?: string;
+  wbsCode?: string;
 }
