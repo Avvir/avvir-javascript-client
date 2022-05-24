@@ -65,7 +65,8 @@ declare type AssociationIds = {
   photoAreaId?: number,
   photoSessionId?: number | number[],
   photoLocationId?: number,
-  viewId?: number
+  viewId?: number,
+  wbsCode?: string
 };
 
 declare type FirebaseUploadTask = firebase.storage.UploadTask
