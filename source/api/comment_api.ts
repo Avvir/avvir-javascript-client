@@ -4,9 +4,9 @@ import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import {ApiComment, ApiCommentThread} from "../models";
 
-export function toCommentThreadUrl({ projectId, floorId, scanDatasetId, viewId, wbsCode }: AssociationIds) {
+export function toCommentThreadUrl({ projectId, floorId, scanDatasetId, viewId, wbsCodes }: AssociationIds) {
   let url = `${Http.baseUrl()}/projects/${projectId}/comments/threads`;
-  if (floorId || scanDatasetId || viewId || wbsCode) {
+  if (floorId || scanDatasetId || viewId || wbsCodes) {
     const params = [];
     if (floorId) {
       params.push(`floorId=${floorId}`);
@@ -20,8 +20,8 @@ export function toCommentThreadUrl({ projectId, floorId, scanDatasetId, viewId, 
       params.push(`viewId=${viewId}`);
     }
 
-    if(wbsCode) {
-      params.push(`wbsCode=${wbsCode}`)
+    if(wbsCodes) {
+      params.push(`wbsCode=${wbsCodes.join(",")}`)
     }
     url += "?" + params.join("&");
   }
