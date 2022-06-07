@@ -21,7 +21,7 @@ export function toCommentThreadUrl({ projectId, floorId, scanDatasetId, viewId, 
     }
 
     if(wbsCodes) {
-      params.push(`wbsCode=${wbsCodes.join(",")}`)
+      params.push(`wbsCodes=${wbsCodes.join(",")}`)
     }
     url += "?" + params.join("&");
   }
