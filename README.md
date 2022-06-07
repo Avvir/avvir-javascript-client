@@ -8,34 +8,6 @@ Install the library by running:
 yarn install avvir
 ```
 
-## Publishing to NPM
-
-To publish to NPM (assuming you have the permission to create git tags), run the publish script:
-```shell
-./scripts/publish.js
-```
-
-The script will stash any uncommitted changes, switch to the master branch, and push a git tag to the repository.
-This will trigger Circle CI to run a job that will publish to the NPM registry if the tests pass.
-The version in package.json is intentionally set to 0.0.0 because the version is controlled by the most recent git tag version.
-
-## Testing Locally Before Publishing
-
-To publish the library locally (ie. on your machine only), run the following *one time* while in the base directory of this repo:
-```shell
-yarn link
-```
-
-
-Then, whenever you want to use your local version of this library in another project, run the following in the base directory of the other project:
-```shell
-yarn link avvir
-```
-
-To see any changes made locally in another project you'll need to rebuild this library each time by running:
-```shell
-yarn build
-```
 
 ### Definitions
 
