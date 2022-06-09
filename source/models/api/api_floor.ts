@@ -24,6 +24,7 @@ export class ApiFloor {
                 firebaseScanDatasetIds,
                 constructionGrid,
                 plannedElementCount,
+                plannedElementsExist,
                 scanDate,
                 photoAreaId,
                 offset,
@@ -88,6 +89,7 @@ export class ApiFloor {
     this.firebaseScanDatasetIds = firebaseScanDatasetIds || [];
     this.constructionGrid = constructionGrid || null;
     this.plannedElementCount = plannedElementCount || 0;
+    this.plannedElementsExist = plannedElementsExist || null;
     // @ts-ignore
     this.scanDate = scanDate || null;
     this.photoAreaId = photoAreaId;
@@ -137,6 +139,7 @@ export class ApiFloor {
 
   constructionGrid: ApiConstructionGrid | null = null;
   plannedElementCount: number | null = null;
+  plannedElementsExist: boolean | null = null;
   scanDate: number | null = null;
   readonly offset: Vector2Like = null;
   photoAreaId: number | null = null;
