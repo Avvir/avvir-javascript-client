@@ -671,6 +671,7 @@ AvvirApi.api.floors.getFloor(associationIds, user).then((response) => {
 - `String[]` firebaseScanDatasetIds
 - `ApiConstructionGrid | Null` constructionGrid
 - `Number | Null` plannedElementCount
+- `Boolean | Null` plannedElementsExist
 - `Number | Null` scanDate
 - _readonly_ `Vector2Like` offset
 - `Number | Null` photoAreaId
