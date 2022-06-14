@@ -1,3 +1,19 @@
+/*
+
+Preprocessing to do:
+    - Discard any masterformat keywords without keyword columns and discard (~ 6,400 records --> ~300 records)
+        These should be keyed intelligently somehow (makeMasterformatKeysAsCode())
+    - Get all project elements data into a list of objects.
+    - Iterate through each row of projectElementsData and see if any values matches masterformat keywords
+       - If so, add column to output; calculate score with existing function
+
+ Input: Freetext (30,000 queries) --> Output (Masterformat (one of ~300 tagged masterformats) + Confidence Score)
+ */
+
+
+
+
+
 
 import * as fs from 'fs';
 import * as path from 'path';
@@ -37,20 +53,29 @@ function timeout(func) {
 
 export default class AutoClassifier {
     masterformatKeywords: any[];
-    defaultProperties: any[];
+    masterformatKeywordsByCode: any;
+    columnsWeCareAbout: any[];
     projectElementsData: any[];
     hackResources: any;
 
     constructor(floorTsvFilename) {
         this.masterformatKeywords = [];
-        this.defaultProperties = [];
+        this.columnsWeCareAbout = [];
         this.projectElementsData = [];
+        this.masterformatKeywordsByCode = {};
         this.hackResources = {
             masterformatKeywords: __dirname + '/../../resources/masterformat-keywords.csv',
             defaultProperties: __dirname + '/../../resources/default-properties.csv',
             projectElementsData: __dirname + '/../../resources/project-elements-data.csv',
         }
     }
+
+    private makeMasterformatsByCode = () => {
+        this.masterformatKeywords.forEach( (row) => {
+            this.masterformatKeywordsByCode[row['Code']] = row;
+        });
+    }
+
     async loadCsvFile(filename, target) {
         return new Promise ((resolve, reject) => {
             fs.createReadStream(filename)
@@ -91,22 +116,24 @@ export default class AutoClassifier {
     };
 
     autoClassify() {
+        this.makeMasterformatsByCode();
         let t = timer("calculate scores");
+        // Project Elements Data == just the basic "PBE" information
         let i = 0, projectElementsDataRecordsLength = this.projectElementsData.length
         while (i < projectElementsDataRecordsLength) {
             const projectElementDataRecord = this.projectElementsData[i];
             const matchingCodes = [];
-            let j = 0, defaultPropertiesLength = this.defaultProperties.length;
-            while (j < defaultPropertiesLength) {
-                const propertyName = this.defaultProperties[j][DefaultPropertiesPropertyName];
+            // For Every Row in the "PBE", look at each of the columns called "default properties"
+            this.columnsWeCareAbout.forEach( (column) => {
+                const propertyName = column[DefaultPropertiesPropertyName];
                 // get the corresponding model element property
                 const elementPropertyValue = projectElementDataRecord[propertyName] ? projectElementDataRecord[propertyName].toLowerCase() : null;
 
-                if (elementPropertyValue && typeof (elementPropertyValue) === "string" && elementPropertyValue.length) {
-
-
+                if (elementPropertyValue)
                     // now search through MF records, which one has any keyword matching elementPropertyValue
                     // This should be rewritten as a hash lookup to run in O(1) not O(n)
+
+
                     let k = 0, masterFormatKeywordsRecordsLength = this.masterformatKeywords.length;
                     while (k < masterFormatKeywordsRecordsLength) {
                         const masterFormatKeywordsRecord = this.masterformatKeywords[k];
@@ -118,13 +145,18 @@ export default class AutoClassifier {
                             const keyword = masterFormatKeywordsRecord[masterFormatKeywordsKey].toLowerCase();
                             const masterFormatKeywordsWeight = masterFormatKeywordsWeights[l]; // TODO log if this doesn't match
                             const keywordWeight = masterFormatKeywordsRecord[masterFormatKeywordsWeight];
-                            if (keyword && typeof (keyword) === "string" && keyword.length && elementPropertyValue.indexOf(keyword) > -1) {
+                            if (
+                                    keyword &&
+                                    elementPropertyValue.indexOf(keyword) > -1 &&
+                                    this.masterformatKeywordsByCode.hasOwnProperty(keyword)
+                            ) {
                                 // increment the score by number of matches and their weight
                                 const weightedKeyword = {keyword: keyword, weight: keywordWeight};
-                                const matchingCode = matchingCodes.find(match => {
-                                    return match.code === masterFormatKeywordsRecordCode;
-                                });
-                                if (matchingCode) {
+                                // if matchingcode is in some array
+                                // const matchingCode = matchingCodes.find(match => {
+                                //     return match.code === masterFormatKeywordsRecordCode;
+                                // });
+                                // if (matchingCode) {
                                     const keywordFoundInProperties = matchingCode.keywordsFoundInProperties.find(keywordFound => {
                                         return keywordFound.keyword === keyword;
                                     });
@@ -132,7 +164,7 @@ export default class AutoClassifier {
                                         matchingCode.keywordsFoundInProperties.push(weightedKeyword);
                                         matchingCode.score = this.calculateScore(matchingCode.keywordsFoundInProperties);
                                     }
-                                } else {
+                            } else {
                                     const matchingCodeInitial = {
                                         id: masterFormatKeywordsRecord.id,
                                         code: masterFormatKeywordsRecordCode,
@@ -150,8 +182,7 @@ export default class AutoClassifier {
                         k++;
                     };
                     // console.log(codesWithKeywordsMatchingPropertyValue);
-                };
-                j++;
+            });
             };
             if (matchingCodes.length) {
                 console.log("Element: " + projectElementDataRecord.getCellValue("ItemName"));
