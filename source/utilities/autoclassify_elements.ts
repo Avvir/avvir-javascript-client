@@ -2,18 +2,43 @@ import {
     useBase,
     useRecords,
 } from '@airtable/blocks/ui';
+// const fs = require('fs')
+import * as csv from 'csv-parser';
+import * as fs from 'fs';
+import csvParser from "csv-parser";
+import path from "path";
+const csvParser = require("csv-parser/dist/esm");
 
+/*
+const csv = require('csv-parser')
+const fs = require('fs')
+const results = [];
+
+fs.createReadStream('data.csv')
+  .pipe(csv())
+  .on('data', (data) => results.push(data))
+  .on('end', () => {
+    console.log(results);
+    // [
+    //   { NAME: 'Daffy Duck', AGE: '24' },
+    //   { NAME: 'Bugs Bunny', AGE: '22' }
+    // ]
+  });
+ */
+
+// Lookup table <-- this doesn't change between floors
 const MasterFormatKeywordsTableName = "MasterFormat Keywords";
 const MasterFormatKeywordsTableViewWithKeywords = "with keywords";
 const masterFormatKeywordsKeys = ["Keyword 1", "Keyword 2", "Keyword 3", "Keyword 4", "Keyword 5"];
 const masterFormatKeywordsWeights = ["Weight 1", "Weight 2", "Weight 3", "Weight 4", "Weight 5"];
 
+// Source data for floor
 const DefaultPropertiesTableName = "Default Properties";
 const DefaultPropertiesPropertyName = "Property Name";
 const DefaultPropertiesPropertyPriority = "Priority";
-
 const ProjectCustomPropertiesTableName = "Project Custom Properties";
 
+// Output data
 const ProjectElementsDataTableName = "Project Elements Data";
 
 var timer = function (name) {
@@ -31,20 +56,45 @@ function timeout(func) {
     return new Promise(resolve => setTimeout(resolve, func));
 }
 
-function AutoClassifier() {
-    const base = useBase();
+export default class AutoClassifier {
+    masterformatKeywords: any[];
 
-    const defaultPropertiesTable = base.getTableByNameIfExists(DefaultPropertiesTableName);
-    const defaultPropertiesRecords = useRecords(defaultPropertiesTable);
+    constructor(floorTsvFilename) {
+        this.masterformatKeywords = [];
 
-    const masterFormatKeywordsTable = base.getTableByNameIfExists(MasterFormatKeywordsTableName);
-    const masterFormatKeywordsTableView = masterFormatKeywordsTable.getViewByNameIfExists(MasterFormatKeywordsTableViewWithKeywords);
-    const masterFormatKeywordsRecords = useRecords(masterFormatKeywordsTableView);
+        this.openFile().then(r => console.log(r[0]));
 
-    const projectElementsDataTable = base.getTableByNameIfExists(ProjectElementsDataTableName);
-    const projectElementsDataRecords = useRecords(projectElementsDataTable);
+            // .pipe(csvParser())
+            // .on('data', (data) => {
+            //     this.masterformatKeywords.push(data)
+            // })
+            // .on('end', () => {
+            //     console.log(this.masterformatKeywords[0]);
+            //     // [
+            //     //   { NAME: 'Daffy Duck', AGE: '24' },
+            //     //   { NAME: 'Bugs Bunny', AGE: '22' }
+            //     // ]
+            // });
 
-    function calculateScore(keywordsWithWeigths) {
+
+
+    }
+    // constructor:
+    //  loads masterformat keys & weights
+    //  loads actual properties data
+    // const base = useBase();
+    //
+    // const defaultPropertiesTable = base.getTableByNameIfExists(DefaultPropertiesTableName);
+    // const defaultPropertiesRecords = useRecords(defaultPropertiesTable);
+    //
+    // const masterFormatKeywordsTable = base.getTableByNameIfExists(MasterFormatKeywordsTableName);
+    // const masterFormatKeywordsTableView = masterFormatKeywordsTable.getViewByNameIfExists(MasterFormatKeywordsTableViewWithKeywords);
+    // const masterFormatKeywordsRecords = useRecords(masterFormatKeywordsTableView);
+    //
+    // const projectElementsDataTable = base.getTableByNameIfExists(ProjectElementsDataTableName);
+    // const projectElementsDataRecords = useRecords(projectElementsDataTable);
+
+    static calculateScore(keywordsWithWeigths) {
         let score = 0;
         let h = 0, keywordsWithWeightsLength = keywordsWithWeigths.length;
         while (h < keywordsWithWeightsLength) {
@@ -56,7 +106,7 @@ function AutoClassifier() {
         return score / masterFormatKeywordsKeys.length;
     };
 
-    function autoClassify() {
+    static autoClassify() {
         let t = timer("calculate scores");
         let i = 0, projectElementsDataRecordsLength = projectElementsDataRecords.length;
         while (i < projectElementsDataRecordsLength) {
@@ -162,5 +212,27 @@ function AutoClassifier() {
         t.stop();
         return;
     };
-}
 
+    private async openFile() {
+        let file = "../../resources/masterformat-keywords.csv"
+        let filehandle = null;
+        try {
+            filehandle = await open(__dirname + file, 'r+');
+            filehandle.createReadStream()
+                .pipe(csvParser())
+                .on('data', (data) => {
+                    this.masterformatKeywords.push(data)
+                })
+                .on('end', () => {
+                    console.log(this.masterformatKeywords[0]);
+                    // [
+                    //   { NAME: 'Daffy Duck', AGE: '24' },
+                    //   { NAME: 'Bugs Bunny', AGE: '22' }
+                    // ]
+                });
+        } finally {
+            await filehandle?.close();
+        }
+    }
+
+}
