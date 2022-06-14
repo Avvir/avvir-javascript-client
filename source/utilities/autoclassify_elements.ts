@@ -1,30 +1,9 @@
-import {
-    useBase,
-    useRecords,
-} from '@airtable/blocks/ui';
-// const fs = require('fs')
-import * as csv from 'csv-parser';
+
 import * as fs from 'fs';
-import csvParser from "csv-parser";
-import path from "path";
-const csvParser = require("csv-parser/dist/esm");
+import * as path from 'path';
+import * as csv from 'fast-csv';
 
-/*
-const csv = require('csv-parser')
-const fs = require('fs')
-const results = [];
 
-fs.createReadStream('data.csv')
-  .pipe(csv())
-  .on('data', (data) => results.push(data))
-  .on('end', () => {
-    console.log(results);
-    // [
-    //   { NAME: 'Daffy Duck', AGE: '24' },
-    //   { NAME: 'Bugs Bunny', AGE: '22' }
-    // ]
-  });
- */
 
 // Lookup table <-- this doesn't change between floors
 const MasterFormatKeywordsTableName = "MasterFormat Keywords";
@@ -61,8 +40,23 @@ export default class AutoClassifier {
 
     constructor(floorTsvFilename) {
         this.masterformatKeywords = [];
+    }
+    async loadMasterformatKeywords() {
+        return new Promise ((resolve, reject) => {
 
-        this.openFile().then(r => console.log(r[0]));
+            fs.createReadStream('/Users/sharonzhu/avvir/repos/avvir-javascript-client/resources/masterformat-keywords.csv')
+                .pipe(csv.parse({headers: true}))
+                .on('error', error => console.error(error))
+                .on('data', row => {
+                    this.masterformatKeywords.push(row);
+                    // console.log(row);
+                })
+                .on('end', (rowCount: number) => console.log(`Parsed ${rowCount} rows`))
+                .on('close', (event) => {
+                    resolve(this.masterformatKeywords);
+                })
+        });
+        // this.openFile().then(r => console.log(r[0]));
 
             // .pipe(csvParser())
             // .on('data', (data) => {
@@ -76,7 +70,7 @@ export default class AutoClassifier {
             //     // ]
             // });
 
-
+        // return Promise.resolve();
 
     }
     // constructor:

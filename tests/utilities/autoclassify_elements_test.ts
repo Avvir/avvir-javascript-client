@@ -4,9 +4,17 @@ import AutoClassifier from "../../source/utilities/autoclassify_elements";
 
 describe.only("AutoClassifier", () => {
     describe("#constructor", () => {
-        it("loads lookup table", ()=>{
-            let autoClassifier = new AutoClassifier("some-floor.csv");
-            expect(autoClassifier.masterformatKeywords).has.length(6742);
+        xit("loads lookup table", async (done) => {
+            // setTimeout(() => {
+                let autoClassifier = new AutoClassifier("some-floor.csv")
+                await autoClassifier.loadMasterformatKeywords(); // .then ((event) => {
+
+                    expect(autoClassifier.masterformatKeywords).has.length(1006742);
+                    console.log(autoClassifier)
+                    done();
+                // })
+
+            // }, 10000)
         });
         it('loads data from some file', function () {
 
