@@ -1,0 +1,22 @@
+﻿Property Name,Priority
+ItemName,High
+ElementName,High
+ElementType,High
+ElementCategory,High
+ElementFamily Name,High
+ElementSystem Classification,High
+CADmep+Service,High
+CADmep+Service Type,High
+ElementFabrication Service Name,High
+ElementSize,Low
+ElementNominal Diameter,Low
+ElementArea,Low
+CADmep+Area,Low
+ElementLength,Low
+CADmep+Length/Angle,Low
+AttributesLength,Low
+AutoCadLength,Low
+ElementWeight,Low
+Tekla QuantityWeight,Low
+CADmep+Weight,Low
+SDS2_GeneralMember_Net_Weight,Low
