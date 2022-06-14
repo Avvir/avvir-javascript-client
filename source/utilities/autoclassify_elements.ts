@@ -37,45 +37,35 @@ function timeout(func) {
 
 export default class AutoClassifier {
     masterformatKeywords: any[];
+    defaultProperties: any[];
+    projectElementsData: any[];
+    hackResources: any;
 
     constructor(floorTsvFilename) {
         this.masterformatKeywords = [];
+        this.defaultProperties = [];
+        this.projectElementsData = [];
+        this.hackResources = {
+            masterformatKeywords: __dirname + '/../../resources/masterformat-keywords.csv',
+            defaultProperties: __dirname + '/../../resources/default-properties.csv',
+            projectElementsData: __dirname + '/../../resources/project-elements-data.csv',
+        }
     }
-    async loadMasterformatKeywords() {
+    async loadCsvFile(filename, target) {
         return new Promise ((resolve, reject) => {
-
-            fs.createReadStream('/Users/sharonzhu/avvir/repos/avvir-javascript-client/resources/masterformat-keywords.csv')
+            fs.createReadStream(filename)
                 .pipe(csv.parse({headers: true}))
                 .on('error', error => console.error(error))
                 .on('data', row => {
-                    this.masterformatKeywords.push(row);
+                    target.push(row);
                     // console.log(row);
                 })
                 .on('end', (rowCount: number) => console.log(`Parsed ${rowCount} rows`))
                 .on('close', (event) => {
-                    resolve(this.masterformatKeywords);
+                    resolve(target);
                 })
         });
-        // this.openFile().then(r => console.log(r[0]));
-
-            // .pipe(csvParser())
-            // .on('data', (data) => {
-            //     this.masterformatKeywords.push(data)
-            // })
-            // .on('end', () => {
-            //     console.log(this.masterformatKeywords[0]);
-            //     // [
-            //     //   { NAME: 'Daffy Duck', AGE: '24' },
-            //     //   { NAME: 'Bugs Bunny', AGE: '22' }
-            //     // ]
-            // });
-
-        // return Promise.resolve();
-
     }
-    // constructor:
-    //  loads masterformat keys & weights
-    //  loads actual properties data
     // const base = useBase();
     //
     // const defaultPropertiesTable = base.getTableByNameIfExists(DefaultPropertiesTableName);
@@ -88,7 +78,7 @@ export default class AutoClassifier {
     // const projectElementsDataTable = base.getTableByNameIfExists(ProjectElementsDataTableName);
     // const projectElementsDataRecords = useRecords(projectElementsDataTable);
 
-    static calculateScore(keywordsWithWeigths) {
+    calculateScore(keywordsWithWeigths) {
         let score = 0;
         let h = 0, keywordsWithWeightsLength = keywordsWithWeigths.length;
         while (h < keywordsWithWeightsLength) {
@@ -100,50 +90,34 @@ export default class AutoClassifier {
         return score / masterFormatKeywordsKeys.length;
     };
 
-    static autoClassify() {
+    autoClassify() {
         let t = timer("calculate scores");
-        let i = 0, projectElementsDataRecordsLength = projectElementsDataRecords.length;
+        let i = 0, projectElementsDataRecordsLength = this.projectElementsData.length
         while (i < projectElementsDataRecordsLength) {
-            const projectElementDataRecord = projectElementsDataRecords[i];
-            // console.log("Element: " + projectElementDataRecord.getCellValue("ItemName"));
-
+            const projectElementDataRecord = this.projectElementsData[i];
             const matchingCodes = [];
-            /*
-                [
-                    {
-                        code: "23 11 07",
-                        keywordsFoundInProperties: [
-                            {keyword: "concrete", keywordWeight: 1},
-                            {keyword: "rebar", keywordWeight: 0.75},
-                        ],
-                        calculatedScore: 0.875,
-                    },
-                    ...
-                ]
-            */
-
-            let j = 0, defaultPropertjesRecordsLength = defaultPropertiesRecords.length;
-            while (j < defaultPropertjesRecordsLength) {
-                const propertyName = defaultPropertiesRecords[j].getCellValueAsString(DefaultPropertiesPropertyName);
+            let j = 0, defaultPropertiesLength = this.defaultProperties.length;
+            while (j < defaultPropertiesLength) {
+                const propertyName = this.defaultProperties[j][DefaultPropertiesPropertyName];
                 // get the corresponding model element property
-                const elementPropertyValue = projectElementDataRecord.getCellValue(propertyName) ? projectElementDataRecord.getCellValueAsString(propertyName).toLowerCase() : null;
+                const elementPropertyValue = projectElementDataRecord[propertyName] ? projectElementDataRecord[propertyName].toLowerCase() : null;
 
                 if (elementPropertyValue && typeof (elementPropertyValue) === "string" && elementPropertyValue.length) {
-                    // console.log("  Property " + propertyName + ": " + elementPropertyValue);
-                    // console.log("    matching codes:");
+
 
                     // now search through MF records, which one has any keyword matching elementPropertyValue
-                    let k = 0, masterFormatKeywordsRecordsLength = masterFormatKeywordsRecords.length;
+                    // This should be rewritten as a hash lookup to run in O(1) not O(n)
+                    let k = 0, masterFormatKeywordsRecordsLength = this.masterformatKeywords.length;
                     while (k < masterFormatKeywordsRecordsLength) {
-                        const masterFormatKeywordsRecord = masterFormatKeywordsRecords[k];
-                        const masterFormatKeywordsRecordCode = masterFormatKeywordsRecord.getCellValueAsString("Code");
+                        const masterFormatKeywordsRecord = this.masterformatKeywords[k];
+                        const masterFormatKeywordsRecordCode = masterFormatKeywordsRecord["Code"];
 
                         let l = 0, masterFormatKeywordsKeysLength = masterFormatKeywordsKeys.length;
                         while (l < masterFormatKeywordsKeysLength) {
                             const masterFormatKeywordsKey = masterFormatKeywordsKeys[l];
-                            const keyword = masterFormatKeywordsRecord.getCellValueAsString(masterFormatKeywordsKey).toLowerCase();
+                            const keyword = masterFormatKeywordsRecord[masterFormatKeywordsKey].toLowerCase();
                             const masterFormatKeywordsWeight = masterFormatKeywordsWeights[l]; // TODO log if this doesn't match
-                            const keywordWeight = masterFormatKeywordsRecord.getCellValueAsString(masterFormatKeywordsWeight);
+                            const keywordWeight = masterFormatKeywordsRecord[masterFormatKeywordsWeight];
                             if (keyword && typeof (keyword) === "string" && keyword.length && elementPropertyValue.indexOf(keyword) > -1) {
                                 // increment the score by number of matches and their weight
                                 const weightedKeyword = {keyword: keyword, weight: keywordWeight};
@@ -156,7 +130,7 @@ export default class AutoClassifier {
                                     });
                                     if (!keywordFoundInProperties) {
                                         matchingCode.keywordsFoundInProperties.push(weightedKeyword);
-                                        matchingCode.score = calculateScore(matchingCode.keywordsFoundInProperties);
+                                        matchingCode.score = this.calculateScore(matchingCode.keywordsFoundInProperties);
                                     }
                                 } else {
                                     const matchingCodeInitial = {
@@ -167,24 +141,18 @@ export default class AutoClassifier {
                                         ],
                                         score: 0,
                                     }
-                                    matchingCodeInitial.score = calculateScore(matchingCodeInitial.keywordsFoundInProperties);
+                                    matchingCodeInitial.score = this.calculateScore(matchingCodeInitial.keywordsFoundInProperties);
                                     matchingCodes.push(matchingCodeInitial);
-                                }
-                                ;
-                            }
-                            ;
+                                };
+                            };
                             l++;
-                        }
-                        ;
+                        };
                         k++;
-                    }
-                    ;
+                    };
                     // console.log(codesWithKeywordsMatchingPropertyValue);
-                }
-                ;
+                };
                 j++;
-            }
-            ;
+            };
             if (matchingCodes.length) {
                 console.log("Element: " + projectElementDataRecord.getCellValue("ItemName"));
                 console.log(matchingCodes);
@@ -195,38 +163,13 @@ export default class AutoClassifier {
                 const projectElementDataRecordFields = {
                     "MasterFormat Keywords": [{id: bestMatchingCode.id}],
                 };
-                if (projectElementsDataTable.hasPermissionToUpdateRecord(projectElementDataRecord, projectElementDataRecordFields)) {
-                    projectElementsDataTable.updateRecordAsync(projectElementDataRecord, projectElementDataRecordFields);
-                }
-                ;
-            }
-            ;
+                    this.projectElementsData.push(projectElementDataRecord, projectElementDataRecordFields);
+
+            };
             i++;
         }
         t.stop();
         return;
     };
-
-    private async openFile() {
-        let file = "../../resources/masterformat-keywords.csv"
-        let filehandle = null;
-        try {
-            filehandle = await open(__dirname + file, 'r+');
-            filehandle.createReadStream()
-                .pipe(csvParser())
-                .on('data', (data) => {
-                    this.masterformatKeywords.push(data)
-                })
-                .on('end', () => {
-                    console.log(this.masterformatKeywords[0]);
-                    // [
-                    //   { NAME: 'Daffy Duck', AGE: '24' },
-                    //   { NAME: 'Bugs Bunny', AGE: '22' }
-                    // ]
-                });
-        } finally {
-            await filehandle?.close();
-        }
-    }
 
 }

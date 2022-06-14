@@ -4,15 +4,14 @@ import AutoClassifier from "../../source/utilities/autoclassify_elements";
 
 describe.only("AutoClassifier", () => {
     describe("#constructor", () => {
-        xit("loads lookup table", async (done) => {
+        it("loads lookup table", async (done) => {
             // setTimeout(() => {
                 let autoClassifier = new AutoClassifier("some-floor.csv")
-                await autoClassifier.loadMasterformatKeywords(); // .then ((event) => {
-
-                    expect(autoClassifier.masterformatKeywords).has.length(1006742);
+                autoClassifier.loadCsvFile(autoClassifier.hackResources.masterformatKeywords, autoClassifier.masterformatKeywords).then((output) => {
+                    expect(output).has.length(1006742);
                     console.log(autoClassifier)
                     done();
-                // })
+                });
 
             // }, 10000)
         });
