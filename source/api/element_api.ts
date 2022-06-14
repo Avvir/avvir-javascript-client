@@ -112,6 +112,11 @@ export default class ElementApi {
     return Http.get(url, user) as unknown as Promise<ApiUserAction[]>;
   }
 
+  static exportBcfDeviatedElements({projectId, floorId, scanDatasetId}: AssociationIds, user: User): Promise<ApiDetailedElement[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/bcf-deviations`;
+    return Http.get(url, user) as unknown as Promise<ApiDetailedElement[]>;
+  }
+
 }
 
 makeErrorsPretty(ElementApi);

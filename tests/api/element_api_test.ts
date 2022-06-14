@@ -561,6 +561,89 @@ describe("ElementApi", () => {
     });
   });
 
+  describe("::exportBcfDeviatedElements", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/bcf-deviations`,
+        [{
+          globalId: "some-element-id",
+          scanResult: {
+            scanLabel: "DEVIATED",
+            deviation: {
+              deviationVectorMeters: {
+                x: 1,
+                y: 1,
+                z: 0
+              }
+            }
+          },
+        }]);
+    });
+
+    it("makes a request to the export bcf deviated elements endpoint", () => {
+      ElementApi.exportBcfDeviatedElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, {
+        authType: GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+      });
+
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/bcf-deviations`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("returns the deviated elements for a bcf file", () => {
+      return ElementApi.exportBcfDeviatedElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, {
+        authType: GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+      })
+        .then((elementDetails) => {
+          expect(elementDetails).to.deep.eq([{
+            globalId: "some-element-id",
+            scanResult: {
+              scanLabel: "DEVIATED",
+              deviation: {
+                deviationVectorMeters: {
+                  x: 1,
+                  y: 1,
+                  z: 0
+                }
+              }
+            },
+          }]);
+        });
+    });
+
+    describe("when the user is signed in", () => {
+      let user;
+      beforeEach(() => {
+        user = {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        };
+      });
+
+      it("authenticates the request", () => {
+        ElementApi.exportBcfDeviatedElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-id"
+        }, user);
+
+        const lastFetchOpts = fetchMock.lastOptions();
+        expect(lastFetchOpts.headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      });
+    });
+  });
+
   describe("::createElements", () => {
     beforeEach(() => {
       fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements`, 200);
