@@ -74,7 +74,9 @@ export default class AutoClassifier {
             );
 
             this.makeMasterformatsByCode();
+            this.makeWeightsByKeyword();
     }
+
 
     async loadCsvFile(filename, target) {
         return new Promise ((resolve, reject) => {
@@ -110,6 +112,46 @@ export default class AutoClassifier {
         return potentialMatches;
     };
 
+    makeWeightsByKeyword() {
+        let COLUMN_MAP = {
+            'Keyword 1': 'Weight 1',
+            'Keyword 2': 'Weight 2',
+            'Keyword 3': 'Weight 3',
+            'Keyword 4': 'Weight 4',
+            'Keyword 5': 'Weight 5'
+        }
+
+        this.masterformatKeywords.forEach( (row) => {
+            for (let [k,v] of Object.entries(COLUMN_MAP)) {
+                if (row[k] != "") {
+                    if (this.weightsByKeyword.hasOwnProperty(row[k])) {
+                        this.weightsByKeyword[row[k]][row['Code']] = parseInt(row[v]);
+                    } else {
+                        this.weightsByKeyword[row[k]] = {}
+                        this.weightsByKeyword[row[k]][row['Code']] = parseInt(row[v]);
+                    }
+                }
+            }
+        });
+            // if keyword x isn't empty
+                // if the keyword exists:
+                    // write the masterformat + weight to the object
+                // else
+                    // create the entry and then write
+            // if it is
+                // keep going
+        //     for (let keyword in row) {
+        //         if (keyword.indexOf('Keyword') > -1 && ) {
+        //
+        //         }
+        //     }
+        //     if (this.weightsByKeyword.hasOwnProperty(row['Code'])) {
+        //         this.weightsByKeyword.
+        //     }
+        // })
+    }
+
+
     selectWinningMasterformat(potentialMatches) {
         let i = 0, n = potentialMatches.length;
         let masterformats = {}
@@ -142,7 +184,7 @@ export default class AutoClassifier {
             // For Every Row in the "PBE", look at each of the columns called "default properties"
             this.columnsWeCareAbout.forEach((column) => {
                 const elementPropertyValue = pbe[column].toLowerCase();
-                this.findColumnValueInKeywords(elementPropertyValue, this.weightsByKeyword)
+                matchingCodes.concat(this.findColumnValueInKeywords(elementPropertyValue));
             });
             // pick best matching code for the PBE (i.e., highest score)
             pbe.masterformatCode = this.selectWinningMasterformat(matchingCodes);

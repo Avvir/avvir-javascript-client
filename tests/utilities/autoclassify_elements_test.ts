@@ -10,6 +10,7 @@ describe.only("AutoClassifier", () => {
                 expect(autoClassifier.masterformatKeywords.length).eql(297);
                 expect(autoClassifier.columnsWeCareAbout.length).eql(21);
                 expect(autoClassifier.projectElementsData.length).eql(11417);
+                console.log(autoClassifier.masterformatKeywords);
             });
         });
 
@@ -89,8 +90,39 @@ describe.only("AutoClassifier", () => {
             expect(answer).to.eql("some-masterformat");
         });
     });
-    describe("#makeWeightsByKeyword", () => {
+    describe("#makeWeightsByKeyword", async () => {
+        it('transforms the CSV into something useful', () => {
 
+
+            let autoClassifier = new AutoClassifier("some-floor.csv");
+            autoClassifier.masterformatKeywords = [
+                {
+                    'Map ID': '',
+                    'Division': '03',
+                    'Code': '03 05 00',
+                    'Level': '3',
+                    'Description': 'Common Work Results for Concrete',
+                    'Keyword 1': 'Concrete',
+                    'Weight 1': '1',
+                    'Keyword 2': '',
+                    'Weight 2': '2',
+                    'Keyword 3': '',
+                    'Weight 3': '1',
+                    'Keyword 4': '',
+                    'Weight 4': '1',
+                    'Keyword 5': '',
+                    'Weight 5': '1'
+                }
+            ];
+            autoClassifier.makeWeightsByKeyword();
+            let output = {
+                "Concrete":
+                    {
+                        '03 05 00': 1
+                    }
+            }
+            expect(autoClassifier.weightsByKeyword).eql(output);
+        });
     });
     describe("#autoClassify", () => {
     })
