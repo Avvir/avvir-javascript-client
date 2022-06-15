@@ -108,7 +108,30 @@ export default class AutoClassifier {
         return potentialMatches;
     };
 
-    private selectWinningMasterformat() {}
+    selectWinningMasterformat(potentialMatches) {
+        let i = 0, n = potentialMatches.length;
+        let masterformats = {}
+        while (i < n) {
+            let curr = Object.keys(potentialMatches[i]);
+            curr.forEach(masterformat => {
+                if (masterformats.hasOwnProperty(masterformat)) {
+                    masterformats[masterformat] = masterformats[masterformat] + potentialMatches[i][masterformat];
+                } else {
+                    masterformats[masterformat] = potentialMatches[i][masterformat]
+                }
+            })
+            i++;
+        };
+        let max_so_far = 0;
+        let current_biggest;
+        for (let masterformat in masterformats) {
+            if (masterformats[masterformat] > max_so_far) {
+                current_biggest = masterformat
+                max_so_far = masterformats[masterformat]
+            }
+        };
+        return current_biggest;
+    };
 
     autoClassify() {
         // Project Elements Data == just the basic "PBE" information

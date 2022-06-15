@@ -44,7 +44,7 @@ describe.only("AutoClassifier", () => {
                 }
             };
         })
-        it.only('returns the weightsByKeyword for keywords that match', () => {
+        it('returns the weightsByKeyword for keywords that match', () => {
             let autoClassifier = new AutoClassifier("some-floor.csv");
             let searchString = "Me and Concrete";
             let answer = autoClassifier.findColumnValueInKeywords(searchString, weightsByKeyword);
@@ -72,7 +72,25 @@ describe.only("AutoClassifier", () => {
 
     })
 
+    describe("#selectWinningMasterformat", () => {
+        it('returns the masterformat with the highest score', () => {
+            let potentialMatches = [
+                {
+                    "some-masterformat": 4,
+                    "some-other-masterformat": 7
+                },
+                {
+                    "some-masterformat": 4
+                }
+            ];
+            let autoClassifier = new AutoClassifier("some-floor.csv");
+            let answer = autoClassifier.selectWinningMasterformat(potentialMatches);
+            expect(answer).to.eql("some-masterformat");
+        });
+    });
+    describe("#makeWeightsByKeyword", () => {
 
+    });
     describe("#autoClassify", () => {
     })
 });
