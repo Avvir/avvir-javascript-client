@@ -16,8 +16,6 @@ describe.only("AutoClassifier", () => {
     })
     describe("#calculateScore", () => {
         it('returns the sum of the score divided by the fixed number of keywords ', () => {
-
-
             let autoClassifier = new AutoClassifier("some-floor.csv");
             let input = [
                 {
@@ -33,7 +31,7 @@ describe.only("AutoClassifier", () => {
             expect(answer).to.eql(7 / 5)
         });
     })
-    describe("#readInput", () => {
+    describe("#autoClassify", () => {
     })
     describe("#formatOutput", () => {
     })
