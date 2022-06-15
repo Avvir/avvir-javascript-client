@@ -31,8 +31,48 @@ describe.only("AutoClassifier", () => {
             expect(answer).to.eql(7 / 5)
         });
     })
-    describe("#autoClassify", () => {
+    describe("#findColumnValueInKeywords", () => {
+        let weightsByKeyword;
+        beforeEach(() => {
+            weightsByKeyword = {
+                "Concrete": {
+                    "some-masterformat": 1,
+                    "some-other-masterformat": 7
+                },
+                "Reinforce": {
+                    "some-masterformat": 1
+                }
+            };
+        })
+        it.only('returns the weightsByKeyword for keywords that match', () => {
+            let autoClassifier = new AutoClassifier("some-floor.csv");
+            let searchString = "Me and Concrete";
+            let answer = autoClassifier.findColumnValueInKeywords(searchString, weightsByKeyword);
+            expect(answer).to.eql([
+                    {
+                        "some-masterformat": 1,
+                        "some-other-masterformat": 7
+                    }
+                ]
+            )
+            let anotherSearchString = "Concrete Reinforced"
+            let anotherAnswer = autoClassifier.findColumnValueInKeywords(anotherSearchString, weightsByKeyword);
+            expect(anotherAnswer).to.eql([
+                    {
+                        "some-masterformat": 1,
+                        "some-other-masterformat": 7
+                    },
+                    {
+                        "some-masterformat": 1
+                    }
+
+                ]
+            )
+        });
+
     })
-    describe("#formatOutput", () => {
+
+
+    describe("#autoClassify", () => {
     })
 });

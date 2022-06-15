@@ -98,6 +98,18 @@ export default class AutoClassifier {
         return score / masterFormatKeywordsKeys.length;
     };
 
+    findColumnValueInKeywords(searchString, weightsByKeyword) {
+        let potentialMatches = []
+        for (let keyword in weightsByKeyword) {
+            if (searchString.indexOf(keyword) > -1) {
+                potentialMatches.push(weightsByKeyword[keyword])
+            }
+        }
+        return potentialMatches;
+    };
+
+    private selectWinningMasterformat() {}
+
     autoClassify() {
         // Project Elements Data == just the basic "PBE" information
         this.projectElementsData.forEach((pbe) => {
@@ -105,14 +117,17 @@ export default class AutoClassifier {
             // For Every Row in the "PBE", look at each of the columns called "default properties"
             this.columnsWeCareAbout.forEach((column) => {
                 const elementPropertyValue = pbe[column].toLowerCase();
-                // see if any keywords are present in that value
-                if (elementPropertyValue.indexOf(keyword) > -1 &&
-                    this.masterformatKeywordsByCode.hasOwnProperty(keyword)) {
-                    // add to matchingCodes
-                }
+                // if there is an elementPropertyValue, iterate through masterformat-keywords-short to find it's weight
+                // if (elementPropertyValue) {
+                //     const matchingKeywor = this.findColumnValueInKeywords(elementPropertyValue);
+                //     this.uniqueKeywords.foreach( (keyword) => {
+                //        if keyword in elementPropertyValue
+                //         matchingCodes.append( masterformatToWeightValueThingie )
+                //     });
+                // }
             });
             // pick best matching code for the PBE (i.e., highest score)
-            // append that code to the PBE record and keep going.
+            pbe.masterformatCode = this.selectWinningMasterformat(matchingCodes);
         });
     }
 }
