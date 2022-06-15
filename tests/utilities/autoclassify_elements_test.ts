@@ -46,8 +46,9 @@ describe.only("AutoClassifier", () => {
         })
         it('returns the weightsByKeyword for keywords that match', () => {
             let autoClassifier = new AutoClassifier("some-floor.csv");
+            autoClassifier.weightsByKeyword = weightsByKeyword;
             let searchString = "Me and Concrete";
-            let answer = autoClassifier.findColumnValueInKeywords(searchString, weightsByKeyword);
+            let answer = autoClassifier.findColumnValueInKeywords(searchString);
             expect(answer).to.eql([
                     {
                         "some-masterformat": 1,
@@ -56,7 +57,7 @@ describe.only("AutoClassifier", () => {
                 ]
             )
             let anotherSearchString = "Concrete Reinforced"
-            let anotherAnswer = autoClassifier.findColumnValueInKeywords(anotherSearchString, weightsByKeyword);
+            let anotherAnswer = autoClassifier.findColumnValueInKeywords(anotherSearchString);
             expect(anotherAnswer).to.eql([
                     {
                         "some-masterformat": 1,

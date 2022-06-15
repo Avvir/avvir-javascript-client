@@ -37,12 +37,14 @@ export default class AutoClassifier {
     columnsWeCareAbout: any[];
     projectElementsData: any[];
     hackResources: any;
+    weightsByKeyword: any;
 
     constructor(floorTsvFilename) {
         this.masterformatKeywords = [];
         this.columnsWeCareAbout = [];
         this.projectElementsData = [];
         this.masterformatKeywordsByCode = {};
+        this.weightsByKeyword = {}
         this.hackResources = {
             masterformatKeywords: __dirname + '/../../resources/masterformat-keywords-short.csv',
             columnsWeCareAbout: __dirname + '/../../resources/default-properties.csv',
@@ -98,11 +100,11 @@ export default class AutoClassifier {
         return score / masterFormatKeywordsKeys.length;
     };
 
-    findColumnValueInKeywords(searchString, weightsByKeyword) {
+    findColumnValueInKeywords(searchString) {
         let potentialMatches = []
-        for (let keyword in weightsByKeyword) {
+        for (let keyword in this.weightsByKeyword) {
             if (searchString.indexOf(keyword) > -1) {
-                potentialMatches.push(weightsByKeyword[keyword])
+                potentialMatches.push(this.weightsByKeyword[keyword])
             }
         }
         return potentialMatches;
@@ -140,14 +142,7 @@ export default class AutoClassifier {
             // For Every Row in the "PBE", look at each of the columns called "default properties"
             this.columnsWeCareAbout.forEach((column) => {
                 const elementPropertyValue = pbe[column].toLowerCase();
-                // if there is an elementPropertyValue, iterate through masterformat-keywords-short to find it's weight
-                // if (elementPropertyValue) {
-                //     const matchingKeywor = this.findColumnValueInKeywords(elementPropertyValue);
-                //     this.uniqueKeywords.foreach( (keyword) => {
-                //        if keyword in elementPropertyValue
-                //         matchingCodes.append( masterformatToWeightValueThingie )
-                //     });
-                // }
+                this.findColumnValueInKeywords(elementPropertyValue, this.weightsByKeyword)
             });
             // pick best matching code for the PBE (i.e., highest score)
             pbe.masterformatCode = this.selectWinningMasterformat(matchingCodes);
