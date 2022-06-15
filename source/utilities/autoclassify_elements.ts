@@ -10,15 +10,8 @@ Preprocessing to do:
  Input: Freetext (30,000 queries) --> Output (Masterformat (one of ~300 tagged masterformats) + Confidence Score)
  */
 
-
-
-
-
-
 import * as fs from 'fs';
-import * as path from 'path';
 import * as csv from 'fast-csv';
-
 
 
 // Lookup table <-- this doesn't change between floors
@@ -36,20 +29,6 @@ const ProjectCustomPropertiesTableName = "Project Custom Properties";
 // Output data
 const ProjectElementsDataTableName = "Project Elements Data";
 
-var timer = function (name) {
-    var start = new Date();
-    return {
-        stop: function () {
-            var end = new Date();
-            var time = end.getTime() - start.getTime();
-            console.log('Timer:', name, 'finished in', time, 'ms');
-        }
-    }
-};
-
-function timeout(func) {
-    return new Promise(resolve => setTimeout(resolve, func));
-}
 
 export default class AutoClassifier {
     masterformatKeywords: any[];
@@ -64,8 +43,8 @@ export default class AutoClassifier {
         this.projectElementsData = [];
         this.masterformatKeywordsByCode = {};
         this.hackResources = {
-            masterformatKeywords: __dirname + '/../../resources/masterformat-keywords.csv',
-            defaultProperties: __dirname + '/../../resources/default-properties.csv',
+            masterformatKeywords: __dirname + '/../../resources/masterformat-keywords-short.csv',
+            columnsWeCareAbout: __dirname + '/../../resources/default-properties.csv',
             projectElementsData: __dirname + '/../../resources/project-elements-data.csv',
         }
     }
@@ -74,6 +53,24 @@ export default class AutoClassifier {
         this.masterformatKeywords.forEach( (row) => {
             this.masterformatKeywordsByCode[row['Code']] = row;
         });
+    }
+
+    async initialize() {
+
+            await this.loadCsvFile(
+                this.hackResources.masterformatKeywords,
+                this.masterformatKeywords
+            );
+            await this.loadCsvFile(
+                this.hackResources.columnsWeCareAbout,
+                this.columnsWeCareAbout
+            );
+            await this.loadCsvFile(
+                this.hackResources.projectElementsData,
+                this.projectElementsData
+            );
+
+            this.makeMasterformatsByCode();
     }
 
     async loadCsvFile(filename, target) {
@@ -94,27 +91,12 @@ export default class AutoClassifier {
                 // })
         });
     }
-    // const base = useBase();
-    //
-    // const defaultPropertiesTable = base.getTableByNameIfExists(DefaultPropertiesTableName);
-    // const defaultPropertiesRecords = useRecords(defaultPropertiesTable);
-    //
-    // const masterFormatKeywordsTable = base.getTableByNameIfExists(MasterFormatKeywordsTableName);
-    // const masterFormatKeywordsTableView = masterFormatKeywordsTable.getViewByNameIfExists(MasterFormatKeywordsTableViewWithKeywords);
-    // const masterFormatKeywordsRecords = useRecords(masterFormatKeywordsTableView);
-    //
-    // const projectElementsDataTable = base.getTableByNameIfExists(ProjectElementsDataTableName);
-    // const projectElementsDataRecords = useRecords(projectElementsDataTable);
 
-    calculateScore(keywordsWithWeigths) {
+    calculateScore(weights) {
         let score = 0;
-        let h = 0, keywordsWithWeightsLength = keywordsWithWeigths.length;
-        while (h < keywordsWithWeightsLength) {
-            const keywordWithWeight = keywordsWithWeigths[h];
-            score += parseFloat(keywordWithWeight.weight);
-            h++;
-        }
-        ;
+        weights.forEach ( (curr) => {
+            score += parseFloat(curr.weight);
+        })
         return score / masterFormatKeywordsKeys.length;
     };
 
