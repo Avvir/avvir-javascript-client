@@ -128,10 +128,13 @@ describe.only("AutoClassifier", () => {
         it("makes the masterformat field happy", async function () {
             let autoClassifier = new AutoClassifier("some-floor.csv");
             await autoClassifier.initialize();
-            autoClassifier.autoClassify();
-            autoClassifier.plannedBuildingElements.forEach(pbe => {
-                expect(pbe.hasOwnProperty("masterformatCode")).to.eql(true);
-            })
+            // await setTimeout(() => {
+                autoClassifier.autoClassify()
+                autoClassifier.plannedBuildingElements.forEach(pbe => {
+                    expect(pbe.hasOwnProperty("masterformatCode")).to.eql(true);
+                })
+
+            // }, 10000);
         });
     })
     describe("#writeToTsv", () => {

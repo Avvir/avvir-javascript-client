@@ -23,7 +23,7 @@ export default class AutoClassifier {
         this.hackResources = {
             masterformatKeywords: __dirname + '/../../resources/masterformat-keywords-short.csv',
             columnsWeCareAbout: __dirname + '/../../resources/default-properties.csv',
-            plannedBuildingElements: __dirname + '/../../resources/project-elements-data.csv',
+            plannedBuildingElements: __dirname + '/../../resources/project-elements-data-nulled-masterformat.csv',
         }
     }
 
@@ -78,13 +78,14 @@ export default class AutoClassifier {
     };
 
     findColumnValueInKeywords(searchString) {
-        let potentialMatches = []
+        let potentialMatches = {}
         for (let keyword in this.weightsByKeyword) {
             if (searchString.indexOf(keyword) > -1) {
-                potentialMatches.push(this.weightsByKeyword[keyword])
+                // potentialMatches.push(this.weightsByKeyword[keyword])
+                potentialMatches[keyword] = this.weightsByKeyword[keyword]
             }
         }
-        return potentialMatches;
+        return Object.values(potentialMatches)[0];
     };
 
     makeWeightsByKeyword() {
@@ -149,19 +150,26 @@ export default class AutoClassifier {
 
     autoClassify() {
         // Project Elements Data == just the basic "PBE" information
-        this.plannedBuildingElements.forEach((pbe) => {
-            const matchingCodes = [];
+        this.plannedBuildingElements = this.plannedBuildingElements.map((pbe) => {
+            // const matchingCodes = [];
             // For Every Row in the "PBE", look at each of the columns called "default properties"
-            this.columnsWeCareAbout.forEach((column) => {
-                const elementPropertyValue = pbe[column];
+            let matchingCodes = this.columnsWeCareAbout.map((column) => {
+                const elementPropertyValue = pbe[column['Property Name']];
                 if (elementPropertyValue) {
-                    elementPropertyValue.toLowerCase();
-                    matchingCodes.concat(this.findColumnValueInKeywords(elementPropertyValue));
+                    // elementPropertyValue.toLowerCase();
+                    // console.log(elementPropertyValue)
+                    // console.log(this.findColumnValueInKeywords(elementPropertyValue))
+                    // matchingCodes.concat(this.findColumnValueInKeywords(elementPropertyValue));
+                    return this.findColumnValueInKeywords(elementPropertyValue);
                 }
-            });
+            }, this);
             // pick best matching code for the PBE (i.e., highest score)
+            matchingCodes = matchingCodes.filter( (code) => {
+                return code != undefined;
+            })
             pbe.masterformatCode = this.selectWinningMasterformat(matchingCodes);
-        });
+            return pbe;
+        }, this);
         return this.writeToTsv();
     }
 }
