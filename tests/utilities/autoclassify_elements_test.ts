@@ -59,16 +59,14 @@ describe.only("AutoClassifier", () => {
             )
             let anotherSearchString = "Concrete Reinforced"
             let anotherAnswer = autoClassifier.findColumnValueInKeywords(anotherSearchString);
-            expect(anotherAnswer).to.eql([
-                    {
-                        "some-masterformat": 1,
-                        "some-other-masterformat": 7
-                    },
+            expect(anotherAnswer).to.eql(
+                [{
+                    "some-masterformat": 1,
+                    "some-other-masterformat": 7
+                },
                     {
                         "some-masterformat": 1
-                    }
-
-                ]
+                    }]
             )
         });
 
@@ -129,16 +127,16 @@ describe.only("AutoClassifier", () => {
             let autoClassifier = new AutoClassifier("some-floor.csv");
             await autoClassifier.initialize();
             // await setTimeout(() => {
-                autoClassifier.autoClassify()
-                autoClassifier.plannedBuildingElements.forEach(pbe => {
-                    expect(pbe.hasOwnProperty("masterformatCode")).to.eql(true);
-                })
+            autoClassifier.autoClassify()
+            autoClassifier.plannedBuildingElements.forEach(pbe => {
+                expect(pbe.hasOwnProperty("masterformatCode")).to.eql(true);
+            })
 
             // }, 10000);
         });
     })
     describe("#writeToTsv", () => {
-        it("writes our planned building elements to a tsv", async() => {
+        it("writes our planned building elements to a tsv", async () => {
             let autoClassifier = new AutoClassifier("/tmp/some-floor.tsv");
             await autoClassifier.initialize();
             let outputTsv = autoClassifier.autoClassify();

@@ -85,7 +85,7 @@ export default class AutoClassifier {
                 potentialMatches[keyword] = this.weightsByKeyword[keyword]
             }
         }
-        return Object.values(potentialMatches)[0];
+        return Object.values(potentialMatches);
     };
 
     makeWeightsByKeyword() {
@@ -167,7 +167,11 @@ export default class AutoClassifier {
             matchingCodes = matchingCodes.filter( (code) => {
                 return code != undefined;
             })
-            pbe.masterformatCode = this.selectWinningMasterformat(matchingCodes);
+            // let matchingCodesOutput = matchingCodes.reduce( (acc, curr) => {
+            //     curr.forEach((d) => acc.concat(d))
+            // },[])
+            let matchingCodesDone = matchingCodes.reduce( (prev, curr) => prev.concat(curr), []);
+            pbe.masterformatCode = this.selectWinningMasterformat(matchingCodesDone);
             return pbe;
         }, this);
         return this.writeToTsv();
