@@ -31,6 +31,16 @@ export default class UserApi {
         return Http.put(url, user, apiUser);
     }
 
+    static sendPasswordResetEmail(email: string): void{
+        const url = `${Http.baseUrl()}/users/send-password-reset-email`;
+        return Http.post(url, null, {email});
+    }
+
+    static resetPassword(password: string,  email: string, token: string): void{
+        const url = `${Http.baseUrl()}/users/reset-password`;
+        return Http.post(url, null,{email, token, password});
+    }
+
 }
 
 makeErrorsPretty(UserApi)
