@@ -134,12 +134,23 @@ describe("FileInformationApi", () => {
         url: "some-file-url.com",
         purposeType: "OTHER"
       }]);
+
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/files?purposeType=MINIMAP`, [{
+        url: "some-file-url.com",
+        purposeType: "MINIMAP"
+      }]);
     });
 
     it("makes a call to the project files endpoint", () => {
       FileInformationApi.listPhotoAreaFiles({ projectId: "some-project-id", photoAreaId: 4 }, user);
       const request = fetchMock.lastCall();
       expect(request[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/files`);
+    });
+
+    it("makes a call to the project files endpoint with the specified purpose types", () => {
+      FileInformationApi.listPhotoAreaFiles({ projectId: "some-project-id", photoAreaId: 4 }, [PhotoAreaPurposeType.MINIMAP], user);
+      const request = fetchMock.lastCall();
+      expect(request[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/files?purposeType=MINIMAP`);
     });
 
     it("sends the request with authorization headers", () => {
