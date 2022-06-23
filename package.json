@@ -9,7 +9,9 @@
   "main": "dist/avvir_api.node.js",
   "files": [
     "dist/*",
-    "dist/**"
+    "dist/**",
+    "source/*",
+    "source/**"
   ],
   "browserslist": [
     "> 1%",
