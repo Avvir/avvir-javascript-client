@@ -5,7 +5,7 @@ import {AssociationIds, AvvirApiFiles} from "type_aliases";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import {User} from "../utilities/get_authorization_headers";
-import {FloorPurposeType, PurposeType} from "../models";
+import {FloorPurposeType, PhotoAreaPurposeType, PurposeType} from "../models";
 import ApiArgoResponse from "../models/api/api_argo_response";
 import ApiPipeline, {ApiPipelineArgument} from "../models/api/api_pipeline";
 import Pipelines from "../models/enums/pipeline_types";
@@ -30,8 +30,17 @@ export default class FileInformationApi {
     return Http.post(url, user, null);
   }
 
-  static listPhotoAreaFiles({ projectId, photoAreaId }: AssociationIds, user: User) :Promise<ApiCloudFile[]>{
-    const url = `${Http.baseUrl()}/projects/${projectId}/photo-areas/${photoAreaId}/files`;
+  static listPhotoAreaFiles({ projectId, photoAreaId }: AssociationIds, user: User): Promise<ApiCloudFile[]>
+  static listPhotoAreaFiles({ projectId, photoAreaId }: AssociationIds, purposeTypes: PhotoAreaPurposeType[] | User, user: User): Promise<ApiCloudFile[]>
+  static listPhotoAreaFiles({ projectId, photoAreaId }: AssociationIds, purposeTypes: PhotoAreaPurposeType[] | User, user?: User): Promise<ApiCloudFile[]> {
+    let query;
+    if (Array.isArray(purposeTypes)) {
+      query = `?purposeType=${purposeTypes.map(purposeType => PurposeTypeConverter.toApiPurposeType(purposeType)).join(",")}`;
+    } else {
+      query = "";
+      user = purposeTypes as User;
+    }
+    const url = `${Http.baseUrl()}/projects/${projectId}/photo-areas/${photoAreaId}/files${query}`;
     return Http.get(url, user);
   }
 
