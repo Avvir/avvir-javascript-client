@@ -14,3 +14,4 @@ export {UploaderStatus} from "./uploader_status";
 export {UserAuthType} from "./user_auth_type";
 export {UserRole} from "./user_role";
 export {UserActionType} from "./user_action_type";
+export {ApiIntegrationCredentialsType} from "./api_integration_credentials_type";

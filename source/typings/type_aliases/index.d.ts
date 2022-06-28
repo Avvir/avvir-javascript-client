@@ -58,6 +58,7 @@ declare type AssociationIds = {
   accountId?: string,
   commentThreadId?: number,
   commentId?: number,
+  organizationId?: string,
   projectId?: string
   floorId?: string
   scanDatasetId?: string,

@@ -11,6 +11,7 @@ import ProjectApi from "./api/project_api";
 import ScanDatasetApi from "./api/scan_dataset_api";
 import WebGatewayApi from "./api/web_gateway_api";
 import UserApi from "./api/user_api";
+import IntegrationsApi from "./api/integrations_api";
 
 export default {
     auth: AuthApi,
@@ -19,6 +20,7 @@ export default {
     elements: ElementApi,
     files: FileInformationApi,
     floors: FloorApi,
+    integrations: IntegrationsApi,
     organizations: OrganizationApi,
     photos: PhotoAreaApi,
     pipelines: PipelineApi,
