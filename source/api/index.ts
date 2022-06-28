@@ -10,6 +10,7 @@ import ProjectApi from "./project_api";
 import ScanDatasetApi from "./scan_dataset_api";
 import WebGatewayApi from "./web_gateway_api";
 import UserApi from "./user_api";
+import IntegrationsApi from "./integrations_api";
 
 export {
   AuthApi,
@@ -17,6 +18,7 @@ export {
   ElementApi,
   FileInformationApi,
   FloorApi,
+  IntegrationsApi,
   OrganizationApi,
   PhotoAreaApi,
   PipelineApi,
