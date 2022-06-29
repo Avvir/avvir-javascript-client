@@ -35,3 +35,4 @@ export {PhotoViewerDetails ,ViewCamera, ApiView, ViewAttributes, ViewParameter, 
 export {ApiQueryResource} from "./api_query_resource";
 export {ApiUserAction} from "./api_user_action";
 export {ApiActionPayload, ApiBehavioralData} from "./api_action_payload";
+export {ApiIntegrationCredentials, ApiIntegrationCredentialsArgs} from "./api_integration_credentials";
