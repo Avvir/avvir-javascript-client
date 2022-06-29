@@ -36,6 +36,8 @@ export class ApiIntegrationCredentials {
   username?: string;
   password?: string;
   authorId?: number;
+  createdAt: number;
+  modifiedAt?: number;
   credentialsType: ApiIntegrationCredentialsType;
   firebaseOrganizationId?: string;
   firebaseProjectId?: string;
