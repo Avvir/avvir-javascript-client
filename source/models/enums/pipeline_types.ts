@@ -9,7 +9,8 @@ export type PipelineName = "downsample-scan" |
   "ingest-project-file" |
   "convert-e57-to-las" |
   "convert-and-process-e57" |
-    "ingest-las-or-e57"
+    "ingest-las-or-e57" |
+    "generate-bcf"
 
 export enum Pipelines {
   INGEST_PROJECT_FILE = "ingest-project-file",
@@ -23,7 +24,8 @@ export enum Pipelines {
   CREATE_AND_PROCESS_SVF = "create-and-process-svf",
   CONVERT_E57_TO_LAS = "convert-e57-to-las",
   CONVERT_AND_PROCESS_E57 = "convert-and-process-e57",
-  INGEST_LAS_OR_E57 = "ingest-las-or-e57"
+  INGEST_LAS_OR_E57 = "ingest-las-or-e57",
+  GENERATE_BCF = "generate-bcf"
 }
 
 export default Pipelines;

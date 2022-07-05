@@ -36,7 +36,8 @@ export enum ScanDatasetPurposeType {
   DOWNSAMPLED_SCAN = "downsampledScan",
   INGESTED_SCAN = "ingestedScan",
   ELEMENT_SNAPSHOT = "elementSnapshot",
-  SITE_CUBE_PHOTO = "siteCubePhoto"
+  SITE_CUBE_PHOTO = "siteCubePhoto",
+  DEVIATIONS_SCAN_BCF = "deviationsScanBcf"
 }
 
 export enum PhotoAreaPurposeType {
@@ -73,6 +74,7 @@ export type ScanDatasetTypeKeys = "OTHER"
     | "INGESTED_SCAN"
     | "ELEMENT_SNAPSHOT"
     | "SITE_CUBE_PHOTO"
+    | "DEVIATIONS_SCAN_BCF"
 export type PhotoAreaTypeKeys = "OTHER"
     | "MINIMAP"
     | "THREE_SIXTY_PHOTO"
@@ -104,6 +106,7 @@ export const PurposeTypeMap: ProjectTypeMap & Omit<FloorTypeMap, "OTHER"> & Omit
   INGESTED_SCAN: ScanDatasetPurposeType.INGESTED_SCAN,
   ELEMENT_SNAPSHOT: ScanDatasetPurposeType.ELEMENT_SNAPSHOT,
   SITE_CUBE_PHOTO: ScanDatasetPurposeType.SITE_CUBE_PHOTO,
+  DEVIATIONS_SCAN_BCF: ScanDatasetPurposeType.DEVIATIONS_SCAN_BCF,
 
   BIM_IFC: FloorPurposeType.BIM_IFC,
   BIM_NWD: FloorPurposeType.BIM_NWD,
