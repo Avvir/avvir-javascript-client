@@ -18,12 +18,14 @@ export class ApiScannedElement<Label extends ApiBuiltStatus> {
 export type InPlaceScanResult = {
   globalId?: string
   scanLabel: typeof ApiBuiltStatus.IN_PLACE
+  deviation?: ApiElementDeviation
   detectedInScan?: boolean
 }
 
 export type NotBuiltScanResult = {
   globalId?: string
   scanLabel: typeof ApiBuiltStatus.NOT_BUILT
+  deviation?: ApiElementDeviation
   detectedInScan?: boolean
 }
 
