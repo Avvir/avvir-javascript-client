@@ -5,7 +5,8 @@ export enum UserActionType {
   ELEMENT_CHANGED_TO_DEVIATED = "element_changed_to_deviated",
   ELEMENT_CHANGED_TO_CLASH = "element_changed_to_clash",
   ELEMENT_CHANGED_TO_EXCLUDE_FROM_ANALYSIS = "element_changed_to_exclude_from_analysis",
-  ELEMENT_CHANGED_TO_INCLUDE_IN_ANALYSIS = "element_changed_to_include_in_analysis"
+  ELEMENT_CHANGED_TO_INCLUDE_IN_ANALYSIS = "element_changed_to_include_in_analysis",
+  INFERRED_BUILT_ELEMENTS_SELECTED = "inferred_built_elements_selected",
 }
 
 export default UserActionType;
