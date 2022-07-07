@@ -5,6 +5,7 @@ import ApiProjectMasterformatProgress from "./api_project_masterformat_progress"
 import SystemOfMeasurement, { IMPERIAL } from "../enums/system_of_measurement";
 import { DateLike, Modify } from "type_aliases";
 import ApiProjectReport from "./api_project_report";
+import {ApiTeamMember} from "./api_team_member";
 
 export interface ApiProjectArgument extends Partial<Modify<ApiProject, {
   archivedAt?: DateLike
@@ -40,7 +41,9 @@ export class ApiProject {
                 costAnalysisProgresses,
                 projectReports,
                 firebaseFloorIds,
-                generateMasterformatProgressEnabled
+                generateMasterformatProgressEnabled,
+                teamMembers,
+                integrationProjectId
               }: ApiProjectArgument = {}) {
     addInstantGetterAndSetterToApiModel(this, "startDate");
     addInstantGetterAndSetterToApiModel(this, "endDate");
@@ -76,6 +79,8 @@ export class ApiProject {
     // @ts-ignore
     this.archivedAt = archivedAt || null;
     this.generateMasterformatProgressEnabled = generateMasterformatProgressEnabled;
+    this.integrationProjectId = integrationProjectId;
+    this.teamMembers = teamMembers;
   }
 
   readonly id: number;
@@ -105,6 +110,8 @@ export class ApiProject {
   avvirAnalysisNotes: string | null = null;
   sourceAnalysisNotes: string | null = null;
   generateMasterformatProgressEnabled: boolean | null;
+  integrationProjectId?: number;
+  teamMembers?: ApiTeamMember[] = [];
 }
 
 export default ApiProject;

@@ -21,8 +21,11 @@ export default class PhotoAreaApi {
     return Http.post(url, user, locations);
   }
 
-  static listPhotoAreasForProject({ projectId }: AssociationIds, user: User): Promise<ApiPhotoArea[]> {
+  static listPhotoAreasForProject({ projectId, integrationProjectId }: AssociationIds, user: User): Promise<ApiPhotoArea[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/photo-areas`;
+    if (integrationProjectId != null) {
+      url += `?integrationProjectId=${integrationProjectId}`;
+    }
     return Http.get(url, user);
   }
 
