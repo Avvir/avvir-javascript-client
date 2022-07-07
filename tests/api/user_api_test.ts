@@ -113,10 +113,11 @@ describe("UserApi", () => {
         it("makes a call to send reset password email", () => {
             UserApi.sendPasswordResetEmail("some-email@test.org");
             const fetchCall = fetchMock.lastCall();
+            const encodedEmail = encodeURIComponent("some-email@test.org");
 
             expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/send-password-reset-email`);
             expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
-            expect(fetchMock.lastOptions().body).to.eq ('{"email":"some-email@test.org"}');
+            expect(fetchMock.lastOptions().body).to.eq (`{"email":"${encodedEmail}"}`);
         })
     });
 
@@ -131,10 +132,11 @@ describe("UserApi", () => {
         it("makes a call to reset password", () => {
             UserApi.resetPassword("password", "some-email@test.org", "token");
             const fetchCall = fetchMock.lastCall();
+            const encodedEmail = encodeURIComponent("some-email@test.org");
 
             expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/reset-password`);
             expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
-            expect(fetchMock.lastOptions().body).to.eq ('{"email":"some-email@test.org","token":"token","password":"password"}');
+            expect(fetchMock.lastOptions().body).to.eq (`{"email":"${encodedEmail}","token":"token","password":"password"}`);
         })
     });
 
