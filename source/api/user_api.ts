@@ -31,12 +31,14 @@ export default class UserApi {
         return Http.put(url, user, apiUser);
     }
 
-    static sendPasswordResetEmail(email: string): void{
+    static sendPasswordResetEmail(email: string): Promise<void>{
+        email = encodeURIComponent(email);
         const url = `${Http.baseUrl()}/users/send-password-reset-email`;
         return Http.post(url, null, {email});
     }
 
-    static resetPassword(password: string,  email: string, token: string): void{
+    static resetPassword(password: string,  email: string, token: string):  Promise<void>{
+        email = encodeURIComponent(email);
         const url = `${Http.baseUrl()}/users/reset-password`;
         return Http.post(url, null,{email, token, password});
     }
