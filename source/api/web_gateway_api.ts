@@ -207,7 +207,7 @@ export default class WebGatewayApi {
     };
     return Http.post(url, user, actionForm);
   }
-
+  
   static checkRunningProcess(processId: number, user: User): Promise<ApiRunningProcess> {
     let url = `${Http.baseUrl()}/running-processes/${processId}`;
     return Http.get(url, user)

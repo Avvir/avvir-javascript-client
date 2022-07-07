@@ -4,13 +4,15 @@ import fetchMock from "fetch-mock";
 
 import {makeStoreContents} from "../test_utils/test_factories";
 import {
+  ApiIntegrationCredentials,
   ApiIntegrationCredentialsType,
+  ApiIntegrationProject,
+  ApiRunningProcess,
   User,
   UserAuthType,
   UserRole
 } from "../../source";
 import Http from "../../source/utilities/http";
-import {ApiIntegrationCredentials} from "../../source";
 import {IntegrationsApi} from "../../source/api";
 
 describe("IntegrationsApi", () => {
@@ -71,6 +73,57 @@ describe("IntegrationsApi", () => {
           password: "some-password",
           credentialsType: ApiIntegrationCredentialsType.DRONE_DEPLOY
         }),
+        {
+          authType: UserAuthType.GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+        });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
+  describe("::getIntegrationProjectsForCredentials", () => {
+    beforeEach(() => {
+      let response = [new ApiIntegrationProject({
+        id: 1,
+        integrationCredentialsId: 2,
+        externalName: "Some Name",
+        externalId: "some-id"
+      }),
+        new ApiIntegrationProject({
+          id: 2,
+          integrationCredentialsId: 2,
+          externalName: "Some Other Name",
+          externalId: "some-other-id"
+        })
+      ];
+
+      fetchMock.get(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials/DRONE_DEPLOY/projects`, response);
+    });
+
+    it("makes a call to the endpoint", () => {
+      IntegrationsApi.getIntegrationProjectsForCredentials({
+          organizationId: "some-org-id",
+          projectId: "some-project-id"
+        },
+        ApiIntegrationCredentialsType.DRONE_DEPLOY,
+        {
+          authType: UserAuthType.GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+        });
+
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials/DRONE_DEPLOY/projects`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("sends the request with an Authorization header", () => {
+      IntegrationsApi.getIntegrationProjectsForCredentials({
+          organizationId: "some-org-id",
+          projectId: "some-project-id"
+        },
+        ApiIntegrationCredentialsType.DRONE_DEPLOY,
         {
           authType: UserAuthType.GATEWAY_JWT,
           gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
@@ -161,6 +214,125 @@ describe("IntegrationsApi", () => {
           organizationId: "some-org-id",
           projectId: "some-project-id"
         },
+        {
+          authType: UserAuthType.GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+        });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
+  describe("::syncIntegrationProjects", () => {
+    beforeEach(() => {
+      let response = new ApiRunningProcess({
+        id: 1,
+        name: "some-process"
+      });
+      fetchMock.post(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials/DRONE_DEPLOY/sync-projects`, response);
+    });
+
+    it("makes a call to the endpoint", () => {
+      IntegrationsApi.syncIntegrationProjects({
+          organizationId: "some-org-id",
+          projectId: "some-project-id"
+        },
+        ApiIntegrationCredentialsType.DRONE_DEPLOY,
+        {
+          authType: UserAuthType.GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+        });
+
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials/DRONE_DEPLOY/sync-projects`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("sends the request with an Authorization header", () => {
+      IntegrationsApi.syncIntegrationProjects({
+          organizationId: "some-org-id",
+          projectId: "some-project-id"
+        },
+        ApiIntegrationCredentialsType.DRONE_DEPLOY,
+        {
+          authType: UserAuthType.GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+        });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
+  describe("::syncIntegrationPhotoAreas", () => {
+    beforeEach(() => {
+      let response = new ApiRunningProcess({
+        id: 1,
+        name: "some-process"
+      });
+      fetchMock.post(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials/DRONE_DEPLOY/sync-photo-areas`, response);
+    });
+
+    it("makes a call to the endpoint", () => {
+      IntegrationsApi.syncIntegrationPhotoAreas({
+          organizationId: "some-org-id",
+          projectId: "some-project-id"
+        },
+        ApiIntegrationCredentialsType.DRONE_DEPLOY,
+        {
+          authType: UserAuthType.GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+        });
+
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials/DRONE_DEPLOY/sync-photo-areas`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("sends the request with an Authorization header", () => {
+      IntegrationsApi.syncIntegrationPhotoAreas({
+          organizationId: "some-org-id",
+          projectId: "some-project-id"
+        },
+        ApiIntegrationCredentialsType.DRONE_DEPLOY,
+        {
+          authType: UserAuthType.GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+        });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
+  describe("::updateProjectIntegrationProject", () => {
+    beforeEach(() => {
+      fetchMock.put(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/integration-projects/3`, "");
+    });
+
+    it("makes a call to the endpoint", () => {
+      IntegrationsApi.updateProjectIntegrationProject({
+          organizationId: "some-org-id",
+          projectId: "some-project-id"
+        },
+        3,
+        {
+          authType: UserAuthType.GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+        });
+
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/integration-projects/3`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("sends the request with an Authorization header", () => {
+      IntegrationsApi.updateProjectIntegrationProject({
+          organizationId: "some-org-id",
+          projectId: "some-project-id"
+        },
+        3,
         {
           authType: UserAuthType.GATEWAY_JWT,
           gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}

@@ -55,6 +55,7 @@ describe("PhotoAreaApi", () => {
   describe("#listPhotoAreasForProject", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas`, 200);
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas?integrationProjectId=3`, 200);
     });
 
     it("makes a request to the gateway", () => {
@@ -64,6 +65,16 @@ describe("PhotoAreaApi", () => {
       });
 
       expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("makes a request to the gateway with the integration project id", () => {
+      PhotoAreaApi.listPhotoAreasForProject({ projectId: "some-project-id", integrationProjectId: 3 }, {
+        authType: GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+      });
+
+      expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas?integrationProjectId=3`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 

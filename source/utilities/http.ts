@@ -23,14 +23,14 @@ export default class Http {
     });
   }
 
-  static put(url: RequestInfo, user: User, body: any, contentType = "application/json") {
+  static put(url: RequestInfo, user: User, body?: any, contentType = "application/json") {
     return Http.fetch(url, {
       method: "PUT",
       headers: {
         ...httpPostHeaders(contentType),
         ...getAuthorizationHeaders(user)
       },
-      body: JSON.stringify(body)
+      body: body == null ? "" : JSON.stringify(body)
     });
   }
 
@@ -44,14 +44,14 @@ export default class Http {
     });
   }
 
-  static post(url: RequestInfo, user: User, body: any) {
+  static post(url: RequestInfo, user: User, body?: any) {
     return Http.fetch(url, {
       method: "POST",
       headers: {
         ...httpPostHeaders,
         ...getAuthorizationHeaders(user)
       },
-      body: JSON.stringify(body)
+      body: body == null ? "" : JSON.stringify(body)
     });
   }
 
