@@ -59,8 +59,10 @@ export default class ElementApi {
 
   static updateManyElements({projectId, floorId, scanDatasetId}: AssociationIds,
                             elements: ApiDetailedElement[],
-                            user: User): Promise<{ [scanDatasetId: string]: ApiDetailedElement[] }> {
+                            user: User,
+                            progressMode?: boolean): Promise<{ [scanDatasetId: string]: ApiDetailedElement[] }> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/detailed-elements`;
+    if (progressMode) url += "?progressMode=true";
     return Http.patch(url, user, elements) as unknown as Promise<{ [scanDatasetId: string]: ApiDetailedElement[] }>;
   }
 
