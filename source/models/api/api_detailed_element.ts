@@ -10,8 +10,8 @@ export class ApiDetailedElement<Label extends ApiBuiltStatus = ApiBuiltStatus> e
         addInstantGetterAndSetterToApiModel(this, "builtAt", detailedElement.builtAt);
         addInstantGetterAndSetterToApiModel(this, "fixedAt", detailedElement.fixedAt);
         this.scanResult = detailedElement.scanResult;
-        if(this.scanResult.deviation) {
-            this.scanResult.deviation = {...new ApiElementDeviation(this.scanResult.deviation)};
+        if (isDeviationScanResult(this.scanResult)) {
+            this.scanResult.deviation = { ...new ApiElementDeviation(this.scanResult.deviation) };
         }
         if (detailedElement.fixedDeviation) {
             this.fixedDeviation = {...new ApiElementDeviation(detailedElement.fixedDeviation)};
