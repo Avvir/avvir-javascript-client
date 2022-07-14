@@ -14,6 +14,7 @@ import {
 } from "../../source";
 import Http from "../../source/utilities/http";
 import {IntegrationsApi} from "../../source/api";
+import {lastMockedFetchCall} from "../test_utils/fetch_mock_utils";
 
 describe("IntegrationsApi", () => {
   let user: User, fakeGetState;
@@ -307,7 +308,7 @@ describe("IntegrationsApi", () => {
 
   describe("::updateProjectIntegrationProject", () => {
     beforeEach(() => {
-      fetchMock.put(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/integration-projects/3`, "");
+      fetchMock.post(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/set-integration-project`, "");
     });
 
     it("makes a call to the endpoint", () => {
@@ -315,15 +316,34 @@ describe("IntegrationsApi", () => {
           organizationId: "some-org-id",
           projectId: "some-project-id"
         },
-        3,
+        new ApiIntegrationProject({id: 3}),
         {
           authType: UserAuthType.GATEWAY_JWT,
           gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
         });
 
-      const fetchCall = fetchMock.lastCall();
+      const fetchCall = lastMockedFetchCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/integration-projects/3`);
+      expect(fetchCall.url).to.eq(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/set-integration-project`);
+      expect(JSON.parse(fetchCall.body)).to.deep.eq({ id: 3 });
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("makes a call to the endpoint when the id is null", () => {
+      IntegrationsApi.updateProjectIntegrationProject({
+          organizationId: "some-org-id",
+          projectId: "some-project-id"
+        },
+        null,
+        {
+          authType: UserAuthType.GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+        });
+
+      const fetchCall = lastMockedFetchCall();
+
+      expect(fetchCall.url).to.eq(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/set-integration-project`);
+      expect(fetchCall.body).to.eq(null);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
@@ -332,7 +352,7 @@ describe("IntegrationsApi", () => {
           organizationId: "some-org-id",
           projectId: "some-project-id"
         },
-        3,
+        null,
         {
           authType: UserAuthType.GATEWAY_JWT,
           gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}

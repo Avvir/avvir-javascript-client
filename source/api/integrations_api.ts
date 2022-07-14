@@ -36,9 +36,9 @@ export default class IntegrationsApi {
     return Http.post(url, user) as unknown as Promise<ApiRunningProcess>;
   }
 
-  static updateProjectIntegrationProject({organizationId, projectId}: AssociationIds, integrationProjectId: number, user: User): Promise<void> {
-    const url = `${Http.baseUrl()}/integrations/organizations/${organizationId}/projects/${projectId}/integration-projects/${integrationProjectId}`;
-    return Http.put(url, user) as unknown as Promise<void>;
+  static updateProjectIntegrationProject({organizationId, projectId}: AssociationIds, integrationProject: ApiIntegrationProject | null, user: User): Promise<void> {
+    const url = `${Http.baseUrl()}/integrations/organizations/${organizationId}/projects/${projectId}/set-integration-project`;
+    return Http.post(url, user, integrationProject) as unknown as Promise<void>;
   }
 
 }
