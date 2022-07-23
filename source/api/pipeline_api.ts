@@ -22,6 +22,12 @@ export default class PipelineApi {
     const url = `${Http.baseUrl()}/pipelines/${pipelineId}`;
     return Http.get(url, user);
   }
+
+  static getFloorPipelines({ projectId, floorId }: AssociationIds, user: User) {
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/pipelines`;
+    console.log(url);
+    return Http.get(url, user) as Promise<ApiPipeline[]>;
+  }
 }
 
 makeErrorsPretty(PipelineApi)
