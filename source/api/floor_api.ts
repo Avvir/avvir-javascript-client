@@ -31,6 +31,11 @@ export default class FloorApi {
     return Http.patch(url, user, null);
   }
 
+  static reorderFloors({ projectId }: AssociationIds, floorIds: string[], user: User): Promise<void> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/reorder-floors`;
+    return Http.post(url, user, floorIds);
+  }
+
   static deleteFloor({ projectId, floorId }, user: User): Promise<void> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}`;
     return Http.delete(url, user);
