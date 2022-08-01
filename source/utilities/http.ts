@@ -19,23 +19,28 @@ provider.register({
   propagator: new B3Propagator(),
 });
 
-
+// ensure request id is passed through on headers
 registerInstrumentations({
   instrumentations: [
     getWebAutoInstrumentations({
-      // load custom configuration for xml-http-request instrumentation
-      // needs to be secured to API - need to make regex out of gateway URL in the config
       '@opentelemetry/instrumentation-xml-http-request': {
+        ignoreUrls: [
+          /(.*).mixpanel.com(.*)/g,
+          /(.*).launchdarkly.com(.*)/g,
+          /(.*).googleapis.com(.*)/g,
+        ],
         propagateTraceHeaderCorsUrls: [
-          /http:\/\/localhost:8080\.*/,
+          new RegExp(Config.getConfiguration().AVVIR_GATEWAY_URL + ".*")
         ],
       },
-      // load custom configuration for fetch instrumentation
-      // needs to be secured to api
       '@opentelemetry/instrumentation-fetch': {
+        ignoreUrls: [
+          /(.*).mixpanel.com(.*)/g,
+          /(.*).launchdarkly.com(.*)/g,
+          /(.*).googleapis.com(.*)/g,
+        ],
         propagateTraceHeaderCorsUrls: [
-          // Config.getConfiguration().AVVIR_GATEWAY_URL,
-          /http:\/\/localhost:8080\.*/,
+          new RegExp(Config.getConfiguration().AVVIR_GATEWAY_URL + ".*")
         ],
       },
     }),
