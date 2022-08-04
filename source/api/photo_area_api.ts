@@ -60,6 +60,13 @@ export default class PhotoAreaApi {
     return Http.put(url, user, locations);
   }
 
+  static deletePhotoLocations({ projectId, photoAreaId }: AssociationIds,
+                              locationIds: number[],
+                              user: User): Promise<ApiPhotoLocation[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/photo-areas/${photoAreaId}/locations`;
+    return Http.delete(url, user, locationIds);
+  }
+
 }
 
 makeErrorsPretty(PhotoAreaApi);

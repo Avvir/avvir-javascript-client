@@ -41,7 +41,7 @@ describe("PhotoAreaApi", () => {
       PhotoAreaApi.createPhotoLocations({
         projectId: "some-project-id",
         photoAreaId: 1,
-        photoSessionId: [2,3]
+        photoSessionId: [2, 3]
       }, [], user);
       const fetchCall = fetchMock.lastCall();
       const lastFetchOpts = fetchMock.lastOptions();
@@ -59,9 +59,9 @@ describe("PhotoAreaApi", () => {
     });
 
     it("makes a request to the gateway", () => {
-      PhotoAreaApi.listPhotoAreasForProject({ projectId: "some-project-id" }, {
+      PhotoAreaApi.listPhotoAreasForProject({projectId: "some-project-id"}, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas`);
@@ -69,9 +69,9 @@ describe("PhotoAreaApi", () => {
     });
 
     it("makes a request to the gateway with the integration project id", () => {
-      PhotoAreaApi.listPhotoAreasForProject({ projectId: "some-project-id", integrationProjectId: 3 }, {
+      PhotoAreaApi.listPhotoAreasForProject({projectId: "some-project-id", integrationProjectId: 3}, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas?integrationProjectId=3`);
@@ -79,9 +79,9 @@ describe("PhotoAreaApi", () => {
     });
 
     it("includes the authorization headers", () => {
-      PhotoAreaApi.listPhotoAreasForProject({ projectId: "some-project-id" }, {
+      PhotoAreaApi.listPhotoAreasForProject({projectId: "some-project-id"}, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
@@ -94,9 +94,9 @@ describe("PhotoAreaApi", () => {
     });
 
     it("makes a request to the gateway", () => {
-      PhotoAreaApi.listPhotoLocations({ projectId: "some-project-id", photoAreaId: 4 }, {
+      PhotoAreaApi.listPhotoLocations({projectId: "some-project-id", photoAreaId: 4}, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations`);
@@ -104,9 +104,9 @@ describe("PhotoAreaApi", () => {
     });
 
     it("includes the authorization headers", () => {
-      PhotoAreaApi.listPhotoLocations({ projectId: "some-project-id", photoAreaId: 4 }, {
+      PhotoAreaApi.listPhotoLocations({projectId: "some-project-id", photoAreaId: 4}, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
@@ -118,9 +118,9 @@ describe("PhotoAreaApi", () => {
       });
 
       it("adds the photo session id as a query param", () => {
-        PhotoAreaApi.listPhotoLocations({ projectId: "some-project-id", photoAreaId: 4, photoSessionId: 5 }, {
+        PhotoAreaApi.listPhotoLocations({projectId: "some-project-id", photoAreaId: 4, photoSessionId: 5}, {
           authType: GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
         });
 
         expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations?photoSessionId=5`);
@@ -134,9 +134,9 @@ describe("PhotoAreaApi", () => {
     });
 
     it("makes a request to the gateway", () => {
-      PhotoAreaApi.listPhotoSessionsForPhotoArea({ projectId: "some-project-id", photoAreaId: 4 }, {
+      PhotoAreaApi.listPhotoSessionsForPhotoArea({projectId: "some-project-id", photoAreaId: 4}, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/sessions`);
@@ -144,9 +144,9 @@ describe("PhotoAreaApi", () => {
     });
 
     it("includes the authorization headers", () => {
-      PhotoAreaApi.listPhotoSessionsForPhotoArea({ projectId: "some-project-id", photoAreaId: 4 }, {
+      PhotoAreaApi.listPhotoSessionsForPhotoArea({projectId: "some-project-id", photoAreaId: 4}, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
@@ -181,7 +181,7 @@ describe("PhotoAreaApi", () => {
           cameraWorldMatrix: new Matrix4(),
           bimLocation: new ApiPhotoLocation3d({
             id: 5,
-            position: new Vector3(0,0,0),
+            position: new Vector3(0, 0, 0),
             orientation: {a: 0, b: 0, c: 0, d: 1}
           }),
           yawOffset: 0,
@@ -200,7 +200,7 @@ describe("PhotoAreaApi", () => {
           cameraWorldMatrix: new Matrix4(),
           bimLocation: new ApiPhotoLocation3d({
             id: 6,
-            position: new Vector3(1,2,3),
+            position: new Vector3(1, 2, 3),
             orientation: {a: 0, b: 0, c: 0, d: 1}
           }),
           yawOffset: 0,
@@ -273,4 +273,30 @@ describe("PhotoAreaApi", () => {
       );
     });
   });
+
+  describe("#deletePhotoLocations", () => {
+    beforeEach(() => {
+      fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/locations`, {
+        status: 200,
+        body: {}
+      });
+    });
+
+    it("makes a call to the delete photo locations endpoint", () => {
+      PhotoAreaApi.deletePhotoLocations({
+          projectId: "some-project-id",
+          photoAreaId: 1
+        },
+        [1, 2],
+        user);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/locations`);
+      expect(lastFetchOpts.method).to.eq("DELETE");
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+  });
+
 });

@@ -34,13 +34,14 @@ export default class Http {
     });
   }
 
-  static delete(url: RequestInfo, user: User) {
+  static delete(url: RequestInfo, user: User, body?: any) {
     return Http.fetch(url, {
       method: "DELETE",
       headers: {
         ...httpPostHeaders,
         ...getAuthorizationHeaders(user)
-      }
+      },
+      body: body == null ? "" : JSON.stringify(body)
     });
   }
 

@@ -9,6 +9,7 @@ export type ApiPhotoLocationArgs = ModifyPartial<ApiPhotoLocation, {
   createdAt?: DateLike,
   updatedAt?: DateLike,
   originalTimestamp?: DateLike
+  deletedAt?: DateLike
 }>;
 
 export class ApiPhotoLocation {
@@ -27,11 +28,13 @@ export class ApiPhotoLocation {
                 rotationType,
                 createdAt,
                 updatedAt,
-                originalTimestamp
+                originalTimestamp,
+                deletedAt
               }: ApiPhotoLocationArgs = {}) {
     addInstantGetterAndSetterToApiModel(this, "createdAt", createdAt);
     addInstantGetterAndSetterToApiModel(this, "updatedAt", updatedAt);
     addInstantGetterAndSetterToApiModel(this, "originalTimestamp", originalTimestamp);
+    addInstantGetterAndSetterToApiModel(this, "deletedAt", deletedAt);
     this.id = id;
     this.photoAreaId = photoAreaId;
     this.photoSessionId = photoSessionId;
@@ -50,6 +53,10 @@ export class ApiPhotoLocation {
   readonly photoAreaId: number;
   readonly photoSessionId?: number;
   readonly file: ApiCloudFile;
+  readonly createdAt: number;
+  readonly updatedAt?: number;
+  readonly originalTimestamp?: number;
+  readonly deletedAt?: number;
   minimapX: number;
   minimapY: number;
   minimapBearing: number;
