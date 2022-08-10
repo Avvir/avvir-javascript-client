@@ -1,5 +1,5 @@
 import { User } from "../utilities/get_authorization_headers";
-import { AssociationIds } from "../typings/type_aliases";
+import { AssociationIds } from "../models";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import {ApiComment, ApiCommentThread} from "../models";

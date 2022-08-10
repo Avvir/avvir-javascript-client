@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import PurposeTypeConverter from "../../source/converters/purpose_type_converter";
-import { FloorPurposeType, ProjectPurposeType, PurposeType, ScanDatasetPurposeType } from "../../source/models/enums/purpose_type";
-import { ApiFloorPurposeType, ApiProjectPurposeType, ApiPurposeType, ApiScanDatasetPurposeType } from "../../source/models/api/api_purpose_type";
+import { FloorPurposeType, ProjectPurposeType, PurposeType, ScanDatasetPurposeType } from "../../source";
+import { ApiFloorPurposeType, ApiProjectPurposeType, ApiPurposeType, ApiScanDatasetPurposeType } from "../../source";
 
 describe("PurposeTypeConverter", () => {
   describe("#toApiPurposeType", () => {
@@ -27,7 +27,8 @@ describe("PurposeTypeConverter", () => {
       const allPurposeTypes = (Object.values(ApiProjectPurposeType) as ApiPurposeType[]).concat(Object.values(ApiFloorPurposeType)).concat(Object.values(ApiScanDatasetPurposeType));
 
       allPurposeTypes.forEach(purposeType => {
-        expect(PurposeTypeConverter.toPurposeType(purposeType)).not.to.be.undefined;
+        const converted = PurposeTypeConverter.toPurposeType(purposeType);
+        expect(converted).not.to.be.undefined;
       });
     });
   });

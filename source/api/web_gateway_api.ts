@@ -1,4 +1,3 @@
-// @ts-nocheck
 import ApiInvitation from "../models/api/api_invitation";
 import ApiMasterformat from "../models/api/api_masterformat";
 import ApiPipeline from "../models/api/api_pipeline";
@@ -6,8 +5,7 @@ import DeprecatedApiPipeline from "../models/api/deprecated_api_pipeline";
 import getAuthorizationHeaders, {BasicUser, User} from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import {AssociationIds} from "type_aliases";
-import {UserAuthType, ApiRunningProcess, ApiUserAction, UserActionType, ApiActionPayload} from "../models";
+import {AssociationIds, UserAuthType, ApiRunningProcess, ApiUserAction, UserActionType, ApiActionPayload} from "../models";
 import buildFileName from "../utilities/build_file_name";
 import AuthApi from "./auth_api";
 import {httpGetHeaders} from "../utilities/request_headers";
@@ -16,7 +14,7 @@ export default class WebGatewayApi {
 
   static connectProjectToStructionSite({projectId}: AssociationIds, structionSiteProjectUrl: string, token: string, user: User): Promise<ApiPipeline> {
     const url = `${Http.baseUrl()}/projects/${projectId}/connect-to-structionsite?structionsite-access-token=${token}&structionsite-project-url=${structionSiteProjectUrl}`;
-    return Http.post(url, user, null);
+    return Http.post(url, user, null) as unknown as Promise<ApiPipeline>;
   }
 
   /**
@@ -24,7 +22,7 @@ export default class WebGatewayApi {
    */
   static checkPipelineStatus({projectId}: AssociationIds, pipelineId: number, user: User): Promise<ApiPipeline> {
     const url = `${Http.baseUrl()}/pipelines/${pipelineId}`;
-    return Http.get(url, user);
+    return Http.get(url, user) as unknown as Promise<ApiPipeline>;
   }
 
   /**
@@ -32,7 +30,7 @@ export default class WebGatewayApi {
    */
   static createInvitation(inviteeEmail: string, role: string, organizationId: string, projectId: string, user: User): Promise<ApiInvitation> {
     const url = `${Http.baseUrl()}/users/invitations`;
-    return Http.post(url, user, {userEmail: inviteeEmail, role, clientAccountId: organizationId, projectId});
+    return Http.post(url, user, {userEmail: inviteeEmail, role, clientAccountId: organizationId, projectId}) as unknown as Promise<ApiInvitation>;
   }
 
   /**
@@ -40,7 +38,7 @@ export default class WebGatewayApi {
    */
   static getInvitation(invitationToken: string, user: User): Promise<ApiInvitation> {
     const url = `${Http.baseUrl()}/users/invitations/${invitationToken}`;
-    return Http.get(url, user);
+    return Http.get(url, user) as unknown as Promise<ApiInvitation>;
   }
 
   static getProgressReportPdfUrl(projectId: string, floorId: string, user: User): string {
@@ -95,7 +93,7 @@ export default class WebGatewayApi {
       return Promise.reject(new Error("Project not loaded yet"));
     }
     let url = `${Http.baseUrl()}/projects/${projectId}/procore?procore-access-token=${procoreAccessToken}`;
-    return Http.get(url, user);
+    return Http.get(url, user) as unknown as Promise<{ expiresInSeconds: number }>;
   }
 
   static pushPdfToProcore({
@@ -107,7 +105,7 @@ export default class WebGatewayApi {
       return Promise.reject(new Error("Project not loaded yet"));
     }
     const url = `${Http.baseUrl()}/projects/${projectId}/push-report-to-procore/${pdfType}?procore-project-id=${procoreProjectId}&procore-company-id=${procoreCompanyId}&procore-access-token=${procoreAccessToken}`;
-    return Http.post(url, user, null) as Promise<{ body: { id: number } }>;
+    return Http.post(url, user, null) as unknown as Promise<{ body: { id: number } }>;
   }
 
   static getProcoreProjects(projectId: string, procoreAccessToken: string, user: User): Promise<{ lastUpdated: number, projectId: string | number }[]> {
@@ -115,7 +113,7 @@ export default class WebGatewayApi {
       return Promise.reject(new Error("Project not loaded yet"));
     }
     const url = `${Http.baseUrl()}/projects/${projectId}/procore-projects?procore-access-token=${procoreAccessToken}`;
-    return Http.get(url, user);
+    return Http.get(url, user) as unknown as Promise<{ lastUpdated: number, projectId: string | number }[]>;
   }
 
   /**
@@ -152,7 +150,7 @@ export default class WebGatewayApi {
   static acceptInvitation(token: string, password: string): Promise<void> {
     const url = `${Http.baseUrl()}/users/accept-invitation`;
     let invitationForm = {invitationToken: token, password};
-    return Http.post(url, null, invitationForm);
+    return Http.post(url, null, invitationForm) as unknown as Promise<void>;
   }
 
   static exportIfc({
@@ -161,7 +159,7 @@ export default class WebGatewayApi {
                      scanDatasetId
                    }: AssociationIds, type: string, user: User): Promise<DeprecatedApiPipeline> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/export-ifc?type=${type}`;
-    return Http.post(url, user, null);
+    return Http.post(url, user, null) as unknown as Promise<DeprecatedApiPipeline>;
   }
 
   // TODO unify with pipeline api
@@ -171,24 +169,24 @@ export default class WebGatewayApi {
                             scanDatasetId
                           }: AssociationIds, workflowName: string, type: string, user: User): Promise<DeprecatedApiPipeline> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/export-ifc/${workflowName}?type=${type}`;
-    return Http.get(url, user);
+    return Http.get(url, user) as unknown as Promise<DeprecatedApiPipeline>;
   }
 
   /** @deprecated **/
   static downsampleScan({projectId, floorId, scanDatasetId}: AssociationIds, user: User): Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/downsample-scan`;
-    return Http.post(url, user, null);
+    return Http.post(url, user, null) as unknown as Promise<void>;
   }
 
   //TODO move to AuthApi
   static getGcpBearerToken({projectId}: AssociationIds, user: User): Promise<{ accessToken: string, expireTime: string }> {
     let url = `${Http.baseUrl()}/projects/${projectId}/gcpAccessToken`;
-    return Http.get(url, user);
+    return Http.get(url, user) as unknown as Promise<{ accessToken: string, expireTime: string }>;
   }
 
   static getMasterformat(version: number): Promise<ApiMasterformat[]> {
     let url = `${Http.baseUrl()}/masterformats/${version}`;
-    return Http.get(url, null);
+    return Http.get(url, null) as unknown as Promise<ApiMasterformat[]>;
   }
 
   static triggerArgoRunProgressAndDeviations({
@@ -196,12 +194,12 @@ export default class WebGatewayApi {
                                                floorId
                                              }: AssociationIds, deviationsFlag: string, bimSourceFileExtension: string, user: User): Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/run-progress-and-deviations?deviationsFlag=${deviationsFlag}&bimSourceFileExtension=${bimSourceFileExtension}`;
-    return Http.post(url, user, null);
+    return Http.post(url, user, null) as unknown as Promise<void>;
   }
 
   static triggerArgoRunNwdConvert({projectId, floorId}: AssociationIds, user: User): Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/nwd-convert`;
-    return Http.post(url, user, null);
+    return Http.post(url, user, null) as unknown as Promise<void>;
   }
 
   static recordUserActions(type: UserActionType, userActions: ApiActionPayload[], user: User): Promise<ApiUserAction[]> {
@@ -210,12 +208,12 @@ export default class WebGatewayApi {
       type,
       payload: userActions
     };
-    return Http.post(url, user, actionForm);
+    return Http.post(url, user, actionForm) as unknown as Promise<ApiUserAction[]>;
   }
   
   static checkRunningProcess(processId: number, user: User): Promise<ApiRunningProcess> {
     let url = `${Http.baseUrl()}/running-processes/${processId}`;
-    return Http.get(url, user)
+    return Http.get(url, user) as unknown as Promise<ApiRunningProcess>
   }
 
 }

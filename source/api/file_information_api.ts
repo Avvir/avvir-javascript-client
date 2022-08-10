@@ -1,38 +1,48 @@
-// @ts-nocheck
-import ApiCloudFile from "../models/api/api_cloud_file";
+// noinspection JSDeprecatedSymbols
+
 import PurposeTypeConverter from "../converters/purpose_type_converter";
-import {AssociationIds, AvvirApiFiles} from "type_aliases";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import {User} from "../utilities/get_authorization_headers";
-import {FloorPurposeType, PhotoAreaPurposeType, PurposeType} from "../models";
 import ApiArgoResponse from "../models/api/api_argo_response";
 import ApiPipeline, {ApiPipelineArgument} from "../models/api/api_pipeline";
 import Pipelines from "../models/enums/pipeline_types";
 import AvvirApi from "../avvir_api";
 import {pollPipeline} from "../utilities/pollPipeline";
-import PipelineApi from "./pipeline_api";
-
+import {
+  ApiCloudFile,
+  AvvirApiFiles,
+  ApiFloorPurposeType,
+  ApiPhotoAreaPurposeType,
+  ApiPurposeType,
+  AssociationIds, PhotoAreaPurposeType, PurposeType
+} from "../models";
 
 export default class FileInformationApi {
-  static createProjectFile({ projectId }: AssociationIds, apiFile: ApiCloudFile, user: User) : Promise<ApiCloudFile>{
+  static createProjectFile({projectId}: AssociationIds, apiFile: ApiCloudFile, user: User): Promise<ApiCloudFile> {
     const url = `${Http.baseUrl()}/projects/${projectId}/files`;
-    return Http.post(url, user, apiFile);
+    return Http.post(url, user, apiFile) as unknown as Promise<ApiCloudFile>;
   }
 
-  static listProjectFiles({ projectId }: AssociationIds, user: User): Promise<ApiCloudFile[]> {
+  static listProjectFiles({projectId}: AssociationIds, user: User): Promise<ApiCloudFile[]> {
     const url = `${Http.baseUrl()}/projects/${projectId}/files`;
-    return Http.get(url, user);
+    return Http.get(url, user) as unknown as Promise<ApiCloudFile[]>;
   };
 
-  static zipProjectFolder(folderName: string, { projectId }: AssociationIds, user: User):Promise<ApiArgoResponse> {
+  static zipProjectFolder(folderName: string, {projectId}: AssociationIds, user: User): Promise<ApiArgoResponse> {
     const url = `${Http.baseUrl()}/projects/${projectId}/zip-project-folder?folder-prefix=${folderName}`;
-    return Http.post(url, user, null);
+    return Http.post(url, user, null) as unknown as Promise<ApiArgoResponse>;
   }
 
-  static listPhotoAreaFiles({ projectId, photoAreaId }: AssociationIds, user: User): Promise<ApiCloudFile[]>
-  static listPhotoAreaFiles({ projectId, photoAreaId }: AssociationIds, purposeTypes: PhotoAreaPurposeType[] | User, user: User): Promise<ApiCloudFile[]>
-  static listPhotoAreaFiles({ projectId, photoAreaId }: AssociationIds, purposeTypes: PhotoAreaPurposeType[] | User, user?: User): Promise<ApiCloudFile[]> {
+  static listPhotoAreaFiles({projectId, photoAreaId}: AssociationIds, user: User): Promise<ApiCloudFile[]>
+  static listPhotoAreaFiles({
+                              projectId,
+                              photoAreaId
+                            }: AssociationIds, purposeTypes: ApiPhotoAreaPurposeType[] | PhotoAreaPurposeType[] | User, user: User): Promise<ApiCloudFile[]>;
+  static listPhotoAreaFiles({
+                              projectId,
+                              photoAreaId
+                            }: AssociationIds, purposeTypes: ApiPhotoAreaPurposeType[] | PhotoAreaPurposeType[] | User, user?: User): Promise<ApiCloudFile[]> {
     let query;
     if (Array.isArray(purposeTypes)) {
       query = `?purposeType=${purposeTypes.map(purposeType => PurposeTypeConverter.toApiPurposeType(purposeType)).join(",")}`;
@@ -41,32 +51,51 @@ export default class FileInformationApi {
       user = purposeTypes as User;
     }
     const url = `${Http.baseUrl()}/projects/${projectId}/photo-areas/${photoAreaId}/files${query}`;
-    return Http.get(url, user);
+    return Http.get(url, user) as unknown as Promise<ApiCloudFile[]>;
   }
 
-  static saveFloorFile({ projectId, floorId }: AssociationIds, apiFile: ApiCloudFile, user: User) :Promise<ApiCloudFile|void>{
+  static saveFloorFile({projectId, floorId}: AssociationIds, apiFile: ApiCloudFile, user: User): Promise<ApiCloudFile> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/file`;
-    return Http.post(url, user, apiFile);
+    return Http.post(url, user, apiFile) as unknown as Promise<ApiCloudFile>;
   }
 
-  static listFloorFiles({ projectId, floorId }: AssociationIds, user: User):Promise<AvvirApiFiles<FloorPurposeType>> {
+  static listFloorFiles({projectId, floorId}: AssociationIds, user: User): Promise<AvvirApiFiles<ApiFloorPurposeType>> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/files`;
-    return Http.get(url, user);
+    return Http.get(url, user) as unknown as Promise<AvvirApiFiles<ApiFloorPurposeType>>;
   }
 
-  static savePhotoAreaFile({ projectId, photoAreaId }: AssociationIds, apiFile: ApiCloudFile, user: User): Promise<ApiCloudFile> {
+  static savePhotoAreaFile({
+                             projectId,
+                             photoAreaId
+                           }: AssociationIds, apiFile: ApiCloudFile, user: User): Promise<ApiCloudFile> {
     const url = `${Http.baseUrl()}/projects/${projectId}/photo-areas/${photoAreaId}/files`;
-    return Http.post(url, user, apiFile);
+    return Http.post(url, user, apiFile) as unknown as Promise<ApiCloudFile>;
   }
 
-  static saveScanDatasetFile({ projectId, floorId, scanDatasetId }: AssociationIds, apiFile: ApiCloudFile, user: User):Promise<ApiCloudFile> {
+  static saveScanDatasetFile({
+                               projectId,
+                               floorId,
+                               scanDatasetId
+                             }: AssociationIds, apiFile: ApiCloudFile, user: User): Promise<ApiCloudFile> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/file`;
-    return Http.post(url, user, apiFile);
+    return Http.post(url, user, apiFile) as unknown as Promise<ApiCloudFile>;
   }
 
-  static getScanDatasetFiles({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<{ files: ApiCloudFile[] }>
-  static getScanDatasetFiles({ projectId, floorId, scanDatasetId }: AssociationIds, purposeType: PurposeType, user: User): Promise<{ files: ApiCloudFile[] }>
-  static getScanDatasetFiles({ projectId, floorId, scanDatasetId }: AssociationIds, purposeType: PurposeType | User, user?: User) {
+  static getScanDatasetFiles({
+                               projectId,
+                               floorId,
+                               scanDatasetId
+                             }: AssociationIds, user: User): Promise<{ files: ApiCloudFile[] }>
+  static getScanDatasetFiles({
+                               projectId,
+                               floorId,
+                               scanDatasetId
+                             }: AssociationIds, purposeType: ApiPurposeType | PurposeType, user: User): Promise<{ files: ApiCloudFile[] }>
+  static getScanDatasetFiles({
+                               projectId,
+                               floorId,
+                               scanDatasetId
+                             }: AssociationIds, purposeType: ApiPurposeType | PurposeType | User, user?: User) {
     let query;
     if (typeof purposeType === "string") {
       query = `?purposeType=${PurposeTypeConverter.toApiPurposeType(purposeType)}`;
@@ -75,11 +104,12 @@ export default class FileInformationApi {
       user = purposeType as User;
     }
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/files${query}`;
-    return Http.get(url, user);
+    return Http.get(url, user) as unknown as Promise<{ files: ApiCloudFile[] }>;
   }
 
-  static saveAndIngestE57ProjectFile({ projectId }: AssociationIds, apiFile: ApiCloudFile,  user: User): Promise<ApiCloudFile> {
-    return FileInformationApi.createProjectFile({ projectId }, apiFile, user).then(() => {
+  /** @deprecated */
+  static saveAndIngestE57ProjectFile({projectId}: AssociationIds, apiFile: ApiCloudFile, user: User): Promise<ApiCloudFile> {
+    return FileInformationApi.createProjectFile({projectId}, apiFile, user).then(() => {
       let pipeline: ApiPipelineArgument = new ApiPipeline({
         name: Pipelines.INGEST_PROJECT_FILE,
         firebaseProjectId: projectId,
@@ -88,19 +118,25 @@ export default class FileInformationApi {
           fileType: 'e57'
         }
       });
-      return PipelineApi.triggerPipeline(pipeline, user)
-          .then((pipelineResponse) => {
-            return pollPipeline(pipelineResponse, user).then(()=>{
-              //pipeline is finished, return cloudfile
-              return FileInformationApi.listProjectFiles({projectId}, user).then((projectFiles) => {
-                return projectFiles.slice(-1)[0];
-              })
+      return AvvirApi.pipelines.triggerPipeline(pipeline, user)
+        .then((pipelineResponse) => {
+          return pollPipeline(pipelineResponse, user).then(() => {
+            //pipeline is finished, return cloudfile
+            return FileInformationApi.listProjectFiles({projectId}, user).then((projectFiles) => {
+              return projectFiles.slice(-1)[0];
             })
-          });
+          })
+        });
     })
   }
-  static saveAndConvertE57ProjectFile({ projectId, floorId, scanDatasetId }: AssociationIds, apiFile: ApiCloudFile,  user: User): Promise<ApiCloudFile> {
-    return FileInformationApi.saveAndIngestE57ProjectFile({projectId}, apiFile, user).then((e57CloudFile)=>{
+
+  /** @deprecated */
+  static saveAndConvertE57ProjectFile({
+                                        projectId,
+                                        floorId,
+                                        scanDatasetId
+                                      }: AssociationIds, apiFile: ApiCloudFile, user: User): Promise<ApiCloudFile> {
+    return FileInformationApi.saveAndIngestE57ProjectFile({projectId}, apiFile, user).then((e57CloudFile) => {
       let pipeline: ApiPipelineArgument = new ApiPipeline({
         name: Pipelines.CONVERT_E57_TO_LAS,
         firebaseProjectId: projectId,
@@ -111,14 +147,14 @@ export default class FileInformationApi {
       });
 
       return AvvirApi.pipelines.triggerPipeline(pipeline, user)
-          .then((pipelineResponse) => {
-            return pollPipeline(pipelineResponse, user).then(()=>{
-              //pipeline is finished, return cloudfile
-              return FileInformationApi.listProjectFiles({projectId}, user).then((projectFiles) => {
-                return projectFiles.slice(-1)[0];
-              })
+        .then((pipelineResponse) => {
+          return pollPipeline(pipelineResponse, user).then(() => {
+            //pipeline is finished, return cloudfile
+            return FileInformationApi.listProjectFiles({projectId}, user).then((projectFiles) => {
+              return projectFiles.slice(-1)[0];
             })
-          });
+          })
+        });
     })
   }
 }

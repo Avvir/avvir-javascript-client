@@ -6,7 +6,6 @@ import moment from "moment";
 import ApiScanDataset from "../../source/models/api/api_scan_dataset";
 import DateConverter from "../../source/converters/date_converter";
 import ScanDatasetApi from "../../source/api/scan_dataset_api";
-import {makeStoreContents} from "../test_utils/test_factories";
 import { User, UserRole, UserAuthType} from "../../source";
 import Config from "../../source/config";
 import {sandbox} from "../test_utils/setup_tests";
@@ -18,11 +17,8 @@ describe("ScanDatasetApi", () => {
   beforeEach(() => {
     fetchMock.resetBehavior();
     user = {authType: UserAuthType.FIREBASE, firebaseUser: {uid: "some-uid", role: UserRole.SUPERADMIN, idToken: "some-firebase.id.token"}};
-    fakeGetState = () => makeStoreContents({
-      user,
-    });
   });
-  let user: User, fakeGetState;
+  let user: User;
 
   describe("#getScanDataset", () => {
     beforeEach(() => {
@@ -587,7 +583,7 @@ describe("ScanDatasetApi", () => {
         projectId: "some-project-id",
         floorId: "some-floor-id",
         scanDatasetId: "some-scan-id"
-      }, {id: 123, photoAreaId: 111, sessionDate: 1234567 }, user);
+      }, {deletedAt: 0, id: 123, photoAreaId: 111, sessionDate: 1234567 }, user);
       const fetchCall = fetchMock.lastCall();
       const lastFetchOpts = fetchMock.lastOptions();
 

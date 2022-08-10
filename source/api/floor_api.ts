@@ -2,7 +2,7 @@
 import ApiFloor from "../models/api/api_floor";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import { AssociationIds } from "type_aliases";
+import { AssociationIds } from "../models";
 import { User } from "../utilities/get_authorization_headers";
 import {ApiPlannedElement} from "../models";
 

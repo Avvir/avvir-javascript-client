@@ -7,14 +7,13 @@ import ApiCloudFile from "../../source/models/api/api_cloud_file";
 import DateConverter from "../../source/converters/date_converter";
 import FileInformationApi from "../../source/api/file_information_api";
 import {FIREBASE} from "../../source/models/enums/user_auth_type";
-import {makeFakeDispatch, makeStoreContents} from "../test_utils/test_factories";
-import {OTHER, PhotoAreaPurposeType} from "../../source/models/enums/purpose_type";
 import {SUPERADMIN} from "../../source/models/enums/user_role";
 import Config from "../../source/config";
 import Http from "../../source/utilities/http";
+import {ApiPhotoAreaPurposeType, ApiProjectPurposeType} from "../../source";
 
 describe("FileInformationApi", () => {
-  let fakeDispatch, dispatchSpy, fakeGetState, user;
+  let user;
   beforeEach(() => {
     user = {
       authType: FIREBASE,
@@ -25,13 +24,6 @@ describe("FileInformationApi", () => {
         uid: "some.email@avvir.io"
       }
     };
-    fakeGetState = () => makeStoreContents({
-      user,
-      locationMetadata: { projectId: "some-project-id", floorId: "some-floor-id" }
-    });
-
-    dispatchSpy = sandbox.spy();
-    fakeDispatch = makeFakeDispatch(dispatchSpy, fakeGetState);
   });
 
   describe("#createProjectFile", () => {
@@ -44,7 +36,7 @@ describe("FileInformationApi", () => {
           projectId: "some-project-id"
         },
         new ApiCloudFile({
-          purposeType: OTHER,
+          purposeType: ApiProjectPurposeType.OTHER,
           url: "some-download-url.com",
           lastModified: moment("2018-04-01")
         }),
@@ -55,7 +47,7 @@ describe("FileInformationApi", () => {
       expect(request["0"]).to.eq(`${Http.baseUrl()}/projects/some-project-id/files`);
       expect(JSON.parse(request["1"].body as string)).to.deep.eq({
         createdAt: null,
-        purposeType: "OTHER",
+        purposeType: ApiProjectPurposeType.OTHER,
         url: "some-download-url.com",
         lastModified: DateConverter.dateToInstant(moment("2018-04-01"))
       });
@@ -67,7 +59,7 @@ describe("FileInformationApi", () => {
           floorId: "some-floor-id",
         },
         new ApiCloudFile({
-          purposeType: OTHER,
+          purposeType: ApiProjectPurposeType.OTHER,
           url: "some-download-url.com",
           lastModified: moment("2018-04-01")
         }),
@@ -92,7 +84,7 @@ describe("FileInformationApi", () => {
             floorId: "some-floor-id",
           },
           new ApiCloudFile({
-            purposeType: OTHER,
+            purposeType: ApiProjectPurposeType.OTHER,
             url: "some-download-url.com",
             lastModified: moment("2018-04-01")
           }),
@@ -108,7 +100,7 @@ describe("FileInformationApi", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/files`, [{
         url: "some-file-url.com",
-        purposeType: "OTHER"
+        purposeType: ApiProjectPurposeType.OTHER
       }]);
     });
 
@@ -132,7 +124,7 @@ describe("FileInformationApi", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/files`, [{
         url: "some-file-url.com",
-        purposeType: "OTHER"
+        purposeType: ApiProjectPurposeType.OTHER
       }]);
 
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/files?purposeType=MINIMAP`, [{
@@ -148,7 +140,7 @@ describe("FileInformationApi", () => {
     });
 
     it("makes a call to the project files endpoint with the specified purpose types", () => {
-      FileInformationApi.listPhotoAreaFiles({ projectId: "some-project-id", photoAreaId: 4 }, [PhotoAreaPurposeType.MINIMAP], user);
+      FileInformationApi.listPhotoAreaFiles({ projectId: "some-project-id", photoAreaId: 4 }, [ApiPhotoAreaPurposeType.MINIMAP], user);
       const request = fetchMock.lastCall();
       expect(request[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/files?purposeType=MINIMAP`);
     });
@@ -196,7 +188,7 @@ describe("FileInformationApi", () => {
           floorId: "some-floor-id"
         },
         new ApiCloudFile({
-          purposeType: OTHER,
+          purposeType: ApiProjectPurposeType.OTHER,
           url: "some-download-url.com",
           lastModified: moment("2018-04-01")
         }),
@@ -207,7 +199,7 @@ describe("FileInformationApi", () => {
       expect(request["0"]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/file`);
       expect(JSON.parse(request["1"].body as string)).to.deep.eq({
         createdAt: null,
-        purposeType: "OTHER",
+        purposeType: ApiProjectPurposeType.OTHER,
         url: "some-download-url.com",
         lastModified: DateConverter.dateToInstant(moment("2018-04-01"))
       });
@@ -219,7 +211,7 @@ describe("FileInformationApi", () => {
           floorId: "some-floor-id",
         },
         new ApiCloudFile({
-          purposeType: OTHER,
+          purposeType: ApiProjectPurposeType.OTHER,
           url: "some-download-url.com",
           lastModified: moment("2018-04-01")
         }),
@@ -244,7 +236,7 @@ describe("FileInformationApi", () => {
             floorId: "some-floor-id",
           },
           new ApiCloudFile({
-            purposeType: OTHER,
+            purposeType: ApiProjectPurposeType.OTHER,
             url: "some-download-url.com",
             lastModified: moment("2018-04-01")
           }),
@@ -268,7 +260,7 @@ describe("FileInformationApi", () => {
           photoAreaId: 1
         },
         new ApiCloudFile({
-          purposeType: PhotoAreaPurposeType.THREE_SIXTY_PHOTO,
+          purposeType: ApiPhotoAreaPurposeType.THREE_SIXTY_PHOTO,
           url: "some-download-url.com",
           lastModified: moment("2018-04-01")
         }),
@@ -298,7 +290,7 @@ describe("FileInformationApi", () => {
           scanDatasetId: "some-scan-id"
         },
         new ApiCloudFile({
-          purposeType: OTHER,
+          purposeType: ApiProjectPurposeType.OTHER,
           url: "some-download-url.com",
           lastModified: moment("2018-04-01")
         }),
@@ -309,7 +301,7 @@ describe("FileInformationApi", () => {
       expect(request["0"]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/file`);
       expect(JSON.parse(request["1"].body as string)).to.deep.eq({
         createdAt: null,
-        purposeType: "OTHER",
+        purposeType: ApiProjectPurposeType.OTHER,
         url: "some-download-url.com",
         lastModified: DateConverter.dateToInstant(moment("2018-04-01"))
       });
@@ -322,7 +314,7 @@ describe("FileInformationApi", () => {
           scanDatasetId: "some-scan-id"
         },
         new ApiCloudFile({
-          purposeType: OTHER,
+          purposeType: ApiProjectPurposeType.OTHER,
           url: "some-download-url.com",
           lastModified: moment("2018-04-01")
         }),
@@ -348,7 +340,7 @@ describe("FileInformationApi", () => {
             scanDatasetId: "some-scan-id"
           },
           new ApiCloudFile({
-            purposeType: OTHER,
+            purposeType: ApiProjectPurposeType.OTHER,
             url: "some-download-url.com",
             lastModified: moment("2018-04-01")
           }),

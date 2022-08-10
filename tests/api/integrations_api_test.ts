@@ -2,7 +2,6 @@ import {describe} from "mocha";
 import {expect} from "chai";
 import fetchMock from "fetch-mock";
 
-import {makeStoreContents} from "../test_utils/test_factories";
 import {
   ApiIntegrationCredentials,
   ApiIntegrationCredentialsType,
@@ -17,16 +16,13 @@ import {IntegrationsApi} from "../../source/api";
 import {lastMockedFetchCall} from "../test_utils/fetch_mock_utils";
 
 describe("IntegrationsApi", () => {
-  let user: User, fakeGetState;
+  let user: User;
   beforeEach(() => {
     fetchMock.resetBehavior();
     user = {
       authType: UserAuthType.FIREBASE,
       firebaseUser: {uid: "some-uid", role: UserRole.SUPERADMIN, idToken: "some-firebase.id.token"}
     };
-    fakeGetState = () => makeStoreContents({
-      user,
-    });
   });
 
   describe("::saveIntegrationCredentials", () => {

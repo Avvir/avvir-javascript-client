@@ -1,10 +1,9 @@
-import {AssociationIds} from "type_aliases";
 import {User} from "../utilities/get_authorization_headers";
 import {ApiPlannedElement} from "../models/api/api_planned_element";
 import Http from "../utilities/http";
 import DeviationStatus from "../models/enums/deviation_status";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import {ApiDetailedElement, ApiQueryResource, ApiRunningProcess, ApiUserAction} from "../models";
+import {ApiDetailedElement, ApiQueryResource, ApiRunningProcess, ApiUserAction, AssociationIds} from "../models";
 
 export default class ElementApi {
   static getPlannedBuildingElements({projectId, floorId}: AssociationIds, user: User): Promise<ApiPlannedElement[]> {

@@ -3,21 +3,17 @@ import {expect} from "chai";
 import fetchMock from "fetch-mock";
 
 import CommentApi from "../../source/api/comment_api";
-import {makeStoreContents} from "../test_utils/test_factories";
 import {ApiComment, ApiCommentThread, ApiUser, User, UserRole, UserAuthType} from "../../source";
 import Http from "../../source/utilities/http";
 
 describe("CommentApi", () => {
-  let user: User, fakeGetState;
+  let user: User;
   beforeEach(() => {
     fetchMock.resetBehavior();
     user = {
       authType: UserAuthType.FIREBASE,
       firebaseUser: {uid: "some-uid", role: UserRole.SUPERADMIN, idToken: "some-firebase.id.token"}
     };
-    fakeGetState = () => makeStoreContents({
-      user,
-    });
   });
 
   describe("::getCommentThreads", () => {

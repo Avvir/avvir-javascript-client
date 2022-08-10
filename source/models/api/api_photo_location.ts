@@ -1,4 +1,4 @@
-import {Matrix4Like, DateLike, ModifyPartial} from "type_aliases";
+import {Matrix4Like, DateLike, ModifyPartial} from "./type_aliases";
 import PhotoProjectionType from "../enums/photo_projection_type";
 import ApiCloudFile from "./api_cloud_file";
 import ApiPhotoLocation3d from "./api_photo_location_3d";
