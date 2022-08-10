@@ -1,4 +1,4 @@
-import {Vector3Like} from "type_aliases";
+import {Vector3Like} from "./type_aliases";
 import {DeviationStatus} from "../enums";
 import {Vector3} from "three";
 

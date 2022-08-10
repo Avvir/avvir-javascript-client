@@ -1,5 +1,5 @@
 import {Vector3} from "three";
-import {DateLike, ModifyPartial, Vector3Like} from "type_aliases";
+import {DateLike, ModifyPartial, Vector3Like} from "./type_aliases";
 import addDateGetterAndSetterToDomainModel from "../../mixins/add_date_getter_and_setter_to_domain_model";
 import {UniformatId} from "uniformat";
 import {ApiInspectionModes} from "../enums";

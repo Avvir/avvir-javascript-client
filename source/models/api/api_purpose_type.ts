@@ -1,12 +1,13 @@
-import { FloorTypeKeys, ProjectTypeKeys, ScanDatasetTypeKeys, PhotoAreaTypeKeys} from "../enums";
-
 export enum ApiProjectPurposeType {
   OTHER = "OTHER",
   RAW_PROJECT_BIM = "RAW_PROJECT_BIM",
   PROJECT_FOLDER_ZIP = "PROJECT_FOLDER_ZIP",
 }
 
+export type ApiProjectTypeKeys = keyof typeof ApiProjectPurposeType;
+
 export enum ApiFloorPurposeType {
+  OTHER = "OTHER",
   BIM_IFC = "BIM_IFC",
   BIM_NWD = "BIM_NWD",
   GRID_IFC = "GRID_IFC",
@@ -19,7 +20,10 @@ export enum ApiFloorPurposeType {
   SVF = "SVF",
 }
 
+export type ApiFloorTypeKeys = keyof typeof ApiFloorPurposeType;
+
 export enum ApiScanDatasetPurposeType {
+  OTHER = "OTHER",
   /** @deprecated Raw scans are no longer supported. */
   RAW_SCAN = "RAW_SCAN",
   SCANNER_PATH = "SCANNER_PATH",
@@ -35,18 +39,26 @@ export enum ApiScanDatasetPurposeType {
   INGESTED_SCAN = "INGESTED_SCAN",
   ELEMENT_SNAPSHOT = "ELEMENT_SNAPSHOT",
   SITE_CUBE_PHOTO = "SITE_CUBE_PHOTO",
+  DEVIATIONS_SCAN_BCF = "DEVIATIONS_SCAN_BCF"
 }
 
+export type ApiScanDatasetTypeKeys = keyof typeof ApiScanDatasetPurposeType;
+
 export enum ApiPhotoAreaPurposeType {
+  OTHER = "OTHER",
   MINIMAP = "MINIMAP",
   THREE_SIXTY_PHOTO = "THREE_SIXTY_PHOTO"
 }
 
+export type ApiPhotoAreaTypeKeys = keyof typeof ApiPhotoAreaPurposeType;
+
 export type ApiPurposeType = ApiProjectPurposeType | ApiFloorPurposeType | ApiScanDatasetPurposeType | ApiPhotoAreaPurposeType
-type ApiProjectTypeMap = { [type in ProjectTypeKeys]: ApiProjectPurposeType }
-type ApiFloorTypeMap = { [type in FloorTypeKeys]: ApiFloorPurposeType }
-type ApiScanDatasetTypeMap = { [type in ScanDatasetTypeKeys]: ApiScanDatasetPurposeType }
-type ApiPhotoAreaTypeMap = { [type in PhotoAreaTypeKeys]: ApiPhotoAreaPurposeType }
+export type ApiPurposeTypeKeys = keyof typeof ApiPurposeType;
+
+export type ApiProjectTypeMap = { [type in ApiProjectTypeKeys]: ApiProjectPurposeType }
+export type ApiFloorTypeMap = { [type in ApiFloorTypeKeys]: ApiFloorPurposeType }
+export type ApiScanDatasetTypeMap = { [type in ApiScanDatasetTypeKeys]: ApiScanDatasetPurposeType }
+export type ApiPhotoAreaTypeMap = { [type in ApiPhotoAreaTypeKeys]: ApiPhotoAreaPurposeType }
 
 // noinspection JSDeprecatedSymbols
 const ApiPurposeType = {
@@ -65,6 +77,7 @@ const ApiPurposeType = {
   INGESTED_SCAN: ApiScanDatasetPurposeType.INGESTED_SCAN,
   ELEMENT_SNAPSHOT: ApiScanDatasetPurposeType.ELEMENT_SNAPSHOT,
   SITE_CUBE_PHOTO: ApiScanDatasetPurposeType.SITE_CUBE_PHOTO,
+  DEVIATIONS_SCAN_BCF: ApiScanDatasetPurposeType.DEVIATIONS_SCAN_BCF,
 
   BIM_IFC: ApiFloorPurposeType.BIM_IFC,
   BIM_NWD: ApiFloorPurposeType.BIM_NWD,
@@ -85,6 +98,12 @@ const ApiPurposeType = {
   THREE_SIXTY_PHOTO: ApiPhotoAreaPurposeType.THREE_SIXTY_PHOTO
 };
 
-export const isApiPurposeType = (type: any): type is ApiPurposeType => Object.values(ApiPurposeType).includes(type);
+const apiPurposeTypeKeys: ApiPurposeTypeKeys[] = Object.values(ApiPurposeType);
+const apiFloorPurposeTypeKeys: ApiFloorTypeKeys[] = Object.values(ApiFloorPurposeType);
+const apiScanDatasetPurposeTypeKeys: ApiScanDatasetTypeKeys[] = Object.values(ApiScanDatasetPurposeType);
+const apiPhotoAreaPurposeTypeKeys: ApiPhotoAreaTypeKeys[] = Object.values(ApiPhotoAreaPurposeType);
 
-export default ApiPurposeType as ApiProjectTypeMap & ApiFloorTypeMap & ApiScanDatasetTypeMap & ApiPhotoAreaTypeMap;
+export const isApiPurposeType = (type: any): type is ApiPurposeType => apiPurposeTypeKeys.includes(type);
+export const isApiFloorPurposeType = (type: any): type is ApiFloorPurposeType => apiFloorPurposeTypeKeys.includes(type);
+export const isApiScanDatasetPurposeType = (type: any): type is ApiScanDatasetPurposeType => apiScanDatasetPurposeTypeKeys.includes(type);
+export const isApiPhotoAreaPurposeType = (type: any): type is ApiFloorPurposeType => apiPhotoAreaPurposeTypeKeys.includes(type);

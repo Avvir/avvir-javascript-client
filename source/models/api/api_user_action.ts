@@ -1,7 +1,7 @@
 import {ApiActionPayload} from "./api_action_payload";
 import UserActionType from "../enums/user_action_type";
 import ApiUser from "./api_user";
-import {DateLike} from "type_aliases";
+import {DateLike} from "./type_aliases";
 import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
 
 export class ApiUserAction {

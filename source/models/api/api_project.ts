@@ -3,7 +3,7 @@ import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_
 import ApiProjectCostAnalysisProgress from "./api_project_cost_analysis_progress";
 import ApiProjectMasterformatProgress from "./api_project_masterformat_progress";
 import SystemOfMeasurement, { IMPERIAL } from "../enums/system_of_measurement";
-import { DateLike, Modify } from "type_aliases";
+import { DateLike, Modify } from "./type_aliases";
 import ApiProjectReport from "./api_project_report";
 import {ApiTeamMember} from "./api_team_member";
 

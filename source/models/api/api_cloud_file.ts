@@ -1,8 +1,11 @@
-import {DateLike, Modify} from "type_aliases";
+import {DateLike, Modify} from "./type_aliases";
 import {addInstantGetterAndSetterToApiModel, addReadOnlyPropertiesToModel} from "../../mixins"
 import {ApiProjectPurposeType, ApiPurposeType, isApiPurposeType} from "./api_purpose_type";
-import {isPurposeType, PurposeType} from "../enums";
 import {PurposeTypeConverter} from "../../converters";
+import {isPurposeType, PurposeType} from "../enums";
+
+export type AvvirApiFiles<Type extends ApiPurposeType = ApiPurposeType> = { [purposeType in Type]?: ApiCloudFile | ApiCloudFile[] }
+export type AvvirApiFileIds<Type extends ApiPurposeType = ApiPurposeType> = { [purposeType in Type]?: number[] }
 
 export interface ApiCloudFileArgument extends Partial<Modify<ApiCloudFile, {
   lastModified?: DateLike

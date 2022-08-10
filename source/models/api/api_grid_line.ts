@@ -1,5 +1,5 @@
 import { Vector2 } from "three";
-import { Vector2Like } from "type_aliases";
+import { Vector2Like } from "./type_aliases";
 
 export class ApiGridLine {
   constructor({ name, point1, point2 }: Partial<ApiGridLine>) {

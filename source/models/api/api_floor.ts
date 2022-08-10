@@ -1,7 +1,7 @@
 import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
 import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 import ApiConstructionGrid from "./api_construction_grid";
-import {DateLike, Matrix3Like, Modify, Vector2Like} from "type_aliases";
+import {DateLike, Matrix3Like, Modify, Vector2Like} from "./type_aliases";
 import ApiMatrix3 from "./api_matrix_3";
 import {Matrix3} from "three";
 import Matrix3Converter from "../../converters/matrix_3_converter";

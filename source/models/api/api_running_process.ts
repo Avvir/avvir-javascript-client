@@ -1,5 +1,5 @@
 import ProcessStatus from "../enums/process_status";
-import {DateLike, ModifyPartial} from "type_aliases";
+import {DateLike, ModifyPartial} from "./type_aliases";
 import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
 
 export interface ApiRunningProcessArgs extends ModifyPartial<ApiRunningProcess, {

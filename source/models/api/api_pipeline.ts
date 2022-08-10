@@ -1,4 +1,4 @@
-import { DateLike, ModifyPartial } from "type_aliases";
+import { DateLike, ModifyPartial } from "./type_aliases";
 import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
 import {PipelineName, RunningProcessStatus} from "../enums";

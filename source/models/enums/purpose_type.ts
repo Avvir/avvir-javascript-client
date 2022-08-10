@@ -1,11 +1,20 @@
 // noinspection JSUnusedGlobalSymbols,JSDeprecatedSymbols
 
+import {
+  ApiFloorTypeKeys,
+  ApiPhotoAreaTypeKeys,
+  ApiProjectTypeKeys,
+  ApiScanDatasetTypeKeys
+} from "../api";
+
+/** @deprecated use ApiProjectPurposeType */
 export enum ProjectPurposeType {
   OTHER = "other",
   RAW_PROJECT_BIM = "rawProjectBim",
   PROJECT_FOLDER_ZIP = "projectFolderZip",
 }
 
+/** @deprecated use ApiFloorPurposeType */
 export enum FloorPurposeType {
   OTHER = "other",
   BIM_IFC = "bimIfc",
@@ -20,6 +29,7 @@ export enum FloorPurposeType {
   SVF = "svf"
 }
 
+/** @deprecated use ApiScanDatasetPurposeType */
 export enum ScanDatasetPurposeType {
   OTHER = "other",
   /** @deprecated Raw scans are no longer supported. */
@@ -40,52 +50,36 @@ export enum ScanDatasetPurposeType {
   DEVIATIONS_SCAN_BCF = "deviationsScanBcf"
 }
 
+/** @deprecated use ApiPhotoAreaPurposeType */
 export enum PhotoAreaPurposeType {
   OTHER = "other",
   MINIMAP = "minimap",
   THREE_SIXTY_PHOTO = "threeSixtyPhoto"
 }
 
-export type ProjectTypeKeys = "OTHER"
-    | "RAW_PROJECT_BIM"
-    | "PROJECT_FOLDER_ZIP"
-export type FloorTypeKeys = "OTHER"
-    | "BIM_IFC"
-    | "BIM_NWD"
-    | "GRID_IFC"
-    | "BIM_MESH_OBJ"
-    | "BIM_TEXTURE_MTL"
-    | "BIM_MESH_GLB"
-    | "BIM_MINIMAP"
-    | "VIEWER_BIM_MESH_OBJ"
-    | "PLANNED_CLOUD_ZIP"
-    | "SVF"
-export type ScanDatasetTypeKeys = "OTHER"
-    | "RAW_SCAN"
-    | "SCANNER_PATH"
-    | "FLOOR_FLATNESS_TOPO_MAP"
-    | "BUILT_NOT_BUILT_BIM_IFC"
-    | "NEEDS_FURTHER_ANALYSIS"
-    | "PREPROCESSED_SCAN"
-    | "PREPROCESSED_SCAN_E57"
-    | "INCLUDED_BIM_IFC"
-    | "POTREE"
-    | "DOWNSAMPLED_SCAN"
-    | "INGESTED_SCAN"
-    | "ELEMENT_SNAPSHOT"
-    | "SITE_CUBE_PHOTO"
-    | "DEVIATIONS_SCAN_BCF"
-export type PhotoAreaTypeKeys = "OTHER"
-    | "MINIMAP"
-    | "THREE_SIXTY_PHOTO"
+/** @deprecated use ApiProjectTypeKeys */
+export type ProjectTypeKeys = ApiProjectTypeKeys;
 
+/** @deprecated use ApiFloorTypeKeys */
+export type FloorTypeKeys = ApiFloorTypeKeys;
+
+/** @deprecated use ApiScanDatasetTypeKeys */
+export type ScanDatasetTypeKeys = ApiScanDatasetTypeKeys;
+
+/** @deprecated use ApiPhotoAreaTypeKeys */
+export type PhotoAreaTypeKeys = ApiPhotoAreaTypeKeys;
+
+/** @deprecated use ApiPurposeTypeKeys */
 export type PurposeTypeKeys = ProjectTypeKeys | FloorTypeKeys | ScanDatasetTypeKeys | PhotoAreaTypeKeys;
+
+/** @deprecated use ApiPurposeType */
 export type PurposeType = ProjectPurposeType | FloorPurposeType | ScanDatasetPurposeType | PhotoAreaPurposeType;
 type ProjectTypeMap = { [type in ProjectTypeKeys]: ProjectPurposeType };
 type FloorTypeMap = { [type in FloorTypeKeys]: FloorPurposeType };
 type ScanDatasetTypeMap = { [type in ScanDatasetTypeKeys]: ScanDatasetPurposeType };
 type PhotoAreaTypeMap = { [type in PhotoAreaTypeKeys]: PhotoAreaPurposeType };
 
+/** @deprecated */
 export const PurposeTypeMap: ProjectTypeMap & Omit<FloorTypeMap, "OTHER"> & Omit<ScanDatasetTypeMap, "OTHER"> & Omit<PhotoAreaTypeMap, "OTHER"> = {
   MINIMAP: PhotoAreaPurposeType.MINIMAP,
   THREE_SIXTY_PHOTO: PhotoAreaPurposeType.THREE_SIXTY_PHOTO,
@@ -124,7 +118,7 @@ export const PurposeTypeMap: ProjectTypeMap & Omit<FloorTypeMap, "OTHER"> & Omit
   PROJECT_FOLDER_ZIP: ProjectPurposeType.PROJECT_FOLDER_ZIP,
 };
 
-
+/** @deprecated use isApiPurposeType */
 export const isPurposeType = (type: any): type is PurposeType => Object.values(PurposeTypeMap)
     .some(purposeType => type === purposeType);
 
@@ -157,13 +151,16 @@ export const SVF = FloorPurposeType.SVF;
 export const MINIMAP = PhotoAreaPurposeType.MINIMAP;
 export const THREE_SIXTY_PHOTO = PhotoAreaPurposeType.THREE_SIXTY_PHOTO;
 
+/** @deprecated */
 export type UploadHistoryPurposeTypes = typeof RAW_SCAN | typeof OTHER;
 
+/** @deprecated */
 export const uploadHistoryPurposeTypes = [
   RAW_SCAN,
   OTHER
 ];
 
+/** @deprecated */
 export const floorPurposeTypes = [
   BIM_IFC,
   BIM_NWD,
@@ -177,4 +174,5 @@ export const floorPurposeTypes = [
   SVF,
 ];
 
+/** @deprecated */
 export default PurposeTypeMap as ProjectTypeMap & FloorTypeMap & ScanDatasetTypeMap & PhotoAreaTypeMap;

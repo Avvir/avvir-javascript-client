@@ -3,7 +3,7 @@ import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter
 import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 import ApiMatrix4 from "./api_matrix_4";
 import Matrix4Converter from "../../converters/matrix_4_converter";
-import { DateLike, Modify } from "type_aliases";
+import { DateLike, Modify } from "./type_aliases";
 
 export interface ApiScanDatasetArgument extends Partial<Modify<ApiScanDataset, {
   coarseAlignmentMatrix?: ApiMatrix4 | Matrix4 | string | null

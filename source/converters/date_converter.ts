@@ -1,5 +1,5 @@
 import moment, { Moment } from "moment";
-import { DateLike } from "type_aliases";
+import {DateLike} from "../models";
 
 export class DateFormatter {
   constructor(format: string) {

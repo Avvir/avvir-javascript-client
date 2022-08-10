@@ -1,16 +1,15 @@
 import AuthApi from "../source/api/auth_api";
 import {describe} from "mocha";
 import ApiCloudFile from "../source/models/api/api_cloud_file";
-import {ScanDatasetPurposeType} from "../source/models/enums/purpose_type";
 import {expect} from "chai";
-import {User} from "../source/utilities/get_authorization_headers";
 import FileInformationApi from "../source/api/file_information_api";
 import {sandbox} from "../tests/test_utils/setup_tests";
 import Config from "../source/config";
+import {ApiScanDatasetPurposeType} from "../source";
 
 
 describe("Assocate Project file to scan dataset files test", () => {
-  let projectId: string, user: User, email: string, password: string, checkPipeline, checkPipelineTimeout: number,
+  let projectId: string, email: string, password: string, checkPipelineTimeout: number,
     checkPipelineIterations: number, fileUrl: string;
   beforeEach(() => {
     email = process.env.AVVIR_SANDBOX_EMAIL
@@ -23,7 +22,6 @@ describe("Assocate Project file to scan dataset files test", () => {
   })
 
   describe("when a project file has been ingested and a scan dataset exists",  () => {
-    let pipeline;
     beforeEach(()=>{
 
       // pipeline =
@@ -38,13 +36,13 @@ describe("Assocate Project file to scan dataset files test", () => {
             let floorId = '-Mk8kPX_ISw-nO_5QZ1';
             let cloudFile = new ApiCloudFile({
               url: fileUrl,
-              purposeType: ScanDatasetPurposeType.PREPROCESSED_SCAN
+              purposeType: ApiScanDatasetPurposeType.PREPROCESSED_SCAN
             });
 
             FileInformationApi.saveScanDatasetFile({ projectId, floorId, scanDatasetId }, cloudFile, user)
                 .then((scanDatasetCloudFile: ApiCloudFile)=>{
                   console.log("saving")
-                  expect(scanDatasetCloudFile.purposeType).to.be.eq(ScanDatasetPurposeType.PREPROCESSED_SCAN);
+                  expect(scanDatasetCloudFile.purposeType).to.be.eq(ApiScanDatasetPurposeType.PREPROCESSED_SCAN);
                   expect(scanDatasetCloudFile.url).to.be.eq(fileUrl);
                 }).catch(console.log).then(()=> {
                   console.log("caught");

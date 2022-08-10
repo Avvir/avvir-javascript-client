@@ -2,15 +2,14 @@ import AuthApi from "../source/api/auth_api";
 import {describe} from "mocha";
 import AvvirApi from "../source/avvir_api";
 import ApiCloudFile from "../source/models/api/api_cloud_file";
-import {OTHER} from "../source/models/enums/purpose_type";
 import Pipelines from "../source/models/enums/pipeline_types";
 import ApiPipeline, {ApiPipelineArgument} from "../source/models/api/api_pipeline";
 import {expect} from "chai";
 import RunningProcessStatus from "../source/models/enums/running_process_status";
-import {User} from "../source/utilities/get_authorization_headers";
+import {ApiProjectPurposeType} from "../source";
 
 describe("Ingest project files test", () => {
-  let projectId: string, user: User, email: string, password: string, checkPipeline, checkPipelineTimeout: number, checkPipelineIterations: number
+  let projectId: string, email: string, password: string, checkPipeline, checkPipelineTimeout: number, checkPipelineIterations: number
   beforeEach(() => {
     email = process.env.AVVIR_SANDBOX_EMAIL
     password = process.env.AVVIR_SANDBOX_PASSWORD
@@ -41,10 +40,8 @@ describe("Ingest project files test", () => {
     this.timeout(0)
     let apiCloudFile: ApiCloudFile = new ApiCloudFile({
       url: 'https://storage.googleapis.com/avvir-public-readonly/test-fixture.txt',
-      purposeType: OTHER
+      purposeType: ApiProjectPurposeType.OTHER
     })
-
-    let pipelineResponse: ApiPipeline;
 
     AuthApi.login(email, password)
         .then((user) => {
@@ -63,7 +60,7 @@ describe("Ingest project files test", () => {
                   expect(pipelineResponse.status).to.eq(RunningProcessStatus.RUNNING);
 
                   checkPipeline(pipelineResponse, user)
-                      .then((response) => {
+                      .then(() => {
                         AvvirApi.files.listProjectFiles({projectId}, user).then((projectFiles) => {
                           let url = projectFiles.slice(-1)[0].url;
                           let isExternalUrl = new RegExp(`https://storage.googleapis.com/avvir-portal-acceptance.appspot.com/project_uploads/${[projectId]}/\\d\\d\\d\\d-\\d\\d-\\d\\d_\\d\\d-\\d\\d-\\d\\d_test-fixture.txt`)
@@ -79,10 +76,10 @@ describe("Ingest project files test", () => {
                   done(err);
                 });
               }).catch((err)=>{
-                done(err);;
+                done(err);
               })
         }).catch((err)=>{
-          done(err);;
+          done(err);
         });
 
 

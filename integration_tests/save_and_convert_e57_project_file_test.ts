@@ -1,13 +1,12 @@
 import {describe} from "mocha";
 import {expect} from "chai";
-import {User} from "../source/utilities/get_authorization_headers";
 import FileInformationApi from "../source/api/file_information_api";
 import ApiCloudFile from "../source/models/api/api_cloud_file";
-import {OTHER} from "../source/models/enums/purpose_type";
 import AuthApi from "../source/api/auth_api";
+import {ApiProjectPurposeType} from "../source";
 
 describe("Ingest project files test", () => {
-  let projectId: string, user: User, email: string, password: string;
+  let projectId: string, email: string, password: string;
 
   beforeEach(() => {
     email = process.env.AVVIR_SANDBOX_EMAIL
@@ -19,7 +18,7 @@ describe("Ingest project files test", () => {
     this.timeout(0)
     let apiFile: ApiCloudFile = new ApiCloudFile({
       url: 'https://storage.googleapis.com/avvir-public-readonly/test-point-cloud.e57',
-      purposeType: OTHER
+      purposeType: ApiProjectPurposeType.OTHER
     })
     return AuthApi.login(email, password)
         .then((user) => {

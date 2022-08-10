@@ -1,7 +1,7 @@
 import AuthApi from "../source/api/auth_api";
 import {describe} from "mocha";
 import ApiCloudFile from "../source/models/api/api_cloud_file";
-import {BIM_NWD} from "../source/models/enums/purpose_type";
+import {ApiFloorPurposeType} from "../source";
 import {expect} from "chai";
 import FileInformationApi from "../source/api/file_information_api";
 import {sandbox} from "../tests/test_utils/setup_tests";
@@ -11,7 +11,6 @@ import ApiPipeline, {ApiPipelineArgument} from "../source/models/api/api_pipelin
 import Pipelines from "../source/models/enums/pipeline_types";
 import AvvirApi from "../source/avvir_api";
 import RunningProcessStatus from "../source/models/enums/running_process_status";
-import {ApiFloorPurposeType} from "../source";
 
 describe("Assocate Project file to scan dataset files test", () => {
   let projectId: string, email: string, password: string, checkPipeline, checkPipelineTimeout: number,
@@ -56,7 +55,7 @@ describe("Assocate Project file to scan dataset files test", () => {
             let floorId = '-MlLg4ZVUYsv9oA39nOE';
             let cloudFile = new ApiCloudFile({
               url: fileUrl,
-              purposeType: BIM_NWD
+              purposeType: ApiFloorPurposeType.BIM_NWD
             });
 
             return AvvirApi.files.createProjectFile({projectId}, cloudFile, user)

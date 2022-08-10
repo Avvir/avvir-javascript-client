@@ -1,5 +1,5 @@
 import {User} from "../utilities/get_authorization_headers";
-import {AssociationIds, DateLike} from "type_aliases";
+import {AssociationIds, DateLike} from "../models";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import ApiProgressScanDataset from "../models/api/api_progress_scan_dataset";
@@ -84,18 +84,18 @@ export default class ScanDatasetApi {
                       projectId,
                       floorId,
                       scanDatasetId
-                    }: AssociationIds, view: ApiView, user: User): Promise<ViewParameter> {
+                    }: AssociationIds, view: ApiView, user: User): Promise<ApiView> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/views`;
-    return Http.post(url, user, view) as Promise<ViewParameter>;
+    return Http.post(url, user, view) as unknown as Promise<ApiView>;
   }
 
   static getView({
                    projectId,
                    floorId,
                    scanDatasetId
-                 }: AssociationIds, viewId: number, user: User): Promise<ViewParameter> {
+                 }: AssociationIds, viewId: number, user: User): Promise<ApiView> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/views/${viewId}`;
-    return Http.get(url, user) as Promise<ViewParameter>;
+    return Http.get(url, user) as unknown as Promise<ApiView>;
   }
 
   static getViewsForScanDataset({
