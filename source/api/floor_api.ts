@@ -40,6 +40,11 @@ export default class FloorApi {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}`;
     return Http.delete(url, user);
   }
+
+  static updatePlannedBuildingElements({ projectId, floorId }: AssociationIds, elements: ApiPlannedElement[], user: User, validate?: boolean) {
+    return Http.patch(`${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements?validate=${!!validate}`, user, elements)
+  }
+
 }
 
 makeErrorsPretty(FloorApi);

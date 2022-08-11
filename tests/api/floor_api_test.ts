@@ -9,6 +9,7 @@ import FloorApi from "../../source/api/floor_api";
 import Http from "../../source/utilities/http";
 import { FIREBASE } from "../../source/models/enums/user_auth_type";
 import { User } from "../../source/utilities/get_authorization_headers";
+import {ApiPlannedElement} from "../../source";
 
 describe("FloorApi", () => {
   let user;
@@ -273,6 +274,62 @@ describe("FloorApi", () => {
     });
   });
 
+  describe("#updatePlannedBuildingElements", () => {
+    beforeEach(() => {
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements?validate=false`, 200);
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements?validate=true`, 200);
+    });
 
+    it("makes a call to the endpoint", () => {
+      FloorApi.updatePlannedBuildingElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id"
+      }, [new ApiPlannedElement({
+        globalId: "some-global-id",
+        name: "some-name"
+      })], user);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
 
-});
+      expect(lastFetchOpts.headers).to.include.key("Content-Type");
+      expect(lastFetchOpts.headers["Content-Type"]).to.eq("application/json");
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements?validate=false`);
+      expect(fetchCall[1].body).to.deep.eq(JSON.stringify([new ApiPlannedElement({
+            globalId: "some-global-id",
+            name: "some-name"
+          })]
+      ));
+    });
+
+    it("sends the request with authorization headers", () => {
+      FloorApi.updatePlannedBuildingElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id"
+      }, [new ApiPlannedElement({
+        globalId: "some-global-id",
+        name: "some-name"
+      })], user);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements?validate=false`);
+      expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+
+    it("takes a validation flag", () => {
+      FloorApi.updatePlannedBuildingElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id"
+      }, [new ApiPlannedElement({
+        globalId: "some-global-id",
+        name: "some-name"
+      })], user, true);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements?validate=true`);
+    });
+  });
+
+  });
