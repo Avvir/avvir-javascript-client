@@ -57,6 +57,11 @@ export default class WebGatewayApi {
     return Http.addAuthToDownloadUrl(baseUrl, user);
   }
 
+  static getPlannedElementsNewTsvUrl({projectId, floorId}: AssociationIds, fileName: string, user: User): string {
+    const baseUrl = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/${fileName}_planned-building-elements-new.tsv`;
+    return Http.addAuthToDownloadUrl(baseUrl, user);
+  }
+
   static getDeviationsReportTsvUrl({projectId, floorId}: AssociationIds, fileName: string, user: User): string {
     const baseUrl = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/${fileName}_deviation-report.tsv`;
     return Http.addAuthToDownloadUrl(baseUrl, user);
