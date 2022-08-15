@@ -1,4 +1,5 @@
 import {UniformatId} from "uniformat";
+import ApiElementDeviation from "./api_element_deviation";
 
 export class ApiPlannedElement {
   constructor({
@@ -16,7 +17,11 @@ export class ApiPlannedElement {
                 primaryMeasurement,
                 navisworksGuid,
                 issueId,
-                excludeFromAnalysis
+                excludeFromAnalysis,
+                builtAt,
+                deviation,
+                fixedAt,
+                fixedAtDeviation
               }: Partial<ApiPlannedElement> = {}) {
     this.globalId = globalId;
     this.name = name;
@@ -33,6 +38,10 @@ export class ApiPlannedElement {
     this.navisworksGuid = navisworksGuid;
     this.issueId = issueId;
     this.excludeFromAnalysis = excludeFromAnalysis;
+    this.builtAt = builtAt;
+    this.fixedAt = fixedAt;
+    this.deviation = deviation;
+    this.fixedAtDeviation = fixedAtDeviation;
   }
 
   name?: string;
@@ -50,6 +59,10 @@ export class ApiPlannedElement {
   navisworksGuid?: string;
   issueId?: number;
   excludeFromAnalysis?: boolean;
+  builtAt?: number;
+  deviation?: ApiElementDeviation;
+  fixedAt?: number;
+  fixedAtDeviation?: ApiElementDeviation;
 }
 
 export default ApiPlannedElement;
