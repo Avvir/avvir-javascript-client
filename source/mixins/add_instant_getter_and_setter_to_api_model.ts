@@ -10,14 +10,14 @@ export function addInstantGetterAndSetterToApiModel(modelInstance: Object, prope
     },
     set(val) {
       if (typeof val === "string") {
-        dateVal = DateConverter.dateToInstant(moment(val, "MMM D, YYYY").toDate());
+        dateVal = DateConverter.dateToInstant(moment(val, "MMM D, YYYY").utc(true));
       } else if (val instanceof Date || moment.isMoment(val)) {
         dateVal = DateConverter.dateToInstant(val);
       } else {
         dateVal = val;
       }
     },
-    enumerable: true
+    enumerable: true,
   });
 
   if (initialValue) {

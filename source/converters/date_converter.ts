@@ -1,5 +1,5 @@
 import moment, { Moment } from "moment";
-import {DateLike} from "type_aliases";
+import { DateLike } from "type_aliases";
 
 export class DateFormatter {
   constructor(format: string) {
@@ -63,7 +63,7 @@ export class DateConverter {
     if (date instanceof Date) {
       const epochMillis = moment(date).utc(false).toDate().valueOf();
       return epochMillis / 1000;
-    } else if (moment.isMoment(date)) {
+    } else if (moment.isMoment(date) && date.isValid()) {
       const epochMillis = date.utc(false).toDate().valueOf();
       return epochMillis / 1000;
     } else {

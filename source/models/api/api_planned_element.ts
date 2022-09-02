@@ -1,5 +1,9 @@
-import {UniformatId} from "uniformat";
+import { UniformatId } from "uniformat";
 import ApiElementDeviation from "./api_element_deviation";
+import { addInstantGetterAndSetterToApiModel } from "../../mixins";
+import { DateLike, ModifyPartial } from "type_aliases";
+
+type ApiPlannedElementArgument = ModifyPartial<ApiPlannedElement, { builtAt: DateLike, fixedAt: DateLike }>
 
 export class ApiPlannedElement {
   constructor({
@@ -22,7 +26,10 @@ export class ApiPlannedElement {
                 deviation,
                 fixedAt,
                 fixedAtDeviation
-              }: Partial<ApiPlannedElement> = {}) {
+              }: ApiPlannedElementArgument = {})
+  {
+    addInstantGetterAndSetterToApiModel(this, "builtAt", builtAt);
+    addInstantGetterAndSetterToApiModel(this, "fixedAt", fixedAt);
     this.globalId = globalId;
     this.name = name;
     this.ifcType = ifcType;
@@ -38,8 +45,6 @@ export class ApiPlannedElement {
     this.navisworksGuid = navisworksGuid;
     this.issueId = issueId;
     this.excludeFromAnalysis = excludeFromAnalysis;
-    this.builtAt = builtAt;
-    this.fixedAt = fixedAt;
     this.deviation = deviation;
     this.fixedAtDeviation = fixedAtDeviation;
   }
