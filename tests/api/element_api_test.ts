@@ -15,7 +15,7 @@ describe("ElementApi", () => {
   describe("::getPlannedBuildingElements", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements`,
-        [{
+        [new ApiDetailedElement({
           name: "Some Element Name",
           globalId: "some-element-id",
           ifcType: "IfcSomeType",
@@ -32,7 +32,7 @@ describe("ElementApi", () => {
               }
             }
           },
-        }]);
+        })]);
     });
 
     it("makes a request to the planned building elements endpoint", () => {
@@ -69,6 +69,8 @@ describe("ElementApi", () => {
             scanResult: {
               scanLabel: DEVIATED,
               deviation: {
+                clashing: false,
+                deviationMeters: Math.sqrt(2),
                 status: DETECTED,
                 deviationVectorMeters: {
                   x: 1,

@@ -20,7 +20,8 @@ export function addDateGetterAndSetterToDomainModel(target: Object, propertyName
         dateVal = DateConverter.instantToDate(val) || moment.invalid().toDate();
       }
     },
-    enumerable: true
+    enumerable: true,
+    configurable: true
   });
 
   if (initialValue) {

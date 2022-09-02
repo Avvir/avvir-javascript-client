@@ -18,6 +18,7 @@ export function addInstantGetterAndSetterToApiModel(modelInstance: Object, prope
       }
     },
     enumerable: true,
+    configurable: true
   });
 
   if (initialValue) {
