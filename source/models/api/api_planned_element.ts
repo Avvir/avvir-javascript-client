@@ -25,7 +25,8 @@ export class ApiPlannedElement {
                 builtAt,
                 deviation,
                 fixedAt,
-                fixedAtDeviation
+                fixedAtDeviation,
+                duplicateOf,
               }: ApiPlannedElementArgument = {})
   {
     addInstantGetterAndSetterToApiModel(this, "builtAt", builtAt);
@@ -47,6 +48,7 @@ export class ApiPlannedElement {
     this.excludeFromAnalysis = excludeFromAnalysis;
     this.deviation = deviation;
     this.fixedAtDeviation = fixedAtDeviation;
+    this.duplicateOf = duplicateOf;
   }
 
   name?: string;
@@ -68,6 +70,7 @@ export class ApiPlannedElement {
   deviation?: ApiElementDeviation;
   fixedAt?: number;
   fixedAtDeviation?: ApiElementDeviation;
+  duplicateOf?: string;
 }
 
 export default ApiPlannedElement;
