@@ -101,3 +101,5 @@ export {
 } from "./type_aliases";
 
 export {ApiQuaternion, isApiQuaternion} from "./api_quaternion";
+export {ApiBcfIssue, ApiBcfIssueArgs} from "./api_bcf_issue";
+export {ApiBcfBuildingElementArgs, ApiBcfBuildingElement} from "./api_bcf_building_element";

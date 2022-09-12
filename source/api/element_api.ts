@@ -3,7 +3,14 @@ import {ApiPlannedElement} from "../models/api/api_planned_element";
 import Http from "../utilities/http";
 import DeviationStatus from "../models/enums/deviation_status";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import {ApiDetailedElement, ApiQueryResource, ApiRunningProcess, ApiUserAction, AssociationIds} from "../models";
+import {
+  ApiBcfBuildingElement,
+  ApiDetailedElement,
+  ApiQueryResource,
+  ApiRunningProcess,
+  ApiUserAction,
+  AssociationIds
+} from "../models";
 
 export default class ElementApi {
   static getPlannedBuildingElements({projectId, floorId}: AssociationIds, user: User): Promise<ApiPlannedElement[]> {
@@ -111,6 +118,19 @@ export default class ElementApi {
   static getUserActionsForElement({projectId, floorId, globalId}: AssociationIds, user: User): Promise<ApiUserAction[]> {
     let url = `${Http.baseUrl()}/user-actions/projects/${projectId}/floors/${floorId}/element-history/${globalId}`;
     return Http.get(url, user) as unknown as Promise<ApiUserAction[]>;
+  }
+
+  static exportBcfBuildingElements({projectId, floorId, scanDatasetId}: AssociationIds, user: User): Promise<ApiBcfBuildingElement[]>
+  static exportBcfBuildingElements({projectId, floorId, scanDatasetId}: AssociationIds, deviationThreshold: number | User, user: User): Promise<ApiBcfBuildingElement[]>
+  static exportBcfBuildingElements({projectId, floorId, scanDatasetId}: AssociationIds, deviationThreshold: number | User, user?: User): Promise<ApiBcfBuildingElement[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/bcf-building-elements`;
+    if (user == null) {
+      user = deviationThreshold as User;
+    } else {
+      url += `?deviationThreshold=${deviationThreshold}`;
+    }
+
+    return Http.get(url, user) as unknown as Promise<ApiBcfBuildingElement[]>;
   }
 
 }
