@@ -5,7 +5,7 @@ import "../test_utils/setup_tests";
 import ElementApi from "../../source/api/element_api";
 import Http from "../../source/utilities/http";
 import {DETECTED, DeviationStatus, INCLUDED} from "../../source/models/enums/deviation_status";
-import {DEVIATED, ApiBuiltStatus} from "../../source/models/enums/api_built_status";
+import {ApiBuiltStatus, DEVIATED} from "../../source/models/enums/api_built_status";
 import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
 import {USER} from "../../source/models/enums/user_role";
 import {ApiDetailedElement, ApiPlannedElement} from "../../source";
@@ -22,9 +22,11 @@ describe("ElementApi", () => {
           discipline: "Some Discipline",
           uniformat: "A1010.10",
           scanResult: {
-            scanLabel: DEVIATED,
+            scanLabel: ApiBuiltStatus.DEVIATED,
             deviation: {
-              status: DETECTED,
+              clashing: false,
+              deviationMeters: 1.4142135623730951,
+              status: DeviationStatus.DETECTED,
               deviationVectorMeters: {
                 x: 1,
                 y: 1,
@@ -41,7 +43,7 @@ describe("ElementApi", () => {
         floorId: "some-floor-id"
       }, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       const fetchCall = fetchMock.lastCall();
@@ -57,7 +59,7 @@ describe("ElementApi", () => {
         floorId: "some-floor-id"
       }, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       })
         .then((elementDetails) => {
           expect(elementDetails).to.deep.eq([{
@@ -88,7 +90,7 @@ describe("ElementApi", () => {
       beforeEach(() => {
         user = {
           authType: GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
         };
       });
 
@@ -118,7 +120,7 @@ describe("ElementApi", () => {
         scanDatasetId: "some-scan-id"
       }, "some-deviation-id", INCLUDED, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       const fetchCall = fetchMock.lastCall();
@@ -137,7 +139,7 @@ describe("ElementApi", () => {
         scanDatasetId: "some-scan-id"
       }, "some-deviation-id", INCLUDED, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
@@ -172,7 +174,7 @@ describe("ElementApi", () => {
         }
       }], {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       const fetchCall = fetchMock.lastCall();
@@ -206,7 +208,7 @@ describe("ElementApi", () => {
         scanDatasetId: "some-scan-id"
       }, [{}] as ApiDetailedElement[], {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       }).then(() => {
         expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
       });
@@ -253,7 +255,7 @@ describe("ElementApi", () => {
       beforeEach(() => {
         user = {
           authType: GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
         };
       });
 
@@ -337,7 +339,7 @@ describe("ElementApi", () => {
       beforeEach(() => {
         user = {
           authType: GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
         };
       });
 
@@ -384,7 +386,7 @@ describe("ElementApi", () => {
         scanDatasetId: "some-scan-id"
       }, "some-element-id", {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       const fetchCall = fetchMock.lastCall();
@@ -396,13 +398,13 @@ describe("ElementApi", () => {
 
     it("returns the element details", () => {
       return ElementApi.getElementDetails({
-          projectId: "some-project-id",
-          floorId: "some-floor-id",
-          scanDatasetId: "some-scan-id"
-        }, "some-element-id", {
-          authType: GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-        })
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, "some-element-id", {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      })
         .then((elementDetails) => {
           expect(elementDetails).to.deep.eq({
             name: "Some Element Name",
@@ -430,7 +432,7 @@ describe("ElementApi", () => {
       beforeEach(() => {
         user = {
           authType: GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
         };
       });
 
@@ -477,7 +479,7 @@ describe("ElementApi", () => {
         scanDatasetId: "some-scan-id"
       }, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       const fetchCall = fetchMock.lastCall();
@@ -489,13 +491,13 @@ describe("ElementApi", () => {
 
     it("returns the element details", () => {
       return ElementApi.getManyElementsDetails({
-          projectId: "some-project-id",
-          floorId: "some-floor-id",
-          scanDatasetId: "some-scan-id"
-        }, {
-          authType: GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-        })
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      })
         .then((elementDetails) => {
           expect(elementDetails).to.deep.eq([{
             name: "Some Element Name",
@@ -530,7 +532,7 @@ describe("ElementApi", () => {
           scanDatasetId: "some-scan-id"
         }, {
           authType: GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
         }, ["some-element-id", "some-other-element-id"]);
 
         const fetchCall = fetchMock.lastCall();
@@ -546,7 +548,7 @@ describe("ElementApi", () => {
       beforeEach(() => {
         user = {
           authType: GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
         };
       });
 
@@ -578,7 +580,7 @@ describe("ElementApi", () => {
         scanResult: null
       }], {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       const fetchCall = fetchMock.lastCall();
@@ -604,14 +606,14 @@ describe("ElementApi", () => {
       ElementApi.matchPlannedBuildingElements({
           projectId: "some-project-id",
           floorId: "some-floor-id",
-        }, { "some-v1-id": "some-v2-id" },
+        }, {"some-v1-id": "some-v2-id"},
         [{
           globalId: "some-new-v2-id",
           name: "some new element"
         }],
         {
           authType: GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
         });
 
       expect(fetchMock.lastCall()[0])
@@ -635,7 +637,7 @@ describe("ElementApi", () => {
 
       }, {}, [], {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
@@ -646,8 +648,8 @@ describe("ElementApi", () => {
         floorId: "some-floor-id",
       }, {}, [], {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
-    }).then(runningProcess => {
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      }).then(runningProcess => {
         expect(runningProcess.endDate).to.eq(null);
         expect(runningProcess.startDate).not.to.eq(null);
       });
@@ -659,7 +661,7 @@ describe("ElementApi", () => {
     beforeEach(() => {
       user = {
         authType: FIREBASE,
-        firebaseUser:{ idToken: "some-firebase.id.token" }
+        firebaseUser: {idToken: "some-firebase.id.token"}
       };
       fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements`, 200);
     });
@@ -678,9 +680,9 @@ describe("ElementApi", () => {
       expect(lastFetchOpts.headers["Content-Type"]).to.eq("application/json");
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements`);
       expect(fetchCall[1].body).to.deep.eq(JSON.stringify([new ApiPlannedElement({
-            globalId: "some-global-id",
-            name: "some-name"
-          })]
+          globalId: "some-global-id",
+          name: "some-name"
+        })]
       ));
     });
 
@@ -726,7 +728,7 @@ describe("ElementApi", () => {
         globalId: "some-element-id"
       }, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       const fetchCall = fetchMock.lastCall();
@@ -743,7 +745,7 @@ describe("ElementApi", () => {
         globalId: "some-element-id"
       }, {
         authType: GATEWAY_JWT,
-        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       })
         .then((elementDetails) => {
           expect(elementDetails).to.deep.eq({
@@ -766,7 +768,7 @@ describe("ElementApi", () => {
       beforeEach(() => {
         user = {
           authType: GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
         };
       });
 
@@ -775,6 +777,140 @@ describe("ElementApi", () => {
           projectId: "some-project-id",
           floorId: "some-floor-id",
           globalId: "some-element-id"
+        }, user);
+
+        const lastFetchOpts = fetchMock.lastOptions();
+        expect(lastFetchOpts.headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      });
+    });
+  });
+
+  describe("::exportBcfBuildingElements", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/bcf-building-elements`,
+        [{
+          detailedElement: {
+            name: "Some Element Name",
+            globalId: "some-element-id",
+            ifcType: "IfcSomeType",
+            discipline: "Some Discipline",
+            uniformat: "A1010.10",
+            scanResult: {
+              scanLabel: "DEVIATED",
+              deviation: {
+                status: "DETECTED",
+                deviationVectorMeters: {
+                  x: 1,
+                  y: 1,
+                  z: 0
+                }
+              }
+            },
+          },
+          bcfIssue: {
+            plannedBuildingElementId: 2,
+            topicGuid: "123e4567-e89b-12d3-a456-426614174000",
+            commentGuid: "123e4567-e89b-12d3-a456-426614174001",
+            viewpointGuid: "123e4567-e89b-12d3-a456-426614174002"
+          }
+        }]);
+    })
+
+    it("makes a request to the export bcf building elements endpoint", () => {
+      ElementApi.exportBcfBuildingElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      });
+
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/bcf-building-elements`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("returns the exported bcf building elements", () => {
+      return ElementApi.exportBcfBuildingElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      })
+        .then((elementDetails) => {
+          expect(elementDetails).to.deep.eq([{
+            detailedElement: {
+              name: "Some Element Name",
+              globalId: "some-element-id",
+              ifcType: "IfcSomeType",
+              discipline: "Some Discipline",
+              uniformat: "A1010.10",
+              scanResult: {
+                scanLabel: "DEVIATED",
+                deviation: {
+                  status: "DETECTED",
+                  deviationVectorMeters: {
+                    x: 1,
+                    y: 1,
+                    z: 0
+                  }
+                }
+              },
+            },
+            bcfIssue: {
+              plannedBuildingElementId: 2,
+              topicGuid: "123e4567-e89b-12d3-a456-426614174000",
+              commentGuid: "123e4567-e89b-12d3-a456-426614174001",
+              viewpointGuid: "123e4567-e89b-12d3-a456-426614174002"
+            }
+          }]);
+        });
+    });
+
+    describe("when requesting a specific deviation threshold", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/bcf-building-elements?deviationThreshold=0.2`, 200)
+      });
+
+      it("adds it as a query param", () => {
+        ElementApi.exportBcfBuildingElements({
+            projectId: "some-project-id",
+            floorId: "some-floor-id",
+            scanDatasetId: "some-scan-id"
+          },
+          0.2,
+          {
+            authType: GATEWAY_JWT,
+            gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+          });
+
+        const fetchCall = fetchMock.lastCall();
+        expect(fetchCall[0])
+          .to
+          .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/bcf-building-elements?deviationThreshold=0.2`);
+        expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+      });
+    });
+
+    describe("when the user is signed in", () => {
+      let user;
+      beforeEach(() => {
+        user = {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        };
+      });
+
+      it("authenticates the request", () => {
+        ElementApi.exportBcfBuildingElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-id"
         }, user);
 
         const lastFetchOpts = fetchMock.lastOptions();
