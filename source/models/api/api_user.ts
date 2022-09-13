@@ -6,13 +6,15 @@ export class ApiUser {
     email: string
     role: UserRole
     projectId: string
+    userId: number
 
-    constructor({name, userOrganization, email, role, projectId}: Partial<ApiUser> = {}) {
+    constructor({name, userOrganization, email, role, projectId, userId}: Partial<ApiUser> = {}) {
         this.name = name;
         this.userOrganization = userOrganization;
         this.email = email;
         this.role = role;
         this.projectId = projectId;
+        this.userId = userId
     }
 }
 
