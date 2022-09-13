@@ -11,6 +11,7 @@ import Http from "../../source/utilities/http";
 import ProjectApi from "../../source/api/project_api";
 import { FIREBASE, GATEWAY_JWT } from "../../source/models/enums/user_auth_type";
 import { SUPERADMIN } from "../../source/models/enums/user_role";
+import {User} from "../../source";
 
 describe("ProjectApi", () => {
   let user;
@@ -440,6 +441,32 @@ describe("ProjectApi", () => {
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floor-files`);
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+  });
+
+  describe('#getProjectSummary', () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/summary`, 200);
+    });
+
+    it("makes a request to the gateway api", () => {
+      ProjectApi.getProjectSummary("some-project-id", {
+        authType: "GATEWAY_JWT",
+        gatewayUser: {idToken: "some-firebase.id.token"}
+      } as User);
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/summary`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("includes the authorization headers", () => {
+      ProjectApi.getProjectSummary("some-project-id", {
+        authType: "GATEWAY_JWT",
+        gatewayUser: {idToken: "some-firebase.id.token"}
+      } as User);
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
   });
 });
