@@ -2,6 +2,9 @@ export enum ApiProjectPurposeType {
   OTHER = "OTHER",
   RAW_PROJECT_BIM = "RAW_PROJECT_BIM",
   PROJECT_FOLDER_ZIP = "PROJECT_FOLDER_ZIP",
+  PROJECT_AREAS_NWD = "PROJECT_AREAS_NWD",
+  PROJECT_AREAS_IFC = "PROJECT_AREAS_IFC",
+  PROJECT_AREAS_SVF = "PROJECT_AREAS_SVF",
 }
 
 export type ApiProjectTypeKeys = keyof typeof ApiProjectPurposeType;
@@ -93,6 +96,9 @@ const ApiPurposeType = {
   OTHER: ApiProjectPurposeType.OTHER,
   RAW_PROJECT_BIM: ApiProjectPurposeType.RAW_PROJECT_BIM,
   PROJECT_FOLDER_ZIP: ApiProjectPurposeType.PROJECT_FOLDER_ZIP,
+  PROJECT_AREAS_NWD: ApiProjectPurposeType.PROJECT_AREAS_NWD,
+  PROJECT_AREAS_IFC: ApiProjectPurposeType.PROJECT_AREAS_IFC,
+  PROJECT_AREAS_SVF: ApiProjectPurposeType.PROJECT_AREAS_SVF,
 
   MINIMAP: ApiPhotoAreaPurposeType.MINIMAP,
   THREE_SIXTY_PHOTO: ApiPhotoAreaPurposeType.THREE_SIXTY_PHOTO

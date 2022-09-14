@@ -12,6 +12,9 @@ export enum ProjectPurposeType {
   OTHER = "other",
   RAW_PROJECT_BIM = "rawProjectBim",
   PROJECT_FOLDER_ZIP = "projectFolderZip",
+  PROJECT_AREAS_NWD = "projectAreasNwd",
+  PROJECT_AREAS_IFC = "projectAreasIfc",
+  PROJECT_AREAS_SVF = "projectAreasSvf",
 }
 
 /** @deprecated use ApiFloorPurposeType */
@@ -116,6 +119,9 @@ export const PurposeTypeMap: ProjectTypeMap & Omit<FloorTypeMap, "OTHER"> & Omit
   OTHER: ProjectPurposeType.OTHER,
   RAW_PROJECT_BIM: ProjectPurposeType.RAW_PROJECT_BIM,
   PROJECT_FOLDER_ZIP: ProjectPurposeType.PROJECT_FOLDER_ZIP,
+  PROJECT_AREAS_NWD: ProjectPurposeType.PROJECT_AREAS_NWD,
+  PROJECT_AREAS_IFC: ProjectPurposeType.PROJECT_AREAS_IFC,
+  PROJECT_AREAS_SVF: ProjectPurposeType.PROJECT_AREAS_SVF,
 };
 
 /** @deprecated use isApiPurposeType */
