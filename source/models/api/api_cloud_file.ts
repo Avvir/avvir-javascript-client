@@ -3,6 +3,7 @@ import {addInstantGetterAndSetterToApiModel, addReadOnlyPropertiesToModel} from 
 import {ApiProjectPurposeType, ApiPurposeType, isApiPurposeType} from "./api_purpose_type";
 import {PurposeTypeConverter} from "../../converters";
 import {isPurposeType, PurposeType} from "../enums";
+import ApiCloudFileLocation3d from "./api_cloud_file_location_3d";
 
 export type AvvirApiFiles<Type extends ApiPurposeType = ApiPurposeType> = { [purposeType in Type]?: ApiCloudFile | ApiCloudFile[] }
 export type AvvirApiFileIds<Type extends ApiPurposeType = ApiPurposeType> = { [purposeType in Type]?: number[] }
@@ -47,6 +48,7 @@ export class ApiCloudFile {
   }
 
   readonly url: string;
+  location3d?: ApiCloudFileLocation3d
   readonly id?: number
   lastModified?: number | null = null;
   createdAt?: number | null = null;
