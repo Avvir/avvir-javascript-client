@@ -7,6 +7,7 @@ import makeErrorsPretty from "../utilities/make_errors_pretty";
 import ApiProjectCostAnalysisProgress from "../models/api/api_project_cost_analysis_progress";
 import ApiCloudFile from "../models/api/api_cloud_file";
 import {ApiProjectSummary} from "../models";
+import {ApiWorkPackage} from "../models/api/api_work_package";
 
 export default class ProjectApi {
   static listProjectsForOrganization(accountId: string, user: User): Promise<ApiProject[]> {
@@ -96,6 +97,16 @@ export default class ProjectApi {
   static getProjectSummary(projectId: string, user: User) {
     let url = `${Http.baseUrl()}/projects/${projectId}/summary`;
     return Http.get(url, user) as unknown as Promise<ApiProjectSummary>;
+  }
+
+  static getWorkPackages(projectId: string, user:User) {
+    let url = `${Http.baseUrl()}/projects/${projectId}/work-packages`;
+    return Http.get(url, user) as unknown as Promise<ApiWorkPackage[]>;
+  }
+
+  static saveWorkPackages(projectId: string, user:User, workPackages: ApiWorkPackage[]) {
+    let url = `${Http.baseUrl()}/projects/${projectId}/work-packages`;
+    return Http.put(url, user, workPackages) as unknown as Promise<ApiWorkPackage[]>;
   }
 }
 
