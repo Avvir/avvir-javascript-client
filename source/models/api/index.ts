@@ -27,6 +27,7 @@ export {ApiProjectMasterformatProgress} from "./api_project_masterformat_progres
 export {ApiProjectReportVersion} from "./api_project_report_version";
 export {ApiProjectSummary} from "./api_project_summary";
 export {ApiWorkPackage} from "./api_work_package"
+export {ApiProjectArea} from "./api_project_area"
 
 export {
   ApiPhotoAreaPurposeType,
