@@ -1,13 +1,14 @@
 import ApiProject from "../models/api/api_project";
 import ApiProjectMasterformatProgress from "../models/api/api_project_masterformat_progress";
 import {User} from "../utilities/get_authorization_headers";
-import {AssociationIds} from "../models";
+import {ApiProjectArea, AssociationIds} from "../models";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import ApiProjectCostAnalysisProgress from "../models/api/api_project_cost_analysis_progress";
 import ApiCloudFile from "../models/api/api_cloud_file";
 import {ApiProjectSummary} from "../models";
 import {ApiWorkPackage} from "../models/api/api_work_package";
+import {ApiProjectAreaWorkStatus} from "../models/api/api_project_area_work_status";
 
 export default class ProjectApi {
   static listProjectsForOrganization(accountId: string, user: User): Promise<ApiProject[]> {
@@ -97,6 +98,11 @@ export default class ProjectApi {
   static getProjectSummary(projectId: string, user: User) {
     let url = `${Http.baseUrl()}/projects/${projectId}/summary`;
     return Http.get(url, user) as unknown as Promise<ApiProjectSummary>;
+  }
+
+  static getProjectAreas(projectId: string, user: User) {
+    let url = `${Http.baseUrl()}/projects/${projectId}/areas`;
+    return Http.get(url, user) as unknown as Promise<ApiProjectArea[]>;
   }
 
   static getWorkPackages(projectId: string, user:User) {
