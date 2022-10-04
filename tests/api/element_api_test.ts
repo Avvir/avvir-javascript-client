@@ -1,17 +1,16 @@
 import fetchMock from "fetch-mock";
-import {expect} from "chai";
+import { expect } from "chai";
 import "../test_utils/setup_tests";
 
 import ElementApi from "../../source/api/element_api";
 import Http from "../../source/utilities/http";
-import {DETECTED, DeviationStatus, INCLUDED} from "../../source/models/enums/deviation_status";
-import {ApiBuiltStatus, DEVIATED} from "../../source/models/enums/api_built_status";
-import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
-import {USER} from "../../source/models/enums/user_role";
-import {ApiDetailedElement, ApiPlannedElement} from "../../source";
+import { DETECTED, DeviationStatus, INCLUDED } from "../../source/models/enums/deviation_status";
+import { ApiBuiltStatus, DEVIATED, NOT_BUILT } from "../../source/models/enums/api_built_status";
+import { FIREBASE, GATEWAY_JWT } from "../../source/models/enums/user_auth_type";
+import { USER } from "../../source/models/enums/user_role";
+import { ApiDetailedElement, ApiPlannedElement, ApiScannedElement, DateConverter } from "../../source";
 
 describe("ElementApi", () => {
-
   describe("::getPlannedBuildingElements", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements`,
@@ -356,6 +355,138 @@ describe("ElementApi", () => {
     });
   });
 
+  describe("::createPlannedBuildingElementsQuery", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/query`, {
+        id: 23,
+        queriedIds: ["some-global-id"]
+      });
+    });
+
+    it("makes a request to the create detailed elements query endpoint", () => {
+      ElementApi.createPlannedBuildingElementsQuery({
+        projectId: "some-project-id",
+        floorId: "some-floor-id"
+      }, ["some-global-id"], null);
+
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/query`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+      expect(fetchMock.lastOptions().body).to.eq(JSON.stringify(["some-global-id"]));
+    });
+
+    it("returns the created query", () => {
+      return ElementApi.createPlannedBuildingElementsQuery({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+      }, ["some-global-id"], null)
+        .then((plannedElementsQuery) => {
+          expect(plannedElementsQuery).to.deep.eq({
+            id: 23,
+            queriedIds: ["some-global-id"]
+          });
+        });
+    });
+
+    describe("when the user is signed in", () => {
+      let user;
+      beforeEach(() => {
+        user = {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        };
+      });
+
+      it("authenticates the request", () => {
+        ElementApi.createPlannedBuildingElementsQuery({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-id"
+        }, ["some-global-id"], user);
+
+        const lastFetchOpts = fetchMock.lastOptions();
+        expect(lastFetchOpts.headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      });
+    });
+  });
+
+  describe("::getPlannedBuildingElementsQueryResult", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/query/23`, [{
+        name: "Some Element Name",
+        globalId: "some-element-id",
+        ifcType: "IfcSomeType",
+        discipline: "Some Discipline",
+        uniformat: "A1010.10",
+        builtAt: DateConverter.dateToInstant(new Date("2022-04-01")),
+        deviation: {
+          status: "DETECTED",
+          deviationVectorMeters: {
+            x: 1,
+            y: 1,
+            z: 0
+          }
+        }
+      }]);
+    });
+
+    it("makes a request to get the planned building elements query results", () => {
+      ElementApi.getPlannedBuildingElementsQueryResult({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+      }, 23, null);
+
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/query/23`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("returns the results for the query", () => {
+      return ElementApi.getPlannedBuildingElementsQueryResult({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+      }, 23, null)
+        .then((plannedElementsQueryResult) => {
+          expect(plannedElementsQueryResult).to.deep.eq([{
+            name: "Some Element Name",
+            globalId: "some-element-id",
+            ifcType: "IfcSomeType",
+            discipline: "Some Discipline",
+            uniformat: "A1010.10",
+            builtAt: DateConverter.dateToInstant(new Date("2022-04-01")),
+            deviation: {
+              status: "DETECTED",
+              deviationVectorMeters: {
+                x: 1,
+                y: 1,
+                z: 0
+              }
+            }
+          }]);
+        });
+    });
+
+    describe("when the user is signed in", () => {
+      let user;
+      beforeEach(() => {
+        user = {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        };
+      });
+
+      it("authenticates the request", () => {
+        ElementApi.getPlannedBuildingElementsQueryResult({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+        }, 23, user);
+
+        const lastFetchOpts = fetchMock.lastOptions();
+        expect(lastFetchOpts.headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      });
+    });
+  });
+
   describe("::getElementDetails", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/element/some-element-id`,
@@ -642,6 +773,7 @@ describe("ElementApi", () => {
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
+
     it("returns the running process", () => {
       ElementApi.matchPlannedBuildingElements({
         projectId: "some-project-id",
@@ -700,9 +832,120 @@ describe("ElementApi", () => {
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements`);
       expect(lastFetchOpts.headers["firebaseIdToken"]).to.eq("some-firebase.id.token");
     });
-
   });
 
+  describe("::updatePlannedBuildingElementsForViewer", () => {
+    let user;
+    beforeEach(() => {
+      user = {
+        authType: FIREBASE,
+        firebaseUser: {idToken: "some-firebase.id.token"}
+      };
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-scan-dataset-id/viewer`, 200);
+    });
+
+    it("makes a call to the endpoint", () => {
+      ElementApi.updatePlannedBuildingElementsForViewer({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-dataset-id"
+      }, [new ApiScannedElement({
+        globalId: "some-global-id",
+        scanLabel: NOT_BUILT,
+      })], false, user);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(lastFetchOpts.headers["Content-Type"]).to.eq("application/json");
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-scan-dataset-id/viewer`);
+      expect(fetchCall[1].body).to.deep.eq(JSON.stringify([new ApiScannedElement({
+          globalId: "some-global-id",
+          scanLabel: NOT_BUILT,
+        })]
+      ));
+    });
+
+    it("sends the request with authorization headers", () => {
+      ElementApi.updatePlannedBuildingElementsForViewer({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-dataset-id"
+      }, [new ApiScannedElement({
+        globalId: "some-global-id",
+        scanLabel: NOT_BUILT,
+      })], false, user);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-scan-dataset-id/viewer`);
+      expect(lastFetchOpts.headers["firebaseIdToken"]).to.eq("some-firebase.id.token");
+    });
+
+    describe("when progress mode is passed in as true", () => {
+      beforeEach(() => {
+        fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-scan-dataset-id/viewer?progressMode=true;`, 200);
+      });
+
+      it("adds the query string to the url", () => {
+        ElementApi.updatePlannedBuildingElementsForViewer({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        }, [new ApiScannedElement({
+          globalId: "some-global-id",
+          scanLabel: NOT_BUILT,
+        })], true, user);
+        const fetchCall = fetchMock.lastCall();
+
+        expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-scan-dataset-id/viewer?progressMode=true;`);
+      });
+    });
+  });
+
+  describe("::updatePlannedBuildingElementsForViewerUndo", () => {
+    let user;
+    beforeEach(() => {
+      user = {
+        authType: FIREBASE,
+        firebaseUser: {idToken: "some-firebase.id.token"}
+      };
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/viewer`, 200);
+    });
+
+    it("makes a call to the endpoint", () => {
+      ElementApi.updatePlannedBuildingElementsForViewerUndo({
+        projectId: "some-project-id",
+        floorId: "some-floor-id"
+      }, [new ApiPlannedElement({
+        globalId: "some-global-id",
+        builtAt: null,
+      })],  user);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(lastFetchOpts.headers["Content-Type"]).to.eq("application/json");
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/viewer`);
+      expect(fetchCall[1].body).to.deep.eq(JSON.stringify([new ApiPlannedElement({
+          globalId: "some-global-id",
+          builtAt: null,
+        })]));
+    });
+
+    it("sends the request with authorization headers", () => {
+      ElementApi.updatePlannedBuildingElementsForViewerUndo({
+        projectId: "some-project-id",
+        floorId: "some-floor-id"
+      }, [new ApiPlannedElement({
+        globalId: "some-global-id",
+        builtAt: null,
+      })], user);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/viewer`);
+      expect(lastFetchOpts.headers["firebaseIdToken"]).to.eq("some-firebase.id.token");
+    });
+  });
 
   describe("::getUserActionsForElement", () => {
     beforeEach(() => {

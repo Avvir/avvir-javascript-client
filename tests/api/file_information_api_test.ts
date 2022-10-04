@@ -248,7 +248,6 @@ describe("FileInformationApi", () => {
     });
   });
 
-
   describe("#savePhotoAreaFile", () => {
     beforeEach(() => {
       fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/files`, 200);

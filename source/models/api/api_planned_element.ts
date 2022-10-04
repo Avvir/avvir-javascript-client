@@ -19,6 +19,7 @@ export class ApiPlannedElement {
                 discipline,
                 primaryUnitOfMeasurement,
                 primaryMeasurement,
+                unitCost,
                 navisworksGuid,
                 issueId,
                 excludeFromAnalysis,
@@ -43,6 +44,7 @@ export class ApiPlannedElement {
     this.discipline = discipline;
     this.primaryUnitOfMeasurement = primaryUnitOfMeasurement;
     this.primaryMeasurement = primaryMeasurement;
+    this.unitCost = unitCost
     this.navisworksGuid = navisworksGuid;
     this.issueId = issueId;
     this.excludeFromAnalysis = excludeFromAnalysis;
@@ -63,6 +65,7 @@ export class ApiPlannedElement {
   revitCategory?: string;
   primaryUnitOfMeasurement?: string;
   primaryMeasurement?: number;
+  unitCost?: number
   navisworksGuid?: string;
   issueId?: number;
   excludeFromAnalysis?: boolean;
