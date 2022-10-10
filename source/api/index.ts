@@ -11,6 +11,7 @@ import ScanDatasetApi from "./scan_dataset_api";
 import WebGatewayApi from "./web_gateway_api";
 import UserApi from "./user_api";
 import IntegrationsApi from "./integrations_api";
+import ProjectSummaryApi from "./project_summary_api";
 
 export {
   AuthApi,
@@ -25,5 +26,6 @@ export {
   ProjectApi,
   ScanDatasetApi,
   WebGatewayApi,
-  UserApi
+  UserApi,
+  ProjectSummaryApi
 };

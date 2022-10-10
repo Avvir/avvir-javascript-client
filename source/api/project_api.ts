@@ -94,11 +94,6 @@ export default class ProjectApi {
     return Http.get(url, user, "text/tab-separated-values; charset=utf-8") as unknown as Promise<string>;
   }
 
-  static getProjectSummary(projectId: string, user: User) {
-    let url = `${Http.baseUrl()}/projects/${projectId}/summary`;
-    return Http.get(url, user) as unknown as Promise<ApiProjectSummary>;
-  }
-
   static getWorkPackages(projectId: string, user:User) {
     let url = `${Http.baseUrl()}/projects/${projectId}/work-packages`;
     return Http.get(url, user) as unknown as Promise<ApiWorkPackage[]>;
