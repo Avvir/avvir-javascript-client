@@ -14,6 +14,8 @@ export {UserAuthType} from "./user_auth_type";
 export {UserRole} from "./user_role";
 export {UserActionType} from "./user_action_type";
 export {ApiIntegrationCredentialsType} from "./api_integration_credentials_type";
+export {UserPermissionAction} from "./user_permission_action";
+export {UserPermissionType} from "./user_permission_type";
 
 export {
   ProjectPurposeType,
