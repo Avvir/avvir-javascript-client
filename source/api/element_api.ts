@@ -141,7 +141,7 @@ export default class ElementApi {
                                                 elements: ApiScannedElement<ApiBuiltStatus>[],
                                                 progressMode: boolean,
                                                 user: User): Promise<ApiPlannedElement[]> {
-    return Http.patch(`${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/${scanDatasetId}/viewer${progressMode ? "?progressMode=true;" : ""}`,
+    return Http.patch(`${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/${scanDatasetId}/viewer${progressMode ? "?progressMode=true" : ""}`,
       user,
       elements) as unknown as Promise<ApiPlannedElement[]>;
   }
