@@ -883,7 +883,7 @@ describe("ElementApi", () => {
 
     describe("when progress mode is passed in as true", () => {
       beforeEach(() => {
-        fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-scan-dataset-id/viewer?progressMode=true;`, 200);
+        fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-scan-dataset-id/viewer?progressMode=true`, 200);
       });
 
       it("adds the query string to the url", () => {
@@ -897,7 +897,7 @@ describe("ElementApi", () => {
         })], true, user);
         const fetchCall = fetchMock.lastCall();
 
-        expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-scan-dataset-id/viewer?progressMode=true;`);
+        expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-scan-dataset-id/viewer?progressMode=true`);
       });
     });
   });
