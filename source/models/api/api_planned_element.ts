@@ -26,7 +26,7 @@ export class ApiPlannedElement {
                 builtAt,
                 deviation,
                 fixedAt,
-                fixedAtDeviation,
+                fixedDeviation,
                 duplicateOf,
               }: ApiPlannedElementArgument = {})
   {
@@ -49,7 +49,7 @@ export class ApiPlannedElement {
     this.issueId = issueId;
     this.excludeFromAnalysis = excludeFromAnalysis;
     this.deviation = deviation;
-    this.fixedAtDeviation = fixedAtDeviation;
+    this.fixedDeviation = fixedDeviation;
     this.duplicateOf = duplicateOf;
   }
 
@@ -72,7 +72,7 @@ export class ApiPlannedElement {
   builtAt?: number;
   deviation?: ApiElementDeviation;
   fixedAt?: number;
-  fixedAtDeviation?: ApiElementDeviation;
+  fixedDeviation?: ApiElementDeviation;
   duplicateOf?: string;
 }
 
