@@ -6,6 +6,7 @@ import SystemOfMeasurement, { IMPERIAL } from "../enums/system_of_measurement";
 import { DateLike, Modify } from "./type_aliases";
 import ApiProjectReport from "./api_project_report";
 import {ApiTeamMember} from "./api_team_member";
+import ApiProjectSettings from "./api_project_settings";
 
 export interface ApiProjectArgument extends Partial<Modify<ApiProject, {
   archivedAt?: DateLike
@@ -112,6 +113,7 @@ export class ApiProject {
   generateMasterformatProgressEnabled: boolean | null;
   integrationProjectId?: number;
   teamMembers?: ApiTeamMember[] = [];
+  settings?: ApiProjectSettings;
 }
 
 export default ApiProject;
