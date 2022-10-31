@@ -20,6 +20,7 @@ export {ApiPhotoSessionArgs, ApiPhotoSession} from "./api_photo_session";
 export {ApiPipeline, ApiPipelineArgument} from "./api_pipeline";
 export {ApiPlannedElement} from "./api_planned_element";
 export {ApiProject, ApiProjectArgument} from "./api_project";
+export {ApiProjectSettings} from "./api_project_settings";
 export {
   ApiProjectCostAnalysisProgressArgument, ApiProjectCostAnalysisProgress
 } from "./api_project_cost_analysis_progress";
