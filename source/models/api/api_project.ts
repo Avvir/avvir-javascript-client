@@ -44,7 +44,8 @@ export class ApiProject {
                 firebaseFloorIds,
                 generateMasterformatProgressEnabled,
                 teamMembers,
-                integrationProjectId
+                integrationProjectId,
+                settings
               }: ApiProjectArgument = {}) {
     addInstantGetterAndSetterToApiModel(this, "startDate");
     addInstantGetterAndSetterToApiModel(this, "endDate");
@@ -82,6 +83,7 @@ export class ApiProject {
     this.generateMasterformatProgressEnabled = generateMasterformatProgressEnabled;
     this.integrationProjectId = integrationProjectId;
     this.teamMembers = teamMembers;
+    this.settings = settings;
   }
 
   readonly id: number;
