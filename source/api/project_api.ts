@@ -6,7 +6,6 @@ import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import ApiProjectCostAnalysisProgress from "../models/api/api_project_cost_analysis_progress";
 import ApiCloudFile from "../models/api/api_cloud_file";
-import {ApiProjectSummary} from "../models";
 import {ApiWorkPackage} from "../models/api/api_work_package";
 
 export default class ProjectApi {

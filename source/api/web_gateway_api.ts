@@ -231,5 +231,5 @@ makeErrorsPretty(WebGatewayApi, {
     "getScanAnalysisUrl",
     "getUniformatSummaryTsvUrl",
     "getScannedProjectMasterformatProgressUrl"
-  ]
+  ], overrideErrorMessage: []
 });
