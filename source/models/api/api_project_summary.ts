@@ -7,6 +7,8 @@ export class ApiProjectSummary {
 export class ApiProjectArea {
     readonly id: number
     readonly modelElementId: number
+    readonly floorId?: number
+    readonly firebaseFloorId?: string
     name: string
     progress: ApiProjectAreaProgress[]
 
