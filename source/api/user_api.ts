@@ -51,4 +51,11 @@ export default class UserApi {
 
 }
 
-makeErrorsPretty(UserApi)
+makeErrorsPretty(UserApi, {
+        exclude: [],
+        overrideErrorMessage: [
+            "resetPassword",
+            "sendPasswordResetEmail",
+            "createInvitation",
+            "getInvitation"
+        ]})

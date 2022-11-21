@@ -2,10 +2,10 @@ import _ from "underscore";
 import checkFetchStatus from "./check_fetch_status";
 import Config from "../config";
 
-const makeErrorsPrettyForFunction = (actionName, action) => {
+const makeErrorsPrettyForFunction = (actionName, action, displayErrorMessage) => {
   return (...argumentList) => {
     return action(...argumentList)
-      .then(checkFetchStatus)
+      .then((response) => checkFetchStatus(response, displayErrorMessage))
       .catch((error) => {
         return Config.sharedErrorHandler({
           error,
@@ -22,12 +22,13 @@ const getFunctionNames = (clazz) => {
   return _.without(Object.getOwnPropertyNames(clazz), ...builtinProperties)
 }
 
-const makeErrorsPretty = (apiClass, options = {exclude: []}) => {
+const makeErrorsPretty = (apiClass, options = {exclude: [], overrideErrorMessage: []}) => {
   let functionNames = getFunctionNames(apiClass);
   _.forEach(functionNames, (functionName) => {
     let isExcluded = options.exclude && options.exclude.includes(functionName);
+    let displayErrorMessage = !options.overrideErrorMessage || !options.overrideErrorMessage.includes(functionName);
     if (!isExcluded) {
-      apiClass[functionName] = makeErrorsPrettyForFunction(functionName, apiClass[functionName]);
+      apiClass[functionName] = makeErrorsPrettyForFunction(functionName, apiClass[functionName], displayErrorMessage);
     }
   });
   return apiClass;

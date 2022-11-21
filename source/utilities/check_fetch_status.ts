@@ -1,8 +1,8 @@
-import ResponseError from "../models/response_error";
 import responseStatusText from "../resources/response_statuses.json";
 import Http from "./http";
+import CustomError from "../models/custom_error";
 
-const checkFetchStatus = <R extends string | {}>(response: Response): Promise<R | never> => {
+const checkFetchStatus = <R extends string | {}>(response: Response, displayErrorMessage: boolean = true): Promise<R | never> => {
   //@ts-ignore
   if(typeof response == "string" || !response.headers) return Promise.resolve(response);
 
@@ -27,11 +27,12 @@ from: \`${requestPath}\``);
       let message = errorBody.errorDetails || errorBody.message;
       let statusMessage = responseStatusText[response.status];
       let verboseMessage = `${response.status} ${statusMessage}: '${message}' at \`${requestPath}\``;
-      const error = new ResponseError(
+      const error = new CustomError(
         message,
         verboseMessage,
         response,
-        errorBody
+        errorBody,
+        displayErrorMessage
       );
       console.error(error);
       throw error;
