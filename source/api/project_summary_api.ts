@@ -8,8 +8,13 @@ export default class ProjectSummaryApi {
         return Http.get(url, user) as unknown as Promise<ApiProjectSummary>;
     }
 
-    static updateProjectAreaProgress(projectId: string, projectAreaId: number, projectArea: ApiProjectArea, user: User): Promise<ApiProjectArea> {
-        let url = `${Http.baseUrl()}/projects/${projectId}/areas/${projectAreaId}`;
+    static createOrReplaceProjectArea(projectId: string, modelElementId: number, projectArea: ApiProjectArea, user: User): Promise<ApiProjectArea> {
+        let url = `${Http.baseUrl()}/projects/${projectId}/areas/${modelElementId}`;
+        return Http.put(url, user, projectArea) as unknown as Promise<ApiProjectArea>
+    };
+
+    static updateProjectAreaProgress(projectId: string, modelElementId: number, projectArea: ApiProjectArea, user: User): Promise<ApiProjectArea> {
+        let url = `${Http.baseUrl()}/projects/${projectId}/areas/${modelElementId}`;
         return Http.patch(url, user, projectArea) as unknown as Promise<ApiProjectArea>
     };
 
