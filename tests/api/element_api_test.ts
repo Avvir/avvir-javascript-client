@@ -1162,4 +1162,32 @@ describe("ElementApi", () => {
     });
   });
 
+
+  describe("::verifyElements", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/detailed-elements/verified-elements`, 200);
+    });
+
+    it("makes a call to verify the elements", () => {
+      // noinspection JSDeprecatedSymbols
+      ElementApi.verifyElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, [{
+        globalId: "some-element-id"
+      }], {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      });
+
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0])
+          .to
+          .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/detailed-elements/verified-elements`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+      expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
+      expect(fetchMock.lastOptions().body).to.eq(JSON.stringify([{globalId: "some-element-id"}]));
+    });
+  });
 });

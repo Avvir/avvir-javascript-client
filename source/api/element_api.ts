@@ -11,6 +11,7 @@ import {
   ApiUserAction,
   AssociationIds
 } from "../models";
+import {ApiVerifiedPlannedBuildingElement} from "../models/api/api_verified_planned_building_element";
 
 export default class ElementApi {
   static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User): Promise<ApiPlannedElement[]> {
@@ -176,6 +177,11 @@ export default class ElementApi {
     }
 
     return Http.get(url, user) as unknown as Promise<ApiBcfBuildingElement[]>;
+  }
+
+  static verifyElements({ projectId, floorId, scanDatasetId }: AssociationIds, elements: ApiVerifiedPlannedBuildingElement[],  user: User) {
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/detailed-elements/verified-elements`;
+    return Http.post(url, user, elements) as unknown as Promise<ApiVerifiedPlannedBuildingElement[]>;
   }
 
 }
