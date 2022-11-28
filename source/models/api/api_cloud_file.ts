@@ -3,7 +3,7 @@ import {addInstantGetterAndSetterToApiModel, addReadOnlyPropertiesToModel} from 
 import {ApiProjectPurposeType, ApiPurposeType, isApiPurposeType} from "./api_purpose_type";
 import {PurposeTypeConverter} from "../../converters";
 import {isPurposeType, PurposeType} from "../enums";
-import ApiCloudFileLocation3d from "./api_cloud_file_location_3d";
+import ApiPhotoLocation3d from "./api_photo_location_3d";
 
 export type AvvirApiFiles<Type extends ApiPurposeType = ApiPurposeType> = { [purposeType in Type]?: ApiCloudFile | ApiCloudFile[] }
 export type AvvirApiFileIds<Type extends ApiPurposeType = ApiPurposeType> = { [purposeType in Type]?: number[] }
@@ -17,10 +17,10 @@ export interface ApiCloudFileArgument extends Partial<Modify<ApiCloudFile, {
 }
 
 export class ApiCloudFile {
-  constructor({url, id, lastModified, createdAt, purposeType, fileType}: ApiCloudFileArgument) {
-    addInstantGetterAndSetterToApiModel(this, "lastModified");
-    addInstantGetterAndSetterToApiModel(this, "createdAt");
-    addReadOnlyPropertiesToModel(this, {url, id, fileType});
+  constructor({url, id, lastModified, createdAt, purposeType, fileType, createdBy, sizeInBytes, location3d}: ApiCloudFileArgument) {
+    addInstantGetterAndSetterToApiModel(this, "lastModified", lastModified);
+    addInstantGetterAndSetterToApiModel(this, "createdAt", createdAt);
+    addReadOnlyPropertiesToModel(this, {url, id, fileType, createdBy});
     let purposeTypeVal: ApiPurposeType = ApiProjectPurposeType.OTHER;
     Object.defineProperties(this, {
       purposeType: {
@@ -40,19 +40,19 @@ export class ApiCloudFile {
       }
     });
     // @ts-ignore
-    this.lastModified = lastModified || null;
-    // @ts-ignore
-    this.createdAt = createdAt || null;
-    // @ts-ignore
     this.purposeType = purposeType;
+    this.location3d = location3d;
+    this.sizeInBytes = sizeInBytes;
   }
 
   readonly url: string;
-  location3d?: ApiCloudFileLocation3d
+  location3d?: ApiPhotoLocation3d
   readonly id?: number
   lastModified?: number | null = null;
   createdAt?: number | null = null;
   purposeType: ApiPurposeType = ApiProjectPurposeType.OTHER;
+  readonly createdBy?: string;
+  sizeInBytes?: number;
 }
 
 export default ApiCloudFile;

@@ -46,7 +46,6 @@ describe("FileInformationApi", () => {
 
       expect(request["0"]).to.eq(`${Http.baseUrl()}/projects/some-project-id/files`);
       expect(JSON.parse(request["1"].body as string)).to.deep.eq({
-        createdAt: null,
         purposeType: ApiProjectPurposeType.OTHER,
         url: "some-download-url.com",
         lastModified: DateConverter.dateToInstant(moment("2018-04-01"))
@@ -198,7 +197,6 @@ describe("FileInformationApi", () => {
 
       expect(request["0"]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/file`);
       expect(JSON.parse(request["1"].body as string)).to.deep.eq({
-        createdAt: null,
         purposeType: ApiProjectPurposeType.OTHER,
         url: "some-download-url.com",
         lastModified: DateConverter.dateToInstant(moment("2018-04-01"))
@@ -269,7 +267,6 @@ describe("FileInformationApi", () => {
 
       expect(request["0"]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/files`);
       expect(JSON.parse(request["1"].body as string)).to.deep.eq({
-        createdAt: null,
         purposeType: "THREE_SIXTY_PHOTO",
         url: "some-download-url.com",
         lastModified: DateConverter.dateToInstant(moment("2018-04-01"))
@@ -289,6 +286,8 @@ describe("FileInformationApi", () => {
           scanDatasetId: "some-scan-id"
         },
         new ApiCloudFile({
+          createdBy: "some-email@example.com",
+          sizeInBytes: 65536,
           purposeType: ApiProjectPurposeType.OTHER,
           url: "some-download-url.com",
           lastModified: moment("2018-04-01")
@@ -299,7 +298,8 @@ describe("FileInformationApi", () => {
 
       expect(request["0"]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/file`);
       expect(JSON.parse(request["1"].body as string)).to.deep.eq({
-        createdAt: null,
+        createdBy: "some-email@example.com",
+        sizeInBytes: 65536,
         purposeType: ApiProjectPurposeType.OTHER,
         url: "some-download-url.com",
         lastModified: DateConverter.dateToInstant(moment("2018-04-01"))
