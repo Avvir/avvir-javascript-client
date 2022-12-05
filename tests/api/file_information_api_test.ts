@@ -38,7 +38,9 @@ describe("FileInformationApi", () => {
         new ApiCloudFile({
           purposeType: ApiProjectPurposeType.OTHER,
           url: "some-download-url.com",
-          lastModified: moment("2018-04-01")
+          lastModified: moment("2018-04-01"),
+          fileSize: 65536,
+          originalFileName: "some-file.las",
         }),
         user,
       );
@@ -48,7 +50,9 @@ describe("FileInformationApi", () => {
       expect(JSON.parse(request["1"].body as string)).to.deep.eq({
         purposeType: ApiProjectPurposeType.OTHER,
         url: "some-download-url.com",
-        lastModified: DateConverter.dateToInstant(moment("2018-04-01"))
+        lastModified: DateConverter.dateToInstant(moment("2018-04-01")),
+        fileSize: 65536,
+        originalFileName: "some-file.las",
       });
     });
 
@@ -189,7 +193,9 @@ describe("FileInformationApi", () => {
         new ApiCloudFile({
           purposeType: ApiProjectPurposeType.OTHER,
           url: "some-download-url.com",
-          lastModified: moment("2018-04-01")
+          lastModified: moment("2018-04-01"),
+          fileSize: 65536,
+          originalFileName: "some-file.las",
         }),
         user,
       );
@@ -199,7 +205,9 @@ describe("FileInformationApi", () => {
       expect(JSON.parse(request["1"].body as string)).to.deep.eq({
         purposeType: ApiProjectPurposeType.OTHER,
         url: "some-download-url.com",
-        lastModified: DateConverter.dateToInstant(moment("2018-04-01"))
+        lastModified: DateConverter.dateToInstant(moment("2018-04-01")),
+        fileSize: 65536,
+        originalFileName: "some-file.las",
       });
     });
 
@@ -287,7 +295,8 @@ describe("FileInformationApi", () => {
         },
         new ApiCloudFile({
           createdBy: "some-email@example.com",
-          sizeInBytes: 65536,
+          fileSize: 65536,
+          originalFileName: "some-file.las",
           purposeType: ApiProjectPurposeType.OTHER,
           url: "some-download-url.com",
           lastModified: moment("2018-04-01")
@@ -299,7 +308,8 @@ describe("FileInformationApi", () => {
       expect(request["0"]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/file`);
       expect(JSON.parse(request["1"].body as string)).to.deep.eq({
         createdBy: "some-email@example.com",
-        sizeInBytes: 65536,
+        fileSize: 65536,
+        originalFileName: "some-file.las",
         purposeType: ApiProjectPurposeType.OTHER,
         url: "some-download-url.com",
         lastModified: DateConverter.dateToInstant(moment("2018-04-01"))
