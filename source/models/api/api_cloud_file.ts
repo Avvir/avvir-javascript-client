@@ -17,7 +17,7 @@ export interface ApiCloudFileArgument extends Partial<Modify<ApiCloudFile, {
 }
 
 export class ApiCloudFile {
-  constructor({url, id, lastModified, createdAt, purposeType, fileType, createdBy, sizeInBytes, location3d}: ApiCloudFileArgument) {
+  constructor({url, id, lastModified, createdAt, purposeType, fileType, createdBy, fileSize, location3d, originalFileName}: ApiCloudFileArgument) {
     addInstantGetterAndSetterToApiModel(this, "lastModified", lastModified);
     addInstantGetterAndSetterToApiModel(this, "createdAt", createdAt);
     addReadOnlyPropertiesToModel(this, {url, id, fileType, createdBy});
@@ -42,7 +42,8 @@ export class ApiCloudFile {
     // @ts-ignore
     this.purposeType = purposeType;
     this.location3d = location3d;
-    this.sizeInBytes = sizeInBytes;
+    this.fileSize = fileSize;
+    this.originalFileName = originalFileName;
   }
 
   readonly url: string;
@@ -52,7 +53,8 @@ export class ApiCloudFile {
   createdAt?: number | null = null;
   purposeType: ApiPurposeType = ApiProjectPurposeType.OTHER;
   readonly createdBy?: string;
-  sizeInBytes?: number;
+  fileSize?: number;
+  originalFileName?: string;
 }
 
 export default ApiCloudFile;
