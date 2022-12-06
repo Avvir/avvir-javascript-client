@@ -443,4 +443,34 @@ describe("ProjectApi", () => {
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
   });
+
+  describe("#listProjectsForUser", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projectListings`, {
+        status: 200,
+        body: [{
+          projectId: "some-project-id",
+          name: "Some Project",
+          archivedAt: null,
+          settings: { projectSummaryPage: true }
+        },{
+          projectId: "another-project-id",
+          name: "Another Project",
+          archivedAt: DateConverter.dateToInstant(moment("2019-04-01")),
+          settings: { projectSummaryPage: false }
+        }]
+      });
+    });
+
+    it("makes an authenticated call to the endpoint", () => {
+      ProjectApi.listProjectsForUser(user);
+
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projectListings`);
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+  });
 });
