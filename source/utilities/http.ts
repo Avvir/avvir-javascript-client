@@ -8,7 +8,7 @@ export default class Http {
 
   static fetch(url: RequestInfo, data) {
     if (Config.getConfiguration().logFetch) {
-      console.log("Calling fetch with:", url, data);
+      console.log("Calling fetch with:", url);
     }
     return fetch(url, data);
   }
