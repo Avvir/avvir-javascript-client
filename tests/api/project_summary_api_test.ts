@@ -1,5 +1,6 @@
 import {describe} from "mocha";
 import {User} from "../../source/models/domain/user";
+// @ts-ignore
 import fetchMock from "fetch-mock";
 import {UserAuthType} from "../../source/models/enums/user_auth_type";
 import {UserRole} from "../../source/models/enums/user_role";
@@ -7,7 +8,6 @@ import {ApiProjectArea, ApiProjectAreaProgress} from "../../source";
 import Http from "../../source/utilities/http";
 import {expect} from "chai";
 import {ProjectSummaryApi} from "../../source/api";
-import ProjectApi from "../../source/api/project_api";
 
 describe("ProjectSummaryApi", () => {
     let user: User;
@@ -47,8 +47,13 @@ describe("ProjectSummaryApi", () => {
         let projectAreaId, response;
         beforeEach(() => {
             projectAreaId = 1;
-            let projectAreaProgress = new ApiProjectAreaProgress(54, "HVAC", "Started");
-            response = new ApiProjectArea(12, projectAreaId, "Some Project Area", projectAreaProgress);
+            let projectAreaProgress = new ApiProjectAreaProgress({id: 54, name: "HVAC", status: "Started"});
+            response = new ApiProjectArea({
+                id: 12,
+                modelElementId: projectAreaId,
+                name: "Some Project Area",
+                progress: [projectAreaProgress]
+            });
             fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/areas/${projectAreaId}`, response);
         });
 
@@ -59,7 +64,7 @@ describe("ProjectSummaryApi", () => {
                 {
                     id: 12,
                     modelElementId: 1,
-                    name: "Some Project Area", progress: [{id: 54,name: "HVAC", status: "started"}]
+                    name: "Some Project Area", progress: [{id: 54, name: "HVAC", status: "started"}]
                 },
                 user);
 
@@ -76,7 +81,7 @@ describe("ProjectSummaryApi", () => {
                 {
                     id: 12,
                     modelElementId: 1,
-                    name: "Some Project Area", progress: [{id: 54,name: "HVAC", status: "started"}]
+                    name: "Some Project Area", progress: [{id: 54, name: "HVAC", status: "started"}]
                 },
                 {
                     authType: UserAuthType.GATEWAY_JWT,
@@ -90,8 +95,13 @@ describe("ProjectSummaryApi", () => {
         let projectAreaId, response;
         beforeEach(() => {
             projectAreaId = 1;
-            let projectAreaProgress = new ApiProjectAreaProgress(54, "HVAC", "Started");
-            response = new ApiProjectArea(12, projectAreaId, "Some Project Area", projectAreaProgress);
+            let projectAreaProgress = new ApiProjectAreaProgress({id: 54, name: "HVAC", status: "Started"});
+            response = new ApiProjectArea({
+                id: 12,
+                modelElementId: projectAreaId,
+                name: "Some Project Area",
+                progress: [projectAreaProgress]
+            });
             fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/areas/${projectAreaId}`, response);
         });
 
