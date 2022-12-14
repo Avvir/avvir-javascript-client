@@ -99,6 +99,79 @@ describe("FileInformationApi", () => {
     });
   });
 
+  describe("#associateProjectFiles", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/associate-files`, 200);
+    });
+
+    it("makes a call to the project files endpoint", () => {
+      FileInformationApi.associateProjectFiles({
+          projectId: "some-project-id"
+        },
+        [new ApiCloudFile({
+          purposeType: ApiProjectPurposeType.OTHER,
+          url: "some-download-url.com",
+          lastModified: moment("2018-04-01"),
+          fileSize: 65536,
+          originalFileName: "some-file.las",
+        })],
+        user,
+      );
+      const request = fetchMock.lastCall();
+
+      expect(request["0"]).to.eq(`${Http.baseUrl()}/projects/some-project-id/associate-files`);
+      expect(JSON.parse(request["1"].body as string)).to.deep.eq([{
+        purposeType: ApiProjectPurposeType.OTHER,
+        url: "some-download-url.com",
+        lastModified: DateConverter.dateToInstant(moment("2018-04-01")),
+        fileSize: 65536,
+        originalFileName: "some-file.las",
+      }]);
+    });
+
+    it("sends the request with authorization headers", () => {
+      FileInformationApi.associateProjectFiles({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+        },
+        [new ApiCloudFile({
+          purposeType: ApiProjectPurposeType.OTHER,
+          url: "some-download-url.com",
+          lastModified: moment("2018-04-01")
+        })],
+        user,
+      );
+
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+
+    describe("when the call fails", () => {
+      beforeEach(() => {
+        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/associate-files`, 500, { overwriteRoutes: true });
+      });
+
+      it("dispatches an api failure notification", () => {
+        sandbox.stub(Config, "sharedErrorHandler");
+        return FileInformationApi.associateProjectFiles({
+            projectId: "some-project-id",
+            floorId: "some-floor-id",
+          },
+          [new ApiCloudFile({
+            purposeType: ApiProjectPurposeType.OTHER,
+            url: "some-download-url.com",
+            lastModified: moment("2018-04-01")
+          })],
+          user,
+        ).catch(() => {}).then(() => {
+          expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({});
+        });
+      });
+    });
+  });
+
   describe("#listProjectFiles", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/files`, [{
