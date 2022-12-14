@@ -24,6 +24,11 @@ export default class FileInformationApi {
     return Http.post(url, user, apiFile) as unknown as Promise<ApiCloudFile>;
   }
 
+  static associateProjectFiles({projectId}: AssociationIds, files: ApiCloudFile[], user: User): Promise<ApiCloudFile[]> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/associate-files`;
+    return Http.post(url, user, files) as unknown as Promise<ApiCloudFile[]>;
+  }
+
   static listProjectFiles({projectId}: AssociationIds, user: User): Promise<ApiCloudFile[]> {
     const url = `${Http.baseUrl()}/projects/${projectId}/files`;
     return Http.get(url, user) as unknown as Promise<ApiCloudFile[]>;
