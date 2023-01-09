@@ -3,6 +3,8 @@ import ApiOrganization from "../models/api/api_organization";
 import {User} from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
+import {List} from "underscore";
+import ApiUserForOrganization from "../models/api/api_user_for_organization";
 
 export default class OrganizationApi {
   static listOrganizations(user: User): Promise<ApiOrganization[]> {
@@ -17,6 +19,11 @@ export default class OrganizationApi {
 
   static getOrganizationName(organizationId: string, user: User):Promise<string> {
     let url = `${Http.baseUrl()}/client-accounts/${organizationId}/name`;
+    return Http.get(url, user);
+  }
+
+  static getUsersForOrganization(organizationId: string, user: User):Promise<ApiUserForOrganization[]> {
+    let url = `${Http.baseUrl()}/client-accounts/${organizationId}/users`;
     return Http.get(url, user);
   }
 
