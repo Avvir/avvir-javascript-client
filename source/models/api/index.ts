@@ -107,3 +107,4 @@ export {ApiQuaternion, isApiQuaternion} from "./api_quaternion";
 export {ApiBcfIssue, ApiBcfIssueArgs} from "./api_bcf_issue";
 export {ApiBcfBuildingElementArgs, ApiBcfBuildingElement} from "./api_bcf_building_element";
 export {ApiUserPermission} from "./api_user_permission";
+export {ApiUserForOrganization} from "./api_user_for_organization";
