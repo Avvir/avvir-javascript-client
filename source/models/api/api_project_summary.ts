@@ -1,4 +1,5 @@
 import ApiCloudFile from "./api_cloud_file";
+import {DateLike} from "type_aliases";
 export class ApiProjectSummary {
     readonly model:ApiCloudFile;
     projectAreas: ApiProjectArea[];
@@ -27,12 +28,20 @@ export class ApiProjectAreaProgress {
     id: number
     name: string
     status: string
+    expectedStart: DateLike;
+    expectedCompletion: DateLike;
+    start: DateLike;
+    completion: DateLike;
 
 
-    constructor({id, name, status} : Partial<ApiProjectAreaProgress>) {
+    constructor({id, name, status, expectedStart, expectedCompletion, start, completion} : Partial<ApiProjectAreaProgress>) {
         this.id = id;
         this.name = name;
-        this.status = status
+        this.status = status;
+        this.expectedStart = expectedStart;
+        this.expectedCompletion = expectedCompletion;
+        this.start = start;
+        this.completion = completion;
     }
 }
 
