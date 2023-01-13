@@ -209,7 +209,7 @@ describe("ScanDatasetApi", () => {
     });
   });
 
-  describe("#updateScanDataset", () => {
+  describe("#mergeScanDataset", () => {
     beforeEach(() => {
       fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id`, 200);
     });
@@ -231,7 +231,7 @@ describe("ScanDatasetApi", () => {
         firebaseId: "some-scan-dataset-id",
         firebaseFloorId: "some-floor-id"
       });
-      ScanDatasetApi.updateScanDataset({
+      ScanDatasetApi.mergeScanDataset({
           projectId: "some-project-id",
           floorId: "some-floor-id",
           scanDatasetId: "some-scan-dataset-id"
@@ -266,7 +266,77 @@ describe("ScanDatasetApi", () => {
     });
 
     it("includes the authorization headers", () => {
-      ScanDatasetApi.updateScanDataset({
+      ScanDatasetApi.mergeScanDataset({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-dataset-id"
+      }, null, {
+        authType: UserAuthType.GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
+  describe("#replaceScanDataset", () => {
+    beforeEach(() => {
+      fetchMock.put(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id`, 200);
+    });
+
+    it("makes a request to the gateway", () => {
+      const apiScanDataset = new ApiScanDataset({
+        coarseAlignmentMatrix: `1 2 3 4
+0 0 0 1
+0 0 0 1
+0 0 0 1.7777`,
+        fineAlignmentMatrix: `1 2 3 5
+0 0 0 5
+0 0 0 5
+0 0 0 5.7777`,
+        notes: "Some notes",
+        name: "Some Name",
+        scanDate: moment("2018-04-01").toDate(),
+        scanNumber: 1,
+        firebaseId: "some-scan-dataset-id",
+        firebaseFloorId: "some-floor-id"
+      });
+      ScanDatasetApi.replaceScanDataset({
+            projectId: "some-project-id",
+            floorId: "some-floor-id",
+            scanDatasetId: "some-scan-dataset-id"
+          },
+          apiScanDataset, {
+            authType: UserAuthType.GATEWAY_JWT,
+            gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+          });
+
+      expect(fetchMock.lastUrl()).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id`);
+      expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
+      expect(JSON.parse(fetchMock.lastCall()[1].body as string)).to.deep.eq({
+        coarseAlignmentMatrix: {
+          x1: 1, x2: 2, x3: 3, x4: 4,
+          y1: 0, y2: 0, y3: 0, y4: 1,
+          z1: 0, z2: 0, z3: 0, z4: 1,
+          w1: 0, w2: 0, w3: 0, w4: 1.7777,
+        },
+        fineAlignmentMatrix: {
+          x1: 1, x2: 2, x3: 3, x4: 5,
+          y1: 0, y2: 0, y3: 0, y4: 5,
+          z1: 0, z2: 0, z3: 0, z4: 5,
+          w1: 0, w2: 0, w3: 0, w4: 5.7777,
+        },
+        notes: "Some notes",
+        name: "Some Name",
+        scanDate: DateConverter.dateToInstant(moment("2018-04-01")),
+        firebaseId: "some-scan-dataset-id",
+        firebaseFloorId: "some-floor-id",
+        scanNumber: 1
+      });
+    });
+
+    it("includes the authorization headers", () => {
+      ScanDatasetApi.replaceScanDataset({
         projectId: "some-project-id",
         floorId: "some-floor-id",
         scanDatasetId: "some-scan-dataset-id"
