@@ -13,13 +13,22 @@ export default class ScanDatasetApi {
     return Http.get(url, user) as unknown as Promise<ApiScanDataset[]>;
   }
 
-  static updateScanDataset({
+  static mergeScanDataset({
                              projectId,
                              floorId,
                              scanDatasetId
                            }: AssociationIds, scanDataset: ApiScanDataset, user: User): Promise<void> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}`;
     return Http.patch(url, user, scanDataset) as unknown as Promise<void>;
+  }
+
+  static replaceScanDataset({
+      projectId,
+      floorId,
+      scanDatasetId
+                            }: AssociationIds, scanDataset: ApiScanDataset, user: User): Promise<void> {
+      const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}`;
+      return Http.put(url, user, scanDataset) as unknown as Promise<void>;
   }
 
   static createScanDataset({
