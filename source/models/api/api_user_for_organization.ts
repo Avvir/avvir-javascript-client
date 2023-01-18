@@ -1,7 +1,8 @@
 import UserRole from "../enums/user_role";
-import {List} from "underscore";
+import {DateLike} from "./type_aliases";
 
 export class ApiUserForOrganization {
+    id: number
     name: string
     email: string
     role: UserRole
@@ -9,8 +10,10 @@ export class ApiUserForOrganization {
     accessType: string
     inviteStatus: string
     masterformatCodes: string[]
+    latestInvitationExpiry: DateLike
 
-    constructor({name,  email, role, projects, accessType, inviteStatus, masterformatCodes}: Partial<ApiUserForOrganization> = {}) {
+    constructor({id, name,  email, role, projects, accessType, inviteStatus, masterformatCodes, latestInvitationExpiry}: Partial<ApiUserForOrganization> = {}) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.role = role;
@@ -18,6 +21,7 @@ export class ApiUserForOrganization {
         this.accessType = accessType;
         this.inviteStatus = inviteStatus;
         this.masterformatCodes = masterformatCodes;
+        this.latestInvitationExpiry = latestInvitationExpiry;
     }
 }
 
