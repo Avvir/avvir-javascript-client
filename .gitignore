@@ -13,6 +13,7 @@ dist
 !.idea/inspectionProfiles
 !.idea/compiler.xml
 .idea/inspectionProfiles/profiles_settings.xml
+.idea/inspectionProfiles/Project_Default.xml
 
 .DS_Store
 .env

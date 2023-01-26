@@ -5,7 +5,14 @@ import DeprecatedApiPipeline from "../models/api/deprecated_api_pipeline";
 import getAuthorizationHeaders, {BasicUser, User} from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import {AssociationIds, UserAuthType, ApiRunningProcess, ApiUserAction, UserActionType, ApiActionPayload} from "../models";
+import {
+  ApiActionPayload,
+  ApiRunningProcess,
+  ApiUserAction,
+  AssociationIds,
+  UserActionType,
+  UserAuthType
+} from "../models";
 import buildFileName from "../utilities/build_file_name";
 import AuthApi from "./auth_api";
 import {httpGetHeaders} from "../utilities/request_headers";
@@ -210,7 +217,7 @@ export default class WebGatewayApi {
     };
     return Http.post(url, user, actionForm) as unknown as Promise<ApiUserAction[]>;
   }
-  
+
   static checkRunningProcess(processId: number, user: User): Promise<ApiRunningProcess> {
     let url = `${Http.baseUrl()}/running-processes/${processId}`;
     return Http.get(url, user) as unknown as Promise<ApiRunningProcess>
