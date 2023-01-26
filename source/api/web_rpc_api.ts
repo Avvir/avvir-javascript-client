@@ -57,10 +57,9 @@ class HttpRpcExchangeClient {
     getQueryResponse(exchangeRequest: ApiRpcExchangeRequest, user: User): Promise<ApiRpcQueryResponse> {
         const resultPromise = this.post("/rpc/get_query_response", user, exchangeRequest) as unknown as Promise<ApiRpcQueryResponse>
         return resultPromise.then(result => {
-            if(result.statusCode != ApiQueryStatus.RUNNING)
-            {
+            if (result.statusCode != ApiQueryStatus.RUNNING) {
                 return result
-            }else {
+            } else {
                 return this.sleep(1000).then(() => { return this.getQueryResponse(exchangeRequest, user) })
             }
         })
@@ -78,12 +77,25 @@ class HttpRpcExchangeClient {
 
 export default class WebRpcApi {
     httpRpcExchangeClient = new HttpRpcExchangeClient();
-    startRpcSession(user: User): Promise<ApiRpcSession> {
-        return new Promise((resolve) => resolve(new ApiRpcSession({sessionId: -1})));
+    stubCalls = true;
+    startRpcSession(session: ApiRpcSession, user: User): Promise<ApiRpcSession> {
+        if (this.stubCalls) {
+            return new Promise((resolve) => resolve(new ApiRpcSession({sessionId: -1})));
+        } else {
+            return this.httpRpcExchangeClient.startSession(session, user);
+        }
     }
 
     runRpcQuery(request: ApiRpcQueryRequest, user: User): Promise<ApiRpcQueryResponse> {
-        return this.httpRpcExchangeClient.runQuery(request, user);
+        if (this.stubCalls) {
+            return new Promise((resolve) => resolve(new ApiRpcQueryResponse({queryId: -1, statusCode: 2, message: "fake response", result: {photoUrl: "https://storage.googleapis.com/avvir-portal-acceptance.appspot.com/hackathon2023/j9tsglzc1xksmx1lxl78.jpg?Expires=253370764800&GoogleAccessId=firebase-adminsdk-buats%40avvir-portal-acceptance.iam.gserviceaccount.com&Signature=r5zxE8EJhjt%2BwNALhoOq0Iu7OaepcLo6RApylsRxoeNd%2BtAhNIR8Dh%2BiDTGBms3JhjmKm7ykdOhlGamorgf57%2Fd9RHPMp%2BqBq2i0xRyskC4bD4msSATAW285qzXg6CCkocLC6jruSpSGgdZgEmMW9Jo%2FzwYa%2BovoRj8d5CXVO1A5nEgxysdpje%2F4fqVUFI9uZoR%2B%2FTg9oJlybsPKZjhGk7FnS4UlBuWnRz8nai3Ln2zwqp%2BDaecCMGvwF3R%2FXd5UNQm8J1neYVZsTKj4q%2FImdaCb%2BNxcmP11omoAAz8AzCeG3SYaFVjn9ZaWZwCeDsCV6v413sEuB3QjHp9QEFvT1A%3D%3D"}})))
+        } else {
+            return this.httpRpcExchangeClient.runQuery(request, user);
+        }
+    }
+
+    static printHello() {
+        console.log("hello");
     }
 }
 
