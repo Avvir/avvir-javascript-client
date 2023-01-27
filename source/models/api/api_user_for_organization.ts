@@ -11,8 +11,10 @@ export class ApiUserForOrganization {
     inviteStatus: string
     masterformatCodes: string[]
     latestInvitationExpiry: DateLike
+    accountCreationTime: DateLike
+    accountAcceptedTime: DateLike
 
-    constructor({id, name,  email, role, projects, accessType, inviteStatus, masterformatCodes, latestInvitationExpiry}: Partial<ApiUserForOrganization> = {}) {
+    constructor({id, name,  email, role, projects, accessType, inviteStatus, masterformatCodes, latestInvitationExpiry, accountCreationTime, accountAcceptedTime}: Partial<ApiUserForOrganization> = {}) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -22,6 +24,8 @@ export class ApiUserForOrganization {
         this.inviteStatus = inviteStatus;
         this.masterformatCodes = masterformatCodes;
         this.latestInvitationExpiry = latestInvitationExpiry;
+        this.accountCreationTime = accountCreationTime;
+        this.accountAcceptedTime = accountAcceptedTime;
     }
 }
 
