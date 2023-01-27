@@ -1,10 +1,10 @@
 // noinspection JSDeprecatedSymbols
 
-import _ from "underscore";
+import {invert} from "underscore";
 import PurposeType, {PurposeType as PurposeTypeString} from "../models/enums/purpose_type";
 import {ApiPurposeType, isApiPurposeType} from "../models";
 
-const apiPurposeTypeByPurposeType = _.invert(PurposeType);
+const apiPurposeTypeByPurposeType = invert(PurposeType);
 
 const purposeTypeByApiPurposeType = PurposeType;
 
