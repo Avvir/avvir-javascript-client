@@ -10,12 +10,14 @@ export class ApiScanDatasetStats {
    pipelineEndTime: Date;
    pipelineStatus: string;
    qaCompleteTime: Date;
+   qaStartTime: Date;
    squareFootage: number;
 
    constructor(props: ApiScanDatasetStatsProps) {
       addInstantGetterAndSetterToApiModel(this, 'pipelineStartTime', props.pipelineStartTime);
       addInstantGetterAndSetterToApiModel(this, 'pipelineEndTime', props.pipelineEndTime);
       addInstantGetterAndSetterToApiModel(this, 'qaCompleteTime', props.qaCompleteTime);
+      addInstantGetterAndSetterToApiModel(this, 'qaStartTime', props.qaStartTime);
       this.organizationName = props.organizationName;
       this.projectName = props.projectName;
       this.scanDatasetId = props.scanDatasetId;
