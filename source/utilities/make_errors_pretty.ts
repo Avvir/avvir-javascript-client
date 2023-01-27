@@ -1,4 +1,4 @@
-import _ from "underscore";
+import {forEach, without} from "underscore";
 import checkFetchStatus from "./check_fetch_status";
 import Config from "../config";
 
@@ -19,12 +19,12 @@ const makeErrorsPrettyForFunction = (actionName, action, displayErrorMessage) =>
 const getFunctionNames = (clazz) => {
   let builtinProperties = ["length", "constructor", "name", "prototype"];
   // TODO it might make sense to check the type of each property
-  return _.without(Object.getOwnPropertyNames(clazz), ...builtinProperties)
+  return without(Object.getOwnPropertyNames(clazz), ...builtinProperties)
 }
 
 const makeErrorsPretty = (apiClass, options = {exclude: [], overrideErrorMessage: []}) => {
   let functionNames = getFunctionNames(apiClass);
-  _.forEach(functionNames, (functionName) => {
+  forEach(functionNames, (functionName) => {
     let isExcluded = options.exclude && options.exclude.includes(functionName);
     let displayErrorMessage = !options.overrideErrorMessage || !options.overrideErrorMessage.includes(functionName);
     if (!isExcluded) {
