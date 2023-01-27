@@ -5,6 +5,7 @@ import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import {List} from "underscore";
 import ApiUserForOrganization from "../models/api/api_user_for_organization";
+import {ApiScanDatasetStats} from "../models/api/api_scandataset_stats";
 
 export default class OrganizationApi {
   static listOrganizations(user: User): Promise<ApiOrganization[]> {
@@ -35,6 +36,11 @@ export default class OrganizationApi {
   static updateOrganization(accountId: string, organization: ApiOrganization, user: User): Promise<void> {
     let url = `${Http.baseUrl()}/client-accounts/${accountId}`;
     return Http.patch(url, user, organization);
+  }
+
+  static getScanDataSetStats(user: User): Promise<ApiScanDatasetStats[]> {
+    let url =  `${Http.baseUrl()}/client-accounts/scan-dataset-stats`;
+    return Http.get(url, user) as unknown as Promise<ApiScanDatasetStats[]>;
   }
 }
 

@@ -111,3 +111,5 @@ export {ApiUserForOrganization} from "./api_user_for_organization";
 export { ApiRpcSession } from "./api_rpc_session";
 export { ApiRpcQueryRequest } from "./api_rpc_query_request";
 export { ApiRpcQueryResponse } from "./api_rpc_query_response";
+export {ApiScanDatasetStats} from "./api_scandataset_stats";
+
