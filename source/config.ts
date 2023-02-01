@@ -1,9 +1,9 @@
-import {forEach} from "underscore";
+const _ = require("underscore");
 
 let configuration: {[key: string]: any} = {logFetch: false};
 
 const addEnvironmentVariablesToConfiguration = () => {
-  forEach(configuration, (value, varName) => {
+  _.forEach(configuration, (value, varName) => {
     const envValue = process.env[varName];
     if (envValue && envValue != "") {
       configuration[varName] = envValue;
