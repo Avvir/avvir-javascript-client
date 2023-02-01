@@ -7,11 +7,6 @@
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
   "main": "dist/avvir_api.node.js",
-  "exports": {
-    "import": "./dist/esm/index.js",
-    "default": "./dist/esm/index.js",
-    "node": "./dist/avvir_api.node.js"
-  },
   "files": [
     "dist/*",
     "dist/**",
@@ -24,10 +19,9 @@
     "Firefox ESR"
   ],
   "scripts": {
-    "build": "yarn build-esm && yarn build-web && yarn copy-dist-files",
+    "build": "yarn build-esm && yarn build-web",
     "build-esm": "tsc --project tsconfig.esm.json",
     "build-web": "yarn run webpack",
-    "copy-dist-files": "copyfiles --error -u 1 \"dist_files/**/*\" dist",
     "clean": "rimraf ./dist",
     "prepublishOnly": "yarn rebuild",
     "rebuild": "yarn clean && yarn build",
@@ -55,7 +49,6 @@
     "chai-roughly": "^1.0.0",
     "chai-spies": "^1.0.0",
     "chai-things": "^0.2.0",
-    "copyfiles": "^2.4.1",
     "deepmerge": "^4.2.2",
     "fetch-mock": "^9.11.0",
     "mocha": "^8.2.1",

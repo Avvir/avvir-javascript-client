@@ -1,11 +1,11 @@
 import Avvir from "./source/index";
-import {forEach} from 'underscore';
+import _ from 'underscore';
 
 function importAll(directoryContext, target) {
   directoryContext.keys().forEach(filePath => {
 
     let moduleExports = directoryContext(filePath);
-    forEach(moduleExports, (moduleExport, exportName) => {
+    _.forEach(moduleExports, (moduleExport, exportName) => {
       // if (exportName !== 'default') {
         target[exportName] = moduleExport;
       // }
