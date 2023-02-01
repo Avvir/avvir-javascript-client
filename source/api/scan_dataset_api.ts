@@ -21,6 +21,14 @@ export default class ScanDatasetApi {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}`;
     return Http.patch(url, user, scanDataset) as unknown as Promise<void>;
   }
+  //@Deprecated
+  static updateScanDataset({
+                            projectId,
+                            floorId,
+                            scanDatasetId
+                          }: AssociationIds, scanDataset: ApiScanDataset, user: User): Promise<void> {
+    return this.mergeScanDataset({projectId, floorId, scanDatasetId}, scanDataset, user);
+  }
 
   static replaceScanDataset({
       projectId,
