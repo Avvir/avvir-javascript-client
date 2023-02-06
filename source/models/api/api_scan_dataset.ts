@@ -70,8 +70,8 @@ export class ApiScanDataset {
     if (dataPresences) {
       this.dataPresences = dataPresences;
     }
-    this.notes = notes != undefined ? notes : null;
-    this.name = name || null;
+    this.notes = notes;
+    this.name = name;
     // @ts-ignore
     this.scanDate = scanDate;
     this.analysisCompleted = analysisCompleted;
