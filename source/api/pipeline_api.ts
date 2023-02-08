@@ -26,6 +26,11 @@ export default class PipelineApi {
     console.log(url);
     return Http.get(url, user) as unknown as Promise<ApiPipeline[]>;
   }
-}
 
+  static updatePipeLineByExternalId({projectId, floorId}: AssociationIds, externalId: string,
+                                                   apiPipeline: ApiPipeline, user: User): Promise<ApiPipeline>{
+    const url = `${Http.baseUrl()}/pipelines-by-external-id/${externalId}`;
+    return Http.get(url, user) as unknown as Promise<ApiPipeline>;
+  }
+}
 makeErrorsPretty(PipelineApi)
