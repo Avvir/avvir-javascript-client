@@ -25,7 +25,8 @@
     "clean": "rimraf ./dist",
     "prepublishOnly": "yarn rebuild",
     "rebuild": "yarn clean && yarn build",
-    "test": "NODE_ENV=test AVVIR_ENVIRONMENT=acceptance nyc mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive"
+    "test": "NODE_ENV=test AVVIR_ENVIRONMENT=acceptance nyc mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive",
+    "test:integration": "NODE_ENV=test AVVIR_ENVIRONMENT=acceptance nyc mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./integration_tests{,/**/}**.[tj]s*\" --recursive"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.8",

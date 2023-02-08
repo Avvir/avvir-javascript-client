@@ -7,6 +7,11 @@ In webstorm mocha configuration template:
  - set extra-mocha-options to `--require ./tests/test_utils/mocha_setup.js`
  - set AVVIR_ENVIRONMENT to acceptance `AVVIR_ENVIRONMENT=acceptance`
 
+For running integration tests you will also need to set these env vars:
+
+AVVIR_SANDBOX_EMAIL
+AVVIR_SANDBOX_PASSWORD
+AVVIR_SANDBOX_PROJECT_ID
 
 ## Publishing to NPM
 

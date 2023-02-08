@@ -11,6 +11,9 @@ import beVeryLike from "./chai_be_very_like";
 const chaiRoughly = require("chai-roughly");
 const chaiJsonEqual = require("chai-json-equal");
 const chaiThings = require("chai-things");
+const nodeFetch = require("node-fetch");
+
+global.fetch = nodeFetch;
 
 chai.use(beVeryLike);
 chai.use(SinonChai);
