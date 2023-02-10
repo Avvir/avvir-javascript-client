@@ -31,6 +31,18 @@ export default class UserApi {
     return Http.get(url, user) as unknown as Promise<ApiUserPermission[]>;
   }
 
+  static deleteUserPermission(email: string, permissionId: number, user: User): Promise<void> {
+    const encodedEmail = encodeURIComponent(email);
+    const url = `${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions/${permissionId}`;
+    return Http.delete(url, user) as unknown as Promise<void>;
+  }
+
+  static createUserPermission(email: string, permission: ApiUserPermission, user: User): Promise<void> {
+    const encodedEmail = encodeURIComponent(email);
+    const url = `${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions`;
+    return Http.put(url, user, permission) as unknown as Promise<void>;
+  }
+
   static updateUserAccount(email: string, role: UserRole, apiUser: ApiUser, user: User): Promise<ApiUser> {
     const encodedEmail = encodeURIComponent(email);
     const url = `${Http.baseUrl()}/users/accounts/${encodedEmail}/${role}`;

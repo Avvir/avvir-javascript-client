@@ -1,12 +1,14 @@
 import {describe} from "mocha";
 import fetchMock from "fetch-mock";
-import {UserRole, User} from "../../source";
+import ApiUserPermission, {UserRole, User} from "../../source";
 import {expect} from "chai";
 import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
 import {SUPERADMIN, USER} from "../../source/models/enums/user_role";
 import Http from "../../source/utilities/http";
 import {UserApi} from "../../source/api";
 import {ApiUser} from "../../source";
+import UserPermissionType from "../../source/models/enums/user_permission_type";
+import UserPermissionAction from "../../source/models/enums/user_permission_action";
 
 describe("UserApi", () => {
   let user: User;
@@ -179,5 +181,70 @@ describe("UserApi", () => {
     })
   });
 
-  //
+  describe("::deleteUserPermission", () => {
+    const encodedEmail = encodeURIComponent("some-email@test.org")
+    const permissionId = 123;
+    beforeEach(() => {
+      fetchMock.delete(`${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions/${permissionId}`,
+        {
+          status: 200,
+        })
+    });
+
+    it("makes a call to the endpoint", () => {
+      UserApi.deleteUserPermission("some-email@test.org", 123, {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      });
+
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions/123`);
+    });
+
+    it("sends the request with an Authorization header", () => {
+      UserApi.deleteUserPermission("some-email@test.org", 123, {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    })
+  });
+
+  describe("::createUserPermission", () => {
+    const encodedEmail = encodeURIComponent("some-email@test.org")
+    const permission = {
+      permissionType: UserPermissionType.ORGANIZATION,
+      permissionAction: UserPermissionAction.READ,
+      organizationFirebaseId: "some-org",
+    };
+    beforeEach(() => {
+      fetchMock.put(`${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions`,
+        {
+          status: 200,
+        })
+    });
+
+    it("makes a call to the endpoint", () => {
+      UserApi.createUserPermission("some-email@test.org", permission, {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      });
+
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions`);
+      expect(fetchMock.lastOptions().body).to.eq(`{"permissionType":"ORGANIZATION","permissionAction":"READ","organizationFirebaseId":"some-org"}`);
+    });
+
+    it("sends the request with an Authorization header", () => {
+      UserApi.createUserPermission("some-email@test.org", permission, {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    })
+  });
 });
