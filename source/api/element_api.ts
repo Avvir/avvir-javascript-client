@@ -178,6 +178,15 @@ export default class ElementApi {
     return Http.get(url, user) as unknown as Promise<ApiBcfBuildingElement[]>;
   }
 
+  static exportSelectedBcfBuildingElements({ projectId, floorId, scanDatasetId }: AssociationIds,
+                                   globalIds: string[],
+                                   user?: User): Promise<ApiBcfBuildingElement[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/bcf-building-elements`;
+
+    return Http.post(url, user, globalIds) as unknown as Promise<ApiBcfBuildingElement[]>;
+  }
+
+
 }
 
 makeErrorsPretty(ElementApi);
