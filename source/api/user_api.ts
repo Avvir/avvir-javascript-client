@@ -39,7 +39,7 @@ export default class UserApi {
 
   static createUserPermission(email: string, permission: ApiUserPermission, user: User): Promise<void> {
     const encodedEmail = encodeURIComponent(email);
-    const url = `${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions`;
+    const url = `${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions/new`;
     return Http.put(url, user, permission) as unknown as Promise<void>;
   }
 
