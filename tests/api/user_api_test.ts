@@ -220,7 +220,7 @@ describe("UserApi", () => {
       organizationFirebaseId: "some-org",
     };
     beforeEach(() => {
-      fetchMock.put(`${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions`,
+      fetchMock.put(`${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions/new`,
         {
           status: 200,
         })
@@ -234,7 +234,7 @@ describe("UserApi", () => {
 
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions/new`);
       expect(fetchMock.lastOptions().body).to.eq(`{"permissionType":"ORGANIZATION","permissionAction":"READ","organizationFirebaseId":"some-org"}`);
     });
 
