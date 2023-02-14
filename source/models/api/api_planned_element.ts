@@ -30,7 +30,8 @@ export class ApiPlannedElement {
                 duplicateOf,
                 reviztoId,
                 reviztoIfcGuid,
-                verified
+                verified,
+                exportedToBcf
               }: ApiPlannedElementArgument = {})
   {
     addInstantGetterAndSetterToApiModel(this, "builtAt", builtAt);
@@ -57,6 +58,7 @@ export class ApiPlannedElement {
     this.reviztoId = reviztoId;
     this.reviztoIfcGuid = reviztoIfcGuid;
     this.verified = verified;
+    this.exportedToBcf = exportedToBcf;
   }
 
   name?: string;
@@ -83,6 +85,7 @@ export class ApiPlannedElement {
   reviztoId?: string;
   reviztoIfcGuid?: string;
   verified?: boolean;
+  exportedToBcf?: boolean;
 }
 
 export default ApiPlannedElement;
