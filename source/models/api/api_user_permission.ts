@@ -9,8 +9,20 @@ export class ApiUserPermission {
   masterformatCode: string
   permissionType: UserPermissionType
   permissionAction: UserPermissionAction
+  organizationName: string
+  projectName: string
 
-  constructor({id, userId, projectFirebaseId, organizationFirebaseId, masterformatCode, permissionType, permissionAction}: Partial<ApiUserPermission>) {
+  constructor({
+                id,
+                userId,
+                projectFirebaseId,
+                organizationFirebaseId,
+                masterformatCode,
+                permissionType,
+                permissionAction,
+                organizationName,
+                projectName,
+  }: Partial<ApiUserPermission>) {
     this.id = id;
     this.userId = userId;
     this.projectFirebaseId = projectFirebaseId;
@@ -18,6 +30,8 @@ export class ApiUserPermission {
     this.masterformatCode = masterformatCode;
     this.permissionType = permissionType;
     this.permissionAction = permissionAction;
+    this.organizationName = organizationName;
+    this.projectName = projectName;
   }
 }
 
