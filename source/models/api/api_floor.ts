@@ -26,6 +26,7 @@ export class ApiFloor {
                 plannedElementCount,
                 plannedElementsExist,
                 scanDate,
+                scanDateString,
                 photoAreaId,
                 offset,
                 photoAreaMinimapPixelToBimMinimapPixel,
@@ -92,6 +93,7 @@ export class ApiFloor {
     this.plannedElementsExist = plannedElementsExist || null;
     // @ts-ignore
     this.scanDate = scanDate || null;
+    this.scanDateString = scanDateString || null;
     this.photoAreaId = photoAreaId;
     this.offset = offset || null;
     // @ts-ignore
@@ -141,6 +143,7 @@ export class ApiFloor {
   plannedElementCount: number | null = null;
   plannedElementsExist: boolean | null = null;
   scanDate: number | null = null;
+  scanDateString: string | null = null;
   readonly offset: Vector2Like = null;
   photoAreaId: number | null = null;
   photoAreaMinimapPixelToBimMinimapPixel: ApiMatrix3 | null = null;
