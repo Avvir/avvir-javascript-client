@@ -8,7 +8,8 @@ import { DateLike, Modify } from "./type_aliases";
 export interface ApiScanDatasetArgument extends Partial<Modify<ApiScanDataset, {
   coarseAlignmentMatrix?: ApiMatrix4 | Matrix4 | string | null
   fineAlignmentMatrix?: ApiMatrix4 | Matrix4 | string | null
-  scanDate?: DateLike
+  scanDate?: DateLike,
+  scanDateString?: string,
 }>> {}
 
 export class ApiScanDataset {
@@ -25,6 +26,7 @@ export class ApiScanDataset {
     coarseAlignmentMatrix,
     fineAlignmentMatrix,
     scanDate,
+    scanDateString,
     qaStarted,
     qaComplete
   }: ApiScanDatasetArgument) {
@@ -74,6 +76,7 @@ export class ApiScanDataset {
     this.name = name;
     // @ts-ignore
     this.scanDate = scanDate;
+    this.scanDateString = scanDateString;
     this.analysisCompleted = analysisCompleted;
     this.manualQcPresent = manualQcPresent;
     this.qaComplete = qaComplete;
@@ -104,6 +107,10 @@ export class ApiScanDataset {
    * Date that the dataset was captured.
    */
   scanDate: number | null = null;
+  /**
+   * Date that the dataset was captured.
+   */
+  scanDateString: string | null = null;
 
   analysisCompleted: number | null;
   manualQcPresent: number | null;
