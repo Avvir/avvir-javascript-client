@@ -79,15 +79,6 @@ export default class ScanDatasetApi {
     return Http.get(url, user) as unknown as Promise<ApiDetailedElement[]>;
   }
 
-  static getProgressReportForScanDataset({
-                                           projectId,
-                                           floorId,
-                                           scanDatasetId
-                                         }: AssociationIds, user: User): Promise<ApiProgressScanDataset> {
-    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/progress`;
-    return Http.get(url, user) as unknown as Promise<ApiProgressScanDataset>;
-  }
-
   static getScanRepresentation({
                                  projectId,
                                  floorId,
