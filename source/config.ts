@@ -1,4 +1,4 @@
-const _ = require("underscore");
+import _ from "underscore";
 
 let configuration: {[key: string]: any} = {logFetch: false};
 
