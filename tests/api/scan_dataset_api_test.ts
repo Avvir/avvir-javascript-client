@@ -412,38 +412,6 @@ describe("ScanDatasetApi", () => {
     });
   });
 
-  describe("#getProgressReportForScanDataset", () => {
-    beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/progress`, 200);
-    });
-
-    it("makes a request to the gateway", () => {
-      ScanDatasetApi.getProgressReportForScanDataset({
-          projectId: "some-project-id",
-          floorId: "some-floor-id",
-          scanDatasetId: "some-scan-dataset-id"
-        },
-        user);
-
-      expect(fetchMock.lastUrl()).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/progress`);
-      expect(fetchMock.lastOptions().headers["Accept"]).to.eq("application/json");
-    });
-
-    it("includes the authorization headers", () => {
-      ScanDatasetApi.getProgressReportForScanDataset({
-        projectId: "some-project-id",
-        floorId: "some-floor-id",
-        scanDatasetId: "some-scan-dataset-id"
-      }, {
-        authType: UserAuthType.GATEWAY_JWT,
-        gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
-      });
-
-      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
-    });
-  });
-
-
   describe("::getScanRepresentation", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/files/scan-representation`, {
