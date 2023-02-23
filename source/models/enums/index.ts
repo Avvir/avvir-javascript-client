@@ -17,6 +17,7 @@ export {ApiIntegrationCredentialsType} from "./api_integration_credentials_type"
 export {UserPermissionAction} from "./user_permission_action";
 export {UserPermissionType} from "./user_permission_type";
 export {AssociationType} from "./association_type";
+export {ProjectWorkPackageType} from "./project_work_package_type";
 
 export {
   ProjectPurposeType,
