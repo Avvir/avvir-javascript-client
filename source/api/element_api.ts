@@ -3,14 +3,7 @@ import { ApiPlannedElement } from "../models/api/api_planned_element";
 import Http from "../utilities/http";
 import DeviationStatus from "../models/enums/deviation_status";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import {
-  ApiBcfBuildingElement, ApiBuiltStatus,
-  ApiDetailedElement,
-  ApiQueryResource,
-  ApiRunningProcess, ApiScannedElement,
-  ApiUserAction,
-  AssociationIds
-} from "../models";
+import { ApiBcfBuildingElement, ApiBuiltStatus, ApiDetailedElement, ApiQueryResource, ApiRunningProcess, ApiScannedElement, ApiUserAction, AssociationIds } from "../models";
 
 export default class ElementApi {
   static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User): Promise<ApiPlannedElement[]> {
@@ -107,9 +100,29 @@ export default class ElementApi {
                                                  floorId,
                                                }: AssociationIds,
                                                queryId: number,
-                                               user: User): Promise<ApiDetailedElement[]> {
+                                               user: User): Promise<ApiPlannedElement[]> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/query/${queryId}`;
     return Http.get(url, user) as unknown as Promise<ApiPlannedElement[]>;
+  }
+
+  static createObstructedElementsQuery({
+                                         projectId,
+                                         floorId
+                                       }: AssociationIds,
+                                       globalIds: string[],
+                                       user: User): Promise<ApiQueryResource> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/obstructions/query`;
+    return Http.post(url, user, globalIds) as unknown as Promise<ApiQueryResource>;
+  }
+
+  static getObstructedElementsQueryResult({
+                                            projectId,
+                                            floorId,
+                                          }: AssociationIds,
+                                          queryId: number,
+                                          user: User): Promise<{ [globalId: string]: string[] }> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/obstructions/query/${queryId}`;
+    return Http.get(url, user) as unknown as Promise<{ [globalId: string]: string[] }>;
   }
 
   /** @deprecated */
@@ -179,8 +192,8 @@ export default class ElementApi {
   }
 
   static exportSelectedBcfBuildingElements({ projectId, floorId, scanDatasetId }: AssociationIds,
-                                   globalIds: string[],
-                                   user?: User): Promise<ApiBcfBuildingElement[]> {
+                                           globalIds: string[],
+                                           user?: User): Promise<ApiBcfBuildingElement[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/bcf-building-elements`;
 
     return Http.post(url, user, globalIds) as unknown as Promise<ApiBcfBuildingElement[]>;
