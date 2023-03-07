@@ -13,6 +13,7 @@ import WebRpcApi from "./web_rpc_api";
 import UserApi from "./user_api";
 import IntegrationsApi from "./integrations_api";
 import ProjectSummaryApi from "./project_summary_api";
+import GroupApi from "./group_api";
 
 export {
     AuthApi,
@@ -29,5 +30,6 @@ export {
     WebGatewayApi,
     WebRpcApi,
     UserApi,
-    ProjectSummaryApi
+    ProjectSummaryApi,
+    GroupApi
 };
