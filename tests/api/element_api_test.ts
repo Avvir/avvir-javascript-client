@@ -611,6 +611,118 @@ describe("ElementApi", () => {
     });
   });
 
+  describe("::createManualObstructedElements", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-global-id/obstructions`,
+        {
+          "some-global-id": ["some-obstructed-global-id"]
+        });
+    });
+
+    it("makes a request to the create obstructed elements endpoint", () => {
+      ElementApi.createManualObstructedElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id"
+      }, "some-global-id", ["some-obstructed-global-id"], null);
+
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-global-id/obstructions`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+      expect(fetchMock.lastOptions().body).to.eq(JSON.stringify(["some-obstructed-global-id"]));
+    });
+
+    it("returns the modified obstructions", () => {
+      return ElementApi.createManualObstructedElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+        }, "some-global-id", ["some-obstructed-global-id"], null)
+        .then((obstructedElementsQuery) => {
+          expect(obstructedElementsQuery).to.deep.eq({
+            "some-global-id": ["some-obstructed-global-id"]
+          });
+        });
+    });
+
+    describe("when the user is signed in", () => {
+      let user;
+      beforeEach(() => {
+        user = {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        };
+      });
+
+      it("authenticates the request", () => {
+        ElementApi.createManualObstructedElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-id"
+        }, "some-global-id", ["some-obstructed-global-id"], user);
+
+        const lastFetchOpts = fetchMock.lastOptions();
+        expect(lastFetchOpts.headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      });
+    });
+  });
+
+  describe("::deleteObstructedElements", () => {
+    beforeEach(() => {
+      fetchMock.put(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-global-id/obstructions/delete`,
+        {
+          "some-global-id": []
+        });
+    });
+
+    it("makes a request to the create obstructed elements endpoint", () => {
+      ElementApi.deleteObstructedElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id"
+      }, "some-global-id", ["some-obstructed-global-id"], null);
+
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-global-id/obstructions/delete`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+      expect(fetchMock.lastOptions().body).to.eq(JSON.stringify(["some-obstructed-global-id"]));
+    });
+
+    it("returns the modified obstructions", () => {
+      return ElementApi.deleteObstructedElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+        }, "some-global-id", ["some-obstructed-global-id"], null)
+        .then((obstructedElementsQuery) => {
+          expect(obstructedElementsQuery).to.deep.eq({
+            "some-global-id": []
+          });
+        });
+    });
+
+    describe("when the user is signed in", () => {
+      let user;
+      beforeEach(() => {
+        user = {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        };
+      });
+
+      it("authenticates the request", () => {
+        ElementApi.deleteObstructedElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-id"
+        }, "some-global-id", ["some-obstructed-global-id"], user);
+
+        const lastFetchOpts = fetchMock.lastOptions();
+        expect(lastFetchOpts.headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      });
+    });
+  });
+
   describe("::getElementDetails", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/element/some-element-id`,
