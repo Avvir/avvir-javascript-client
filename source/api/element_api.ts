@@ -125,6 +125,22 @@ export default class ElementApi {
     return Http.get(url, user) as unknown as Promise<{ [globalId: string]: string[] }>;
   }
 
+  static createManualObstructedElements({ projectId, floorId }: AssociationIds,
+                                        obstructingElementGlobalId: string,
+                                        obstructedElementsGlobalIds: string[],
+                                        user: User): Promise<{ [globalId: string]: string[] }> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/${obstructingElementGlobalId}/obstructions`;
+    return Http.post(url, user, obstructedElementsGlobalIds) as unknown as Promise<{ [globalId: string]: string[] }>;
+  }
+
+  static deleteObstructedElements({ projectId, floorId }: AssociationIds,
+                                  obstructingElementGlobalId: string,
+                                  obstructedElementsGlobalIds: string[],
+                                  user: User): Promise<{ [globalId: string]: string[] }> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/${obstructingElementGlobalId}/obstructions/delete`;
+    return Http.put(url, user, obstructedElementsGlobalIds) as unknown as Promise<{ [globalId: string]: string[] }>;
+  }
+
   /** @deprecated */
   static createElements({ projectId, floorId }: AssociationIds,
                         elements: ApiDetailedElement[],
