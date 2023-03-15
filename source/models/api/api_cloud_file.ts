@@ -8,6 +8,10 @@ import ApiPhotoLocation3d from "./api_photo_location_3d";
 export type AvvirApiFiles<Type extends ApiPurposeType = ApiPurposeType> = { [purposeType in Type]?: ApiCloudFile | ApiCloudFile[] }
 export type AvvirApiFileIds<Type extends ApiPurposeType = ApiPurposeType> = { [purposeType in Type]?: number[] }
 
+export interface ApiCloudFileMetadata {
+  offset?: {x: number, y: number}
+}
+
 export interface ApiCloudFileArgument extends Partial<Modify<ApiCloudFile, {
   lastModified?: DateLike
   createdAt?: DateLike
@@ -30,7 +34,8 @@ export class ApiCloudFile {
                 originalFileName,
                 projectId,
                 associationType,
-                associationId
+                associationId,
+                metadata
               }: ApiCloudFileArgument) {
     addInstantGetterAndSetterToApiModel(this, "lastModified", lastModified);
     addInstantGetterAndSetterToApiModel(this, "createdAt", createdAt);
@@ -55,15 +60,18 @@ export class ApiCloudFile {
     });
     // @ts-ignore
     this.purposeType = purposeType;
+    // noinspection JSDeprecatedSymbols
     this.location3d = location3d;
     this.fileSize = fileSize;
     this.originalFileName = originalFileName;
     this.projectId = projectId;
     this.associationId = associationId;
     this.associationType = associationType;
+    this.metadata = metadata;
   }
 
   readonly url: string;
+  /** @deprecated Use metadata.offset */
   location3d?: ApiPhotoLocation3d
   readonly id?: number
   lastModified?: number | null = null;
@@ -75,6 +83,7 @@ export class ApiCloudFile {
   associationType?: AssociationType;
   projectId?: number;
   associationId?: number;
+  metadata?: ApiCloudFileMetadata
 }
 
 export default ApiCloudFile;
