@@ -1,16 +1,16 @@
-import {sandbox} from "../test_utils/setup_tests";
-import {expect} from "chai";
+import { sandbox } from "../test_utils/setup_tests";
+import { expect } from "chai";
 import fetchMock from "fetch-mock";
 import moment from "moment";
 
 import ApiCloudFile from "../../source/models/api/api_cloud_file";
 import DateConverter from "../../source/converters/date_converter";
 import FileInformationApi from "../../source/api/file_information_api";
-import {FIREBASE} from "../../source/models/enums/user_auth_type";
-import {SUPERADMIN} from "../../source/models/enums/user_role";
+import { FIREBASE } from "../../source/models/enums/user_auth_type";
+import { SUPERADMIN } from "../../source/models/enums/user_role";
 import Config from "../../source/config";
 import Http from "../../source/utilities/http";
-import {ApiPhotoAreaPurposeType, ApiProjectPurposeType} from "../../source";
+import { ApiPhotoAreaPurposeType, ApiProjectPurposeType } from "../../source";
 
 describe("FileInformationApi", () => {
   let user;
@@ -188,6 +188,30 @@ describe("FileInformationApi", () => {
 
     it("sends the request with authorization headers", () => {
       FileInformationApi.listProjectFiles({ projectId: "some-project-id" }, user);
+
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+  });
+
+  describe("#listFloorFilesForProject", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floor-files`, [{floorId: "some-floor-id", files: [{
+        url: "some-file-url.com",
+        purposeType: ApiProjectPurposeType.OTHER
+      }]}]);
+    });
+
+    it("makes a call to the project files endpoint", () => {
+      FileInformationApi.listFloorFilesForProject({ projectId: "some-project-id" }, user);
+      const request = fetchMock.lastCall();
+      expect(request[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floor-files`);
+    });
+
+    it("sends the request with authorization headers", () => {
+      FileInformationApi.listFloorFilesForProject({ projectId: "some-project-id" }, user);
 
       const lastFetchOpts = fetchMock.lastOptions();
 
