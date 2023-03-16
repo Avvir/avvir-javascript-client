@@ -19,6 +19,16 @@ export default class GroupApi {
     let url = `${Http.baseUrl()}/projects/${projectId}/groups/floor/${floorId}/planned-building-elements`;
     return Http.post(url, user, globalIds) as unknown as Promise<ApiGroup>;
   }
+
+  static deleteGroup({ projectId, groupId }: AssociationIds, user: User, ): Promise<void> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/groups/${groupId}`;
+    return Http.delete(url, user) as unknown as Promise<void>;
+  }
+
+  static deleteGroupMembers({ projectId }: AssociationIds, groupMemberIds: number[], user: User, ): Promise<void> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/groups/members`;
+    return Http.delete(url, user, groupMemberIds) as unknown as Promise<void>;
+  }
 }
 
 makeErrorsPretty(GroupApi);
