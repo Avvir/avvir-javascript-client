@@ -51,15 +51,17 @@ export class ViewCamera {
 
 export class ViewFilters {
   constructor(filters: Partial<ViewFilters> = {}) {
-    const {trades, deviationTolerance, pointCloudVisible} = filters;
+    const {trades, deviationTolerance, pointCloudVisible, sectionPointCloud} = filters;
     this.trades = new ViewTrades(trades);
     this.deviationTolerance = new DeviationTolerance(deviationTolerance);
     this.pointCloudVisible = pointCloudVisible;
+    this.sectionPointCloud = sectionPointCloud;
   }
 
   trades: ViewTrades;
   deviationTolerance: DeviationTolerance;
   pointCloudVisible: boolean;
+  sectionPointCloud: boolean;
 }
 
 export type SelectedElements = string[]
