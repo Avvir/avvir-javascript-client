@@ -64,7 +64,7 @@ describe("ProjectSummaryApi", () => {
                 {
                     id: 12,
                     modelElementId: 1,
-                    name: "Some Project Area", progress: [{id: 54, name: "HVAC", status: "started"}]
+                    progress: [{id: 54, name: "HVAC", status: "started"}]
                 },
                 user);
 
@@ -81,7 +81,7 @@ describe("ProjectSummaryApi", () => {
                 {
                     id: 12,
                     modelElementId: 1,
-                    name: "Some Project Area", progress: [{id: 54, name: "HVAC", status: "started"}]
+                    progress: [{id: 54, name: "HVAC", status: "started"}]
                 },
                 {
                     authType: UserAuthType.GATEWAY_JWT,
@@ -99,7 +99,6 @@ describe("ProjectSummaryApi", () => {
             response = new ApiProjectArea({
                 id: 12,
                 modelElementId: projectAreaId,
-                name: "Some Project Area",
                 progress: [projectAreaProgress]
             });
             fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/areas/${projectAreaId}`, response);
