@@ -10,13 +10,11 @@ export class ApiProjectArea {
     readonly modelElementId: number
     readonly floorId?: number
     readonly firebaseFloorId?: string
-    name: string
     progress: ApiProjectAreaProgress[]
 
-    constructor({id, modelElementId, name, progress, floorId, firebaseFloorId} : Partial<ApiProjectArea>) {
+    constructor({id, modelElementId, progress, floorId, firebaseFloorId} : Partial<ApiProjectArea>) {
         this.id = id;
         this.modelElementId = modelElementId;
-        this.name = name;
         this.progress = progress;
         this.floorId = floorId;
         this.firebaseFloorId = firebaseFloorId;
