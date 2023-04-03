@@ -16,6 +16,12 @@ export default class PipelineApi {
     return Http.post(url, user, body) as unknown as Promise<ApiPipeline>;
   }
 
+  static triggerIngestProjectReportPipeline(associationIds: AssociationIds, body = {}, user: User): Promise<ApiPipeline> {
+    let {organizationId, projectId} = associationIds;
+    const url = `${Http.baseUrl()}/pipeline/${organizationId}/${projectId}/ingest-project-export-report/trigger`;
+    return Http.post(url, user, body) as unknown as Promise<ApiPipeline>;
+  }
+
   static checkPipelineStatus({projectId}: AssociationIds, pipelineId: number, user: User): Promise<ApiPipeline> {
     const url = `${Http.baseUrl()}/pipelines/${pipelineId}`;
     return Http.get(url, user) as unknown as Promise<ApiPipeline>;
