@@ -129,7 +129,7 @@ export default class ElementApi {
                                         obstructingElementGlobalId: string,
                                         obstructedElementsGlobalIds: string[],
                                         user: User): Promise<{ [globalId: string]: string[] }> {
-    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/${obstructingElementGlobalId}/obstructions`;
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/${obstructingElementGlobalId}/manual-obstructions`;
     return Http.post(url, user, obstructedElementsGlobalIds) as unknown as Promise<{ [globalId: string]: string[] }>;
   }
 
@@ -137,7 +137,7 @@ export default class ElementApi {
                                   obstructingElementGlobalId: string,
                                   obstructedElementsGlobalIds: string[],
                                   user: User): Promise<{ [globalId: string]: string[] }> {
-    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/${obstructingElementGlobalId}/obstructions/delete`;
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/${obstructingElementGlobalId}/manual-obstructions/delete`;
     return Http.put(url, user, obstructedElementsGlobalIds) as unknown as Promise<{ [globalId: string]: string[] }>;
   }
 

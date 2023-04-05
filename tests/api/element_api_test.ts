@@ -613,7 +613,7 @@ describe("ElementApi", () => {
 
   describe("::createManualObstructedElements", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-global-id/obstructions`,
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-global-id/manual-obstructions`,
         {
           "some-global-id": ["some-obstructed-global-id"]
         });
@@ -628,7 +628,7 @@ describe("ElementApi", () => {
       const fetchCall = fetchMock.lastCall();
       expect(fetchCall[0])
         .to
-        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-global-id/obstructions`);
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-global-id/manual-obstructions`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
       expect(fetchMock.lastOptions().body).to.eq(JSON.stringify(["some-obstructed-global-id"]));
     });
@@ -669,7 +669,7 @@ describe("ElementApi", () => {
 
   describe("::deleteObstructedElements", () => {
     beforeEach(() => {
-      fetchMock.put(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-global-id/obstructions/delete`,
+      fetchMock.put(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-global-id/manual-obstructions/delete`,
         {
           "some-global-id": []
         });
@@ -684,7 +684,7 @@ describe("ElementApi", () => {
       const fetchCall = fetchMock.lastCall();
       expect(fetchCall[0])
         .to
-        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-global-id/obstructions/delete`);
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-global-id/manual-obstructions/delete`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
       expect(fetchMock.lastOptions().body).to.eq(JSON.stringify(["some-obstructed-global-id"]));
     });
