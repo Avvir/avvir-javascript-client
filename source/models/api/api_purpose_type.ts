@@ -5,6 +5,7 @@ export enum ApiProjectPurposeType {
   PROJECT_AREAS_NWD = "PROJECT_AREAS_NWD",
   PROJECT_AREAS_IFC = "PROJECT_AREAS_IFC",
   PROJECT_AREAS_SVF = "PROJECT_AREAS_SVF",
+  PROJECT_EXPORT_REPORT = "PROJECT_EXPORT_REPORT",
 }
 
 export type ApiProjectTypeKeys = keyof typeof ApiProjectPurposeType;
@@ -99,9 +100,10 @@ const ApiPurposeType = {
   PROJECT_AREAS_NWD: ApiProjectPurposeType.PROJECT_AREAS_NWD,
   PROJECT_AREAS_IFC: ApiProjectPurposeType.PROJECT_AREAS_IFC,
   PROJECT_AREAS_SVF: ApiProjectPurposeType.PROJECT_AREAS_SVF,
+  PROJECT_EXPORT_REPORT: ApiProjectPurposeType.PROJECT_EXPORT_REPORT,
 
   MINIMAP: ApiPhotoAreaPurposeType.MINIMAP,
-  THREE_SIXTY_PHOTO: ApiPhotoAreaPurposeType.THREE_SIXTY_PHOTO
+  THREE_SIXTY_PHOTO: ApiPhotoAreaPurposeType.THREE_SIXTY_PHOTO,
 };
 
 const apiPurposeTypeKeys: ApiPurposeTypeKeys[] = Object.values(ApiPurposeType);
