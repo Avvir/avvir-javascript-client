@@ -1,5 +1,5 @@
 import "../test_utils/setup_tests";
-import { expect } from "chai";
+import {expect} from "chai";
 import fetchMock from "fetch-mock";
 import moment from "moment";
 
@@ -9,9 +9,9 @@ import ApiProjectMasterformatProgress from "../../source/models/api/api_project_
 import DateConverter from "../../source/converters/date_converter";
 import Http from "../../source/utilities/http";
 import ProjectApi from "../../source/api/project_api";
-import { FIREBASE, GATEWAY_JWT } from "../../source/models/enums/user_auth_type";
-import { SUPERADMIN } from "../../source/models/enums/user_role";
-import {User} from "../../source";
+import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
+import {SUPERADMIN} from "../../source/models/enums/user_role";
+import {ApiProjectPurposeType, ProjectPurposeType} from "../../source";
 
 describe("ProjectApi", () => {
   let user;

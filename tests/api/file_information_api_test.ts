@@ -11,6 +11,7 @@ import { SUPERADMIN } from "../../source/models/enums/user_role";
 import Config from "../../source/config";
 import Http from "../../source/utilities/http";
 import { ApiPhotoAreaPurposeType, ApiProjectPurposeType } from "../../source";
+import ProjectApi from "../../source/api/project_api";
 
 describe("FileInformationApi", () => {
   let user;
@@ -178,12 +179,23 @@ describe("FileInformationApi", () => {
         url: "some-file-url.com",
         purposeType: ApiProjectPurposeType.OTHER
       }]);
+
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/files?purpose-type=PROJECT_EXPORT_REPORT`, [{
+        url: "some-file-url.com",
+        purposeType: ApiProjectPurposeType.PROJECT_EXPORT_REPORT
+      }])
     });
 
     it("makes a call to the project files endpoint", () => {
       FileInformationApi.listProjectFiles({ projectId: "some-project-id" }, user);
       const request = fetchMock.lastCall();
       expect(request[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/files`);
+    });
+
+    it("makes a call to the project files endpoint with purpose type", () => {
+      FileInformationApi.listProjectFiles({ projectId: "some-project-id" }, user, ApiProjectPurposeType.PROJECT_EXPORT_REPORT,);
+      const request = fetchMock.lastCall();
+      expect(request[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/files?purpose-type=PROJECT_EXPORT_REPORT`);
     });
 
     it("sends the request with authorization headers", () => {

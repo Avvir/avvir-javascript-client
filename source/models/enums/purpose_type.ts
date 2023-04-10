@@ -15,6 +15,7 @@ export enum ProjectPurposeType {
   PROJECT_AREAS_NWD = "projectAreasNwd",
   PROJECT_AREAS_IFC = "projectAreasIfc",
   PROJECT_AREAS_SVF = "projectAreasSvf",
+  PROJECT_EXPORT_REPORT = "projectExportReport"
 }
 
 /** @deprecated use ApiFloorPurposeType */
@@ -122,6 +123,7 @@ export const PurposeTypeMap: ProjectTypeMap & Omit<FloorTypeMap, "OTHER"> & Omit
   PROJECT_AREAS_NWD: ProjectPurposeType.PROJECT_AREAS_NWD,
   PROJECT_AREAS_IFC: ProjectPurposeType.PROJECT_AREAS_IFC,
   PROJECT_AREAS_SVF: ProjectPurposeType.PROJECT_AREAS_SVF,
+  PROJECT_EXPORT_REPORT: ProjectPurposeType.PROJECT_EXPORT_REPORT,
 };
 
 /** @deprecated use isApiPurposeType */

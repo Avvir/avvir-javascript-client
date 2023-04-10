@@ -3,14 +3,15 @@ import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 
 import {
-    AssociationIds,
-    ApiProject,
-    ApiProjectMasterformatProgress,
-    ApiProjectCostAnalysisProgress,
-    ApiCloudFile,
-    ApiWorkPackage,
-    ApiProjectListing
+  AssociationIds,
+  ApiProject,
+  ApiProjectMasterformatProgress,
+  ApiProjectCostAnalysisProgress,
+  ApiCloudFile,
+  ApiWorkPackage,
+  ApiProjectListing, ApiPurposeType, PurposeType
 } from "../models";
+import PurposeTypeConverter from "../converters/purpose_type_converter";
 
 export default class ProjectApi {
   static listProjectsForOrganization(accountId: string, user: User): Promise<ApiProject[]> {

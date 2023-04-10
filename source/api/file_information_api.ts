@@ -24,9 +24,15 @@ export default class FileInformationApi {
     return Http.post(url, user, files) as unknown as Promise<ApiCloudFile[]>;
   }
 
-  static listProjectFiles({ projectId }: AssociationIds, user: User): Promise<ApiCloudFile[]> {
-    const url = `${Http.baseUrl()}/projects/${projectId}/files`;
-    return Http.get(url, user) as unknown as Promise<ApiCloudFile[]>;
+  static listProjectFiles({ projectId }: AssociationIds, user: User, purposeType?: ApiPurposeType | PurposeType): Promise<ApiCloudFile[]> {
+      let query;
+      if (typeof purposeType === "string") {
+          query = `?purpose-type=${PurposeTypeConverter.toApiPurposeType(purposeType)}`;
+      } else {
+          query = "";
+      }
+      const url = `${Http.baseUrl()}/projects/${projectId}/files${query}`;
+      return Http.get(url, user) as unknown as Promise<ApiCloudFile[]>;
   };
 
   static listFloorFilesForProject({ projectId }: AssociationIds,
