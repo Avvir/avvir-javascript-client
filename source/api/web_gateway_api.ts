@@ -107,12 +107,12 @@ export default class WebGatewayApi {
                             projectId,
                             floorId,
                             scanDatasetId
-                          }: AssociationIds, procoreProjectId: string, procoreCompanyId: string, procoreAccessToken: string, pdfType: string, user: User): Promise<{ body: { id: number } }> {
+                          }: AssociationIds, procoreProjectId: string, procoreCompanyId: string, procoreAccessToken: string, pdfType: string, user: User): Promise<{ id: number }> {
     if (!projectId) {
       return Promise.reject(new Error("Project not loaded yet"));
     }
     const url = `${Http.baseUrl()}/projects/${projectId}/push-report-to-procore/${pdfType}?procore-project-id=${procoreProjectId}&procore-company-id=${procoreCompanyId}&procore-access-token=${procoreAccessToken}`;
-    return Http.post(url, user, null) as unknown as Promise<{ body: { id: number } }>;
+    return Http.post(url, user, null) as unknown as Promise<{ id: number }>;
   }
 
   static getProcoreProjects(projectId: string, procoreAccessToken: string, user: User): Promise<{ lastUpdated: number, projectId: string | number }[]> {
