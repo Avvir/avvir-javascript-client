@@ -139,6 +139,10 @@ export default class ScanDatasetApi {
     return Http.post(url, user, {sessionDate}) as unknown as Promise<ApiPhotoSession>;
   }
 
+  static clearVerified({projectId, floorId, scanDatasetId}: AssociationIds, user: User): Promise<void> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/clear-verified`;
+    return Http.post(url, user) as unknown as Promise<void>;
+  };
 }
 
 makeErrorsPretty(ScanDatasetApi);
