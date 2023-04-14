@@ -191,33 +191,29 @@ describe("FloorApi", () => {
     });
   });
 
-  describe("#updateFloorOrder", () => {
+  describe("#reorderFloors", () => {
+    const requestBody = []
+    const associationIds = {projectId: "some-project-id"};
     beforeEach(() => {
-      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/reorder/3`, 200);
+        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/reorder-floors`, {
+            status: 200,
+            body: requestBody
+        });
     });
 
     it("makes a call to the correct endpoint", () => {
-      FloorApi.updateFloorOrder({
-        projectId: "some-project-id",
-        floorId: "some-floor-id"
-      }, 3, { firebaseUser: { idToken: "some-firebase.id.token" } } as User);
-      const fetchCall = fetchMock.lastCall();
-
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/reorder/3`);
+        FloorApi.reorderFloors(associationIds, requestBody, user);
+        const fetchCall = fetchMock.lastCall();
+        expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/reorder-floors`);
     });
 
     it("sends the request with authorization headers", () => {
-      FloorApi.updateFloorOrder({
-        projectId: "some-project-id",
-        floorId: "some-floor-id"
-      }, 3, user);
-      const lastFetchOpts = fetchMock.lastOptions();
-
-      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
-      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+        FloorApi.reorderFloors(associationIds, requestBody, user);
+        const lastFetchOpts = fetchMock.lastOptions();
+        expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+        expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
-  });
-
+});
 
   describe("#deleteFloor", () => {
     beforeEach(() => {
