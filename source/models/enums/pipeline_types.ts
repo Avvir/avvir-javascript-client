@@ -1,18 +1,20 @@
-export type PipelineName = "downsample-scan" |
-  "ingest-scan" |
-  "convert-ifc-and-process-scans" |
-  "generate-ifc" |
-  "create-and-process-svf" |
-  "download-and-zip-project-files-folder" |
-  "pipeline-steps" |
-  "ingest-external-photo-project-data" |
-  "ingest-project-file" |
-  "convert-e57-to-las" |
-  "convert-and-process-e57" |
-  "ingest-las-or-e57" |
-  "generate-bcf" |
-  "compute-qa-statistics" |
-    "ingest-project-export-report"
+export type PipelineName =
+  | "downsample-scan"
+  | "ingest-scan"
+  | "convert-ifc-and-process-scans"
+  | "generate-ifc"
+  | "create-and-process-svf"
+  | "download-and-zip-project-files-folder"
+  | "pipeline-steps"
+  | "ingest-external-photo-project-data"
+  | "ingest-project-file"
+  | "convert-e57-to-las"
+  | "convert-and-process-e57"
+  | "ingest-las-or-e57"
+  | "generate-bcf"
+  | "compute-qa-statistics"
+  | "ingest-project-export-report"
+  | "compute-and-save-clashes"
 
 export enum Pipelines {
   INGEST_PROJECT_FILE = "ingest-project-file",
@@ -29,7 +31,8 @@ export enum Pipelines {
   INGEST_LAS_OR_E57 = "ingest-las-or-e57",
   GENERATE_BCF = "generate-bcf",
   COMPUTE_QA_STATISTICS = "compute-qa-statistics",
-  PROJECT_EXPORT_REPORT = "ingest-project-export-report"
+  PROJECT_EXPORT_REPORT = "ingest-project-export-report",
+  COMPUTE_AND_SAVE_CLASHES = "compute-and-save-clashes",
 }
 
 export default Pipelines;
