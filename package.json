@@ -76,5 +76,13 @@
     "three": "0.110.0",
     "underscore": "^1.12.0",
     "util": "^0.12.4"
+  },
+  "mocha": {
+    "require": [
+      "./tests/test_utils/mocha_setup.js",
+      "./tests/test_utils/setup_tests.ts"
+    ],
+    "exit": true,
+    "ui": "bdd"
   }
 }
