@@ -1,17 +1,8 @@
-import {User} from "../utilities/get_authorization_headers";
+import { User } from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 
-import {
-  AssociationIds,
-  ApiProject,
-  ApiProjectMasterformatProgress,
-  ApiProjectCostAnalysisProgress,
-  ApiCloudFile,
-  ApiWorkPackage,
-  ApiProjectListing, ApiPurposeType, PurposeType
-} from "../models";
-import PurposeTypeConverter from "../converters/purpose_type_converter";
+import { ApiCloudFile, ApiProject, ApiProjectCostAnalysisProgress, ApiProjectListing, ApiProjectMasterformatProgress, ApiWorkPackage, AssociationIds } from "../models";
 
 export default class ProjectApi {
   static listProjectsForOrganization(accountId: string, user: User): Promise<ApiProject[]> {
@@ -57,58 +48,69 @@ export default class ProjectApi {
     return Http.post(url, user, null) as unknown as Promise<void>;
   }
 
-  static saveProjectCostAnalysisProgress({projectId}: AssociationIds, progress, user: User): Promise<void> {
+  static saveProjectCostAnalysisProgress({ projectId }: AssociationIds, progress, user: User): Promise<void> {
     const url = `${Http.baseUrl()}/projects/${projectId}/cost-analysis-progress`;
     return Http.post(url, user, progress) as unknown as Promise<void>;
   }
 
-  static saveScannedProjectMasterformatProgress({projectId}: AssociationIds, progress: ApiProjectMasterformatProgress, user: User): Promise<void> {
+  static saveScannedProjectMasterformatProgress({ projectId }: AssociationIds,
+                                                progress: ApiProjectMasterformatProgress,
+                                                user: User): Promise<void> {
     const url = `${Http.baseUrl()}/projects/${projectId}/masterformat-progress`;
     return Http.post(url, user, progress) as unknown as Promise<void>;
   }
 
-  static saveScheduledProjectMasterformatProgress({projectId}: AssociationIds, progress: ApiProjectMasterformatProgress, user: User): Promise<void> {
-    const url = `${Http.baseUrl()}/projects/${projectId}/scheduled-masterformat-progress`;
+  // TODO: Make schedule type an enum?
+  static saveScheduledProjectMasterformatProgress({ projectId }: AssociationIds,
+                                                  progress: ApiProjectMasterformatProgress,
+                                                  scheduleType: "current" | "baseline",
+                                                  user: User): Promise<void> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/scheduled-masterformat-progress/${scheduleType}`;
     return Http.post(url, user, progress) as unknown as Promise<void>;
   }
 
-  static getProjectCostAnalysisProgress({projectId}: AssociationIds, user: User): Promise<ApiProjectCostAnalysisProgress[]> {
+  static getProjectCostAnalysisProgress({ projectId }: AssociationIds,
+                                        user: User): Promise<ApiProjectCostAnalysisProgress[]> {
     const url = `${Http.baseUrl()}/projects/${projectId}/cost-analysis-progress`;
     return Http.get(url, user) as unknown as Promise<ApiProjectCostAnalysisProgress[]>;
   }
 
-  static getScannedProjectMasterformatProgress({projectId}: AssociationIds, user: User): Promise<ApiProjectMasterformatProgress[]> {
+  static getScannedProjectMasterformatProgress({ projectId }: AssociationIds,
+                                               user: User): Promise<ApiProjectMasterformatProgress[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/masterformat-progress`;
     return Http.get(url, user) as unknown as Promise<ApiProjectMasterformatProgress[]>;
   }
 
-  static getScheduledProjectMasterformatProgress({projectId}: AssociationIds, user: User): Promise<ApiProjectMasterformatProgress[]> {
-    let url = `${Http.baseUrl()}/projects/${projectId}/scheduled-masterformat-progress`;
+  // TODO: Make schedule type an enum?
+  static getScheduledProjectMasterformatProgress({ projectId }: AssociationIds,
+                                                 scheduleType: "current" | "baseline",
+                                                 user: User): Promise<ApiProjectMasterformatProgress[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/scheduled-masterformat-progress/${scheduleType}`;
     return Http.get(url, user) as unknown as Promise<ApiProjectMasterformatProgress[]>;
   }
 
-  static listProjectFloorFiles({projectId}: AssociationIds, user: User): Promise<ApiCloudFile[]> {
+  static listProjectFloorFiles({ projectId }: AssociationIds, user: User): Promise<ApiCloudFile[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floor-files`;
     return Http.get(url, user) as unknown as Promise<ApiCloudFile[]>;
   }
 
-  static getProjectDeviationsReportTsvUrl({projectId}: AssociationIds, fileName: string, user: User): Promise<string> {
+  static getProjectDeviationsReportTsvUrl({ projectId }: AssociationIds, fileName: string, user: User): string {
     const baseUrl = `${Http.baseUrl()}/projects/${projectId}/${fileName}_deviation-report.tsv`;
-    return Promise.resolve(Http.addAuthToDownloadUrl(baseUrl, user));
+    return Http.addAuthToDownloadUrl(baseUrl, user);
   }
 
-  static getProjectDeviationsReportTsv({projectId}: AssociationIds, user: User): Promise<string> {
+  static getProjectDeviationsReportTsv({ projectId }: AssociationIds, user: User): Promise<string> {
     const baseUrl = `${Http.baseUrl()}/projects/${projectId}/project_deviation-report.tsv`;
     const url = Http.addAuthToDownloadUrl(baseUrl, user);
     return Http.get(url, user, "text/tab-separated-values; charset=utf-8") as unknown as Promise<string>;
   }
 
-  static getWorkPackages(projectId: string, user:User) {
+  static getWorkPackages(projectId: string, user: User) {
     let url = `${Http.baseUrl()}/projects/${projectId}/work-packages`;
     return Http.get(url, user) as unknown as Promise<ApiWorkPackage[]>;
   }
 
-  static saveWorkPackages(projectId: string, user:User, workPackages: ApiWorkPackage[]) {
+  static saveWorkPackages(projectId: string, user: User, workPackages: ApiWorkPackage[]) {
     let url = `${Http.baseUrl()}/projects/${projectId}/work-packages`;
     return Http.put(url, user, workPackages) as unknown as Promise<ApiWorkPackage[]>;
   }

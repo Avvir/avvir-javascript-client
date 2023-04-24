@@ -28,15 +28,17 @@ export let sandbox: SinonSandbox;
 
 sandbox = sinon.createSandbox();
 
-beforeEach(() => {
-  Config.setConfigurationFromEnvironmentVariable();
-  sandbox.restore();
+export const mochaHooks = {
+  beforeEach: () => {
+    Config.setConfigurationFromEnvironmentVariable();
+    sandbox.restore();
 
-  sandbox = sinon.createSandbox();
-});
+    sandbox = sinon.createSandbox();
+  },
+  afterEach: (done) => {
+    fetchMock.flush().then(() => done());
+    fetchMock.restore();
+    // Don't put things here. put them in the beforeEach instead.
+  }
+};
 
-afterEach((done) => {
-  fetchMock.flush().then(() => done());
-  fetchMock.restore();
-  // Don't put things here. put them in the beforeEach instead.
-});

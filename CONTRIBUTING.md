@@ -4,7 +4,6 @@
 `yarn install`
 
 In webstorm mocha configuration template:
- - set extra-mocha-options to `--require ./tests/test_utils/mocha_setup.js`
  - set AVVIR_ENVIRONMENT to acceptance `AVVIR_ENVIRONMENT=acceptance`
 
 For running integration tests you will also need to set these env vars:
@@ -41,10 +40,6 @@ To see any changes made locally in another project you'll need to rebuild this l
 ```shell
 yarn build
 ```
-
-## Jetbrains IDE test config
-Add the following in the mocha template in the `Extra Mocha options` field
-`--require ./scripts/mocha_setup.js`
 
 
 ## Troubleshooting
