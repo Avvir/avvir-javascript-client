@@ -1,16 +1,15 @@
-import {expect} from "chai";
+import { expect } from "chai";
 import fetchMock from "fetch-mock";
 import _ from "underscore";
-import moment from "moment";
 
 import ApiScanDataset from "../../source/models/api/api_scan_dataset";
 import DateConverter from "../../source/converters/date_converter";
 import ScanDatasetApi from "../../source/api/scan_dataset_api";
-import { User, UserRole, UserAuthType} from "../../source";
+import { User, UserAuthType, UserRole } from "../../source";
 import Config from "../../source/config";
-import {sandbox} from "../test_utils/setup_tests";
+import { sandbox } from "../test_utils/setup_tests";
 import Http from "../../source/utilities/http";
-import {describe} from "mocha";
+import { describe } from "mocha";
 import ApiView from "../../source/models/api/api_view";
 
 describe("ScanDatasetApi", () => {
@@ -226,7 +225,7 @@ describe("ScanDatasetApi", () => {
 0 0 0 5.7777`,
         notes: "Some notes",
         name: "Some Name",
-        scanDate: moment("2018-04-01").toDate(),
+        scanDate: new Date("2018-04-01"),
         scanNumber: 1,
         firebaseId: "some-scan-dataset-id",
         firebaseFloorId: "some-floor-id"
@@ -258,7 +257,7 @@ describe("ScanDatasetApi", () => {
         },
         notes: "Some notes",
         name: "Some Name",
-        scanDate: DateConverter.dateToInstant(moment("2018-04-01")),
+        scanDate: DateConverter.dateToInstant(new Date("2018-04-01")),
         firebaseId: "some-scan-dataset-id",
         firebaseFloorId: "some-floor-id",
         scanNumber: 1
@@ -296,7 +295,7 @@ describe("ScanDatasetApi", () => {
 0 0 0 5.7777`,
         notes: "Some notes",
         name: "Some Name",
-        scanDate: moment("2018-04-01").toDate(),
+        scanDate: new Date("2018-04-01"),
         scanNumber: 1,
         firebaseId: "some-scan-dataset-id",
         firebaseFloorId: "some-floor-id"
@@ -328,7 +327,7 @@ describe("ScanDatasetApi", () => {
         },
         notes: "Some notes",
         name: "Some Name",
-        scanDate: DateConverter.dateToInstant(moment("2018-04-01")),
+        scanDate: DateConverter.dateToInstant(new Date("2018-04-01")),
         firebaseId: "some-scan-dataset-id",
         firebaseFloorId: "some-floor-id",
         scanNumber: 1

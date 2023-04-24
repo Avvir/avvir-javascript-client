@@ -11,7 +11,6 @@ import { SUPERADMIN } from "../../source/models/enums/user_role";
 import Config from "../../source/config";
 import Http from "../../source/utilities/http";
 import { ApiPhotoAreaPurposeType, ApiProjectPurposeType } from "../../source";
-import ProjectApi from "../../source/api/project_api";
 
 describe("FileInformationApi", () => {
   let user;
@@ -39,7 +38,7 @@ describe("FileInformationApi", () => {
         new ApiCloudFile({
           purposeType: ApiProjectPurposeType.OTHER,
           url: "some-download-url.com",
-          lastModified: moment("2018-04-01"),
+          lastModified: new Date("2018-04-01"),
           fileSize: 65536,
           originalFileName: "some-file.las",
         }),
@@ -51,7 +50,7 @@ describe("FileInformationApi", () => {
       expect(JSON.parse(request["1"].body as string)).to.deep.eq({
         purposeType: ApiProjectPurposeType.OTHER,
         url: "some-download-url.com",
-        lastModified: DateConverter.dateToInstant(moment("2018-04-01")),
+        lastModified: DateConverter.dateToInstant(new Date("2018-04-01")),
         fileSize: 65536,
         originalFileName: "some-file.las",
       });
@@ -112,7 +111,7 @@ describe("FileInformationApi", () => {
         [new ApiCloudFile({
           purposeType: ApiProjectPurposeType.OTHER,
           url: "some-download-url.com",
-          lastModified: moment("2018-04-01"),
+          lastModified: new Date("2018-04-01"),
           fileSize: 65536,
           originalFileName: "some-file.las",
         })],
@@ -124,7 +123,7 @@ describe("FileInformationApi", () => {
       expect(JSON.parse(request["1"].body as string)).to.deep.eq([{
         purposeType: ApiProjectPurposeType.OTHER,
         url: "some-download-url.com",
-        lastModified: DateConverter.dateToInstant(moment("2018-04-01")),
+        lastModified: DateConverter.dateToInstant(new Date("2018-04-01")),
         fileSize: 65536,
         originalFileName: "some-file.las",
       }]);
@@ -183,7 +182,7 @@ describe("FileInformationApi", () => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/files?purpose-type=PROJECT_EXPORT_REPORT`, [{
         url: "some-file-url.com",
         purposeType: ApiProjectPurposeType.PROJECT_EXPORT_REPORT
-      }])
+      }]);
     });
 
     it("makes a call to the project files endpoint", () => {
@@ -193,7 +192,9 @@ describe("FileInformationApi", () => {
     });
 
     it("makes a call to the project files endpoint with purpose type", () => {
-      FileInformationApi.listProjectFiles({ projectId: "some-project-id" }, user, ApiProjectPurposeType.PROJECT_EXPORT_REPORT,);
+      FileInformationApi.listProjectFiles({ projectId: "some-project-id" },
+        user,
+        ApiProjectPurposeType.PROJECT_EXPORT_REPORT,);
       const request = fetchMock.lastCall();
       expect(request[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/files?purpose-type=PROJECT_EXPORT_REPORT`);
     });
@@ -210,10 +211,12 @@ describe("FileInformationApi", () => {
 
   describe("#listFloorFilesForProject", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floor-files`, [{floorId: "some-floor-id", files: [{
-        url: "some-file-url.com",
-        purposeType: ApiProjectPurposeType.OTHER
-      }]}]);
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floor-files`, [{
+        floorId: "some-floor-id", files: [{
+          url: "some-file-url.com",
+          purposeType: ApiProjectPurposeType.OTHER
+        }]
+      }]);
     });
 
     it("makes a call to the project files endpoint", () => {
@@ -252,7 +255,9 @@ describe("FileInformationApi", () => {
     });
 
     it("makes a call to the project files endpoint with the specified purpose types", () => {
-      FileInformationApi.listPhotoAreaFiles({ projectId: "some-project-id", photoAreaId: 4 }, [ApiPhotoAreaPurposeType.MINIMAP], user);
+      FileInformationApi.listPhotoAreaFiles({ projectId: "some-project-id", photoAreaId: 4 },
+        [ApiPhotoAreaPurposeType.MINIMAP],
+        user);
       const request = fetchMock.lastCall();
       expect(request[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/files?purposeType=MINIMAP`);
     });
@@ -269,14 +274,17 @@ describe("FileInformationApi", () => {
 
   describe("zipProjectFolder", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/zip-project-folder?folder-prefix=some-folder-name`, 200);
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/zip-project-folder?folder-prefix=some-folder-name`,
+        200);
     });
 
     it("makes a call to the zip project folder endpoint", () => {
       FileInformationApi.zipProjectFolder("some-folder-name", { projectId: "some-project-id" }, user);
 
       const request = fetchMock.lastCall();
-      expect(request["0"]).to.eq(`${Http.baseUrl()}/projects/some-project-id/zip-project-folder?folder-prefix=some-folder-name`);
+      expect(request["0"])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/zip-project-folder?folder-prefix=some-folder-name`);
     });
 
     it("sends the request with authorization headers", () => {
@@ -302,7 +310,7 @@ describe("FileInformationApi", () => {
         new ApiCloudFile({
           purposeType: ApiProjectPurposeType.OTHER,
           url: "some-download-url.com",
-          lastModified: moment("2018-04-01"),
+          lastModified: new Date("2018-04-01"),
           fileSize: 65536,
           originalFileName: "some-file.las",
         }),
@@ -314,7 +322,7 @@ describe("FileInformationApi", () => {
       expect(JSON.parse(request["1"].body as string)).to.deep.eq({
         purposeType: ApiProjectPurposeType.OTHER,
         url: "some-download-url.com",
-        lastModified: DateConverter.dateToInstant(moment("2018-04-01")),
+        lastModified: DateConverter.dateToInstant(new Date("2018-04-01")),
         fileSize: 65536,
         originalFileName: "some-file.las",
       });
@@ -341,7 +349,9 @@ describe("FileInformationApi", () => {
 
     describe("when the call fails", () => {
       beforeEach(() => {
-        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/file`, 500, { overwriteRoutes: true });
+        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/file`,
+          500,
+          { overwriteRoutes: true });
       });
 
       it("dispatches an api failure notification", () => {
@@ -376,7 +386,7 @@ describe("FileInformationApi", () => {
         new ApiCloudFile({
           purposeType: ApiPhotoAreaPurposeType.THREE_SIXTY_PHOTO,
           url: "some-download-url.com",
-          lastModified: moment("2018-04-01")
+          lastModified: new Date("2018-04-01")
         }),
         user,
       );
@@ -386,14 +396,15 @@ describe("FileInformationApi", () => {
       expect(JSON.parse(request["1"].body as string)).to.deep.eq({
         purposeType: "THREE_SIXTY_PHOTO",
         url: "some-download-url.com",
-        lastModified: DateConverter.dateToInstant(moment("2018-04-01"))
+        lastModified: DateConverter.dateToInstant(new Date("2018-04-01"))
       });
     });
   });
 
   describe("#saveScanDatasetFile", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/file`, 200);
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/file`,
+        200);
     });
 
     it("makes a call to the scan dataset files endpoint", () => {
@@ -408,20 +419,22 @@ describe("FileInformationApi", () => {
           originalFileName: "some-file.las",
           purposeType: ApiProjectPurposeType.OTHER,
           url: "some-download-url.com",
-          lastModified: moment("2018-04-01")
+          lastModified: new Date("2018-04-01")
         }),
         user,
       );
       const request = fetchMock.lastCall();
 
-      expect(request["0"]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/file`);
+      expect(request["0"])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/file`);
       expect(JSON.parse(request["1"].body as string)).to.deep.eq({
         createdBy: "some-email@example.com",
         fileSize: 65536,
         originalFileName: "some-file.las",
         purposeType: ApiProjectPurposeType.OTHER,
         url: "some-download-url.com",
-        lastModified: DateConverter.dateToInstant(moment("2018-04-01"))
+        lastModified: DateConverter.dateToInstant(new Date("2018-04-01"))
       });
     });
 
@@ -447,7 +460,9 @@ describe("FileInformationApi", () => {
 
     describe("when the call fails", () => {
       beforeEach(() => {
-        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/file`, 500, { overwriteRoutes: true });
+        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/file`,
+          500,
+          { overwriteRoutes: true });
       });
 
       it("dispatches an api failure notification", () => {
