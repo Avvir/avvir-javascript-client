@@ -1,6 +1,5 @@
-import fetchMock from "fetch-mock";
 import { expect } from "chai";
-import "../test_utils/setup_tests";
+import fetchMock from "fetch-mock";
 
 import ElementApi from "../../source/api/element_api";
 import Http from "../../source/utilities/http";
