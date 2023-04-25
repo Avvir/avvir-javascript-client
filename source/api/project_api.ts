@@ -116,4 +116,4 @@ export default class ProjectApi {
   }
 }
 
-makeErrorsPretty(ProjectApi);
+makeErrorsPretty(ProjectApi, { exclude: ["getProjectDeviationsReportTsvUrl"] });
