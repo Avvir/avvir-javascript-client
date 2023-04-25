@@ -1,42 +1,41 @@
-import {User} from "../utilities/get_authorization_headers";
-import {AssociationIds, DateLike} from "../models";
+import { User } from "../utilities/get_authorization_headers";
+import { ApiBuiltStatus, ApiDetailedElement, ApiPhotoSession, ApiScanDataset, ApiScannedElementType, AssociationIds, DateLike } from "../models";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import ApiProgressScanDataset from "../models/api/api_progress_scan_dataset";
-import ApiView, {ViewParameter} from "../models/api/api_view";
-import {DateConverter} from "../converters";
-import {ApiScanDataset, ApiDetailedElement, ApiPhotoSession, ApiBuiltStatus, ApiScannedElementType} from "../models";
+import ApiView, { ViewParameter } from "../models/api/api_view";
+import { DateConverter } from "../converters";
 
 export default class ScanDatasetApi {
-  static listScanDatasetsForFloor({projectId, floorId}: AssociationIds, user: User): Promise<ApiScanDataset[]> {
+  static listScanDatasetsForFloor({ projectId, floorId }: AssociationIds, user: User): Promise<ApiScanDataset[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets`;
     return Http.get(url, user) as unknown as Promise<ApiScanDataset[]>;
   }
 
   static mergeScanDataset({
-                             projectId,
-                             floorId,
-                             scanDatasetId
-                           }: AssociationIds, scanDataset: ApiScanDataset, user: User): Promise<void> {
-    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}`;
-    return Http.patch(url, user, scanDataset) as unknown as Promise<void>;
-  }
-  //@Deprecated
-  static updateScanDataset({
                             projectId,
                             floorId,
                             scanDatasetId
                           }: AssociationIds, scanDataset: ApiScanDataset, user: User): Promise<void> {
-    return this.mergeScanDataset({projectId, floorId, scanDatasetId}, scanDataset, user);
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}`;
+    return Http.patch(url, user, scanDataset) as unknown as Promise<void>;
+  }
+
+  //@Deprecated
+  static updateScanDataset({
+                             projectId,
+                             floorId,
+                             scanDatasetId
+                           }: AssociationIds, scanDataset: ApiScanDataset, user: User): Promise<void> {
+    return this.mergeScanDataset({ projectId, floorId, scanDatasetId }, scanDataset, user);
   }
 
   static replaceScanDataset({
-      projectId,
-      floorId,
-      scanDatasetId
+                              projectId,
+                              floorId,
+                              scanDatasetId
                             }: AssociationIds, scanDataset: ApiScanDataset, user: User): Promise<void> {
-      const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}`;
-      return Http.put(url, user, scanDataset) as unknown as Promise<void>;
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}`;
+    return Http.put(url, user, scanDataset) as unknown as Promise<void>;
   }
 
   static createScanDataset({
@@ -46,12 +45,12 @@ export default class ScanDatasetApi {
                            }: AssociationIds & { scanDate?: DateLike }, user: User): Promise<ApiScanDataset> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets`;
     if (scanDate) {
-      url += `?scanDate=${DateConverter.dateToISO(scanDate)}`
+      url += `?scanDate=${DateConverter.dateToISO(scanDate)}`;
     }
     return Http.post(url, user, null) as unknown as Promise<ApiScanDataset>;
   }
 
-  static deleteScanDataset({projectId, floorId, scanDatasetId}: AssociationIds, user: User): Promise<void> {
+  static deleteScanDataset({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}`;
     return Http.delete(url, user) as unknown as Promise<void>;
   };
@@ -60,12 +59,14 @@ export default class ScanDatasetApi {
                             projectId,
                             floorId,
                             scanDatasetId
-                          }: AssociationIds, analysis: ApiScannedElementType<ApiBuiltStatus>[], user: User): Promise<void> {
+                          }: AssociationIds,
+                          analysis: ApiScannedElementType<ApiBuiltStatus>[],
+                          user: User): Promise<void> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/analysis?enforceBuiltPersistence=false`;
     return Http.post(url, user, analysis) as unknown as Promise<void>;
   }
 
-  static getScanDataset({projectId, floorId, scanDatasetId}: AssociationIds, user: User): Promise<ApiScanDataset> {
+  static getScanDataset({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<ApiScanDataset> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}`;
     return Http.get(url, user) as unknown as Promise<ApiScanDataset>;
   }
@@ -115,7 +116,8 @@ export default class ScanDatasetApi {
     return Http.get(url, user) as unknown as Promise<ViewParameter[]>;
   }
 
-  static getNewElementsForScanDataset({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<string[]> {
+  static getNewElementsForScanDataset({ projectId, floorId, scanDatasetId }: AssociationIds,
+                                      user: User): Promise<string[]> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/new-elements`;
     return Http.get(url, user) as unknown as Promise<string[]>;
   }
@@ -133,13 +135,15 @@ export default class ScanDatasetApi {
                               projectId,
                               floorId,
                               scanDatasetId
-                            }: AssociationIds, { id, photoAreaId, sessionDate }:ApiPhotoSession, user: User): Promise<ApiPhotoSession> {
+                            }: AssociationIds,
+                            { id, photoAreaId, sessionDate }: ApiPhotoSession,
+                            user: User): Promise<ApiPhotoSession> {
 
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/photo-session/${id}`;
-    return Http.post(url, user, {sessionDate}) as unknown as Promise<ApiPhotoSession>;
+    return Http.post(url, user, { sessionDate }) as unknown as Promise<ApiPhotoSession>;
   }
 
-  static clearVerified({projectId, floorId, scanDatasetId}: AssociationIds, user: User): Promise<void> {
+  static clearVerified({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/clear-verified`;
     return Http.post(url, user) as unknown as Promise<void>;
   };
