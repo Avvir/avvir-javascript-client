@@ -56,7 +56,7 @@ export default class ProjectApi {
   static saveScannedProjectMasterformatProgress({ projectId }: AssociationIds,
                                                 progress: ApiProjectMasterformatProgress,
                                                 user: User): Promise<void> {
-    const url = `${Http.baseUrl()}/projects/${projectId}/masterformat-progress`;
+    const url = `${Http.baseUrl()}/projects/${projectId}/scanned-masterformat-progress`;
     return Http.post(url, user, progress) as unknown as Promise<void>;
   }
 
@@ -77,7 +77,7 @@ export default class ProjectApi {
 
   static getScannedProjectMasterformatProgress({ projectId }: AssociationIds,
                                                user: User): Promise<ApiProjectMasterformatProgress[]> {
-    let url = `${Http.baseUrl()}/projects/${projectId}/masterformat-progress`;
+    let url = `${Http.baseUrl()}/projects/${projectId}/scanned-masterformat-progress`;
     return Http.get(url, user) as unknown as Promise<ApiProjectMasterformatProgress[]>;
   }
 

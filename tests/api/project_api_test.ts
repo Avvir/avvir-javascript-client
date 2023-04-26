@@ -102,7 +102,7 @@ describe("ProjectApi", () => {
         new ApiMasterformat(2016, "00 00 01"),
         0.8,
         DateConverter.dateToInstant(moment("2018-04-01")))];
-      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/masterformat-progress`, 200);
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/scanned-masterformat-progress`, 200);
     });
 
     it("makes a call to the masterformat progress endpoint", () => {
@@ -112,7 +112,7 @@ describe("ProjectApi", () => {
         { firebaseUser: { idToken: "some-firebase.id.token" } });
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/masterformat-progress`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/scanned-masterformat-progress`);
       expect(JSON.parse(fetchCall[1].body as string)).to.deep.eq([{
         masterformat: { version: 2016, code: "00 00 01" },
         scanDate: DateConverter.dateToInstant(moment("2018-04-01")),
@@ -141,7 +141,7 @@ describe("ProjectApi", () => {
 
     describe("when the call fails", () => {
       beforeEach(() => {
-        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/masterformat-progress`,
+        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/scanned-masterformat-progress`,
           {
             status: 500, body: { some: "body" },
             headers: { "ContentType": "application/json" }
@@ -371,7 +371,7 @@ describe("ProjectApi", () => {
 
   describe("#getScannedProjectMasterformatProgress", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/masterformat-progress`, 200);
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/scanned-masterformat-progress`, 200);
     });
 
     it("makes a request to the gateway api", () => {
@@ -381,7 +381,7 @@ describe("ProjectApi", () => {
       });
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/masterformat-progress`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/scanned-masterformat-progress`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
