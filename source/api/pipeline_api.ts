@@ -1,13 +1,13 @@
-import {AssociationIds} from "../models";
+import { AssociationIds } from "../models";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import {User} from "../utilities/get_authorization_headers";
-import ApiPipeline, {ApiPipelineArgument} from "../models/api/api_pipeline";
+import { User } from "../utilities/get_authorization_headers";
+import ApiPipeline, { ApiPipelineArgument } from "../models/api/api_pipeline";
 
 export default class PipelineApi {
   static triggerJobStepsPipeline(associationIds: AssociationIds, body = {}, user: User): Promise<ApiPipeline> {
-    let {accountId, projectId, floorId, scanDatasetId} = associationIds;
-    const url = `${Http.baseUrl()}/pipeline/${accountId}/${projectId}/${floorId}/${scanDatasetId}/trigger`;
+    const {organizationId, projectId, floorId, scanDatasetId} = associationIds;
+    const url = `${Http.baseUrl()}/pipeline/${organizationId}/${projectId}/${floorId}/${scanDatasetId}/trigger`;
     return Http.post(url, user, body) as unknown as Promise<ApiPipeline>;
   }
 

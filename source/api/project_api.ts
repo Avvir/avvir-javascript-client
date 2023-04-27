@@ -5,8 +5,8 @@ import makeErrorsPretty from "../utilities/make_errors_pretty";
 import { ApiCloudFile, ApiProject, ApiProjectCostAnalysisProgress, ApiProjectListing, ApiProjectMasterformatProgress, ApiWorkPackage, AssociationIds } from "../models";
 
 export default class ProjectApi {
-  static listProjectsForOrganization(accountId: string, user: User): Promise<ApiProject[]> {
-    let url = `${Http.baseUrl()}/client-accounts/${accountId}/projects`;
+  static listProjectsForOrganization(organizationId: string, user: User): Promise<ApiProject[]> {
+    let url = `${Http.baseUrl()}/client-accounts/${organizationId}/projects`;
     return Http.get(url, user) as unknown as Promise<ApiProject[]>;
   }
 
@@ -33,8 +33,8 @@ export default class ProjectApi {
     return Http.get(url, user) as unknown as Promise<ApiProject>;
   }
 
-  static createProject(accountId: string, project: ApiProject, user: User): Promise<{ firebaseId: string }> {
-    let url = `${Http.baseUrl()}/client-accounts/${accountId}/projects`;
+  static createProject(organizationId: string, project: ApiProject, user: User): Promise<{ firebaseId: string }> {
+    let url = `${Http.baseUrl()}/client-accounts/${organizationId}/projects`;
     return Http.post(url, user, project) as unknown as Promise<{ firebaseId: string }>;
   }
 
@@ -43,8 +43,13 @@ export default class ProjectApi {
     return Http.patch(url, user, project) as unknown as Promise<void>;
   }
 
-  static archiveProject(accountId: string, projectId: string, user: User): Promise<void> {
+  static archiveProject(projectId: string, user: User): Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/archive`;
+    return Http.post(url, user, null) as unknown as Promise<void>;
+  }
+
+  static unarchiveProject(projectId: string, user: User): Promise<void> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/unarchive`;
     return Http.post(url, user, null) as unknown as Promise<void>;
   }
 

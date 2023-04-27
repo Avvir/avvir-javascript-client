@@ -1,11 +1,10 @@
 // @ts-nocheck
 import ApiOrganization from "../models/api/api_organization";
-import {User} from "../utilities/get_authorization_headers";
+import { User } from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import {List} from "underscore";
 import ApiUserForOrganization from "../models/api/api_user_for_organization";
-import {ApiScanDatasetStats} from "../models/api/api_scandataset_stats";
+import { ApiScanDatasetStats } from "../models/api/api_scandataset_stats";
 
 export default class OrganizationApi {
   static listOrganizations(user: User): Promise<ApiOrganization[]> {
@@ -33,8 +32,8 @@ export default class OrganizationApi {
     return Http.post(url, user, organization);
   }
 
-  static updateOrganization(accountId: string, organization: ApiOrganization, user: User): Promise<void> {
-    let url = `${Http.baseUrl()}/client-accounts/${accountId}`;
+  static updateOrganization(organizationId: string, organization: ApiOrganization, user: User): Promise<void> {
+    let url = `${Http.baseUrl()}/client-accounts/${organizationId}`;
     return Http.patch(url, user, organization);
   }
 

@@ -1,15 +1,15 @@
-import {sandbox} from "../test_utils/setup_tests";
-import {expect} from "chai";
+import { sandbox } from "../test_utils/setup_tests";
+import { expect } from "chai";
 import fetchMock from "fetch-mock";
 import _, { Dictionary } from "underscore";
 
 import PipelineApi from "../../source/api/pipeline_api";
-import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
+import { FIREBASE, GATEWAY_JWT } from "../../source/models/enums/user_auth_type";
 import Config from "../../source/config";
 import Http from "../../source/utilities/http";
 import ApiPipeline from "../../source/models/api/api_pipeline";
 import RunningProcessStatus from "../../source/models/enums/running_process_status";
-import {USER} from "../../source/models/enums/user_role";
+import { USER } from "../../source/models/enums/user_role";
 
 describe("PipelineApi", () => {
   let user;
@@ -26,7 +26,7 @@ describe("PipelineApi", () => {
 
     it("Calls the correct URL", () => {
       PipelineApi.triggerJobStepsPipeline({
-          accountId: "some-organization-id",
+          organizationId: "some-organization-id",
           projectId: "some-project-id",
           floorId: "some-floor-id",
           scanDatasetId: "some-scan-dataset-id"

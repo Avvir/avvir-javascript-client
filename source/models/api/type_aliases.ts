@@ -1,11 +1,10 @@
-import {Matrix3, Matrix4, Quaternion} from "three";
-import {Moment} from "moment";
+import { Matrix3, Matrix4, Quaternion } from "three";
+import { Moment } from "moment";
 import ApiMatrix3 from "./api_matrix_3";
 import ApiMatrix4 from "./api_matrix_4";
-import {ApiQuaternion} from "./api_quaternion";
+import { ApiQuaternion } from "./api_quaternion";
 
 export type AssociationIds = {
-  accountId?: string,
   commentThreadId?: number,
   commentId?: number,
   organizationId?: string,
