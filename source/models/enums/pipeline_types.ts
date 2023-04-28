@@ -12,7 +12,7 @@ export type PipelineName = "downsample-scan" |
   "ingest-las-or-e57" |
   "generate-bcf" |
   "compute-qa-statistics" |
-    "ingest-project-export-report"
+    "create-project-report"
 
 export enum Pipelines {
   INGEST_PROJECT_FILE = "ingest-project-file",
@@ -29,7 +29,7 @@ export enum Pipelines {
   INGEST_LAS_OR_E57 = "ingest-las-or-e57",
   GENERATE_BCF = "generate-bcf",
   COMPUTE_QA_STATISTICS = "compute-qa-statistics",
-  PROJECT_EXPORT_REPORT = "ingest-project-export-report"
+  PROJECT_EXPORT_REPORT = "create-project-report"
 }
 
 export default Pipelines;
