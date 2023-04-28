@@ -13,7 +13,7 @@ export type PipelineName =
   | "ingest-las-or-e57"
   | "generate-bcf"
   | "compute-qa-statistics"
-  | "ingest-project-export-report"
+  | "create-project-report"
   | "compute-and-save-clashes"
 
 export enum Pipelines {
@@ -31,7 +31,7 @@ export enum Pipelines {
   INGEST_LAS_OR_E57 = "ingest-las-or-e57",
   GENERATE_BCF = "generate-bcf",
   COMPUTE_QA_STATISTICS = "compute-qa-statistics",
-  PROJECT_EXPORT_REPORT = "ingest-project-export-report",
+  PROJECT_EXPORT_REPORT = "create-project-report",
   COMPUTE_AND_SAVE_CLASHES = "compute-and-save-clashes",
 }
 
