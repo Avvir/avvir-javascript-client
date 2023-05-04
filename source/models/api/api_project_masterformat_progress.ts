@@ -2,6 +2,7 @@ import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter
 import ApiMasterformat from "./api_masterformat";
 import { DateLike } from "./type_aliases";
 
+/** @deprecated Use ApiMasterformatProgress **/
 export class ApiProjectMasterformatProgress {
   constructor(masterformat?: ApiMasterformat, percentComplete?: number, scanDate?: DateLike, createdAt?: DateLike) {
     addInstantGetterAndSetterToApiModel(this, "scanDate");

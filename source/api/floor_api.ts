@@ -2,7 +2,7 @@
 import ApiFloor from "../models/api/api_floor";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import { AssociationIds } from "../models";
+import {ApiMasterformatProgress, AssociationIds, ProgressType} from "../models";
 import { User } from "../utilities/get_authorization_headers";
 import {ApiPlannedElement} from "../models";
 
@@ -39,6 +39,21 @@ export default class FloorApi {
 
   static updatePlannedBuildingElements({ projectId, floorId }: AssociationIds, elements: ApiPlannedElement[], user: User, validate?: boolean) {
     return Http.patch(`${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements?validate=${!!validate}`, user, elements)
+  }
+
+  static getMasterformatProgress({ projectId, floorId }: AssociationIds,
+                                 scheduleType: ProgressType,
+                                 user: User): Promise<ApiMasterformatProgress[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/masterformat-progresses/${scheduleType}`;
+    return Http.get(url, user) as unknown as Promise<ApiMasterformatProgress[]>;
+  }
+
+  static setMasterformatProgress({ projectId, floorId }: AssociationIds,
+                                 scheduleType: ProgressType,
+                                 masterformatProgresses: ApiMasterformatProgress[],
+                                 user: User): Promise<void> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/masterformat-progresses/${scheduleType}`;
+    return Http.post(url, user, masterformatProgresses) as unknown as Promise<void>;
   }
 
 }
