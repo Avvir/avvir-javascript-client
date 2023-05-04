@@ -80,6 +80,7 @@ export default class ScanDatasetApi {
     return Http.get(url, user) as unknown as Promise<ApiDetailedElement[]>;
   }
 
+  /** @deprecated Use the scan's point cloud instead */
   static getScanRepresentation({
                                  projectId,
                                  floorId,

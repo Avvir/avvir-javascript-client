@@ -2,20 +2,13 @@ import ApiInvitation from "../models/api/api_invitation";
 import ApiMasterformat from "../models/api/api_masterformat";
 import ApiPipeline from "../models/api/api_pipeline";
 import DeprecatedApiPipeline from "../models/api/deprecated_api_pipeline";
-import getAuthorizationHeaders, {BasicUser, User} from "../utilities/get_authorization_headers";
+import getAuthorizationHeaders, { BasicUser, User } from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import {
-  ApiActionPayload,
-  ApiRunningProcess,
-  ApiUserAction,
-  AssociationIds,
-  UserActionType,
-  UserAuthType
-} from "../models";
+import { ApiActionPayload, ApiRunningProcess, ApiUserAction, AssociationIds, UserActionType, UserAuthType } from "../models";
 import buildFileName from "../utilities/build_file_name";
 import AuthApi from "./auth_api";
-import {httpGetHeaders} from "../utilities/request_headers";
+import { httpGetHeaders } from "../utilities/request_headers";
 
 export default class WebGatewayApi {
 
@@ -53,6 +46,7 @@ export default class WebGatewayApi {
     return Http.addAuthToDownloadUrl(baseUrl, user);
   }
 
+  /** @deprecated We no longer support pdf quality control reports */
   static getQualityControlReportPdfUrl(projectId: string): string {
     return `${Http.baseUrl()}/projects/${projectId}/report.pdf`;
   }
@@ -72,6 +66,7 @@ export default class WebGatewayApi {
     return Http.addAuthToDownloadUrl(baseUrl, user);
   }
 
+  /** @deprecated scan analysis tsv was removed when we removed the concept of scanned building elements */
   static getScanAnalysisUrl({projectId, floorId, scanDatasetId}: AssociationIds, fileName: string, user: User): string {
     const baseUrl = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/${fileName}_scan-analysis.tsv`;
     return Http.addAuthToDownloadUrl(baseUrl, user);
