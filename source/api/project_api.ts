@@ -2,7 +2,15 @@ import { User } from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 
-import { ApiCloudFile, ApiProject, ApiProjectCostAnalysisProgress, ApiProjectListing, ApiProjectMasterformatProgress, ApiWorkPackage, AssociationIds } from "../models";
+import {
+  ApiCloudFile, ApiMasterformatProgress,
+  ApiProject,
+  ApiProjectCostAnalysisProgress,
+  ApiProjectListing,
+  ApiWorkPackage,
+  AssociationIds,
+  ProgressType
+} from "../models";
 
 export default class ProjectApi {
   static listProjectsForOrganization(organizationId: string, user: User): Promise<ApiProject[]> {
@@ -59,7 +67,7 @@ export default class ProjectApi {
   }
 
   static saveScannedProjectMasterformatProgress({ projectId }: AssociationIds,
-                                                progress: ApiProjectMasterformatProgress,
+                                                progress: ApiMasterformatProgress,
                                                 user: User): Promise<void> {
     const url = `${Http.baseUrl()}/projects/${projectId}/scanned-masterformat-progress`;
     return Http.post(url, user, progress) as unknown as Promise<void>;
@@ -67,7 +75,7 @@ export default class ProjectApi {
 
   // TODO: Make schedule type an enum?
   static saveScheduledProjectMasterformatProgress({ projectId }: AssociationIds,
-                                                  progress: ApiProjectMasterformatProgress,
+                                                  progress: ApiMasterformatProgress,
                                                   scheduleType: "current" | "baseline",
                                                   user: User): Promise<void> {
     const url = `${Http.baseUrl()}/projects/${projectId}/scheduled-masterformat-progress/${scheduleType}`;
@@ -81,17 +89,26 @@ export default class ProjectApi {
   }
 
   static getScannedProjectMasterformatProgress({ projectId }: AssociationIds,
-                                               user: User): Promise<ApiProjectMasterformatProgress[]> {
+                                               user: User): Promise<ApiMasterformatProgress[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/scanned-masterformat-progress`;
-    return Http.get(url, user) as unknown as Promise<ApiProjectMasterformatProgress[]>;
+    return Http.get(url, user) as unknown as Promise<ApiMasterformatProgress[]>;
   }
 
-  // TODO: Make schedule type an enum?
+  /**
+   * @deprecated use getProjectMasterformatProgress
+   */
   static getScheduledProjectMasterformatProgress({ projectId }: AssociationIds,
                                                  scheduleType: "current" | "baseline",
-                                                 user: User): Promise<ApiProjectMasterformatProgress[]> {
+                                                 user: User): Promise<ApiMasterformatProgress[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/scheduled-masterformat-progress/${scheduleType}`;
-    return Http.get(url, user) as unknown as Promise<ApiProjectMasterformatProgress[]>;
+    return Http.get(url, user) as unknown as Promise<ApiMasterformatProgress[]>;
+  }
+
+  static getProjectMasterformatProgress({ projectId }: AssociationIds,
+                                        scheduleType: ProgressType,
+                                        user: User): Promise<ApiMasterformatProgress[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/scheduled-masterformat-progress/${scheduleType}`;
+    return Http.get(url, user) as unknown as Promise<ApiMasterformatProgress[]>;
   }
 
   static listProjectFloorFiles({ projectId }: AssociationIds, user: User): Promise<ApiCloudFile[]> {
