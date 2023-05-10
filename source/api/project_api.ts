@@ -6,11 +6,13 @@ import {
   ApiCloudFile, ApiMasterformatProgress,
   ApiProject,
   ApiProjectCostAnalysisProgress,
-  ApiProjectListing,
+  ApiProjectListing, ApiRunningProcess,
   ApiWorkPackage,
   AssociationIds,
   ProgressType
 } from "../models";
+import {DateLike} from "type_aliases";
+import {DateConverter} from "../converters";
 
 export default class ProjectApi {
   static listProjectsForOrganization(organizationId: string, user: User): Promise<ApiProject[]> {
@@ -136,6 +138,16 @@ export default class ProjectApi {
     let url = `${Http.baseUrl()}/projects/${projectId}/work-packages`;
     return Http.put(url, user, workPackages) as unknown as Promise<ApiWorkPackage[]>;
   }
+
+  static generateMasterformatProgress({ projectId }: AssociationIds,
+                                      reportDate: DateLike,
+                                      masterformatVersion: number,
+                                      user: User) {
+    const formattedDate = DateConverter.dateToISO(reportDate);
+    const url = `${Http.baseUrl()}/projects/${projectId}/masterformat-progress-report?masterformatVersion=${masterformatVersion}&reportDate=${formattedDate}`;
+    return Http.post(url, user) as unknown as Promise<ApiRunningProcess>;
+  }
+
 }
 
 makeErrorsPretty(ProjectApi, { exclude: ["getProjectDeviationsReportTsvUrl"] });

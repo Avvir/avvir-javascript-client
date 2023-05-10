@@ -2,9 +2,7 @@ import { expect } from "chai";
 import fetchMock from "fetch-mock";
 import moment from "moment";
 
-import ApiMasterformat from "../../source/models/api/api_masterformat";
-import ApiProjectCostAnalysisProgress from "../../source/models/api/api_project_cost_analysis_progress";
-import ApiProjectMasterformatProgress from "../../source/models/api/api_project_masterformat_progress";
+import { ApiMasterformat, ApiMasterformatProgress, ApiProjectCostAnalysisProgress } from "../../source";
 import DateConverter from "../../source/converters/date_converter";
 import Http from "../../source/utilities/http";
 import ProjectApi from "../../source/api/project_api";
@@ -98,10 +96,11 @@ describe("ProjectApi", () => {
   describe("#saveScannedProjectMasterformatProgress", () => {
     let progress;
     beforeEach(() => {
-      progress = [new ApiProjectMasterformatProgress(
-        new ApiMasterformat(2016, "00 00 01"),
-        0.8,
-        DateConverter.dateToInstant(moment("2018-04-01")))];
+      progress = [new ApiMasterformatProgress({
+        masterformat: new ApiMasterformat(2016, "00 00 01"),
+        percentComplete: 0.8,
+        scanDate: DateConverter.dateToInstant(moment("2018-04-01"))
+    })]
       fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/scanned-masterformat-progress`, 200);
     });
 
@@ -265,10 +264,11 @@ describe("ProjectApi", () => {
   describe("#saveScheduledProjectMasterformatProgress", () => {
     let progress;
     beforeEach(() => {
-      progress = [new ApiProjectMasterformatProgress(
-        new ApiMasterformat(2016, "00 00 01"),
-        0.8,
-        DateConverter.dateToInstant(moment("2018-04-01")))];
+      progress = [new ApiMasterformatProgress({
+          masterformat: new ApiMasterformat(2016, "00 00 01"),
+          percentComplete: 0.8,
+          scanDate: DateConverter.dateToInstant(moment("2018-04-01"))
+      })];
       fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/scheduled-masterformat-progress/baseline`, 200);
       fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/scheduled-masterformat-progress/current`, 200);
     });
@@ -513,4 +513,37 @@ describe("ProjectApi", () => {
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
   });
+
+  describe("#generateMasterformatProgresses", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/masterformat-progress-report?masterformatVersion=2016&reportDate=2023-05-01T12:00:00.000Z`, 200);
+    });
+
+    it("makes a call to the endpoint with the right parameters in the url", () => {
+      ProjectApi.generateMasterformatProgress(
+          {
+            projectId: "some-project-id"
+          },
+          new Date("2023-05-01T12:00:00Z"),
+          2016, user);
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/masterformat-progress-report?masterformatVersion=2016&reportDate=2023-05-01T12:00:00.000Z`);
+    });
+
+    it("sends the request with authorization headers", () => {
+      ProjectApi.generateMasterformatProgress({
+            projectId: "some-project-id"
+          },
+          new Date("2023-05-01T12:00:00Z"),
+          2016,
+          user);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/masterformat-progress-report?masterformatVersion=2016&reportDate=2023-05-01T12:00:00.000Z`);
+      expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+  });
+
 });

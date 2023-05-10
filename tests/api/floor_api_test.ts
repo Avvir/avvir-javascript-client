@@ -426,4 +426,38 @@ describe("FloorApi", () => {
         });
     });
 
+    describe("#generateMasterformatProgresses", () => {
+        beforeEach(() => {
+            fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/generate-masterformat-progress?masterformatVersion=2016&reportDate=2023-05-01T12:00:00.000Z`, 200);
+        });
+
+        it("makes a call to the endpoint with the right parameters in the url", () => {
+            FloorApi.generateMasterformatProgress(
+                {
+                    projectId: "some-project-id",
+                    floorId: "some-floor-id"
+                },
+                new Date("2023-05-01T12:00:00Z"),
+                2016, user);
+            const fetchCall = fetchMock.lastCall();
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/generate-masterformat-progress?masterformatVersion=2016&reportDate=2023-05-01T12:00:00.000Z`);
+        });
+
+        it("sends the request with authorization headers", () => {
+            FloorApi.generateMasterformatProgress({
+                projectId: "some-project-id",
+                floorId: "some-floor-id"
+            },
+                new Date("2023-05-01T12:00:00Z"),
+                2016,
+                user);
+            const fetchCall = fetchMock.lastCall();
+            const lastFetchOpts = fetchMock.lastOptions();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/generate-masterformat-progress?masterformatVersion=2016&reportDate=2023-05-01T12:00:00.000Z`);
+            expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+            expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+        });
+    });
+
 });

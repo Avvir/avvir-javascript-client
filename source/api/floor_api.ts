@@ -2,9 +2,11 @@
 import ApiFloor from "../models/api/api_floor";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import {ApiMasterformatProgress, AssociationIds, ProgressType} from "../models";
+import {ApiMasterformatProgress, ApiRunningProcess, AssociationIds, ProgressType} from "../models";
 import { User } from "../utilities/get_authorization_headers";
 import {ApiPlannedElement} from "../models";
+import {DateConverter} from "../converters";
+import {DateLike} from "type_aliases";
 
 export default class FloorApi {
   static listFloorsForProject(projectId: string, user: User): Promise<ApiFloor[]> {
@@ -54,6 +56,15 @@ export default class FloorApi {
                                  user: User): Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/masterformat-progresses/${scheduleType}`;
     return Http.post(url, user, masterformatProgresses) as unknown as Promise<void>;
+  }
+
+  static generateMasterformatProgress({ projectId, floorId }: AssociationIds,
+                                      reportDate: DateLike,
+                                      masterformatVersion: number,
+                                      user: User): Promise<ApiRunningProcess> {
+    const formattedDate = DateConverter.dateToISO(reportDate);
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/generate-masterformat-progress?masterformatVersion=${masterformatVersion}&reportDate=${formattedDate}`;
+    return Http.post(url, user) as unknown as Promise<ApiRunningProcess>;
   }
 
 }
