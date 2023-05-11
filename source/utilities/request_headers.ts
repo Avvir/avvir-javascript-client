@@ -1,5 +1,5 @@
 interface HttpPostHeaders extends Record<string, string> {
-  (contentType: string): {
+  (contentType: string, accept: string): {
     "Accept": string
     "Content-Type": string
   }
@@ -8,9 +8,9 @@ interface HttpPostHeaders extends Record<string, string> {
   "Content-Type": string
 }
 
-function makePostHeaders(contentType: string) {
+function makePostHeaders(contentType: string, accept: string) {
   return {
-    "Accept": contentType || "application/json",
+    "Accept": accept || "application/json",
     "Content-Type": contentType || "application/json"
   };
 }

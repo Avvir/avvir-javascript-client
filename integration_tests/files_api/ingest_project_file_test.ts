@@ -1,12 +1,12 @@
-import AuthApi from "../source/api/auth_api";
+import AuthApi from "../../source/api/auth_api";
 import {describe} from "mocha";
-import AvvirApi from "../source/avvir_api";
-import ApiCloudFile from "../source/models/api/api_cloud_file";
-import Pipelines from "../source/models/enums/pipeline_types";
-import ApiPipeline, {ApiPipelineArgument} from "../source/models/api/api_pipeline";
+import AvvirApi from "../../source/avvir_api";
+import ApiCloudFile from "../../source/models/api/api_cloud_file";
+import Pipelines from "../../source/models/enums/pipeline_types";
+import ApiPipeline, {ApiPipelineArgument} from "../../source/models/api/api_pipeline";
 import {expect} from "chai";
-import RunningProcessStatus from "../source/models/enums/running_process_status";
-import {ApiProjectPurposeType} from "../source";
+import RunningProcessStatus from "../../source/models/enums/running_process_status";
+import {ApiProjectPurposeType} from "../../source";
 
 describe("Ingest project files test", () => {
   let projectId: string, email: string, password: string, checkPipeline, checkPipelineTimeout: number, checkPipelineIterations: number

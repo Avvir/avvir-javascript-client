@@ -1,9 +1,9 @@
-import AuthApi from "../source/api/auth_api";
+import AuthApi from "../../source/api/auth_api";
 import {describe} from "mocha";
 import {expect} from "chai";
-import {sandbox} from "../tests/test_utils/setup_tests";
-import Config from "../source/config";
-import FloorApi from "../source/api/floor_api";
+import {sandbox} from "../../tests/test_utils/setup_tests";
+import Config from "../../source/config";
+import FloorApi from "../../source/api/floor_api";
 
 describe("When a user is authenticated for a project", () => {
   let projectId: string, email: string, password: string;

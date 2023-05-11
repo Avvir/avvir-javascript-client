@@ -1,9 +1,9 @@
 import {describe} from "mocha";
 import {expect} from "chai";
-import FileInformationApi from "../source/api/file_information_api";
-import ApiCloudFile from "../source/models/api/api_cloud_file";
-import AuthApi from "../source/api/auth_api";
-import {ApiProjectPurposeType} from "../source";
+import FileInformationApi from "../../source/api/file_information_api";
+import ApiCloudFile from "../../source/models/api/api_cloud_file";
+import AuthApi from "../../source/api/auth_api";
+import {ApiProjectPurposeType} from "../../source";
 
 describe("Ingest project files test", () => {
   let projectId: string, email: string, password: string;

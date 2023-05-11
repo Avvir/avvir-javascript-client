@@ -148,6 +148,11 @@ export default class ProjectApi {
     return Http.post(url, user) as unknown as Promise<ApiRunningProcess>;
   }
 
+  static getFiltered5dTsv({projectId}: AssociationIds, projectName: string, fileName: string, filter, user:User) {
+    const url = `${Http.baseUrl()}/projects/${projectId}/cost-analysis-progress/line-items/${fileName}`;
+    return Http.put(url, user, filter, "application/json", "text/tab-separated-values") as unknown as Promise<string>;
+  }
+
 }
 
-makeErrorsPretty(ProjectApi, { exclude: ["getProjectDeviationsReportTsvUrl"] });
+makeErrorsPretty(ProjectApi, { exclude: ["getProjectDeviationsReportTsvUrl"], overrideErrorMessage:["getFiltered5dTsv"] });

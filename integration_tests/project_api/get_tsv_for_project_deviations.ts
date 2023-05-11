@@ -1,15 +1,15 @@
-import AuthApi from "../source/api/auth_api";
+import AuthApi from "../../source/api/auth_api";
 import {describe} from "mocha";
 import {expect} from "chai";
-import {User} from "../source/utilities/get_authorization_headers";
-import {sandbox} from "../tests/test_utils/setup_tests";
-import Config from "../source/config";
-import ApiPipeline, {ApiPipelineArgument} from "../source/models/api/api_pipeline";
-import PipelineApi from "../source/api/pipeline_api";
-import RunningProcessStatus from "../source/models/enums/running_process_status";
-import ProjectApi from "../source/api/project_api";
-import Http from "../source/utilities/http";
-import checkFetchStatus from "../source/utilities/check_fetch_status";
+import {User} from "../../source/utilities/get_authorization_headers";
+import {sandbox} from "../../tests/test_utils/setup_tests";
+import Config from "../../source/config";
+import ApiPipeline, {ApiPipelineArgument} from "../../source/models/api/api_pipeline";
+import PipelineApi from "../../source/api/pipeline_api";
+import RunningProcessStatus from "../../source/models/enums/running_process_status";
+import ProjectApi from "../../source/api/project_api";
+import Http from "../../source/utilities/http";
+import checkFetchStatus from "../../source/utilities/check_fetch_status";
 
 
 describe("Process an associated scan", () => {
