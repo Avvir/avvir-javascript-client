@@ -1,11 +1,11 @@
-import AuthApi from "../source/api/auth_api";
+import AuthApi from "../../source/api/auth_api";
 import {describe} from "mocha";
-import ApiCloudFile from "../source/models/api/api_cloud_file";
+import ApiCloudFile from "../../source/models/api/api_cloud_file";
 import {expect} from "chai";
-import FileInformationApi from "../source/api/file_information_api";
-import {sandbox} from "../tests/test_utils/setup_tests";
-import Config from "../source/config";
-import {ApiScanDatasetPurposeType} from "../source";
+import FileInformationApi from "../../source/api/file_information_api";
+import {sandbox} from "../../tests/test_utils/setup_tests";
+import Config from "../../source/config";
+import {ApiScanDatasetPurposeType} from "../../source";
 
 
 describe("Assocate Project file to scan dataset files test", () => {

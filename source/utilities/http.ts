@@ -23,11 +23,11 @@ export default class Http {
     });
   }
 
-  static put(url: RequestInfo, user: User, body?: any, contentType = "application/json") {
+  static put(url: RequestInfo, user: User, body?: any, contentType = "application/json", accept =  "application/json") {
     return Http.fetch(url, {
       method: "PUT",
       headers: {
-        ...httpPostHeaders(contentType),
+        ...httpPostHeaders(contentType, accept),
         ...getAuthorizationHeaders(user)
       },
       body: body == null ? "" : JSON.stringify(body)

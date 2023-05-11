@@ -1,16 +1,16 @@
-import AuthApi from "../source/api/auth_api";
+import AuthApi from "../../source/api/auth_api";
 import {describe} from "mocha";
-import ApiCloudFile from "../source/models/api/api_cloud_file";
-import {ApiFloorPurposeType} from "../source";
+import ApiCloudFile from "../../source/models/api/api_cloud_file";
+import {ApiFloorPurposeType} from "../../source";
 import {expect} from "chai";
-import FileInformationApi from "../source/api/file_information_api";
-import {sandbox} from "../tests/test_utils/setup_tests";
-import Config from "../source/config";
-import PipelineApi from "../source/api/pipeline_api";
-import ApiPipeline, {ApiPipelineArgument} from "../source/models/api/api_pipeline";
-import Pipelines from "../source/models/enums/pipeline_types";
-import AvvirApi from "../source/avvir_api";
-import RunningProcessStatus from "../source/models/enums/running_process_status";
+import FileInformationApi from "../../source/api/file_information_api";
+import {sandbox} from "../../tests/test_utils/setup_tests";
+import Config from "../../source/config";
+import PipelineApi from "../../source/api/pipeline_api";
+import ApiPipeline, {ApiPipelineArgument} from "../../source/models/api/api_pipeline";
+import Pipelines from "../../source/models/enums/pipeline_types";
+import AvvirApi from "../../source/avvir_api";
+import RunningProcessStatus from "../../source/models/enums/running_process_status";
 
 describe("Assocate Project file to scan dataset files test", () => {
   let projectId: string, email: string, password: string, checkPipeline, checkPipelineTimeout: number,
