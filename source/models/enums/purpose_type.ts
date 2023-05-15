@@ -51,7 +51,8 @@ export enum ScanDatasetPurposeType {
   INGESTED_SCAN = "ingestedScan",
   ELEMENT_SNAPSHOT = "elementSnapshot",
   SITE_CUBE_PHOTO = "siteCubePhoto",
-  DEVIATIONS_SCAN_BCF = "deviationsScanBcf"
+  DEVIATIONS_SCAN_BCF = "deviationsScanBcf",
+  DEVIATIONS_BIM_IFC = "deviationsBimIfc",
 }
 
 /** @deprecated use ApiPhotoAreaPurposeType */
@@ -105,6 +106,7 @@ export const PurposeTypeMap: ProjectTypeMap & Omit<FloorTypeMap, "OTHER"> & Omit
   ELEMENT_SNAPSHOT: ScanDatasetPurposeType.ELEMENT_SNAPSHOT,
   SITE_CUBE_PHOTO: ScanDatasetPurposeType.SITE_CUBE_PHOTO,
   DEVIATIONS_SCAN_BCF: ScanDatasetPurposeType.DEVIATIONS_SCAN_BCF,
+  DEVIATIONS_BIM_IFC: ScanDatasetPurposeType.DEVIATIONS_BIM_IFC,
 
   BIM_IFC: FloorPurposeType.BIM_IFC,
   BIM_NWD: FloorPurposeType.BIM_NWD,
