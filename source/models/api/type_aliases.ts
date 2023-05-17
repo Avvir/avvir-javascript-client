@@ -18,7 +18,8 @@ export type AssociationIds = {
   photoLocationId?: number,
   viewId?: number,
   wbsCode?: string
-  groupId?: number
+  groupId?: number,
+  recipeId?: number
 };
 
 export type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]>; } : T;
