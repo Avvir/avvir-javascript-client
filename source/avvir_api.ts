@@ -13,7 +13,7 @@ import WebGatewayApi from "./api/web_gateway_api";
 import UserApi from "./api/user_api";
 import IntegrationsApi from "./api/integrations_api";
 import ProjectSummaryApi from "./api/project_summary_api";
-import {GroupApi, WebRpcApi} from "./api";
+import { GroupApi, WebRpcApi, RecipeApi} from "./api";
 
 export default {
     auth: AuthApi,
@@ -32,5 +32,6 @@ export default {
     webRpcApi: WebRpcApi,
     user: UserApi,
     projectSummary: ProjectSummaryApi,
-    groups: GroupApi
+    groups: GroupApi,
+    recipes: RecipeApi
 }

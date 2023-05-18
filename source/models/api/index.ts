@@ -30,6 +30,8 @@ export {ApiProjectSummary, ApiProjectArea, ApiProjectAreaProgress} from "./api_p
 export {ApiWorkPackage} from "./api_work_package"
 export {ApiProjectListing} from "./api_project_listing";
 
+export { ApiRecipe, ApiRecipeStep, ApiRecipeArgument, ApiRecipeStepArgument} from "./api_recipe";
+
 export {
     ApiPhotoAreaPurposeType,
     ApiScanDatasetPurposeType,

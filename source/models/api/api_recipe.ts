@@ -9,7 +9,7 @@ export interface ApiRecipeArgument extends Partial<Modify<ApiRecipe, {
 }>> {
 }
 
-class ApiRecipe {
+export class ApiRecipe {
     readonly id: number
     readonly projectFirebaseId?: string
     name: string
@@ -34,7 +34,7 @@ export interface ApiRecipeStepArgument extends Partial<Modify<ApiRecipeStep, {
 }>> {
 }
 
-class ApiRecipeStep {
+export class ApiRecipeStep {
     readonly id: number
     readonly recipeId: number
     readonly globalRecipeStepId: number
