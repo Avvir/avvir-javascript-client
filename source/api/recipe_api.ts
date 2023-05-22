@@ -20,9 +20,9 @@ export default class RecipeApi {
     return Http.post(url, user, apiRecipe) as unknown as Promise<ApiRecipe>;
   }
 
-  static updateGlobalRecipe({ recipeId }: AssociationIds, apiRecipe: ApiRecipe, user: User, ): Promise<void> {
+  static updateGlobalRecipe({ recipeId }: AssociationIds, apiRecipe: ApiRecipe, user: User, ): Promise<ApiRecipe> {
     let url = `${Http.baseUrl()}/recipes/${recipeId}`;
-    return Http.put(url, user, apiRecipe) as unknown as Promise<void>;
+    return Http.put(url, user, apiRecipe) as unknown as Promise<ApiRecipe>;
   }
 
   static deleteGlobalRecipe({ recipeId }: AssociationIds, user: User, ): Promise<void> {
@@ -45,9 +45,9 @@ export default class RecipeApi {
     return Http.post(url, user, apiRecipe) as unknown as Promise<ApiRecipe>;
   }
 
-  static updateProjectRecipe({ projectId, recipeId }: AssociationIds, apiRecipe: ApiRecipe, user: User, ): Promise<void> {
+  static updateProjectRecipe({ projectId, recipeId }: AssociationIds, apiRecipe: ApiRecipe, user: User, ): Promise<ApiRecipe> {
     let url = `${Http.baseUrl()}/projects/${projectId}/recipes/${recipeId}`;
-    return Http.put(url, user, apiRecipe) as unknown as Promise<void>;
+    return Http.put(url, user, apiRecipe) as unknown as Promise<ApiRecipe>;
   }
 
   static deleteProjectRecipe({ projectId, recipeId }: AssociationIds, user: User, ): Promise<void> {
