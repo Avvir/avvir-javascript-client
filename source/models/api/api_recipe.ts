@@ -20,7 +20,7 @@ export class ApiRecipe {
     constructor({id, projectFirebaseId, name, isEnabled, modeledCode, steps}: ApiRecipeArgument) {
         addReadOnlyPropertiesToModel(this, {id, projectFirebaseId});
         this.name = name;
-        this.isEnabled = isEnabled;
+        this.isEnabled = isEnabled || false;
         this.modeledCode = modeledCode;
         this.steps = steps || [];
     }
