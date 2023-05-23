@@ -45,6 +45,7 @@ export enum ApiScanDatasetPurposeType {
   SITE_CUBE_PHOTO = "SITE_CUBE_PHOTO",
   DEVIATIONS_SCAN_BCF = "DEVIATIONS_SCAN_BCF",
   DEVIATIONS_BIM_IFC = "DEVIATIONS_BIM_IFC",
+  NOT_BUILT_IFC = "NOT_BUILT_IFC",
 }
 
 export type ApiScanDatasetTypeKeys = keyof typeof ApiScanDatasetPurposeType;
@@ -73,6 +74,7 @@ const ApiPurposeType = {
   FLOOR_FLATNESS_TOPO_MAP: ApiScanDatasetPurposeType.FLOOR_FLATNESS_TOPO_MAP,
   BUILT_NOT_BUILT_BIM_IFC: ApiScanDatasetPurposeType.BUILT_NOT_BUILT_BIM_IFC,
   DEVIATIONS_BIM_IFC: ApiScanDatasetPurposeType.DEVIATIONS_BIM_IFC,
+  NOT_BUILT_IFC: ApiScanDatasetPurposeType.NOT_BUILT_IFC,
   NEEDS_FURTHER_ANALYSIS: ApiScanDatasetPurposeType.NEEDS_FURTHER_ANALYSIS,
   PREPROCESSED_SCAN: ApiScanDatasetPurposeType.PREPROCESSED_SCAN,
   PREPROCESSED_SCAN_E57: ApiScanDatasetPurposeType.PREPROCESSED_SCAN_E57,
