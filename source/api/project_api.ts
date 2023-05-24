@@ -1,18 +1,21 @@
-import { User } from "../utilities/get_authorization_headers";
+import {User} from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 
 import {
-  ApiCloudFile, ApiMasterformatProgress,
+  ApiCloudFile,
+  ApiMasterformatProgress,
   ApiProject,
   ApiProjectCostAnalysisProgress,
-  ApiProjectListing, ApiRunningProcess,
+  ApiProjectListing,
+  ApiRunningProcess,
   ApiWorkPackage,
   AssociationIds,
   ProgressType
 } from "../models";
 import {DateLike} from "type_aliases";
 import {DateConverter} from "../converters";
+import {ApiClassificationCode} from "../models/api/api_classification_code";
 
 export default class ProjectApi {
   static listProjectsForOrganization(organizationId: string, user: User): Promise<ApiProject[]> {
@@ -153,6 +156,10 @@ export default class ProjectApi {
     return Http.put(url, user, filter, "application/json", "text/tab-separated-values") as unknown as Promise<string>;
   }
 
+  static getClassificationCodes({projectId}: AssociationIds, user:User) {
+    const url = `${Http.baseUrl()}/projects/${projectId}/classification-codes`;
+    return Http.get(url, user) as unknown as Promise<ApiClassificationCode[]>;
+  }
 }
 
 makeErrorsPretty(ProjectApi, { exclude: ["getProjectDeviationsReportTsvUrl"], overrideErrorMessage:["getFiltered5dTsv"] });
