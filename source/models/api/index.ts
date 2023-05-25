@@ -29,7 +29,7 @@ export {ApiProjectReportVersion} from "./api_project_report_version";
 export {ApiProjectSummary, ApiProjectArea, ApiProjectAreaProgress} from "./api_project_summary";
 export {ApiWorkPackage} from "./api_work_package"
 export {ApiProjectListing} from "./api_project_listing";
-
+export {ApiClassificationCode} from "./api_classification_code";
 export { ApiRecipe, ApiRecipeStep, ApiRecipeArgument, ApiRecipeStepArgument} from "./api_recipe";
 
 export {
