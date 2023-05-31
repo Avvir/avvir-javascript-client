@@ -31,7 +31,7 @@ export type DeviationScanResult = {
   globalId?: string
   scanLabel: typeof ApiBuiltStatus.DEVIATED
   deviation: ApiElementDeviation
-  builtConfidence?: number
+  analysisConfidence?: number
   detectedInScan?: boolean
 }
 
