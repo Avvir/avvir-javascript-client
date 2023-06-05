@@ -682,4 +682,36 @@ describe("ScanDatasetApi", () => {
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
   });
+
+  describe("#autoVerify", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/auto-verify`, 200);
+    });
+
+    it("makes a request to the gateway", () => {
+      ScanDatasetApi.autoVerify({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-dataset-id"
+      }, {
+        authType: UserAuthType.GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+      });
+
+      expect(fetchMock.lastUrl()).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/auto-verify`);
+    });
+
+    it("includes the authorization headers", () => {
+      ScanDatasetApi.autoVerify({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-dataset-id"
+      }, {
+        authType: UserAuthType.GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
 });
