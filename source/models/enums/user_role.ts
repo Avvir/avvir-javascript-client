@@ -2,14 +2,10 @@ export enum UserRole {
   SUPERADMIN = "SUPERADMIN",
   USER = "USER",
   SUBCONTRACTOR = "SUBCONTRACTOR",
-  VDC_MANAGER = "VDC_MANAGER",
-  GENERAL_CONTRACTOR = "GENERAL_CONTRACTOR"
 }
 
 export const SUPERADMIN = UserRole.SUPERADMIN;
 export const USER = UserRole.USER;
 export const SUBCONTRACTOR = UserRole.SUBCONTRACTOR;
-export const VDC_MANAGER = UserRole.VDC_MANAGER;
-export const GENERAL_CONTRACTOR = UserRole.GENERAL_CONTRACTOR;
 
 export default UserRole;
