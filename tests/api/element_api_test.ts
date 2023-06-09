@@ -5,9 +5,10 @@ import ElementApi from "../../source/api/element_api";
 import Http from "../../source/utilities/http";
 import { DETECTED, DeviationStatus, INCLUDED } from "../../source/models/enums/deviation_status";
 import { ApiBuiltStatus, DEVIATED, NOT_BUILT } from "../../source/models/enums/api_built_status";
-import { FIREBASE, GATEWAY_JWT } from "../../source/models/enums/user_auth_type";
-import { USER } from "../../source/models/enums/user_role";
+import {FIREBASE, GATEWAY_JWT, UserAuthType} from "../../source/models/enums/user_auth_type";
+import {USER, UserRole} from "../../source/models/enums/user_role";
 import { ApiDetailedElement, ApiPlannedElement, ApiScannedElement, DateConverter } from "../../source";
+import {describe} from "mocha";
 
 describe("ElementApi", () => {
   describe("::getPlannedBuildingElements", () => {
@@ -1416,4 +1417,69 @@ describe("ElementApi", () => {
     });
   });
 
+  describe("#clearVerified", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/clear-verified?scanDatasetId=some-scan-dataset-id`, 200);
+    });
+
+    it("makes a request to the gateway", () => {
+      ElementApi.clearVerified({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-dataset-id"
+      }, {
+        authType: UserAuthType.GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+      });
+
+      expect(fetchMock.lastOptions().headers["Accept"]).to.eq("application/json");
+      expect(fetchMock.lastUrl()).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/clear-verified?scanDatasetId=some-scan-dataset-id`);
+    });
+
+    it("includes the authorization headers", () => {
+      ElementApi.clearVerified({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-dataset-id"
+      }, {
+        authType: UserAuthType.GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
+  describe("#autoVerify", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/auto-verify?scanDatasetId=some-scan-dataset-id`, 200);
+    });
+
+    it("makes a request to the gateway", () => {
+      ElementApi.autoVerify({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-dataset-id"
+      }, {
+        authType: UserAuthType.GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+      });
+
+      expect(fetchMock.lastOptions().headers["Accept"]).to.eq("application/json");
+      expect(fetchMock.lastUrl()).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/auto-verify?scanDatasetId=some-scan-dataset-id`);
+    });
+
+    it("includes the authorization headers", () => {
+      ElementApi.autoVerify({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-dataset-id"
+      }, {
+        authType: UserAuthType.GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
 });

@@ -143,16 +143,6 @@ export default class ScanDatasetApi {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/photo-session/${id}`;
     return Http.post(url, user, { sessionDate }) as unknown as Promise<ApiPhotoSession>;
   }
-
-  static clearVerified({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<void> {
-    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/clear-verified`;
-    return Http.post(url, user) as unknown as Promise<void>;
-  };
-
-  static autoVerify({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<void> {
-    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/auto-verify`;
-    return Http.post(url, user) as unknown as Promise<void>;
-  };
 }
 
 makeErrorsPretty(ScanDatasetApi);
