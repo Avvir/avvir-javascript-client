@@ -216,6 +216,15 @@ export default class ElementApi {
   }
 
 
+  static clearVerified({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<ApiDetailedElement[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/clear-verified?scanDatasetId=${scanDatasetId}`;
+    return Http.post(url, user) as unknown as Promise<ApiDetailedElement[]>;
+  };
+
+  static autoVerify({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<ApiDetailedElement[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/auto-verify?scanDatasetId=${scanDatasetId}`;
+    return Http.post(url, user) as unknown as Promise<ApiDetailedElement[]>;
+  };
 }
 
 makeErrorsPretty(ElementApi);
