@@ -70,7 +70,7 @@ function getTagReleaseNotes (tag) {
   };
 }
 function setCurrentGitTag(tag, message="") {
-  return cp.execSync(`git tag -m ${message} ${tag}`);
+  return cp.execSync(`git tag -m "${message}" ${tag}`);
 }
 
 function pushCurrentGitTag(tag) {
