@@ -20,6 +20,7 @@ export type AssociationIds = {
   wbsCode?: string
   groupId?: number,
   recipeId?: number
+  recipeStepId?: number
 };
 
 export type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]>; } : T;

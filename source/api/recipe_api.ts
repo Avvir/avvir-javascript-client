@@ -54,6 +54,11 @@ export default class RecipeApi {
     let url = `${Http.baseUrl()}/projects/${projectId}/recipes/${recipeId}`;
     return Http.delete(url, user) as unknown as Promise<void>;
   }
+
+  static deleteProjectRecipeStep({projectId, recipeId, recipeStepId}: AssociationIds, user: User): Promise<ApiRecipe> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/recipes/${recipeId}/steps/${recipeStepId}`;
+    return Http.delete(url, user) as unknown as Promise<ApiRecipe>;
+  }
 }
 
 makeErrorsPretty(RecipeApi);

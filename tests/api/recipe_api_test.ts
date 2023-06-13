@@ -343,4 +343,27 @@ describe("RecipeApi", () => {
             expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
         });
     });
+    describe("::deleteProjectRecipeStep", () => {
+        beforeEach(() => {
+            fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/recipes/1/steps/10`, 200);
+        });
+        it("makes a request to the gateway api", () => {
+            RecipeApi.deleteProjectRecipeStep({projectId: "some-project-id", recipeId: 1, recipeStepId: 10}, {
+                authType: "GATEWAY_JWT",
+                gatewayUser: {idToken: "some-firebase.id.token"}
+            } as User);
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/recipes/1/steps/10`);
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+        it("includes the authorization headers", () => {
+            RecipeApi.deleteProjectRecipeStep({projectId: "some-project-id", recipeId: 1, recipeStepId: 10}, {
+                authType: "GATEWAY_JWT",
+                gatewayUser: {idToken: "some-firebase.id.token"}
+            } as User);
+
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+        });
+    })
 });
