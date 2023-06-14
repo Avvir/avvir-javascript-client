@@ -20,15 +20,16 @@ function getCurrentGitTag() {
     .replace("\n", "");
 }
 function getLatestGitCommits(tag) {
-  let commitRegex = /Author:\s+(?<author>.+?)\nDate:\s+(?<date>.+?)\n\n\s+(?<message>.+)/
-  let typeRegex = /\[\s*(?<type>Breaking|Fix|Feature)(\s+Change)?\s*\]\s*(?<message>.+)/i
+  let commitRegex = /Author:\s+(?<author>.+?)\nDate:\s+(?<date>.+?)\n\n\s+(?<message>.+)/mi
+  let typeRegex = /\[\s*(?<type>Breaking|Fix|Feature)(\s+Change)?\s*\]\s*(?<message>.+)/mi
+  let typeRegex2 = /(?<message>.+?\s*\[\s*(?<type>Breaking|Fix|Feature)(\s+Change)?\s*\])/mi
   return cp.execSync(`git log ${tag}..HEAD`)
     .toString()
-    .split(/commit [a-z0-9]+(\s\(.+\))?\n/g)
+    .split(/commit .+?(\s\(.+\))?\n/gm)
     .filter(commit => !!commit)
     .map(commit => {
       let { groups } = commit.match(commitRegex);
-      let { type, message } = commit.match(typeRegex)?.groups || {type: "unknown", message: groups.message }
+      let { type, message } = commit.match(typeRegex)?.groups || commit.match(typeRegex2)?.groups || {type: "unknown", message: groups.message }
       return {
         ...groups,
         message,
@@ -100,7 +101,8 @@ async function main() {
     if(!confirmed) return rl.close();
     if(type !== bumpType) {
       confirmed = await confirmQuestion(rl, `There are "${type}" changes in this release. Are you sure you want to publish a "${bumpType}" release?`);
-      if(!confirmed) return rl.close();
+      rl.close();
+      if(!confirmed) return process.exit(0);
     }
     cp.execSync(`git stash push -m "Stashing changes to publish ${newVersion}"`);
     cp.execSync("git checkout master");
@@ -110,7 +112,8 @@ async function main() {
     setCurrentGitTag(newVersion, changeLog);
 
     console.log(`Pushing git tag: ${newVersion}`);
-    pushCurrentGitTag(newVersion);
+    await pushCurrentGitTag(newVersion);
+    process.exit(0);
   } else {
     console.log("Publishing to npm requires the new code to already be merged into master");
   }
