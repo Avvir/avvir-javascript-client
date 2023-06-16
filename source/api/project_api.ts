@@ -160,6 +160,11 @@ export default class ProjectApi {
     const url = `${Http.baseUrl()}/projects/${projectId}/classification-codes`;
     return Http.get(url, user) as unknown as Promise<ApiClassificationCode[]>;
   }
+
+  static getUnresolvedDeviationsCountForProject({projectId}: AssociationIds, user:User) {
+    const url = `${Http.baseUrl()}/projects/${projectId}/unresolved-deviations-count`;
+    return Http.get(url, user) as unknown as Promise<number>;
+  }
 }
 
 makeErrorsPretty(ProjectApi, { exclude: ["getProjectDeviationsReportTsvUrl"], overrideErrorMessage:["getFiltered5dTsv"] });
