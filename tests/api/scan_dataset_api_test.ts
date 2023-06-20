@@ -2,7 +2,7 @@ import { expect } from "chai";
 import fetchMock from "fetch-mock";
 import _ from "underscore";
 
-import ApiScanDataset from "../../source/models/api/api_scan_dataset";
+import ApiScanDataset, {ApiScanDatasetQaState} from "../../source/models/api/api_scan_dataset";
 import DateConverter from "../../source/converters/date_converter";
 import ScanDatasetApi from "../../source/api/scan_dataset_api";
 import { User, UserAuthType, UserRole } from "../../source";
@@ -648,6 +648,42 @@ describe("ScanDatasetApi", () => {
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/new-elements`);
       expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+  });
+
+  describe("#updateQaStateForScanDataset", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/qa-state`, 200);
+    });
+
+    it("makes a request to the gateway", () => {
+      ScanDatasetApi.updateQaState({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        },
+        ApiScanDatasetQaState.COMPLETED,
+        {
+          authType: UserAuthType.GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+        });
+
+      expect(fetchMock.lastUrl()).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-dataset-id/qa-state`);
+      expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
+      expect(JSON.parse(fetchMock.lastCall()[1].body as string)).to.deep.eq(ApiScanDatasetQaState.COMPLETED);
+    });
+
+    it("includes the authorization headers", () => {
+      ScanDatasetApi.updateQaState({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-dataset-id"
+      }, null, {
+        authType: UserAuthType.GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
   });
 });
