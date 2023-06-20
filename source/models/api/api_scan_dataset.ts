@@ -12,6 +12,12 @@ export interface ApiScanDatasetArgument extends Partial<Modify<ApiScanDataset, {
   scanDateString?: string,
 }>> {}
 
+export enum ApiScanDatasetQaState {
+  NOT_STARTED = "NOT_STARTED",
+  STARTED = "STARTED",
+  COMPLETED = "COMPLETED",
+}
+
 export class ApiScanDataset {
   constructor({
     id,
@@ -28,7 +34,8 @@ export class ApiScanDataset {
     scanDate,
     scanDateString,
     qaStarted,
-    qaComplete
+    qaComplete,
+    qaState,
   }: ApiScanDatasetArgument) {
     addInstantGetterAndSetterToApiModel(this, "scanDate");
     addReadOnlyPropertiesToModel(this, { id, firebaseId, firebaseFloorId, scanNumber });
@@ -79,8 +86,9 @@ export class ApiScanDataset {
     this.scanDateString = scanDateString;
     this.analysisCompleted = analysisCompleted;
     this.manualQcPresent = manualQcPresent;
-    this.qaComplete = qaComplete;
     this.qaStarted = qaStarted;
+    this.qaComplete = qaComplete;
+    this.qaState = qaState;
   }
 
   /**
@@ -119,8 +127,13 @@ export class ApiScanDataset {
   dataPresences?: { scanAnalysis?: boolean };
   notes: string | null = null;
   name: string | null = null;
-  qaComplete: Date | null = null;
-  qaStarted: Date | null = null;
+  readonly qaStarted: Date | null = null;
+  readonly qaComplete: Date | null = null;
+  /**
+   * current QA/QC state based on qaStarted/qaComplete, calculated by the
+   * gateway so the frontend doesn't need to replicate business logic
+   */
+  readonly qaState: ApiScanDatasetQaState = null;
 }
 
 export default ApiScanDataset;

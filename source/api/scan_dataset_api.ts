@@ -4,6 +4,7 @@ import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import ApiView, { ViewParameter } from "../models/api/api_view";
 import { DateConverter } from "../converters";
+import {ApiScanDatasetQaState} from "../models/api/api_scan_dataset";
 
 export default class ScanDatasetApi {
   static listScanDatasetsForFloor({ projectId, floorId }: AssociationIds, user: User): Promise<ApiScanDataset[]> {
@@ -142,6 +143,18 @@ export default class ScanDatasetApi {
 
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/photo-session/${id}`;
     return Http.post(url, user, { sessionDate }) as unknown as Promise<ApiPhotoSession>;
+  }
+
+  static updateQaState({
+                         projectId,
+                         floorId,
+                         scanDatasetId
+                       }: AssociationIds,
+                       qaState: ApiScanDatasetQaState,
+                       user: User): Promise<ApiPhotoSession> {
+
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/qa-state`;
+    return Http.post(url, user, qaState) as unknown as Promise<ApiPhotoSession>;
   }
 }
 
