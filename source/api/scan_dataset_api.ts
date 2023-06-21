@@ -15,9 +15,9 @@ export default class ScanDatasetApi {
   static createScanDataset({
                              projectId,
                              floorId
-                           }: AssociationIds, scanDate: DateLike, user: User): Promise<void> {
+                           }: AssociationIds, scanDate: DateLike, user: User): Promise<ApiScanDataset> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets?scanDate=${DateConverter.dateToISO(scanDate)}`;
-    return Http.post(url, user, null) as unknown as Promise<void>;
+    return Http.post(url, user, null) as unknown as Promise<ApiScanDataset>;
   }
 
   static deleteScanDataset({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<void> {
@@ -29,9 +29,9 @@ export default class ScanDatasetApi {
                              projectId,
                              floorId,
                              scanDatasetId
-                           }: AssociationIds, scanDataset: ApiScanDataset, user: User): Promise<void> {
+                           }: AssociationIds, scanDataset: ApiScanDataset, user: User): Promise<ApiScanDataset> {
       const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}`;
-      return Http.patch(url, user, scanDataset) as unknown as Promise<void>;
+      return Http.patch(url, user, scanDataset) as unknown as Promise<ApiScanDataset>;
   }
 
   /**
@@ -41,7 +41,7 @@ export default class ScanDatasetApi {
                             projectId,
                             floorId,
                             scanDatasetId
-                          }: AssociationIds, scanDataset: ApiScanDataset, user: User): Promise<void> {
+                          }: AssociationIds, scanDataset: ApiScanDataset, user: User): Promise<ApiScanDataset> {
     return this.updateScanDataset({ projectId, floorId, scanDatasetId }, scanDataset, user);
   }
 
@@ -52,19 +52,19 @@ export default class ScanDatasetApi {
                               projectId,
                               floorId,
                               scanDatasetId
-                            }: AssociationIds, scanDataset: ApiScanDataset, user: User): Promise<void> {
+                            }: AssociationIds, scanDataset: ApiScanDataset, user: User): Promise<ApiScanDataset> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}`;
-    return Http.put(url, user, scanDataset) as unknown as Promise<void>;
+    return Http.put(url, user, scanDataset) as unknown as Promise<ApiScanDataset>;
   }
 
   static updateQaState({
                          projectId,
                          floorId,
                          scanDatasetId
-                       }: AssociationIds, qaState: ApiScanDatasetQaState, user: User): Promise<void> {
+                       }: AssociationIds, qaState: ApiScanDatasetQaState, user: User): Promise<ApiScanDataset> {
 
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/qa-state`;
-    return Http.post(url, user, qaState) as unknown as Promise<void>;
+    return Http.post(url, user, qaState) as unknown as Promise<ApiScanDataset>;
   }
 
   static saveScanAnalysis({
