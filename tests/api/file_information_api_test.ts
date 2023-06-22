@@ -235,6 +235,32 @@ describe("FileInformationApi", () => {
     });
   });
 
+  describe("#listScanDatasetFilesForProject", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/scan-dataset-files`, {
+        "some-scan-dataset-id": [{
+          url: "some-file-url.com",
+          purposeType: ApiProjectPurposeType.OTHER
+        }]
+      });
+    });
+
+    it("makes a call to the endpoint", () => {
+      FileInformationApi.listScanDatasetFilesForProject({ projectId: "some-project-id" }, user);
+      const request = fetchMock.lastCall();
+      expect(request[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/scan-dataset-files`);
+    });
+
+    it("sends the request with authorization headers", () => {
+      FileInformationApi.listScanDatasetFilesForProject({ projectId: "some-project-id" }, user);
+
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+  });
+
   describe("#listPhotoAreaFiles", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/files`, [{
