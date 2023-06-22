@@ -45,8 +45,8 @@ function getTagReleaseNotes (tag) {
     return changes
   }, {
     breaking: [],
+    feature: [],
     fix: [],
-    feat: [],
     unknown: []
   });
   let releaseNotes = "";
@@ -55,9 +55,9 @@ function getTagReleaseNotes (tag) {
     type = "major"
     releaseNotes += `Breaking Changes:\n${changes.breaking.join("\n")}`
   }
-  if(changes.feat.length) {
+  if(changes.feature.length) {
     if(type !== "major") type = "minor"
-    releaseNotes += `${releaseNotes.length?"\n":""}Features:\n${changes.feat.join("\n")}`
+    releaseNotes += `${releaseNotes.length?"\n":""}Features:\n${changes.feature.join("\n")}`
   }
   if(changes.fix.length) {
     releaseNotes += `${releaseNotes.length?"\n":""}Fixes:\n${changes.fix.join("\n")}`
