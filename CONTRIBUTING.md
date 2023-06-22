@@ -12,7 +12,7 @@ AVVIR_SANDBOX_EMAIL
 AVVIR_SANDBOX_PASSWORD
 AVVIR_SANDBOX_PROJECT_ID
 
-## Commiting Changes
+## Committing Changes
 
 After making changes to the code, by adding a semantic labels to your commit message, it allows the publishing 
 script to detect which type of release to publish. Use the following labels:
@@ -38,7 +38,7 @@ This will trigger Circle CI to run a job that will publish to the NPM registry i
 The version in package.json is intentionally set to 0.0.0 because the version is controlled by the most recent git tag version.
 
 The publish script can automatically detect which version to bump to release to by reading through the commit
-log after the latest tag (using [semantic labels](#Commiting-Changes)).
+log after the latest tag (using [semantic labels](#Committing-Changes)).
 
 To override this behavior, supply either `patch`, `minor`, or `major` argument to the script to force it 
 to bump the appropriate version number. 
