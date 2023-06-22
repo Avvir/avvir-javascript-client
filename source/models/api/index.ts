@@ -54,7 +54,7 @@ export {
 } from "./api_purpose_type";
 
 export {ApiRunningProcess, ApiRunningProcessArgs} from "./api_running_process";
-export {ApiScanDataset, ApiScanDatasetArgument} from "./api_scan_dataset";
+export {ApiScanDataset, ApiScanDatasetArgument, ApiScanDatasetQaState } from "./api_scan_dataset";
 
 export {
     ApiScannedElement,
