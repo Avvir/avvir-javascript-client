@@ -29,6 +29,10 @@ export default class GroupApi {
     let url = `${Http.baseUrl()}/projects/${projectId}/groups/members`;
     return Http.delete(url, user, groupMemberIds) as unknown as Promise<void>;
   }
+  static updateGroup({ projectId, groupId }: AssociationIds, group: ApiGroup, user: User, ): Promise<ApiGroup|null> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/groups/${groupId}`;
+    return Http.patch(url, user, group) as unknown as Promise<ApiGroup|null>;
+  }
 }
 
 makeErrorsPretty(GroupApi);
