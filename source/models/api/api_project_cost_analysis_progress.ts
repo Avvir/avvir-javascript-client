@@ -29,10 +29,12 @@ export class ApiProjectCostAnalysisProgress {
                     plannedTotalCostProject,
                     modeledTotalCostProject,
                     scannedTotalCostProject,
+                    capturedPercentInstalledProject,
                     reportedTotalCostProject,
                     reportedQuantityProject,
                     modeledQuantityArea,
                     scannedQuantityArea,
+                    capturedPercentInstalledArea,
                     modeledTotalCostArea,
                     scannedTotalCostArea,
                     vendor
@@ -52,6 +54,8 @@ export class ApiProjectCostAnalysisProgress {
         this.modeledTotalCost = modeledTotalCost;
         this.reportedQuantity = reportedQuantity;
         this.scannedQuantityProject = scannedQuantityProject;
+        this.capturedPercentInstalledProject = capturedPercentInstalledProject;
+
         this.scannedQuantity = scannedQuantity;
         this.scannedTotalCost = scannedTotalCost;
         // @ts-ignore
@@ -65,6 +69,8 @@ export class ApiProjectCostAnalysisProgress {
         this.reportedQuantityProject = reportedQuantityProject;
         this.modeledQuantityArea = modeledQuantityArea;
         this.scannedQuantityArea = scannedQuantityArea;
+        this.capturedPercentInstalledArea = capturedPercentInstalledArea;
+
         this.modeledTotalCostArea = modeledTotalCostArea;
         this.scannedTotalCostArea = scannedTotalCostArea;
 
@@ -85,6 +91,7 @@ export class ApiProjectCostAnalysisProgress {
     reportedQuantityProject: number | null = null;
     modeledQuantityProject: number | null = null;
     scannedQuantityProject: number | null = null;
+    capturedPercentInstalledProject: number | null = null;
 
     plannedTotalCostProject: number | null = null;
     modeledTotalCostProject: number | null = null;
@@ -93,6 +100,7 @@ export class ApiProjectCostAnalysisProgress {
 
     modeledQuantityArea: number | null = null;
     scannedQuantityArea: number | null = null;
+    capturedPercentInstalledArea: number | null = null;
 
     modeledTotalCostArea: number | null = null;
     scannedTotalCostArea: number | null = null;
