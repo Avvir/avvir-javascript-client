@@ -105,6 +105,13 @@ export default class ElementApi {
     return Http.get(url, user) as unknown as Promise<ApiPlannedElement[]>;
   }
 
+  static getObstructedElementsForFloor({ projectId, floorId }: AssociationIds, user: User): Promise<{
+    [globalId: string]: string[]
+  }> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/obstructions`;
+    return Http.get(url, user) as unknown as Promise<{ [globalId: string]: string[] }>;
+  }
+
   static createObstructedElementsQuery({
                                          projectId,
                                          floorId
@@ -216,7 +223,8 @@ export default class ElementApi {
   }
 
 
-  static clearVerified({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<ApiDetailedElement[]> {
+  static clearVerified({ projectId, floorId, scanDatasetId }: AssociationIds,
+                       user: User): Promise<ApiDetailedElement[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/clear-verified?scanDatasetId=${scanDatasetId}`;
     return Http.post(url, user) as unknown as Promise<ApiDetailedElement[]>;
   };

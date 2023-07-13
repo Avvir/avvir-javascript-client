@@ -5,10 +5,10 @@ import ElementApi from "../../source/api/element_api";
 import Http from "../../source/utilities/http";
 import { DETECTED, DeviationStatus, INCLUDED } from "../../source/models/enums/deviation_status";
 import { ApiBuiltStatus, DEVIATED, NOT_BUILT } from "../../source/models/enums/api_built_status";
-import {FIREBASE, GATEWAY_JWT, UserAuthType} from "../../source/models/enums/user_auth_type";
-import {USER, UserRole} from "../../source/models/enums/user_role";
+import { FIREBASE, GATEWAY_JWT, UserAuthType } from "../../source/models/enums/user_auth_type";
+import { USER, UserRole } from "../../source/models/enums/user_role";
 import { ApiDetailedElement, ApiPlannedElement, ApiScannedElement, DateConverter } from "../../source";
-import {describe} from "mocha";
+import { describe } from "mocha";
 
 describe("ElementApi", () => {
   describe("::getPlannedBuildingElements", () => {
@@ -492,6 +492,60 @@ describe("ElementApi", () => {
           projectId: "some-project-id",
           floorId: "some-floor-id",
         }, 23, user);
+
+        const lastFetchOpts = fetchMock.lastOptions();
+        expect(lastFetchOpts.headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      });
+    });
+  });
+
+  describe("::getObstructedElementsForFloor", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/obstructions`,
+        {
+          "some-global-id": ["some-obstructed-global-id-1", "some-obstructed-global-id-2"]
+        });
+    });
+
+    it("makes a request to get the obstructed elements for the floor", () => {
+      ElementApi.getObstructedElementsForFloor({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+      },  null);
+
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/obstructions`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("returns the results for the query", () => {
+      return ElementApi.getObstructedElementsForFloor({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+        }, null)
+        .then((obstructedElementsResult) => {
+          expect(obstructedElementsResult).to.deep.eq({
+            "some-global-id": ["some-obstructed-global-id-1", "some-obstructed-global-id-2"]
+          });
+        });
+    });
+
+    describe("when the user is signed in", () => {
+      let user;
+      beforeEach(() => {
+        user = {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        };
+      });
+
+      it("authenticates the request", () => {
+        ElementApi.getObstructedElementsForFloor({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+        }, user);
 
         const lastFetchOpts = fetchMock.lastOptions();
         expect(lastFetchOpts.headers.Authorization).to.eq("Bearer some-firebase.id.token");
@@ -1419,7 +1473,8 @@ describe("ElementApi", () => {
 
   describe("#clearVerified", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/clear-verified?scanDatasetId=some-scan-dataset-id`, 200);
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/clear-verified?scanDatasetId=some-scan-dataset-id`,
+        200);
     });
 
     it("makes a request to the gateway", () => {
@@ -1429,11 +1484,13 @@ describe("ElementApi", () => {
         scanDatasetId: "some-scan-dataset-id"
       }, {
         authType: UserAuthType.GATEWAY_JWT,
-        gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+        gatewayUser: { idToken: "some-firebase.id.token", role: UserRole.USER }
       });
 
       expect(fetchMock.lastOptions().headers["Accept"]).to.eq("application/json");
-      expect(fetchMock.lastUrl()).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/clear-verified?scanDatasetId=some-scan-dataset-id`);
+      expect(fetchMock.lastUrl())
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/clear-verified?scanDatasetId=some-scan-dataset-id`);
     });
 
     it("includes the authorization headers", () => {
@@ -1443,7 +1500,7 @@ describe("ElementApi", () => {
         scanDatasetId: "some-scan-dataset-id"
       }, {
         authType: UserAuthType.GATEWAY_JWT,
-        gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+        gatewayUser: { idToken: "some-firebase.id.token", role: UserRole.USER }
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
@@ -1452,7 +1509,8 @@ describe("ElementApi", () => {
 
   describe("#autoVerify", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/auto-verify?scanDatasetId=some-scan-dataset-id`, 200);
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/auto-verify?scanDatasetId=some-scan-dataset-id`,
+        200);
     });
 
     it("makes a request to the gateway", () => {
@@ -1462,11 +1520,13 @@ describe("ElementApi", () => {
         scanDatasetId: "some-scan-dataset-id"
       }, {
         authType: UserAuthType.GATEWAY_JWT,
-        gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+        gatewayUser: { idToken: "some-firebase.id.token", role: UserRole.USER }
       });
 
       expect(fetchMock.lastOptions().headers["Accept"]).to.eq("application/json");
-      expect(fetchMock.lastUrl()).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/auto-verify?scanDatasetId=some-scan-dataset-id`);
+      expect(fetchMock.lastUrl())
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/auto-verify?scanDatasetId=some-scan-dataset-id`);
     });
 
     it("includes the authorization headers", () => {
@@ -1476,7 +1536,7 @@ describe("ElementApi", () => {
         scanDatasetId: "some-scan-dataset-id"
       }, {
         authType: UserAuthType.GATEWAY_JWT,
-        gatewayUser: {idToken: "some-firebase.id.token", role: UserRole.USER}
+        gatewayUser: { idToken: "some-firebase.id.token", role: UserRole.USER }
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
