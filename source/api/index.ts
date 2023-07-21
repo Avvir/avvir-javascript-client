@@ -15,6 +15,7 @@ import IntegrationsApi from "./integrations_api";
 import ProjectSummaryApi from "./project_summary_api";
 import GroupApi from "./group_api";
 import RecipeApi from "./recipe_api";
+import ReportApi from "./report_api";
 
 export {
     AuthApi,
@@ -22,16 +23,17 @@ export {
     ElementApi,
     FileInformationApi,
     FloorApi,
+    GroupApi,
     IntegrationsApi,
     OrganizationApi,
     PhotoAreaApi,
     PipelineApi,
     ProjectApi,
+    ProjectSummaryApi,
     RecipeApi,
+    ReportApi,
     ScanDatasetApi,
+    UserApi,
     WebGatewayApi,
     WebRpcApi,
-    UserApi,
-    ProjectSummaryApi,
-    GroupApi
 };

@@ -9,6 +9,8 @@ export {ApiElementDeviation} from "./api_element_deviation";
 export {ApiFloor, ApiFloorArgument} from "./api_floor";
 export {ApiGridLine} from "./api_grid_line";
 export {ApiInvitation} from "./api_invitation";
+export {ApiInspectReport} from "./api_inspect_report";
+export {ApiInspectReportEntry} from "./api_inspect_report_entry";
 export {ApiMasterformat} from "./api_masterformat";
 export {ApiMatrix3} from "./api_matrix_3";
 export {ApiMatrix4} from "./api_matrix_4";
