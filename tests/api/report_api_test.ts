@@ -7,7 +7,7 @@ import {UserRole} from "../../source/models/enums/user_role";
 import Http from "../../source/utilities/http";
 import {expect} from "chai";
 import ReportApi from "../../source/api/report_api";
-import {ApiInspectReport, ApiInspectReportEntry} from "../../source";
+import {ApiInspectReport, ApiInspectReportEntry, ApiPlannedElement} from "../../source";
 
 describe("ReportApi", () => {
     let user: User;
@@ -92,7 +92,7 @@ describe("ReportApi", () => {
                 new ApiInspectReportEntry({
                     reportId: 7,
                     name: "some entry name",
-                    elementId: 2
+                    elements: [new ApiPlannedElement({globalId: "Obj2"})]
                 }), {
                     authType: "GATEWAY_JWT",
                     gatewayUser: {idToken: "some-firebase.id.token"}
@@ -104,7 +104,7 @@ describe("ReportApi", () => {
             expect(JSON.parse(fetchCall[1].body as string)).to.deep.eq({
                 reportId: 7,
                 name: "some entry name",
-                elementId: 2
+                elements: [{globalId: "Obj2"}]
             });
             expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
         });

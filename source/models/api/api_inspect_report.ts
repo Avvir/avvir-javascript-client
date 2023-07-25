@@ -1,5 +1,7 @@
 import {addInstantGetterAndSetterToApiModel, addReadOnlyPropertiesToModel} from "../../mixins";
 import {ApiInspectReportEntry} from "./api_inspect_report_entry";
+import {DateLike} from "type_aliases";
+import ApiUser from "./api_user";
 
 export class ApiInspectReport {
     constructor({ id, firebaseProjectId, name, entries, createdBy, createdAt }: Partial<ApiInspectReport>) {
@@ -12,6 +14,6 @@ export class ApiInspectReport {
     readonly firebaseProjectId: string;
     name: string;
     entries: ApiInspectReportEntry[];
-    createdAt?: string;
-    createdBy?: number;
+    createdAt?: DateLike;
+    createdBy?: ApiUser;
 }

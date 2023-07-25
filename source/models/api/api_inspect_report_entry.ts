@@ -1,19 +1,19 @@
 import {addInstantGetterAndSetterToApiModel, addReadOnlyPropertiesToModel} from "../../mixins";
+import {DateLike} from "type_aliases";
+import ApiPlannedElement from "./api_planned_element";
+import ApiUser from "./api_user";
 
 export class ApiInspectReportEntry {
-    constructor({ id, reportId, name, groupId, elementId, createdBy, createdAt }: Partial<ApiInspectReportEntry>) {
-        addReadOnlyPropertiesToModel(this, { id, reportId });
+    constructor({ id, reportId, name, elements, createdBy, createdAt }: Partial<ApiInspectReportEntry>) {
+        addReadOnlyPropertiesToModel(this, { id, reportId, createdBy });
         addInstantGetterAndSetterToApiModel(this, "createdAt", createdAt);
-        this.createdBy = createdBy;
         this.name = name;
-        this.groupId = groupId;
-        this.elementId = elementId;
+        this.elements = elements;
     }
     readonly id: number;
     readonly reportId: number;
     name: string;
-    groupId?: number;
-    elementId?: number;
-    createdAt?: string;
-    createdBy?: number;
+    elements?: ApiPlannedElement[];
+    createdAt?: DateLike;
+    createdBy?: ApiUser;
 }
