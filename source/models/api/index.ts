@@ -33,6 +33,7 @@ export {ApiWorkPackage} from "./api_work_package"
 export {ApiProjectListing} from "./api_project_listing";
 export {ApiClassificationCode} from "./api_classification_code";
 export { ApiRecipe, ApiRecipeStep, ApiRecipeArgument, ApiRecipeStepArgument} from "./api_recipe";
+export {ApiProjectCostAnalysisProgressValidationResult} from "./api_project_cost_anaylsis_progress_validation_result"
 
 export {
     ApiPhotoAreaPurposeType,

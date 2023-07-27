@@ -6,7 +6,7 @@ import {
   ApiCloudFile,
   ApiMasterformatProgress,
   ApiProject,
-  ApiProjectCostAnalysisProgress,
+  ApiProjectCostAnalysisProgress, ApiProjectCostAnalysisProgressValidationResult,
   ApiProjectListing,
   ApiRunningProcess,
   ApiWorkPackage,
@@ -159,6 +159,15 @@ export default class ProjectApi {
   static getClassificationCodes({projectId}: AssociationIds, user:User) {
     const url = `${Http.baseUrl()}/projects/${projectId}/classification-codes`;
     return Http.get(url, user) as unknown as Promise<ApiClassificationCode[]>;
+  }
+  static checkWbsStatus({projectId}: AssociationIds, user: User) {
+    const url = `${Http.baseUrl()}/projects/${projectId}/cost-analysis-progress/validations`
+    return Http.get(url, user) as unknown as Promise<ApiProjectCostAnalysisProgressValidationResult>
+  };
+
+  static updateMasterformatSelection({projectId, floorId}: AssociationIds, masterformatTree, user: User) {
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/cost-analysis-progress-modeled-total-cost`;
+    return Http.put(url, user, masterformatTree) as unknown as Promise<ApiProjectCostAnalysisProgress[]>;
   }
 }
 
