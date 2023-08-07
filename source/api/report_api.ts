@@ -13,9 +13,9 @@ export default class ReportApi {
         let url = `${Http.baseUrl()}/projects/${projectId}/reports`;
         return Http.get(url, user) as unknown as Promise<ApiInspectReport[]>;
     }
-    static createInspectReportEntry({ projectId, inspectReportId }: AssociationIds, reportEntry: ApiInspectReportEntry, user: User): Promise<ApiInspectReportEntry> {
+    static createInspectReportEntries({ projectId, inspectReportId }: AssociationIds, reportEntries: ApiInspectReportEntry[], user: User): Promise<ApiInspectReportEntry[]> {
         let url = `${Http.baseUrl()}/projects/${projectId}/reports/${inspectReportId}/inspect-entries`;
-        return Http.post(url, user, reportEntry) as unknown as Promise<ApiInspectReportEntry>;
+        return Http.post(url, user, reportEntries) as unknown as Promise<ApiInspectReportEntry[]>;
     }
 }
 
