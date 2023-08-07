@@ -85,7 +85,7 @@ describe("ReportApi", () => {
         });
 
         it("makes a request to the gateway api", () => {
-            ReportApi.createInspectReportEntry({
+            ReportApi.createInspectReportEntries({
                     projectId: "some-project-id",
                     inspectReportId: 7
                 },
@@ -110,7 +110,7 @@ describe("ReportApi", () => {
         });
 
         it("includes the authorization headers", () => {
-            ReportApi.createInspectReportEntry({
+            ReportApi.createInspectReportEntries({
                     projectId: "some-project-id",
                     inspectReportId: 7
                 },
