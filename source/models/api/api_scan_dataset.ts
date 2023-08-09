@@ -12,7 +12,8 @@ export interface ApiScanDatasetArgument extends Partial<Modify<ApiScanDataset, {
   scanDateString?: string,
 }>> {}
 
-export enum ApiScanDatasetQaState {
+export const enum ApiScanDatasetQaState {
+  NO_DATA = "NO_DATA",
   NOT_STARTED = "NOT_STARTED",
   STARTED = "STARTED",
   COMPLETED = "COMPLETED",
