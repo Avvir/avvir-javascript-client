@@ -1,6 +1,5 @@
 import {addInstantGetterAndSetterToApiModel, addReadOnlyPropertiesToModel} from "../../mixins";
 import {ApiInspectReportEntry} from "./api_inspect_report_entry";
-import {DateLike} from "type_aliases";
 import ApiUser from "./api_user";
 
 export class ApiInspectReport {
@@ -14,6 +13,6 @@ export class ApiInspectReport {
     readonly firebaseProjectId: string;
     name: string;
     entries: ApiInspectReportEntry[];
-    createdAt?: DateLike;
+    createdAt?: number;
     createdBy?: ApiUser;
 }
