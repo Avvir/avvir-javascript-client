@@ -21,6 +21,10 @@ export default class ReportApi {
         let url = `${Http.baseUrl()}/projects/${projectId}/reports/${inspectReportId}/inspect-entries`;
         return Http.post(url, user, reportEntries) as unknown as Promise<ApiInspectReportEntry[]>;
     }
+    static updateInspectReportEntry({ projectId, inspectReportId, inspectReportEntryId }: AssociationIds, reportEntry, user): Promise<ApiInspectReportEntry> {
+        let url = `${Http.baseUrl()}/projects/${projectId}/reports/${inspectReportId}/inspect-entries/${inspectReportEntryId}`;
+        return Http.put(url, user, reportEntry) as unknown as Promise<ApiInspectReportEntry>;
+    }
 }
 
 makeErrorsPretty(ReportApi);
