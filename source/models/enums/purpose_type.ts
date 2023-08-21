@@ -16,7 +16,9 @@ export enum ProjectPurposeType {
   PROJECT_AREAS_IFC = "projectAreasIfc",
   PROJECT_AREAS_SVF = "projectAreasSvf",
   PROJECT_EXPORT_REPORT = "projectExportReport",
-  PROJECT_REPORT_SCREENSHOT = "projectReportScreenshot"
+  PROJECT_REPORT_SCREENSHOT = "projectReportScreenshot",
+  PROJECT_REPORT_MINIMAP = "projectReportMinimap",
+  PROJECT_REPORT_ZOOMED_MINIMAP = "projectReportZoomedMinimap",
 }
 
 /** @deprecated use ApiFloorPurposeType */
@@ -130,6 +132,8 @@ export const PurposeTypeMap: ProjectTypeMap & Omit<FloorTypeMap, "OTHER"> & Omit
   PROJECT_AREAS_SVF: ProjectPurposeType.PROJECT_AREAS_SVF,
   PROJECT_EXPORT_REPORT: ProjectPurposeType.PROJECT_EXPORT_REPORT,
   PROJECT_REPORT_SCREENSHOT: ProjectPurposeType.PROJECT_REPORT_SCREENSHOT,
+  PROJECT_REPORT_MINIMAP: ProjectPurposeType.PROJECT_REPORT_MINIMAP,
+  PROJECT_REPORT_ZOOMED_MINIMAP: ProjectPurposeType.PROJECT_REPORT_ZOOMED_MINIMAP,
 };
 
 /** @deprecated use isApiPurposeType */

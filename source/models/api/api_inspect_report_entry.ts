@@ -5,12 +5,14 @@ import ApiView from "./api_view";
 import {ApiInspectReportEntryElement} from "./api_inspect_report_entry_element";
 
 export class ApiInspectReportEntry {
-    constructor({ id, reportId, name, view, screenshot,elements, createdBy, createdAt }: Partial<ApiInspectReportEntry>) {
+    constructor({ id, reportId, name, view, screenshot, minimapFile, zoomedMinimapFile, elements, createdBy, createdAt }: Partial<ApiInspectReportEntry>) {
         addReadOnlyPropertiesToModel(this, { id, reportId, createdBy });
         addInstantGetterAndSetterToApiModel(this, "createdAt", createdAt);
         this.name = name;
         this.view = view;
         this.screenshot = screenshot;
+        this.minimapFile = minimapFile;
+        this.zoomedMinimapFile = zoomedMinimapFile;
         this.elements = elements;
     }
     readonly id: number;
@@ -18,6 +20,8 @@ export class ApiInspectReportEntry {
     name: string;
     view: ApiView;
     screenshot: ApiCloudFile;
+    minimapFile: ApiCloudFile;
+    zoomedMinimapFile: ApiCloudFile;
     elements: ApiInspectReportEntryElement[]
     createdAt?: number;
     createdBy?: ApiUser;
