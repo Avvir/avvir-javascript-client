@@ -3,14 +3,18 @@ import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter
 import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 import ApiMatrix4 from "./api_matrix_4";
 import Matrix4Converter from "../../converters/matrix_4_converter";
-import { DateLike, Modify } from "./type_aliases";
+import { DateLike, ModifyPartial } from "type_aliases";
 
-export interface ApiScanDatasetArgument extends Partial<Modify<ApiScanDataset, {
+export type ApiScanDatasetArgument = ModifyPartial<ApiScanDataset, {
   coarseAlignmentMatrix?: ApiMatrix4 | Matrix4 | string | null
   fineAlignmentMatrix?: ApiMatrix4 | Matrix4 | string | null
   scanDate?: DateLike,
+  qaStarted?: DateLike,
+  qaComplete?: DateLike,
+  analysisCompleted?: DateLike,
+  manualAnalysisSkipped?: DateLike,
   scanDateString?: string,
-}>> {}
+}>
 
 export enum ApiScanDatasetQaState {
   NO_DATA = "NO_DATA",
@@ -21,24 +25,29 @@ export enum ApiScanDatasetQaState {
 
 export class ApiScanDataset {
   constructor({
-    id,
-    firebaseId,
-    firebaseFloorId,
-    scanNumber,
-    dataPresences,
-    analysisCompleted,
-    manualQcPresent,
-    notes,
-    name,
-    coarseAlignmentMatrix,
-    fineAlignmentMatrix,
-    scanDate,
-    scanDateString,
-    qaStarted,
-    qaComplete,
-    qaState,
-  }: ApiScanDatasetArgument) {
-    addInstantGetterAndSetterToApiModel(this, "scanDate");
+                id,
+                firebaseId,
+                firebaseFloorId,
+                scanNumber,
+                dataPresences,
+                analysisCompleted,
+                manualAnalysisSkipped,
+                notes,
+                name,
+                coarseAlignmentMatrix,
+                fineAlignmentMatrix,
+                scanDate,
+                scanDateString,
+                qaStarted,
+                qaComplete,
+                qaState,
+              }: ApiScanDatasetArgument)
+  {
+    addInstantGetterAndSetterToApiModel(this, "scanDate", scanDate);
+    addInstantGetterAndSetterToApiModel(this, "qaStarted", qaStarted);
+    addInstantGetterAndSetterToApiModel(this, "qaComplete", qaComplete);
+    addInstantGetterAndSetterToApiModel(this, "analysisCompleted", analysisCompleted);
+    addInstantGetterAndSetterToApiModel(this, "manualAnalysisSkipped", manualAnalysisSkipped);
     addReadOnlyPropertiesToModel(this, { id, firebaseId, firebaseFloorId, scanNumber });
     let coarseAlignmentMatrixVal, fineAlignmentMatrixVal;
     Object.defineProperties(this, {
@@ -82,13 +91,7 @@ export class ApiScanDataset {
     }
     this.notes = notes;
     this.name = name;
-    // @ts-ignore
-    this.scanDate = scanDate;
     this.scanDateString = scanDateString;
-    this.analysisCompleted = analysisCompleted;
-    this.manualQcPresent = manualQcPresent;
-    this.qaStarted = qaStarted;
-    this.qaComplete = qaComplete;
     this.qaState = qaState;
   }
 
@@ -121,15 +124,15 @@ export class ApiScanDataset {
    */
   scanDateString: string | null = null;
 
-  analysisCompleted: number | null;
-  manualQcPresent: number | null;
+  readonly analysisCompleted: number | null;
+  readonly manualAnalysisSkipped: number | null;
   coarseAlignmentMatrix: ApiMatrix4 | null = null;
   fineAlignmentMatrix: ApiMatrix4 | null = null;
   dataPresences?: { scanAnalysis?: boolean };
   notes: string | null = null;
   name: string | null = null;
-  readonly qaStarted: Date | null = null;
-  readonly qaComplete: Date | null = null;
+  readonly qaStarted: number | null = null;
+  readonly qaComplete: number | null = null;
   /**
    * current QA/QC state based on qaStarted/qaComplete, calculated by the
    * gateway so the frontend doesn't need to replicate business logic
