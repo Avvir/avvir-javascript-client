@@ -9,8 +9,11 @@ export default class ReportApi {
         let url = `${Http.baseUrl()}/projects/${projectId}/reports`;
         return Http.post(url, user, report) as unknown as Promise<ApiInspectReport>;
     }
-    static listInspectReports({projectId}: AssociationIds, user: User): Promise<ApiInspectReport[]> {
+    static listInspectReports({projectId}: AssociationIds, user: User, displayEntries?: boolean): Promise<ApiInspectReport[]> {
         let url = `${Http.baseUrl()}/projects/${projectId}/reports`;
+        if (displayEntries) {
+            url += "?displayEntries=true";
+        }
         return Http.get(url, user) as unknown as Promise<ApiInspectReport[]>;
     }
     static listInspectReportEntries({projectId, inspectReportId}: AssociationIds, user: User): Promise<ApiInspectReportEntry[]> {
