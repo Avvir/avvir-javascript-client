@@ -25,6 +25,14 @@ export default class ReportApi {
         let url = `${Http.baseUrl()}/projects/${projectId}/reports/${inspectReportId}/inspect-entries/${inspectReportEntryId}`;
         return Http.put(url, user, reportEntry) as unknown as Promise<ApiInspectReportEntry>;
     }
+    static updateInspectReport({ projectId, inspectReportId }: AssociationIds, report, user): Promise<ApiInspectReport> {
+        let url = `${Http.baseUrl()}/projects/${projectId}/reports/${inspectReportId}`;
+        return Http.put(url, user, report) as unknown as Promise<ApiInspectReport>;
+    }
+    static deleteInspectReport({ projectId, inspectReportId }: AssociationIds, user): Promise<void> {
+        let url = `${Http.baseUrl()}/projects/${projectId}/reports/${inspectReportId}`;
+        return Http.delete(url, user) as unknown as Promise<void>;
+    }
 }
 
 makeErrorsPretty(ReportApi);

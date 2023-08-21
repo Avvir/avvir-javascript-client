@@ -126,4 +126,84 @@ describe("ReportApi", () => {
             expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
         });
     });
+    describe("updateInspectReport", () => {
+        beforeEach(() => {
+            fetchMock.put(`${Http.baseUrl()}/projects/some-project-id/reports/7`, 200);
+        });
+
+        it("makes a request to the gateway api", () => {
+            ReportApi.updateInspectReport({
+                    projectId: "some-project-id",
+                    inspectReportId: 7
+                },
+                new ApiInspectReport({
+                    id: 7,
+                    firebaseProjectId: "some-project-id",
+                    name: "some report name",
+                }), {
+                    authType: "GATEWAY_JWT",
+                    gatewayUser: {idToken: "some-firebase.id.token"}
+                } as User);
+
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/reports/7`);
+            expect(JSON.parse(fetchCall[1].body as string)).to.deep.eq({
+                "entries": [],
+                "firebaseProjectId": "some-project-id",
+                "id": 7,
+                "name": "some report name"
+            });
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+
+        it("includes the authorization headers", () => {
+            ReportApi.updateInspectReport({
+                    projectId: "some-project-id",
+                    inspectReportId: 7
+                },
+                new ApiInspectReport({
+                    id: 7,
+                    firebaseProjectId: "some-project-id",
+                    name: "some report name",
+                }), {
+                    authType: "GATEWAY_JWT",
+                    gatewayUser: {idToken: "some-firebase.id.token"}
+                } as User);
+
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+        });
+    });
+    describe("deleteInspectReport", () => {
+        beforeEach(() => {
+            fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/reports/7`, 200);
+        });
+
+        it("makes a request to the gateway api", () => {
+            ReportApi.deleteInspectReport({
+                    projectId: "some-project-id",
+                    inspectReportId: 7
+                },{
+                    authType: "GATEWAY_JWT",
+                    gatewayUser: {idToken: "some-firebase.id.token"}
+                } as User);
+
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/reports/7`);
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+
+        it("includes the authorization headers", () => {
+            ReportApi.deleteInspectReport({
+                    projectId: "some-project-id",
+                    inspectReportId: 7
+                }, {
+                    authType: "GATEWAY_JWT",
+                    gatewayUser: {idToken: "some-firebase.id.token"}
+                } as User);
+
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+        });
+    });
 });
