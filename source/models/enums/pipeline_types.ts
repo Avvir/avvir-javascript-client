@@ -15,6 +15,7 @@ export type PipelineName =
   | "compute-qa-statistics"
   | "create-project-report"
   | "compute-and-save-clashes"
+  | "compute-and-post-mv-design-intent"
 
 export enum Pipelines {
   INGEST_PROJECT_FILE = "ingest-project-file",
@@ -33,6 +34,7 @@ export enum Pipelines {
   COMPUTE_QA_STATISTICS = "compute-qa-statistics",
   PROJECT_EXPORT_REPORT = "create-project-report",
   COMPUTE_AND_SAVE_CLASHES = "compute-and-save-clashes",
+  COMPUTE_AND_POST_MV_DESIGN_INTENT = "compute-and-post-mv-design-intent",
 }
 
 export default Pipelines;
