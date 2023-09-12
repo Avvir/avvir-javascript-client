@@ -1,8 +1,9 @@
 import ApiProjectReportVersion from "./api_project_report_version";
 
 export class ApiProjectReport {
-    constructor({id, name, url, subcontractorId, reportVersions}: Partial<ApiProjectReport> = {}) {
+    constructor({id, type, name, url, subcontractorId, reportVersions}: Partial<ApiProjectReport> = {}) {
         this.id = id;
+        this.type = type;
         this.name = name;
         this.url = url;
         this.reportVersions = reportVersions;
@@ -10,6 +11,7 @@ export class ApiProjectReport {
     }
 
     id: number;
+    type: string;
     name: string;
     url: string;
     reportVersions: ApiProjectReportVersion[];
