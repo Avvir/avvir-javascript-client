@@ -4,6 +4,7 @@ export class ApiProjectSettings {
   photosOnly: boolean;
   inspectReports: boolean;
   budget5d: boolean;
+  inspect: boolean;
+  progress4d: boolean;
+  progress5d: boolean;
 }
-
-export default ApiProjectSettings;
