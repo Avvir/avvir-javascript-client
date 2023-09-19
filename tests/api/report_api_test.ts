@@ -126,6 +126,35 @@ describe("ReportApi", () => {
             expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
         });
     });
+    describe("deleteInspectReportEntry", () => {
+        beforeEach(() => {
+            fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/reports/7/inspect-entries/9`, 200);
+        });
+        it("makes a request to the gateway api", () => {
+            ReportApi.deleteInspectReportEntry({
+                projectId: "some-project-id",
+                inspectReportId: 7,
+                inspectReportEntryId: 9
+            }, {
+                authType: "GATEWAY_JWT",
+                gatewayUser: {idToken: "some-firebase.id.token"}
+            } as User);
+            const fetchCall = fetchMock.lastCall();
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/reports/7/inspect-entries/9`);
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+        it("includes the authorization headers", () => {
+            ReportApi.deleteInspectReportEntry({
+                    projectId: "some-project-id",
+                    inspectReportId: 7,
+                    inspectReportEntryId: 9
+                }, {
+                    authType: "GATEWAY_JWT",
+                    gatewayUser: {idToken: "some-firebase.id.token"}
+                } as User);
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+        });
+    });
     describe("updateInspectReport", () => {
         beforeEach(() => {
             fetchMock.put(`${Http.baseUrl()}/projects/some-project-id/reports/7`, 200);
@@ -181,12 +210,12 @@ describe("ReportApi", () => {
 
         it("makes a request to the gateway api", () => {
             ReportApi.deleteInspectReport({
-                    projectId: "some-project-id",
-                    inspectReportId: 7
-                },{
-                    authType: "GATEWAY_JWT",
-                    gatewayUser: {idToken: "some-firebase.id.token"}
-                } as User);
+                projectId: "some-project-id",
+                inspectReportId: 7
+            }, {
+                authType: "GATEWAY_JWT",
+                gatewayUser: {idToken: "some-firebase.id.token"}
+            } as User);
 
             const fetchCall = fetchMock.lastCall();
 
@@ -196,12 +225,12 @@ describe("ReportApi", () => {
 
         it("includes the authorization headers", () => {
             ReportApi.deleteInspectReport({
-                    projectId: "some-project-id",
-                    inspectReportId: 7
-                }, {
-                    authType: "GATEWAY_JWT",
-                    gatewayUser: {idToken: "some-firebase.id.token"}
-                } as User);
+                projectId: "some-project-id",
+                inspectReportId: 7
+            }, {
+                authType: "GATEWAY_JWT",
+                gatewayUser: {idToken: "some-firebase.id.token"}
+            } as User);
 
             expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
         });
