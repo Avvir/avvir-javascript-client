@@ -33,6 +33,10 @@ export default class ReportApi {
         let url = `${Http.baseUrl()}/projects/${projectId}/reports/${inspectReportId}`;
         return Http.delete(url, user) as unknown as Promise<void>;
     }
+    static deleteInspectReportEntry({ projectId, inspectReportId, inspectReportEntryId}: AssociationIds, user: User): Promise<void> {
+        let url = `${Http.baseUrl()}/projects/${projectId}/reports/${inspectReportId}/inspect-entries/${inspectReportEntryId}`;
+        return Http.delete(url, user) as unknown as Promise<void>;
+    }
 }
 
 makeErrorsPretty(ReportApi);
