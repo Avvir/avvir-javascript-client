@@ -11,11 +11,12 @@ import {
   ApiRunningProcess,
   ApiWorkPackage,
   AssociationIds,
-  ProgressType
+  ProgressType, ProjectWorkPackageType
 } from "../models";
 import {DateLike} from "type_aliases";
 import {DateConverter} from "../converters";
 import {ApiClassificationCode} from "../models/api/api_classification_code";
+import ApiProjectWorkPackageCost from "../models/api/api_project_work_package_cost";
 
 export default class ProjectApi {
   static listProjectsForOrganization(organizationId: string, user: User): Promise<ApiProject[]> {
@@ -168,6 +169,11 @@ export default class ProjectApi {
   static updateMasterformatSelection({projectId, floorId}: AssociationIds, masterformatTree, user: User) {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/cost-analysis-progress-modeled-total-cost`;
     return Http.put(url, user, masterformatTree) as unknown as Promise<ApiProjectCostAnalysisProgress[]>;
+  }
+
+  static getWorkPackageCosts({projectId}: AssociationIds, workPackageType: ProjectWorkPackageType, user: User) {
+    const url = `${Http.baseUrl()}/projects/${projectId}/work-packages/${workPackageType}/costs`;
+    return Http.get(url, user) as unknown as Promise<ApiProjectWorkPackageCost[]>
   }
 }
 
