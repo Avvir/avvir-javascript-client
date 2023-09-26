@@ -35,6 +35,7 @@ export enum Pipelines {
   PROJECT_EXPORT_REPORT = "create-project-report",
   COMPUTE_AND_SAVE_CLASHES = "compute-and-save-clashes",
   COMPUTE_AND_POST_MV_DESIGN_INTENT = "compute-and-post-mv-design-intent",
+  COMPUTE_AND_POST_MV_PROGRESS_ANALYSIS = "compute-and-post-mv-progress-analysis",
 }
 
 export default Pipelines;
