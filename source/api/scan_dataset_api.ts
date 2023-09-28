@@ -1,10 +1,9 @@
-import { User } from "../utilities/get_authorization_headers";
-import { ApiBuiltStatus, ApiDetailedElement, ApiPhotoSession, ApiScanDataset, ApiScannedElementType, AssociationIds, DateLike } from "../models";
+import ApiView, { ViewParameter } from "../models/api/api_view";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import ApiView, { ViewParameter } from "../models/api/api_view";
+import { ApiBuiltStatus, ApiDetailedElement, ApiPhotoSession, ApiScanDataset, ApiScanDatasetQaState, ApiScannedElementType, AssociationIds, DateLike } from "../models";
 import { DateConverter } from "../converters";
-import {ApiScanDatasetQaState} from "../models/api/api_scan_dataset";
+import { User } from "../utilities/get_authorization_headers";
 
 export default class ScanDatasetApi {
   static listScanDatasetsForFloor({ projectId, floorId }: AssociationIds, user: User): Promise<ApiScanDataset[]> {
@@ -16,7 +15,7 @@ export default class ScanDatasetApi {
                              projectId,
                              floorId
                            }: AssociationIds, scanDate: DateLike, user: User): Promise<ApiScanDataset> {
-    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets?scanDate=${DateConverter.dateToISO(scanDate)}`;
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets?scanDate=${DateConverter.dateToISO(scanDate)}`;
     return Http.post(url, user, null) as unknown as Promise<ApiScanDataset>;
   }
 
@@ -30,8 +29,8 @@ export default class ScanDatasetApi {
                              floorId,
                              scanDatasetId
                            }: AssociationIds, scanDataset: ApiScanDataset, user: User): Promise<ApiScanDataset> {
-      const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}`;
-      return Http.patch(url, user, scanDataset) as unknown as Promise<ApiScanDataset>;
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}`;
+    return Http.patch(url, user, scanDataset) as unknown as Promise<ApiScanDataset>;
   }
 
   /**
@@ -71,7 +70,9 @@ export default class ScanDatasetApi {
                             projectId,
                             floorId,
                             scanDatasetId
-                          }: AssociationIds, analysis: ApiScannedElementType<ApiBuiltStatus>[], user: User): Promise<void> {
+                          }: AssociationIds,
+                          analysis: ApiScannedElementType<ApiBuiltStatus>[],
+                          user: User): Promise<void> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/analysis?enforceBuiltPersistence=false`;
     return Http.post(url, user, analysis) as unknown as Promise<void>;
   }
@@ -81,6 +82,7 @@ export default class ScanDatasetApi {
     return Http.get(url, user) as unknown as Promise<ApiScanDataset>;
   }
 
+  /** @deprecated Use planned building element end points instead */
   static getViewerDetailedElementsForScanDataset({
                                                    projectId,
                                                    floorId,
