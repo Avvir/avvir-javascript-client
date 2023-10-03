@@ -11,6 +11,7 @@ export class ApiUserPermission {
   permissionAction: UserPermissionAction
   organizationName: string
   projectName: string
+  workPackageId: number
 
   constructor({
                 id,
@@ -22,6 +23,7 @@ export class ApiUserPermission {
                 permissionAction,
                 organizationName,
                 projectName,
+                workPackageId
   }: Partial<ApiUserPermission>) {
     this.id = id;
     this.userId = userId;
@@ -32,6 +34,7 @@ export class ApiUserPermission {
     this.permissionAction = permissionAction;
     this.organizationName = organizationName;
     this.projectName = projectName;
+    this.workPackageId = workPackageId;
   }
 }
 
