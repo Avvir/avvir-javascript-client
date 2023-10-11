@@ -1,6 +1,6 @@
 import getAuthorizationHeaders, { User } from "./get_authorization_headers";
 import {httpGetHeaders, httpPostHeaders} from "./request_headers";
-import {isFirebaseUser, isGatewayUser} from "../models";
+import {isFirebaseUser, isGatewayUser, isHxAuthUser} from "../models";
 import Config from "../config";
 
 export default class Http {
@@ -69,7 +69,9 @@ export default class Http {
 
   static addAuthToDownloadUrl(baseUrl: string, user: User): string {
     if (user) {
-      if (isGatewayUser(user)) {
+      if (isHxAuthUser(user)) {
+        return `${baseUrl}?auth=${user.hxAuthUser.accessToken}`;
+      } else if (isGatewayUser(user)) {
         return `${baseUrl}?auth=${user.gatewayUser.idToken}`;
       } else if (isFirebaseUser(user)) {
         return `${baseUrl}?firebaseAuth=${user.firebaseUser.idToken}`;

@@ -1,4 +1,4 @@
-import {BASIC, FIREBASE, GATEWAY_JWT} from "../models/enums/user_auth_type";
+import { BASIC, FIREBASE, GATEWAY_JWT, HXAUTH_ACCESS_TOKEN } from "../models/enums/user_auth_type";
 import User from "../models/domain/user";
 
 export {User,BasicUser,FirebaseUser,GatewayUser} from "../models/domain/user";
@@ -22,6 +22,11 @@ const getAuthorizationHeaders = (user: User) => {
       return {
         firebaseIdToken: user.firebaseUser.idToken
       };
+    }
+    case HXAUTH_ACCESS_TOKEN: {
+      return {
+        hxAuthAccessToken: user.hxAuthUser.accessToken
+      }
     }
     default: {
       console.warn("no authentication");

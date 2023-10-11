@@ -1,6 +1,6 @@
 import _ from "underscore";
 
-let configuration: {[key: string]: any} = {logFetch: false};
+let configuration: Record<string, any> = { logFetch: false };
 
 const addEnvironmentVariablesToConfiguration = () => {
   _.forEach(configuration, (value, varName) => {
@@ -9,75 +9,75 @@ const addEnvironmentVariablesToConfiguration = () => {
       configuration[varName] = envValue;
     }
   });
-}
+};
 
 const useQAConfiguration = () => {
   configuration = {
     AVVIR_GATEWAY_URL: "https://qa-api.avvir.io",
     AVVIR_ENVIRONMENT: "qa"
-  }
-  addEnvironmentVariablesToConfiguration()
-}
+  };
+  addEnvironmentVariablesToConfiguration();
+};
 
 const useAcceptanceConfiguration = () => {
   configuration = {
     AVVIR_GATEWAY_URL: "https://acceptance-api.avvir.io",
     AVVIR_ENVIRONMENT: "acceptance"
-  }
-  addEnvironmentVariablesToConfiguration()
-}
+  };
+  addEnvironmentVariablesToConfiguration();
+};
 
 const useProductionConfiguration = () => {
   configuration = {
     AVVIR_GATEWAY_URL: "https://api.avvir.io",
     AVVIR_ENVIRONMENT: "production"
-  }
-  addEnvironmentVariablesToConfiguration()
-}
+  };
+  addEnvironmentVariablesToConfiguration();
+};
 
 const useLocalProductionConfiguration = () => {
   configuration = {
     AVVIR_GATEWAY_URL: "https://api.avvir.io",
     AVVIR_ENVIRONMENT: "local-production"
-  }
-  addEnvironmentVariablesToConfiguration()
-}
+  };
+  addEnvironmentVariablesToConfiguration();
+};
 
 const useLocalConfiguration = () => {
-  addEnvironmentVariablesToConfiguration()
+  addEnvironmentVariablesToConfiguration();
   configuration = {
     AVVIR_GATEWAY_URL: "http://localhost:8080",
     AVVIR_ENVIRONMENT: "local"
-  }
-}
+  };
+};
 
 const setConfigurationFromEnvironmentVariable = () => {
   setConfigurationForEnvironment(process.env.AVVIR_ENVIRONMENT);
-}
+};
 
 const setConfigurationForEnvironment = (env) => {
-  if(env === 'acceptance'){
-    useAcceptanceConfiguration()
-  } else if(env === 'local-production'){
-    useLocalProductionConfiguration()
-  } else if(env === 'local'){
-    useLocalConfiguration()
-  } else if(env ==='qa') {
-    useQAConfiguration()
+  if (env === "acceptance") {
+    useAcceptanceConfiguration();
+  } else if (env === "local-production") {
+    useLocalProductionConfiguration();
+  } else if (env === "local") {
+    useLocalConfiguration();
+  } else if (env === "qa") {
+    useQAConfiguration();
   } else {
-    useProductionConfiguration()
+    useProductionConfiguration();
   }
-}
+};
 
-setConfigurationFromEnvironmentVariable()
+setConfigurationFromEnvironmentVariable();
 
-const sharedErrorHandler = ({error}: any) => {
+const sharedErrorHandler = ({ error }: any) => {
   throw error;
-}
+};
 
 const getConfiguration = () => {
-  return configuration
-}
+  return configuration;
+};
 
 const Config = {
   useAcceptanceConfiguration,
@@ -89,6 +89,6 @@ const Config = {
   sharedErrorHandler,
   setConfigurationForEnvironment,
   setConfigurationFromEnvironmentVariable
-}
+};
 
-export default Config
+export default Config;

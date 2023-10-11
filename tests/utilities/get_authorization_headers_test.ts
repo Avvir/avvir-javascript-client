@@ -1,7 +1,7 @@
 import { expect } from "chai";
 
 import getAuthorizationHeaders from "../../source/utilities/get_authorization_headers";
-import { BASIC, FIREBASE, GATEWAY_JWT } from "../../source/models/enums/user_auth_type";
+import {BASIC, FIREBASE, GATEWAY_JWT, HXAUTH_ACCESS_TOKEN} from "../../source/models/enums/user_auth_type";
 
 describe("#getAuthorizationHeaders", () => {
   describe("when the user signed in using firebase auth directly", () => {
@@ -36,6 +36,22 @@ describe("#getAuthorizationHeaders", () => {
 
     it("returns an authorization header with the gateway jwt token", () => {
       expect(getAuthorizationHeaders(user)).to.deep.eq({ Authorization: "Bearer some-gateway-jwt-token" });
+    });
+  });
+
+  describe("when the user signed in through HxAuth", () => {
+    let user;
+    beforeEach(() => {
+      user = {
+        authType: HXAUTH_ACCESS_TOKEN,
+        hxAuthUser: {
+          accessToken: "some-hxauth-access-token"
+        },
+      };
+    });
+
+    it("returns an authorization header with the HxAuth access token", () => {
+      expect(getAuthorizationHeaders(user)).to.deep.eq({ hxAuthAccessToken: "some-hxauth-access-token" });
     });
   });
 
