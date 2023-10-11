@@ -5,7 +5,7 @@ export * from "./mixins";
 export * from "./converters";
 
 export const Avvir = {
-    api: AvvirApi
+  api: AvvirApi
 };
 
 export default Avvir;
