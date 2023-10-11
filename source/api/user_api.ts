@@ -19,9 +19,8 @@ export default class UserApi {
     return Http.get(url, user) as unknown as Promise<ApiInvitation>;
   }
 
-  static getUserAccount(email: string, role: UserRole, user: User): Promise<ApiUser> {
-    const encodedEmail = encodeURIComponent(email);
-    const url = `${Http.baseUrl()}/users/accounts/${encodedEmail}/${role}`;
+  static getUserAccount(user: User): Promise<ApiUser> {
+    const url = `${Http.baseUrl()}/users/accounts/self`;
     return Http.get(url, user) as unknown as Promise<ApiUser>;
   }
 
