@@ -23,7 +23,7 @@ describe("UserApi", () => {
   describe("::getUserAccount", () => {
     const encodedEmail = encodeURIComponent("some-email@test.org")
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl()}/users/accounts/${encodedEmail}/SUBCONTRACTOR`,
+      fetchMock.get(`${Http.baseUrl()}/users/accounts/self`,
         {
           status: 200, body: {
             name: "some-user",
@@ -35,23 +35,21 @@ describe("UserApi", () => {
         })
     })
     it("makes a call to the endpoint", () => {
-      UserApi.getUserAccount("some-email@test.org", UserRole.SUBCONTRACTOR,
-        {
+      UserApi.getUserAccount({
           authType: GATEWAY_JWT,
-          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+          gatewayUser: {idToken: "some-firebase.id.token"}
         });
 
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/${encodedEmail}/SUBCONTRACTOR`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/self`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
     it("send the request with an Authorization header", () => {
-      UserApi.getUserAccount("some-email@test.org", UserRole.SUBCONTRACTOR,
-        {
+      UserApi.getUserAccount({
           authType: GATEWAY_JWT,
-          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+          gatewayUser: {idToken: "some-firebase.id.token"}
         });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
