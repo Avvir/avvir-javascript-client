@@ -7,13 +7,15 @@ import SystemOfMeasurement from "../enums/system_of_measurement";
 
 export class PhotoViewerDetails {
   constructor(photoViewerDetails: Partial<PhotoViewerDetails> = {}) {
-    const {photoSessionId, photoLocationId} = photoViewerDetails;
+    const {photoSessionId, photoLocationId, photoSessionIds} = photoViewerDetails;
     this.photoSessionId = photoSessionId;
     this.photoLocationId = photoLocationId;
+    this.photoSessionIds = photoSessionIds || [];
   }
 
   photoSessionId: number;
   photoLocationId: number;
+  photoSessionIds: number[];
 }
 
 export class DeviationTolerance {
