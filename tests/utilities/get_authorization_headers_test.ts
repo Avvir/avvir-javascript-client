@@ -51,7 +51,7 @@ describe("#getAuthorizationHeaders", () => {
     });
 
     it("returns an authorization header with the HxAuth access token", () => {
-      expect(getAuthorizationHeaders(user)).to.deep.eq({ hxAuthAccessToken: "some-hxauth-access-token" });
+      expect(getAuthorizationHeaders(user)).to.deep.eq({ Authorization: "Bearer some-hxauth-access-token" });
     });
   });
 
