@@ -25,7 +25,7 @@ const getAuthorizationHeaders = (user: User) => {
     }
     case HXAUTH_ACCESS_TOKEN: {
       return {
-        hxAuthAccessToken: user.hxAuthUser.accessToken
+        Authorization: `Bearer ${user.hxAuthUser.accessToken}`
       }
     }
     default: {
