@@ -42,6 +42,8 @@ export type HxAuthUser = {
   authType: typeof HXAUTH_ACCESS_TOKEN,
   hxAuthUser: {
     accessToken: string,
+    refreshToken: string,
+    expireTime: number
   }
 }
 
