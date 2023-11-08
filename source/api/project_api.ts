@@ -1,4 +1,4 @@
-import {User} from "../utilities/get_authorization_headers";
+import getAuthorizationHeaders, {User} from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 
@@ -133,6 +133,26 @@ export default class ProjectApi {
     return Http.get(url, user, "text/tab-separated-values; charset=utf-8") as unknown as Promise<string>;
   }
 
+  static getTradeBreakdownTsvUrl({ projectId }: AssociationIds, fileName: string, user: User): string {
+    const baseUrl = `${Http.baseUrl()}/projects/${projectId}/trade-breakdown/${fileName}_trade-breakdown.tsv`;
+    return Http.addAuthToDownloadUrl(baseUrl, user);
+  }
+
+  static saveTradeBreakdownTsv({ projectId }: AssociationIds, tsvContent: string, user: User) {
+    let multipartFormData = new FormData();
+    let file = new Blob([tsvContent], { type: "text/tab-separated-values" });
+    multipartFormData.append("file", file, "file.tsv");
+
+    const url = `${Http.baseUrl()}/projects/${projectId}/trade-breakdown`;
+    return Http.fetch(url, {
+      method: "POST",
+      headers: {
+        ...getAuthorizationHeaders(user)
+      },
+      body: multipartFormData
+    });
+  }
+
   static getWorkPackages(projectId: string, user: User) {
     let url = `${Http.baseUrl()}/projects/${projectId}/work-packages`;
     return Http.get(url, user) as unknown as Promise<ApiWorkPackage[]>;
@@ -177,4 +197,4 @@ export default class ProjectApi {
   }
 }
 
-makeErrorsPretty(ProjectApi, { exclude: ["getProjectDeviationsReportTsvUrl"], overrideErrorMessage:["getFiltered5dTsv"] });
+makeErrorsPretty(ProjectApi, { exclude: ["getProjectDeviationsReportTsvUrl", "getTradeBreakdownTsvUrl"], overrideErrorMessage:["getFiltered5dTsv", "saveTradeBreakdownTsv"] });
