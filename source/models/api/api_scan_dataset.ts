@@ -41,6 +41,7 @@ export class ApiScanDataset {
                 qaStarted,
                 qaComplete,
                 qaState,
+                hasScanFile
               }: ApiScanDatasetArgument)
   {
     addInstantGetterAndSetterToApiModel(this, "scanDate", scanDate);
@@ -93,6 +94,7 @@ export class ApiScanDataset {
     this.name = name;
     this.scanDateString = scanDateString;
     this.qaState = qaState;
+    this.hasScanFile = hasScanFile;
   }
 
   /**
@@ -138,6 +140,7 @@ export class ApiScanDataset {
    * gateway so the frontend doesn't need to replicate business logic
    */
   readonly qaState: ApiScanDatasetQaState = null;
+  readonly hasScanFile?: boolean;
 }
 
 export default ApiScanDataset;
