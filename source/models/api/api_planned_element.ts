@@ -32,7 +32,8 @@ export class ApiPlannedElement {
                 reviztoIfcGuid,
                 verified,
                 exportedToBcf,
-                partialProgressPercent
+                partialProgressPercent,
+                trade
               }: ApiPlannedElementArgument = {})
   {
     addInstantGetterAndSetterToApiModel(this, "builtAt", builtAt);
@@ -61,6 +62,7 @@ export class ApiPlannedElement {
     this.verified = verified;
     this.exportedToBcf = exportedToBcf;
     this.partialProgressPercent = partialProgressPercent;
+    this.trade = trade;
   }
 
   name?: string;
@@ -89,6 +91,7 @@ export class ApiPlannedElement {
   verified?: boolean;
   exportedToBcf?: boolean;
   partialProgressPercent?: number;
+  trade?: string;
 }
 
 export default ApiPlannedElement;
