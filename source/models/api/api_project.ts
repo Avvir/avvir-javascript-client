@@ -1,12 +1,12 @@
 import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
 import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 import ApiProjectCostAnalysisProgress from "./api_project_cost_analysis_progress";
-import ApiProjectMasterformatProgress from "./api_project_masterformat_progress";
 import SystemOfMeasurement, { IMPERIAL } from "../enums/system_of_measurement";
 import { DateLike, Modify } from "./type_aliases";
 import ApiProjectReport from "./api_project_report";
 import {ApiTeamMember} from "./api_team_member";
 import { ApiProjectSettings } from "./api_project_settings";
+import {ApiMasterformatProgress} from "./api_masterformat_progress";
 
 export interface ApiProjectArgument extends Partial<Modify<ApiProject, {
   archivedAt?: DateLike
@@ -90,9 +90,9 @@ export class ApiProject {
   readonly firebaseId: string;
   readonly clientAccountId: string;
   name: string;
-  scannedProjectMasterformatProgresses: Array<ApiProjectMasterformatProgress> = [];
-  baselineProjectMasterformatProgresses: Array<ApiProjectMasterformatProgress> = [];
-  currentProjectMasterformatProgresses: Array<ApiProjectMasterformatProgress> = [];
+  scannedProjectMasterformatProgresses: Array<ApiMasterformatProgress> = [];
+  baselineProjectMasterformatProgresses: Array<ApiMasterformatProgress> = [];
+  currentProjectMasterformatProgresses: Array<ApiMasterformatProgress> = [];
   costAnalysisProgresses: Array<ApiProjectCostAnalysisProgress> = [];
   projectReports: Array<ApiProjectReport>;
   defaultFirebaseFloorId: string | null = null;

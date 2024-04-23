@@ -9,7 +9,8 @@ export class ApiMasterformatProgress {
                     masterformat,
                     percentComplete,
                     scanDate,
-                    createdAt
+                    createdAt,
+                    customTradeCode
                 }: ApiMasterformatProgressArgs) {
         addInstantGetterAndSetterToApiModel(this, "scanDate");
         addInstantGetterAndSetterToApiModel(this, "createdAt");
@@ -22,10 +23,12 @@ export class ApiMasterformatProgress {
         // @ts-ignore
         this.scanDate = scanDate;
         this.createdAt = createdAt;
+        this.customTradeCode = customTradeCode;
     }
 
     masterformat: ApiMasterformat | null = null;
     percentComplete: number | null = null;
     scanDate: number | null | DateLike = null;
     createdAt: number | null | DateLike = null;
+    customTradeCode: string | null = null;
 }
