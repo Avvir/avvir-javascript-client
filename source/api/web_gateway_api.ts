@@ -223,6 +223,7 @@ makeErrorsPretty(WebGatewayApi, {
     "baseUrl",
     "getProgressReportPdfUrl",
     "getQualityControlReportPdfUrl",
+    "getPlannedElementsNewTsvUrl",
     "getDeviationsReportTsvUrl",
     "getScanAnalysisUrl",
     "getUniformatSummaryTsvUrl",
