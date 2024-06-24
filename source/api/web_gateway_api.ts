@@ -51,11 +51,6 @@ export default class WebGatewayApi {
     return `${Http.baseUrl()}/projects/${projectId}/report.pdf`;
   }
 
-  static getPlannedElementsTsvUrl({projectId, floorId}: AssociationIds, fileName: string, user: User): string {
-    const baseUrl = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/${fileName}_planned-building-elements.tsv`;
-    return Http.addAuthToDownloadUrl(baseUrl, user);
-  }
-
   static getPlannedElementsNewTsvUrl({projectId, floorId}: AssociationIds, fileName: string, user: User): string {
     const baseUrl = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/${fileName}_planned-building-elements-new.tsv`;
     return Http.addAuthToDownloadUrl(baseUrl, user);
@@ -228,7 +223,6 @@ makeErrorsPretty(WebGatewayApi, {
     "baseUrl",
     "getProgressReportPdfUrl",
     "getQualityControlReportPdfUrl",
-    "getPlannedElementsTsvUrl",
     "getDeviationsReportTsvUrl",
     "getScanAnalysisUrl",
     "getUniformatSummaryTsvUrl",
