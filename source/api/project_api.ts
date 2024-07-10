@@ -1,21 +1,11 @@
-import getAuthorizationHeaders, {User} from "../utilities/get_authorization_headers";
+import getAuthorizationHeaders, { User } from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 
-import {
-  ApiCloudFile,
-  ApiMasterformatProgress,
-  ApiProject,
-  ApiProjectCostAnalysisProgress, ApiProjectCostAnalysisProgressValidationResult,
-  ApiProjectListing,
-  ApiRunningProcess,
-  ApiWorkPackage,
-  AssociationIds,
-  ProgressType, ProjectWorkPackageType
-} from "../models";
-import {DateLike} from "type_aliases";
-import {DateConverter} from "../converters";
-import {ApiClassificationCode} from "../models/api/api_classification_code";
+import { ApiCloudFile, ApiMasterformatProgress, ApiProject, ApiProjectCostAnalysisProgress, ApiProjectCostAnalysisProgressValidationResult, ApiProjectListing, ApiProjectWorkPackage, ApiRunningProcess, AssociationIds, ProgressType, ProjectWorkPackageType } from "../models";
+import { DateLike } from "type_aliases";
+import { DateConverter } from "../converters";
+import { ApiClassificationCode } from "../models/api/api_classification_code";
 import ApiProjectWorkPackageCost from "../models/api/api_project_work_package_cost";
 
 export default class ProjectApi {
@@ -155,12 +145,12 @@ export default class ProjectApi {
 
   static getWorkPackages(projectId: string, user: User) {
     let url = `${Http.baseUrl()}/projects/${projectId}/work-packages`;
-    return Http.get(url, user) as unknown as Promise<ApiWorkPackage[]>;
+    return Http.get(url, user) as unknown as Promise<ApiProjectWorkPackage[]>;
   }
 
-  static saveWorkPackages(projectId: string, user: User, workPackages: ApiWorkPackage[]) {
+  static saveWorkPackages(projectId: string, user: User, workPackages: ApiProjectWorkPackage[]) {
     let url = `${Http.baseUrl()}/projects/${projectId}/work-packages`;
-    return Http.put(url, user, workPackages) as unknown as Promise<ApiWorkPackage[]>;
+    return Http.put(url, user, workPackages) as unknown as Promise<ApiProjectWorkPackage[]>;
   }
 
   static generateMasterformatProgress({ projectId }: AssociationIds,

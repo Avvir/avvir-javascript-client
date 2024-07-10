@@ -1,15 +1,15 @@
-import {DateLike, Modify} from "./type_aliases";
-import {addInstantGetterAndSetterToApiModel, addReadOnlyPropertiesToModel} from "../../mixins"
-import {ApiProjectPurposeType, ApiPurposeType, isApiPurposeType} from "./api_purpose_type";
-import {PurposeTypeConverter} from "../../converters";
-import {AssociationType, isPurposeType, PurposeType} from "../enums";
+import { DateLike, Modify } from "./type_aliases";
+import { addInstantGetterAndSetterToApiModel, addReadOnlyPropertiesToModel } from "../../mixins";
+import { ApiProjectPurposeType, ApiPurposeType, isApiPurposeType } from "./api_purpose_type";
+import { PurposeTypeConverter } from "../../converters";
+import { AssociationType, isPurposeType, PurposeType } from "../enums";
 import ApiPhotoLocation3d from "./api_photo_location_3d";
 
 export type AvvirApiFiles<Type extends ApiPurposeType = ApiPurposeType> = { [purposeType in Type]?: ApiCloudFile | ApiCloudFile[] }
 export type AvvirApiFileIds<Type extends ApiPurposeType = ApiPurposeType> = { [purposeType in Type]?: number[] }
 
 export interface ApiCloudFileMetadata {
-  offset?: {x: number, y: number}
+  offset?: { x: number, y: number };
 }
 
 export interface ApiCloudFileArgument extends Partial<Modify<ApiCloudFile, {
@@ -17,7 +17,8 @@ export interface ApiCloudFileArgument extends Partial<Modify<ApiCloudFile, {
   createdAt?: DateLike
   purposeType: ApiPurposeType | PurposeType,
   fileType?: string
-}>> {
+}>>
+{
 }
 
 export class ApiCloudFile {
@@ -36,10 +37,12 @@ export class ApiCloudFile {
                 associationType,
                 associationId,
                 metadata
-              }: ApiCloudFileArgument) {
+              }: ApiCloudFileArgument)
+  {
     addInstantGetterAndSetterToApiModel(this, "lastModified", lastModified);
     addInstantGetterAndSetterToApiModel(this, "createdAt", createdAt);
-    addReadOnlyPropertiesToModel(this, {url, id, fileType, createdBy});
+    addReadOnlyPropertiesToModel(this,
+      { url, id, fileType, createdBy, fileSize, projectId, associationType, associationId, originalFileName });
     let purposeTypeVal: ApiPurposeType = ApiProjectPurposeType.OTHER;
     Object.defineProperties(this, {
       purposeType: {
@@ -62,28 +65,24 @@ export class ApiCloudFile {
     this.purposeType = purposeType;
     // noinspection JSDeprecatedSymbols
     this.location3d = location3d;
-    this.fileSize = fileSize;
-    this.originalFileName = originalFileName;
-    this.projectId = projectId;
-    this.associationId = associationId;
-    this.associationType = associationType;
     this.metadata = metadata;
   }
 
   readonly url: string;
   /** @deprecated Use metadata.offset */
-  location3d?: ApiPhotoLocation3d
-  readonly id?: number
+  location3d?: ApiPhotoLocation3d;
+  readonly id?: number;
   lastModified?: number | null = null;
-  createdAt?: number | null = null;
-  purposeType: ApiPurposeType = ApiProjectPurposeType.OTHER;
+  readonly createdAt?: number | null = null;
+  readonly purposeType: ApiPurposeType = ApiProjectPurposeType.OTHER;
   readonly createdBy?: string;
-  fileSize?: number;
-  originalFileName?: string;
-  associationType?: AssociationType;
-  projectId?: number;
-  associationId?: number;
-  metadata?: ApiCloudFileMetadata
+  readonly fileSize?: number;
+  readonly originalFileName?: string;
+  readonly associationType?: AssociationType;
+  readonly projectId?: number;
+  readonly associationId?: number;
+  metadata?: ApiCloudFileMetadata;
+  readonly fileType?: string;
 }
 
 export default ApiCloudFile;

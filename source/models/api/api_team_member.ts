@@ -1,4 +1,4 @@
-import {ApiWorkPackage} from "./api_work_package";
+import { ApiProjectWorkPackage } from "./api_project_work_package";
 
 export class ApiTeamMember {
   id?: number
@@ -7,7 +7,7 @@ export class ApiTeamMember {
   email: string
   role: string
   masterformats?: string[]
-  vendor?: ApiWorkPackage;
+  vendor?: ApiProjectWorkPackage;
 
   constructor({ id, name, userOrganization, email, role, masterformats, vendor }: Partial<ApiTeamMember> = {}) {
     this.id = id;
