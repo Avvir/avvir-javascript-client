@@ -1,26 +1,20 @@
 import ApiCloudFile from "./api_cloud_file";
+import ApiProjectArea from "./api_project_area";
+import { addReadOnlyPropertiesToModel } from "../../mixins";
+
 export class ApiProjectSummary {
-    readonly model:ApiCloudFile;
-    projectAreas: ApiProjectArea[];
+  readonly model: ApiCloudFile;
+  projectAreas: ApiProjectArea[];
+
+  constructor({ model, projectAreas }: Partial<ApiProjectSummary> = {}) {
+    addReadOnlyPropertiesToModel(this, { model });
+    this.projectAreas = projectAreas || [];
+  }
 }
 
-
-export class ApiProjectArea {
-    readonly id: number
-    readonly modelElementId: number
-    readonly floorId?: number
-    readonly firebaseFloorId?: string
-    progress: ApiProjectAreaProgress[]
-
-    constructor({id, modelElementId, progress, floorId, firebaseFloorId} : Partial<ApiProjectArea>) {
-        this.id = id;
-        this.modelElementId = modelElementId;
-        this.progress = progress;
-        this.floorId = floorId;
-        this.firebaseFloorId = firebaseFloorId;
-    }
-}
-
+/**
+ * @deprecated use {@link ApiProjectAreaWorkPackage} instead
+ */
 export class ApiProjectAreaProgress {
     id: number
     name: string
