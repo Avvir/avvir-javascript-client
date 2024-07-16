@@ -44,6 +44,7 @@ describe("ProjectSummaryApi", () => {
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
   });
+
   describe("::updateProjectAreaProgress", () => {
     let projectAreaId, response;
     beforeEach(() => {
@@ -76,6 +77,7 @@ describe("ProjectSummaryApi", () => {
           progress: [],
           workPackages: [{
             id: 54,
+            projectAreaId,
             projectWorkPackageId: 5,
             workPackageId: 3,
             status: "started",
@@ -103,6 +105,7 @@ describe("ProjectSummaryApi", () => {
           progress: [],
           workPackages: [{
             id: 54,
+            projectAreaId,
             projectWorkPackageId: 5,
             workPackageId: 3,
             status: "started",
@@ -126,6 +129,7 @@ describe("ProjectSummaryApi", () => {
       projectAreaId = 1;
       let projectAreaProgress = new ApiProjectAreaWorkPackage({
         id: 54,
+        projectAreaId,
         projectWorkPackageId: 5,
         workPackageId: 3,
         status: "started",
