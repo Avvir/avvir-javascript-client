@@ -1,14 +1,18 @@
-import ApiCloudFile from "./api_cloud_file";
-import ApiProjectArea from "./api_project_area";
-import { addReadOnlyPropertiesToModel } from "../../mixins";
+import ApiCloudFile, { ApiCloudFileArgument } from "./api_cloud_file";
+
+import type { ModifyPartial } from "type_aliases";
+
+export type ApiProjectSummaryArg = ModifyPartial<ApiProjectSummary, {
+  model: ApiCloudFileArgument
+}>
 
 export class ApiProjectSummary {
   readonly model: ApiCloudFile;
-  projectAreas: ApiProjectArea[];
+  projectAreaIds: number[];
 
-  constructor({ model, projectAreas }: Partial<ApiProjectSummary> = {}) {
-    addReadOnlyPropertiesToModel(this, { model });
-    this.projectAreas = projectAreas || [];
+  constructor({ model, projectAreaIds }: ApiProjectSummaryArg = {}) {
+    this.model = new ApiCloudFile(model);
+    this.projectAreaIds = projectAreaIds || [];
   }
 }
 
