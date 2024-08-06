@@ -19,6 +19,7 @@ describe("ProjectSummaryApi", () => {
       firebaseUser: { uid: "some-uid", role: UserRole.SUPERADMIN, idToken: "some-firebase.id.token" }
     };
   });
+
   describe("::getProjectSummary", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/summary`, 200);
@@ -43,6 +44,53 @@ describe("ProjectSummaryApi", () => {
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
+  });
+
+  describe("::createProjectArea", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/areas`, new ApiProjectArea({
+        id: 12,
+        modelElementId: 1,
+        floorId: 7,
+        firebaseFloorId: "some-floor-id"
+      }));
+    });
+
+    it("makes a call to the endpoint", () => {
+      ProjectSummaryApi.createProjectArea("some-project-id", {
+        id: 12,
+        modelElementId: 1,
+        floorId: 7,
+        firebaseFloorId: "some-floor-id",
+        progress: [],
+        workPackages: []
+      }, user);
+
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/areas`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+      expect(fetchMock.lastOptions().headers["Content-Type"]).to.eq("application/json");
+    });
+
+    it("sends the request with an Authorization header", () => {
+      ProjectSummaryApi.createProjectArea(
+        "some-project-id",
+        {
+          id: 12,
+          modelElementId: 1,
+          floorId: 7,
+          firebaseFloorId: "some-floor-id",
+          progress: [],
+          workPackages: []
+        },
+        {
+          authType: UserAuthType.GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: UserRole.USER }
+        });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    })
   });
 
   describe("::updateProjectAreaProgress", () => {
@@ -123,6 +171,7 @@ describe("ProjectSummaryApi", () => {
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
   });
+
   describe("::getProjectArea", () => {
     let projectAreaId, response;
     beforeEach(() => {
