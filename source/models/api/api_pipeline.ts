@@ -21,7 +21,8 @@ export class ApiPipeline {
                 firebaseFloorId,
                 firebaseScanDatasetId,
                 options,
-                status
+                status,
+                pipelineBatchFloors
               }: ApiPipelineArgument = {}) {
     addReadOnlyPropertiesToModel(this, { id });
     addInstantGetterAndSetterToApiModel(this, "startTime");
@@ -39,6 +40,7 @@ export class ApiPipeline {
     this.firebaseScanDatasetId = firebaseScanDatasetId || null;
     this.options = options || {};
     this.status = status || null;
+    this.pipelineBatchFloors = pipelineBatchFloors || null;
   }
 
   readonly id: number;
@@ -56,6 +58,7 @@ export class ApiPipeline {
   options: any;
 
   status: RunningProcessStatus;
+  pipelineBatchFloors: string | string[];
 }
 
 export default ApiPipeline;
