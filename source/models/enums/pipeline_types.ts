@@ -16,6 +16,7 @@ export type PipelineName =
   | "create-project-report"
   | "compute-and-save-clashes"
   | "compute-and-post-mv-design-intent"
+  | "generate-batch-ifc"
 
 export enum Pipelines {
   INGEST_PROJECT_FILE = "ingest-project-file",
@@ -36,6 +37,7 @@ export enum Pipelines {
   COMPUTE_AND_SAVE_CLASHES = "compute-and-save-clashes",
   COMPUTE_AND_POST_MV_DESIGN_INTENT = "compute-and-post-mv-design-intent",
   COMPUTE_AND_POST_MV_PROGRESS_ANALYSIS = "compute-and-post-mv-progress-analysis",
+  GENERATE_BATCH_IFC="generate-batch-ifc"
 }
 
 export default Pipelines;
