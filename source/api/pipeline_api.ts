@@ -10,11 +10,6 @@ export default class PipelineApi {
     return Http.post(url, user, body) as unknown as Promise<ApiPipeline>;
   }
 
- static triggerPipelineForBatchIfcDownload(body: ApiPipelineArgument = {}, user: User): Promise<ApiPipeline> {
-    const url = `${Http.baseUrl()}/batch-pipelines`;
-    return Http.post(url, user, body) as unknown as Promise<ApiPipeline>;
- }
-
   static checkPipelineStatus({projectId}: AssociationIds, pipelineId: number, user: User): Promise<ApiPipeline> {
     const url = `${Http.baseUrl()}/pipelines/${pipelineId}`;
     return Http.get(url, user) as unknown as Promise<ApiPipeline>;
