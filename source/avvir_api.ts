@@ -18,6 +18,7 @@ export default {
   recipes: Api.RecipeApi,
   reports: Api.ReportApi,
   scanDatasets: Api.ScanDatasetApi,
+  trades: Api.TradeApi,
   other: Api.WebGatewayApi,
   webRpcApi: Api.WebRpcApi,
   user: Api.UserApi,
