@@ -1,6 +1,6 @@
-import {User} from "../utilities/get_authorization_headers";
+import { User } from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
-import {AssociationIds} from "../models";
+import { AssociationIds } from "../models";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import ApiRecipe from "../models/api/api_recipe";
 
@@ -57,6 +57,31 @@ export default class RecipeApi {
 
   static deleteProjectRecipeStep({projectId, recipeId, recipeStepId}: AssociationIds, user: User): Promise<ApiRecipe> {
     let url = `${Http.baseUrl()}/projects/${projectId}/recipes/${recipeId}/steps/${recipeStepId}`;
+    return Http.delete(url, user) as unknown as Promise<ApiRecipe>;
+  }
+
+  static createProjectTradeRecipe({ projectId }: AssociationIds, apiRecipe: ApiRecipe, user: User) {
+    const url = `${Http.baseUrl()}/projects/${projectId}/trade-recipes`;
+    return Http.post(url, user, apiRecipe) as unknown as Promise<ApiRecipe>;
+  }
+
+  static listProjectTradeRecipes({ projectId }: AssociationIds, user: User) {
+    const url = `${Http.baseUrl()}/projects/${projectId}/trade-recipes`;
+    return Http.get(url, user) as unknown as Promise<ApiRecipe[]>;
+  }
+
+  static updateProjectTradeRecipe({ projectId }: AssociationIds, apiRecipe: ApiRecipe, user: User) {
+    const url = `${Http.baseUrl()}/projects/${projectId}/trade-recipes/${apiRecipe.id}`;
+    return Http.put(url, user, apiRecipe) as unknown as Promise<ApiRecipe>;
+  }
+
+  static deleteProjectTradeRecipe({ projectId }: AssociationIds, recipeId: number, user: User) {
+    const url = `${Http.baseUrl()}/projects/${projectId}/trade-recipes/${recipeId}`;
+    return Http.delete(url, user) as unknown as Promise<void>;
+  }
+
+  static deleteProjectTradeRecipeStep({ projectId }: AssociationIds, recipeId: number, stepId: number, user: User) {
+    const url = `${Http.baseUrl()}/projects/${projectId}/trade-recipes/${recipeId}/steps/${stepId}`;
     return Http.delete(url, user) as unknown as Promise<ApiRecipe>;
   }
 }
