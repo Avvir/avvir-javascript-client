@@ -45,7 +45,9 @@ export class ApiProject {
                 generateMasterformatProgressEnabled,
                 teamMembers,
                 integrationProjectId,
-                settings
+                settings,
+                baselineScheduleDate,
+                currentScheduleDate
               }: ApiProjectArgument = {}) {
     addInstantGetterAndSetterToApiModel(this, "startDate");
     addInstantGetterAndSetterToApiModel(this, "endDate");
@@ -84,6 +86,8 @@ export class ApiProject {
     this.integrationProjectId = integrationProjectId;
     this.teamMembers = teamMembers;
     this.settings = settings;
+    this.baselineScheduleDate = baselineScheduleDate;
+    this.currentScheduleDate = currentScheduleDate;
   }
 
   readonly id: number;
@@ -116,6 +120,8 @@ export class ApiProject {
   integrationProjectId?: number;
   teamMembers?: ApiTeamMember[] = [];
   settings?: ApiProjectSettings;
+  baselineScheduleDate?: Date;
+  currentScheduleDate?: Date;
 }
 
 export default ApiProject;
