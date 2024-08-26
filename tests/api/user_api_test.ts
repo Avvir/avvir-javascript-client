@@ -1,6 +1,6 @@
 import {describe} from "mocha";
 import fetchMock from "fetch-mock";
-import ApiUserPermission, {UserRole, User} from "../../source";
+import {ApiUserPermission, UserRole, User} from "../../source";
 import {expect} from "chai";
 import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
 import {SUPERADMIN, USER} from "../../source/models/enums/user_role";
@@ -21,7 +21,6 @@ describe("UserApi", () => {
   });
 
   describe("::getUserAccount", () => {
-    const encodedEmail = encodeURIComponent("some-email@test.org")
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/users/accounts/self`,
         {
@@ -57,9 +56,8 @@ describe("UserApi", () => {
   });
 
   describe("::getUserPermissions", () => {
-    const encodedEmail = encodeURIComponent("some-email@test.org")
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions`,
+      fetchMock.get(`${Http.baseUrl()}/users/accounts/123/permissions`,
         {
           status: 200, body: [{
             id: 1,
@@ -74,19 +72,19 @@ describe("UserApi", () => {
     })
 
     it("makes a call to the endpoint", () => {
-      UserApi.getUserPermissions("some-email@test.org", {
+      UserApi.getUserPermissions(123, {
           authType: GATEWAY_JWT,
           gatewayUser: {idToken: "some-firebase.id.token", role: USER}
         });
 
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/123/permissions`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
     it("send the request with an Authorization header", () => {
-      UserApi.getUserPermissions("some-email@test.org", {
+      UserApi.getUserPermissions(123, {
           authType: GATEWAY_JWT,
           gatewayUser: {idToken: "some-firebase.id.token", role: USER}
         });
@@ -96,14 +94,13 @@ describe("UserApi", () => {
   });
 
   describe("::updateUserAccount", () => {
-    const encodedEmail = encodeURIComponent("some-email@test.org");
     const apiUser = new ApiUser({
       name: "some-user",
       userOrganization: "some-org",
       role: UserRole.SUBCONTRACTOR
     })
     beforeEach(() => {
-      fetchMock.put(`${Http.baseUrl()}/users/accounts/${encodedEmail}/SUBCONTRACTOR`,
+      fetchMock.put(`${Http.baseUrl()}/users/accounts/123`,
         {
           status: 200, body: {
             name: "some-user",
@@ -116,7 +113,7 @@ describe("UserApi", () => {
     })
 
     it("makes a call to the endpoint", () => {
-      UserApi.updateUserAccount("some-email@test.org", UserRole.SUBCONTRACTOR, apiUser,
+      UserApi.updateUserAccount(123, apiUser,
         {
           authType: GATEWAY_JWT,
           gatewayUser: {idToken: "some-firebase.id.token", role: USER}
@@ -124,12 +121,12 @@ describe("UserApi", () => {
 
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/${encodedEmail}/SUBCONTRACTOR`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/123`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     })
 
     it("sends request with Authorization header", () => {
-      UserApi.updateUserAccount("some-email@test.org", UserRole.SUBCONTRACTOR, apiUser,
+      UserApi.updateUserAccount(123, apiUser,
         {
           authType: GATEWAY_JWT,
           gatewayUser: {idToken: "some-firebase.id.token", role: USER}
@@ -152,11 +149,10 @@ describe("UserApi", () => {
     it("makes a call to send reset password email", () => {
       UserApi.sendPasswordResetEmail("some-email@test.org");
       const fetchCall = fetchMock.lastCall();
-      const encodedEmail = encodeURIComponent("some-email@test.org");
 
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/send-password-reset-email`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
-      expect(fetchMock.lastOptions().body).to.eq(`{"email":"${encodedEmail}"}`);
+      expect(fetchMock.lastOptions().body).to.eq(`{"email":"some-email%40test.org"}`);
     })
   });
 
@@ -171,37 +167,35 @@ describe("UserApi", () => {
     it("makes a call to reset password", () => {
       UserApi.resetPassword("password", "some-email@test.org", "token");
       const fetchCall = fetchMock.lastCall();
-      const encodedEmail = encodeURIComponent("some-email@test.org");
 
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/reset-password`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
-      expect(fetchMock.lastOptions().body).to.eq(`{"email":"${encodedEmail}","token":"token","password":"password"}`);
+      expect(fetchMock.lastOptions().body).to.eq(`{"email":"some-email%40test.org","token":"token","password":"password"}`);
     })
   });
 
   describe("::deleteUserPermission", () => {
-    const encodedEmail = encodeURIComponent("some-email@test.org")
-    const permissionId = 123;
+    const permissionId = 456;
     beforeEach(() => {
-      fetchMock.delete(`${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions/${permissionId}`,
+      fetchMock.delete(`${Http.baseUrl()}/users/accounts/123/permissions/${permissionId}`,
         {
           status: 200,
         })
     });
 
     it("makes a call to the endpoint", () => {
-      UserApi.deleteUserPermission("some-email@test.org", 123, {
+      UserApi.deleteUserPermission(123, 456, {
         authType: GATEWAY_JWT,
         gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions/123`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/123/permissions/456`);
     });
 
     it("sends the request with an Authorization header", () => {
-      UserApi.deleteUserPermission("some-email@test.org", 123, {
+      UserApi.deleteUserPermission(123, 456, {
         authType: GATEWAY_JWT,
         gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
@@ -211,33 +205,39 @@ describe("UserApi", () => {
   });
 
   describe("::createUserPermission", () => {
-    const encodedEmail = encodeURIComponent("some-email@test.org")
-    const permission = {
+    const permission: ApiUserPermission = {
+      id: 0,
+      masterformatCode: "",
+      organizationName: "",
+      projectFirebaseId: "",
+      projectName: "",
+      userId: 0,
+      workPackageId: 0,
       permissionType: UserPermissionType.ORGANIZATION,
       permissionAction: UserPermissionAction.READ,
-      organizationFirebaseId: "some-org",
+      organizationFirebaseId: "some-org"
     };
     beforeEach(() => {
-      fetchMock.put(`${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions/new`,
+      fetchMock.put(`${Http.baseUrl()}/users/accounts/123/permissions/new`,
         {
           status: 200,
         })
     });
 
     it("makes a call to the endpoint", () => {
-      UserApi.createUserPermission("some-email@test.org", permission, {
+      UserApi.createUserPermission(123, permission, {
         authType: GATEWAY_JWT,
         gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
 
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions/new`);
-      expect(fetchMock.lastOptions().body).to.eq(`{"permissionType":"ORGANIZATION","permissionAction":"READ","organizationFirebaseId":"some-org"}`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/123/permissions/new`);
+      expect(fetchMock.lastOptions().body).to.eq(JSON.stringify(permission));
     });
 
     it("sends the request with an Authorization header", () => {
-      UserApi.createUserPermission("some-email@test.org", permission, {
+      UserApi.createUserPermission(123, permission, {
         authType: GATEWAY_JWT,
         gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
