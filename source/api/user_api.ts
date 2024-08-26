@@ -24,27 +24,23 @@ export default class UserApi {
     return Http.get(url, user) as unknown as Promise<ApiUser>;
   }
 
-  static getUserPermissions(email: string, user: User): Promise<ApiUserPermission[]> {
-    const encodedEmail = encodeURIComponent(email);
-    const url = `${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions`;
+  static getUserPermissions(userId: number, user: User): Promise<ApiUserPermission[]> {
+    const url = `${Http.baseUrl()}/users/accounts/${userId}/permissions`;
     return Http.get(url, user) as unknown as Promise<ApiUserPermission[]>;
   }
 
-  static deleteUserPermission(email: string, permissionId: number, user: User): Promise<void> {
-    const encodedEmail = encodeURIComponent(email);
-    const url = `${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions/${permissionId}`;
+  static deleteUserPermission(userId: number, permissionId: number, user: User): Promise<void> {
+    const url = `${Http.baseUrl()}/users/accounts/${userId}/permissions/${permissionId}`;
     return Http.delete(url, user) as unknown as Promise<void>;
   }
 
-  static createUserPermission(email: string, permission: ApiUserPermission, user: User): Promise<void> {
-    const encodedEmail = encodeURIComponent(email);
-    const url = `${Http.baseUrl()}/users/accounts/${encodedEmail}/permissions/new`;
+  static createUserPermission(userId: number, permission: ApiUserPermission, user: User): Promise<void> {
+    const url = `${Http.baseUrl()}/users/accounts/${userId}/permissions/new`;
     return Http.put(url, user, permission) as unknown as Promise<void>;
   }
 
-  static updateUserAccount(email: string, role: UserRole, apiUser: ApiUser, user: User): Promise<ApiUser> {
-    const encodedEmail = encodeURIComponent(email);
-    const url = `${Http.baseUrl()}/users/accounts/${encodedEmail}/${role}`;
+  static updateUserAccount(userId: number, apiUser: ApiUser, user: User): Promise<ApiUser> {
+    const url = `${Http.baseUrl()}/users/accounts/${userId}`;
     return Http.put(url, user, apiUser) as unknown as Promise<ApiUser>;
   }
 
