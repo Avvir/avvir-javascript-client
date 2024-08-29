@@ -8,6 +8,9 @@ import UserAuthType, { GATEWAY_JWT } from "../models/enums/user_auth_type";
 import { httpGetHeaders } from "../utilities/request_headers";
 
 export default class AuthApi {
+  static getAuthorizationHeaders(user: User) {
+    return getAuthorizationHeaders(user);
+  }
 
   static getCustomFirebaseToken(user: User): Promise<{ headers: Headers, body: { storageToken: string } }> {
     return Http.fetch(`${Http.baseUrl()}/login`, {
