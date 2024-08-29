@@ -43,7 +43,8 @@ export type HxAuthUser = {
   hxAuthUser: {
     accessToken: string,
     refreshToken: string,
-    expireTime: number
+    expireTime: number,
+    realmName: string
   }
 }
 
