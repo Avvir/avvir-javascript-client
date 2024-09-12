@@ -19,6 +19,7 @@ export enum ProjectPurposeType {
   PROJECT_REPORT_SCREENSHOT = "projectReportScreenshot",
   PROJECT_REPORT_MINIMAP = "projectReportMinimap",
   PROJECT_REPORT_ZOOMED_MINIMAP = "projectReportZoomedMinimap",
+  IFC_BATCH_ZIP = "IFC_BATCH_ZIP"
 }
 
 /** @deprecated use ApiFloorPurposeType */
@@ -134,6 +135,8 @@ export const PurposeTypeMap: ProjectTypeMap & Omit<FloorTypeMap, "OTHER"> & Omit
   PROJECT_REPORT_SCREENSHOT: ProjectPurposeType.PROJECT_REPORT_SCREENSHOT,
   PROJECT_REPORT_MINIMAP: ProjectPurposeType.PROJECT_REPORT_MINIMAP,
   PROJECT_REPORT_ZOOMED_MINIMAP: ProjectPurposeType.PROJECT_REPORT_ZOOMED_MINIMAP,
+
+  IFC_BATCH_ZIP: ProjectPurposeType.IFC_BATCH_ZIP,
 };
 
 /** @deprecated use isApiPurposeType */

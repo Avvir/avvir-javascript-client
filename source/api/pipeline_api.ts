@@ -5,7 +5,7 @@ import { User } from "../utilities/get_authorization_headers";
 import ApiPipeline, { ApiPipelineArgument } from "../models/api/api_pipeline";
 
 export default class PipelineApi {
-    static triggerPipeline(body: ApiPipelineArgument = {}, user: User): Promise<ApiPipeline> {
+  static triggerPipeline(body: ApiPipelineArgument = {}, user: User): Promise<ApiPipeline> {
     const url = `${Http.baseUrl()}/pipelines`;
     return Http.post(url, user, body) as unknown as Promise<ApiPipeline>;
   }
