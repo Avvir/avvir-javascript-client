@@ -185,6 +185,15 @@ export default class ProjectApi {
     const url = `${Http.baseUrl()}/projects/${projectId}/work-packages/${workPackageType}/costs`;
     return Http.get(url, user) as unknown as Promise<ApiProjectWorkPackageCost[]>
   }
+
+  static generateAllMasterformatProgress({ projectId }: AssociationIds,
+                                         reportDate: DateLike,
+                                         masterformatVersion: number,
+                                         user: User): Promise<ApiRunningProcess> {
+    const formattedDate = DateConverter.dateToISO(reportDate);
+    let url = `${Http.baseUrl()}/projects/${projectId}/generate-all-masterformat-progress?masterformatVersion=${masterformatVersion}&reportDate=${formattedDate}`;
+    return Http.post(url, user) as unknown as Promise<ApiRunningProcess>;
+  }
 }
 
 makeErrorsPretty(ProjectApi, { exclude: ["getProjectDeviationsReportTsvUrl", "getTradeBreakdownTsvUrl"], overrideErrorMessage:["getFiltered5dTsv", "saveTradeBreakdownTsv"] });
