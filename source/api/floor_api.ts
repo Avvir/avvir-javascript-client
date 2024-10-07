@@ -34,8 +34,8 @@ export default class FloorApi {
     return Http.post(url, user, floorIds);
   }
 
-  static deleteFloor({ projectId, floorId }, user: User): Promise<void> {
-    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}`;
+  static deleteFloor({ projectId, floorId, deletionModeSelection }, user: User): Promise<void> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/mode/${deletionModeSelection}`;
     return Http.delete(url, user);
   }
 
