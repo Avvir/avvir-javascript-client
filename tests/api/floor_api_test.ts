@@ -219,7 +219,7 @@ describe("FloorApi", () => {
 
     describe("#deleteFloor", () => {
         beforeEach(() => {
-            fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`, 200);
+            fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/mode/`, 200);
         });
 
         it("makes a call to the correct endpoint", () => {
@@ -233,7 +233,7 @@ describe("FloorApi", () => {
 
             expect(lastFetchOpts.headers).to.include.keys("Content-Type");
             expect(lastFetchOpts.headers["Content-Type"]).to.eq("application/json");
-            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`);
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/mode/`);
         });
 
         it("sends the request with authorization headers", () => {
@@ -245,7 +245,7 @@ describe("FloorApi", () => {
             const fetchCall = fetchMock.lastCall();
             const lastFetchOpts = fetchMock.lastOptions();
 
-            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`);
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/mode/`);
             expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
             expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
         });
