@@ -225,7 +225,8 @@ describe("FloorApi", () => {
         it("makes a call to the correct endpoint", () => {
             FloorApi.deleteFloor({
                 projectId: "some-project-id",
-                floorId: "some-floor-id"
+                floorId: "some-floor-id",
+                deletionModeSelection: ""
             }, {firebaseUser: {idToken: "some-firebase.id.token"}} as User);
             const fetchCall = fetchMock.lastCall();
             const lastFetchOpts = fetchMock.lastOptions();
@@ -238,7 +239,8 @@ describe("FloorApi", () => {
         it("sends the request with authorization headers", () => {
             FloorApi.deleteFloor({
                 projectId: "some-project-id",
-                floorId: "some-floor-id"
+                floorId: "some-floor-id",
+                deletionModeSelection: ""
             }, user);
             const fetchCall = fetchMock.lastCall();
             const lastFetchOpts = fetchMock.lastOptions();
@@ -262,7 +264,8 @@ describe("FloorApi", () => {
                 sandbox.stub(Config, "sharedErrorHandler");
                 return FloorApi.deleteFloor({
                         projectId: "some-project-id",
-                        floorId: "some-floor-id"
+                        floorId: "some-floor-id",
+                        deletionModeSelection: ""
                     },
                     {firebaseUser: {idToken: "some-firebase.id.token"}} as User)
                     .catch(_.noop)
