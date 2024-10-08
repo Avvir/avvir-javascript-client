@@ -219,38 +219,40 @@ describe("FloorApi", () => {
 
     describe("#deleteFloor", () => {
         beforeEach(() => {
-            fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`, 200);
+            fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/mode/`, 200);
         });
 
         it("makes a call to the correct endpoint", () => {
             FloorApi.deleteFloor({
                 projectId: "some-project-id",
-                floorId: "some-floor-id"
+                floorId: "some-floor-id",
+                deletionModeSelection: ""
             }, {firebaseUser: {idToken: "some-firebase.id.token"}} as User);
             const fetchCall = fetchMock.lastCall();
             const lastFetchOpts = fetchMock.lastOptions();
 
             expect(lastFetchOpts.headers).to.include.keys("Content-Type");
             expect(lastFetchOpts.headers["Content-Type"]).to.eq("application/json");
-            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`);
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/mode/`);
         });
 
         it("sends the request with authorization headers", () => {
             FloorApi.deleteFloor({
                 projectId: "some-project-id",
-                floorId: "some-floor-id"
+                floorId: "some-floor-id",
+                deletionModeSelection: ""
             }, user);
             const fetchCall = fetchMock.lastCall();
             const lastFetchOpts = fetchMock.lastOptions();
 
-            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`);
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/mode/`);
             expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
             expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
         });
 
         describe("when the call fails", () => {
             beforeEach(() => {
-                fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`,
+                fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/mode/`,
                     {
                         status: 500, body: {some: "body"},
                         headers: {"ContentType": "application/json"}
@@ -262,7 +264,8 @@ describe("FloorApi", () => {
                 sandbox.stub(Config, "sharedErrorHandler");
                 return FloorApi.deleteFloor({
                         projectId: "some-project-id",
-                        floorId: "some-floor-id"
+                        floorId: "some-floor-id",
+                        deletionModeSelection: ""
                     },
                     {firebaseUser: {idToken: "some-firebase.id.token"}} as User)
                     .catch(_.noop)
