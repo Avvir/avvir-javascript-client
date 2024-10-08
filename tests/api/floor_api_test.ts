@@ -252,7 +252,7 @@ describe("FloorApi", () => {
 
         describe("when the call fails", () => {
             beforeEach(() => {
-                fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`,
+                fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/mode/`,
                     {
                         status: 500, body: {some: "body"},
                         headers: {"ContentType": "application/json"}
