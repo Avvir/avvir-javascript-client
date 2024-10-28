@@ -10,6 +10,7 @@ import Http from "../../source/utilities/http";
 import {FIREBASE} from "../../source/models/enums/user_auth_type";
 import {User} from "../../source/utilities/get_authorization_headers";
 import {ApiMasterformat, ApiMasterformatProgress, ApiPlannedElement, ProgressType} from "../../source";
+import {ApiFloorFileDeletionMode} from "../../source/models/api/ApiFloorFileDeletionMode";
 
 describe("FloorApi", () => {
     let user;
@@ -219,7 +220,7 @@ describe("FloorApi", () => {
 
     describe("#deleteFloor", () => {
         beforeEach(() => {
-            fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/mode/`, 200);
+            fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`, 200);
         });
 
         it("makes a call to the correct endpoint", () => {
@@ -233,7 +234,7 @@ describe("FloorApi", () => {
 
             expect(lastFetchOpts.headers).to.include.keys("Content-Type");
             expect(lastFetchOpts.headers["Content-Type"]).to.eq("application/json");
-            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/mode/`);
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`);
         });
 
         it("sends the request with authorization headers", () => {
@@ -245,14 +246,14 @@ describe("FloorApi", () => {
             const fetchCall = fetchMock.lastCall();
             const lastFetchOpts = fetchMock.lastOptions();
 
-            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/mode/`);
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`);
             expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
             expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
         });
 
         describe("when the call fails", () => {
             beforeEach(() => {
-                fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/mode/`,
+                fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`,
                     {
                         status: 500, body: {some: "body"},
                         headers: {"ContentType": "application/json"}
@@ -272,6 +273,27 @@ describe("FloorApi", () => {
                     .finally(() => {
                         expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({});
                     });
+            });
+        });
+
+        describe("delete floors with deletion mode selection", () => {
+            beforeEach(() => {
+                fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id?deletionModeSelection=${ApiFloorFileDeletionMode.ALL_FILES}`, 200);
+            });
+
+            it("delete floor with deletion mode ALL_FILES", () => {
+                return FloorApi.deleteFloor({
+                        projectId: "some-project-id",
+                        floorId: "some-floor-id",
+                        deletionModeSelection: "ALL_FILES"
+                    }, user);
+
+                const fetchCall = fetchMock.lastCall();
+                const lastFetchOpts = fetchMock.lastOptions();
+
+                expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id?deletionModeSelection=${ApiFloorFileDeletionMode.ALL_FILES}`);
+                expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+                expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
             });
         });
     });

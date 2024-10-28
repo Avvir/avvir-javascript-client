@@ -7,6 +7,7 @@ import { User } from "../utilities/get_authorization_headers";
 import {ApiPlannedElement} from "../models";
 import {DateConverter} from "../converters";
 import {DateLike} from "type_aliases";
+import FloorFileDeletionModeConverter from "../converters/floor_file_deletion_mode_converter";
 
 export default class FloorApi {
   static listFloorsForProject(projectId: string, user: User): Promise<ApiFloor[]> {
@@ -35,7 +36,13 @@ export default class FloorApi {
   }
 
   static deleteFloor({ projectId, floorId, deletionModeSelection }, user: User): Promise<void> {
-    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/mode/${deletionModeSelection}`;
+    let query: any;
+    if (deletionModeSelection && typeof deletionModeSelection === "string" && deletionModeSelection != "") {
+      query = `?deletionModeSelection=${FloorFileDeletionModeConverter.toApiFloorFileDeletionMode(deletionModeSelection)}`;
+    } else {
+      query = "";
+    }
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}${query}`;
     return Http.delete(url, user);
   }
 
