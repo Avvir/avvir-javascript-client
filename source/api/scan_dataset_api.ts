@@ -155,6 +155,11 @@ export default class ScanDatasetApi {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/photo-session/${id}`;
     return Http.post(url, user, { sessionDate }) as unknown as Promise<ApiPhotoSession>;
   }
+
+  static listScanDatasetsForProject({projectId}: AssociationIds, user: User): Promise<ApiScanDataset[]> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/scan-datasets`;
+    return Http.get(url, user) as unknown as Promise<ApiScanDataset[]>;
+  }
 }
 
 makeErrorsPretty(ScanDatasetApi);
