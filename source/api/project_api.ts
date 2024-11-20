@@ -7,6 +7,7 @@ import { DateLike } from "type_aliases";
 import { DateConverter } from "../converters";
 import { ApiClassificationCode } from "../models/api/api_classification_code";
 import ApiProjectWorkPackageCost from "../models/api/api_project_work_package_cost";
+import {PbeTsvType} from "../models/api/PbeTsvType";
 
 export default class ProjectApi {
   static listProjectsForOrganization(organizationId: string, user: User): Promise<ApiProject[]> {
@@ -193,6 +194,24 @@ export default class ProjectApi {
     const formattedDate = DateConverter.dateToISO(reportDate);
     let url = `${Http.baseUrl()}/projects/${projectId}/generate-all-masterformat-progress?masterformatVersion=${masterformatVersion}&reportDate=${formattedDate}`;
     return Http.post(url, user) as unknown as Promise<ApiRunningProcess>;
+  }
+
+  static updateProjectExportTsv({ projectId }: AssociationIds, tsvContent: string, user: User, dispatch) {
+    let multipartFormData = new FormData();
+    let file = new Blob([tsvContent], { type: "text/tab-separated-values" });
+    multipartFormData.append("file", file, "file.tsv");
+
+    let floor = undefined;
+    let pbeTsvType = PbeTsvType.PROJECT_LEVEL_PBE;
+
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floor}/planned-building-elements?pbeTsvType=${pbeTsvType}`;
+    return Http.fetch(url, {
+      method: "POST",
+      headers: {
+        ...getAuthorizationHeaders(user)
+      },
+      body: multipartFormData
+    });
   }
 }
 
