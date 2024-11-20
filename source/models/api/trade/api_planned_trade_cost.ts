@@ -1,4 +1,4 @@
-export default class ApiPlannedTradeCost {
+export class ApiPlannedTradeCost {
   constructor({
                 tradeCode,
                 unitOfMeasure,
@@ -19,3 +19,5 @@ export default class ApiPlannedTradeCost {
   plannedTotalCost: number;
   plannedQuantity: number;
 }
+
+export default ApiPlannedTradeCost;

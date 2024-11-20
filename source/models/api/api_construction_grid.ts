@@ -1,5 +1,6 @@
-import {addReadOnlyPropertiesToModel} from "../../mixins";
-import ApiGridLine from "./api_grid_line";
+import { addReadOnlyPropertiesToModel } from "../../mixins";
+
+import type ApiGridLine from "./api_grid_line";
 
 export class ApiConstructionGrid {
   constructor({ id, globalId, axisULines, axisVLines, firebaseFloorId }: Partial<ApiConstructionGrid>) {
@@ -10,8 +11,8 @@ export class ApiConstructionGrid {
 
   readonly id: number | null = null;
   readonly globalId: string | null = null;
-  axisULines: Array<ApiGridLine> = [];
-  axisVLines: Array<ApiGridLine> = [];
+  axisULines: ApiGridLine[] = [];
+  axisVLines: ApiGridLine[] = [];
   readonly firebaseFloorId: string | null = null;
 }
 

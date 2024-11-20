@@ -31,3 +31,5 @@ export function isApiQuaternion(type: any): type is ApiQuaternion {
     && Number.isFinite(type.c)
     && Number.isFinite(type.d);
 }
+
+export default ApiQuaternion;

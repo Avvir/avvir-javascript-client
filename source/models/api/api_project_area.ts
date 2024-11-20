@@ -1,6 +1,7 @@
-import ApiProjectAreaWorkPackage from "./api_project_area_work_package";
 import { addReadOnlyPropertiesToModel } from "../../mixins";
 import { ApiProjectAreaProgress } from "./api_project_summary";
+
+import type ApiProjectAreaWorkPackage from "./api_project_area_work_package";
 
 export class ApiProjectArea {
   readonly id: number;

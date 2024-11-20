@@ -1,4 +1,4 @@
-import {Vector3Like} from "./type_aliases";
+import type { Vector3Like } from "./type_aliases";
 
 export type ApiBehavioralData = {
   deviation?: Vector3Like
@@ -15,7 +15,8 @@ export class ApiActionPayload {
               photoSessionId: number,
               photoLocationId: number,
               scannedBuildingElementId: number,
-              behavioralData: ApiBehavioralData) {
+              behavioralData: ApiBehavioralData)
+  {
     this.globalId = globalId;
     this.firebaseClientAccountId = firebaseClientAccountId;
     this.firebaseProjectId = firebaseProjectId;
@@ -38,5 +39,6 @@ export class ApiActionPayload {
   photoLocationId?: number;
   scannedBuildingElementId?: number;
   behavioralData?: ApiBehavioralData;
-
 }
+
+export default ApiActionPayload;

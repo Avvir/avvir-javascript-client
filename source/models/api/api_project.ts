@@ -1,18 +1,20 @@
 import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
 import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
-import ApiProjectCostAnalysisProgress from "./api_project_cost_analysis_progress";
+import ApiProjectReport, { ApiProjectReportArgument } from "./api_project_report";
 import SystemOfMeasurement, { IMPERIAL } from "../enums/system_of_measurement";
-import { DateLike, Modify } from "./type_aliases";
-import ApiProjectReport from "./api_project_report";
-import {ApiTeamMember} from "./api_team_member";
-import { ApiProjectSettings } from "./api_project_settings";
-import {ApiMasterformatProgress} from "./api_masterformat_progress";
 
-export interface ApiProjectArgument extends Partial<Modify<ApiProject, {
-  archivedAt?: DateLike
-  startDate?: DateLike
-  endDate?: DateLike
-}>> {}
+import type ApiProjectCostAnalysisProgress from "./api_project_cost_analysis_progress";
+import type ApiTeamMember from "./api_team_member";
+import type ApiMasterformatProgress from "./api_masterformat_progress";
+import type ApiProjectSettings from "./api_project_settings";
+import type { DateLike, ModifyPartial } from "./type_aliases";
+
+export type ApiProjectArgument = ModifyPartial<ApiProject, {
+  archivedAt: DateLike
+  startDate: DateLike
+  endDate: DateLike
+  projectReports: ApiProjectReportArgument[]
+}>
 
 export class ApiProject {
   constructor({
@@ -48,10 +50,11 @@ export class ApiProject {
                 settings,
                 baselineScheduleDate,
                 currentScheduleDate
-              }: ApiProjectArgument = {}) {
-    addInstantGetterAndSetterToApiModel(this, "startDate");
-    addInstantGetterAndSetterToApiModel(this, "endDate");
-    addInstantGetterAndSetterToApiModel(this, "archivedAt");
+              }: ApiProjectArgument = {})
+  {
+    addInstantGetterAndSetterToApiModel(this, "startDate", startDate);
+    addInstantGetterAndSetterToApiModel(this, "endDate", endDate);
+    addInstantGetterAndSetterToApiModel(this, "archivedAt", archivedAt);
 
     addReadOnlyPropertiesToModel(this, { firebaseId, clientAccountId, id });
 
@@ -73,15 +76,9 @@ export class ApiProject {
     this.baselineProjectMasterformatProgresses = baselineProjectMasterformatProgresses || [];
     this.currentProjectMasterformatProgresses = currentProjectMasterformatProgresses || [];
     this.costAnalysisProgresses = costAnalysisProgresses || [];
-    this.projectReports = projectReports || [];
+    this.projectReports = projectReports?.map(report => new ApiProjectReport(report)) || [];
 
     this.systemOfMeasurement = systemOfMeasurement || IMPERIAL;
-    // @ts-ignore
-    this.endDate = endDate || null;
-    // @ts-ignore
-    this.startDate = startDate || null;
-    // @ts-ignore
-    this.archivedAt = archivedAt || null;
     this.generateMasterformatProgressEnabled = generateMasterformatProgressEnabled;
     this.integrationProjectId = integrationProjectId;
     this.teamMembers = teamMembers;
@@ -94,11 +91,11 @@ export class ApiProject {
   readonly firebaseId: string;
   readonly clientAccountId: string;
   name: string;
-  scannedProjectMasterformatProgresses: Array<ApiMasterformatProgress> = [];
-  baselineProjectMasterformatProgresses: Array<ApiMasterformatProgress> = [];
-  currentProjectMasterformatProgresses: Array<ApiMasterformatProgress> = [];
-  costAnalysisProgresses: Array<ApiProjectCostAnalysisProgress> = [];
-  projectReports: Array<ApiProjectReport>;
+  scannedProjectMasterformatProgresses: ApiMasterformatProgress[];
+  baselineProjectMasterformatProgresses: ApiMasterformatProgress[];
+  currentProjectMasterformatProgresses: ApiMasterformatProgress[];
+  costAnalysisProgresses: ApiProjectCostAnalysisProgress[];
+  projectReports: ApiProjectReport[];
   defaultFirebaseFloorId: string | null = null;
   firebaseFloorIds: string[] = [];
   addressLine1: string | null = null;

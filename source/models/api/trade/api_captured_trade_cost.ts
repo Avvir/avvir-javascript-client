@@ -1,4 +1,4 @@
-export default class ApiCapturedTradeCost {
+export class ApiCapturedTradeCost {
   constructor({ tradeCode, capturedQuantity, modeledQuantity }: Partial<ApiCapturedTradeCost> = {}) {
     this.tradeCode = tradeCode;
     this.capturedQuantity = capturedQuantity;
@@ -9,3 +9,5 @@ export default class ApiCapturedTradeCost {
   capturedQuantity: number;
   modeledQuantity: number;
 }
+
+export default ApiCapturedTradeCost;

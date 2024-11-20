@@ -1,12 +1,13 @@
-import { DateLike, ModifyPartial } from "./type_aliases";
-import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
-import {PipelineName, RunningProcessStatus} from "../enums";
+import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
 
-export interface ApiPipelineArgument extends ModifyPartial<ApiPipeline, {
+import type { DateLike, ModifyPartial } from "./type_aliases";
+import type { PipelineName, RunningProcessStatus } from "../enums";
+
+export type ApiPipelineArgument = ModifyPartial<ApiPipeline, {
   startTime?: DateLike
   endTime?: DateLike
-}> {}
+}>
 
 export class ApiPipeline {
   constructor({
@@ -22,7 +23,8 @@ export class ApiPipeline {
                 firebaseScanDatasetId,
                 options,
                 status
-              }: ApiPipelineArgument = {}) {
+              }: ApiPipelineArgument = {})
+  {
     addReadOnlyPropertiesToModel(this, { id });
     addInstantGetterAndSetterToApiModel(this, "startTime");
     addInstantGetterAndSetterToApiModel(this, "endTime");

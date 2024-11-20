@@ -1,7 +1,8 @@
 import { addReadOnlyPropertiesToModel } from "../../mixins";
-import { ProjectWorkPackageType } from "../enums";
 
-export default class ApiWorkPackage {
+import type { ProjectWorkPackageType } from "../enums";
+
+export class ApiWorkPackage {
   constructor({ id, name, firebaseProjectId, type }: Partial<ApiWorkPackage> = {}) {
     addReadOnlyPropertiesToModel(this, { id, firebaseProjectId, type });
     this.name = name;
@@ -10,5 +11,7 @@ export default class ApiWorkPackage {
   readonly id: number;
   name: string;
   readonly firebaseProjectId: string;
-  readonly type: ProjectWorkPackageType
+  readonly type: ProjectWorkPackageType;
 }
+
+export default ApiWorkPackage;

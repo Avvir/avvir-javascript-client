@@ -19,7 +19,8 @@ export default {
   reports: Api.ReportApi,
   scanDatasets: Api.ScanDatasetApi,
   trades: Api.TradeApi,
-  other: Api.WebGatewayApi,
-  webRpcApi: Api.WebRpcApi,
   user: Api.UserApi,
+  webRpcApi: Api.WebRpcApi,
+  workPackages: Api.WorkPackageApi,
+  other: Api.WebGatewayApi,
 };
