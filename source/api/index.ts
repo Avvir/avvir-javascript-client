@@ -17,6 +17,7 @@ import TradeApi from "./trade_api";
 import UserApi from "./user_api";
 import WebGatewayApi from "./web_gateway_api";
 import WebRpcApi from "./web_rpc_api";
+import WorkPackageApi from "./work_package_api";
 
 export {
   AuthApi,
@@ -38,4 +39,5 @@ export {
   UserApi,
   WebGatewayApi,
   WebRpcApi,
+  WorkPackageApi
 };

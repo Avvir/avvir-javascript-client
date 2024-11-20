@@ -1,4 +1,4 @@
-import {UserRole} from "../enums";
+import type { UserRole } from "../enums";
 
 export class ApiInvitation {
   resourceName: string;

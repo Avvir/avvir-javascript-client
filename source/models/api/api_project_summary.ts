@@ -2,7 +2,7 @@ import ApiCloudFile, { ApiCloudFileArgument } from "./api_cloud_file";
 
 import type { ModifyPartial } from "type_aliases";
 
-export type ApiProjectSummaryArg = ModifyPartial<ApiProjectSummary, {
+export type ApiProjectSummaryArgument = ModifyPartial<ApiProjectSummary, {
   model: ApiCloudFileArgument
 }>
 
@@ -10,7 +10,7 @@ export class ApiProjectSummary {
   readonly model: ApiCloudFile;
   projectAreaIds: number[];
 
-  constructor({ model, projectAreaIds }: ApiProjectSummaryArg = {}) {
+  constructor({ model, projectAreaIds }: ApiProjectSummaryArgument = {}) {
     this.model = new ApiCloudFile(model);
     this.projectAreaIds = projectAreaIds || [];
   }

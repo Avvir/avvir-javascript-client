@@ -1,25 +1,23 @@
-import { DateLike, Modify } from "./type_aliases";
 import { addInstantGetterAndSetterToApiModel, addReadOnlyPropertiesToModel } from "../../mixins";
 import { ApiProjectPurposeType, ApiPurposeType, isApiPurposeType } from "./api_purpose_type";
-import { PurposeTypeConverter } from "../../converters";
 import { AssociationType, isPurposeType, PurposeType } from "../enums";
-import ApiPhotoLocation3d from "./api_photo_location_3d";
+import { PurposeTypeConverter } from "../../converters";
+
+import type ApiPhotoLocation3d from "./api_photo_location_3d";
+import type { DateLike, ModifyPartial, Vector2Like } from "type_aliases";
 
 export type AvvirApiFiles<Type extends ApiPurposeType = ApiPurposeType> = { [purposeType in Type]?: ApiCloudFile | ApiCloudFile[] }
 export type AvvirApiFileIds<Type extends ApiPurposeType = ApiPurposeType> = { [purposeType in Type]?: number[] }
 
 export interface ApiCloudFileMetadata {
-  offset?: { x: number, y: number };
+  offset?: Vector2Like;
 }
 
-export interface ApiCloudFileArgument extends Partial<Modify<ApiCloudFile, {
+export type ApiCloudFileArgument = ModifyPartial<ApiCloudFile, {
   lastModified?: DateLike
   createdAt?: DateLike
   purposeType: ApiPurposeType | PurposeType,
-  fileType?: string
-}>>
-{
-}
+}>
 
 export class ApiCloudFile {
   constructor({

@@ -1,10 +1,10 @@
-import {ApiDetailedElement} from "./api_detailed_element";
-import {ApiBcfIssue} from "./api_bcf_issue";
+import type { ApiBcfIssue } from "./api_bcf_issue";
+import type { ApiDetailedElement } from "./api_detailed_element";
 
-export type ApiBcfBuildingElementArgs = Partial<ApiBcfBuildingElement>;
+export type ApiBcfBuildingElementArgument = Partial<ApiBcfBuildingElement>;
 
 export class ApiBcfBuildingElement {
-  constructor({bcfIssue, detailedElement}: ApiBcfBuildingElementArgs = {}) {
+  constructor({ bcfIssue, detailedElement }: ApiBcfBuildingElementArgument = {}) {
     this.detailedElement = detailedElement;
     this.bcfIssue = bcfIssue;
   }

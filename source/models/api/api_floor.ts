@@ -1,17 +1,18 @@
+import { Matrix3 } from "three";
+
 import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
 import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
-import ApiConstructionGrid from "./api_construction_grid";
-import {DateLike, Matrix3Like, Modify, Vector2Like} from "./type_aliases";
-import ApiMatrix3 from "./api_matrix_3";
-import {Matrix3} from "three";
 import Matrix3Converter from "../../converters/matrix_3_converter";
 
-export interface ApiFloorArgument extends Partial<Modify<ApiFloor, {
+import type ApiConstructionGrid from "./api_construction_grid";
+import type ApiMatrix3 from "./api_matrix_3";
+import type { DateLike, Matrix3Like, ModifyPartial, Vector2Like } from "type_aliases";
+
+export type ApiFloorArgument = ModifyPartial<ApiFloor, {
   scanDate?: DateLike,
   photoAreaMinimapPixelToBimMinimapPixel?: Matrix3Like;
   bimMinimapToWorld?: Matrix3Like;
-}>> {
-}
+}>
 
 export class ApiFloor {
   constructor({
@@ -33,9 +34,10 @@ export class ApiFloor {
                 bimMinimapToWorld,
                 floorElevation,
                 globalOffsetYaw
-              }: ApiFloorArgument = {}) {
-    addInstantGetterAndSetterToApiModel(this, "scanDate");
-    addReadOnlyPropertiesToModel(this, {id, firebaseId, firebaseProjectId});
+              }: ApiFloorArgument = {})
+  {
+    addReadOnlyPropertiesToModel(this, { id, firebaseId, firebaseProjectId });
+    addInstantGetterAndSetterToApiModel(this, "scanDate", scanDate);
     let offsetVal: Vector2Like, photoMinimapToBimMinimapTransformVal: ApiMatrix3,
       bimMinimapToWorldTransformVal: ApiMatrix3;
     Object.defineProperties(this, {
@@ -45,7 +47,7 @@ export class ApiFloor {
         },
         set(val: Vector2Like) {
           if (val) {
-            offsetVal = {x: val.x, y: val.y};
+            offsetVal = { x: val.x, y: val.y };
           } else {
             offsetVal = null;
           }
@@ -137,7 +139,7 @@ export class ApiFloor {
   /**
    * An array of external identifiers of the capture datasets associated with this area.
    */
-  firebaseScanDatasetIds: Array<string> = [];
+  firebaseScanDatasetIds: string[];
 
   constructionGrid: ApiConstructionGrid | null = null;
   plannedElementCount: number | null = null;

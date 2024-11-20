@@ -1,7 +1,8 @@
-import { UniformatId } from "uniformat";
-import ApiElementDeviation from "./api_element_deviation";
 import { addInstantGetterAndSetterToApiModel } from "../../mixins";
-import { DateLike, ModifyPartial } from "type_aliases";
+
+import type ApiElementDeviation from "./api_element_deviation";
+import type { DateLike, ModifyPartial } from "type_aliases";
+import type { UniformatId } from "uniformat";
 
 type ApiPlannedElementArgument = ModifyPartial<ApiPlannedElement, { builtAt: DateLike, fixedAt: DateLike }>
 

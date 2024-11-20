@@ -1,8 +1,12 @@
-import {ApiBuiltStatus} from "../enums";
-import {ApiElementDeviation} from "./api_element_deviation";
+import { ApiBuiltStatus } from "../enums";
 
+import type ApiElementDeviation from "./api_element_deviation";
+
+/**
+ * @deprecated This information is now all part of the {@link ApiPlannedElement}
+ */
 export class ApiScannedElement<Label extends ApiBuiltStatus> {
-  constructor({globalId, scanLabel, deviation, detectedInScan}: Partial<ApiScannedElement<Label>> = {}) {
+  constructor({ globalId, scanLabel, deviation, detectedInScan }: Partial<ApiScannedElement<Label>> = {}) {
     this.globalId = globalId;
     this.scanLabel = scanLabel;
     this.deviation = deviation;

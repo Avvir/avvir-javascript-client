@@ -11,7 +11,7 @@ export type ApiCloudFileLocationId = {
   orientation: ApiQuaternion
 }
 
-export type ApiCloudFileLocation3dArguments = {
+export type ApiCloudFileLocation3dArgument = {
   id: number,
   position: Vector3Like,
   orientation: Vector4Like
@@ -25,7 +25,7 @@ export class ApiCloudFileLocation3d {
         id,
         position,
         orientation
-      }: ApiCloudFileLocation3dArguments ) {
+      }: ApiCloudFileLocation3dArgument ) {
     addReadOnlyPropertiesToModel(this, { id });
     this.position = position;
     this.orientation = ApiQuaternion.create(orientation);

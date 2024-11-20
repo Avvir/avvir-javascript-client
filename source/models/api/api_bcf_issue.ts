@@ -1,7 +1,7 @@
-export type ApiBcfIssueArgs = Partial<ApiBcfIssue>;
+export type ApiBcfIssueArgument = Partial<ApiBcfIssue>;
 
 export class ApiBcfIssue {
-  constructor({plannedBuildingElementId, commentGuid, viewpointGuid, topicGuid}: ApiBcfIssueArgs = {}) {
+  constructor({plannedBuildingElementId, commentGuid, viewpointGuid, topicGuid}: ApiBcfIssueArgument = {}) {
     this.plannedBuildingElementId = plannedBuildingElementId;
     this.commentGuid = commentGuid;
     this.topicGuid = topicGuid;
