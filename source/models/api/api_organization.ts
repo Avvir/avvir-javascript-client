@@ -52,7 +52,7 @@ export class ApiOrganization {
   contactPhoneNumber?: string | null = null;
   name?: string | null = null;
   notes?: string | null = null;
-  firebaseProjectIds: Array<string> = [];
+  firebaseProjectIds: string[];
   multivistaEmail?: string | null = null;
   multivistaPassword?: string | null = null;
 }

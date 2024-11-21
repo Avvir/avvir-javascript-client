@@ -1,4 +1,4 @@
-import { UniformatId } from "uniformat";
+import type { UniformatId } from "uniformat";
 
 export class ApiProgressCategory {
   uniformatId: UniformatId;

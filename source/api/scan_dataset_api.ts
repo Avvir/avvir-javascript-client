@@ -1,4 +1,4 @@
-import ApiView, { ViewParameter } from "../models/api/api_view";
+import ApiView, { ApiViewArgument } from "../models/api/api_view";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import { ApiBuiltStatus, ApiDetailedElement, ApiPhotoSession, ApiScanDataset, ApiScanDatasetQaState, ApiScannedElementType, AssociationIds, DateLike } from "../models";
@@ -124,9 +124,9 @@ export default class ScanDatasetApi {
                                   projectId,
                                   floorId,
                                   scanDatasetId
-                                }: AssociationIds, user: User): Promise<ViewParameter[]> {
+                                }: AssociationIds, user: User): Promise<ApiViewArgument[]> {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/views`;
-    return Http.get(url, user) as unknown as Promise<ViewParameter[]>;
+    return Http.get(url, user) as unknown as Promise<ApiViewArgument[]>;
   }
 
   static getNewElementsForScanDataset({ projectId, floorId, scanDatasetId }: AssociationIds,

@@ -1,4 +1,4 @@
-import ApiProgressCategory from "./api_progress_category";
+import type ApiProgressCategory from "./api_progress_category";
 
 export class ApiProgressScanDataset {
   id: number;

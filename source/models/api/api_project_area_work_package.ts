@@ -12,7 +12,18 @@ export class ApiProjectAreaWorkPackage {
   completion: string;
 
 
-  constructor({ id, projectAreaId, projectWorkPackageId, workPackageId, status, expectedStart, expectedCompletion, start, completion }: Partial<ApiProjectAreaWorkPackage>) {
+  constructor({
+                id,
+                projectAreaId,
+                projectWorkPackageId,
+                workPackageId,
+                status,
+                expectedStart,
+                expectedCompletion,
+                start,
+                completion
+              }: Partial<ApiProjectAreaWorkPackage>)
+  {
     addReadOnlyPropertiesToModel(this, { id, projectAreaId, projectWorkPackageId, workPackageId });
     this.status = status;
     this.expectedStart = expectedStart;

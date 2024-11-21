@@ -1,4 +1,4 @@
-export default class ApiTradeCost {
+export class ApiTradeCost {
   constructor({ tradeCode, unitOfMeasure, plannedUnitCost, plannedTotalCost, plannedQuantity, capturedQuantity, modeledQuantity, reportedQuantity }: Partial<ApiTradeCost> = {}) {
     this.tradeCode = tradeCode;
     this.unitOfMeasure = unitOfMeasure;
@@ -20,3 +20,5 @@ export default class ApiTradeCost {
   modeledQuantity: number;
   reportedQuantity: number;
 }
+
+export default ApiTradeCost;

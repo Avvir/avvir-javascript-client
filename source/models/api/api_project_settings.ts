@@ -8,3 +8,5 @@ export class ApiProjectSettings {
   autoScanAnalysis: boolean;
   autoCalculateProgress: boolean;
 }
+
+export default ApiProjectSettings;

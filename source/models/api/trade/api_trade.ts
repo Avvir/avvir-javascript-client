@@ -1,4 +1,4 @@
-export default class ApiTrade {
+export class ApiTrade {
   constructor({ code, parentCode, title, workPackageId, childCodes }: Partial<ApiTrade> = {}) {
     this.code = code;
     if (parentCode) {
@@ -15,3 +15,5 @@ export default class ApiTrade {
   workPackageId: number;
   childCodes: string[];
 }
+
+export default ApiTrade;

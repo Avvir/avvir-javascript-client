@@ -1,7 +1,8 @@
 import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
-import {DateLike, ModifyPartial} from "./type_aliases";
 
-export type ApiIntegrationProjectArgs = ModifyPartial<ApiIntegrationProject, {
+import type { DateLike, ModifyPartial } from "./type_aliases";
+
+export type ApiIntegrationProjectArgument = ModifyPartial<ApiIntegrationProject, {
   createdAt?: DateLike,
   modifiedAt?: DateLike
 }>;
@@ -14,7 +15,8 @@ export class ApiIntegrationProject {
                 integrationCredentialsId,
                 externalId,
                 externalName
-              }: ApiIntegrationProjectArgs) {
+              }: ApiIntegrationProjectArgument)
+  {
     this.id = id;
     this.integrationCredentialsId = integrationCredentialsId;
     this.externalId = externalId;
