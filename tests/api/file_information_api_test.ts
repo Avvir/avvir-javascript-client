@@ -6,11 +6,9 @@ import moment from "moment";
 import ApiCloudFile from "../../source/models/api/api_cloud_file";
 import DateConverter from "../../source/converters/date_converter";
 import FileInformationApi from "../../source/api/file_information_api";
-import { FIREBASE } from "../../source/models/enums/user_auth_type";
-import { SUPERADMIN } from "../../source/models/enums/user_role";
+import { ApiPhotoAreaPurposeType, ApiProjectPurposeType, FIREBASE, SUPERADMIN } from "../../source";
 import Config from "../../source/config";
 import Http from "../../source/utilities/http";
-import { ApiPhotoAreaPurposeType, ApiProjectPurposeType } from "../../source";
 
 describe("FileInformationApi", () => {
   let user;
@@ -505,6 +503,45 @@ describe("FileInformationApi", () => {
           }),
           user,
         ).catch(() => {}).then(() => {
+          expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({});
+        });
+      });
+    });
+  });
+
+  describe("#deleteFile", () => {
+    beforeEach(() => {
+      fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/files/3`,
+        200);
+    });
+
+    it("makes a call to the delete file endpoint", () => {
+      FileInformationApi.deleteFile({ projectId: "some-project-id" }, 3, user);
+      const request = fetchMock.lastCall();
+
+      expect(request["0"]).to.eq(`${Http.baseUrl()}/projects/some-project-id/files/3`);
+    });
+
+    it("sends the request with authorization headers", () => {
+      FileInformationApi.deleteFile({ projectId: "some-project-id" }, 3, user);
+
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+
+    describe("when the call fails", () => {
+      beforeEach(() => {
+        fetchMock.delete(`${Http.baseUrl()}/projects/some-project-id/files/3`,
+          500,
+          { overwriteRoutes: true });
+      });
+
+      it("dispatches an api failure notification", () => {
+        sandbox.stub(Config, "sharedErrorHandler");
+        return FileInformationApi.deleteFile({ projectId: "some-project-id" }, 3, user)
+          .catch(() => {}).then(() => {
           expect(Config.sharedErrorHandler).to.have.been.calledWithMatch({});
         });
       });
