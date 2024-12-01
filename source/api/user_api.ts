@@ -6,6 +6,7 @@ import UserRole from "../models/enums/user_role";
 import ApiInvitation from "../models/api/api_invitation";
 import ApiCreateInvitationForm from "../models/api/api_create_invitation_form";
 import ApiUserPermission from "../models/api/api_user_permission";
+import {AssociationIds} from "../models";
 
 export default class UserApi {
 
@@ -55,6 +56,12 @@ export default class UserApi {
     const url = `${Http.baseUrl()}/users/reset-password`;
     return Http.post(url, null, {email, token, password}) as unknown as Promise<void>;
   }
+
+  //bulk-invite
+
+  static sendBulkInvites({organizationId}: AssociationIds, tsvContent: string, user: User): Promise<string>  {
+    const url = `${Http.baseUrl()}/users/bulk-invite/${organizationId}`;
+    return Http.postTsvMulipartFormData(url, user, tsvContent) as unknown as Promise<string>;  }
 
 }
 
