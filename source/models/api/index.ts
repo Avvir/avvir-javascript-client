@@ -66,3 +66,4 @@ export * from "./api_work_package";
 export * from "./type_aliases";
 export * from "./deprecated_api_pipeline";
 export * from "./trade";
+export {ApiElementProgress} from "./api_element_progress";
