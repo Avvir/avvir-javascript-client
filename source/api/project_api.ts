@@ -199,10 +199,9 @@ export default class ProjectApi {
     let file = new Blob([tsvContent], { type: "text/tab-separated-values" });
     multipartFormData.append("file", file, "file.tsv");
 
-    let floor = undefined;
     let pbeTsvType = PbeTsvType.PROJECT_LEVEL_PBE;
 
-    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floor}/planned-building-elements?pbeTsvType=${pbeTsvType}`;
+    const url = `${Http.baseUrl()}/projects/${projectId}/planned-building-elements?pbeTsvType=${pbeTsvType}`;
     return Http.fetch(url, {
       method: "POST",
       headers: {
