@@ -152,11 +152,9 @@ export default class FileInformationApi {
   }
 
   /** @deprecated */
-  static saveAndConvertE57ProjectFile({
-                                        projectId,
-                                        floorId,
-                                        scanDatasetId
-                                      }: AssociationIds, apiFile: ApiCloudFile, user: User): Promise<ApiCloudFile> {
+  static saveAndConvertE57ProjectFile({ projectId }: AssociationIds,
+                                      apiFile: ApiCloudFile,
+                                      user: User): Promise<ApiCloudFile> {
     return FileInformationApi.saveAndIngestE57ProjectFile({ projectId }, apiFile, user).then((e57CloudFile) => {
       let pipeline: ApiPipelineArgument = new ApiPipeline({
         name: Pipelines.CONVERT_E57_TO_LAS,
@@ -177,6 +175,11 @@ export default class FileInformationApi {
           });
         });
     });
+  }
+
+  static deleteFile({ projectId }: AssociationIds, fileId: number, user: User): Promise<void> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/files/${fileId}`;
+    return Http.delete(url, user) as unknown as Promise<void>;
   }
 }
 
