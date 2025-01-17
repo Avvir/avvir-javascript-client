@@ -458,19 +458,154 @@ describe("WebGatewayApi", () => {
 
   describe("::getProcoreProjects", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/procore-projects?procore-access-token=some-procore-access-token`,
+      fetchMock.get(`${Http.baseUrl()}/integrations/procore/projects?procore-access-token=some-procore-access-token`,
         {status: 200, body: ["some-procore-project"]});
+      fetchMock.get(`${Http.baseUrl()}/integrations/procore/projects?procore-access-token=some-procore-access-token&companyId=some-company-id`,
+          {status: 200, body: ["some-procore-project"]});
     });
 
     it("includes auth headers and makes a request to the gateway", () => {
-      WebGatewayApi.getProcoreProjects("some-project-id", "some-procore-access-token", {
+      WebGatewayApi.getProcoreProjects("some-procore-access-token",undefined, {
         authType: GATEWAY_JWT,
         gatewayUser: {idToken: "some-firebase.id.token", role: USER}
       });
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/procore-projects?procore-access-token=some-procore-access-token`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/procore/projects?procore-access-token=some-procore-access-token`);
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("includes auth headers and makes a request to the gateway with companyId", () => {
+      WebGatewayApi.getProcoreProjects("some-procore-access-token", "some-company-id", {
+        authType: GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: USER },
+      });
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(
+          `${Http.baseUrl()}/integrations/procore/projects?procore-access-token=some-procore-access-token&companyId=some-company-id`
+      );
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+  });
+
+  describe("::getProcoreCompanies", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/integrations/procore/companies?procore-access-token=some-procore-access-token`,
+          {status: 200, body: ["some-procore-company"]});
+    });
+
+    it("includes auth headers and makes a request to the gateway", () => {
+      WebGatewayApi.getProcoreCompanies("some-procore-access-token", {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      });
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/procore/companies?procore-access-token=some-procore-access-token`);
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+  });
+
+  describe("::getProcoreObservationTypes", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-company-id/observation-types?procore-access-token=some-procore-access-token`,
+          {status: 200, body: ["some-procore-observation-type"]});
+    });
+
+    it("includes auth headers and makes a request to the gateway", () => {
+      WebGatewayApi.listProcoreObservationTypes("some-procore-access-token","some-company-id", {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      });
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/procore/some-company-id/observation-types?procore-access-token=some-procore-access-token`);
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+  });
+
+  describe("::createProcoreObservation", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-company-id/observation-types?procore-access-token=some-procore-access-token`,
+          {status: 200, body: ["some-procore-observation-type"]});
+    });
+
+    it("includes auth headers and makes a request to the gateway", () => {
+      WebGatewayApi.listProcoreObservationTypes("some-procore-access-token","some-company-id", {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      });
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/procore/some-company-id/observation-types?procore-access-token=some-procore-access-token`);
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+  });
+
+  describe("::createProcoreObservation", () => {
+    let dispatchSpy;
+    beforeEach(() => {
+      dispatchSpy = sandbox.spy();
+      fetchMock.post(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/create-observation?procore-access-token=some-procore-access-token`,
+          200);
+    });
+
+    it("includes the authorization headers", () => {
+      WebGatewayApi.CreateProcoreObservation(
+          "some-procore-access-token",
+          "some-company-id",
+          "some-project-id",
+          {
+            "description":"Sample Observation Item",
+            "due_date":"2024-11-16",
+            "name":"Test Observation",
+            "personal": true,
+            "priority":"Low",
+            "status":"initiated",
+            "type_id": 152839
+          },
+          {
+            authType: GATEWAY_JWT,
+            gatewayUser: {idToken: "some-firebase.id.token", role: USER},
+          }
+      );
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+
+    it("makes a request to the gateway api", () => {
+      WebGatewayApi.CreateProcoreObservation("some-procore-access-token",
+          "some-company-id",
+          "some-project-id",
+          {
+            "description":"Sample Observation Item",
+            "due_date":"2024-11-16",
+            "name":"Test Observation",
+            "personal": true,
+            "priority":"Low",
+            "status":"initiated",
+            "type_id": 152839
+          },
+          {
+            authType: GATEWAY_JWT,
+            gatewayUser: {idToken: "some-firebase.id.token", role: USER},
+          }
+      );
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0])
+          .to
+          .eq(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/create-observation?procore-access-token=some-procore-access-token`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
   });
