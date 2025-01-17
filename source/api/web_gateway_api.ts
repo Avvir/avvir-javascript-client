@@ -85,11 +85,8 @@ export default class WebGatewayApi {
     return Http.addAuthToDownloadUrl(url, user);
   }
 
-  static checkProcoreAccessToken(projectId: string, procoreAccessToken: string, user: User): Promise<{ expiresInSeconds: number }> {
-    if (!projectId) {
-      return Promise.reject(new Error("Project not loaded yet"));
-    }
-    let url = `${Http.baseUrl()}/projects/${projectId}/procore?procore-access-token=${procoreAccessToken}`;
+  static checkProcoreAccessToken(procoreAccessToken: string, user: User): Promise<{ expiresInSeconds: number }> {
+    let url = `${Http.baseUrl()}/integrations/procore/access-token?procore-access-token=${procoreAccessToken}`;
     return Http.get(url, user) as unknown as Promise<{ expiresInSeconds: number }>;
   }
 
@@ -105,14 +102,40 @@ export default class WebGatewayApi {
     return Http.post(url, user, null) as unknown as Promise<{ id: number }>;
   }
 
-  static getProcoreProjects(projectId: string, procoreAccessToken: string, user: User): Promise<{ lastUpdated: number, projectId: string | number }[]> {
-    if (!projectId) {
-      return Promise.reject(new Error("Project not loaded yet"));
+  static getProcoreProjects(procoreAccessToken: string,
+                            companyId: string ,
+                            user: User): Promise<{ lastUpdated: number, projectId: string | number }[]> {
+    let url = `${Http.baseUrl()}/integrations/procore/projects`;
+    const params = [];
+    params.push(`procore-access-token=${procoreAccessToken}`)
+    if (companyId) {
+      params.push(`companyId=${companyId}`)
     }
-    const url = `${Http.baseUrl()}/projects/${projectId}/procore-projects?procore-access-token=${procoreAccessToken}`;
+    url += "?" + params.join("&");
     return Http.get(url, user) as unknown as Promise<{ lastUpdated: number, projectId: string | number }[]>;
   }
 
+  static getProcoreCompanies(procoreAccessToken: string,
+                            user: User): Promise<{ name: string, id: string | number }[]> {
+    let url = `${Http.baseUrl()}/integrations/procore/companies?procore-access-token=${procoreAccessToken}`;
+    return Http.get(url, user) as unknown as Promise<{ name: string, id: string | number }[]>;
+  }
+
+  static listProcoreObservationTypes(procoreAccessToken: string,
+                                     companyId: string,
+                                     user: User): Promise<{ name: string, id: string | number, category:string }[]> {
+    let url = `${Http.baseUrl()}/integrations/procore/${companyId}/observation-types?procore-access-token=${procoreAccessToken}`;
+    return Http.get(url, user) as unknown as Promise<{ name: string, id: string | number, category:string }[]>;
+  }
+
+  static CreateProcoreObservation(procoreAccessToken: string,
+                                     companyId: string,
+                                     projectId: string,
+                                     observationRequest: any,
+                                     user: User): Promise<void> {
+    let url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/create-observation?procore-access-token=${procoreAccessToken}`;
+    return Http.post(url, user,observationRequest) as unknown as Promise<void>;
+  }
   /**
    * @deprecated Moved to AuthApi
    */
