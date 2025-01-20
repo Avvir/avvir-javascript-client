@@ -8,6 +8,7 @@ import {
 } from "../models";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
+import {ApiObservationRequest} from "../models/api/api_observation_request";
 
 export default class IntegrationsApi {
 
@@ -66,6 +67,74 @@ export default class IntegrationsApi {
     const url = `${Http.baseUrl()}/integrations/organizations/${organizationId}/projects/${projectId}/set-integration-project`;
     return Http.post(url, user, integrationProject) as unknown as Promise<void>;
   }
+
+    static checkProcoreAccessToken(procoreAccessToken: string,
+                                   user: User): Promise<{ expiresInSeconds: number }> {
+        if (!procoreAccessToken) {
+            return Promise.reject(new Error("Procore access token not found"));
+        }
+        let url = `${Http.baseUrl()}/integrations/procore/access-token?procore-access-token=${procoreAccessToken}`;
+        return Http.get(url, user) as unknown as Promise<{ expiresInSeconds: number }>;
+    }
+
+    static pushPdfToProcore({
+                                projectId,
+                                floorId,
+                                scanDatasetId
+                            }: AssociationIds, procoreProjectId: string, procoreCompanyId: string, procoreAccessToken: string, pdfType: string, user: User): Promise<{ id: number }> {
+        if (!projectId) {
+            return Promise.reject(new Error("Project not loaded yet"));
+        }
+        const url = `${Http.baseUrl()}/projects/${projectId}/push-report-to-procore/${pdfType}?procore-project-id=${procoreProjectId}&procore-company-id=${procoreCompanyId}&procore-access-token=${procoreAccessToken}`;
+        return Http.post(url, user, null) as unknown as Promise<{ id: number }>;
+    }
+
+    static getProcoreProjects(procoreAccessToken: string,
+                              companyId: string ,
+                              user: User): Promise<{ lastUpdated: number, projectId: string | number }[]> {
+        if (!procoreAccessToken) {
+            return Promise.reject(new Error("Procore access token not found"));
+        }
+        let url = `${Http.baseUrl()}/integrations/procore/projects`;
+        const params = [];
+        params.push(`procore-access-token=${procoreAccessToken}`)
+        if (companyId) {
+            params.push(`companyId=${companyId}`)
+        }
+        url += "?" + params.join("&");
+        return Http.get(url, user) as unknown as Promise<{ lastUpdated: number, projectId: string | number }[]>;
+    }
+
+    static getProcoreCompanies(procoreAccessToken: string,
+                               user: User): Promise<{ name: string, id: string | number }[]> {
+        if (!procoreAccessToken) {
+            return Promise.reject(new Error("Procore access token not found"));
+        }
+        let url = `${Http.baseUrl()}/integrations/procore/companies?procore-access-token=${procoreAccessToken}`;
+        return Http.get(url, user) as unknown as Promise<{ name: string, id: string | number }[]>;
+    }
+
+    static listProcoreObservationTypes(procoreAccessToken: string,
+                                       companyId: string,
+                                       user: User): Promise<{ name: string, id: string | number, category:string }[]> {
+        if (!procoreAccessToken) {
+            return Promise.reject(new Error("Procore access token not found"));
+        }
+        let url = `${Http.baseUrl()}/integrations/procore/${companyId}/observation-types?procore-access-token=${procoreAccessToken}`;
+        return Http.get(url, user) as unknown as Promise<{ name: string, id: string | number, category:string }[]>;
+    }
+
+    static CreateProcoreObservation(procoreAccessToken: string,
+                                    companyId: string,
+                                    projectId: string,
+                                    observationRequest: ApiObservationRequest,
+                                    user: User): Promise<void> {
+        if (!procoreAccessToken) {
+            return Promise.reject(new Error("Procore access token not found"));
+        }
+        let url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/create-observation?procore-access-token=${procoreAccessToken}`;
+        return Http.post(url, user,observationRequest) as unknown as Promise<void>;
+    }
 
 }
 
