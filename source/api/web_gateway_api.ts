@@ -9,6 +9,7 @@ import { ApiActionPayload, ApiRunningProcess, ApiUserAction, AssociationIds, Use
 import buildFileName from "../utilities/build_file_name";
 import AuthApi from "./auth_api";
 import { httpGetHeaders } from "../utilities/request_headers";
+import {ApiObservationRequest} from "../models/api/api_observation_request";
 
 export default class WebGatewayApi {
 
@@ -86,6 +87,9 @@ export default class WebGatewayApi {
   }
 
   static checkProcoreAccessToken(procoreAccessToken: string, user: User): Promise<{ expiresInSeconds: number }> {
+    if (!procoreAccessToken) {
+      return Promise.reject(new Error("Procore access token not found"));
+    }
     let url = `${Http.baseUrl()}/integrations/procore/access-token?procore-access-token=${procoreAccessToken}`;
     return Http.get(url, user) as unknown as Promise<{ expiresInSeconds: number }>;
   }
@@ -105,6 +109,9 @@ export default class WebGatewayApi {
   static getProcoreProjects(procoreAccessToken: string,
                             companyId: string ,
                             user: User): Promise<{ lastUpdated: number, projectId: string | number }[]> {
+    if (!procoreAccessToken) {
+      return Promise.reject(new Error("Procore access token not found"));
+    }
     let url = `${Http.baseUrl()}/integrations/procore/projects`;
     const params = [];
     params.push(`procore-access-token=${procoreAccessToken}`)
@@ -117,6 +124,9 @@ export default class WebGatewayApi {
 
   static getProcoreCompanies(procoreAccessToken: string,
                             user: User): Promise<{ name: string, id: string | number }[]> {
+    if (!procoreAccessToken) {
+      return Promise.reject(new Error("Procore access token not found"));
+    }
     let url = `${Http.baseUrl()}/integrations/procore/companies?procore-access-token=${procoreAccessToken}`;
     return Http.get(url, user) as unknown as Promise<{ name: string, id: string | number }[]>;
   }
@@ -124,6 +134,9 @@ export default class WebGatewayApi {
   static listProcoreObservationTypes(procoreAccessToken: string,
                                      companyId: string,
                                      user: User): Promise<{ name: string, id: string | number, category:string }[]> {
+    if (!procoreAccessToken) {
+      return Promise.reject(new Error("Procore access token not found"));
+    }
     let url = `${Http.baseUrl()}/integrations/procore/${companyId}/observation-types?procore-access-token=${procoreAccessToken}`;
     return Http.get(url, user) as unknown as Promise<{ name: string, id: string | number, category:string }[]>;
   }
@@ -131,8 +144,11 @@ export default class WebGatewayApi {
   static CreateProcoreObservation(procoreAccessToken: string,
                                      companyId: string,
                                      projectId: string,
-                                     observationRequest: any,
+                                     observationRequest: ApiObservationRequest,
                                      user: User): Promise<void> {
+    if (!procoreAccessToken) {
+      return Promise.reject(new Error("Procore access token not found"));
+    }
     let url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/create-observation?procore-access-token=${procoreAccessToken}`;
     return Http.post(url, user,observationRequest) as unknown as Promise<void>;
   }
