@@ -405,6 +405,48 @@ describe("WebGatewayApi", () => {
     });
   });
 
+  describe("::checkProcoreAccessToken", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/integrations/procore/access-token?procore-access-token=some-procore-access-token`,
+          {status: 200, body: {expiresInSeconds: 3600}});
+    });
+
+    it("includes auth headers and makes a request to check access token", () => {
+       WebGatewayApi.checkProcoreAccessToken("some-procore-access-token", {
+        authType: GATEWAY_JWT,
+        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+      });
+
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/procore/access-token?procore-access-token=some-procore-access-token`);
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("throws an error if procore access token is missing", () => {
+      try {
+         WebGatewayApi.checkProcoreAccessToken("", {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+      } catch (error) {
+        expect(error.message).to.eq("Procore access token not found");
+      }
+    });
+
+    it("throws an error if procore access token is undefined", () => {
+      try {
+         WebGatewayApi.checkProcoreAccessToken(undefined, {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+      } catch (error) {
+        expect(error.message).to.eq("Procore access token not found");
+      }
+    });
+  });
+
   describe("::pushPdfToProcore", () => {
     let dispatchSpy;
     beforeEach(() => {
@@ -476,6 +518,28 @@ describe("WebGatewayApi", () => {
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
+    it("throws an error if procore access token is missing when companyId is not given", () => {
+      try {
+        WebGatewayApi.getProcoreProjects("",undefined, {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+      } catch (error) {
+        expect(error.message).to.eq("Procore access token not found");
+      }
+    });
+
+    it("throws an error if procore access token is undefined when companyId is not given", () => {
+      try {
+        WebGatewayApi.getProcoreProjects(undefined, undefined, {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+      } catch (error) {
+        expect(error.message).to.eq("Procore access token not found");
+      }
+    });
+
     it("includes auth headers and makes a request to the gateway with companyId", () => {
       WebGatewayApi.getProcoreProjects("some-procore-access-token", "some-company-id", {
         authType: GATEWAY_JWT,
@@ -488,6 +552,28 @@ describe("WebGatewayApi", () => {
       );
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("throws an error if procore access token is missing when companyId is given", () => {
+      try {
+        WebGatewayApi.getProcoreProjects("","some-company-id", {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+      } catch (error) {
+        expect(error.message).to.eq("Procore access token not found");
+      }
+    });
+
+    it("throws an error if procore access token is undefined when companyId is given", () => {
+      try {
+        WebGatewayApi.getProcoreProjects(undefined, "some-company-id", {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+      } catch (error) {
+        expect(error.message).to.eq("Procore access token not found");
+      }
     });
 
   });
@@ -510,6 +596,28 @@ describe("WebGatewayApi", () => {
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
+    it("throws an error if procore access token is missing", () => {
+      try {
+        WebGatewayApi.getProcoreCompanies("", {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+      } catch (error) {
+        expect(error.message).to.eq("Procore access token not found");
+      }
+    });
+
+    it("throws an error if procore access token is undefined", () => {
+      try {
+        WebGatewayApi.getProcoreCompanies(undefined, {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+      } catch (error) {
+        expect(error.message).to.eq("Procore access token not found");
+      }
+    });
+
   });
 
   describe("::getProcoreObservationTypes", () => {
@@ -530,24 +638,26 @@ describe("WebGatewayApi", () => {
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
-  });
-
-  describe("::createProcoreObservation", () => {
-    beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-company-id/observation-types?procore-access-token=some-procore-access-token`,
-          {status: 200, body: ["some-procore-observation-type"]});
+    it("throws an error if procore access token is missing", () => {
+      try {
+        WebGatewayApi.listProcoreObservationTypes("","some-company-id", {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+      } catch (error) {
+        expect(error.message).to.eq("Procore access token not found");
+      }
     });
 
-    it("includes auth headers and makes a request to the gateway", () => {
-      WebGatewayApi.listProcoreObservationTypes("some-procore-access-token","some-company-id", {
-        authType: GATEWAY_JWT,
-        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
-      });
-      const fetchCall = fetchMock.lastCall();
-
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/procore/some-company-id/observation-types?procore-access-token=some-procore-access-token`);
-      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
-      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    it("throws an error if procore access token is undefined", () => {
+      try {
+        WebGatewayApi.listProcoreObservationTypes(undefined,"some-company-id", {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+        });
+      } catch (error) {
+        expect(error.message).to.eq("Procore access token not found");
+      }
     });
 
   });
@@ -569,7 +679,7 @@ describe("WebGatewayApi", () => {
             "description":"Sample Observation Item",
             "due_date":"2024-11-16",
             "name":"Test Observation",
-            "personal": true,
+            "personal": "true",
             "priority":"Low",
             "status":"initiated",
             "type_id": 152839
@@ -591,7 +701,7 @@ describe("WebGatewayApi", () => {
             "description":"Sample Observation Item",
             "due_date":"2024-11-16",
             "name":"Test Observation",
-            "personal": true,
+            "personal": "true",
             "priority":"Low",
             "status":"initiated",
             "type_id": 152839
@@ -607,6 +717,52 @@ describe("WebGatewayApi", () => {
           .to
           .eq(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/create-observation?procore-access-token=some-procore-access-token`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("throws an error if procore access token is missing", () => {
+      try {
+        WebGatewayApi.CreateProcoreObservation("",
+            "some-company-id",
+            "some-project-id",
+            {
+              "description":"Sample Observation Item",
+              "due_date":"2024-11-16",
+              "name":"Test Observation",
+              "personal": "true",
+              "priority":"Low",
+              "status":"initiated",
+              "type_id": 152839
+            },
+            {
+              authType: GATEWAY_JWT,
+              gatewayUser: {idToken: "some-firebase.id.token", role: USER},
+            });
+      } catch (error) {
+        expect(error.message).to.eq("Procore access token not found");
+      }
+    });
+
+    it("throws an error if procore access token is undefined", () => {
+      try {
+        WebGatewayApi.CreateProcoreObservation(undefined,
+            "some-company-id",
+            "some-project-id",
+            {
+              "description":"Sample Observation Item",
+              "due_date":"2024-11-16",
+              "name":"Test Observation",
+              "personal": "true",
+              "priority":"Low",
+              "status":"initiated",
+              "type_id": 152839
+            },
+            {
+              authType: GATEWAY_JWT,
+              gatewayUser: {idToken: "some-firebase.id.token", role: USER},
+            });
+      } catch (error) {
+        expect(error.message).to.eq("Procore access token not found");
+      }
     });
   });
 
