@@ -9,6 +9,9 @@ import {
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import {ApiObservationRequest} from "../models/api/integrations/procore/api_observation_request";
+import ApiProjects from "../models/api/integrations/autodesk/api_projects";
+import ApiHubs from "../models/api/integrations/autodesk/api_hubs";
+import ApiAutodeskAccessToken from "../models/api/integrations/autodesk/api_access_token";
 
 export default class IntegrationsApi {
 
@@ -145,6 +148,33 @@ export default class IntegrationsApi {
         }
         let url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/create-observation?procore-access-token=${procoreAccessToken}`;
         return Http.post(url, user, observationRequest) as unknown as Promise<void>;
+    }
+
+    static getAutoDeskAccessToken(code: String, redirectUri:string, user:User): Promise<ApiAutodeskAccessToken> {
+        if(!code||!redirectUri)
+        {
+            return Promise.reject(new Error("Invalid client secret or redirectUri"));
+        }
+        const url = `${Http.baseUrl()}/integrations/autodesk/access-token?code=${code}&redirect-uri=${redirectUri}`;
+        return Http.get(url, user) as unknown as Promise<ApiAutodeskAccessToken>;
+    }
+
+    static  getAutodeskHubs(access_token: string, user:User): Promise<ApiHubs> {
+        if(!access_token)
+        {
+            return Promise.reject(new Error("Invalid access token"));
+        }
+        const url = `${Http.baseUrl()}/integrations/autodesk/hubs?access-token=${access_token}`
+        return Http.get(url, user) as unknown as Promise<ApiHubs>;
+    }
+
+    static getAutoDeskProjects(access_token: string, hubId: string, user:User): Promise<ApiProjects> {
+        if(!access_token || !hubId)
+        {
+            return Promise.reject(new Error("Invalid access token or hubId"));
+        }
+        const url = `${Http.baseUrl()}/integrations/autodesk/projects?access-token=${access_token}&hubId=${hubId}`;
+        return Http.get(url, user) as unknown as Promise<ApiProjects>;
     }
 
 }
