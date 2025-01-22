@@ -150,27 +150,24 @@ export default class IntegrationsApi {
         return Http.post(url, user, observationRequest) as unknown as Promise<void>;
     }
 
-    static getAutoDeskAccessToken(code: String, redirectUri:string, user:User): Promise<ApiAutodeskAccessToken> {
-        if(!code||!redirectUri)
-        {
+    static getAutoDeskAccessToken(code: string, redirectUri: string, user: User): Promise<ApiAutodeskAccessToken> {
+        if (!code || !redirectUri) {
             return Promise.reject(new Error("Invalid client secret or redirectUri"));
         }
         const url = `${Http.baseUrl()}/integrations/autodesk/access-token?code=${code}&redirect-uri=${redirectUri}`;
         return Http.get(url, user) as unknown as Promise<ApiAutodeskAccessToken>;
     }
 
-    static  getAutodeskHubs(access_token: string, user:User): Promise<ApiHubs> {
-        if(!access_token)
-        {
+    static getAutodeskHubs(access_token: string, user: User): Promise<ApiHubs> {
+        if (!access_token) {
             return Promise.reject(new Error("Invalid access token"));
         }
         const url = `${Http.baseUrl()}/integrations/autodesk/hubs?access-token=${access_token}`
         return Http.get(url, user) as unknown as Promise<ApiHubs>;
     }
 
-    static getAutoDeskProjects(access_token: string, hubId: string, user:User): Promise<ApiProjects> {
-        if(!access_token || !hubId)
-        {
+    static getAutoDeskProjects(access_token: string, hubId: string, user: User): Promise<ApiProjects> {
+        if (!access_token || !hubId) {
             return Promise.reject(new Error("Invalid access token or hubId"));
         }
         const url = `${Http.baseUrl()}/integrations/autodesk/projects?access-token=${access_token}&hubId=${hubId}`;
