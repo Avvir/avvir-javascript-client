@@ -5,6 +5,7 @@ export class attributes {
 export class ApiHubs {
     id: string;
     name: attributes
+
     constructor({id, name}: Partial<ApiHubs> = {}) {
         this.id = id;
         this.name = name;
