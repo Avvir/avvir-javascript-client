@@ -475,7 +475,7 @@ describe("IntegrationsApi", () => {
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 });
             } catch (error) {
-                expect(error.message).to.eq("Procore access token not found");
+                expect(error.message).to.eq("Procore access token not foundiiiiii");
             }
         });
 
@@ -756,4 +756,180 @@ describe("IntegrationsApi", () => {
         });
     });
 
+    describe("::getAutodeskAccessToken", () => {
+        beforeEach(() => {
+            fetchMock.get(`${Http.baseUrl()}/integrations/autodesk/access-token?code=some-code&redirect-uri=some-redirect-uri`,
+                {status: 200, body: {access_token: "some-access-token"}});
+        });
+
+        it("includes auth headers and makes a request to the gateway", () => {
+            IntegrationsApi.getAutoDeskAccessToken("some-code", "some-redirect-uri", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            });
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/autodesk/access-token?code=some-code&redirect-uri=some-redirect-uri`);
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+
+        it("throws an error if code is missing", () => {
+            return IntegrationsApi.getAutoDeskAccessToken("", "some-redirect-uri", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Invalid client secret or redirectUri");
+            });
+        });
+
+        it("throws an error if code is undefined", () => {
+            return IntegrationsApi.getAutoDeskAccessToken(undefined, "some-redirect-uri", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error
+            }).then((error) => {
+                expect(error.message).to.eq("Invalid client secret or redirectUri");
+            });
+        });
+
+        it("throws an error if redirectUri is missing", () => {
+            return IntegrationsApi.getAutoDeskAccessToken("some-code", "", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Invalid client secret or redirectUri");
+            });
+        });
+
+        it("throws an error if redirectUri is undefined", () => {
+            return IntegrationsApi.getAutoDeskAccessToken
+            ("some-code", undefined, {
+                authType: GATEWAY_JWT,
+                gatewayUser: {
+                    idToken: "some-firebase.id.token", role: USER
+                }
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Invalid client secret or redirectUri");
+            });
+        });
+    });
+
+    describe("::getAutoDeskHubs", () => {
+        beforeEach(() => {
+            fetchMock.get(`${Http.baseUrl()}/integrations/autodesk/hubs?access-token=some-access-token`,
+                {status: 200, body: ["some-autodesk-hubs"]});
+        });
+
+        it("includes auth headers and makes a request to the gateway", () => {
+            IntegrationsApi.getAutodeskHubs("some-access-token", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {
+                    idToken: "some-firebase.id.token", role: USER
+                }
+            });
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/autodesk/hubs?access-token=some-access-token`);
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+
+        it("throws an error if access token is missing", () => {
+            return IntegrationsApi.getAutodeskHubs("", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {
+                    idToken: "some-firebase.id.token", role: USER
+                }
+            }).catch((error) => {
+                return error
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token");
+            });
+        });
+
+        it("throws an error if access token is undefined", () => {
+            return IntegrationsApi.getAutodeskHubs(undefined, {
+                authType: GATEWAY_JWT,
+                gatewayUser: {
+                    idToken: "some-firebase.id.token", role: USER
+                }
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token");
+            });
+        });
+    });
+
+    describe("::getAutoDeskProjects", () => {
+        beforeEach(() => {
+                fetchMock.get(`${Http.baseUrl()}/integrations/autodesk/projects?access-token=some-access-token&hubId=some-hub-id`,
+                    {status: 200, body: ["some-autodesk-project"]});
+            }
+        );
+
+        it("includes auth headers and makes a request to the gateway", () => {
+            IntegrationsApi.getAutoDeskProjects("some-access-token", "some-hub-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            });
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/autodesk/projects?access-token=some-access-token&hubId=some-hub-id`);
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+
+        it("throws an error if access token is missing", () => {
+            return IntegrationsApi.getAutoDeskProjects("", "some-hub-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token or hubId");
+            });
+        });
+
+        it("throws an error if hubid is missing", () => {
+            return IntegrationsApi.getAutoDeskProjects("some-access-token", "", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token or hubId");
+            });
+        });
+
+        it("throws an error if access token is undefined", () => {
+            return IntegrationsApi.getAutoDeskProjects(undefined, "some-hub-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token or hubId");
+            });
+        });
+
+        it("throws an error if hubid is undefined", () => {
+            return IntegrationsApi.getAutoDeskProjects("some-access-token", undefined, {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token or hubId");
+            });
+        });
+    });
 });
