@@ -763,7 +763,7 @@ describe("IntegrationsApi", () => {
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
-            IntegrationsApi.getAutoDeskAccessToken("some-code", "some-redirect-uri", {
+            IntegrationsApi.getAutodeskAccessToken("some-code", "some-redirect-uri", {
                 authType: GATEWAY_JWT,
                 gatewayUser: {idToken: "some-firebase.id.token", role: USER}
             });
@@ -775,7 +775,7 @@ describe("IntegrationsApi", () => {
         });
 
         it("throws an error if code is missing", () => {
-            return IntegrationsApi.getAutoDeskAccessToken("", "some-redirect-uri", {
+            return IntegrationsApi.getAutodeskAccessToken("", "some-redirect-uri", {
                 authType: GATEWAY_JWT,
                 gatewayUser: {idToken: "some-firebase.id.token", role: USER}
             }).catch((error) => {
@@ -786,7 +786,7 @@ describe("IntegrationsApi", () => {
         });
 
         it("throws an error if code is undefined", () => {
-            return IntegrationsApi.getAutoDeskAccessToken(undefined, "some-redirect-uri", {
+            return IntegrationsApi.getAutodeskAccessToken(undefined, "some-redirect-uri", {
                 authType: GATEWAY_JWT,
                 gatewayUser: {idToken: "some-firebase.id.token", role: USER}
             }).catch((error) => {
@@ -797,7 +797,7 @@ describe("IntegrationsApi", () => {
         });
 
         it("throws an error if redirectUri is missing", () => {
-            return IntegrationsApi.getAutoDeskAccessToken("some-code", "", {
+            return IntegrationsApi.getAutodeskAccessToken("some-code", "", {
                 authType: GATEWAY_JWT,
                 gatewayUser: {idToken: "some-firebase.id.token", role: USER}
             }).catch((error) => {
@@ -808,7 +808,7 @@ describe("IntegrationsApi", () => {
         });
 
         it("throws an error if redirectUri is undefined", () => {
-            return IntegrationsApi.getAutoDeskAccessToken
+            return IntegrationsApi.getAutodeskAccessToken
             ("some-code", undefined, {
                 authType: GATEWAY_JWT,
                 gatewayUser: {
@@ -877,7 +877,7 @@ describe("IntegrationsApi", () => {
         );
 
         it("includes auth headers and makes a request to the gateway", () => {
-            IntegrationsApi.getAutoDeskProjects("some-access-token", "some-hub-id", {
+            IntegrationsApi.getAutodeskProjects("some-access-token", "some-hub-id", {
                 authType: GATEWAY_JWT,
                 gatewayUser: {idToken: "some-firebase.id.token", role: USER}
             });
@@ -889,7 +889,7 @@ describe("IntegrationsApi", () => {
         });
 
         it("throws an error if access token is missing", () => {
-            return IntegrationsApi.getAutoDeskProjects("", "some-hub-id", {
+            return IntegrationsApi.getAutodeskProjects("", "some-hub-id", {
                 authType: GATEWAY_JWT,
                 gatewayUser: {idToken: "some-firebase.id.token", role: USER}
             }).catch((error) => {
@@ -900,7 +900,7 @@ describe("IntegrationsApi", () => {
         });
 
         it("throws an error if hubid is missing", () => {
-            return IntegrationsApi.getAutoDeskProjects("some-access-token", "", {
+            return IntegrationsApi.getAutodeskProjects("some-access-token", "", {
                 authType: GATEWAY_JWT,
                 gatewayUser: {idToken: "some-firebase.id.token", role: USER}
             }).catch((error) => {
@@ -911,7 +911,7 @@ describe("IntegrationsApi", () => {
         });
 
         it("throws an error if access token is undefined", () => {
-            return IntegrationsApi.getAutoDeskProjects(undefined, "some-hub-id", {
+            return IntegrationsApi.getAutodeskProjects(undefined, "some-hub-id", {
                 authType: GATEWAY_JWT,
                 gatewayUser: {idToken: "some-firebase.id.token", role: USER}
             }).catch((error) => {
@@ -922,7 +922,7 @@ describe("IntegrationsApi", () => {
         });
 
         it("throws an error if hubid is undefined", () => {
-            return IntegrationsApi.getAutoDeskProjects("some-access-token", undefined, {
+            return IntegrationsApi.getAutodeskProjects("some-access-token", undefined, {
                 authType: GATEWAY_JWT,
                 gatewayUser: {idToken: "some-firebase.id.token", role: USER}
             }).catch((error) => {

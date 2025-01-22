@@ -150,7 +150,7 @@ export default class IntegrationsApi {
         return Http.post(url, user, observationRequest) as unknown as Promise<void>;
     }
 
-    static getAutoDeskAccessToken(code: string, redirectUri: string, user: User): Promise<ApiAutodeskAccessToken> {
+    static getAutodeskAccessToken(code: string, redirectUri: string, user: User): Promise<ApiAutodeskAccessToken> {
         if (!code || !redirectUri) {
             return Promise.reject(new Error("Invalid client secret or redirectUri"));
         }
@@ -166,7 +166,7 @@ export default class IntegrationsApi {
         return Http.get(url, user) as unknown as Promise<ApiHubs>;
     }
 
-    static getAutoDeskProjects(access_token: string, hubId: string, user: User): Promise<ApiProjects> {
+    static getAutodeskProjects(access_token: string, hubId: string, user: User): Promise<ApiProjects> {
         if (!access_token || !hubId) {
             return Promise.reject(new Error("Invalid access token or hubId"));
         }
