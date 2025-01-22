@@ -475,7 +475,7 @@ describe("IntegrationsApi", () => {
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 });
             } catch (error) {
-                expect(error.message).to.eq("Procore access token not foundiiiiii");
+                expect(error.message).to.eq("Procore access token not found");
             }
         });
 
