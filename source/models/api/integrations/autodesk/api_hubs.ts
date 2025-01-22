@@ -1,14 +1,14 @@
-export class attributes {
+export class Attributes {
     name: string;
 }
 
 export class ApiHubs {
     id: string;
-    name: attributes
+    attributes: Attributes
 
-    constructor({id, name}: Partial<ApiHubs> = {}) {
+    constructor({id, attributes}: Partial<ApiHubs> = {}) {
         this.id = id;
-        this.name = name;
+        this.attributes = attributes;
     }
 }
 
