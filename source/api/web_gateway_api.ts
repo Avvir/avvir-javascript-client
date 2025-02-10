@@ -53,17 +53,7 @@ export default class WebGatewayApi {
     return Http.get(url, user) as unknown as Promise<ApiInvitation>;
   }
 
-  static getProgressReportPdfUrl(projectId: string, floorId: string, user: User): string {
-    const baseUrl = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/progress-report.pdf`;
-    return Http.addAuthToDownloadUrl(baseUrl, user);
-  }
-
-  /** @deprecated We no longer support pdf quality control reports */
-  static getQualityControlReportPdfUrl(projectId: string): string {
-    return `${Http.baseUrl()}/projects/${projectId}/report.pdf`;
-  }
-
-  static getPlannedElementsNewTsvUrl({ projectId, floorId }: AssociationIds, fileName: string, user: User): string {
+  static getPlannedElementsNewTsvUrl({projectId, floorId}: AssociationIds, fileName: string, user: User): string {
     const baseUrl = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/${fileName}_planned-building-elements-new.tsv`;
     return Http.addAuthToDownloadUrl(baseUrl, user);
   }
@@ -222,8 +212,6 @@ makeErrorsPretty(WebGatewayApi, {
     "login",
     "addAuthToDownloadUrl",
     "baseUrl",
-    "getProgressReportPdfUrl",
-    "getQualityControlReportPdfUrl",
     "getPlannedElementsNewTsvUrl",
     "getDeviationsReportTsvUrl",
     "getScanAnalysisUrl",

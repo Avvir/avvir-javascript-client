@@ -405,57 +405,6 @@ describe("IntegrationsApi", () => {
         });
     });
 
-    describe("::pushPdfToProcore", () => {
-        let dispatchSpy;
-        beforeEach(() => {
-            dispatchSpy = sandbox.spy();
-            fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/push-report-to-procore/progress?procore-project-id=some-procore-project-id&procore-company-id=some-company-id&procore-access-token=some-procore-access-token`,
-                200);
-        });
-
-        it("includes the authorization headers", () => {
-            IntegrationsApi.pushPdfToProcore({
-                    projectId: "some-project-id",
-                    floorId: "some-floor-id",
-                    scanDatasetId: "some-scan-dataset-id"
-                },
-                "some-procore-project-id",
-                "some-company-id",
-                "some-procore-access-token",
-                "progress",
-                {
-                    authType: GATEWAY_JWT,
-                    gatewayUser: {idToken: "some-firebase.id.token", role: USER},
-                },
-            );
-
-            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
-        });
-
-        it("makes a request to the gateway api", () => {
-            IntegrationsApi.pushPdfToProcore({
-                    projectId: "some-project-id",
-                    floorId: "some-floor-id",
-                    scanDatasetId: "some-scan-dataset-id"
-                },
-                "some-procore-project-id",
-                "some-company-id",
-                "some-procore-access-token",
-                "progress",
-                {
-                    authType: GATEWAY_JWT,
-                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
-                },
-            );
-            const fetchCall = fetchMock.lastCall();
-
-            expect(fetchCall[0])
-                .to
-                .eq(`${Http.baseUrl()}/projects/some-project-id/push-report-to-procore/progress?procore-project-id=some-procore-project-id&procore-company-id=some-company-id&procore-access-token=some-procore-access-token`);
-            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
-        });
-    });
-
     describe("::getProcoreProjects", () => {
         beforeEach(() => {
             fetchMock.get(`${Http.baseUrl()}/integrations/procore/projects?procore-access-token=some-procore-access-token`,
