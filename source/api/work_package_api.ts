@@ -1,7 +1,9 @@
-import ApiWorkPackage from "../models/api/api_work_package";
 import Http from "../utilities/http";
-import { AssociationIds, User } from "../models";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
+
+import type { ApiWorkPackage, User } from "../models";
+import type { AssociationIds } from "type_aliases";
+
 
 export default class WorkPackageApi {
   static listWorkPackages({ projectId }: AssociationIds, user: User) {

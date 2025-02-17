@@ -1,7 +1,7 @@
-import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_to_model";
-import { ApiQuaternion } from "./api_quaternion";
+import addReadOnlyPropertiesToModel from "../../../mixins/add_read_only_properties_to_model";
+import { ApiQuaternion } from "../api_quaternion";
 
-import type { Vector3Like, Vector4Like } from "./type_aliases";
+import type { Vector3Like, Vector4Like } from "type_aliases";
 
 export type ApiPhotoLocationProperties = {
   id: number,

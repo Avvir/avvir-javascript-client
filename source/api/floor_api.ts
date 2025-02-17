@@ -1,13 +1,12 @@
 // @ts-nocheck
-import ApiFloor from "../models/api/api_floor";
+import FloorFileDeletionModeConverter from "../converters/floor_file_deletion_mode_converter";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import {ApiMasterformatProgress, ApiRunningProcess, AssociationIds, ProgressType} from "../models";
-import { User } from "../utilities/get_authorization_headers";
-import {ApiPlannedElement} from "../models";
-import {DateConverter} from "../converters";
-import {DateLike} from "type_aliases";
-import FloorFileDeletionModeConverter from "../converters/floor_file_deletion_mode_converter";
+import { DateConverter } from "../converters";
+
+import type { ApiFloor, ApiMasterformatProgress, ApiPlannedElement, ApiRunningProcess, ProgressType } from "../models";
+import type { AssociationIds, DateLike } from "type_aliases";
+import type { User } from "../utilities/get_authorization_headers";
 
 export default class FloorApi {
   static listFloorsForProject(projectId: string, user: User): Promise<ApiFloor[]> {

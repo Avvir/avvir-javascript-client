@@ -1,12 +1,11 @@
 import { addInstantGetterAndSetterToApiModel, addReadOnlyPropertiesToModel } from "../../mixins";
-import { ApiProjectPurposeType, ApiPurposeType, isApiPurposeType } from "./api_purpose_type";
+import { ApiProjectPurposeType, ApiPurposeType, isApiPurposeType } from "../enums/api_purpose_type";
 import { AssociationType, isPurposeType, PurposeType } from "../enums";
 import { PurposeTypeConverter } from "../../converters";
 
-import type ApiPhotoLocation3d from "./api_photo_location_3d";
+import type ApiPhotoLocation3d from "./photos/api_photo_location_3d";
 import type { DateLike, ModifyPartial, Vector2Like } from "type_aliases";
 
-export type AvvirApiFiles<Type extends ApiPurposeType = ApiPurposeType> = { [purposeType in Type]?: ApiCloudFile | ApiCloudFile[] }
 export type AvvirApiFileIds<Type extends ApiPurposeType = ApiPurposeType> = { [purposeType in Type]?: number[] }
 
 export interface ApiCloudFileMetadata {

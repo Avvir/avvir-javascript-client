@@ -1,8 +1,9 @@
-import { User } from "../utilities/get_authorization_headers";
-import { AssociationIds } from "../models";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import {ApiComment, ApiCommentThread} from "../models";
+import { ApiComment, ApiCommentThread } from "../models";
+import { User } from "../utilities/get_authorization_headers";
+
+import type { AssociationIds } from "type_aliases";
 
 export function toCommentThreadUrl({ projectId, floorId, scanDatasetId, viewId, wbsCode }: AssociationIds) {
   let url = `${Http.baseUrl()}/projects/${projectId}/comments/threads`;
@@ -20,8 +21,8 @@ export function toCommentThreadUrl({ projectId, floorId, scanDatasetId, viewId, 
       params.push(`viewId=${viewId}`);
     }
 
-    if(wbsCode) {
-      params.push(`wbsCode=${wbsCode}`)
+    if (wbsCode) {
+      params.push(`wbsCode=${wbsCode}`);
     }
     url += "?" + params.join("&");
   }
@@ -40,7 +41,9 @@ export default class CommentApi {
     return Http.post(url, user, body) as unknown as Promise<ApiCommentThread>;
   }
 
-  static createCommentForThread({ projectId, commentThreadId }: AssociationIds, body: ApiComment, user: User): Promise<ApiComment> {
+  static createCommentForThread({ projectId, commentThreadId }: AssociationIds,
+                                body: ApiComment,
+                                user: User): Promise<ApiComment> {
     const url = `${Http.baseUrl()}/projects/${projectId}/comments/threads/${commentThreadId}`;
     return Http.post(url, user, body) as unknown as Promise<ApiComment>;
   }

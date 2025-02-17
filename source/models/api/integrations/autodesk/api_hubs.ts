@@ -1,15 +1,13 @@
-export class Attributes {
-    name: string;
-}
+import { ApiAutodeskAttritributes } from "./api_autodesk_attriibutes";
 
 export class ApiHubs {
-    id: string;
-    attributes: Attributes
+  id: string;
+  attributes: ApiAutodeskAttritributes;
 
-    constructor({id, attributes}: Partial<ApiHubs> = {}) {
-        this.id = id;
-        this.attributes = attributes;
-    }
+  constructor({ id, attributes }: Partial<ApiHubs> = {}) {
+    this.id = id;
+    this.attributes = attributes;
+  }
 }
 
 export default ApiHubs;

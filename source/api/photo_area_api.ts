@@ -1,8 +1,10 @@
 import { isArray } from "underscore";
-import { ApiPhotoArea, ApiPhotoLocation, ApiPhotoLocation3d, ApiPhotoSession, AssociationIds } from "../models";
-import { User } from "../utilities/get_authorization_headers";
-import makeErrorsPretty from "../utilities/make_errors_pretty";
+
 import Http from "../utilities/http";
+import makeErrorsPretty from "../utilities/make_errors_pretty";
+
+import type { ApiPhotoArea, ApiPhotoLocation, ApiPhotoLocation3d, ApiPhotoSession, User } from "../models";
+import type { AssociationIds } from "type_aliases";
 
 export default class PhotoAreaApi {
 

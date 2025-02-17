@@ -1,18 +1,19 @@
-import ApiInvitation from "../models/api/api_invitation";
-import ApiMasterformat from "../models/api/api_masterformat";
-import ApiPipeline from "../models/api/api_pipeline";
-import DeprecatedApiPipeline from "../models/api/deprecated_api_pipeline";
-import getAuthorizationHeaders, { BasicUser, User } from "../utilities/get_authorization_headers";
+import AuthApi from "./auth_api";
+import buildFileName from "../utilities/build_file_name";
+import getAuthorizationHeaders from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import { ApiActionPayload, ApiRunningProcess, ApiUserAction, AssociationIds, UserActionType, UserAuthType } from "../models";
-import buildFileName from "../utilities/build_file_name";
-import AuthApi from "./auth_api";
 import { httpGetHeaders } from "../utilities/request_headers";
+import type { ApiActionPayload, ApiInvitation, ApiMasterformat, ApiPipeline, ApiRunningProcess, ApiUserAction, BasicUser, DeprecatedApiPipeline, User, UserActionType } from "../models";
+import { UserAuthType } from "../models";
+import type { AssociationIds } from "type_aliases";
 
 export default class WebGatewayApi {
 
-  static connectProjectToStructionSite({projectId}: AssociationIds, structionSiteProjectUrl: string, token: string, user: User): Promise<ApiPipeline> {
+  static connectProjectToStructionSite({ projectId }: AssociationIds,
+                                       structionSiteProjectUrl: string,
+                                       token: string,
+                                       user: User): Promise<ApiPipeline> {
     const url = `${Http.baseUrl()}/projects/${projectId}/connect-to-structionsite?structionsite-access-token=${token}&structionsite-project-url=${structionSiteProjectUrl}`;
     return Http.post(url, user, null) as unknown as Promise<ApiPipeline>;
   }
@@ -20,7 +21,7 @@ export default class WebGatewayApi {
   /**
    * @deprecated Moved to PipelinesApi
    */
-  static checkPipelineStatus({projectId}: AssociationIds, pipelineId: number, user: User): Promise<ApiPipeline> {
+  static checkPipelineStatus({ projectId }: AssociationIds, pipelineId: number, user: User): Promise<ApiPipeline> {
     const url = `${Http.baseUrl()}/pipelines/${pipelineId}`;
     return Http.get(url, user) as unknown as Promise<ApiPipeline>;
   }
@@ -28,9 +29,20 @@ export default class WebGatewayApi {
   /**
    * @deprecated Moved to UserApi
    */
-  static createInvitation(inviteeEmail: string, role: string, organizationId: string, projectId: string, user: User): Promise<ApiInvitation> {
+  static createInvitation(inviteeEmail: string,
+                          role: string,
+                          organizationId: string,
+                          projectId: string,
+                          user: User): Promise<ApiInvitation> {
     const url = `${Http.baseUrl()}/users/invitations`;
-    return Http.post(url, user, {userEmail: inviteeEmail, role, clientAccountId: organizationId, projectId}) as unknown as Promise<ApiInvitation>;
+    return Http.post(url,
+      user,
+      {
+        userEmail: inviteeEmail,
+        role,
+        clientAccountId: organizationId,
+        projectId
+      }) as unknown as Promise<ApiInvitation>;
   }
 
   /**
@@ -51,28 +63,33 @@ export default class WebGatewayApi {
     return `${Http.baseUrl()}/projects/${projectId}/report.pdf`;
   }
 
-  static getPlannedElementsNewTsvUrl({projectId, floorId}: AssociationIds, fileName: string, user: User): string {
+  static getPlannedElementsNewTsvUrl({ projectId, floorId }: AssociationIds, fileName: string, user: User): string {
     const baseUrl = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/${fileName}_planned-building-elements-new.tsv`;
     return Http.addAuthToDownloadUrl(baseUrl, user);
   }
 
-  static getDeviationsReportTsvUrl({projectId, floorId}: AssociationIds, fileName: string, user: User): string {
+  static getDeviationsReportTsvUrl({ projectId, floorId }: AssociationIds, fileName: string, user: User): string {
     const baseUrl = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/${fileName}_deviation-report.tsv`;
     return Http.addAuthToDownloadUrl(baseUrl, user);
   }
 
   /** @deprecated scan analysis tsv was removed when we removed the concept of scanned building elements */
-  static getScanAnalysisUrl({projectId, floorId, scanDatasetId}: AssociationIds, fileName: string, user: User): string {
+  static getScanAnalysisUrl({ projectId, floorId, scanDatasetId }: AssociationIds,
+                            fileName: string,
+                            user: User): string {
     const baseUrl = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/${fileName}_scan-analysis.tsv`;
     return Http.addAuthToDownloadUrl(baseUrl, user);
   }
 
-  static getUniformatSummaryTsvUrl({projectId}: AssociationIds, projectName: string, user: User): string {
-    const baseUrl = `${Http.baseUrl()}/projects/${projectId}/${buildFileName(projectName)}_uniformat-summary.tsv`
+  static getUniformatSummaryTsvUrl({ projectId }: AssociationIds, projectName: string, user: User): string {
+    const baseUrl = `${Http.baseUrl()}/projects/${projectId}/${buildFileName(projectName)}_uniformat-summary.tsv`;
     return Http.addAuthToDownloadUrl(baseUrl, user);
   }
 
-  static getScannedProjectMasterformatProgressUrl({projectId}: AssociationIds, fileName: string, fileDate: string, user: User): string {
+  static getScannedProjectMasterformatProgressUrl({ projectId }: AssociationIds,
+                                                  fileName: string,
+                                                  fileDate: string,
+                                                  user: User): string {
     const baseUrl = `${Http.baseUrl()}/projects/${projectId}/${fileName}_4d-progress_${fileDate}_2016.tsv`;
     return Http.addAuthToDownloadUrl(baseUrl, user);
   }
@@ -84,6 +101,7 @@ export default class WebGatewayApi {
   static addAuthToDownloadUrl(url: string, user: User): string {
     return Http.addAuthToDownloadUrl(url, user);
   }
+
   /**
    * @deprecated Moved to AuthApi
    */
@@ -109,7 +127,7 @@ export default class WebGatewayApi {
       return response.json()
         .then(body => {
           const headers = response.headers;
-          return {headers, body};
+          return { headers, body };
         });
     }) as Promise<{ headers: Headers, body: { storageToken: string, redirectUrl: string } }>;
   }
@@ -117,7 +135,7 @@ export default class WebGatewayApi {
   // TODO move to auth api
   static acceptInvitation(token: string, password: string): Promise<void> {
     const url = `${Http.baseUrl()}/users/accept-invitation`;
-    let invitationForm = {invitationToken: token, password};
+    let invitationForm = { invitationToken: token, password };
     return Http.post(url, null, invitationForm) as unknown as Promise<void>;
   }
 
@@ -135,19 +153,26 @@ export default class WebGatewayApi {
                             projectId,
                             floorId,
                             scanDatasetId
-                          }: AssociationIds, workflowName: string, type: string, user: User): Promise<DeprecatedApiPipeline> {
+                          }: AssociationIds,
+                          workflowName: string,
+                          type: string,
+                          user: User): Promise<DeprecatedApiPipeline> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/export-ifc/${workflowName}?type=${type}`;
     return Http.get(url, user) as unknown as Promise<DeprecatedApiPipeline>;
   }
 
   /** @deprecated **/
-  static downsampleScan({projectId, floorId, scanDatasetId}: AssociationIds, user: User): Promise<void> {
+  static downsampleScan({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}/downsample-scan`;
     return Http.post(url, user, null) as unknown as Promise<void>;
   }
 
   //TODO move to AuthApi
-  static getGcpBearerToken({projectId}: AssociationIds, user: User): Promise<{ accessToken: string, expireTime: string }> {
+  static getGcpBearerToken({ projectId }: AssociationIds, user: User): Promise<{
+    accessToken: string,
+    expireTime: string
+  }>
+  {
     let url = `${Http.baseUrl()}/projects/${projectId}/gcpAccessToken`;
     return Http.get(url, user) as unknown as Promise<{ accessToken: string, expireTime: string }>;
   }
@@ -160,17 +185,22 @@ export default class WebGatewayApi {
   static triggerArgoRunProgressAndDeviations({
                                                projectId,
                                                floorId
-                                             }: AssociationIds, deviationsFlag: string, bimSourceFileExtension: string, user: User): Promise<void> {
+                                             }: AssociationIds,
+                                             deviationsFlag: string,
+                                             bimSourceFileExtension: string,
+                                             user: User): Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/run-progress-and-deviations?deviationsFlag=${deviationsFlag}&bimSourceFileExtension=${bimSourceFileExtension}`;
     return Http.post(url, user, null) as unknown as Promise<void>;
   }
 
-  static triggerArgoRunNwdConvert({projectId, floorId}: AssociationIds, user: User): Promise<void> {
+  static triggerArgoRunNwdConvert({ projectId, floorId }: AssociationIds, user: User): Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/nwd-convert`;
     return Http.post(url, user, null) as unknown as Promise<void>;
   }
 
-  static recordUserActions(type: UserActionType, userActions: ApiActionPayload[], user: User): Promise<ApiUserAction[]> {
+  static recordUserActions(type: UserActionType,
+                           userActions: ApiActionPayload[],
+                           user: User): Promise<ApiUserAction[]> {
     let url = `${Http.baseUrl()}/user-actions`;
     let actionForm = {
       type,
@@ -181,7 +211,7 @@ export default class WebGatewayApi {
 
   static checkRunningProcess(processId: number, user: User): Promise<ApiRunningProcess> {
     let url = `${Http.baseUrl()}/running-processes/${processId}`;
-    return Http.get(url, user) as unknown as Promise<ApiRunningProcess>
+    return Http.get(url, user) as unknown as Promise<ApiRunningProcess>;
   }
 
 }

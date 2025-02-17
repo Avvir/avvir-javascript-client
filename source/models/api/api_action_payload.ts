@@ -1,4 +1,4 @@
-import type { Vector3Like } from "./type_aliases";
+import type { Vector3Like } from "type_aliases";
 
 export type ApiBehavioralData = {
   deviation?: Vector3Like

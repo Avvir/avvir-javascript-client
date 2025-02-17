@@ -1,7 +1,8 @@
 import moment, { Moment } from "moment";
 
 import DateFormatter from "./date_formatter";
-import { DateLike } from "../models";
+
+import type { DateLike } from "type_aliases";
 
 export class DateConverter {
   static getLocalizedDateFormatter(): DateFormatter {
@@ -130,6 +131,18 @@ export class DateConverter {
 
   private static pad(i: number): string {
     return i.toString().padStart(2, "0");
+  }
+
+  static dateLikeToDate(date: DateLike): Date {
+      if (typeof date === "string") {
+        return moment(date, "MMM D, YYYY").utc(true).toDate();
+      } else if (date instanceof Date) {
+        return date;
+      } else if (moment.isMoment(date)) {
+        return date.toDate();
+      } else {
+        return DateConverter.instantToDate(date) || moment.invalid().toDate();
+      }
   }
 }
 
