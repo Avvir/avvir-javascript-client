@@ -1,7 +1,8 @@
 import moment from "moment";
 
 import DateConverter from "../converters/date_converter";
-import { DateLike } from "../models";
+
+import type { DateLike } from "type_aliases";
 
 export function addInstantGetterAndSetterToApiModel(modelInstance: Object,
                                                     propertyName: string,

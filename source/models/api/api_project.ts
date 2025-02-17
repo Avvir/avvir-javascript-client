@@ -7,7 +7,7 @@ import type ApiProjectCostAnalysisProgress from "./api_project_cost_analysis_pro
 import type ApiTeamMember from "./api_team_member";
 import type ApiMasterformatProgress from "./api_masterformat_progress";
 import type ApiProjectSettings from "./api_project_settings";
-import type { DateLike, ModifyPartial } from "./type_aliases";
+import type { DateLike, ModifyPartial } from "type_aliases";
 
 export type ApiProjectArgument = ModifyPartial<ApiProject, {
   archivedAt: DateLike

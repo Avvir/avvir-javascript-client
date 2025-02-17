@@ -1,11 +1,11 @@
-import getAuthorizationHeaders, { User } from "../utilities/get_authorization_headers";
+import getAuthorizationHeaders from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import { DateConverter } from "../converters";
+import { PbeTsvType } from "../models/api/pbe_tsv_type";
 
-import type { ApiClassificationCode, ApiCloudFile, ApiMasterformatProgress, ApiProject, ApiProjectCostAnalysisProgress, ApiProjectCostAnalysisProgressValidationResult, ApiProjectListing, ApiProjectWorkPackage, ApiProjectWorkPackageCost, ApiRunningProcess, AssociationIds, ProgressType, ProjectWorkPackageType } from "../models";
-import type { DateLike } from "type_aliases";
-import {PbeTsvType} from "../models/api/PbeTsvType";
+import type { ApiClassificationCode, ApiCloudFile, ApiMasterformatProgress, ApiProject, ApiProjectCostAnalysisProgress, ApiProjectCostAnalysisProgressValidationResult, ApiProjectListing, ApiProjectWorkPackage, ApiProjectWorkPackageCost, ApiRunningProcess, ProgressType, ProjectWorkPackageType, User } from "../models";
+import type { AssociationIds, DateLike } from "type_aliases";
 
 export default class ProjectApi {
   static listProjectsForOrganization(organizationId: string, user: User): Promise<ApiProject[]> {
@@ -155,34 +155,36 @@ export default class ProjectApi {
   static generateMasterformatProgress({ projectId }: AssociationIds,
                                       reportDate: DateLike,
                                       masterformatVersion: number,
-                                      user: User) {
+                                      user: User)
+  {
     const formattedDate = DateConverter.dateToISO(reportDate);
     const url = `${Http.baseUrl()}/projects/${projectId}/masterformat-progress-report?masterformatVersion=${masterformatVersion}&reportDate=${formattedDate}`;
     return Http.post(url, user) as unknown as Promise<ApiRunningProcess>;
   }
 
-  static getFiltered5dTsv({projectId}: AssociationIds, projectName: string, fileName: string, filter, user:User) {
+  static getFiltered5dTsv({ projectId }: AssociationIds, projectName: string, fileName: string, filter, user: User) {
     const url = `${Http.baseUrl()}/projects/${projectId}/cost-analysis-progress/line-items/${fileName}`;
     return Http.put(url, user, filter, "application/json", "text/tab-separated-values") as unknown as Promise<string>;
   }
 
-  static getClassificationCodes({projectId}: AssociationIds, user:User) {
+  static getClassificationCodes({ projectId }: AssociationIds, user: User) {
     const url = `${Http.baseUrl()}/projects/${projectId}/classification-codes`;
     return Http.get(url, user) as unknown as Promise<ApiClassificationCode[]>;
   }
-  static checkWbsStatus({projectId}: AssociationIds, user: User) {
-    const url = `${Http.baseUrl()}/projects/${projectId}/cost-analysis-progress/validations`
-    return Http.get(url, user) as unknown as Promise<ApiProjectCostAnalysisProgressValidationResult>
+
+  static checkWbsStatus({ projectId }: AssociationIds, user: User) {
+    const url = `${Http.baseUrl()}/projects/${projectId}/cost-analysis-progress/validations`;
+    return Http.get(url, user) as unknown as Promise<ApiProjectCostAnalysisProgressValidationResult>;
   };
 
-  static updateMasterformatSelection({projectId, floorId}: AssociationIds, masterformatTree, user: User) {
+  static updateMasterformatSelection({ projectId, floorId }: AssociationIds, masterformatTree, user: User) {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/cost-analysis-progress-modeled-total-cost`;
     return Http.put(url, user, masterformatTree) as unknown as Promise<ApiProjectCostAnalysisProgress[]>;
   }
 
-  static getWorkPackageCosts({projectId}: AssociationIds, workPackageType: ProjectWorkPackageType, user: User) {
+  static getWorkPackageCosts({ projectId }: AssociationIds, workPackageType: ProjectWorkPackageType, user: User) {
     const url = `${Http.baseUrl()}/projects/${projectId}/work-packages/${workPackageType}/costs`;
-    return Http.get(url, user) as unknown as Promise<ApiProjectWorkPackageCost[]>
+    return Http.get(url, user) as unknown as Promise<ApiProjectWorkPackageCost[]>;
   }
 
   static generateAllMasterformatProgress({ projectId }: AssociationIds,
@@ -194,7 +196,7 @@ export default class ProjectApi {
     return Http.post(url, user) as unknown as Promise<ApiRunningProcess>;
   }
 
-  static updateProjectExportTsv({ projectId }: AssociationIds, tsvContent: string, user: User, dispatch) {
+  static updateProjectExportTsv({ projectId }: AssociationIds, tsvContent: string, user: User) {
     let multipartFormData = new FormData();
     let file = new Blob([tsvContent], { type: "text/tab-separated-values" });
     multipartFormData.append("file", file, "file.tsv");
@@ -212,4 +214,8 @@ export default class ProjectApi {
   }
 }
 
-makeErrorsPretty(ProjectApi, { exclude: ["getProjectDeviationsReportTsvUrl", "getTradeBreakdownTsvUrl"], overrideErrorMessage:["getFiltered5dTsv", "saveTradeBreakdownTsv"] });
+makeErrorsPretty(ProjectApi,
+  {
+    exclude: ["getProjectDeviationsReportTsvUrl", "getTradeBreakdownTsvUrl"],
+    overrideErrorMessage: ["getFiltered5dTsv", "saveTradeBreakdownTsv"]
+  });

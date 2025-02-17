@@ -1,6 +1,3 @@
-import ImageFetcher from "../javascript/services/utilities/image_fetcher";
-import AvvirConsoleTools from "../javascript/services/utilities/avvir_console_tools";
-import { Potree as PotreeType } from "@pnext/three-loader";
 import * as ThreeType from "three";
 
 declare module "react-firebase-file-uploader";
@@ -33,15 +30,6 @@ declare module "random-strings" {
 }
 
 declare global {
-  interface Window {
-    Avvir: {
-      imageFetcher: ImageFetcher
-    }
-    AvvirConsoleTools: AvvirConsoleTools
-  }
-}
-
-declare global {
   namespace Autodesk {
     namespace Viewing {
       class Model {
@@ -67,10 +55,6 @@ declare global {
       }
     }
   }
-}
-
-declare global {
-  const Potree: PotreeType
 }
 
 declare global {

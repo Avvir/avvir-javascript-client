@@ -1,6 +1,8 @@
 import moment from "moment";
+
 import DateConverter from "../converters/date_converter";
-import {DateLike} from "../models";
+
+import type { DateLike } from "type_aliases";
 
 export function addDateGetterAndSetterToDomainModel(target: Object, propertyName: string, initialValue?: DateLike) {
   let dateVal: Date;

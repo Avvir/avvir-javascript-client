@@ -1,8 +1,8 @@
-import { User } from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
-import { AssociationIds } from "../models";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import ApiRecipe from "../models/api/api_recipe";
+
+import type { ApiRecipe, User } from "../models";
+import type { AssociationIds } from "type_aliases";
 
 export default class RecipeApi {
   static getGlobalRecipe({ recipeId }: AssociationIds, user: User, ): Promise<ApiRecipe|null> {

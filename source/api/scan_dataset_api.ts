@@ -1,9 +1,13 @@
-import ApiView, { ApiViewArgument } from "../models/api/api_view";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import { ApiBuiltStatus, ApiDetailedElement, ApiPhotoSession, ApiScanDataset, ApiScanDatasetQaState, ApiScannedElementType, AssociationIds, DateLike } from "../models";
+import type { ApiBuiltStatus, ApiDetailedElement, ApiPhotoSession, ApiScanDatasetQaState, ApiScannedElementType, ApiView, ApiViewArgument, User } from "../models";
+import { ApiScanDataset } from "../models";
+import type { AssociationIds, DateLike } from "type_aliases";
 import { DateConverter } from "../converters";
-import { User } from "../utilities/get_authorization_headers";
+
+function isApiScanDataset(obj: any): obj is Partial<ApiScanDataset> {
+  return obj.scanDate != null || obj.name != null
+}
 
 export default class ScanDatasetApi {
   static listScanDatasetsForFloor({ projectId, floorId }: AssociationIds, user: User): Promise<ApiScanDataset[]> {
@@ -11,13 +15,23 @@ export default class ScanDatasetApi {
     return Http.get(url, user) as unknown as Promise<ApiScanDataset[]>;
   }
 
-  static createScanDataset({
-                             projectId,
-                             floorId
-                           }: AssociationIds, scanDate: DateLike, user: User): Promise<ApiScanDataset> {
-    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets?scanDate=${DateConverter.dateToISO(scanDate)}`;
-    return Http.post(url, user, null) as unknown as Promise<ApiScanDataset>;
+  static createScanDataset({ projectId, floorId }: AssociationIds,
+                           apiScanDataset: Partial<ApiScanDataset>,
+                           user: User): Promise<ApiScanDataset>
+  static createScanDataset({ projectId, floorId }: AssociationIds,
+                           scanDate: DateLike,
+                           user: User): Promise<ApiScanDataset>
+  static createScanDataset({ projectId, floorId }: AssociationIds,
+                           scan: Partial<ApiScanDataset> | DateLike,
+                           user: User): Promise<ApiScanDataset> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets`;
+    if (isApiScanDataset(scan)) {
+      return Http.post(url, user, scan) as unknown as Promise<ApiScanDataset>;
+    } else {
+      return Http.post(url + `?scanDate=${DateConverter.dateLikeToDate(scan).valueOf()}`, user) as unknown as Promise<ApiScanDataset>;
+    }
   }
+
 
   static deleteScanDataset({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<void> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/scan-datasets/${scanDatasetId}`;
@@ -156,7 +170,7 @@ export default class ScanDatasetApi {
     return Http.post(url, user, { sessionDate }) as unknown as Promise<ApiPhotoSession>;
   }
 
-  static listScanDatasetsForProject({projectId}: AssociationIds, user: User): Promise<ApiScanDataset[]> {
+  static listScanDatasetsForProject({ projectId }: AssociationIds, user: User): Promise<ApiScanDataset[]> {
     const url = `${Http.baseUrl()}/projects/${projectId}/scan-datasets`;
     return Http.get(url, user) as unknown as Promise<ApiScanDataset[]>;
   }

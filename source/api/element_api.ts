@@ -1,9 +1,10 @@
-import { User } from "../utilities/get_authorization_headers";
-import { ApiPlannedElement } from "../models/api/api_planned_element";
-import Http from "../utilities/http";
 import DeviationStatus from "../models/enums/deviation_status";
+import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import { ApiBcfBuildingElement, ApiBuiltStatus, ApiDetailedElement, ApiQueryResource, ApiRunningProcess, ApiScannedElement, ApiUserAction, AssociationIds } from "../models";
+
+import type { ApiBcfBuildingElement, ApiBuiltStatus, ApiDetailedElement, ApiPlannedElement, ApiQueryResource, ApiRunningProcess, ApiScannedElement, ApiUserAction } from "../models";
+import type { AssociationIds } from "type_aliases";
+import type { User } from "../utilities/get_authorization_headers";
 
 export default class ElementApi {
   static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User): Promise<ApiPlannedElement[]> {
@@ -107,7 +108,8 @@ export default class ElementApi {
 
   static getObstructedElementsForFloor({ projectId, floorId }: AssociationIds, user: User): Promise<{
     [globalId: string]: string[]
-  }> {
+  }>
+  {
     const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/obstructions`;
     return Http.get(url, user) as unknown as Promise<{ [globalId: string]: string[] }>;
   }

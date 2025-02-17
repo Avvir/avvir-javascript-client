@@ -1,7 +1,7 @@
 import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
 
 import type ProcessStatus from "../enums/process_status";
-import type { DateLike, ModifyPartial } from "./type_aliases";
+import type { DateLike, ModifyPartial } from "type_aliases";
 
 export type ApiRunningProcessArgument = ModifyPartial<ApiRunningProcess, {
   startDate?: DateLike

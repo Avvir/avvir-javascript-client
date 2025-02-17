@@ -5,7 +5,7 @@ import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_
 
 import type SystemOfMeasurement from "../enums/system_of_measurement";
 import type { ApiInspectionModes } from "../enums";
-import type { DateLike, ModifyPartial, Vector3Like } from "./type_aliases";
+import type { DateLike, ModifyPartial, Vector3Like } from "type_aliases";
 import type { UniformatId } from "uniformat";
 
 export class PhotoViewerDetails {

@@ -1,15 +1,15 @@
 // noinspection JSDeprecatedSymbols
 
-import PurposeTypeConverter from "../converters/purpose_type_converter";
+import ApiArgoResponse from "../models/api/api_argo_response";
+import AvvirApi from "../avvir_api";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import { User } from "../utilities/get_authorization_headers";
-import ApiArgoResponse from "../models/api/api_argo_response";
-import ApiPipeline, { ApiPipelineArgument } from "../models/api/api_pipeline";
-import Pipelines from "../models/enums/pipeline_types";
-import AvvirApi from "../avvir_api";
-import { pollPipeline } from "../utilities/pollPipeline";
-import { ApiCloudFile, ApiFloorPurposeType, ApiPhotoAreaPurposeType, ApiPurposeType, AssociationIds, AvvirApiFiles, PhotoAreaPurposeType, PurposeType } from "../models";
+import PurposeTypeConverter from "../converters/purpose_type_converter";
+import type { ApiCloudFile, ApiFloorPurposeType, ApiPhotoAreaPurposeType, ApiPipelineArgument, ApiPurposeType, PhotoAreaPurposeType, PurposeType } from "../models";
+import { ApiPipeline, Pipelines } from "../models";
+import { pollPipeline } from "../utilities/poll_pipeline";
+import type { AssociationIds, AvvirApiFiles } from "type_aliases";
+import type { User } from "../utilities/get_authorization_headers";
 
 export default class FileInformationApi {
   static createProjectFile({ projectId }: AssociationIds, apiFile: ApiCloudFile, user: User): Promise<ApiCloudFile> {

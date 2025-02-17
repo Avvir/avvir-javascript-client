@@ -46,7 +46,12 @@ describe("ScanDatasetApi", () => {
 
   describe("::createScanDataset", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets?scanDate=2022-01-01T12:34:00.000Z`,
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets?scanDate=1641040440000`,
+        {
+          status: 200,
+          body: {}
+        });
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets`,
         {
           status: 200,
           body: {}
@@ -66,12 +71,23 @@ describe("ScanDatasetApi", () => {
 
       expect(fetchCall[0])
         .to
-        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets?scanDate=2022-01-01T12:34:00.000Z`);
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets?scanDate=1641040440000`);
+    });
+
+    it("adds the scan dataset body when it exists", () => {
+      ScanDatasetApi.createScanDataset(
+        {
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+        },
+        { scanDate: DateConverter.dateToInstant(new Date("2022-01-01T12:34:00.0000Z")) },
+        user
+      );
     });
 
     describe("when the call fails", () => {
       beforeEach(() => {
-        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets?scanDate=2022-01-01T12:34:00.000Z`,
+        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets?scanDate=1641040440000`,
           {
             status: 500, body: { some: "body" },
             headers: { "ContentType": "application/json" }

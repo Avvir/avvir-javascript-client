@@ -1,8 +1,9 @@
-import {User} from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
-import {ApiGroup} from "../models/api/api_groups";
-import {AssociationIds} from "../models";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
+
+import type { ApiGroup } from "../models";
+import type { AssociationIds } from "type_aliases";
+import type { User } from "../utilities/get_authorization_headers";
 
 export default class GroupApi {
   static getGroup({ projectId, groupId }: AssociationIds, user: User, ): Promise<ApiGroup|null> {

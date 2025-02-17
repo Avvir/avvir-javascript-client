@@ -1,10 +1,10 @@
-import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
+import addInstantGetterAndSetterToApiModel from "../../../mixins/add_instant_getter_and_setter_to_api_model";
 
-import type ApiCloudFile from "./api_cloud_file";
+import type ApiCloudFile from "../api_cloud_file";
 import type ApiPhotoLocation3d from "./api_photo_location_3d";
-import type PhotoProjectionType from "../enums/photo_projection_type";
-import type { DateLike, Matrix4Like, ModifyPartial } from "./type_aliases";
-import type { PhotoRotationType } from "../enums";
+import type PhotoProjectionType from "../../enums/photo_projection_type";
+import type { DateLike, Matrix4Like, ModifyPartial } from "type_aliases";
+import type { PhotoRotationType } from "../../enums";
 
 export type ApiPhotoLocationArgument = ModifyPartial<ApiPhotoLocation, {
   createdAt: DateLike,

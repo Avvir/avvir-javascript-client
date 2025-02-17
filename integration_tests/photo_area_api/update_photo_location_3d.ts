@@ -1,11 +1,11 @@
 import AuthApi from "../../source/api/auth_api";
-import {describe} from "mocha";
-import {expect} from "chai";
-import {sandbox} from "../../tests/test_utils/setup_tests";
+import { describe } from "mocha";
+import { expect } from "chai";
+import { sandbox } from "../../tests/test_utils/setup_tests";
 import Config from "../../source/config";
-import ApiPhotoLocation3d from "../../source/models/api/api_photo_location_3d";
+import ApiPhotoLocation3d from "../../source/models/api/photos/api_photo_location_3d";
 import PhotoAreaApi from "../../source/api/photo_area_api";
-import {Euler, Quaternion} from "three";
+import { Euler, Quaternion } from "three";
 
 describe("When a user is authenticated for a project", () => {
   let projectId: string, email: string, password: string, photoAreaId: number, photoLocationId: number, photoLocation3d: ApiPhotoLocation3d;
