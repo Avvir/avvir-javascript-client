@@ -516,4 +516,111 @@ describe("FloorApi", () => {
     });
   });
 
+  describe("#backupFloor", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/backup`,
+        200);
+    });
+
+    it("makes a call to the endpoint with the right parameters in the url", () => {
+      FloorApi.backupFloor(
+        {
+          projectId: "some-project-id",
+          floorId: "some-floor-id"
+        }, user);
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/backup`);
+    });
+
+    it("sends the request with authorization headers", () => {
+      FloorApi.backupFloor({
+          projectId: "some-project-id",
+          floorId: "some-floor-id"
+        },
+        user);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/backup`);
+      expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+  });
+
+  describe("#getFloorBackups", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/backups`,
+        200);
+    });
+
+    it("makes a call to the endpoint with the right parameters in the url", () => {
+      FloorApi.getFloorBackups(
+        {
+          projectId: "some-project-id",
+          floorId: "some-floor-id"
+        }, user);
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/backups`);
+    });
+
+    it("sends the request with authorization headers", () => {
+      FloorApi.getFloorBackups({
+          projectId: "some-project-id",
+          floorId: "some-floor-id"
+        },
+        user);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/backups`);
+      expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+  });
+
+  describe("#revertFloorToBackup", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/backups/42/revert`,
+        200);
+    });
+
+    it("makes a call to the endpoint with the right parameters in the url", () => {
+      FloorApi.revertFloorToBackup(
+        {
+          projectId: "some-project-id",
+          floorId: "some-floor-id"
+        },
+        42,
+        user);
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/backups/42/revert`);
+    });
+
+    it("sends the request with authorization headers", () => {
+      FloorApi.revertFloorToBackup({
+          projectId: "some-project-id",
+          floorId: "some-floor-id"
+        },
+        42,
+        user);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/backups/42/revert`);
+      expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+  });
 });
