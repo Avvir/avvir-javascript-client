@@ -4,7 +4,7 @@ import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import { DateConverter } from "../converters";
 
-import type { ApiFloor, ApiMasterformatProgress, ApiPlannedElement, ApiRunningProcess, ProgressType } from "../models";
+import type { ApiFloor, ApiFloorBackup, ApiMasterformatProgress, ApiPlannedElement, ApiRunningProcess, ProgressType } from "../models";
 import type { AssociationIds, DateLike } from "type_aliases";
 import type { User } from "../utilities/get_authorization_headers";
 
@@ -73,6 +73,21 @@ export default class FloorApi {
     return Http.post(url, user) as unknown as Promise<ApiRunningProcess>;
   }
 
+  static backupFloor({ projectId, floorId }: AssociationIds,
+                     user: User): Promise<{id: number}> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/backup`;
+    return Http.post(url, user) as unknown as Promise<{id: number}>;
+  }
+
+  static getFloorBackups({ projectId, floorId }: AssociationIds, user: User): Promise<ApiFloorBackup[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/backups`;
+    return Http.get(url, user) as unknown as Promise<ApiFloorBackup[]>;
+  }
+
+  static revertFloorToBackup({ projectId, floorId }: AssociationIds, backupId: number, user: User): Promise<ApiRunningProcess> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/backups/${backupId}/revert`;
+    return Http.post(url, user) as unknown as Promise<ApiRunningProcess>;
+  }
 }
 
 makeErrorsPretty(FloorApi);

@@ -18,6 +18,7 @@ export { ApiClassificationCode } from "./api_classification_code";
 export { ApiBcfIssue, ApiBcfIssueArgument } from "./api_bcf_issue";
 export { ApiBcfBuildingElement, ApiBcfBuildingElementArgument } from "./api_bcf_building_element";
 export { ApiArgoResponse, ArgoMetadata } from "./api_argo_response";
+export { ApiFloorBackup } from "./api_floor_backup";
 export * from "./integrations";
 export * from "./photos";
 export * from "./trade";
