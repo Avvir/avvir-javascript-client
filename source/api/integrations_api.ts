@@ -6,6 +6,7 @@ import type ApiHubs from "../models/api/integrations/autodesk/api_hubs";
 import type ApiProjects from "../models/api/integrations/autodesk/api_projects";
 import type { ApiIntegrationCredentials, ApiIntegrationCredentialsType, ApiIntegrationProject, ApiObservationRequest, ApiRunningProcess, User } from "../models";
 import type { AssociationIds } from "type_aliases";
+import type {ApiRfiRequest} from "../models/api/integrations/procore/api_rfi_request";
 
 export default class IntegrationsApi {
 
@@ -144,11 +145,24 @@ export default class IntegrationsApi {
     return Http.get(url, user) as unknown as Promise<{ name: string, id: string | number, category: string }[]>;
   }
 
+  static getRfiAssignees(procoreAccessToken: string,
+                         projectId: string,
+                                     user: User): Promise<{ name: string, id: string | number}[]> {
+    if (!procoreAccessToken) {
+      return Promise.reject(new Error("Procore access token not found"));
+    }
+    if (!projectId) {
+      return Promise.reject(new Error("project id not found"));
+    }
+    let url = `${Http.baseUrl()}/integrations/procore/${projectId}/assignees?procore-access-token=${procoreAccessToken}`;
+    return Http.get(url, user) as unknown as Promise<{ name: string, id: string | number}[]>;
+  }
+
   static CreateProcoreObservation(procoreAccessToken: string,
                                   companyId: string,
                                   projectId: string,
                                   observationRequest: ApiObservationRequest,
-                                  user: User): Promise<void> {
+                                  user: User): Promise<number> {
     if (!procoreAccessToken) {
       return Promise.reject(new Error("Procore access token not found"));
     }
@@ -159,7 +173,31 @@ export default class IntegrationsApi {
       return Promise.reject(new Error("company id not found"));
     }
     let url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/create-observation?procore-access-token=${procoreAccessToken}`;
-    return Http.post(url, user, observationRequest) as unknown as Promise<void>;
+    return Http.post(url, user, observationRequest) as unknown as Promise<number>;
+  }
+
+  static CreateProcoreRfi(procoreAccessToken: string,
+                                  companyId: string,
+                                  projectId: string,
+                                  rfiRequest: ApiRfiRequest,
+                                  user: User): Promise<number> {
+    if (!procoreAccessToken) {
+      return Promise.reject(new Error("Procore access token not found"));
+    }
+    if (!projectId) {
+      return Promise.reject(new Error("project id not found"));
+    }
+    if (!companyId) {
+      return Promise.reject(new Error("company id not found"));
+    }
+    let url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/create-rfi?procore-access-token=${procoreAccessToken}`;
+
+    const modifiedRfiRequest = {
+      ...rfiRequest,
+      private: rfiRequest.personal
+    };
+    delete modifiedRfiRequest.personal;
+    return Http.post(url, user, modifiedRfiRequest) as unknown as Promise<number>;
   }
 
   static getAutodeskAccessToken(code: string, redirectUri: string, user: User): Promise<ApiAutodeskAccessToken> {
