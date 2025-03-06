@@ -139,7 +139,7 @@ export default class ProjectApi {
         ...getAuthorizationHeaders(user)
       },
       body: multipartFormData
-    });
+    }) as unknown as Promise<ApiRunningProcess>;
   }
 
   static getWorkPackages(projectId: string, user: User) {
@@ -210,7 +210,7 @@ export default class ProjectApi {
         ...getAuthorizationHeaders(user)
       },
       body: multipartFormData
-    });
+    }) as unknown as Promise<ApiRunningProcess>;
   }
 }
 
