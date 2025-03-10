@@ -16,6 +16,10 @@ import {IntegrationsApi} from "../../source/api";
 import {lastMockedFetchCall} from "../test_utils/fetch_mock_utils";
 import {sandbox} from "../test_utils/setup_tests";
 
+import { AutodeskRequest } from "../../source/models/api/integrations/autodesk/api_autodesk_request";
+import AutodeskIssue from "../../source/models/api/integrations/autodesk/api_autodesk_issue";
+
+
 describe("IntegrationsApi", () => {
     let user: User;
     beforeEach(() => {
@@ -474,25 +478,25 @@ describe("IntegrationsApi", () => {
 
         it("throws an error if procore access token is missing when companyId is not given", () => {
             return IntegrationsApi.getProcoreProjects("", undefined, {
-                    authType: GATEWAY_JWT,
-                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
-                }).catch((error) => {
-                    return error;
-                }).then((error) => {
-                    expect(error.message).to.eq("Procore access token not found");
-                });
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Procore access token not found");
+            });
 
         });
 
         it("throws an error if procore access token is undefined when companyId is not given", () => {
             return IntegrationsApi.getProcoreProjects(undefined, undefined, {
-                    authType: GATEWAY_JWT,
-                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
-                }).catch((error) => {
-                    return error;
-                }).then((error) => {
-                    expect(error.message).to.eq("Procore access token not found");
-                });
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Procore access token not found");
+            });
         });
 
         it("includes auth headers and makes a request to the gateway with companyId", () => {
@@ -511,24 +515,24 @@ describe("IntegrationsApi", () => {
 
         it("throws an error if procore access token is missing when companyId is given", () => {
             return IntegrationsApi.getProcoreProjects("", "some-company-id", {
-                    authType: GATEWAY_JWT,
-                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
-                }).catch((error) => {
-                    return error;
-                }).then((error) => {
-                    expect(error.message).to.eq("Procore access token not found");
-                });
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Procore access token not found");
+            });
         });
 
         it("throws an error if procore access token is undefined when companyId is given", () => {
             return IntegrationsApi.getProcoreProjects(undefined, "some-company-id", {
-                    authType: GATEWAY_JWT,
-                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
-                }).catch((error) => {
-                    return error;
-                }).then((error) => {
-                    expect(error.message).to.eq("Procore access token not found");
-                });
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Procore access token not found");
+            });
         });
 
     });
@@ -605,7 +609,7 @@ describe("IntegrationsApi", () => {
         });
 
         it("throws an error if procore access token is undefined", () => {
-           return IntegrationsApi.listProcoreObservationTypes(undefined, "some-company-id", {
+            return IntegrationsApi.listProcoreObservationTypes(undefined, "some-company-id", {
                 authType: GATEWAY_JWT,
                 gatewayUser: {idToken: "some-firebase.id.token", role: USER}
             }).catch((error) => {
@@ -845,7 +849,7 @@ describe("IntegrationsApi", () => {
                 "some-company-id",
                 "some-project-id",
                 {
-                    "question": {"body":"Sample Observation Item"},
+                    "question": {"body": "Sample Observation Item"},
                     "due_date": "2024-11-16",
                     "subject": "Test Subject",
                     "personal": true,
@@ -867,7 +871,7 @@ describe("IntegrationsApi", () => {
                 "some-company-id",
                 "some-project-id",
                 {
-                    "question": {"body":"Sample Observation Item"},
+                    "question": {"body": "Sample Observation Item"},
                     "due_date": "2024-11-16",
                     "subject": "Test Subject",
                     "personal": true,
@@ -893,7 +897,7 @@ describe("IntegrationsApi", () => {
                 "some-company-id",
                 "some-project-id",
                 {
-                    "question": {"body":"Sample Observation Item"},
+                    "question": {"body": "Sample Observation Item"},
                     "due_date": "2024-11-16",
                     "subject": "Test Subject",
                     "personal": true,
@@ -916,7 +920,7 @@ describe("IntegrationsApi", () => {
                 "some-company-id",
                 "some-project-id",
                 {
-                    "question": {"body":"Sample Observation Item"},
+                    "question": {"body": "Sample Observation Item"},
                     "due_date": "2024-11-16",
                     "subject": "Test Subject",
                     "personal": true,
@@ -939,7 +943,7 @@ describe("IntegrationsApi", () => {
                 "some-company-id",
                 "",
                 {
-                    "question": {"body":"Sample Observation Item"},
+                    "question": {"body": "Sample Observation Item"},
                     "due_date": "2024-11-16",
                     "subject": "Test Subject",
                     "personal": true,
@@ -962,7 +966,7 @@ describe("IntegrationsApi", () => {
                 "",
                 "some-project-id",
                 {
-                    "question": {"body":"Sample Observation Item"},
+                    "question": {"body": "Sample Observation Item"},
                     "due_date": "2024-11-16",
                     "subject": "Test Subject",
                     "personal": true,
@@ -1153,6 +1157,130 @@ describe("IntegrationsApi", () => {
                 return error;
             }).then((error) => {
                 expect(error.message).to.include("Invalid access token or hubId");
+            });
+        });
+    });
+
+    describe("::createAutodeskRequest", () => {
+        describe("::createAutodeskRequest", () => {
+            beforeEach(() => {
+                fetchMock.post(`${Http.baseUrl()}/integrations/autodesk/create-request?access-token=some-access-token&projectId=some-project-id`,
+                    201);
+            });
+
+            afterEach(() => {
+                fetchMock.restore();
+            });
+
+            it("includes auth headers and makes a request to the gateway", () => {
+                const autodeskRequest = new AutodeskRequest({
+                    type: "issue",
+                    request: new AutodeskIssue({
+                        title: "Issue Title",
+                        question: "Issue Question",
+                        status: "open",
+                        priority: "high",
+                        dueDate: "2023-12-31"
+                    })
+                });
+
+                IntegrationsApi.createAutodeskRequest("some-access-token", "some-project-id", autodeskRequest, {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+                });
+                const fetchCall = fetchMock.lastCall();
+
+                expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/autodesk/create-request?access-token=some-access-token&projectId=some-project-id`);
+                expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+                expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+            });
+
+            it("throws an error if access token is missing", () => {
+                const autodeskRequest = new AutodeskRequest({
+                    type: "issue",
+                    request: new AutodeskIssue({
+                        title: "Issue Title",
+                        question: "Issue Question",
+                        status: "open",
+                        priority: "high",
+                        dueDate: "2023-12-31"
+                    })
+                });
+
+                return IntegrationsApi.createAutodeskRequest("", "some-project-id", autodeskRequest, {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+                }).catch((error) => {
+                    return error;
+                }).then((error) => {
+                    expect(error.message).to.include("Invalid access token or hubId");
+                });
+            });
+
+            it("throws an error if projectId is missing", () => {
+                const autodeskRequest = new AutodeskRequest({
+                    type: "issue",
+                    request: new AutodeskIssue({
+                        title: "Issue Title",
+                        question: "Issue Question",
+                        status: "open",
+                        priority: "high",
+                        dueDate: "2023-12-31"
+                    })
+                });
+
+                return IntegrationsApi.createAutodeskRequest("some-access-token", "", autodeskRequest, {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+                }).catch((error) => {
+                    return error;
+                }).then((error) => {
+                    expect(error.message).to.include("Invalid access token or hubId");
+                });
+            });
+
+            it("throws an error if access token is undefined", () => {
+                const autodeskRequest = new AutodeskRequest({
+                    type: "issue",
+                    request: new AutodeskIssue({
+                        title: "Issue Title",
+                        question: "Issue Question",
+                        status: "open",
+                        priority: "high",
+                        dueDate: "2023-12-31"
+                    })
+                });
+
+                return IntegrationsApi.createAutodeskRequest(undefined, "some-project-id", autodeskRequest, {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+                }).catch((error) => {
+                    return error;
+                }).then((error) => {
+                    expect(error.message).to.include("Invalid access token or hubId");
+                });
+            });
+
+            it("throws an error if projectId is undefined", () => {
+                const autodeskRequest = new AutodeskRequest({
+                    type: "issue",
+                    request: new AutodeskIssue({
+                        title: "Issue Title",
+                        question: "Issue Question",
+                        status: "open",
+                        priority: "high",
+                        dueDate: "2023-12-31"
+                    })
+                });
+
+                return IntegrationsApi.createAutodeskRequest("some-access-token", undefined, autodeskRequest, {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+                }).catch((error) => {
+                    return error;
+                }).then((error) => {
+                    expect(error.message).to.include("Invalid access token or hubId");
+                });
             });
         });
     });

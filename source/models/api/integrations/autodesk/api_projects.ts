@@ -1,8 +1,8 @@
-import { ApiAutodeskAttritributes } from "./api_autodesk_attriibutes";
+import { ApiAutodeskAttributes } from "./api_autodesk_attributes";
 
 export class ApiProjects {
   id: string;
-  attributes: ApiAutodeskAttritributes;
+  attributes: ApiAutodeskAttributes;
 
   constructor({ id, attributes }: Partial<ApiProjects> = {}) {
     this.id = id;
