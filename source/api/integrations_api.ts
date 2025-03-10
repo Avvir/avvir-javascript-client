@@ -7,6 +7,7 @@ import type ApiProjects from "../models/api/integrations/autodesk/api_projects";
 import type { ApiIntegrationCredentials, ApiIntegrationCredentialsType, ApiIntegrationProject, ApiObservationRequest, ApiRunningProcess, User } from "../models";
 import type { AssociationIds } from "type_aliases";
 import type {ApiRfiRequest} from "../models/api/integrations/procore/api_rfi_request";
+import {AutodeskRequest} from "../models";
 
 export default class IntegrationsApi {
 
@@ -222,6 +223,14 @@ export default class IntegrationsApi {
     }
     const url = `${Http.baseUrl()}/integrations/autodesk/projects?access-token=${access_token}&hubId=${hubId}`;
     return Http.get(url, user) as unknown as Promise<ApiProjects>;
+  }
+
+  static createAutodeskRequest(access_token: string, projectId: string, autodeskRequest:AutodeskRequest,user: User): Promise<number> {
+    if (!access_token || !projectId) {
+      return Promise.reject(new Error("Invalid access token or hubId"));
+    }
+    const url = `${Http.baseUrl()}/integrations/autodesk/create-request?access-token=${access_token}&projectId=${projectId}`;
+    return Http.post(url,user, autodeskRequest) as unknown as Promise<number>;
   }
 
 }
