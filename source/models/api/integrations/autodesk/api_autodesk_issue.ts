@@ -1,12 +1,12 @@
 export class AutodeskIssue {
     title: string;
-    question: string;
+    description: string;
     status: string;
     priority: string;
     dueDate: string;
-    constructor({title,question,status,priority,dueDate}: Partial<AutodeskIssue> = {}) {
+    constructor({title,description,status,priority,dueDate}: Partial<AutodeskIssue> = {}) {
         this.title = title;
-        this.question = question;
+        this.description = description;
         this.status = status;
         this.priority = priority;
         this.dueDate = dueDate;
