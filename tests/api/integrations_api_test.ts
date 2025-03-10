@@ -1177,7 +1177,7 @@ describe("IntegrationsApi", () => {
                     type: "issue",
                     request: new AutodeskIssue({
                         title: "Issue Title",
-                        question: "Issue Question",
+                        description: "Issue Question",
                         status: "open",
                         priority: "high",
                         dueDate: "2023-12-31"
@@ -1200,7 +1200,7 @@ describe("IntegrationsApi", () => {
                     type: "issue",
                     request: new AutodeskIssue({
                         title: "Issue Title",
-                        question: "Issue Question",
+                        description: "Issue Question",
                         status: "open",
                         priority: "high",
                         dueDate: "2023-12-31"
@@ -1222,7 +1222,7 @@ describe("IntegrationsApi", () => {
                     type: "issue",
                     request: new AutodeskIssue({
                         title: "Issue Title",
-                        question: "Issue Question",
+                        description: "Issue Question",
                         status: "open",
                         priority: "high",
                         dueDate: "2023-12-31"
@@ -1244,7 +1244,7 @@ describe("IntegrationsApi", () => {
                     type: "issue",
                     request: new AutodeskIssue({
                         title: "Issue Title",
-                        question: "Issue Question",
+                        description: "Issue Question",
                         status: "open",
                         priority: "high",
                         dueDate: "2023-12-31"
@@ -1266,7 +1266,7 @@ describe("IntegrationsApi", () => {
                     type: "issue",
                     request: new AutodeskIssue({
                         title: "Issue Title",
-                        question: "Issue Question",
+                        description: "Issue Question",
                         status: "open",
                         priority: "high",
                         dueDate: "2023-12-31"
