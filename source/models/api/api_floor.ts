@@ -33,7 +33,8 @@ export class ApiFloor {
                 photoAreaMinimapPixelToBimMinimapPixel,
                 bimMinimapToWorld,
                 floorElevation,
-                globalOffsetYaw
+                globalOffsetYaw,
+                lockedByRunningProcessId
               }: ApiFloorArgument = {})
   {
     addReadOnlyPropertiesToModel(this, { id, firebaseId, firebaseProjectId });
@@ -104,6 +105,7 @@ export class ApiFloor {
     this.bimMinimapToWorld = bimMinimapToWorld || null;
     this.floorElevation = floorElevation || null;
     this.globalOffsetYaw = globalOffsetYaw;
+    this.lockedByRunningProcessId = lockedByRunningProcessId;
   }
 
   /**
@@ -152,6 +154,7 @@ export class ApiFloor {
   bimMinimapToWorld: ApiMatrix3 | null = null;
   floorElevation: number | null;
   globalOffsetYaw: number | null;
+  lockedByRunningProcessId?: number;
 }
 
 export default ApiFloor;
