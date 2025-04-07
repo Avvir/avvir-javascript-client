@@ -205,14 +205,36 @@ export default class IntegrationsApi {
     return Http.get(url, user) as unknown as Promise<ApiProjects>;
   }
 
-  static createAutodeskRequest(access_token: string, projectId: string, autodeskRequest:AutodeskRequest,user: User): Promise<number> {
-    if (!access_token || !projectId) {
-      return Promise.reject(new Error("Invalid access token or hubId"));
+  static createAutodeskRequest(access_token: string,hubId:string, projectId: string, autodeskRequest:AutodeskRequest,imageBlob:Blob,user: User): Promise<number> {
+    if (!access_token) {
+      return Promise.reject(new Error("Invalid access token"));
     }
-    const url = `${Http.baseUrl()}/integrations/autodesk/create-request?access-token=${access_token}&projectId=${projectId}`;
-    return Http.post(url,user, autodeskRequest) as unknown as Promise<number>;
-  }
+    if (!hubId) {
+      return Promise.reject(new Error("Invalid hubId"));
+    }
+    if (!projectId) {
+      return Promise.reject(new Error("Invalid projectId"));
+    }
+    if (!autodeskRequest) {
+      return Promise.reject(new Error("Invalid autodeskRequest"));
+    }
+    if (!imageBlob) {
+      return Promise.reject(new Error("Invalid imageBlob"));
+    }
+    if (!user) {
+      return Promise.reject(new Error("Invalid user"));
+    }
 
+    const formData = new FormData();
+    formData.append("hubId", hubId);
+    formData.append("projectId", projectId);
+    formData.append("access_token", access_token);
+    formData.append("autodeskRequest", JSON.stringify(autodeskRequest));
+    formData.append("image", imageBlob, "image.png");
+
+    const url = `${Http.baseUrl()}/integrations/autodesk/create-request`;
+    return Http.post(url,user, formData) as unknown as Promise<number>;
+  }
 }
 
 makeErrorsPretty(IntegrationsApi);
