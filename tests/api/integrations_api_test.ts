@@ -1113,8 +1113,7 @@ describe("IntegrationsApi", () => {
     describe("::createAutodeskRequest", () => {
         describe("::createAutodeskRequest", () => {
             beforeEach(() => {
-                fetchMock.post(`${Http.baseUrl()}/integrations/autodesk/create-request?access-token=some-access-token&projectId=some-project-id`,
-                    201);
+                fetchMock.post(`${Http.baseUrl()}/integrations/autodesk/create-request`, 201);
             });
 
             afterEach(() => {
@@ -1132,14 +1131,15 @@ describe("IntegrationsApi", () => {
                         dueDate: "2023-12-31"
                     })
                 });
+                const imageBlob = new Blob(["image content"], { type: "image/png" });
 
-                IntegrationsApi.createAutodeskRequest("some-access-token", "some-project-id", autodeskRequest, {
+                IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, imageBlob, {
                     authType: GATEWAY_JWT,
-                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
                 });
                 const fetchCall = fetchMock.lastCall();
 
-                expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/autodesk/create-request?access-token=some-access-token&projectId=some-project-id`);
+                expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/autodesk/create-request`);
                 expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
                 expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
             });
@@ -1155,14 +1155,38 @@ describe("IntegrationsApi", () => {
                         dueDate: "2023-12-31"
                     })
                 });
+                const imageBlob = new Blob(["image content"], { type: "image/png" });
 
-                return IntegrationsApi.createAutodeskRequest("", "some-project-id", autodeskRequest, {
+                return IntegrationsApi.createAutodeskRequest("", "some-hub-id", "some-project-id", autodeskRequest, imageBlob, {
                     authType: GATEWAY_JWT,
-                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
                 }).catch((error) => {
                     return error;
                 }).then((error) => {
-                    expect(error.message).to.include("Invalid access token or hubId");
+                    expect(error.message).to.include("Invalid access token");
+                });
+            });
+
+            it("throws an error if hubId is missing", () => {
+                const autodeskRequest = new AutodeskRequest({
+                    type: "issue",
+                    request: new AutodeskIssue({
+                        title: "Issue Title",
+                        description: "Issue Question",
+                        status: "open",
+                        priority: "high",
+                        dueDate: "2023-12-31"
+                    })
+                });
+                const imageBlob = new Blob(["image content"], { type: "image/png" });
+
+                return IntegrationsApi.createAutodeskRequest("some-access-token", "", "some-project-id", autodeskRequest, imageBlob, {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+                }).catch((error) => {
+                    return error;
+                }).then((error) => {
+                    expect(error.message).to.include("Invalid hubId");
                 });
             });
 
@@ -1177,14 +1201,15 @@ describe("IntegrationsApi", () => {
                         dueDate: "2023-12-31"
                     })
                 });
+                const imageBlob = new Blob(["image content"], { type: "image/png" });
 
-                return IntegrationsApi.createAutodeskRequest("some-access-token", "", autodeskRequest, {
+                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "", autodeskRequest, imageBlob, {
                     authType: GATEWAY_JWT,
-                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
                 }).catch((error) => {
                     return error;
                 }).then((error) => {
-                    expect(error.message).to.include("Invalid access token or hubId");
+                    expect(error.message).to.include("Invalid projectId");
                 });
             });
 
@@ -1199,14 +1224,38 @@ describe("IntegrationsApi", () => {
                         dueDate: "2023-12-31"
                     })
                 });
+                const imageBlob = new Blob(["image content"], { type: "image/png" });
 
-                return IntegrationsApi.createAutodeskRequest(undefined, "some-project-id", autodeskRequest, {
+                return IntegrationsApi.createAutodeskRequest(undefined, "some-hub-id", "some-project-id", autodeskRequest, imageBlob, {
                     authType: GATEWAY_JWT,
-                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
                 }).catch((error) => {
                     return error;
                 }).then((error) => {
-                    expect(error.message).to.include("Invalid access token or hubId");
+                    expect(error.message).to.include("Invalid access token");
+                });
+            });
+
+            it("throws an error if hubId is undefined", () => {
+                const autodeskRequest = new AutodeskRequest({
+                    type: "issue",
+                    request: new AutodeskIssue({
+                        title: "Issue Title",
+                        description: "Issue Question",
+                        status: "open",
+                        priority: "high",
+                        dueDate: "2023-12-31"
+                    })
+                });
+                const imageBlob = new Blob(["image content"], { type: "image/png" });
+
+                return IntegrationsApi.createAutodeskRequest("some-access-token", undefined, "some-project-id", autodeskRequest, imageBlob, {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+                }).catch((error) => {
+                    return error;
+                }).then((error) => {
+                    expect(error.message).to.include("Invalid hubId");
                 });
             });
 
@@ -1221,14 +1270,99 @@ describe("IntegrationsApi", () => {
                         dueDate: "2023-12-31"
                     })
                 });
+                const imageBlob = new Blob(["image content"], { type: "image/png" });
 
-                return IntegrationsApi.createAutodeskRequest("some-access-token", undefined, autodeskRequest, {
+                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", undefined, autodeskRequest, imageBlob, {
                     authType: GATEWAY_JWT,
-                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
                 }).catch((error) => {
                     return error;
                 }).then((error) => {
-                    expect(error.message).to.include("Invalid access token or hubId");
+                    expect(error.message).to.include("Invalid projectId");
+                });
+            });
+
+            it("throws an error if image blob is missing", () => {
+                const autodeskRequest = new AutodeskRequest({
+                    type: "issue",
+                    request: new AutodeskIssue({
+                        title: "Issue Title",
+                        description: "Issue Question",
+                        status: "open",
+                        priority: "high",
+                        dueDate: "2023-12-31"
+                    })
+                });
+
+                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, null, {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+                }).catch((error) => {
+                    return error;
+                }).then((error) => {
+                    expect(error.message).to.include("Invalid imageBlob");
+                });
+            });
+
+            it("throws an error if image blob is undefined", () => {
+                const autodeskRequest = new AutodeskRequest({
+                    type: "issue",
+                    request: new AutodeskIssue({
+                        title: "Issue Title",
+                        description: "Issue Question",
+                        status: "open",
+                        priority: "high",
+                        dueDate: "2023-12-31"
+                    })
+                });
+
+                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, undefined, {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+                }).catch((error) => {
+                    return error;
+                }).then((error) => {
+                    expect(error.message).to.include("Invalid imageBlob");
+                });
+            });
+
+            it("throws an error if user is missing", () => {
+                const autodeskRequest = new AutodeskRequest({
+                    type: "issue",
+                    request: new AutodeskIssue({
+                        title: "Issue Title",
+                        description: "Issue Question",
+                        status: "open",
+                        priority: "high",
+                        dueDate: "2023-12-31"
+                    })
+                });
+                const imageBlob = new Blob(["image content"], { type: "image/png" });
+
+                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, imageBlob, null).catch((error) => {
+                    return error;
+                }).then((error) => {
+                    expect(error.message).to.include("Invalid user");
+                });
+            });
+
+            it("throws an error if user is undefined", () => {
+                const autodeskRequest = new AutodeskRequest({
+                    type: "issue",
+                    request: new AutodeskIssue({
+                        title: "Issue Title",
+                        description: "Issue Question",
+                        status: "open",
+                        priority: "high",
+                        dueDate: "2023-12-31"
+                    })
+                });
+                const imageBlob = new Blob(["image content"], { type: "image/png" });
+
+                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, imageBlob, undefined).catch((error) => {
+                    return error;
+                }).then((error) => {
+                    expect(error.message).to.include("Invalid user");
                 });
             });
         });
