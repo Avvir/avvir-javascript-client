@@ -16,7 +16,7 @@ import {IntegrationsApi} from "../../source/api";
 import {lastMockedFetchCall} from "../test_utils/fetch_mock_utils";
 import {sandbox} from "../test_utils/setup_tests";
 
-import { AutodeskRequest } from "../../source/models/api/integrations/autodesk/api_autodesk_request";
+import {AutodeskRequest} from "../../source/models/api/integrations/autodesk/api_autodesk_request";
 import AutodeskIssue from "../../source/models/api/integrations/autodesk/api_autodesk_issue";
 
 
@@ -1131,11 +1131,11 @@ describe("IntegrationsApi", () => {
                         dueDate: "2023-12-31"
                     })
                 });
-                const imageBlob = new Blob(["image content"], { type: "image/png" });
+                const imageBlob = new Blob(["image content"], {type: "image/png"});
 
                 IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, imageBlob, {
                     authType: GATEWAY_JWT,
-                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 });
                 const fetchCall = fetchMock.lastCall();
 
@@ -1155,11 +1155,11 @@ describe("IntegrationsApi", () => {
                         dueDate: "2023-12-31"
                     })
                 });
-                const imageBlob = new Blob(["image content"], { type: "image/png" });
+                const imageBlob = new Blob(["image content"], {type: "image/png"});
 
                 return IntegrationsApi.createAutodeskRequest("", "some-hub-id", "some-project-id", autodeskRequest, imageBlob, {
                     authType: GATEWAY_JWT,
-                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 }).catch((error) => {
                     return error;
                 }).then((error) => {
@@ -1178,11 +1178,11 @@ describe("IntegrationsApi", () => {
                         dueDate: "2023-12-31"
                     })
                 });
-                const imageBlob = new Blob(["image content"], { type: "image/png" });
+                const imageBlob = new Blob(["image content"], {type: "image/png"});
 
                 return IntegrationsApi.createAutodeskRequest("some-access-token", "", "some-project-id", autodeskRequest, imageBlob, {
                     authType: GATEWAY_JWT,
-                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 }).catch((error) => {
                     return error;
                 }).then((error) => {
@@ -1201,11 +1201,11 @@ describe("IntegrationsApi", () => {
                         dueDate: "2023-12-31"
                     })
                 });
-                const imageBlob = new Blob(["image content"], { type: "image/png" });
+                const imageBlob = new Blob(["image content"], {type: "image/png"});
 
                 return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "", autodeskRequest, imageBlob, {
                     authType: GATEWAY_JWT,
-                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 }).catch((error) => {
                     return error;
                 }).then((error) => {
@@ -1224,11 +1224,11 @@ describe("IntegrationsApi", () => {
                         dueDate: "2023-12-31"
                     })
                 });
-                const imageBlob = new Blob(["image content"], { type: "image/png" });
+                const imageBlob = new Blob(["image content"], {type: "image/png"});
 
                 return IntegrationsApi.createAutodeskRequest(undefined, "some-hub-id", "some-project-id", autodeskRequest, imageBlob, {
                     authType: GATEWAY_JWT,
-                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 }).catch((error) => {
                     return error;
                 }).then((error) => {
@@ -1247,11 +1247,11 @@ describe("IntegrationsApi", () => {
                         dueDate: "2023-12-31"
                     })
                 });
-                const imageBlob = new Blob(["image content"], { type: "image/png" });
+                const imageBlob = new Blob(["image content"], {type: "image/png"});
 
                 return IntegrationsApi.createAutodeskRequest("some-access-token", undefined, "some-project-id", autodeskRequest, imageBlob, {
                     authType: GATEWAY_JWT,
-                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 }).catch((error) => {
                     return error;
                 }).then((error) => {
@@ -1270,11 +1270,11 @@ describe("IntegrationsApi", () => {
                         dueDate: "2023-12-31"
                     })
                 });
-                const imageBlob = new Blob(["image content"], { type: "image/png" });
+                const imageBlob = new Blob(["image content"], {type: "image/png"});
 
                 return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", undefined, autodeskRequest, imageBlob, {
                     authType: GATEWAY_JWT,
-                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 }).catch((error) => {
                     return error;
                 }).then((error) => {
@@ -1296,7 +1296,7 @@ describe("IntegrationsApi", () => {
 
                 return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, null, {
                     authType: GATEWAY_JWT,
-                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 }).catch((error) => {
                     return error;
                 }).then((error) => {
@@ -1318,7 +1318,7 @@ describe("IntegrationsApi", () => {
 
                 return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, undefined, {
                     authType: GATEWAY_JWT,
-                    gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 }).catch((error) => {
                     return error;
                 }).then((error) => {
@@ -1337,7 +1337,7 @@ describe("IntegrationsApi", () => {
                         dueDate: "2023-12-31"
                     })
                 });
-                const imageBlob = new Blob(["image content"], { type: "image/png" });
+                const imageBlob = new Blob(["image content"], {type: "image/png"});
 
                 return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, imageBlob, null).catch((error) => {
                     return error;
@@ -1357,7 +1357,7 @@ describe("IntegrationsApi", () => {
                         dueDate: "2023-12-31"
                     })
                 });
-                const imageBlob = new Blob(["image content"], { type: "image/png" });
+                const imageBlob = new Blob(["image content"], {type: "image/png"});
 
                 return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, imageBlob, undefined).catch((error) => {
                     return error;
