@@ -1141,7 +1141,6 @@ describe("IntegrationsApi", () => {
 
                 expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/autodesk/create-request`);
                 expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
-                expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
             });
 
             it("throws an error if access token is missing", () => {

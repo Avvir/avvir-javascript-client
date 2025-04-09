@@ -15,6 +15,7 @@ import type {
 import type {AssociationIds} from "type_aliases";
 import type {ApiRfiRequest} from "../models/api/integrations/procore/api_rfi_request";
 import {AutodeskRequest} from "../models";
+import getAuthorizationHeaders from "../utilities/get_authorization_headers";
 
 export default class IntegrationsApi {
 
@@ -235,12 +236,19 @@ export default class IntegrationsApi {
         const formData = new FormData();
         formData.append("hubId", hubId);
         formData.append("projectId", projectId);
-        formData.append("access_token", access_token);
+        formData.append("access-token", access_token);
         formData.append("autodeskRequest", JSON.stringify(autodeskRequest));
         formData.append("image", imageBlob, "image.png");
 
         const url = `${Http.baseUrl()}/integrations/autodesk/create-request`;
-        return Http.post(url, user, formData) as unknown as Promise<number>;
+
+        return Http.fetch(url, {
+            method: "POST",
+            headers: {
+                ...getAuthorizationHeaders(user)
+            },
+            body: formData
+        }) as unknown as Promise<number>;
     }
 }
 
