@@ -581,9 +581,73 @@ describe("IntegrationsApi", () => {
 
     });
 
+    describe("::getProcoreObservationAssignees", () => {
+        beforeEach(() => {
+            fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/observation-assignees?procore-access-token=some-procore-access-token`,
+                {status: 200, body: ["some-procore-observation-assignees"]});
+        });
+
+        it("includes auth headers and makes a request to the gateway", () => {
+            IntegrationsApi.getObservationAssignees("some-procore-access-token","some-company-id", "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            });
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/observation-assignees?procore-access-token=some-procore-access-token`);
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+
+        it("throws an error if procore access token is missing", () => {
+            IntegrationsApi.getObservationAssignees("","some-company-id", "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Procore access token not found");
+            });
+        });
+
+        it("throws an error if procore access token is undefined", () => {
+            IntegrationsApi.getObservationAssignees(undefined,"some-company-id", "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Procore access token not found");
+            });
+        });
+
+        it("throws an error if project id is missing", () => {
+            IntegrationsApi.getObservationAssignees("some-access-token","some-company-id", undefined, {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("project id not found");
+            });
+        });
+
+        it("throws an error if company id is missing", () => {
+            return IntegrationsApi.getObservationAssignees("some-access-token", undefined,"some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("company id not found");
+            });
+        });
+
+    });
+
     describe("::getProcoreRfiAssignees", () => {
         beforeEach(() => {
-            fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-project-id/assignees?procore-access-token=some-procore-access-token`,
+            fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-project-id/rfi-assignees?procore-access-token=some-procore-access-token`,
                 {status: 200, body: ["some-procore-assignees"]});
         });
 
@@ -594,7 +658,7 @@ describe("IntegrationsApi", () => {
             });
             const fetchCall = fetchMock.lastCall();
 
-            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/procore/some-project-id/assignees?procore-access-token=some-procore-access-token`);
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/procore/some-project-id/rfi-assignees?procore-access-token=some-procore-access-token`);
             expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
             expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
         });
@@ -635,11 +699,16 @@ describe("IntegrationsApi", () => {
     });
 
     describe("::createProcoreObservation", () => {
-        let dispatchSpy;
+        let dispatchSpy, imageBlob;
         beforeEach(() => {
             dispatchSpy = sandbox.spy();
-            fetchMock.post(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/create-observation?procore-access-token=some-procore-access-token`,
+            imageBlob = new Blob(["image content"], {type: "image/png"});
+            fetchMock.post(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/create-observation-with-attachment?procore-access-token=some-procore-access-token`,
                 200);
+        });
+
+        afterEach(() => {
+            fetchMock.restore();
         });
 
         it("includes the authorization headers", () => {
@@ -654,8 +723,10 @@ describe("IntegrationsApi", () => {
                     "personal": "true",
                     "priority": "Low",
                     "status": "initiated",
-                    "type_id": 152839
+                    "type_id": 152839,
+                    "assignee_id": 1,
                 },
+                imageBlob,
                 {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER},
@@ -676,8 +747,10 @@ describe("IntegrationsApi", () => {
                     "personal": "true",
                     "priority": "Low",
                     "status": "initiated",
-                    "type_id": 152839
+                    "type_id": 152839,
+                    "assignee_id": 1,
                 },
+                imageBlob,
                 {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER},
@@ -687,7 +760,7 @@ describe("IntegrationsApi", () => {
 
             expect(fetchCall[0])
                 .to
-                .eq(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/create-observation?procore-access-token=some-procore-access-token`);
+                .eq(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/create-observation-with-attachment?procore-access-token=some-procore-access-token`);
             expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
         });
 
@@ -702,8 +775,10 @@ describe("IntegrationsApi", () => {
                     "personal": "true",
                     "priority": "Low",
                     "status": "initiated",
-                    "type_id": 152839
+                    "type_id": 152839,
+                    "assignee_id": 1,
                 },
+                imageBlob,
                 {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER},
@@ -725,8 +800,10 @@ describe("IntegrationsApi", () => {
                     "personal": "true",
                     "priority": "Low",
                     "status": "initiated",
-                    "type_id": 152839
+                    "type_id": 152839,
+                    "assignee_id": 1,
                 },
+                imageBlob,
                 {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER},
@@ -748,8 +825,10 @@ describe("IntegrationsApi", () => {
                     "personal": "true",
                     "priority": "Low",
                     "status": "initiated",
-                    "type_id": 152839
+                    "type_id": 152839,
+                    "assignee_id": 1,
                 },
+                imageBlob,
                 {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER},
@@ -771,8 +850,10 @@ describe("IntegrationsApi", () => {
                     "personal": "true",
                     "priority": "Low",
                     "status": "initiated",
-                    "type_id": 152839
+                    "type_id": 152839,
+                    "assignee_id": 1,
                 },
+                imageBlob,
                 {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER},
@@ -785,14 +866,19 @@ describe("IntegrationsApi", () => {
     });
 
     describe("::createProcoreRfi", () => {
-        let dispatchSpy;
+        let dispatchSpy, imageBlob;
         beforeEach(() => {
             dispatchSpy = sandbox.spy();
-            fetchMock.post(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/create-rfi?procore-access-token=some-procore-access-token`,
+            imageBlob = new Blob(["image content"], {type: "image/png"});
+            fetchMock.post(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/create-rfi-with-attachments?procore-access-token=some-procore-access-token`,
                 200);
+        });
+        afterEach(() => {
+            fetchMock.restore();
         });
 
         it("includes the authorization headers", () => {
+
             IntegrationsApi.CreateProcoreRfi(
                 "some-procore-access-token",
                 "some-company-id",
@@ -803,8 +889,9 @@ describe("IntegrationsApi", () => {
                     "subject": "Test Subject",
                     "personal": true,
                     "draft": true,
-                    "assignee_id": 152839
+                    "assignee_ids": [152839,12434]
                 },
+                imageBlob,
                 {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER},
@@ -825,8 +912,9 @@ describe("IntegrationsApi", () => {
                     "subject": "Test Subject",
                     "personal": true,
                     "draft": true,
-                    "assignee_id": 152839
+                    "assignee_ids": [152839,12434]
                 },
+                imageBlob,
                 {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER},
@@ -851,8 +939,9 @@ describe("IntegrationsApi", () => {
                     "subject": "Test Subject",
                     "personal": true,
                     "draft": true,
-                    "assignee_id": 152839
+                    "assignee_ids": [152839,12434]
                 },
+                imageBlob,
                 {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER},
@@ -874,8 +963,9 @@ describe("IntegrationsApi", () => {
                     "subject": "Test Subject",
                     "personal": true,
                     "draft": true,
-                    "assignee_id": 152839
+                    "assignee_ids": [152839,12434]
                 },
+                imageBlob,
                 {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER},
@@ -897,8 +987,9 @@ describe("IntegrationsApi", () => {
                     "subject": "Test Subject",
                     "personal": true,
                     "draft": true,
-                    "assignee_id": 152839
+                    "assignee_ids": [152839,12434]
                 },
+                imageBlob,
                 {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER},
@@ -920,8 +1011,9 @@ describe("IntegrationsApi", () => {
                     "subject": "Test Subject",
                     "personal": true,
                     "draft": true,
-                    "assignee_id": 152839
+                    "assignee_ids": [152839,12434]
                 },
+                imageBlob,
                 {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER},
