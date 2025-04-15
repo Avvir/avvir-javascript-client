@@ -6,6 +6,7 @@ export class ApiObservationRequest {
   personal: string;
   priority: string;
   status: string;
+  assignee_id: number;
 
   constructor({
                 type_id,
@@ -14,7 +15,8 @@ export class ApiObservationRequest {
                 description,
                 personal,
                 priority,
-                status
+                status,
+                  assignee_id
               }: Partial<ApiObservationRequest> = {}) {
     this.type_id = type_id!;
     this.name = name!;
@@ -23,5 +25,6 @@ export class ApiObservationRequest {
     this.personal = personal!;
     this.priority = priority!;
     this.status = status!;
+    this.assignee_id = assignee_id!;
   }
 }

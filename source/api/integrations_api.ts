@@ -134,6 +134,23 @@ export default class IntegrationsApi {
         return Http.get(url, user) as unknown as Promise<{ name: string, id: string | number, category: string }[]>;
     }
 
+    static getObservationAssignees(procoreAccessToken: string,
+                           companyId: string,
+                           projectId: string,
+                           user: User): Promise<{ name: string, id: string | number }[]> {
+        if (!procoreAccessToken) {
+            return Promise.reject(new Error("Procore access token not found"));
+        }
+        if (!projectId) {
+            return Promise.reject(new Error("project id not found"));
+        }
+        if (!companyId) {
+            return Promise.reject(new Error("company id not found"));
+        }
+        let url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/observation-assignees?procore-access-token=${procoreAccessToken}`;
+        return Http.get(url, user) as unknown as Promise<{ name: string, id: string | number }[]>;
+    }
+
     static getRfiAssignees(procoreAccessToken: string,
                            projectId: string,
                            user: User): Promise<{ name: string, id: string | number }[]> {
@@ -143,7 +160,7 @@ export default class IntegrationsApi {
         if (!projectId) {
             return Promise.reject(new Error("project id not found"));
         }
-        let url = `${Http.baseUrl()}/integrations/procore/${projectId}/assignees?procore-access-token=${procoreAccessToken}`;
+        let url = `${Http.baseUrl()}/integrations/procore/${projectId}/rfi-assignees?procore-access-token=${procoreAccessToken}`;
         return Http.get(url, user) as unknown as Promise<{ name: string, id: string | number }[]>;
     }
 
@@ -151,6 +168,7 @@ export default class IntegrationsApi {
                                     companyId: string,
                                     projectId: string,
                                     observationRequest: ApiObservationRequest,
+                                    imageBlob: Blob,
                                     user: User): Promise<number> {
         if (!procoreAccessToken) {
             return Promise.reject(new Error("Procore access token not found"));
@@ -161,14 +179,31 @@ export default class IntegrationsApi {
         if (!companyId) {
             return Promise.reject(new Error("company id not found"));
         }
-        let url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/create-observation?procore-access-token=${procoreAccessToken}`;
-        return Http.post(url, user, observationRequest) as unknown as Promise<number>;
+        if (!imageBlob) {
+            return Promise.reject(new Error("Invalid imageBlob"));
+        }
+
+        const formData = new FormData();
+        formData.append("autodeskRequest", JSON.stringify(observationRequest));
+        formData.append("image", imageBlob, "image.png");
+
+        const url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/create-observation-with-attachment?procore-access-token=${procoreAccessToken}`;
+
+        return Http.fetch(url, {
+            method: "POST",
+            headers: {
+                ...getAuthorizationHeaders(user)
+            },
+            body: formData
+        }) as unknown as Promise<number>;
+
     }
 
     static CreateProcoreRfi(procoreAccessToken: string,
                             companyId: string,
                             projectId: string,
                             rfiRequest: ApiRfiRequest,
+                            imageBlob: Blob,
                             user: User): Promise<number> {
         if (!procoreAccessToken) {
             return Promise.reject(new Error("Procore access token not found"));
@@ -179,14 +214,29 @@ export default class IntegrationsApi {
         if (!companyId) {
             return Promise.reject(new Error("company id not found"));
         }
-        let url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/create-rfi?procore-access-token=${procoreAccessToken}`;
+        if (!imageBlob) {
+            return Promise.reject(new Error("Invalid imageBlob"));
+        }
+
+        let url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/create-rfi-with-attachments?procore-access-token=${procoreAccessToken}`;
 
         const modifiedRfiRequest = {
             ...rfiRequest,
             private: rfiRequest.personal
         };
         delete modifiedRfiRequest.personal;
-        return Http.post(url, user, modifiedRfiRequest) as unknown as Promise<number>;
+
+        const formData = new FormData();
+        formData.append("rfiRequest", JSON.stringify(modifiedRfiRequest));
+        formData.append("image", imageBlob, "image.png");
+
+        return Http.fetch(url, {
+            method: "POST",
+            headers: {
+                ...getAuthorizationHeaders(user)
+            },
+            body: formData
+        }) as unknown as Promise<number>;
     }
 
     static getAutodeskAccessToken(code: string, redirectUri: string, user: User): Promise<ApiAutodeskAccessToken> {
