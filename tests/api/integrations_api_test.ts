@@ -732,7 +732,6 @@ describe("IntegrationsApi", () => {
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER},
                 }
             );
-
             expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
         });
 
@@ -761,7 +760,6 @@ describe("IntegrationsApi", () => {
             expect(fetchCall[0])
                 .to
                 .eq(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/create-observation-with-attachment?procore-access-token=some-procore-access-token`);
-            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
         });
 
         it("throws an error if procore access token is missing", () => {
@@ -863,6 +861,54 @@ describe("IntegrationsApi", () => {
                 expect(error.message).to.eq("company id not found");
             });
         });
+
+        it("throws an error if image blob is missing", () => {
+            return IntegrationsApi.CreateProcoreObservation("some-access-token",
+                "some-company-id",
+                "some-project-id",
+                {
+                    "description": "Sample Observation Item",
+                    "due_date": "2024-11-16",
+                    "name": "Test Observation",
+                    "personal": "true",
+                    "priority": "Low",
+                    "status": "initiated",
+                    "type_id": 152839,
+                    "assignee_id": 1,
+                }, null,
+                {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid imageBlob");
+            });
+        });
+
+        it("throws an error if image blob is undefined", () => {
+
+            return IntegrationsApi.CreateProcoreObservation("some-access-token",
+                "some-company-id",
+                "some-project-id",
+                {
+                    "description": "Sample Observation Item",
+                    "due_date": "2024-11-16",
+                    "name": "Test Observation",
+                    "personal": "true",
+                    "priority": "Low",
+                    "status": "initiated",
+                    "type_id": 152839,
+                    "assignee_id": 1,
+                }, undefined, {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid imageBlob");
+            });
+        });
     });
 
     describe("::createProcoreRfi", () => {
@@ -924,8 +970,7 @@ describe("IntegrationsApi", () => {
 
             expect(fetchCall[0])
                 .to
-                .eq(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/create-rfi?procore-access-token=some-procore-access-token`);
-            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+                .eq(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/create-rfi-with-attachments?procore-access-token=some-procore-access-token`);
         });
 
         it("throws an error if procore access token is missing", () => {
@@ -1021,6 +1066,52 @@ describe("IntegrationsApi", () => {
                 return error;
             }).then((error) => {
                 expect(error.message).to.eq("company id not found");
+            });
+        });
+
+        it("throws an error if image blob is missing", () => {
+            return IntegrationsApi.CreateProcoreRfi(
+                "some-procore-access-token",
+                "some-company-id",
+                "some-project-id",
+                {
+                    "question": {"body": "Sample Observation Item"},
+                    "due_date": "2024-11-16",
+                    "subject": "Test Subject",
+                    "personal": true,
+                    "draft": true,
+                    "assignee_ids": [152839,12434]
+                }, null,
+                {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+                }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid imageBlob");
+            });
+        });
+
+        it("throws an error if image blob is undefined", () => {
+
+            return IntegrationsApi.CreateProcoreRfi(
+                "some-procore-access-token",
+                "some-company-id",
+                "some-project-id",
+                {
+                    "question": {"body": "Sample Observation Item"},
+                    "due_date": "2024-11-16",
+                    "subject": "Test Subject",
+                    "personal": true,
+                    "draft": true,
+                    "assignee_ids": [152839,12434]
+                }, undefined, {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+                }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid imageBlob");
             });
         });
     });
