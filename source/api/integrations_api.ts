@@ -184,7 +184,7 @@ export default class IntegrationsApi {
         }
 
         const formData = new FormData();
-        formData.append("autodeskRequest", JSON.stringify(observationRequest));
+        formData.append("observationRequest", JSON.stringify(observationRequest));
         formData.append("image", imageBlob, "image.png");
 
         const url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/create-observation-with-attachment?procore-access-token=${procoreAccessToken}`;
