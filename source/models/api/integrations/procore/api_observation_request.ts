@@ -16,7 +16,7 @@ export class ApiObservationRequest {
                 personal,
                 priority,
                 status,
-                  assignee_id
+                assignee_id
               }: Partial<ApiObservationRequest> = {}) {
     this.type_id = type_id!;
     this.name = name!;
