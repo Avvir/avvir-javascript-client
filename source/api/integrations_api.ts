@@ -185,7 +185,7 @@ export default class IntegrationsApi {
 
         const formData = new FormData();
         formData.append("observationRequest", JSON.stringify(observationRequest));
-        formData.append("image", imageBlob, "image.png");
+        formData.append("attachments", imageBlob, "image.png");
 
         const url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/create-observation-with-attachment?procore-access-token=${procoreAccessToken}`;
 
@@ -228,7 +228,7 @@ export default class IntegrationsApi {
 
         const formData = new FormData();
         formData.append("rfiRequest", JSON.stringify(modifiedRfiRequest));
-        formData.append("image", imageBlob, "image.png");
+        formData.append("attachments", imageBlob, "image.png");
 
         return Http.fetch(url, {
             method: "POST",
