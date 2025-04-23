@@ -518,7 +518,7 @@ describe("FloorApi", () => {
 
   describe("#backupFloor", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/backup`,
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/backup?backupPurpose=some-purpose`,
         200);
     });
 
@@ -527,11 +527,13 @@ describe("FloorApi", () => {
         {
           projectId: "some-project-id",
           floorId: "some-floor-id"
-        }, user);
+        },
+        "some-purpose",
+        user);
       const fetchCall = fetchMock.lastCall();
       expect(fetchCall[0])
         .to
-        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/backup`);
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/backup?backupPurpose=some-purpose`);
     });
 
     it("sends the request with authorization headers", () => {
@@ -539,13 +541,14 @@ describe("FloorApi", () => {
           projectId: "some-project-id",
           floorId: "some-floor-id"
         },
+        "some-purpose",
         user);
       const fetchCall = fetchMock.lastCall();
       const lastFetchOpts = fetchMock.lastOptions();
 
       expect(fetchCall[0])
         .to
-        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/backup`);
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/backup?backupPurpose=some-purpose`);
       expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });

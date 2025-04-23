@@ -74,8 +74,15 @@ export default class FloorApi {
   }
 
   static backupFloor({ projectId, floorId }: AssociationIds,
-                     user: User): Promise<{id: number}> {
+                     backupPurpose: string | User,
+                     user?: User): Promise<{id: number}> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/backup`;
+    if (typeof backupPurpose === "string") {
+      url += "?backupPurpose=" + backupPurpose;
+    } else if (user == null) {
+      user = backupPurpose;
+    }
+
     return Http.post(url, user) as unknown as Promise<{id: number}>;
   }
 
