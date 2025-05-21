@@ -16,6 +16,8 @@ import type {AssociationIds} from "type_aliases";
 import type {ApiRfiRequest} from "../models/api/integrations/procore/api_rfi_request";
 import {AutodeskRequest} from "../models";
 import getAuthorizationHeaders from "../utilities/get_authorization_headers";
+import ApiReviztoAccessToken from "../models/api/integrations/revizto/api_access_token";
+import ApiReviztoData from "../models/api/integrations/revizto/api_revizto_data";
 
 export default class IntegrationsApi {
 
@@ -246,6 +248,23 @@ export default class IntegrationsApi {
         const url = `${Http.baseUrl()}/integrations/autodesk/access-token?code=${code}&redirect-uri=${redirectUri}`;
         return Http.get(url, user) as unknown as Promise<ApiAutodeskAccessToken>;
     }
+
+    static getReviztoAccessToken(code: string, user: User): Promise<ApiReviztoAccessToken> {
+        if (!code) {
+            return Promise.reject(new Error("Invalid code"));
+        }
+        const url = `${Http.baseUrl()}/integrations/revizto/access-token?code=${code}`;
+        return Http.get(url, user) as unknown as Promise<ApiReviztoAccessToken>;
+    }
+
+    static getReviztoData(accessToken: string, user: User): Promise<ApiReviztoData> {
+        if (!accessToken ) {
+            return Promise.reject(new Error("Invalid access token"));
+        }
+        const url = `${Http.baseUrl()}/integrations/revizto/get-data?access-token=${accessToken}`;
+        return Http.get(url, user) as unknown as Promise<ApiReviztoData>;
+    }
+
 
     static getAutodeskHubs(access_token: string, user: User): Promise<ApiHubs> {
         if (!access_token) {
