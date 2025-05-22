@@ -16,6 +16,7 @@ import type {AssociationIds} from "type_aliases";
 import type {ApiRfiRequest} from "../models/api/integrations/procore/api_rfi_request";
 import {AutodeskRequest} from "../models";
 import getAuthorizationHeaders from "../utilities/get_authorization_headers";
+import ApiIssueTypes from "../models/api/integrations/autodesk/api_issue_types";
 
 export default class IntegrationsApi {
 
@@ -261,6 +262,14 @@ export default class IntegrationsApi {
         }
         const url = `${Http.baseUrl()}/integrations/autodesk/projects?access-token=${access_token}&hubId=${hubId}`;
         return Http.get(url, user) as unknown as Promise<ApiProjects>;
+    }
+
+    static getAutodeskIssueTypes(access_token: string, projectId: string, user: User): Promise<ApiIssueTypes> {
+        if (!access_token || !projectId) {
+            return Promise.reject(new Error("Invalid access token or projectId"));
+        }
+        const url = `${Http.baseUrl()}/integrations/autodesk/issue-types?access-token=${access_token}&projectId=${projectId}`;
+        return Http.get(url, user) as unknown as Promise<ApiIssueTypes>;
     }
 
     static createAutodeskRequest(access_token: string, hubId: string, projectId: string, autodeskRequest: AutodeskRequest, imageBlob: Blob, user: User): Promise<number> {
