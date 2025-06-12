@@ -17,6 +17,8 @@ import type {ApiRfiRequest} from "../models/api/integrations/procore/api_rfi_req
 import {AutodeskRequest} from "../models";
 import getAuthorizationHeaders from "../utilities/get_authorization_headers";
 import ApiIssueTypes from "../models/api/integrations/autodesk/api_issue_types";
+import {ElementIdentifiers} from "../models/api/integrations/element_identifiers";
+import {IntegrationAssociationIds} from "../models/api/integrations/integration_ids";
 
 export default class IntegrationsApi {
 
@@ -169,6 +171,7 @@ export default class IntegrationsApi {
                                     companyId: string,
                                     projectId: string,
                                     observationRequest: ApiObservationRequest,
+                                    ids: IntegrationAssociationIds,
                                     imageBlob: Blob,
                                     user: User): Promise<number> {
         if (!procoreAccessToken) {
@@ -186,6 +189,7 @@ export default class IntegrationsApi {
 
         const formData = new FormData();
         formData.append("observationRequest", JSON.stringify(observationRequest));
+        formData.append("associationIds",JSON.stringify(ids));
         formData.append("attachments", imageBlob, "image.png");
 
         const url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/create-observation-with-attachment?procore-access-token=${procoreAccessToken}`;
@@ -204,6 +208,7 @@ export default class IntegrationsApi {
                             companyId: string,
                             projectId: string,
                             rfiRequest: ApiRfiRequest,
+                            ids: IntegrationAssociationIds,
                             imageBlob: Blob,
                             user: User): Promise<number> {
         if (!procoreAccessToken) {
@@ -229,6 +234,7 @@ export default class IntegrationsApi {
 
         const formData = new FormData();
         formData.append("rfiRequest", JSON.stringify(modifiedRfiRequest));
+        formData.append("associationIds",JSON.stringify(ids));
         formData.append("attachments", imageBlob, "image.png");
 
         return Http.fetch(url, {
@@ -272,7 +278,7 @@ export default class IntegrationsApi {
         return Http.get(url, user) as unknown as Promise<ApiIssueTypes>;
     }
 
-    static createAutodeskRequest(access_token: string, hubId: string, projectId: string, autodeskRequest: AutodeskRequest, imageBlob: Blob, user: User): Promise<number> {
+    static createAutodeskRequest(access_token: string, hubId: string, projectId: string, autodeskRequest: AutodeskRequest, imageBlob: Blob, ids:IntegrationAssociationIds, user: User): Promise<number> {
         if (!access_token) {
             return Promise.reject(new Error("Invalid access token"));
         }
@@ -297,6 +303,7 @@ export default class IntegrationsApi {
         formData.append("projectId", projectId);
         formData.append("access-token", access_token);
         formData.append("autodeskRequest", JSON.stringify(autodeskRequest));
+        formData.append("associationIds", JSON.stringify(ids));
         formData.append("image", imageBlob, "image.png");
 
         const url = `${Http.baseUrl()}/integrations/autodesk/create-request`;
@@ -308,6 +315,11 @@ export default class IntegrationsApi {
             },
             body: formData
         }) as unknown as Promise<number>;
+    }
+
+    static getAllCreatedIssuesForDeviatedElements(user: User, ids: ElementIdentifiers[]): Promise<{ toolName: string, issueId: string, id:number }[]> {
+        let url = `${Http.baseUrl()}/integrations/tools/issues`;
+        return Http.post(url,user, ids) as unknown as Promise<{ toolName: string, issueId: string, id:number }[]>;
     }
 }
 
