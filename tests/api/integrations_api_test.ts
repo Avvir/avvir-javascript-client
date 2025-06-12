@@ -726,6 +726,12 @@ describe("IntegrationsApi", () => {
                     "type_id": 152839,
                     "assignee_id": 1,
                 },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId":"some-floor-id",
+                    "scanDatasetId":"some-scan-dataset-id",
+                    "globalId":"some-global-id"
+                },
                 imageBlob,
                 {
                     authType: GATEWAY_JWT,
@@ -748,6 +754,12 @@ describe("IntegrationsApi", () => {
                     "status": "initiated",
                     "type_id": 152839,
                     "assignee_id": 1,
+                },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId":"some-floor-id",
+                    "scanDatasetId":"some-scan-dataset-id",
+                    "globalId":"some-global-id"
                 },
                 imageBlob,
                 {
@@ -776,6 +788,12 @@ describe("IntegrationsApi", () => {
                     "type_id": 152839,
                     "assignee_id": 1,
                 },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId":"some-floor-id",
+                    "scanDatasetId":"some-scan-dataset-id",
+                    "globalId":"some-global-id"
+                },
                 imageBlob,
                 {
                     authType: GATEWAY_JWT,
@@ -800,6 +818,12 @@ describe("IntegrationsApi", () => {
                     "status": "initiated",
                     "type_id": 152839,
                     "assignee_id": 1,
+                },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId":"some-floor-id",
+                    "scanDatasetId":"some-scan-dataset-id",
+                    "globalId":"some-global-id"
                 },
                 imageBlob,
                 {
@@ -826,6 +850,12 @@ describe("IntegrationsApi", () => {
                     "type_id": 152839,
                     "assignee_id": 1,
                 },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId":"some-floor-id",
+                    "scanDatasetId":"some-scan-dataset-id",
+                    "globalId":"some-global-id"
+                },
                 imageBlob,
                 {
                     authType: GATEWAY_JWT,
@@ -851,6 +881,12 @@ describe("IntegrationsApi", () => {
                     "type_id": 152839,
                     "assignee_id": 1,
                 },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId":"some-floor-id",
+                    "scanDatasetId":"some-scan-dataset-id",
+                    "globalId":"some-global-id"
+                },
                 imageBlob,
                 {
                     authType: GATEWAY_JWT,
@@ -875,7 +911,13 @@ describe("IntegrationsApi", () => {
                     "status": "initiated",
                     "type_id": 152839,
                     "assignee_id": 1,
-                }, null,
+                },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId":"some-floor-id",
+                    "scanDatasetId":"some-scan-dataset-id",
+                    "globalId":"some-global-id"
+                },null,
                 {
                 authType: GATEWAY_JWT,
                 gatewayUser: {idToken: "some-firebase.id.token", role: USER}
@@ -900,6 +942,12 @@ describe("IntegrationsApi", () => {
                     "status": "initiated",
                     "type_id": 152839,
                     "assignee_id": 1,
+                },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId":"some-floor-id",
+                    "scanDatasetId":"some-scan-dataset-id",
+                    "globalId":"some-global-id"
                 }, undefined, {
                 authType: GATEWAY_JWT,
                 gatewayUser: {idToken: "some-firebase.id.token", role: USER}
@@ -937,6 +985,12 @@ describe("IntegrationsApi", () => {
                     "draft": true,
                     "assignee_ids": [152839,12434]
                 },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId":"some-floor-id",
+                    "scanDatasetId":"some-scan-dataset-id",
+                    "globalId":"some-global-id"
+                },
                 imageBlob,
                 {
                     authType: GATEWAY_JWT,
@@ -959,6 +1013,12 @@ describe("IntegrationsApi", () => {
                     "personal": true,
                     "draft": true,
                     "assignee_ids": [152839,12434]
+                },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId":"some-floor-id",
+                    "scanDatasetId":"some-scan-dataset-id",
+                    "globalId":"some-global-id"
                 },
                 imageBlob,
                 {
@@ -986,6 +1046,12 @@ describe("IntegrationsApi", () => {
                     "draft": true,
                     "assignee_ids": [152839,12434]
                 },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId":"some-floor-id",
+                    "scanDatasetId":"some-scan-dataset-id",
+                    "globalId":"some-global-id"
+                },
                 imageBlob,
                 {
                     authType: GATEWAY_JWT,
@@ -1009,6 +1075,12 @@ describe("IntegrationsApi", () => {
                     "personal": true,
                     "draft": true,
                     "assignee_ids": [152839,12434]
+                },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId":"some-floor-id",
+                    "scanDatasetId":"some-scan-dataset-id",
+                    "globalId":"some-global-id"
                 },
                 imageBlob,
                 {
@@ -1034,6 +1106,12 @@ describe("IntegrationsApi", () => {
                     "draft": true,
                     "assignee_ids": [152839,12434]
                 },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId":"some-floor-id",
+                    "scanDatasetId":"some-scan-dataset-id",
+                    "globalId":"some-global-id"
+                },
                 imageBlob,
                 {
                     authType: GATEWAY_JWT,
@@ -1058,6 +1136,12 @@ describe("IntegrationsApi", () => {
                     "draft": true,
                     "assignee_ids": [152839,12434]
                 },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId":"some-floor-id",
+                    "scanDatasetId":"some-scan-dataset-id",
+                    "globalId":"some-global-id"
+                },
                 imageBlob,
                 {
                     authType: GATEWAY_JWT,
@@ -1081,7 +1165,13 @@ describe("IntegrationsApi", () => {
                     "personal": true,
                     "draft": true,
                     "assignee_ids": [152839,12434]
-                }, null,
+                },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId":"some-floor-id",
+                    "scanDatasetId":"some-scan-dataset-id",
+                    "globalId":"some-global-id"
+                },null,
                 {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER}
@@ -1105,7 +1195,13 @@ describe("IntegrationsApi", () => {
                     "personal": true,
                     "draft": true,
                     "assignee_ids": [152839,12434]
-                }, undefined, {
+                },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId":"some-floor-id",
+                    "scanDatasetId":"some-scan-dataset-id",
+                    "globalId":"some-global-id"
+                },undefined, {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 }).catch((error) => {
@@ -1316,7 +1412,14 @@ describe("IntegrationsApi", () => {
                 });
                 const imageBlob = new Blob(["image content"], {type: "image/png"});
 
-                IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, imageBlob, {
+                IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, imageBlob,
+                    {
+                        "firebaseProjectId": "some-project-id",
+                        "firebaseFloorId":"some-floor-id",
+                        "scanDatasetId":"some-scan-dataset-id",
+                        "globalId":"some-global-id"
+                    },
+                    {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 });
@@ -1339,7 +1442,14 @@ describe("IntegrationsApi", () => {
                 });
                 const imageBlob = new Blob(["image content"], {type: "image/png"});
 
-                return IntegrationsApi.createAutodeskRequest("", "some-hub-id", "some-project-id", autodeskRequest, imageBlob, {
+                return IntegrationsApi.createAutodeskRequest("", "some-hub-id", "some-project-id", autodeskRequest, imageBlob,
+                    {
+                        "firebaseProjectId": "some-project-id",
+                        "firebaseFloorId":"some-floor-id",
+                        "scanDatasetId":"some-scan-dataset-id",
+                        "globalId":"some-global-id"
+                    },
+                    {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 }).catch((error) => {
@@ -1362,7 +1472,14 @@ describe("IntegrationsApi", () => {
                 });
                 const imageBlob = new Blob(["image content"], {type: "image/png"});
 
-                return IntegrationsApi.createAutodeskRequest("some-access-token", "", "some-project-id", autodeskRequest, imageBlob, {
+                return IntegrationsApi.createAutodeskRequest("some-access-token", "", "some-project-id", autodeskRequest, imageBlob,
+                    {
+                        "firebaseProjectId": "some-project-id",
+                        "firebaseFloorId":"some-floor-id",
+                        "scanDatasetId":"some-scan-dataset-id",
+                        "globalId":"some-global-id"
+                    },
+                    {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 }).catch((error) => {
@@ -1385,7 +1502,14 @@ describe("IntegrationsApi", () => {
                 });
                 const imageBlob = new Blob(["image content"], {type: "image/png"});
 
-                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "", autodeskRequest, imageBlob, {
+                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "", autodeskRequest, imageBlob,
+                    {
+                        "firebaseProjectId": "some-project-id",
+                        "firebaseFloorId":"some-floor-id",
+                        "scanDatasetId":"some-scan-dataset-id",
+                        "globalId":"some-global-id"
+                    },
+                    {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 }).catch((error) => {
@@ -1408,7 +1532,14 @@ describe("IntegrationsApi", () => {
                 });
                 const imageBlob = new Blob(["image content"], {type: "image/png"});
 
-                return IntegrationsApi.createAutodeskRequest(undefined, "some-hub-id", "some-project-id", autodeskRequest, imageBlob, {
+                return IntegrationsApi.createAutodeskRequest(undefined, "some-hub-id", "some-project-id", autodeskRequest, imageBlob,
+                    {
+                        "firebaseProjectId": "some-project-id",
+                        "firebaseFloorId":"some-floor-id",
+                        "scanDatasetId":"some-scan-dataset-id",
+                        "globalId":"some-global-id"
+                    },
+                    {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 }).catch((error) => {
@@ -1431,7 +1562,14 @@ describe("IntegrationsApi", () => {
                 });
                 const imageBlob = new Blob(["image content"], {type: "image/png"});
 
-                return IntegrationsApi.createAutodeskRequest("some-access-token", undefined, "some-project-id", autodeskRequest, imageBlob, {
+                return IntegrationsApi.createAutodeskRequest("some-access-token", undefined, "some-project-id", autodeskRequest, imageBlob,
+                    {
+                        "firebaseProjectId": "some-project-id",
+                        "firebaseFloorId":"some-floor-id",
+                        "scanDatasetId":"some-scan-dataset-id",
+                        "globalId":"some-global-id"
+                    },
+                    {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 }).catch((error) => {
@@ -1454,7 +1592,14 @@ describe("IntegrationsApi", () => {
                 });
                 const imageBlob = new Blob(["image content"], {type: "image/png"});
 
-                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", undefined, autodeskRequest, imageBlob, {
+                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", undefined, autodeskRequest, imageBlob,
+                    {
+                        "firebaseProjectId": "some-project-id",
+                        "firebaseFloorId":"some-floor-id",
+                        "scanDatasetId":"some-scan-dataset-id",
+                        "globalId":"some-global-id"
+                    },
+                    {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 }).catch((error) => {
@@ -1476,7 +1621,14 @@ describe("IntegrationsApi", () => {
                     })
                 });
 
-                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, null, {
+                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, null,
+                    {
+                        "firebaseProjectId": "some-project-id",
+                        "firebaseFloorId":"some-floor-id",
+                        "scanDatasetId":"some-scan-dataset-id",
+                        "globalId":"some-global-id"
+                    },
+                    {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 }).catch((error) => {
@@ -1498,7 +1650,14 @@ describe("IntegrationsApi", () => {
                     })
                 });
 
-                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, undefined, {
+                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, undefined,
+                    {
+                        "firebaseProjectId": "some-project-id",
+                        "firebaseFloorId":"some-floor-id",
+                        "scanDatasetId":"some-scan-dataset-id",
+                        "globalId":"some-global-id"
+                    },
+                    {
                     authType: GATEWAY_JWT,
                     gatewayUser: {idToken: "some-firebase.id.token", role: USER}
                 }).catch((error) => {
@@ -1521,7 +1680,14 @@ describe("IntegrationsApi", () => {
                 });
                 const imageBlob = new Blob(["image content"], {type: "image/png"});
 
-                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, imageBlob, null).catch((error) => {
+                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, imageBlob,
+                    {
+                        "firebaseProjectId": "some-project-id",
+                        "firebaseFloorId":"some-floor-id",
+                        "scanDatasetId":"some-scan-dataset-id",
+                        "globalId":"some-global-id"
+                    },
+                    null).catch((error) => {
                     return error;
                 }).then((error) => {
                     expect(error.message).to.include("Invalid user");
@@ -1541,7 +1707,14 @@ describe("IntegrationsApi", () => {
                 });
                 const imageBlob = new Blob(["image content"], {type: "image/png"});
 
-                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, imageBlob, undefined).catch((error) => {
+                return IntegrationsApi.createAutodeskRequest("some-access-token", "some-hub-id", "some-project-id", autodeskRequest, imageBlob,
+                    {
+                        "firebaseProjectId": "some-project-id",
+                        "firebaseFloorId":"some-floor-id",
+                        "scanDatasetId":"some-scan-dataset-id",
+                        "globalId":"some-global-id"
+                    },
+                    undefined).catch((error) => {
                     return error;
                 }).then((error) => {
                     expect(error.message).to.include("Invalid user");
@@ -1549,4 +1722,25 @@ describe("IntegrationsApi", () => {
             });
         });
     });
+
+    describe("::getAllCreatedIssuesForDeviatedElements", () => {
+        beforeEach(() => {
+            fetchMock.post(`${Http.baseUrl()}/integrations/tools/issues`,
+                [{"id":1, "status":"some-status"}]);
+        });
+
+        it("includes auth headers and makes a request to the gateway", () => {
+            IntegrationsApi.getAllCreatedIssuesForDeviatedElements( {
+                authType: GATEWAY_JWT,
+                gatewayUser: {
+                    idToken: "some-firebase.id.token", role: USER
+                }
+            }, [{"pbeProjectId":1, "globalId": "some-global-id", "firebaseFloorId":"some-floor-id"}]);
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/tools/issues`);
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+    })
 });
