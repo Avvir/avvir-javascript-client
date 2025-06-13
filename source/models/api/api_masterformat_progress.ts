@@ -1,6 +1,7 @@
 import addInstantGetterAndSetterToApiModel from "../../mixins/add_instant_getter_and_setter_to_api_model";
 import ApiMasterformat from "./api_masterformat";
-import { DateLike } from "type_aliases";
+import {DateLike} from "type_aliases";
+import {ProgressType} from "../enums";
 
 export type ApiMasterformatProgressArgument = Partial<ApiMasterformatProgress>;
 
@@ -10,7 +11,8 @@ export class ApiMasterformatProgress {
                     percentComplete,
                     scanDate,
                     createdAt,
-                    customTradeCode
+                    customTradeCode,
+                    progressType
                 }: ApiMasterformatProgressArgument) {
         addInstantGetterAndSetterToApiModel(this, "scanDate");
         addInstantGetterAndSetterToApiModel(this, "createdAt");
@@ -24,6 +26,7 @@ export class ApiMasterformatProgress {
         this.scanDate = scanDate;
         this.createdAt = createdAt;
         this.customTradeCode = customTradeCode;
+        this.progressType = progressType;
     }
 
     masterformat: ApiMasterformat | null = null;
@@ -31,6 +34,7 @@ export class ApiMasterformatProgress {
     scanDate: number | null | DateLike = null;
     createdAt: number | null | DateLike = null;
     customTradeCode: string | null = null;
+    progressType: ProgressType | null = null;
 }
 
 export default ApiMasterformatProgress;
