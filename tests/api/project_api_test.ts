@@ -1,13 +1,13 @@
-import { expect } from "chai";
+import {expect} from "chai";
 import fetchMock from "fetch-mock";
 import moment from "moment";
 
-import { ApiMasterformat, ApiMasterformatProgress, ApiProjectCostAnalysisProgress } from "../../source";
+import {ApiMasterformat, ApiMasterformatProgress, ApiProjectCostAnalysisProgress, ProgressType} from "../../source";
 import DateConverter from "../../source/converters/date_converter";
 import Http from "../../source/utilities/http";
 import ProjectApi from "../../source/api/project_api";
-import { FIREBASE, GATEWAY_JWT } from "../../source/models/enums/user_auth_type";
-import { SUPERADMIN } from "../../source/models/enums/user_role";
+import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
+import {SUPERADMIN} from "../../source/models/enums/user_role";
 
 describe("ProjectApi", () => {
   let user;
@@ -395,24 +395,78 @@ describe("ProjectApi", () => {
     });
   });
 
+  describe("#getAllFloorsMasterformatProgress", () => {
+    describe("when ProgressType is null", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/masterformat-progresses`, 200);
+      });
+
+      it("makes a request to the gateway api", () => {
+        ProjectApi.getAllFloorsMasterformatProgress({projectId: "some-project-id"}, null, {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token"}
+        });
+        const fetchCall = fetchMock.lastCall();
+
+        expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/masterformat-progresses`);
+        expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+      });
+
+      it("includes the authorization headers", () => {
+        ProjectApi.getAllFloorsMasterformatProgress({ projectId: "some-project-id" }, null, {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token" }
+        });
+
+        expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      });
+    });
+
+    describe("when ProgressType is null", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/masterformat-progresses?progressType=SCANNED`, 200);
+      });
+
+      it("makes a request to the gateway api", () => {
+        ProjectApi.getAllFloorsMasterformatProgress({projectId: "some-project-id"}, ProgressType.SCANNED, {
+          authType: GATEWAY_JWT,
+          gatewayUser: {idToken: "some-firebase.id.token"}
+        });
+        const fetchCall = fetchMock.lastCall();
+
+        expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/masterformat-progresses?progressType=SCANNED`);
+        expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+      });
+
+      it("includes the authorization headers", () => {
+        ProjectApi.getAllFloorsMasterformatProgress({ projectId: "some-project-id" }, ProgressType.SCANNED, {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token" }
+        });
+
+        expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      });
+    });
+  });
+
   describe("#getScheduledProjectMasterformatProgress", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/scheduled-masterformat-progress/baseline`, 200);
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/scheduled-masterformat-progress/BASELINE`, 200);
     });
 
     it("makes a request to the gateway api", () => {
-      ProjectApi.getScheduledProjectMasterformatProgress({ projectId: "some-project-id" }, "baseline", {
+      ProjectApi.getProjectMasterformatProgress({ projectId: "some-project-id" }, ProgressType.BASELINE, {
         authType: GATEWAY_JWT,
         gatewayUser: { idToken: "some-firebase.id.token" }
       });
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/scheduled-masterformat-progress/baseline`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/scheduled-masterformat-progress/BASELINE`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
     it("includes the authorization headers", () => {
-      ProjectApi.getScheduledProjectMasterformatProgress({ projectId: "some-project-id" }, "baseline", {
+      ProjectApi.getProjectMasterformatProgress({ projectId: "some-project-id" }, ProgressType.BASELINE, {
         authType: GATEWAY_JWT,
         gatewayUser: { idToken: "some-firebase.id.token", role: SUPERADMIN }
       });

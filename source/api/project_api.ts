@@ -106,6 +106,14 @@ export default class ProjectApi {
     return Http.get(url, user) as unknown as Promise<ApiMasterformatProgress[]>;
   }
 
+  static getAllFloorsMasterformatProgress({ projectId }: AssociationIds,
+                                          progressType: ProgressType,
+                                          user: User): Promise<{[floorFirebaseId: string]: ApiMasterformatProgress[]}> {
+    const query = progressType == null ? "" : "?progressType=" + progressType;
+    const url = `${Http.baseUrl()}/projects/${projectId}/masterformat-progresses${query}`;
+    return Http.get(url, user) as unknown as Promise<{[floorFirebaseId: string]: ApiMasterformatProgress[]}>;
+  }
+
   static listProjectFloorFiles({ projectId }: AssociationIds, user: User): Promise<ApiCloudFile[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floor-files`;
     return Http.get(url, user) as unknown as Promise<ApiCloudFile[]>;
