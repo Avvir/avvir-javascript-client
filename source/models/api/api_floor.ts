@@ -33,6 +33,7 @@ export class ApiFloor {
                 photoAreaMinimapPixelToBimMinimapPixel,
                 bimMinimapToWorld,
                 floorElevation,
+                floorPlanOffset,
                 globalOffsetYaw,
                 lockedByRunningProcessId
               }: ApiFloorArgument = {})
@@ -104,55 +105,39 @@ export class ApiFloor {
     // @ts-ignore
     this.bimMinimapToWorld = bimMinimapToWorld || null;
     this.floorElevation = floorElevation || null;
+    this.floorPlanOffset = floorPlanOffset || 0;
     this.globalOffsetYaw = globalOffsetYaw;
     this.lockedByRunningProcessId = lockedByRunningProcessId;
   }
 
-  /**
-   * Internal identifier, not used in URLs.
-   */
+  /** Internal identifier, not used in URLs. */
   readonly id: number;
-
-  /**
-   * External identifier, suitable for use in URLs.
-   */
+  /** External identifier, suitable for use in URLs. */
   readonly firebaseId: string;
-
-  /**
-   * External identifier of the project that this area belongs to.
-   */
+  /** External identifier of the project that this area belongs to. */
   readonly firebaseProjectId: string;
-
-  /**
-   * Ordinal number to sort this area by when showing all of the areas in a project.
-   */
+  /** Ordinal number to sort this area by when showing all the areas in a project. */
   ordinal: number;
-
-  /**
-   * The name or title of this area.
-   */
+  /** The name or title of this area. */
   floorNumber: string;
-
-  /**
-   * External identifier of the default capture dataset associated with this area.
-   */
+  /** External identifier of the default capture dataset associated with this area. */
   defaultFirebaseScanDatasetId: string;
-
-  /**
-   * An array of external identifiers of the capture datasets associated with this area.
-   */
+  /** An array of external identifiers of the capture datasets associated with this area. */
   firebaseScanDatasetIds: string[];
-
   constructionGrid: ApiConstructionGrid | null = null;
   plannedElementCount: number | null = null;
   plannedElementsExist: boolean | null = null;
+  /** The date of the current default capture dataset */
   scanDate: number | null = null;
+  /** The string representation of the {@link scanDate} */
   scanDateString: string | null = null;
   readonly offset: Vector2Like = null;
   photoAreaId: number | null = null;
   photoAreaMinimapPixelToBimMinimapPixel: ApiMatrix3 | null = null;
   bimMinimapToWorld: ApiMatrix3 | null = null;
   floorElevation: number | null;
+  /** The vertical offset of the floor plan from the {@link floorElevation}, useful for adjusting the height of the floor plan to make it more visible */
+  floorPlanOffset: number;
   globalOffsetYaw: number | null;
   lockedByRunningProcessId?: number;
 }

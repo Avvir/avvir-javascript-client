@@ -134,7 +134,8 @@ describe("FloorApi", () => {
         floorId: "some-floor-id"
       }, new ApiFloor({
         defaultFirebaseScanDatasetId: "some-scan-id",
-        floorElevation: 10.0
+        floorElevation: 10.0,
+        floorPlanOffset: 0,
       }), { firebaseUser: { idToken: "some-firebase.id.token" } } as User);
       const fetchCall = fetchMock.lastCall();
       const lastFetchOpts = fetchMock.lastOptions();
@@ -144,7 +145,8 @@ describe("FloorApi", () => {
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id`);
       expect(fetchCall[1].body).to.deep.eq(JSON.stringify(new ApiFloor({
         defaultFirebaseScanDatasetId: "some-scan-id",
-        floorElevation: 10.0
+        floorElevation: 10.0,
+        floorPlanOffset: 0,
       })));
     });
 
