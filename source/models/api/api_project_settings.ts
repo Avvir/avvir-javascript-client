@@ -7,6 +7,7 @@ export class ApiProjectSettings {
   progress5d: boolean;
   autoScanAnalysis: boolean;
   autoCalculateProgress: boolean;
+  viewerHomeButton: boolean;
 }
 
 export default ApiProjectSettings;
