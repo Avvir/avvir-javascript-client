@@ -66,3 +66,4 @@ export * from "./api_detailed_element";
 export * from "./api_construction_grid";
 export * from "./api_cloud_file";
 export * from "./api_action_payload";
+export * from "./api_partial_progress_element";

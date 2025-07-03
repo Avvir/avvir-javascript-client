@@ -5,6 +5,7 @@ import makeErrorsPretty from "../utilities/make_errors_pretty";
 import type { ApiBcfBuildingElement, ApiBuiltStatus, ApiDetailedElement, ApiPlannedElement, ApiQueryResource, ApiRunningProcess, ApiScannedElement, ApiUserAction } from "../models";
 import type { AssociationIds } from "type_aliases";
 import type { User } from "../utilities/get_authorization_headers";
+import {ApiPartialProgressElement} from "../models";
 
 export default class ElementApi {
   static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User): Promise<ApiPlannedElement[]> {
@@ -190,6 +191,15 @@ export default class ElementApi {
     return Http.patch(`${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/viewer`,
       user,
       elements) as unknown as Promise<ApiPlannedElement[]>;
+  }
+
+  static updatePartialProgressForViewer({ projectId, floorId, scanDatasetId }: AssociationIds,
+                                        partialProgressPercent: number,
+                                        globalIds: string[],
+                                        user: User): Promise<ApiPartialProgressElement[]> {
+    return Http.post(`${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/${scanDatasetId}/viewer-partial-progress?partialProgressPercent=${partialProgressPercent}`,
+      user,
+      globalIds) as unknown as Promise<ApiPartialProgressElement[]>;
   }
 
   static getUserActionsForElement({ projectId, floorId, globalId }: AssociationIds,

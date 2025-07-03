@@ -1255,6 +1255,47 @@ describe("ElementApi", () => {
     });
   });
 
+  describe("#updatePartialProgressForViewer", () => {
+    let user;
+    beforeEach(() => {
+      user = {
+        authType: FIREBASE,
+        firebaseUser: { idToken: "some-firebase.id.token" }
+      };
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-scan-id/viewer-partial-progress?partialProgressPercent=0.5`,
+        ["Obj0", "Obj1", "Obj2"]);
+    });
+
+    it("makes a request to update the partial progress percent", () => {
+      ElementApi.updatePartialProgressForViewer({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, 0.5, ["Obj0", "Obj1", "Obj2"], user);
+
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-scan-id/viewer-partial-progress?partialProgressPercent=0.5`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("sends the request with authorization headers", () => {
+      ElementApi.updatePartialProgressForViewer({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-id"
+      }, 0.5, ["Obj0", "Obj1", "Obj2"], user);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-scan-id/viewer-partial-progress?partialProgressPercent=0.5`);
+      expect(lastFetchOpts.headers["firebaseIdToken"]).to.eq("some-firebase.id.token");
+    });
+  });
+
   describe("::getUserActionsForElement", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/user-actions/projects/some-project-id/floors/some-floor-id/element-history/some-element-id`,
