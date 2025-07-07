@@ -9,6 +9,7 @@ export class ApiProjectSettings {
   autoCalculateProgress: boolean;
   viewerHomeButton: boolean;
   tradeFilterForceUniformat: boolean;
+  createScanDatasetsAutomatically: boolean;
 }
 
 export default ApiProjectSettings;
