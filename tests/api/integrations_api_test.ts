@@ -18,6 +18,7 @@ import {sandbox} from "../test_utils/setup_tests";
 
 import {AutodeskRequest} from "../../source/models/api/integrations/autodesk/api_autodesk_request";
 import AutodeskIssue from "../../source/models/api/integrations/autodesk/api_autodesk_issue";
+import {ReviztoIssueFields} from "../../source/models/api/integrations/revizto/api_issue_fields";
 
 
 describe("IntegrationsApi", () => {
@@ -1772,6 +1773,337 @@ describe("IntegrationsApi", () => {
                 }).then((error) => {
                     expect(error.message).to.include("Invalid user");
                 });
+            });
+        });
+    });
+
+    describe("::createReviztoIssue", () => {
+        let preview: File;
+        let fields: ReviztoIssueFields;
+        let user: User;
+
+        beforeEach(() => {
+            preview = new File(["preview content"], "preview.png", { type: "image/png" });
+            fields = {
+                projectUuid: "some-project-uuid",
+                projectId: "some-project-id",
+                dueDate: "2023-12-31",
+                priority: "High",
+                status: "Open",
+                title: "Issue Title",
+                description: "Detailed description of the issue",
+                assignee: "assignee@example.com",
+                reporter: "reporter@example.com",
+                notify: ["user1@example.com", "user2@example.com"]
+            };
+            user = {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+            };
+
+            fetchMock.post(`${Http.baseUrl()}/integrations/revizto/create-request`, 201);
+        });
+
+        afterEach(() => {
+            fetchMock.restore();
+        });
+
+        it("includes auth headers, region header, and makes a request to the gateway", () => {
+            const preview = new File(["content"], "preview.png", { type: "image/png" });
+            return IntegrationsApi.createReviztoIssue(
+                "some-token",
+                "some-region",
+                preview,
+                fields,
+                "some-uuid",
+                "some-project-id",
+                "some-access-token",
+                user
+            ).then(() => {
+                const fetchCall = fetchMock.lastCall();
+
+                expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/revizto/create-request`);
+
+                const headers = fetchMock.lastOptions().headers;
+                expect(headers.Authorization).to.eq("Bearer some-firebase.id.token");
+                expect(headers.region).to.eq("some-region");
+
+                const body = fetchMock.lastOptions().body as FormData;
+                expect(body.get("preview")).to.eq(preview);
+                expect(body.get("fields")).to.eq(JSON.stringify(fields));
+                expect(body.get("uuid")).to.eq("some-uuid");
+                expect(body.get("projectId")).to.eq("some-project-id");
+                expect(body.get("access-token")).to.eq("some-access-token");
+                expect(body.get("region")).to.eq("some-region");
+            });
+        });
+
+        it("throws an error if token is missing", () => {
+            return IntegrationsApi.createReviztoIssue(
+                "some-token",
+                "some-region",
+                preview,
+                fields,
+                "some-uuid",
+                "some-project-id",
+                "some-access-token",
+                user
+            ).catch((error) => {
+                expect(error.message).to.eq("Invalid input parameters");
+            });
+        });
+
+        it("throws an error if region is missing", () => {
+            return IntegrationsApi.createReviztoIssue(
+                "some-token",
+                "some-region",
+                preview,
+                fields,
+                "some-uuid",
+                "some-project-id",
+                "some-access-token",
+                user
+            ).catch((error) => {
+                expect(error.message).to.eq("Invalid input parameters");
+            });
+        });
+
+        it("throws an error if preview is missing", () => {
+            return IntegrationsApi.createReviztoIssue(
+                "some-token",
+                "some-region",
+                null as unknown as File,
+                fields,
+                "some-uuid",
+                "some-project-id",
+                "some-access-token",
+                user
+            ).catch((error) => {
+                expect(error.message).to.eq("Invalid input parameters");
+            });
+        });
+
+        it("throws an error if fields are missing", () => {
+            return IntegrationsApi.createReviztoIssue(
+                "some-token",
+                "some-region",
+                preview,
+                null as unknown as ReviztoIssueFields,
+                "some-uuid",
+                "some-project-id",
+                "some-access-token",
+                user
+            ).catch((error) => {
+                expect(error.message).to.eq("Invalid input parameters");
+            });
+        });
+
+        it("throws an error if uuid is missing", () => {
+            return IntegrationsApi.createReviztoIssue(
+                "some-token",
+                "some-region",
+                preview,
+                fields,
+                "",
+                "some-project-id",
+                "some-access-token",
+                user
+            ).catch((error) => {
+                expect(error.message).to.eq("Invalid input parameters");
+            });
+        });
+
+        it("throws an error if projectId is missing", () => {
+            return IntegrationsApi.createReviztoIssue(
+                "some-token",
+                "some-region",
+                preview,
+                fields,
+                "some-uuid",
+                "",
+                "some-access-token",
+                user
+            ).catch((error) => {
+                expect(error.message).to.eq("Invalid input parameters");
+            });
+        });
+
+        it("throws an error if accessToken is missing", () => {
+            return IntegrationsApi.createReviztoIssue(
+                "some-token",
+                "some-region",
+                preview,
+                fields,
+                "some-uuid",
+                "some-project-id",
+                "",
+                user
+            ).catch((error) => {
+                expect(error.message).to.eq("Invalid input parameters");
+            });
+        });
+    });
+
+    describe("::getReviztoAccessToken", () => {
+        beforeEach(() => {
+            fetchMock.get(`${Http.baseUrl()}/integrations/revizto/access-token?code=some-code&region=some-region`, {
+                status: 200,
+                body: { access_token: "some-access-token", token_type: "Bearer", expires_in: "3600", refresh_token: "some-refresh-token" }
+            });
+        });
+
+        it("includes auth headers and makes a request to the gateway", () => {
+            IntegrationsApi.getReviztoAccessToken("some-code", "some-region", {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+            });
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/revizto/access-token?code=some-code&region=some-region`);
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+
+        it("throws an error if code is missing", () => {
+            return IntegrationsApi.getReviztoAccessToken("", "some-region", {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Invalid code or region");
+            });
+        });
+
+        it("throws an error if code is undefined", () => {
+            return IntegrationsApi.getReviztoAccessToken(undefined, "some-region", {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Invalid code or region");
+            });
+        });
+
+        it("throws an error if region is missing", () => {
+            return IntegrationsApi.getReviztoAccessToken("some-code", "", {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Invalid code or region");
+            });
+        });
+
+        it("throws an error if region is undefined", () => {
+            return IntegrationsApi.getReviztoAccessToken("some-code", undefined, {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Invalid code or region");
+            });
+        });
+    });
+
+    describe("::getReviztoData", () => {
+        beforeEach(() => {
+            fetchMock.get(`${Http.baseUrl()}/integrations/revizto/get-data?access-token=some-access-token&region=some-region`, {
+                status: 200,
+                body: {
+                    userEmail: "some-user-email@example.com",
+                    hubs: [
+                        {
+                            hubId: "some-hub-id",
+                            hubName: "Some Hub Name",
+                            hubUuid: "some-hub-uuid",
+                            projects: [
+                                {
+                                    projectTitle: "Some Project Title 1",
+                                    projectUuid: "some-project-uuid-1",
+                                    projectId: "some-project-id-1",
+                                    statuses: [
+                                        {
+                                            statusName: "Some Status 1",
+                                            statusUuid: "some-status-uuid-1"
+                                        }
+                                    ],
+                                    types: [
+                                        {
+                                            typeName: "Some Type 1",
+                                            typeUuid: "some-type-uuid-1"
+                                        }
+                                    ],
+                                    assignees: [
+                                        {
+                                            assigneeEmail: "some-email-1@example.com",
+                                            asigneeUuid: "some-assignee-uuid-1"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            });
+        });
+
+        it("includes auth headers and makes a request to the gateway", () => {
+            IntegrationsApi.getReviztoData("some-access-token", "some-region", {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+            });
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/revizto/get-data?access-token=some-access-token&region=some-region`);
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+
+        it("throws an error if access token is missing", () => {
+            return IntegrationsApi.getReviztoData("", "some-region", {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token or region");
+            });
+        });
+
+        it("throws an error if region is missing", () => {
+            return IntegrationsApi.getReviztoData("some-access-token", "", {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token or region");
+            });
+        });
+
+        it("throws an error if access token is undefined", () => {
+            return IntegrationsApi.getReviztoData(undefined, "some-region", {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token or region");
+            });
+        });
+
+        it("throws an error if region is undefined", () => {
+            return IntegrationsApi.getReviztoData("some-access-token", undefined, {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token or region");
             });
         });
     });
