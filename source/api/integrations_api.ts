@@ -19,6 +19,9 @@ import getAuthorizationHeaders from "../utilities/get_authorization_headers";
 import ApiIssueTypes from "../models/api/integrations/autodesk/api_issue_types";
 import {ElementIdentifiers} from "../models/api/integrations/element_identifiers";
 import {IntegrationAssociationIds} from "../models/api/integrations/integration_ids";
+import ApiReviztoAccessToken from "../models/api/integrations/revizto/api_access_token";
+import ApiReviztoData from "../models/api/integrations/revizto/api_get_data";
+import {ReviztoIssueFields} from "../models/api/integrations/revizto/api_issue_fields";
 
 export default class IntegrationsApi {
 
@@ -314,6 +317,57 @@ export default class IntegrationsApi {
                 ...getAuthorizationHeaders(user)
             },
             body: formData
+        }) as unknown as Promise<number>;
+    }
+
+    static getReviztoAccessToken(code: string, region: string, user: User): Promise<ApiReviztoAccessToken> {
+        if (!code || !region) {
+            return Promise.reject(new Error("Invalid code or region"));
+        }
+        const url = `${Http.baseUrl()}/integrations/revizto/access-token?code=${code}&region=${region}`;
+        return Http.get(url, user) as unknown as Promise<ApiReviztoAccessToken>;
+    }
+
+    static getReviztoData(accessToken: string, region: string, user: User): Promise<ApiReviztoData> {
+        if (!accessToken || !region) {
+            return Promise.reject(new Error("Invalid access token or region"));
+        }
+        const url = `${Http.baseUrl()}/integrations/revizto/get-data?access-token=${accessToken}&region=${region}`;
+        return Http.get(url, user) as unknown as Promise<ApiReviztoData>;
+    }
+
+    static createReviztoIssue(
+        token: string,
+        region: string,
+        preview: File,
+        fields: ReviztoIssueFields,
+        uuid: string,
+        projectId: string,
+        accessToken: string,
+        user: User
+    ): Promise<number> {
+        if (!token || !region || !preview || !fields || !uuid || !projectId || !accessToken) {
+            return Promise.reject(new Error("Invalid input parameters"));
+        }
+
+        const formData = new FormData();
+        formData.append("preview", preview);
+        formData.append("fields", JSON.stringify(fields));
+        formData.append("uuid", uuid);
+        formData.append("projectId", projectId);
+        formData.append("access-token", accessToken);
+        formData.append("region", region);
+
+        const url = `${Http.baseUrl()}/integrations/revizto/create-request`;
+
+        return Http.fetch(url, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                region: region,
+                ...getAuthorizationHeaders(user),
+            },
+            body: formData,
         }) as unknown as Promise<number>;
     }
 
