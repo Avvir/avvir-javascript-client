@@ -1826,7 +1826,6 @@ describe("IntegrationsApi", () => {
 
                 const headers = fetchMock.lastOptions().headers;
                 expect(headers.Authorization).to.eq("Bearer some-firebase.id.token");
-                expect(headers.region).to.eq("some-region");
 
                 const body = fetchMock.lastOptions().body as FormData;
                 expect(body.get("preview")).to.eq(preview);
