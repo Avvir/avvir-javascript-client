@@ -339,7 +339,7 @@ export default class IntegrationsApi {
     static createReviztoIssue(
         token: string,
         region: string,
-        preview: File,
+        preview: Blob,
         fields: ReviztoIssueFields,
         uuid: string,
         projectId: string,
@@ -364,7 +364,6 @@ export default class IntegrationsApi {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,
-                region: region,
                 ...getAuthorizationHeaders(user),
             },
             body: formData,
