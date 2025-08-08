@@ -62,12 +62,15 @@ export class Type {
 
 export class Assignee {
     assigneeEmail: string;
+    assigneeFullname: string;
     asigneeUuid: string;
 
-    constructor({ assigneeEmail, asigneeUuid }: Partial<Assignee> = {}) {
+    constructor({ assigneeEmail, asigneeUuid,assigneeFullname }: Partial<Assignee> = {}) {
         this.assigneeEmail = assigneeEmail;
         this.asigneeUuid = asigneeUuid;
+        this.assigneeFullname = assigneeFullname;
     }
 }
+
 
 export default ApiReviztoData;

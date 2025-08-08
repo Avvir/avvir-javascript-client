@@ -1811,21 +1811,17 @@ describe("IntegrationsApi", () => {
         it("includes auth headers, region header, and makes a request to the gateway", () => {
             const preview = new File(["content"], "preview.png", { type: "image/png" });
             return IntegrationsApi.createReviztoIssue(
-                "some-token",
+                "some-access-token",
                 "some-region",
                 preview,
                 fields,
                 "some-uuid",
                 "some-project-id",
-                "some-access-token",
                 user
             ).then(() => {
                 const fetchCall = fetchMock.lastCall();
 
                 expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/revizto/create-request`);
-
-                const headers = fetchMock.lastOptions().headers;
-                expect(headers.Authorization).to.eq("Bearer some-firebase.id.token");
 
                 const body = fetchMock.lastOptions().body as FormData;
                 expect(body.get("preview")).to.eq(preview);
@@ -1839,13 +1835,12 @@ describe("IntegrationsApi", () => {
 
         it("throws an error if token is missing", () => {
             return IntegrationsApi.createReviztoIssue(
-                "some-token",
+                "some-access-token",
                 "some-region",
                 preview,
                 fields,
                 "some-uuid",
                 "some-project-id",
-                "some-access-token",
                 user
             ).catch((error) => {
                 expect(error.message).to.eq("Invalid input parameters");
@@ -1860,7 +1855,6 @@ describe("IntegrationsApi", () => {
                 fields,
                 "some-uuid",
                 "some-project-id",
-                "some-access-token",
                 user
             ).catch((error) => {
                 expect(error.message).to.eq("Invalid input parameters");
@@ -1875,7 +1869,6 @@ describe("IntegrationsApi", () => {
                 fields,
                 "some-uuid",
                 "some-project-id",
-                "some-access-token",
                 user
             ).catch((error) => {
                 expect(error.message).to.eq("Invalid input parameters");
@@ -1890,7 +1883,6 @@ describe("IntegrationsApi", () => {
                 null as unknown as ReviztoIssueFields,
                 "some-uuid",
                 "some-project-id",
-                "some-access-token",
                 user
             ).catch((error) => {
                 expect(error.message).to.eq("Invalid input parameters");
@@ -1905,7 +1897,6 @@ describe("IntegrationsApi", () => {
                 fields,
                 "",
                 "some-project-id",
-                "some-access-token",
                 user
             ).catch((error) => {
                 expect(error.message).to.eq("Invalid input parameters");
@@ -1920,27 +1911,12 @@ describe("IntegrationsApi", () => {
                 fields,
                 "some-uuid",
                 "",
-                "some-access-token",
                 user
             ).catch((error) => {
                 expect(error.message).to.eq("Invalid input parameters");
             });
         });
 
-        it("throws an error if accessToken is missing", () => {
-            return IntegrationsApi.createReviztoIssue(
-                "some-token",
-                "some-region",
-                preview,
-                fields,
-                "some-uuid",
-                "some-project-id",
-                "",
-                user
-            ).catch((error) => {
-                expect(error.message).to.eq("Invalid input parameters");
-            });
-        });
     });
 
     describe("::getReviztoAccessToken", () => {
