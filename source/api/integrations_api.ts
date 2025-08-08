@@ -337,16 +337,15 @@ export default class IntegrationsApi {
     }
 
     static createReviztoIssue(
-        token: string,
+        reviztoAccesstoken: string,
         region: string,
         preview: Blob,
         fields: ReviztoIssueFields,
         uuid: string,
         projectId: string,
-        accessToken: string,
         user: User
-    ): Promise<number> {
-        if (!token || !region || !preview || !fields || !uuid || !projectId || !accessToken) {
+    ): Promise<Response> {
+        if (!reviztoAccesstoken || !region || !preview || !fields || !uuid || !projectId ) {
             return Promise.reject(new Error("Invalid input parameters"));
         }
 
@@ -355,7 +354,7 @@ export default class IntegrationsApi {
         formData.append("fields", JSON.stringify(fields));
         formData.append("uuid", uuid);
         formData.append("projectId", projectId);
-        formData.append("access-token", accessToken);
+        formData.append("access-token", reviztoAccesstoken);
         formData.append("region", region);
 
         const url = `${Http.baseUrl()}/integrations/revizto/create-request`;
@@ -363,11 +362,10 @@ export default class IntegrationsApi {
         return Http.fetch(url, {
             method: "POST",
             headers: {
-                Authorization: `Bearer ${token}`,
                 ...getAuthorizationHeaders(user),
             },
             body: formData,
-        }) as unknown as Promise<number>;
+        }) as unknown as Promise<Response>;
     }
 
     static getAllCreatedIssuesForDeviatedElements(user: User, ids: ElementIdentifiers[]): Promise<{ toolName: string, issueId: string, id:number }[]> {
