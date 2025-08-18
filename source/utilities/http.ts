@@ -56,6 +56,19 @@ export default class Http {
     });
   }
 
+  static postTsvMulipartFormData(url: RequestInfo, user: User, tsvContent: string ) {
+    let multipartFormData = new FormData();
+    let file = new Blob([tsvContent], { type: "text/tab-separated-values" });
+    multipartFormData.append("file", file, "file.tsv");
+    return Http.fetch(url, {
+      method: "POST",
+      headers: {
+        ...getAuthorizationHeaders(user)
+      },
+      body: multipartFormData
+    });
+  }
+
   static patch(url: RequestInfo, user: User, body: any) {
     return Http.fetch(url, {
       method: "PATCH",
