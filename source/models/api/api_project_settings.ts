@@ -10,6 +10,7 @@ export class ApiProjectSettings {
   viewerHomeButton: boolean;
   tradeFilterForceUniformat: boolean;
   createScanDatasetsAutomatically: boolean;
+  automaticPhotoIngestion: boolean;
 }
 
 export default ApiProjectSettings;
