@@ -343,6 +343,7 @@ export default class IntegrationsApi {
         fields: ReviztoIssueFields,
         uuid: string,
         projectId: string,
+        selectedElementIds: IntegrationAssociationIds,
         user: User
     ): Promise<Response> {
         if (!reviztoAccesstoken || !region || !preview || !fields || !uuid || !projectId ) {
@@ -356,6 +357,7 @@ export default class IntegrationsApi {
         formData.append("projectId", projectId);
         formData.append("access-token", reviztoAccesstoken);
         formData.append("region", region);
+        formData.append("associationIds", JSON.stringify(selectedElementIds));
 
         const url = `${Http.baseUrl()}/integrations/revizto/create-request`;
 
