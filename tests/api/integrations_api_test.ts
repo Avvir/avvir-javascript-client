@@ -1781,6 +1781,7 @@ describe("IntegrationsApi", () => {
         let preview: File;
         let fields: ReviztoIssueFields;
         let user: User;
+        let associatedElementIds: IntegrationAssociatedIds;
 
         beforeEach(() => {
             preview = new File(["preview content"], "preview.png", { type: "image/png" });
@@ -1795,6 +1796,12 @@ describe("IntegrationsApi", () => {
                 assignee: "assignee@example.com",
                 reporter: "reporter@example.com",
                 notify: ["user1@example.com", "user2@example.com"]
+            };
+            associatedElementIds =  {
+                "firebaseProjectId": "some-project-id",
+                "firebaseFloorId":"some-floor-id",
+                "scanDatasetId":"some-scan-dataset-id",
+                "globalId":"some-global-id"
             };
             user = {
                 authType: GATEWAY_JWT,
@@ -1817,6 +1824,7 @@ describe("IntegrationsApi", () => {
                 fields,
                 "some-uuid",
                 "some-project-id",
+                associatedElementIds,
                 user
             ).then(() => {
                 const fetchCall = fetchMock.lastCall();
@@ -1829,6 +1837,8 @@ describe("IntegrationsApi", () => {
                 expect(body.get("uuid")).to.eq("some-uuid");
                 expect(body.get("projectId")).to.eq("some-project-id");
                 expect(body.get("access-token")).to.eq("some-access-token");
+                expect(body.get("associationIds")).to.eq(JSON.stringify(associatedElementIds));
+
                 expect(body.get("region")).to.eq("some-region");
             });
         });
@@ -1841,6 +1851,7 @@ describe("IntegrationsApi", () => {
                 fields,
                 "some-uuid",
                 "some-project-id",
+                associatedElementIds,
                 user
             ).catch((error) => {
                 expect(error.message).to.eq("Invalid input parameters");
@@ -1855,6 +1866,7 @@ describe("IntegrationsApi", () => {
                 fields,
                 "some-uuid",
                 "some-project-id",
+                associatedElementIds,
                 user
             ).catch((error) => {
                 expect(error.message).to.eq("Invalid input parameters");
@@ -1869,6 +1881,7 @@ describe("IntegrationsApi", () => {
                 fields,
                 "some-uuid",
                 "some-project-id",
+                associatedElementIds,
                 user
             ).catch((error) => {
                 expect(error.message).to.eq("Invalid input parameters");
@@ -1883,6 +1896,7 @@ describe("IntegrationsApi", () => {
                 null as unknown as ReviztoIssueFields,
                 "some-uuid",
                 "some-project-id",
+                associatedElementIds,
                 user
             ).catch((error) => {
                 expect(error.message).to.eq("Invalid input parameters");
@@ -1897,6 +1911,7 @@ describe("IntegrationsApi", () => {
                 fields,
                 "",
                 "some-project-id",
+                associatedElementIds,
                 user
             ).catch((error) => {
                 expect(error.message).to.eq("Invalid input parameters");
@@ -1911,6 +1926,7 @@ describe("IntegrationsApi", () => {
                 fields,
                 "some-uuid",
                 "",
+                associatedElementIds,
                 user
             ).catch((error) => {
                 expect(error.message).to.eq("Invalid input parameters");
