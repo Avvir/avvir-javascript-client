@@ -19,6 +19,8 @@ import {sandbox} from "../test_utils/setup_tests";
 import {AutodeskRequest} from "../../source/models/api/integrations/autodesk/api_autodesk_request";
 import AutodeskIssue from "../../source/models/api/integrations/autodesk/api_autodesk_issue";
 import {ReviztoIssueFields} from "../../source/models/api/integrations/revizto/api_issue_fields";
+import {JiraIssueRequestModel} from "../../source/models/api/integrations/jira/JiraIssueRequestModel";
+import moment from "moment";
 
 
 describe("IntegrationsApi", () => {
@@ -2096,6 +2098,49 @@ describe("IntegrationsApi", () => {
             }).then((error) => {
                 expect(error.message).to.include("Invalid access token or region");
             });
+        });
+    });
+
+    describe("::createJiraServiceDeskTicket", () => {
+        let jiraIssueRequest: JiraIssueRequestModel;
+        let user: User;
+
+        beforeEach(() => {
+            user = {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-token", role: UserRole.SUPERADMIN }
+            };
+
+            jiraIssueRequest = {
+                "serviceDeskId" : 1,
+                "requestTypeIds" : [ 11, 22 ],
+                "raiseOnBehalfOf": "test@hexagon.com",
+                "summary" : "Test ticket summary",
+                "projectName" : "some-project-name",
+                "projectLink" : "https://some-project-link.com",
+                "captureDate" : moment('2025-09-10'),
+                "numberOfAreasOrLevels" : 20,
+                "totalProjectSquareFootage" : 200,
+                "dueDate" : moment('2025-09-12'),
+                "buildingType": "123",
+                "subTaskNameTemplate": "Test sub task",
+                "priority": "Low"
+            }
+
+            fetchMock.post(`${Http.baseUrl()}/integrations/jira/create-ticket`, 201);
+        });
+
+        afterEach(() => {
+            fetchMock.restore();
+        });
+
+        it("makes a request to the gateway", () => {
+            IntegrationsApi.createJiraServiceDeskTicket(jiraIssueRequest, user);
+
+            expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/integrations/jira/create-ticket`);
+            expect(fetchMock.lastOptions().headers["Accept"]).to.eq("application/json");
+            expect(fetchMock.lastOptions().headers["Authorization"]).to.eq("Bearer some-token");
+            expect(fetchMock.lastOptions().method).to.eq("POST");
         });
     });
 
