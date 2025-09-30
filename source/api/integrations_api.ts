@@ -22,6 +22,9 @@ import {IntegrationAssociationIds} from "../models/api/integrations/integration_
 import ApiReviztoAccessToken from "../models/api/integrations/revizto/api_access_token";
 import ApiReviztoData from "../models/api/integrations/revizto/api_get_data";
 import {ReviztoIssueFields} from "../models/api/integrations/revizto/api_issue_fields";
+import {JiraIssueRequest} from "../models/api/integrations/jira/JiraIssueRequest";
+import {ApiResponse} from "../models/api/integrations/jira/ApiResponse";
+import {JiraIssueRequestModel} from "../models/api/integrations/jira/JiraIssueRequestModel";
 
 export default class IntegrationsApi {
 
@@ -373,6 +376,15 @@ export default class IntegrationsApi {
     static getAllCreatedIssuesForDeviatedElements(user: User, ids: ElementIdentifiers[]): Promise<{ toolName: string, issueId: string, id:number }[]> {
         let url = `${Http.baseUrl()}/integrations/tools/issues`;
         return Http.post(url,user, ids) as unknown as Promise<{ toolName: string, issueId: string, id:number }[]>;
+    }
+
+    static createJiraServiceDeskTicket(jiraIssueRequestModel: JiraIssueRequestModel,
+                                     user: User): Promise<ApiResponse> {
+        if (jiraIssueRequestModel) {
+            const url = `${Http.baseUrl()}/integrations/jira/create-ticket`;
+            const jiraIssueRequest = new JiraIssueRequest(jiraIssueRequestModel);
+            return Http.post(url, user, jiraIssueRequest) as unknown as Promise<ApiResponse>;
+        }
     }
 }
 
