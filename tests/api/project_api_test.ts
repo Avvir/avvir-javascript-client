@@ -475,6 +475,71 @@ describe("ProjectApi", () => {
     });
   });
 
+  describe("#uploadAiAssistedProgressMasterFormatScheduleTsv", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/hephaestus`, 200);
+    });
+
+    it("makes a request to the gateway api", () => {
+      ProjectApi.uploadAiAssistedProgressMasterFormatScheduleTsv("some-project-id", "col1\tcol2\nval1\tval2", "true", user);
+
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/hephaestus`);
+    });
+
+    it("includes the authorization headers and correct form data", () => {
+      ProjectApi.uploadAiAssistedProgressMasterFormatScheduleTsv("some-project-id", "col1\tcol2\nval1\tval2", "true", user);
+
+      const lastFetchOpts = fetchMock.lastOptions();
+      const body = lastFetchOpts.body as FormData;
+
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+      expect(body.get("isCorrectedTsvFile")).to.eq("true");
+      expect(body.has("tsvFile")).to.eq(true);
+    });
+
+    it("rejects the promise when the call fails", () => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/hephaestus`, { status: 500, body: {} }, { overwriteRoutes: true });
+
+      let rejected = false;
+      return ProjectApi.uploadAiAssistedProgressMasterFormatScheduleTsv("some-project-id", "col1\tcol2\nval1\tval2", "true", user)
+          .catch(() => { rejected = true; })
+          .finally(() => {
+            expect(rejected).to.eq(true);
+          });
+    });
+  });
+
+  describe("#DownloadAiAssistedMasterFormatScheduleTsv", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/hephaestus`, 200);
+    });
+
+    it("makes a GET request to the correct endpoint", () => {
+      ProjectApi.DownloadAiAssistedMasterFormatScheduleTsv("some-project-id", user);
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/hephaestus`);
+    });
+
+    it("includes the authorization headers", () => {
+      ProjectApi.DownloadAiAssistedMasterFormatScheduleTsv("some-project-id", user);
+      const lastFetchOpts = fetchMock.lastOptions();
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+
+    it("rejects the promise when the call fails", () => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/hephaestus`, { status: 500, body: {} }, { overwriteRoutes: true });
+      let rejected = false;
+      return ProjectApi.DownloadAiAssistedMasterFormatScheduleTsv("some-project-id", user)
+          .catch(() => { rejected = true; })
+          .finally(() => {
+            expect(rejected).to.eq(true);
+          });
+    });
+  });
+
   describe("#listProjectFloorFiles", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floor-files`,
