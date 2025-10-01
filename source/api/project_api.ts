@@ -88,6 +88,28 @@ export default class ProjectApi {
     let url = `${Http.baseUrl()}/projects/${projectId}/scanned-masterformat-progress`;
     return Http.get(url, user) as unknown as Promise<ApiMasterformatProgress[]>;
   }
+  
+  static uploadAiAssistedProgressMasterFormatScheduleTsv(projectId, tsvContent: string, isCorrectedTsvFile:string, user: User) {
+    let url = `${Http.baseUrl()}/projects/${projectId}/hephaestus`;
+
+    let multipartFormData = new FormData();
+    let file = new Blob([tsvContent], { type: "text/tab-separated-values" });
+    multipartFormData.append("tsvFile", file, "file.tsv");
+    multipartFormData.append("isCorrectedTsvFile", isCorrectedTsvFile);
+
+    return Http.fetch(url, {
+      method: "POST",
+      headers: {
+        ...getAuthorizationHeaders(user)
+      },
+      body: multipartFormData
+    }) as unknown as Promise<any>;
+  }
+
+  static DownloadAiAssistedMasterFormatScheduleTsv(projectId, user: User) {
+    let url = `${Http.baseUrl()}/projects/${projectId}/hephaestus`;
+    return Http.get(url, user) as unknown as Promise<any>;
+  }
 
   /**
    * @deprecated use getProjectMasterformatProgress
