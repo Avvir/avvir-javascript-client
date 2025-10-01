@@ -1,4 +1,5 @@
 import {JiraIssueRequestModel} from "./JiraIssueRequestModel";
+import {DateFormatter} from "../../../../converters";
 
 export class RequestFieldValues {
     constructor(jiraIssueRequestModel: JiraIssueRequestModel) {
@@ -33,11 +34,8 @@ export class RequestFieldValues {
     private formatDateToYyyyMmDd(date: any) {
         if (date) {
             const selectedDate = new Date(date);
-            const yyyy = selectedDate.getFullYear();
-            const mm = String(selectedDate.getMonth() + 1).padStart(2, '0');
-            const dd = String(selectedDate.getDate()).padStart(2, '0');
-
-            return`${yyyy}-${mm}-${dd}`;
+            const formattedDate = new DateFormatter("YYYY-MM-DD").formatLocal(selectedDate);
+            return formattedDate;
         }
         return date;
     }
