@@ -25,6 +25,7 @@ import {ReviztoIssueFields} from "../models/api/integrations/revizto/api_issue_f
 import {JiraIssueRequest} from "../models/api/integrations/jira/JiraIssueRequest";
 import {ApiResponse} from "../models/api/integrations/jira/ApiResponse";
 import {JiraIssueRequestModel} from "../models/api/integrations/jira/JiraIssueRequestModel";
+import {FieldsConfiguration} from "../models/api/integrations/jira/FieldsConfiguration";
 
 export default class IntegrationsApi {
 
@@ -385,6 +386,11 @@ export default class IntegrationsApi {
             const jiraIssueRequest = new JiraIssueRequest(jiraIssueRequestModel);
             return Http.post(url, user, jiraIssueRequest) as unknown as Promise<ApiResponse>;
         }
+    }
+
+    static getJiraFieldsConfiguration(user: User): Promise<FieldsConfiguration> {
+        const url = `${Http.baseUrl()}/integrations/jira/configuration`;
+        return Http.get(url, user) as unknown as Promise<FieldsConfiguration>;
     }
 }
 

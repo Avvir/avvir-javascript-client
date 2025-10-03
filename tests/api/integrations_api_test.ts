@@ -2144,6 +2144,29 @@ describe("IntegrationsApi", () => {
         });
     });
 
+    describe("::getJiraFieldsConfiguration", () => {
+        let user: User;
+
+        afterEach(() => {
+            fetchMock.restore();
+        });
+
+        it("makes a request to the gateway to fetch jira api fields configuration", () => {
+            user = {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-token", role: UserRole.SUPERADMIN }
+            };
+            fetchMock.get(`${Http.baseUrl()}/integrations/jira/configuration`, 200);
+
+            IntegrationsApi.getJiraFieldsConfiguration(user);
+
+            expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/integrations/jira/configuration`);
+            expect(fetchMock.lastOptions().headers["Accept"]).to.eq("application/json");
+            expect(fetchMock.lastOptions().headers["Authorization"]).to.eq("Bearer some-token");
+            expect(fetchMock.lastOptions().method).to.eq("GET");
+        });
+    });
+
     describe("::getAllCreatedIssuesForDeviatedElements", () => {
         beforeEach(() => {
             fetchMock.post(`${Http.baseUrl()}/integrations/tools/issues`,
