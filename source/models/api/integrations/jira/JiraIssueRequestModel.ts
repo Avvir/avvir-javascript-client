@@ -39,3 +39,5 @@ export class JiraIssueRequestModel {
         this.priority = jiraTicketModel.priority;
     }
 }
+
+export default JiraIssueRequestModel;
