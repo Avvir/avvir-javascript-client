@@ -108,7 +108,12 @@ export default class ProjectApi {
 
   static DownloadAiAssistedMasterFormatScheduleTsv(projectId, user: User) {
     let url = `${Http.baseUrl()}/projects/${projectId}/hephaestus`;
-    return Http.get(url, user) as unknown as Promise<Response>;
+    return (fetch(url, {
+      method: "GET",
+      headers: {
+        ...getAuthorizationHeaders(user)
+      },
+    })) as unknown as Promise<Response>
   }
 
   /**
