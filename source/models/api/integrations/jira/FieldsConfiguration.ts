@@ -5,3 +5,5 @@ export class FieldsConfiguration {
     priorityTypes?: JiraFieldProperty[];
     requestTypes?: JiraFieldProperty[];
 }
+
+export default FieldsConfiguration;
