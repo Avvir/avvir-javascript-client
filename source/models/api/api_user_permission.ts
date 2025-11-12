@@ -4,8 +4,8 @@ import type UserPermissionType from "../enums/user_permission_type";
 export class ApiUserPermission {
   id: number;
   userId: number;
-  projectFirebaseId: string;
-  organizationFirebaseId: string;
+  firebaseProjectId: string;
+  firebaseOrganizationId: string;
   masterformatCode: string;
   permissionType: UserPermissionType;
   permissionAction: UserPermissionAction;
@@ -16,8 +16,8 @@ export class ApiUserPermission {
   constructor({
                 id,
                 userId,
-                projectFirebaseId,
-                organizationFirebaseId,
+                firebaseProjectId,
+                firebaseOrganizationId,
                 masterformatCode,
                 permissionType,
                 permissionAction,
@@ -28,8 +28,8 @@ export class ApiUserPermission {
   {
     this.id = id;
     this.userId = userId;
-    this.projectFirebaseId = projectFirebaseId;
-    this.organizationFirebaseId = organizationFirebaseId;
+    this.firebaseProjectId = firebaseProjectId;
+    this.firebaseOrganizationId = firebaseOrganizationId;
     this.masterformatCode = masterformatCode;
     this.permissionType = permissionType;
     this.permissionAction = permissionAction;

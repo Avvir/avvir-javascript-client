@@ -62,8 +62,8 @@ describe("UserApi", () => {
           status: 200, body: [{
             id: 1,
             userId: 2,
-            projectFirebaseId: "some-project-id",
-            organizationFirebaseId: "some-org-id",
+            firebaseProjectId: "some-project-id",
+            firebaseOrganizationId: "some-org-id",
             permissionType: "PROJECT",
             permissionAction: "READ"
           }
@@ -209,13 +209,13 @@ describe("UserApi", () => {
       id: 0,
       masterformatCode: "",
       organizationName: "",
-      projectFirebaseId: "",
+      firebaseProjectId: "",
       projectName: "",
       userId: 0,
       workPackageId: 0,
       permissionType: UserPermissionType.ORGANIZATION,
       permissionAction: UserPermissionAction.READ,
-      organizationFirebaseId: "some-org"
+      firebaseOrganizationId: "some-org"
     };
     beforeEach(() => {
       fetchMock.put(`${Http.baseUrl()}/users/accounts/123/permissions/new`,
