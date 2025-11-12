@@ -47,7 +47,6 @@
     "chai-almost": "^1.0.1",
     "chai-datetime": "^1.7.0",
     "chai-json-equal": "^0.0.1",
-    "chai-roughly": "^1.0.0",
     "chai-spies": "^1.0.0",
     "chai-things": "^0.2.0",
     "deepmerge": "^4.2.2",

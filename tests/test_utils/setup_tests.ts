@@ -8,7 +8,6 @@ import fetchMock from "fetch-mock";
 import Config from "../../source/config";
 import beVeryLike from "./chai_be_very_like";
 
-const chaiRoughly = require("chai-roughly");
 const chaiJsonEqual = require("chai-json-equal");
 const chaiThings = require("chai-things");
 const nodeFetch = require("node-fetch");
@@ -18,7 +17,6 @@ global.fetch = nodeFetch;
 chai.use(beVeryLike);
 chai.use(SinonChai);
 chai.use(ChaiSpies);
-chai.use(chaiRoughly);
 chai.use(chaiJsonEqual);
 chai.use(chaiAlmost(1.0e-6));
 chai.use(ChaiDatetime);
