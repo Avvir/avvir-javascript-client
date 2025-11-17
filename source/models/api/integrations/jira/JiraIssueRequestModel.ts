@@ -8,6 +8,7 @@ export class JiraIssueRequestModel {
     summary?: string;
     projectName?: string;
     projectLink?: string;
+    assignee?: string;
     captureDate?: Moment;
     subTaskNameTemplate?: string;
     numberOfAreasOrLevels?: number;
@@ -28,6 +29,7 @@ export class JiraIssueRequestModel {
         this.buildingType = jiraTicketModel.buildingType;
         this.summary = jiraTicketModel.summary;
         this.projectLink = jiraTicketModel.projectLink;
+        this.assignee = jiraTicketModel.assignee;
         this.projectName = jiraTicketModel.projectName;
         this.captureDate = jiraTicketModel.captureDate;
         this.subTaskNameTemplate = jiraTicketModel.subTaskNameTemplate;
