@@ -3,6 +3,7 @@ import addReadOnlyPropertiesToModel from "../../mixins/add_read_only_properties_
 
 import type { DateLike, ModifyPartial } from "type_aliases";
 import type { PipelineName, RunningProcessStatus } from "../enums";
+import ApiPipelineLog from "./api_pipeline_log";
 
 export type ApiPipelineArgument = ModifyPartial<ApiPipeline, {
   startTime?: DateLike
@@ -22,7 +23,8 @@ export class ApiPipeline {
                 firebaseFloorId,
                 firebaseScanDatasetId,
                 options,
-                status
+                status,
+                logs,
               }: ApiPipelineArgument = {})
   {
     addReadOnlyPropertiesToModel(this, { id });
@@ -41,6 +43,7 @@ export class ApiPipeline {
     this.firebaseScanDatasetId = firebaseScanDatasetId || null;
     this.options = options || {};
     this.status = status || null;
+    this.logs = logs || [];
   }
 
   readonly id: number;
@@ -58,6 +61,8 @@ export class ApiPipeline {
   options: any;
 
   status: RunningProcessStatus;
+
+  logs: ApiPipelineLog[];
 }
 
 export default ApiPipeline;
