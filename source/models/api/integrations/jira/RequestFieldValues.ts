@@ -16,6 +16,7 @@ export class RequestFieldValues {
         this.squareFootage = jiraIssueRequestModel?.squareFootage;
         this.dueDate = this.formatDateToYyyyMmDd(jiraIssueRequestModel?.dueDate);
         this.priority = jiraIssueRequestModel?.priority ? jiraIssueRequestModel?.priority : "Unprioritized";
+        this.assignee = jiraIssueRequestModel?.assignee;
     }
     summary?: string;
     projectName?: string;
@@ -30,6 +31,7 @@ export class RequestFieldValues {
     dueDate?: string;
     buildingType?: string;
     priority: string;
+    assignee?: string;
 
     private formatDateToYyyyMmDd(date: any) {
         if (date) {
