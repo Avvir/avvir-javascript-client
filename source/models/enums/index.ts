@@ -8,6 +8,7 @@ export * from "./inspection_modes";
 export * from "./notification_level";
 export * from "./photo_projection_type";
 export * from "./photo_rotation_type";
+export * from "./pipeline_log_type";
 export * from "./pipeline_types";
 export * from "./process_status";
 export * from "./progress_type";
