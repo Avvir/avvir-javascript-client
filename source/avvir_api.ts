@@ -9,6 +9,7 @@ export default {
   files: Api.FileInformationApi,
   floors: Api.FloorApi,
   groups: Api.GroupApi,
+  newGroups: Api.NewGroupApi,
   integrations: Api.IntegrationsApi,
   organizations: Api.OrganizationApi,
   photos: Api.PhotoAreaApi,
