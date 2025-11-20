@@ -5,6 +5,9 @@ import type { ApiGroup } from "../models";
 import type { AssociationIds } from "type_aliases";
 import type { User } from "../utilities/get_authorization_headers";
 
+/**
+ * @deprecated use {@link NewGroupApi} instead
+ */
 export default class GroupApi {
   static getGroup({ projectId, groupId }: AssociationIds, user: User, ): Promise<ApiGroup|null> {
     let url = `${Http.baseUrl()}/projects/${projectId}/groups/${groupId}`;

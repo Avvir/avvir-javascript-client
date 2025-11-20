@@ -4,6 +4,7 @@ import ElementApi from "./element_api";
 import FileInformationApi from "./file_information_api";
 import FloorApi from "./floor_api";
 import GroupApi from "./group_api";
+import NewGroupApi from "./new_group_api";
 import IntegrationsApi from "./integrations_api";
 import OrganizationApi from "./organization_api";
 import PhotoAreaApi from "./photo_area_api";
@@ -26,6 +27,7 @@ export {
   FileInformationApi,
   FloorApi,
   GroupApi,
+  NewGroupApi,
   IntegrationsApi,
   OrganizationApi,
   PhotoAreaApi,
