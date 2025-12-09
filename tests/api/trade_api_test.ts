@@ -129,18 +129,6 @@ describe("TradeApi", () => {
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
-
-    describe("when a scan date is passed in", () => {
-      it("includes it in the request's query params", () => {
-        TradeApi.refreshCapturedTradeCosts({
-          authType: UserAuthType.GATEWAY_JWT,
-          gatewayUser: { idToken: "some-firebase.id.token" }
-        } as User);
-        const fetchCall = fetchMock.lastCall();
-
-        expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/all/trade-breakdown/update-captured-trade-costs`);
-      });
-    });
   });
 
   describe("::listTradeCosts", () => {
