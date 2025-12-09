@@ -104,6 +104,45 @@ describe("TradeApi", () => {
     });
   });
 
+
+  describe("::refreshCapturedTradeCosts", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/all/trade-breakdown/update-captured-trade-costs`, 202);
+    });
+
+    it("makes a request to the gateway api", () => {
+      TradeApi.refreshCapturedTradeCosts({
+        authType: UserAuthType.GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      } as User);
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/all/trade-breakdown/update-captured-trade-costs`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("includes the authorization headers", () => {
+      TradeApi.refreshCapturedTradeCosts({
+        authType: UserAuthType.GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      } as User);
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+
+    describe("when a scan date is passed in", () => {
+      it("includes it in the request's query params", () => {
+        TradeApi.refreshCapturedTradeCosts({
+          authType: UserAuthType.GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token" }
+        } as User);
+        const fetchCall = fetchMock.lastCall();
+
+        expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/all/trade-breakdown/update-captured-trade-costs`);
+      });
+    });
+  });
+
   describe("::listTradeCosts", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/trade-breakdown/costs`, 200);
