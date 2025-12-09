@@ -27,6 +27,12 @@ export default class TradeApi {
     return Http.get(url, user) as unknown as Promise<ApiCapturedTradeCost[]>;
   }
 
+  static refreshCapturedTradeCosts(user: User) {
+    const projects = 'all';
+    const url = `${Http.baseUrl()}/projects/${projects}/trade-breakdown/update-captured-trade-costs`;
+    return Http.post(url, user) as unknown as Promise<void>;
+  }
+
   static listTradeCosts({ projectId }: AssociationIds, user: User) {
     const url = `${Http.baseUrl()}/projects/${projectId}/trade-breakdown/costs`;
     return Http.get(url, user) as unknown as Promise<ApiTradeCost[]>;
