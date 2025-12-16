@@ -131,6 +131,32 @@ describe("TradeApi", () => {
     });
   });
 
+  describe("::checkStatusOfLastRefreshCapturedTradeCosts", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/all/trade-breakdown/check-status-update-captured-trade-costs`, 200);
+    });
+
+    it("makes a request to the gateway api", () => {
+      TradeApi.checkStatusOfLastRefreshCapturedTradeCosts({
+        authType: UserAuthType.GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      } as User);
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/all/trade-breakdown/check-status-update-captured-trade-costs`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("includes the authorization headers", () => {
+      TradeApi.checkStatusOfLastRefreshCapturedTradeCosts({
+        authType: UserAuthType.GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      } as User);
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
   describe("::listTradeCosts", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/trade-breakdown/costs`, 200);
