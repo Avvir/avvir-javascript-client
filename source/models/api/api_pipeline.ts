@@ -66,3 +66,4 @@ export class ApiPipeline {
 }
 
 export default ApiPipeline;
+export {ApiPipelineLog};
