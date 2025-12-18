@@ -72,15 +72,13 @@ yarn build
 
 `TypeError: Only absolute URLs are supported`: make sure that your AVVIR_GATEWAY_URL environment variable is set.
 
+# Publishing
 
- # TODO - Chores etc.
- 
- -[ ] remove overload method from FileInformationApi
- -[ ] rename reduce_user_session.ts
- -[ ] why doesn't async/await transpile?
- -[ ] pretty errors on AuthApi.login()
- -[ ] getViewerFloor is still a thing?
- -[ ] avvir-only docs ?
- -[ ] how to get superadmin credentials
- -[ ] upload file from local data
-
+```
+$ VERSION=v...
+$ git tag $VERSION
+$ git push origin $VERSION
+$ npm login
+$ npm version --no-git-tag-version $VERSION
+$ npm publish
+```
