@@ -28,25 +28,13 @@ $ git commit -m "[Fix] Some patch"
 ```
 ## Publishing to NPM
 
-To publish to NPM (assuming you have the permission to create git tags), run the publish script:
-```shell
-$ ./scripts/publish.js
 ```
-
-The script will stash any uncommitted changes, switch to the master branch, and push a git tag to the repository.
-This will trigger Circle CI to run a job that will publish to the NPM registry if the tests pass.
-The version in package.json is intentionally set to 0.0.0 because the version is controlled by the most recent git tag version.
-
-The publish script can automatically detect which version to bump to release to by reading through the commit
-log after the latest tag (using [semantic labels](#Committing-Changes)).
-
-To override this behavior, supply either `patch`, `minor`, or `major` argument to the script to force it 
-to bump the appropriate version number. 
-
-Example: 
-```shell
-$ ./scripts/publish.js minor
-$ ./scripts/publish.js major
+$ VERSION=v...
+$ git tag $VERSION
+$ git push origin $VERSION
+$ npm login
+$ npm version --no-git-tag-version $VERSION
+$ npm publish
 ```
 
 ## Testing Locally Before Publishing
@@ -71,14 +59,3 @@ yarn build
 ## Troubleshooting
 
 `TypeError: Only absolute URLs are supported`: make sure that your AVVIR_GATEWAY_URL environment variable is set.
-
-# Publishing
-
-```
-$ VERSION=v...
-$ git tag $VERSION
-$ git push origin $VERSION
-$ npm login
-$ npm version --no-git-tag-version $VERSION
-$ npm publish
-```
