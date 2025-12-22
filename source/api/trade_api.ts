@@ -30,7 +30,7 @@ export default class TradeApi {
   static refreshCapturedTradeCosts(user: User) {
     const projects = 'all';
     const url = `${Http.baseUrl()}/projects/${projects}/trade-breakdown/update-captured-trade-costs`;
-    return Http.post(url, user) as unknown as Promise<void>;
+    return Http.post(url, user) as unknown as Promise<number>;
   }
 
   static checkStatusOfLastRefreshCapturedTradeCosts(user: User) {
