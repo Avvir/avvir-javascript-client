@@ -26,6 +26,8 @@ import {JiraIssueRequest} from "../models/api/integrations/jira/JiraIssueRequest
 import {ApiResponse} from "../models/api/integrations/jira/ApiResponse";
 import {JiraIssueRequestModel} from "../models/api/integrations/jira/JiraIssueRequestModel";
 import {FieldsConfiguration} from "../models/api/integrations/jira/FieldsConfiguration";
+import { PowerBIAccessTokenResponse } from "../models/api/integrations/powerbi/api_access_token";
+import { EmbedTokenResponse } from "../models/api/integrations/powerbi/api_embed_token_response";
 
 export default class IntegrationsApi {
 
@@ -372,6 +374,19 @@ export default class IntegrationsApi {
             },
             body: formData,
         }) as unknown as Promise<Response>;
+    }
+
+    static getPowerBIAccessToken(user: User): Promise<PowerBIAccessTokenResponse> {
+        const url = `${Http.baseUrl()}/integrations/powerbi/accessToken`;
+        return Http.get(url, user) as unknown as Promise<PowerBIAccessTokenResponse>;
+    }
+
+    static getPowerBIEmbedToken(groupId: string, reportId: string, user: User): Promise<EmbedTokenResponse> {
+        if (!groupId || !reportId) {
+            return Promise.reject(new Error("Invalid groupId or reportId"));
+        }
+        const url = `${Http.baseUrl()}/integrations/powerbi/embedToken/groups/${groupId}/reports/${reportId}`;
+        return Http.get(url, user) as unknown as Promise<EmbedTokenResponse>;
     }
 
     static getAllCreatedIssuesForDeviatedElements(user: User, ids: ElementIdentifiers[]): Promise<{ toolName: string, issueId: string, id:number }[]> {

@@ -6,7 +6,7 @@ import {
     ApiIntegrationCredentials,
     ApiIntegrationCredentialsType,
     ApiIntegrationProject,
-    ApiRunningProcess, GATEWAY_JWT, USER,
+    ApiRunningProcess, GATEWAY_JWT, IntegrationAssociationIds, USER,
     User,
     UserAuthType,
     UserRole
@@ -1783,7 +1783,7 @@ describe("IntegrationsApi", () => {
         let preview: File;
         let fields: ReviztoIssueFields;
         let user: User;
-        let associatedElementIds: IntegrationAssociatedIds;
+        let associatedElementIds: IntegrationAssociationIds;
 
         beforeEach(() => {
             preview = new File(["preview content"], "preview.png", { type: "image/png" });
@@ -2100,6 +2100,84 @@ describe("IntegrationsApi", () => {
             });
         });
     });
+
+    describe("::getPowerBIAccessToken", () => {
+        beforeEach(() => {
+            fetchMock.get(`${Http.baseUrl()}/integrations/powerbi/accessToken`, {
+                status: 200,
+                body: { access_token: "some-access-token", token_type: "Bearer", expires_in: "3600", refresh_token: "some-refresh-token" }
+            });
+        });
+
+        it("includes auth headers and makes a request to the gateway", () => {
+            IntegrationsApi.getPowerBIAccessToken({
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+            });
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/powerbi/accessToken`);
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+    });
+
+    describe("::getPowerBIEmbedToken", () => {
+        const groupId = "some-group-id";
+        const reportId = "some-report-id";
+        const url = `${Http.baseUrl()}/integrations/powerbi/embedToken/groups/${groupId}/reports/${reportId}`;
+
+        beforeEach(() => {
+            fetchMock.get(url, {
+                status: 200,
+                body: { token: "some-embed-token", expiration: "2024-12-31T23:59:59Z" }
+            });
+        });
+
+        it("includes auth headers and makes a request to the gateway", () => {
+            IntegrationsApi.getPowerBIEmbedToken(groupId, reportId, {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+            });
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(url);
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+
+        it("throws an error if groupId is missing", () => {
+            return IntegrationsApi.getPowerBIEmbedToken("", reportId, {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+            }).catch((error) => {
+                expect(error).to.be.an("error");
+                expect(error.message).to.eq("Invalid groupId or reportId");
+            });
+        });
+
+        it("throws an error if reportId is missing", () => {
+            return IntegrationsApi.getPowerBIEmbedToken(groupId, "", {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+            }).catch((error) => {
+                expect(error).to.be.an("error");
+                expect(error.message).to.eq("Invalid groupId or reportId");
+            });
+        });
+
+        it("throws an error if both groupId and reportId are missing", () => {
+            return IntegrationsApi.getPowerBIEmbedToken("", "", {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+            }).catch((error) => {
+                expect(error).to.be.an("error");
+                expect(error.message).to.eq("Invalid groupId or reportId");
+            });
+        });
+    });
+
+
 
     describe("::createJiraServiceDeskTicket", () => {
         let jiraIssueRequest: JiraIssueRequestModel;
