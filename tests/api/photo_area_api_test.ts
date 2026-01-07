@@ -153,13 +153,87 @@ describe("PhotoAreaApi", () => {
     });
   });
 
-  describe("#updatePhotoLocations", () => {
+  describe("#updatePhotoLocation", () => {
     beforeEach(() => {
-      fetchMock.put(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/locations`, {
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/locations/13`, {
         status: 200,
         body: {}
       });
-      fetchMock.put(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/locations?photoSessionId=2`, {
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/locations/13?photoSessionId=2`, {
+        status: 200,
+        body: {}
+      });
+    });
+
+    it("makes a call to the update photo locations endpoint", () => {
+      PhotoAreaApi.updatePhotoLocation({
+        projectId: "some-project-id",
+        photoAreaId: 1
+      },
+        new ApiPhotoLocation({
+          id: 13,
+          photoAreaId: 2,
+          photoSessionId: 3,
+          minimapX: 0.4,
+          minimapY: 0.6,
+          minimapBearing: 0,
+          projectionType: PhotoProjectionType.EQUIRECTANGULAR,
+          cameraWorldMatrix: new Matrix4(),
+          bimLocation: new ApiPhotoLocation3d({
+            id: 5,
+            position: new Vector3(0, 0, 0),
+            orientation: {a: 0, b: 0, c: 0, d: 1}
+          }),
+          yawOffset: 0,
+          rotationType: PhotoRotationType.ABSOLUTE_MINIMAP_BEARING,
+          createdAt: DateConverter.dateToInstant(new Date("2022-03-01T00:00Z")),
+          updatedAt: DateConverter.dateToInstant(new Date("2022-03-01T01:00Z"))
+        }), user);
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/locations/13`);
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+
+      const body = JSON.parse(fetchCall[1].body as string);
+
+      expect(body).to.deep.eq(
+        {
+          id: 13,
+          photoAreaId: 2,
+          photoSessionId: 3,
+          minimapX: 0.4,
+          minimapY: 0.6,
+          minimapBearing: 0,
+          projectionType: PhotoProjectionType.EQUIRECTANGULAR,
+          cameraWorldMatrix: {
+            elements: [
+              1, 0, 0, 0, 0, 1,
+              0, 0, 0, 0, 1, 0,
+              0, 0, 0, 1
+            ]
+          },
+          bimLocation: {
+            id: 5,
+            position: {x: 0, y: 0, z: 0},
+            orientation: {a: 0, b: 0, c: 0, d: 1}
+          },
+          yawOffset: 0,
+          rotationType: PhotoRotationType.ABSOLUTE_MINIMAP_BEARING,
+          createdAt: 1646092800,
+          updatedAt: 1646096400
+        });
+    });
+  });
+
+  describe("#updatePhotoLocations", () => {
+    beforeEach(() => {
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/locations`, {
+        status: 200,
+        body: {}
+      });
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/locations?photoSessionId=2`, {
         status: 200,
         body: {}
       });

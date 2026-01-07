@@ -53,11 +53,18 @@ export default class PhotoAreaApi {
     return Http.patch(url, user, coordinates) as unknown as Promise<ApiPhotoLocation>;
   }
 
+  static updatePhotoLocation({ projectId, photoAreaId }: AssociationIds,
+                              location: ApiPhotoLocation,
+                              user: User): Promise<ApiPhotoLocation> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/photo-areas/${photoAreaId}/locations/${location.id}`;
+    return Http.patch(url, user, location) as unknown as Promise<ApiPhotoLocation>;
+  }
+
   static updatePhotoLocations({ projectId, photoAreaId }: AssociationIds,
-                              locations: ApiPhotoLocation[],
+                                 locations: ApiPhotoLocation[],
                               user: User): Promise<ApiPhotoLocation[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/photo-areas/${photoAreaId}/locations`;
-    return Http.put(url, user, locations) as unknown as Promise<ApiPhotoLocation[]>;
+    return Http.patch(url, user, locations) as unknown as Promise<ApiPhotoLocation[]>;
   }
 
   static deletePhotoLocations({ projectId, photoAreaId }: AssociationIds,
