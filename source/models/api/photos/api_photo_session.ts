@@ -13,6 +13,7 @@ export class ApiPhotoSession {
     addReadOnlyPropertiesToModel(this, { id, photoAreaId });
     addInstantGetterAndSetterToApiModel(this, "sessionDate", sessionDate);
     addInstantGetterAndSetterToApiModel(this, "deletedAt", deletedAt);
+    addInstantGetterAndSetterToApiModel(this, "createdAt", deletedAt);
     this.externalId = externalId;
   }
 
@@ -20,6 +21,7 @@ export class ApiPhotoSession {
   readonly photoAreaId: number;
   readonly sessionDate: number;
   readonly deletedAt: number;
+  readonly createdAt: number;
   externalId: string;
 }
 

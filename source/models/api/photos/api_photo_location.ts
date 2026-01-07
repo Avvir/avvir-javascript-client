@@ -30,7 +30,8 @@ export class ApiPhotoLocation {
                 createdAt,
                 updatedAt,
                 originalTimestamp,
-                deletedAt
+                deletedAt,
+                updatedBy
               }: ApiPhotoLocationArgument = {})
   {
     this.id = id;
@@ -45,6 +46,7 @@ export class ApiPhotoLocation {
     this.bimLocation = bimLocation;
     this.yawOffset = yawOffset;
     this.rotationType = rotationType;
+    this.updatedBy = updatedBy;
     addInstantGetterAndSetterToApiModel(this, "createdAt", createdAt);
     addInstantGetterAndSetterToApiModel(this, "updatedAt", updatedAt);
     addInstantGetterAndSetterToApiModel(this, "originalTimestamp", originalTimestamp);
@@ -67,6 +69,7 @@ export class ApiPhotoLocation {
   readonly updatedAt?: number;
   readonly originalTimestamp?: number;
   readonly deletedAt?: number;
+  readonly updatedBy?: number;
 }
 
 export default ApiPhotoLocation;
