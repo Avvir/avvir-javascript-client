@@ -23,6 +23,8 @@ commands:
           key: v2-dependencies-{{ checksum "yarn.lock" }}
 
 jobs:
+  push_hexagon: 
+     - checkout  
   test:
     executor: docker-node
     steps:
@@ -35,6 +37,7 @@ jobs:
 workflows:
   commit:
     jobs:
+      - push_hexagon
       - test:
           filters:
             tags:
