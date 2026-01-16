@@ -4,12 +4,8 @@
   "version": "0.0.0",
   "description": "Javascript client for Avvir APIs",
   "license": "Apache-2.0",
-  "module": "dist/esm/index.js",
-  "types": "dist/esm/index.d.ts",
-  "main": "dist/avvir_api.node.js",
+  "main": "source/index.ts",
   "files": [
-    "dist/*",
-    "dist/**",
     "source/*",
     "source/**"
   ],
@@ -19,12 +15,6 @@
     "Firefox ESR"
   ],
   "scripts": {
-    "build": "yarn build-esm && yarn build-web",
-    "build-esm": "tsc --project tsconfig.esm.json",
-    "build-web": "yarn run webpack",
-    "clean": "rimraf ./dist",
-    "prepublishOnly": "yarn rebuild",
-    "rebuild": "yarn clean && yarn build",
     "test": "NODE_ENV=test AVVIR_ENVIRONMENT=acceptance nyc mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive",
     "test:integration": "NODE_ENV=test AVVIR_ENVIRONMENT=acceptance nyc mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./integration_tests{,/**/}**.[tj]s*\" --recursive"
   },
@@ -52,7 +42,6 @@
     "deepmerge": "^4.2.2",
     "fetch-mock": "^9.11.0",
     "mocha": "^8.2.1",
-    "rimraf": "^3.0.2",
     "sinon": "^11.1.2",
     "sinon-chai": "^3.5.0",
     "tolerant-deep-eql": "git+http://git@github.com/TiraO/deep-eql.git#06a376d",
