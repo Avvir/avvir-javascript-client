@@ -35,7 +35,7 @@ export class ApiFloor {
                 floorElevation,
                 floorPlanOffset,
                 globalOffsetYaw,
-                lockedByRunningProcessId
+                isLocked
               }: ApiFloorArgument = {})
   {
     addReadOnlyPropertiesToModel(this, { id, firebaseId, firebaseProjectId });
@@ -107,7 +107,7 @@ export class ApiFloor {
     this.floorElevation = floorElevation || null;
     this.floorPlanOffset = floorPlanOffset || 0;
     this.globalOffsetYaw = globalOffsetYaw;
-    this.lockedByRunningProcessId = lockedByRunningProcessId;
+    this.isLocked = isLocked;
   }
 
   /** Internal identifier, not used in URLs. */
@@ -139,7 +139,7 @@ export class ApiFloor {
   /** The vertical offset of the floor plan from the {@link floorElevation}, useful for adjusting the height of the floor plan to make it more visible */
   floorPlanOffset: number;
   globalOffsetYaw: number | null;
-  lockedByRunningProcessId?: number;
+  isLocked: boolean;
 }
 
 export default ApiFloor;
