@@ -1445,6 +1445,73 @@ describe("IntegrationsApi", () => {
         });
     });
 
+    describe("::getAutodeskIssueAssignees", () => {
+
+        beforeEach(() => {
+            fetchMock.get(`${Http.baseUrl()}/integrations/autodesk/assignees?access-token=some-access-token&projectId=some-project-id`,
+                {status: 200, body: [
+                        {name: "John Doe", autodeskId: "ABC123"},
+                        {name: "Jane Smith", autodeskId: "XYZ789"}
+                    ]});
+        });
+
+        it("includes auth headers and makes a request to the gateway", () => {
+            IntegrationsApi.getAutodeskIssueAssignees("some-access-token", "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            });
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/autodesk/assignees?access-token=some-access-token&projectId=some-project-id`);
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+
+        it("throws an error if access token is missing", () => {
+            return IntegrationsApi.getAutodeskIssueAssignees("", "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token or projectId");
+            });
+        });
+
+        it("throws an error if projectId is missing", () => {
+            return IntegrationsApi.getAutodeskIssueAssignees("some-access-token", "", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token or projectId");
+            });
+        });
+
+        it("throws an error if access token is undefined", () => {
+            return IntegrationsApi.getAutodeskIssueAssignees(undefined, "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token or projectId");
+            });
+        });
+
+        it("throws an error if projectId is undefined", () => {
+            return IntegrationsApi.getAutodeskIssueAssignees("some-access-token", undefined, {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token or projectId");
+            });
+        });
+    });
+
     describe("::createAutodeskRequest", () => {
         describe("::createAutodeskRequest", () => {
             beforeEach(() => {
