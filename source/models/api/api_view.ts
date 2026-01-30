@@ -92,14 +92,16 @@ export type ViewAttributesArgument = ModifyPartial<ViewAttributes, {
   camera: ViewCameraArgument
   filters: ViewFiltersArgument
   photoViewerDetails: Partial<PhotoViewerDetails>
+  selectionPosition: Vector3Like
 }>
 
 export class ViewAttributes {
   constructor(attributes: ViewAttributesArgument = {}) {
     if (attributes) {
-      const { camera, filters, selectedElements, inspectionMode, photoViewerDetails } = attributes;
+      const { camera, filters, selectionPosition, selectedElements, inspectionMode, photoViewerDetails } = attributes;
       this.camera = new ViewCamera(camera);
       this.filters = new ViewFilters(filters);
+      this.selectionPosition = new Vector3(selectionPosition?.x, selectionPosition?.y, selectionPosition?.z);
       this.selectedElements = selectedElements || [];
       this.inspectionMode = inspectionMode;
       this.photoViewerDetails = new PhotoViewerDetails(photoViewerDetails);
@@ -113,6 +115,7 @@ export class ViewAttributes {
 
   camera: ViewCamera;
   filters: ViewFilters;
+  selectionPosition: Vector3
   selectedElements: SelectedElements;
   inspectionMode: ApiInspectionModes;
   photoViewerDetails: PhotoViewerDetails;
