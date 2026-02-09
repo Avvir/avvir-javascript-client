@@ -638,11 +638,17 @@ describe("ProjectApi", () => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/masterformats-with-pbes?masterformatVersion=2016`,
           {
             status: 200,
-
             body: [{
-              version: 2016,
-              code: '05 00 00',
-              description: 'Metals',
+              "masterformat": {
+                "version": 2016,
+                "code": "03 30 00",
+                "description": "Cast-in-Place Concrete",
+                "masterformatId": {
+                  "version": 2016,
+                  "code": "03 30 00"
+                }
+              },
+              "uniformat": "B1010.10"
             }]
           });
     });
