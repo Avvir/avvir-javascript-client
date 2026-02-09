@@ -6,7 +6,7 @@ import { PbeTsvType } from "../models/api/pbe_tsv_type";
 
 import type { ApiClassificationCode, ApiCloudFile, ApiMasterformatProgress, ApiProject, ApiProjectCostAnalysisProgress, ApiProjectCostAnalysisProgressValidationResult, ApiProjectListing, ApiProjectWorkPackage, ApiProjectWorkPackageCost, ApiRunningProcess, ProgressType, ProjectWorkPackageType, User } from "../models";
 import type { AssociationIds, DateLike } from "type_aliases";
-import {ApiMasterformat} from "../models";
+import ApiMasterFormatWithUniformat from "../models/api/api_masterformat_with_uniformat";
 
 export default class ProjectApi {
   static listProjectsForOrganization(organizationId: string, user: User): Promise<ApiProject[]> {
@@ -90,9 +90,9 @@ export default class ProjectApi {
     return Http.get(url, user) as unknown as Promise<ApiMasterformatProgress[]>;
   }
 
-  static getMasterformatsWithPbesInProject(projectId: string, version: number, user: User): Promise<ApiMasterformat[]> {
+  static getMasterformatsWithPbesInProject(projectId: string, version: number, user: User): Promise<ApiMasterFormatWithUniformat[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/masterformats-with-pbes?masterformatVersion=${version}`;
-    return Http.get(url, user) as unknown as Promise<ApiMasterformat[]>;
+    return Http.get(url, user) as unknown as Promise<ApiMasterFormatWithUniformat[]>;
   }
   
   static uploadAiAssistedProgressMasterFormatScheduleTsv(projectId, tsvContent: string, isCorrectedTsvFile:string, user: User) {
