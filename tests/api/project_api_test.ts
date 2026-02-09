@@ -633,6 +633,34 @@ describe("ProjectApi", () => {
     });
   });
 
+  describe("#getMasterformatsWithPbesInProject", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/masterformats-with-pbes?masterformatVersion=2016`,
+          {
+            status: 200,
+
+            body: [{
+              version: 2016,
+              code: '05 00 00',
+              description: 'Metals',
+            }]
+          });
+    });
+
+    it("includes auth headers and makes a request to the gateway", () => {
+      ProjectApi.getMasterformatsWithPbesInProject("some-project-id", 2016,
+          {
+            authType: GATEWAY_JWT,
+            gatewayUser: { idToken: "some-firebase.id.token", role: SUPERADMIN }
+          });
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/masterformats-with-pbes?masterformatVersion=2016`);
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+  });
+
   describe("#generateMasterformatProgresses", () => {
     beforeEach(() => {
       fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/masterformat-progress-report?masterformatVersion=2016&reportDate=2023-05-01T12:00:00.000Z`, 200);
