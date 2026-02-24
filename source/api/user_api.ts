@@ -1,8 +1,7 @@
-import {User} from "../utilities/get_authorization_headers";
+import { User } from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
 import ApiUser from "../models/api/api_user";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import UserRole from "../models/enums/user_role";
 import ApiInvitation from "../models/api/api_invitation";
 import ApiCreateInvitationForm from "../models/api/api_create_invitation_form";
 import ApiUserPermission from "../models/api/api_user_permission";
@@ -24,8 +23,21 @@ export default class UserApi {
     return Http.get(url, user) as unknown as Promise<ApiUser>;
   }
 
+  /**
+   * @deprecated use {@link UserApi.listUserPermissions} instead
+   */
   static getUserPermissions(userId: number, user: User): Promise<ApiUserPermission[]> {
     const url = `${Http.baseUrl()}/users/accounts/${userId}/permissions`;
+    return Http.get(url, user) as unknown as Promise<ApiUserPermission[]>;
+  }
+
+  static listUserPermissions(userId: number, user: User): Promise<ApiUserPermission[]> {
+    const url = `${Http.baseUrl()}/users/accounts/${userId}/permissions`;
+    return Http.get(url, user) as unknown as Promise<ApiUserPermission[]>;
+  }
+
+  static listUserPermissionsForOrganization(organizationId: string, user: User): Promise<ApiUserPermission[]> {
+    const url = `${Http.baseUrl()}/client-accounts/${organizationId}/permissions`;
     return Http.get(url, user) as unknown as Promise<ApiUserPermission[]>;
   }
 
@@ -34,9 +46,9 @@ export default class UserApi {
     return Http.delete(url, user) as unknown as Promise<void>;
   }
 
-  static createUserPermission(userId: number, permission: ApiUserPermission, user: User): Promise<void> {
-    const url = `${Http.baseUrl()}/users/accounts/${userId}/permissions/new`;
-    return Http.put(url, user, permission) as unknown as Promise<void>;
+  static createUserPermission(userId: number, permission: ApiUserPermission, user: User): Promise<ApiUserPermission> {
+    const url = `${Http.baseUrl()}/users/accounts/${userId}/permissions`;
+    return Http.post(url, user, permission) as unknown as Promise<ApiUserPermission>;
   }
 
   static updateUserAccount(userId: number, apiUser: ApiUser, user: User): Promise<ApiUser> {
@@ -47,22 +59,23 @@ export default class UserApi {
   static sendPasswordResetEmail(email: string): Promise<void> {
     email = encodeURIComponent(email);
     const url = `${Http.baseUrl()}/users/send-password-reset-email`;
-    return Http.post(url, null, {email}) as unknown as Promise<void>;
+    return Http.post(url, null, { email }) as unknown as Promise<void>;
   }
 
   static resetPassword(password: string, email: string, token: string): Promise<void> {
     email = encodeURIComponent(email);
     const url = `${Http.baseUrl()}/users/reset-password`;
-    return Http.post(url, null, {email, token, password}) as unknown as Promise<void>;
+    return Http.post(url, null, { email, token, password }) as unknown as Promise<void>;
   }
 
 }
 
 makeErrorsPretty(UserApi, {
-        exclude: [],
-        overrideErrorMessage: [
-            "resetPassword",
-            "sendPasswordResetEmail",
-            "createInvitation",
-            "getInvitation"
-        ]})
+  exclude: [],
+  overrideErrorMessage: [
+    "resetPassword",
+    "sendPasswordResetEmail",
+    "createInvitation",
+    "getInvitation"
+  ]
+});
