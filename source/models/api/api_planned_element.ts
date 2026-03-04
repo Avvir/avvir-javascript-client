@@ -1,4 +1,4 @@
-import { addInstantGetterAndSetterToApiModel } from "../../mixins";
+import { addInstantGetterAndSetterToApiModel, addReadOnlyPropertiesToModel } from "../../mixins";
 
 import type ApiElementDeviation from "./api_element_deviation";
 import type { DateLike, ModifyPartial } from "type_aliases";
@@ -8,6 +8,7 @@ type ApiPlannedElementArgument = ModifyPartial<ApiPlannedElement, { builtAt: Dat
 
 export class ApiPlannedElement {
   constructor({
+                id,
                 globalId,
                 name,
                 ifcType,
@@ -37,6 +38,7 @@ export class ApiPlannedElement {
                 trade
               }: ApiPlannedElementArgument = {})
   {
+    addReadOnlyPropertiesToModel(this, { id });
     addInstantGetterAndSetterToApiModel(this, "builtAt", builtAt);
     addInstantGetterAndSetterToApiModel(this, "fixedAt", fixedAt);
     this.globalId = globalId;
@@ -51,7 +53,7 @@ export class ApiPlannedElement {
     this.discipline = discipline;
     this.primaryUnitOfMeasurement = primaryUnitOfMeasurement;
     this.primaryMeasurement = primaryMeasurement;
-    this.unitCost = unitCost
+    this.unitCost = unitCost;
     this.navisworksGuid = navisworksGuid;
     this.issueId = issueId;
     this.excludeFromAnalysis = excludeFromAnalysis;
@@ -66,6 +68,7 @@ export class ApiPlannedElement {
     this.trade = trade;
   }
 
+  readonly id: number;
   name?: string;
   globalId: string;
   itemId?: string | null;
@@ -78,7 +81,7 @@ export class ApiPlannedElement {
   revitCategory?: string;
   primaryUnitOfMeasurement?: string;
   primaryMeasurement?: number;
-  unitCost?: number
+  unitCost?: number;
   navisworksGuid?: string;
   issueId?: number;
   excludeFromAnalysis?: boolean;
