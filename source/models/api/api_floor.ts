@@ -12,6 +12,7 @@ export type ApiFloorArgument = ModifyPartial<ApiFloor, {
   scanDate?: DateLike,
   photoAreaMinimapPixelToBimMinimapPixel?: Matrix3Like;
   bimMinimapToWorld?: Matrix3Like;
+  areaLocationInFloorPlan?: Vector2Like[]
 }>
 
 export class ApiFloor {
@@ -34,6 +35,7 @@ export class ApiFloor {
                 bimMinimapToWorld,
                 floorElevation,
                 floorPlanOffset,
+                areaLocationInFloorPlan,
                 globalOffsetYaw,
                 isLocked
               }: ApiFloorArgument = {})
@@ -41,7 +43,7 @@ export class ApiFloor {
     addReadOnlyPropertiesToModel(this, { id, firebaseId, firebaseProjectId });
     addInstantGetterAndSetterToApiModel(this, "scanDate", scanDate);
     let offsetVal: Vector2Like, photoMinimapToBimMinimapTransformVal: ApiMatrix3,
-      bimMinimapToWorldTransformVal: ApiMatrix3;
+      bimMinimapToWorldTransformVal: ApiMatrix3, areaLocationInFloorPlanVal: Vector2Like[];
     Object.defineProperties(this, {
       offset: {
         get() {
@@ -85,6 +87,25 @@ export class ApiFloor {
           }
         },
         enumerable: true
+      },
+      areaLocationInFloorPlan: {
+        get() {
+          return areaLocationInFloorPlanVal;
+        },
+        set(val: Vector2Like[]) {
+          if (val && Array.isArray(val)) {
+            if (val.length) {
+              areaLocationInFloorPlanVal = val.map(point => {
+                return { x: point.x, y: point.y };
+              });
+            } else {
+              areaLocationInFloorPlanVal = [];
+            }
+          } else {
+            areaLocationInFloorPlanVal = null;
+          }
+        },
+        enumerable: true
       }
     });
 
@@ -106,6 +127,7 @@ export class ApiFloor {
     this.bimMinimapToWorld = bimMinimapToWorld || null;
     this.floorElevation = floorElevation || null;
     this.floorPlanOffset = floorPlanOffset || 0;
+    this.areaLocationInFloorPlan = areaLocationInFloorPlan;
     this.globalOffsetYaw = globalOffsetYaw;
     this.isLocked = isLocked;
   }
@@ -138,6 +160,8 @@ export class ApiFloor {
   floorElevation: number | null;
   /** The vertical offset of the floor plan from the {@link floorElevation}, useful for adjusting the height of the floor plan to make it more visible */
   floorPlanOffset: number;
+  /** The coordinates on the floor plan that define the boundaries of the area. Stored as normalized coordinates */
+  areaLocationInFloorPlan: Vector2Like[];
   globalOffsetYaw: number | null;
   isLocked: boolean;
 }

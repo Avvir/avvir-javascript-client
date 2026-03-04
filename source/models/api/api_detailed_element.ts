@@ -1,10 +1,10 @@
 import ApiElementDeviation from "./api_element_deviation";
 import ApiPlannedElement from "./api_planned_element";
-import {addInstantGetterAndSetterToApiModel} from "../../mixins";
-import {ApiScannedElementTypeMap, isDeviationScanResult} from "./api_scanned_element";
+import { addInstantGetterAndSetterToApiModel } from "../../mixins";
+import { ApiScannedElementTypeMap, isDeviationScanResult } from "./api_scanned_element";
 
-import type {ApiBuiltStatus} from "../enums";
-import {ApiElementProgress} from "./api_element_progress";
+import type { ApiBuiltStatus } from "../enums";
+import { ApiElementProgress } from "./api_element_progress";
 
 /** @deprecated This information should now all live in the {@link ApiPlannedElement}. */
 export class ApiDetailedElement<Label extends ApiBuiltStatus = ApiBuiltStatus> extends ApiPlannedElement {
@@ -15,11 +15,11 @@ export class ApiDetailedElement<Label extends ApiBuiltStatus = ApiBuiltStatus> e
     this.scanResult = detailedElement.scanResult;
 
     if (isDeviationScanResult(this.scanResult)) {
-      this.scanResult.deviation = {...new ApiElementDeviation(this.scanResult.deviation)};
+      this.scanResult.deviation = { ...new ApiElementDeviation(this.scanResult.deviation) };
     }
 
     if (detailedElement.fixedDeviation) {
-      this.fixedDeviation = {...new ApiElementDeviation(detailedElement.fixedDeviation)};
+      this.fixedDeviation = { ...new ApiElementDeviation(detailedElement.fixedDeviation) };
     }
 
     if (detailedElement.progressHistory) {
