@@ -29,6 +29,9 @@ import {JiraIssueRequestModel} from "../models/api/integrations/jira/JiraIssueRe
 import {FieldsConfiguration} from "../models/api/integrations/jira/FieldsConfiguration";
 import { PowerBIAccessTokenResponse } from "../models/api/integrations/powerbi/api_access_token";
 import { EmbedTokenResponse } from "../models/api/integrations/powerbi/api_embed_token_response";
+import {ApiCoordinationIssueRequest} from "../models/api/integrations/procore/api_coordination_issue_request";
+import {Trade} from "../models/api/integrations/procore/Trade";
+import {Location} from "../models/api/integrations/procore/Location";
 
 export default class IntegrationsApi {
 
@@ -212,6 +215,71 @@ export default class IntegrationsApi {
             body: formData
         }) as unknown as Promise<number>;
 
+    }
+
+    static CreateProcoreCoordinationIssueWithAttachments(procoreAccessToken: string,
+                                                         companyId: string,
+                                                         projectId: string,
+                                                         coordinationIssueRequest: ApiCoordinationIssueRequest,
+                                                         ids: IntegrationAssociationIds,
+                                                         imageBlob: Blob,
+                                                         user: User): Promise<number> {
+        if (!procoreAccessToken) {
+            return Promise.reject(new Error("Procore access token not found"));
+        }
+        if (!projectId) {
+            return Promise.reject(new Error("project id not found"));
+        }
+        if (!companyId) {
+            return Promise.reject(new Error("company id not found"));
+        }
+        if (!imageBlob) {
+            return Promise.reject(new Error("Invalid imageBlob"));
+        }
+        if (!coordinationIssueRequest || coordinationIssueRequest?.title?.length === 0) {
+            return Promise.reject(new Error("Invalid coordinationIssueRequest or Missing title"));
+        }
+
+        const url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/create-coordination-issue-with-attachments?procore-access-token=${procoreAccessToken}`;
+
+        const formData = new FormData();
+        formData.append("coordinationIssueRequest", JSON.stringify(coordinationIssueRequest));
+        formData.append("associationIds",JSON.stringify(ids));
+        formData.append("attachments", imageBlob, "image.png");
+
+        return Http.fetch(url, {
+            method: "POST",
+            headers: {
+                ...getAuthorizationHeaders(user)
+            },
+            body: formData
+        }) as unknown as Promise<number>;
+
+    }
+
+    static getProcoreTradesForCoordinateIssue(procoreAccessToken: string, companyId: string, user: User): Promise<Trade[]> {
+        if (!procoreAccessToken) {
+            return Promise.reject(new Error("Procore access token not found"));
+        }
+        if (!companyId) {
+            return Promise.reject(new Error("company id not found"));
+        }
+        const url = `${Http.baseUrl()}/integrations/procore/${companyId}/trades?procore-access-token=${procoreAccessToken}`;
+        return Http.get(url, user) as unknown as Promise<Trade[]>;
+    }
+
+    static getProcoreLocationsForCoordinateIssue(procoreAccessToken: string, companyId: string, projectId: string, user: User): Promise<Location[]> {
+        if (!procoreAccessToken) {
+            return Promise.reject(new Error("Procore access token not found"));
+        }
+        if (!projectId) {
+            return Promise.reject(new Error("project id not found"));
+        }
+        if (!companyId) {
+            return Promise.reject(new Error("company id not found"));
+        }
+        const url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/locations?procore-access-token=${procoreAccessToken}`;
+        return Http.get(url, user) as unknown as Promise<Location[]>;
     }
 
     static CreateProcoreRfi(procoreAccessToken: string,

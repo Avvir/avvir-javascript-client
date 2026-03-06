@@ -2331,5 +2331,435 @@ describe("IntegrationsApi", () => {
             expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
             expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
         });
-    })
+    });
+
+    describe("::getProcoreTradesForCoordinateIssue", () => {
+        beforeEach(() => {
+            fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-company-id/trades?procore-access-token=some-procore-access-token`,
+                {status: 200, body: [{id: 1, name: "Electrical", active: true}, {id: 2, name: "Plumbing", active: true}]});
+        });
+
+        it("includes auth headers and makes a request to the gateway", () => {
+            IntegrationsApi.getProcoreTradesForCoordinateIssue("some-procore-access-token", "some-company-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            });
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/procore/some-company-id/trades?procore-access-token=some-procore-access-token`);
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+
+        it("throws an error if procore access token is missing", () => {
+            return IntegrationsApi.getProcoreTradesForCoordinateIssue("", "some-company-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Procore access token not found");
+            });
+        });
+
+        it("throws an error if procore access token is undefined", () => {
+            return IntegrationsApi.getProcoreTradesForCoordinateIssue(undefined, "some-company-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Procore access token not found");
+            });
+        });
+
+        it("throws an error if company id is missing", () => {
+            return IntegrationsApi.getProcoreTradesForCoordinateIssue("some-access-token", undefined, {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("company id not found");
+            });
+        });
+    });
+
+    describe("::getProcoreLocationsForCoordinateIssue", () => {
+        beforeEach(() => {
+            fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/locations?procore-access-token=some-procore-access-token`,
+                {status: 200, body: [{id: 1, name: "Building A", parent_id: null}, {id: 2, name: "Building B", parent_id: 1}]});
+        });
+
+        it("includes auth headers and makes a request to the gateway", () => {
+            IntegrationsApi.getProcoreLocationsForCoordinateIssue("some-procore-access-token", "some-company-id", "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            });
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/locations?procore-access-token=some-procore-access-token`);
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+
+        it("throws an error if procore access token is missing", () => {
+            return IntegrationsApi.getProcoreLocationsForCoordinateIssue("", "some-company-id", "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Procore access token not found");
+            });
+        });
+
+        it("throws an error if procore access token is undefined", () => {
+            return IntegrationsApi.getProcoreLocationsForCoordinateIssue(undefined, "some-company-id", "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Procore access token not found");
+            });
+        });
+
+        it("throws an error if project id is missing", () => {
+            return IntegrationsApi.getProcoreLocationsForCoordinateIssue("some-access-token", "some-company-id", undefined, {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("project id not found");
+            });
+        });
+
+        it("throws an error if company id is missing", () => {
+            return IntegrationsApi.getProcoreLocationsForCoordinateIssue("some-access-token", undefined, "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("company id not found");
+            });
+        });
+    });
+
+    describe("::CreateProcoreCoordinationIssueWithAttachments", () => {
+        let imageBlob;
+        beforeEach(() => {
+            imageBlob = new Blob(["image content"], {type: "image/png"});
+            fetchMock.post(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/create-coordination-issue-with-attachments?procore-access-token=some-procore-access-token`,
+                200);
+        });
+
+        afterEach(() => {
+            fetchMock.restore();
+        });
+
+        it("includes the authorization headers", () => {
+            IntegrationsApi.CreateProcoreCoordinationIssueWithAttachments(
+                "some-procore-access-token",
+                "some-company-id",
+                "some-project-id",
+                {
+                    "title": "Test Coordination Issue",
+                    "description": "Sample coordination issue description",
+                    "status": "Open",
+                    "trade_id": 1,
+                    "location_id": 2,
+                    "due_date": "2024-11-16",
+                    "assignee_id": 123
+                },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId": "some-floor-id",
+                    "scanDatasetId": "some-scan-dataset-id",
+                    "globalId": "some-global-id"
+                },
+                imageBlob,
+                {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER},
+                }
+            );
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+        });
+
+        it("makes a request to the gateway api", () => {
+            IntegrationsApi.CreateProcoreCoordinationIssueWithAttachments(
+                "some-procore-access-token",
+                "some-company-id",
+                "some-project-id",
+                {
+                    "title": "Test Coordination Issue",
+                    "description": "Sample coordination issue description",
+                    "status": "Open",
+                    "trade_id": 1,
+                    "location_id": 2,
+                    "due_date": "2024-11-16",
+                    "assignee_id": 123
+                },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId": "some-floor-id",
+                    "scanDatasetId": "some-scan-dataset-id",
+                    "globalId": "some-global-id"
+                },
+                imageBlob,
+                {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER},
+                }
+            );
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0])
+                .to
+                .eq(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/create-coordination-issue-with-attachments?procore-access-token=some-procore-access-token`);
+        });
+
+        it("throws an error if procore access token is missing", () => {
+            return IntegrationsApi.CreateProcoreCoordinationIssueWithAttachments(
+                "",
+                "some-company-id",
+                "some-project-id",
+                {
+                    "title": "Test Coordination Issue",
+                    "description": "Sample coordination issue description",
+                    "status": "Open",
+                    "trade_id": 1,
+                    "location_id": 2,
+                    "due_date": "2024-11-16",
+                    "assignee_id": 123
+                },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId": "some-floor-id",
+                    "scanDatasetId": "some-scan-dataset-id",
+                    "globalId": "some-global-id"
+                },
+                imageBlob,
+                {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER},
+                }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Procore access token not found");
+            });
+        });
+
+        it("throws an error if procore access token is undefined", () => {
+            return IntegrationsApi.CreateProcoreCoordinationIssueWithAttachments(
+                undefined,
+                "some-company-id",
+                "some-project-id",
+                {
+                    "title": "Test Coordination Issue",
+                    "description": "Sample coordination issue description",
+                    "status": "Open",
+                    "trade_id": 1,
+                    "location_id": 2,
+                    "due_date": "2024-11-16",
+                    "assignee_id": 123
+                },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId": "some-floor-id",
+                    "scanDatasetId": "some-scan-dataset-id",
+                    "globalId": "some-global-id"
+                },
+                imageBlob,
+                {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER},
+                }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Procore access token not found");
+            });
+        });
+
+        it("throws an error if projectId is missing", () => {
+            return IntegrationsApi.CreateProcoreCoordinationIssueWithAttachments(
+                "some-access-token",
+                "some-company-id",
+                "",
+                {
+                    "title": "Test Coordination Issue",
+                    "description": "Sample coordination issue description",
+                    "status": "Open",
+                    "trade_id": 1,
+                    "location_id": 2,
+                    "due_date": "2024-11-16",
+                    "assignee_id": 123
+                },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId": "some-floor-id",
+                    "scanDatasetId": "some-scan-dataset-id",
+                    "globalId": "some-global-id"
+                },
+                imageBlob,
+                {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER},
+                }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("project id not found");
+            });
+        });
+
+        it("throws an error if companyId is missing", () => {
+            return IntegrationsApi.CreateProcoreCoordinationIssueWithAttachments(
+                "some-access-token",
+                "",
+                "some-project-id",
+                {
+                    "title": "Test Coordination Issue",
+                    "description": "Sample coordination issue description",
+                    "status": "Open",
+                    "trade_id": 1,
+                    "location_id": 2,
+                    "due_date": "2024-11-16",
+                    "assignee_id": 123
+                },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId": "some-floor-id",
+                    "scanDatasetId": "some-scan-dataset-id",
+                    "globalId": "some-global-id"
+                },
+                imageBlob,
+                {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER},
+                }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("company id not found");
+            });
+        });
+
+        it("throws an error if image blob is missing", () => {
+            return IntegrationsApi.CreateProcoreCoordinationIssueWithAttachments(
+                "some-access-token",
+                "some-company-id",
+                "some-project-id",
+                {
+                    "title": "Test Coordination Issue",
+                    "description": "Sample coordination issue description",
+                    "status": "Open",
+                    "trade_id": 1,
+                    "location_id": 2,
+                    "due_date": "2024-11-16",
+                    "assignee_id": 123
+                },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId": "some-floor-id",
+                    "scanDatasetId": "some-scan-dataset-id",
+                    "globalId": "some-global-id"
+                },
+                null,
+                {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+                }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid imageBlob");
+            });
+        });
+
+        it("throws an error if image blob is undefined", () => {
+            return IntegrationsApi.CreateProcoreCoordinationIssueWithAttachments(
+                "some-access-token",
+                "some-company-id",
+                "some-project-id",
+                {
+                    "title": "Test Coordination Issue",
+                    "description": "Sample coordination issue description",
+                    "status": "Open",
+                    "trade_id": 1,
+                    "location_id": 2,
+                    "due_date": "2024-11-16",
+                    "assignee_id": 123
+                },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId": "some-floor-id",
+                    "scanDatasetId": "some-scan-dataset-id",
+                    "globalId": "some-global-id"
+                },
+                undefined,
+                {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+                }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid imageBlob");
+            });
+        });
+
+        it("throws an error if coordinationIssueRequest is missing", () => {
+            return IntegrationsApi.CreateProcoreCoordinationIssueWithAttachments(
+                "some-access-token",
+                "some-company-id",
+                "some-project-id",
+                null,
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId": "some-floor-id",
+                    "scanDatasetId": "some-scan-dataset-id",
+                    "globalId": "some-global-id"
+                },
+                imageBlob,
+                {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+                }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid coordinationIssueRequest or Missing title");
+            });
+        });
+
+        it("throws an error if coordinationIssueRequest title is missing", () => {
+            return IntegrationsApi.CreateProcoreCoordinationIssueWithAttachments(
+                "some-access-token",
+                "some-company-id",
+                "some-project-id",
+                {
+                    "title": "",
+                    "description": "Sample coordination issue description",
+                    "status": "Open",
+                    "trade_id": 1,
+                    "location_id": 2,
+                    "due_date": "2024-11-16",
+                    "assignee_id": 123
+                },
+                {
+                    "firebaseProjectId": "some-project-id",
+                    "firebaseFloorId": "some-floor-id",
+                    "scanDatasetId": "some-scan-dataset-id",
+                    "globalId": "some-global-id"
+                },
+                imageBlob,
+                {
+                    authType: GATEWAY_JWT,
+                    gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+                }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid coordinationIssueRequest or Missing title");
+            });
+        });
+    });
 });
