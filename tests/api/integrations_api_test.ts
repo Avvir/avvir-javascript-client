@@ -2448,6 +2448,69 @@ describe("IntegrationsApi", () => {
         });
     });
 
+    describe("::getProcoreCoordinationIssueAssigness", () => {
+        beforeEach(() => {
+            fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/coordination-issue-assignees?procore-access-token=some-procore-access-token`,
+                {status: 200, body: [{id: 1, name: "Assignee 1"}, {id: 2, name: "Assignee 2"}]});
+        });
+
+        it("includes auth headers and makes a request to the gateway", () => {
+            IntegrationsApi.getProcoreCoordinationIssueAssigness("some-procore-access-token", "some-company-id", "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            });
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/coordination-issue-assignees?procore-access-token=some-procore-access-token`);
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+
+        it("throws an error if procore access token is missing", () => {
+            return IntegrationsApi.getProcoreCoordinationIssueAssigness("", "some-company-id", "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Procore access token not found");
+            });
+        });
+
+        it("throws an error if procore access token is undefined", () => {
+            return IntegrationsApi.getProcoreCoordinationIssueAssigness(undefined, "some-company-id", "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Procore access token not found");
+            });
+        });
+
+        it("throws an error if project id is missing", () => {
+            return IntegrationsApi.getProcoreCoordinationIssueAssigness("some-access-token", "some-company-id", undefined, {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("project id not found");
+            });
+        });
+
+        it("throws an error if company id is missing", () => {
+            return IntegrationsApi.getProcoreCoordinationIssueAssigness("some-access-token", undefined, "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("company id not found");
+            });
+        });
+    });
+
     describe("::CreateProcoreCoordinationIssueWithAttachments", () => {
         let imageBlob;
         beforeEach(() => {

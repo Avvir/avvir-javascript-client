@@ -268,6 +268,20 @@ export default class IntegrationsApi {
         return Http.get(url, user) as unknown as Promise<Trade[]>;
     }
 
+    static getProcoreCoordinationIssueAssigness(procoreAccessToken: string, companyId: string, projectId: string, user: User): Promise<{ name: string, id: string | number }[]> {
+        if (!procoreAccessToken) {
+            return Promise.reject(new Error("Procore access token not found"));
+        }
+        if (!projectId) {
+            return Promise.reject(new Error("project id not found"));
+        }
+        if (!companyId) {
+            return Promise.reject(new Error("company id not found"));
+        }
+        const url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/coordination-issue-assignees?procore-access-token=${procoreAccessToken}`;
+        return Http.get(url, user) as unknown as Promise<{ name: string, id: string | number }[]>;
+    }
+
     static getProcoreLocationsForCoordinateIssue(procoreAccessToken: string, companyId: string, projectId: string, user: User): Promise<Location[]> {
         if (!procoreAccessToken) {
             return Promise.reject(new Error("Procore access token not found"));
