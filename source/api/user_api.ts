@@ -5,6 +5,7 @@ import makeErrorsPretty from "../utilities/make_errors_pretty";
 import ApiInvitation from "../models/api/api_invitation";
 import ApiCreateInvitationForm from "../models/api/api_create_invitation_form";
 import ApiUserPermission from "../models/api/api_user_permission";
+import {ApiUserRole} from "../models";
 
 export default class UserApi {
 
@@ -66,6 +67,11 @@ export default class UserApi {
     email = encodeURIComponent(email);
     const url = `${Http.baseUrl()}/users/reset-password`;
     return Http.post(url, null, { email, token, password }) as unknown as Promise<void>;
+  }
+
+  static updateUserRoles(userId: number, roles: ApiUserRole[], user: User): Promise<void> {
+    const url = `${Http.baseUrl()}/users/accounts/${userId}/roles`;
+    return Http.post(url, user, roles) as unknown as Promise<void>;
   }
 
 }

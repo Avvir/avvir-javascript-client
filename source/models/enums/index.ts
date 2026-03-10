@@ -21,6 +21,7 @@ export * from "./user_auth_type";
 export * from "./user_permission_action";
 export * from "./user_permission_type";
 export * from "./user_role";
+export * from "./user_role_type";
 
 export {
   ProjectPurposeType,

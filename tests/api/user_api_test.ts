@@ -5,7 +5,17 @@ import fetchMock from "fetch-mock";
 import Http from "../../source/utilities/http";
 import UserPermissionAction from "../../source/models/enums/user_permission_action";
 import UserPermissionType from "../../source/models/enums/user_permission_type";
-import { ApiUser, ApiUserPermission, FIREBASE, GATEWAY_JWT, SUPERADMIN, USER, User, UserRole } from "../../source";
+import {
+  ApiUser,
+  ApiUserPermission,
+  ApiUserRole,
+  FIREBASE,
+  GATEWAY_JWT,
+  SUPERADMIN,
+  USER,
+  User,
+  UserRole, UserRoleType
+} from "../../source";
 import { UserApi } from "../../source/api";
 
 describe("UserApi", () => {
@@ -282,6 +292,58 @@ describe("UserApi", () => {
 
     it("sends the request with an Authorization header", () => {
       UserApi.listUserPermissionsForOrganization("some-organization-id", {
+        authType: GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
+  describe("::updateUserRoles", () => {
+    const roles: ApiUserRole[] = [
+      {
+        id: null,
+        roleType: UserRoleType.BASIC_USER,
+        scope: UserPermissionType.ORGANIZATION,
+        userId: 42,
+        firebaseOrganizationId: "some-org",
+        firebaseProjectId: null,
+        workPackageId: null
+      },
+      {
+        id: null,
+        roleType: UserRoleType.GCS,
+        scope: UserPermissionType.ORGANIZATION,
+        userId: 42,
+        firebaseOrganizationId: "some-org",
+        firebaseProjectId: null,
+        workPackageId: null
+      }
+    ];
+
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/users/accounts/123/roles`,
+        {
+          status: 200,
+          body: roles
+        });
+    });
+
+    it("makes a call to the endpoint", () => {
+      UserApi.updateUserRoles(123, roles, {
+        authType: GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+      });
+
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/123/roles`);
+      expect(fetchMock.lastOptions().body).to.eq(JSON.stringify(roles));
+    });
+
+    it("sends the request with an Authorization header", () => {
+      UserApi.updateUserRoles(123, roles, {
         authType: GATEWAY_JWT,
         gatewayUser: { idToken: "some-firebase.id.token", role: USER }
       });
