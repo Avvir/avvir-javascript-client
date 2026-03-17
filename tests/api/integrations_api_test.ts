@@ -650,24 +650,24 @@ describe("IntegrationsApi", () => {
 
     describe("::getProcoreRfiAssignees", () => {
         beforeEach(() => {
-            fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-project-id/rfi-assignees?procore-access-token=some-procore-access-token`,
+            fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/rfi-assignees?procore-access-token=some-procore-access-token`,
                 {status: 200, body: ["some-procore-assignees"]});
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
-            IntegrationsApi.getRfiAssignees("some-procore-access-token", "some-project-id", {
+            IntegrationsApi.getRfiAssignees("some-procore-access-token", "some-company-id","some-project-id", {
                 authType: GATEWAY_JWT,
                 gatewayUser: {idToken: "some-firebase.id.token", role: USER}
             });
             const fetchCall = fetchMock.lastCall();
 
-            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/procore/some-project-id/rfi-assignees?procore-access-token=some-procore-access-token`);
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/rfi-assignees?procore-access-token=some-procore-access-token`);
             expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
             expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
         });
 
         it("throws an error if procore access token is missing", () => {
-            return IntegrationsApi.getRfiAssignees("", "some-project-id", {
+            return IntegrationsApi.getRfiAssignees("", "some-company-id", "some-project-id", {
                 authType: GATEWAY_JWT,
                 gatewayUser: {idToken: "some-firebase.id.token", role: USER}
             }).catch((error) => {
@@ -678,7 +678,7 @@ describe("IntegrationsApi", () => {
         });
 
         it("throws an error if procore access token is undefined", () => {
-            return IntegrationsApi.getRfiAssignees(undefined, "some-project-id", {
+            return IntegrationsApi.getRfiAssignees(undefined, "some-company-id","some-project-id", {
                 authType: GATEWAY_JWT,
                 gatewayUser: {idToken: "some-firebase.id.token", role: USER}
             }).catch((error) => {
@@ -689,13 +689,88 @@ describe("IntegrationsApi", () => {
         });
 
         it("throws an error if project id is missing", () => {
-            return IntegrationsApi.getRfiAssignees("some-access-token", undefined, {
+            return IntegrationsApi.getRfiAssignees("some-access-token", "some-company-id", undefined, {
                 authType: GATEWAY_JWT,
                 gatewayUser: {idToken: "some-firebase.id.token", role: USER}
             }).catch((error) => {
                 return error;
             }).then((error) => {
                 expect(error.message).to.eq("project id not found");
+            });
+        });
+
+        it("throws an error if company id is missing", () => {
+            return IntegrationsApi.getRfiAssignees("some-access-token", undefined, "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("company id not found");
+            });
+        });
+
+    });
+
+    describe("::getRfiManagers", () => {
+        beforeEach(() => {
+            fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/rfi-managers?procore-access-token=some-procore-access-token`,
+                {status: 200, body: ["some-procore-assignees"]});
+        });
+
+        it("includes auth headers and makes a request to the gateway", () => {
+            IntegrationsApi.getRfiManagers("some-procore-access-token", "some-company-id","some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            });
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/rfi-managers?procore-access-token=some-procore-access-token`);
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+
+        it("throws an error if procore access token is missing", () => {
+            return IntegrationsApi.getRfiManagers("", "some-company-id", "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Procore access token not found");
+            });
+        });
+
+        it("throws an error if procore access token is undefined", () => {
+            return IntegrationsApi.getRfiManagers(undefined, "some-company-id","some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("Procore access token not found");
+            });
+        });
+
+        it("throws an error if project id is missing", () => {
+            return IntegrationsApi.getRfiManagers("some-access-token", "some-company-id", undefined, {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("project id not found");
+            });
+        });
+
+        it("throws an error if company id is missing", () => {
+            return IntegrationsApi.getRfiManagers("some-access-token", undefined, "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.eq("company id not found");
             });
         });
 

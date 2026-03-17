@@ -168,15 +168,36 @@ export default class IntegrationsApi {
     }
 
     static getRfiAssignees(procoreAccessToken: string,
+                           companyId: string,
                            projectId: string,
                            user: User): Promise<{ name: string, id: string | number }[]> {
         if (!procoreAccessToken) {
             return Promise.reject(new Error("Procore access token not found"));
         }
+        if (!companyId) {
+            return Promise.reject(new Error("company id not found"));
+        }
         if (!projectId) {
             return Promise.reject(new Error("project id not found"));
         }
-        let url = `${Http.baseUrl()}/integrations/procore/${projectId}/rfi-assignees?procore-access-token=${procoreAccessToken}`;
+        let url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/rfi-assignees?procore-access-token=${procoreAccessToken}`;
+        return Http.get(url, user) as unknown as Promise<{ name: string, id: string | number }[]>;
+    }
+
+    static getRfiManagers(procoreAccessToken: string,
+                           companyId: string,
+                           projectId: string,
+                           user: User): Promise<{ name: string, id: string | number }[]> {
+        if (!procoreAccessToken) {
+            return Promise.reject(new Error("Procore access token not found"));
+        }
+        if (!companyId) {
+            return Promise.reject(new Error("company id not found"));
+        }
+        if (!projectId) {
+            return Promise.reject(new Error("project id not found"));
+        }
+        let url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/rfi-managers?procore-access-token=${procoreAccessToken}`;
         return Http.get(url, user) as unknown as Promise<{ name: string, id: string | number }[]>;
     }
 
