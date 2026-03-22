@@ -32,6 +32,7 @@ import { EmbedTokenResponse } from "../models/api/integrations/powerbi/api_embed
 import {ApiCoordinationIssueRequest} from "../models/api/integrations/procore/api_coordination_issue_request";
 import {Trade} from "../models/api/integrations/procore/Trade";
 import {Location} from "../models/api/integrations/procore/Location";
+import {ProcoreToolsPermissionsResponse} from "../models/api/integrations/procore/procore_tools_permissions_response";
 
 export default class IntegrationsApi {
 
@@ -165,6 +166,23 @@ export default class IntegrationsApi {
         }
         let url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/observation-assignees?procore-access-token=${procoreAccessToken}`;
         return Http.get(url, user) as unknown as Promise<{ name: string, id: string | number }[]>;
+    }
+
+    static getAllProcoreToolsPermissions(procoreAccessToken: string,
+                                        companyId: string,
+                                        projectId: string,
+                                        user: User): Promise<ProcoreToolsPermissionsResponse> {
+        if (!procoreAccessToken) {
+            return Promise.reject(new Error("Procore access token not found"));
+        }
+        if (!projectId) {
+            return Promise.reject(new Error("project id not found"));
+        }
+        if (!companyId) {
+            return Promise.reject(new Error("company id not found"));
+        }
+        let url = `${Http.baseUrl()}/integrations/procore/${companyId}/${projectId}/procore-tools-permissions?procore-access-token=${procoreAccessToken}`;
+        return Http.get(url, user) as unknown as Promise<ProcoreToolsPermissionsResponse>;
     }
 
     static getRfiAssignees(procoreAccessToken: string,
