@@ -5,3 +5,4 @@ export * from "./procore/Location";
 export * from "./procore/api_coordination_issue_request";
 export * from "./procore/Trade";
 export * from "./integration_ids";
+export * from "./procore/procore_tools_permissions_response";
