@@ -5,6 +5,7 @@ import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import ApiUserForOrganization from "../models/api/api_user_for_organization";
 import { ApiScanDatasetStats } from "../models/api/api_scandataset_stats";
+import {ApiOrganizationMember} from "../models";
 
 export default class OrganizationApi {
   static listOrganizations(user: User): Promise<ApiOrganization[]> {
@@ -22,8 +23,13 @@ export default class OrganizationApi {
     return Http.get(url, user);
   }
 
-  static getUsersForOrganization(organizationId: string, user: User):Promise<ApiUserForOrganization[]> {
+  static getUsersForOrganization(organizationId: string, user: User): Promise<ApiUserForOrganization[]> {
     let url = `${Http.baseUrl()}/client-accounts/${organizationId}/users`;
+    return Http.get(url, user);
+  }
+
+  static getOrganizationMembers(organizationId: string, user: User): Promise<ApiOrganizationMember[]> {
+    let url = `${Http.baseUrl()}/client-accounts/${organizationId}/members`;
     return Http.get(url, user);
   }
 
