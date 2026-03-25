@@ -1,8 +1,7 @@
 export enum UserRoleType {
   SUPERADMIN = "SUPERADMIN",
   BASIC_USER = "BASIC_USER",
-  GCS = "GCS",
+  EDITOR = "EDITOR",
   ADMIN = "ADMIN",
-  QA_QC_USER = "QA_QC_USER",
   SUBCONTRACTOR = "SUBCONTRACTOR"
 }

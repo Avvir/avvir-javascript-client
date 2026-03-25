@@ -69,3 +69,4 @@ export * from "./api_action_payload";
 export * from "./api_partial_progress_element";
 export * from "./api_masterformat_with_uniformat";
 export * from "./api_user_role";
+export * from "./api_organization_member";
