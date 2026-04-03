@@ -2042,6 +2042,7 @@ describe("IntegrationsApi", () => {
                 dueDate: "2023-12-31",
                 priority: "High",
                 status: "Open",
+                issueType: "some-issue-type",
                 title: "Issue Title",
                 description: "Detailed description of the issue",
                 assignee: "assignee@example.com",

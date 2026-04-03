@@ -4,6 +4,7 @@ export class ReviztoIssueFields {
     dueDate: string;
     priority: string;
     status: string;
+    issueType: string;
     title: string;
     description: string;
     assignee: string;
@@ -16,6 +17,7 @@ export class ReviztoIssueFields {
                     dueDate,
                     priority,
                     status,
+                    issueType,
                     title,
                     description,
                     assignee,
@@ -27,6 +29,7 @@ export class ReviztoIssueFields {
         this.dueDate = dueDate;
         this.priority = priority;
         this.status = status;
+        this.issueType = issueType;
         this.title = title;
         this.description = description;
         this.assignee = assignee;
