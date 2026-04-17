@@ -8,6 +8,7 @@ import UserPermissionType from "../../source/models/enums/user_permission_type";
 import {
   ApiUser,
   ApiUserPermission,
+  ApiUserProject,
   ApiUserRole,
   FIREBASE,
   GATEWAY_JWT,
@@ -349,6 +350,63 @@ describe("UserApi", () => {
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
+  describe("::listUserProjects", () => {
+    const userProjects: ApiUserProject[] = [
+      {
+        projectId: 260693,
+        projectName: "100RProjectPhotoIngestionTest",
+        role: UserRoleType.BASIC_USER,
+        organizationFirebaseId: "-ODfDtNSfRDr_8BbadPL",
+        projectFirebaseId: "-OezyB7xtOXhZG4JeFfk"
+      },
+      {
+        projectId: 260637,
+        projectName: "DemoProjectIngestion",
+        role: UserRoleType.BASIC_USER,
+        organizationFirebaseId: "-ODfDtNSfRDr_8BbadPL",
+        projectFirebaseId: "-Oew2AKX8vTGOGP_oDPy"
+      }
+    ];
+
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/users/accounts/projects`,
+        {
+          status: 200,
+          body: userProjects
+        });
+    });
+
+    it("makes a call to the endpoint", () => {
+      UserApi.listUserProjects({
+        authType: GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+      });
+
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/projects`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("sends the request with an Authorization header", () => {
+      UserApi.listUserProjects({
+        authType: GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+
+    it("returns the list of user projects", () => {
+      return UserApi.listUserProjects({
+        authType: GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+      }).then(result => {
+        expect(result).to.deep.eq(userProjects);
+      });
     });
   });
 });
