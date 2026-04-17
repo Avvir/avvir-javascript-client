@@ -5,7 +5,7 @@ import makeErrorsPretty from "../utilities/make_errors_pretty";
 import ApiInvitation from "../models/api/api_invitation";
 import ApiCreateInvitationForm from "../models/api/api_create_invitation_form";
 import ApiUserPermission from "../models/api/api_user_permission";
-import {ApiUserRole} from "../models";
+import {ApiUserRole, ApiUserProject} from "../models";
 
 export default class UserApi {
 
@@ -72,6 +72,11 @@ export default class UserApi {
   static updateUserRoles(userId: number, roles: ApiUserRole[], user: User): Promise<void> {
     const url = `${Http.baseUrl()}/users/accounts/${userId}/roles`;
     return Http.post(url, user, roles) as unknown as Promise<void>;
+  }
+
+  static listUserProjects(user: User): Promise<ApiUserProject[]> {
+    const url = `${Http.baseUrl()}/users/accounts/projects`;
+    return Http.get(url, user) as unknown as Promise<ApiUserProject[]>;
   }
 
 }
