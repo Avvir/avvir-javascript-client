@@ -33,6 +33,11 @@ export default class OrganizationApi {
     return Http.get(url, user);
   }
 
+  static removeOrganizationMember(organizationId: string, userId: number, user: User): Promise<void> {
+    let url = `${Http.baseUrl()}/client-accounts/${organizationId}/members/${userId}`;
+    return Http.delete(url, user) as unknown as Promise<void>;
+  }
+
   static createOrganization(organization: ApiOrganization, user: User): Promise<{ firebaseId: string }> {
     let url = `${Http.baseUrl()}/client-accounts`;
     return Http.post(url, user, organization);
