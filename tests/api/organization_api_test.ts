@@ -17,6 +17,31 @@ describe("OrganizationApi", () => {
     };
   });
 
+  describe("#removeOrganizationMember", () => {
+    beforeEach(() => {
+      fetchMock.delete(`${Http.baseUrl()}/client-accounts/some-org-id/members/42`, {
+        status: 204,
+        body: null
+      });
+    });
+
+    it("makes a DELETE request to the correct URL", () => {
+      OrganizationApi.removeOrganizationMember("some-org-id", 42, user);
+      expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/client-accounts/some-org-id/members/42`);
+    });
+
+    it("includes the user's auth token in the request", () => {
+      OrganizationApi.removeOrganizationMember("some-org-id", 42, user);
+      expect(fetchMock.lastOptions().headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+
+    it("returns a promise that resolves", () => {
+      return OrganizationApi.removeOrganizationMember("some-org-id", 42, user).then((result) => {
+        expect(result).to.be.empty;
+      });
+    });
+  });
+
   describe("#createOrganization", () => {
     beforeEach(() => {
       fetchMock.post(`${Http.baseUrl()}/client-accounts`, {
