@@ -6,8 +6,8 @@ import {ApiMasterformat, ApiMasterformatProgress, ApiProjectCostAnalysisProgress
 import DateConverter from "../../source/converters/date_converter";
 import Http from "../../source/utilities/http";
 import ProjectApi from "../../source/api/project_api";
-import {FIREBASE, GATEWAY_JWT} from "../../source/models/enums/user_auth_type";
-import {SUPERADMIN} from "../../source/models/enums/user_role";
+import {FIREBASE, GATEWAY_JWT} from "../../source";
+import {SUPERADMIN} from "../../source";
 
 describe("ProjectApi", () => {
   let user;
@@ -30,6 +30,10 @@ describe("ProjectApi", () => {
           archivedAt: DateConverter.dateToInstant(moment("2019-04-01"))
         }]
       });
+      fetchMock.get(`${Http.baseUrl()}/client-accounts/some-organization-id/projects?filterArchived=true`, {
+        status: 200,
+        body: []
+      });
     });
 
     it("makes an authenticated call to the endpoint", () => {
@@ -41,6 +45,18 @@ describe("ProjectApi", () => {
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/client-accounts/some-organization-id/projects`);
       expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+
+    it("does not append filterArchived when false", () => {
+      ProjectApi.listProjectsForOrganization("some-organization-id", user, false);
+
+      expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/client-accounts/some-organization-id/projects`);
+    });
+
+    it("appends filterArchived=true to the url when true", () => {
+      ProjectApi.listProjectsForOrganization("some-organization-id", user, true);
+
+      expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/client-accounts/some-organization-id/projects?filterArchived=true`);
     });
   });
 
