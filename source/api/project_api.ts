@@ -9,8 +9,9 @@ import type { AssociationIds, DateLike } from "type_aliases";
 import ApiMasterFormatWithUniformat from "../models/api/api_masterformat_with_uniformat";
 
 export default class ProjectApi {
-  static listProjectsForOrganization(organizationId: string, user: User): Promise<ApiProject[]> {
-    let url = `${Http.baseUrl()}/client-accounts/${organizationId}/projects`;
+  static listProjectsForOrganization(organizationId: string, user: User, filterArchived: boolean = false): Promise<ApiProject[]> {
+    const query = filterArchived ? "?filterArchived=true" : "";
+    let url = `${Http.baseUrl()}/client-accounts/${organizationId}/projects${query}`;
     return Http.get(url, user) as unknown as Promise<ApiProject[]>;
   }
 
