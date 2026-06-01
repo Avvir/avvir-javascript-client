@@ -6,6 +6,8 @@ import makeErrorsPretty from "../utilities/make_errors_pretty";
 import ApiUserForOrganization from "../models/api/api_user_for_organization";
 import { ApiScanDatasetStats } from "../models/api/api_scandataset_stats";
 import {ApiOrganizationMember} from "../models";
+import ApiCssEligibleUser from "../models/api/api_css_eligible_user";
+import ApiCssContact from "../models/api/api_css_contact";
 
 export default class OrganizationApi {
   static listOrganizations(user: User): Promise<ApiOrganization[]> {
@@ -51,6 +53,26 @@ export default class OrganizationApi {
   static getScanDataSetStats(user: User): Promise<ApiScanDatasetStats[]> {
     let url =  `${Http.baseUrl()}/client-accounts/scan-dataset-stats`;
     return Http.get(url, user) as unknown as Promise<ApiScanDatasetStats[]>;
+  }
+
+  static getCssEligibleUsers(organizationId: string, user: User): Promise<ApiCssEligibleUser[]> {
+    let url = `${Http.baseUrl()}/client-accounts/${organizationId}/css-eligible-users`;
+    return Http.get(url, user) as unknown as Promise<ApiCssEligibleUser[]>;
+  }
+
+  static listCssContacts(organizationId: string, user: User): Promise<ApiCssContact[]> {
+    let url = `${Http.baseUrl()}/client-accounts/${organizationId}/css-contacts`;
+    return Http.get(url, user) as unknown as Promise<ApiCssContact[]>;
+  }
+
+  static createCssContact(organizationId: string, userId: number, user: User): Promise<ApiCssContact> {
+    let url = `${Http.baseUrl()}/client-accounts/${organizationId}/css-contacts`;
+    return Http.post(url, user, { userId }) as unknown as Promise<ApiCssContact>;
+  }
+
+  static deleteCssContact(organizationId: string, contactId: number, user: User): Promise<void> {
+    let url = `${Http.baseUrl()}/client-accounts/${organizationId}/css-contacts/${contactId}`;
+    return Http.delete(url, user) as unknown as Promise<void>;
   }
 }
 
