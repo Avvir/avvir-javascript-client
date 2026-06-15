@@ -301,7 +301,7 @@ describe("UserApi", () => {
     });
   });
 
-  describe("::updateUserRoles", () => {
+  describe("::updateUserRolesForOrganization", () => {
     const roles: ApiUserRole[] = [
       {
         id: null,
@@ -314,7 +314,7 @@ describe("UserApi", () => {
       },
       {
         id: null,
-        roleType: UserRoleType.GCS,
+        roleType: UserRoleType.QA_QC_USER,
         scope: UserPermissionType.ORGANIZATION,
         userId: 42,
         firebaseOrganizationId: "some-org",
@@ -324,7 +324,7 @@ describe("UserApi", () => {
     ];
 
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl()}/users/accounts/123/roles`,
+      fetchMock.post(`${Http.baseUrl()}/users/accounts/123/organizations/some-org/roles`,
         {
           status: 200,
           body: roles
@@ -332,19 +332,19 @@ describe("UserApi", () => {
     });
 
     it("makes a call to the endpoint", () => {
-      UserApi.updateUserRoles(123, roles, {
+      UserApi.updateUserRolesForOrganization(123, "some-org", roles, {
         authType: GATEWAY_JWT,
         gatewayUser: { idToken: "some-firebase.id.token", role: USER }
       });
 
       const fetchCall = fetchMock.lastCall();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/123/roles`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/users/accounts/123/organizations/some-org/roles`);
       expect(fetchMock.lastOptions().body).to.eq(JSON.stringify(roles));
     });
 
     it("sends the request with an Authorization header", () => {
-      UserApi.updateUserRoles(123, roles, {
+      UserApi.updateUserRolesForOrganization(123, "some-org", roles, {
         authType: GATEWAY_JWT,
         gatewayUser: { idToken: "some-firebase.id.token", role: USER }
       });
