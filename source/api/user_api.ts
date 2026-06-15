@@ -69,8 +69,16 @@ export default class UserApi {
     return Http.post(url, null, { email, token, password }) as unknown as Promise<void>;
   }
 
+  /**
+   * @deprecated use {@link UserApi.updateUserRolesForOrganization} instead
+   */
   static updateUserRoles(userId: number, roles: ApiUserRole[], user: User): Promise<void> {
     const url = `${Http.baseUrl()}/users/accounts/${userId}/roles`;
+    return Http.post(url, user, roles) as unknown as Promise<void>;
+  }
+
+  static updateUserRolesForOrganization(userId: number, organizationId: string, roles: ApiUserRole[], user: User): Promise<void> {
+    const url = `${Http.baseUrl()}/users/accounts/${userId}/organizations/${organizationId}/roles`;
     return Http.post(url, user, roles) as unknown as Promise<void>;
   }
 
