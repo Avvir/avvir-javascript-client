@@ -66,7 +66,7 @@
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",
     "extendable-error-class": "^0.1.2",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "moment": "^2.29.1",
     "node-fetch": "^2.6.1",
     "nyc": "^15.1.0",
