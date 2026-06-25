@@ -86,6 +86,40 @@ describe("ProjectApi", () => {
     });
   });
 
+  describe("#getProjectDeviationSummary", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/deviation-summary`, {
+        status: 200,
+        body: {
+          inPlace: 0.25,
+          deviatedWithinTolerance: 0.25,
+          criticallyDeviated: 0.25,
+          notBuilt: 0.25
+        }
+      });
+    });
+
+    it("makes a request to the gateway api", () => {
+      ProjectApi.getProjectDeviationSummary({ projectId: "some-project-id" }, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/deviation-summary`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("includes the authorization headers", () => {
+      ProjectApi.getProjectDeviationSummary({ projectId: "some-project-id" }, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
   describe("#updateProject", () => {
     beforeEach(() => {
       fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id`, 200);
