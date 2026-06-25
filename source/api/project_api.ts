@@ -4,7 +4,7 @@ import makeErrorsPretty from "../utilities/make_errors_pretty";
 import { DateConverter } from "../converters";
 import { PbeTsvType } from "../models/api/pbe_tsv_type";
 
-import type { ApiClassificationCode, ApiCloudFile, ApiMasterformatProgress, ApiProject, ApiProjectCostAnalysisProgress, ApiProjectCostAnalysisProgressValidationResult, ApiProjectDeviationSummary, ApiProjectListing, ApiProjectWorkPackage, ApiProjectWorkPackageCost, ApiRunningProcess, ProgressType, ProjectWorkPackageType, User } from "../models";
+import type { ApiClassificationCode, ApiCloudFile, ApiMasterformatProgress, ApiProject, ApiProjectCostAnalysisProgress, ApiProjectCostAnalysisProgressValidationResult, ApiProjectDeviationSummary, ApiProjectListing, ApiProjectProgressSummary, ApiProjectWorkPackage, ApiProjectWorkPackageCost, ApiRunningProcess, ProgressType, ProjectWorkPackageType, User } from "../models";
 import type { AssociationIds, DateLike } from "type_aliases";
 import ApiMasterFormatWithUniformat from "../models/api/api_masterformat_with_uniformat";
 
@@ -41,6 +41,11 @@ export default class ProjectApi {
   static getProjectDeviationSummary({ projectId }: AssociationIds, user: User): Promise<ApiProjectDeviationSummary> {
     let url = `${Http.baseUrl()}/projects/${projectId}/deviation-summary`;
     return Http.get(url, user) as unknown as Promise<ApiProjectDeviationSummary>;
+  }
+
+  static getProjectProgressSummary({ projectId }: AssociationIds, user: User): Promise<ApiProjectProgressSummary> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/progress-summary`;
+    return Http.get(url, user) as unknown as Promise<ApiProjectProgressSummary>;
   }
 
   static createProject(organizationId: string, project: ApiProject, user: User): Promise<{ firebaseId: string }> {
