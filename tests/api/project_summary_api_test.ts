@@ -46,6 +46,33 @@ describe("ProjectSummaryApi", () => {
     });
   });
 
+  describe("::getProjectSupportingSignals", () => {
+    beforeEach(() => {
+
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/supporting-signals`, 200);
+    });
+
+    it("makes a request to the gateway api", () => {
+      ProjectSummaryApi.getProjectSupportingSignals("some-project-id", {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      } as User);
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/supporting-signals`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("includes the authorization headers", () => {
+      ProjectSummaryApi.getProjectSupportingSignals("some-project-id", {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      } as User);
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
   describe("::createProjectArea", () => {
     beforeEach(() => {
       fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/areas`, new ApiProjectArea({

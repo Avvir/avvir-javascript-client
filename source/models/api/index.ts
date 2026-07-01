@@ -43,6 +43,7 @@ export * from "../enums/api_purpose_type";
 export * from "./api_project_work_package_cost";
 export * from "./api_project_work_package";
 export * from "./api_project_summary";
+export * from "./api_project_supporting_signals";
 export * from "./api_project_settings";
 export * from "./api_project_deviation_summary";
 export * from "./api_project_progress_summary";
