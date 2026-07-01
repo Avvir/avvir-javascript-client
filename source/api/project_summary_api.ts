@@ -1,10 +1,14 @@
 import makeErrorsPretty from "../utilities/make_errors_pretty";
-import { ApiProjectArea, ApiProjectAreaWorkPackage, ApiProjectSummary, User } from "../models";
+import { ApiProjectArea, ApiProjectAreaWorkPackage, ApiProjectSummary, ApiProjectSupportingSignals, User } from "../models";
 import Http from "../utilities/http";
 
 export default class ProjectSummaryApi {
     static getProjectSummary(projectId: string, user: User) {
         return Http.get(`${Http.baseUrl()}/projects/${projectId}/summary`, user) as unknown as Promise<ApiProjectSummary>;
+    }
+
+    static getProjectSupportingSignals(projectId: string, user: User) {
+        return Http.get(`${Http.baseUrl()}/projects/${projectId}/supporting-signals`, user) as unknown as Promise<ApiProjectSupportingSignals>;
     }
 
     /**
