@@ -86,6 +86,48 @@ describe("ProjectApi", () => {
     });
   });
 
+  describe("#getCssContactsForProject", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/css-contacts`, {
+        status: 200,
+        body: [{ name: "Jordan Rivera", email: "jordan.rivera@hexagon.com" }]
+      });
+    });
+
+    it("makes an authenticated call to the endpoint", () => {
+      ProjectApi.getCssContactsForProject("some-project-id", user);
+
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/css-contacts`);
+      expect(fetchMock.lastOptions().headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+  });
+
+  describe("#submitSupportRequest", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/support-requests`, {
+        status: 201,
+        body: { id: 100, createdAt: 1751414400 }
+      });
+    });
+
+    it("posts multipart form data to the endpoint with auth headers", () => {
+      ProjectApi.submitSupportRequest(
+        "some-project-id",
+        { description: "Something is broken", sourcePage: "/projects/some-project-id/summary" },
+        user
+      );
+
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/support-requests`);
+      expect(lastFetchOpts.method).to.eq("POST");
+      expect(lastFetchOpts.body).to.be.instanceof(FormData);
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+    });
+  });
+
   describe("#getProjectDeviationSummary", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/deviation-summary`, {

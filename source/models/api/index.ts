@@ -1,5 +1,7 @@
 export { ApiCssEligibleUser } from "./api_css_eligible_user";
 export { ApiCssContact, ApiCssContactArgument } from "./api_css_contact";
+export { ApiCssContactSummary } from "./api_css_contact_summary";
+export { ApiSupportRequest, ApiSupportRequestArgument } from "./api_support_request";
 export { ApiRpcSession } from "./api_rpc_session";
 export { ApiRpcQueryResponse } from "./api_rpc_query_response";
 export { ApiRpcQueryRequest } from "./api_rpc_query_request";

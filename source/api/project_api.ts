@@ -7,6 +7,8 @@ import { PbeTsvType } from "../models/api/pbe_tsv_type";
 import type { ApiClassificationCode, ApiCloudFile, ApiMasterformatProgress, ApiProject, ApiProjectCostAnalysisProgress, ApiProjectCostAnalysisProgressValidationResult, ApiProjectDeviationSummary, ApiProjectListing, ApiProjectProgressSummary, ApiProjectWorkPackage, ApiProjectWorkPackageCost, ApiRunningProcess, ProgressType, ProjectWorkPackageType, User } from "../models";
 import type { AssociationIds, DateLike } from "type_aliases";
 import ApiMasterFormatWithUniformat from "../models/api/api_masterformat_with_uniformat";
+import ApiCssContactSummary from "../models/api/api_css_contact_summary";
+import ApiSupportRequest from "../models/api/api_support_request";
 
 export default class ProjectApi {
   static listProjectsForOrganization(organizationId: string, user: User, filterArchived: boolean = false): Promise<ApiProject[]> {
@@ -131,6 +133,34 @@ export default class ProjectApi {
         ...getAuthorizationHeaders(user)
       },
     })) as unknown as Promise<Response>
+  }
+
+  static getCssContactsForProject(projectId: string, user: User): Promise<ApiCssContactSummary[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/css-contacts`;
+    return Http.get(url, user) as unknown as Promise<ApiCssContactSummary[]>;
+  }
+
+  static submitSupportRequest(projectId: string,
+                              { description, sourcePage, files }: { description: string, sourcePage?: string, files?: File[] },
+                              user: User): Promise<ApiSupportRequest> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/support-requests`;
+
+    let multipartFormData = new FormData();
+    multipartFormData.append("description", description);
+    if (sourcePage != null) {
+      multipartFormData.append("sourcePage", sourcePage);
+    }
+    (files || []).forEach((file) => {
+      multipartFormData.append("attachments", file, file.name);
+    });
+
+    return Http.fetch(url, {
+      method: "POST",
+      headers: {
+        ...getAuthorizationHeaders(user)
+      },
+      body: multipartFormData
+    }) as unknown as Promise<ApiSupportRequest>;
   }
 
   /**
