@@ -1,6 +1,6 @@
 // @ts-nocheck
 import ApiOrganization from "../models/api/api_organization";
-import { User } from "../utilities/get_authorization_headers";
+import getAuthorizationHeaders, { User } from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import ApiUserForOrganization from "../models/api/api_user_for_organization";
@@ -8,6 +8,8 @@ import { ApiScanDatasetStats } from "../models/api/api_scandataset_stats";
 import {ApiOrganizationMember} from "../models";
 import ApiCssEligibleUser from "../models/api/api_css_eligible_user";
 import ApiCssContact from "../models/api/api_css_contact";
+import ApiCssContactSummary from "../models/api/api_css_contact_summary";
+import ApiSupportRequest from "../models/api/api_support_request";
 
 export default class OrganizationApi {
   static listOrganizations(user: User): Promise<ApiOrganization[]> {
@@ -73,6 +75,34 @@ export default class OrganizationApi {
   static deleteCssContact(organizationId: string, contactId: number, user: User): Promise<void> {
     let url = `${Http.baseUrl()}/client-accounts/${organizationId}/css-contacts/${contactId}`;
     return Http.delete(url, user) as unknown as Promise<void>;
+  }
+
+  static getCssContactsForOrganization(organizationId: string, user: User): Promise<ApiCssContactSummary[]> {
+    let url = `${Http.baseUrl()}/support-center/css-contacts?organizationId=${encodeURIComponent(organizationId)}`;
+    return Http.get(url, user) as unknown as Promise<ApiCssContactSummary[]>;
+  }
+
+  static submitSupportRequestForOrganization(organizationId: string,
+                                             { description, sourcePage, files }: { description: string, sourcePage?: string, files?: File[] },
+                                             user: User): Promise<ApiSupportRequest> {
+    let url = `${Http.baseUrl()}/support-center/support-requests?organizationId=${encodeURIComponent(organizationId)}`;
+
+    let multipartFormData = new FormData();
+    multipartFormData.append("description", description);
+    if (sourcePage != null) {
+      multipartFormData.append("sourcePage", sourcePage);
+    }
+    (files || []).forEach((file) => {
+      multipartFormData.append("attachments", file, file.name);
+    });
+
+    return Http.fetch(url, {
+      method: "POST",
+      headers: {
+        ...getAuthorizationHeaders(user)
+      },
+      body: multipartFormData
+    }) as unknown as Promise<ApiSupportRequest>;
   }
 }
 

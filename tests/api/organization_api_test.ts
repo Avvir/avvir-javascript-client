@@ -63,4 +63,46 @@ describe("OrganizationApi", () => {
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
   });
+
+  describe("#getCssContactsForOrganization", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/support-center/css-contacts?organizationId=some-org-id`, {
+        status: 200,
+        body: [{ name: "Some CS Lead", email: "some.cs.lead@example.com" }]
+      });
+    });
+
+    it("makes an authenticated call to the endpoint", () => {
+      OrganizationApi.getCssContactsForOrganization("some-org-id", user);
+
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/support-center/css-contacts?organizationId=some-org-id`);
+      expect(fetchMock.lastOptions().headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+  });
+
+  describe("#submitSupportRequestForOrganization", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/support-center/support-requests?organizationId=some-org-id`, {
+        status: 201,
+        body: { id: 100, createdAt: 1751414400 }
+      });
+    });
+
+    it("posts multipart form data to the endpoint with auth headers", () => {
+      OrganizationApi.submitSupportRequestForOrganization(
+        "some-org-id",
+        { description: "Something is broken", sourcePage: "/organizations/some-org-id/support-center" },
+        user
+      );
+
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/support-center/support-requests?organizationId=some-org-id`);
+      expect(lastFetchOpts.method).to.eq("POST");
+      expect(lastFetchOpts.body).to.be.instanceof(FormData);
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+    });
+  });
 });

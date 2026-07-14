@@ -136,14 +136,14 @@ export default class ProjectApi {
   }
 
   static getCssContactsForProject(projectId: string, user: User): Promise<ApiCssContactSummary[]> {
-    let url = `${Http.baseUrl()}/projects/${projectId}/css-contacts`;
+    let url = `${Http.baseUrl()}/support-center/css-contacts?projectId=${encodeURIComponent(projectId)}`;
     return Http.get(url, user) as unknown as Promise<ApiCssContactSummary[]>;
   }
 
   static submitSupportRequest(projectId: string,
                               { description, sourcePage, files }: { description: string, sourcePage?: string, files?: File[] },
                               user: User): Promise<ApiSupportRequest> {
-    let url = `${Http.baseUrl()}/projects/${projectId}/support-requests`;
+    let url = `${Http.baseUrl()}/support-center/support-requests?projectId=${encodeURIComponent(projectId)}`;
 
     let multipartFormData = new FormData();
     multipartFormData.append("description", description);
