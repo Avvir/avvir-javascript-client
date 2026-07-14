@@ -88,9 +88,9 @@ describe("ProjectApi", () => {
 
   describe("#getCssContactsForProject", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/css-contacts`, {
+      fetchMock.get(`${Http.baseUrl()}/support-center/css-contacts?projectId=some-project-id`, {
         status: 200,
-        body: [{ name: "Jordan Rivera", email: "jordan.rivera@hexagon.com" }]
+        body: [{ name: "Some CS Lead", email: "some.cs.lead@example.com" }]
       });
     });
 
@@ -98,14 +98,14 @@ describe("ProjectApi", () => {
       ProjectApi.getCssContactsForProject("some-project-id", user);
 
       const fetchCall = fetchMock.lastCall();
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/css-contacts`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/support-center/css-contacts?projectId=some-project-id`);
       expect(fetchMock.lastOptions().headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
   });
 
   describe("#submitSupportRequest", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/support-requests`, {
+      fetchMock.post(`${Http.baseUrl()}/support-center/support-requests?projectId=some-project-id`, {
         status: 201,
         body: { id: 100, createdAt: 1751414400 }
       });
@@ -121,7 +121,7 @@ describe("ProjectApi", () => {
       const fetchCall = fetchMock.lastCall();
       const lastFetchOpts = fetchMock.lastOptions();
 
-      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/support-requests`);
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/support-center/support-requests?projectId=some-project-id`);
       expect(lastFetchOpts.method).to.eq("POST");
       expect(lastFetchOpts.body).to.be.instanceof(FormData);
       expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
