@@ -106,6 +106,156 @@ describe("ElementApi", () => {
     });
   });
 
+  describe("::getMinimalPlannedBuildingElements", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/minimal`,
+        [{
+          globalId: "some-element-id",
+          builtStatus: ApiBuiltStatus.DEVIATED,
+          trade: "some-trade",
+          uniformat: "A1010.10"
+        }]);
+    });
+
+    it("makes a request to the minimal planned building elements endpoint", () => {
+      ElementApi.getMinimalPlannedBuildingElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id"
+      }, {
+        authType: GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+      });
+
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/minimal`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("returns the minimal element payload", () => {
+      return ElementApi.getMinimalPlannedBuildingElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id"
+        }, {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        })
+        .then((minimalElements) => {
+          expect(minimalElements).to.deep.eq([{
+            globalId: "some-element-id",
+            builtStatus: DEVIATED,
+            trade: "some-trade",
+            uniformat: "A1010.10"
+          }]);
+        });
+    });
+
+    describe("when the user is signed in", () => {
+      let user;
+      beforeEach(() => {
+        user = {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        };
+      });
+
+      it("authenticates the request", () => {
+        ElementApi.getMinimalPlannedBuildingElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id"
+        }, user);
+
+        const lastFetchOpts = fetchMock.lastOptions();
+        expect(lastFetchOpts.headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      });
+    });
+  });
+
+  describe("::getOptimizedPlannedBuildingElements", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/optimized`,
+        [{
+          name: "Some Element Name",
+          globalId: "some-element-id",
+          uniformat: "A1010.10",
+          trade: "some-trade",
+          deviation: {
+            deviationMeters: 1.4142135623730951,
+            status: DeviationStatus.INCLUDED,
+            deviationVectorMeters: {
+              x: 1,
+              y: 1,
+              z: 0
+            }
+          }
+        }]);
+    });
+
+    it("makes a request to the optimized planned building elements endpoint", () => {
+      ElementApi.getOptimizedPlannedBuildingElements({
+        projectId: "some-project-id",
+        floorId: "some-floor-id"
+      }, {
+        authType: GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+      });
+
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0])
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/optimized`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("returns the optimized element payload", () => {
+      return ElementApi.getOptimizedPlannedBuildingElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id"
+        }, {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        })
+        .then((optimizedElements) => {
+          expect(optimizedElements).to.deep.eq([{
+            name: "Some Element Name",
+            globalId: "some-element-id",
+            uniformat: "A1010.10",
+            trade: "some-trade",
+            deviation: {
+              deviationMeters: Math.sqrt(2),
+              status: INCLUDED,
+              deviationVectorMeters: {
+                x: 1,
+                y: 1,
+                z: 0
+              }
+            }
+          }]);
+        });
+    });
+
+    describe("when the user is signed in", () => {
+      let user;
+      beforeEach(() => {
+        user = {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        };
+      });
+
+      it("authenticates the request", () => {
+        ElementApi.getOptimizedPlannedBuildingElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id"
+        }, user);
+
+        const lastFetchOpts = fetchMock.lastOptions();
+        expect(lastFetchOpts.headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      });
+    });
+  });
+
   describe("::updateDeviationStatus", () => {
     beforeEach(() => {
       fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/scan-datasets/some-scan-id/deviation-status`,
