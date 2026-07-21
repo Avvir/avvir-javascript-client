@@ -11,6 +11,8 @@ export class ApiProjectSettings {
   tradeFilterForceUniformat: boolean;
   createScanDatasetsAutomatically: boolean;
   automaticPhotoIngestion: boolean;
+  dashboardProgress: boolean;
+  dashboardDeviation: boolean;
 }
 
 export default ApiProjectSettings;
