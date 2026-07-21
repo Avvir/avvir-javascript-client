@@ -78,3 +78,4 @@ export * from "./api_masterformat_with_uniformat";
 export * from "./api_user_role";
 export * from "./api_user_project";
 export * from "./api_organization_member";
+export * from "./api_minimal_planned_building_element";

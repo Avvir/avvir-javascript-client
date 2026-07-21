@@ -2,7 +2,7 @@ import DeviationStatus from "../models/enums/deviation_status";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 
-import type { ApiBcfBuildingElement, ApiBuiltStatus, ApiDetailedElement, ApiPlannedElement, ApiQueryResource, ApiRunningProcess, ApiScannedElement, ApiUserAction } from "../models";
+import type { ApiBcfBuildingElement, ApiBuiltStatus, ApiDetailedElement, ApiMinimalPlannedBuildingElement, ApiPlannedElement, ApiQueryResource, ApiRunningProcess, ApiScannedElement, ApiUserAction } from "../models";
 import type { AssociationIds } from "type_aliases";
 import type { User } from "../utilities/get_authorization_headers";
 import {ApiPartialProgressElement} from "../models";
@@ -11,6 +11,18 @@ export default class ElementApi {
   static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User): Promise<ApiPlannedElement[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements`;
     return Http.get(url, user) as unknown as Promise<ApiDetailedElement[]>;
+  }
+
+  static getMinimalPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User): Promise<ApiMinimalPlannedBuildingElement[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/minimal`;
+    return Http.get(url, user) as unknown as Promise<ApiMinimalPlannedBuildingElement[]>;
+  }
+
+  // same shape as getPlannedBuildingElements, but deviation vectors are trimmed to
+  // INCLUDED-only server-side. getPlannedBuildingElements remains the fallback.
+  static getOptimizedPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User): Promise<ApiPlannedElement[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/optimized`;
+    return Http.get(url, user) as unknown as Promise<ApiPlannedElement[]>;
   }
 
   static updateDeviationStatus({ projectId, floorId, scanDatasetId }: AssociationIds,
