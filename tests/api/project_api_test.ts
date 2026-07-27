@@ -128,6 +128,62 @@ describe("ProjectApi", () => {
     });
   });
 
+  describe("#getProjectFloorTradeDeviationMagnitudes", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/deviations-by-floor`, {
+        status: 200,
+        body: {
+          "some-floor-id": {
+            "01": 0.0,
+            "02": 0.1,
+          }
+        }
+      });
+
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/deviations-by-floor?currentScan=true`, {
+        status: 200,
+        body: {
+          "some-floor-id": {
+            "01": 0.0,
+            "02": 0.1,
+          }
+        }
+      });
+
+    });
+
+    it("makes a request to the gateway api without ?currentScan when currentScan is false", () => {
+      ProjectApi.getProjectFloorTradeDeviationMagnitudes({ projectId: "some-project-id" }, false, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/deviations-by-floor`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("makes a request to the gateway api with ?currentScan=true when currentScan is true", () => {
+      ProjectApi.getProjectFloorTradeDeviationMagnitudes({ projectId: "some-project-id" }, true, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/deviations-by-floor?currentScan=true`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("includes the authorization headers", () => {
+      ProjectApi.getProjectFloorTradeDeviationMagnitudes({ projectId: "some-project-id" }, false, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
   describe("#getProjectDeviationSummary", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/deviation-summary`, {
