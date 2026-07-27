@@ -40,6 +40,14 @@ export default class ProjectApi {
     return Http.get(url, user) as unknown as Promise<ApiProject>;
   }
 
+  static getProjectFloorTradeDeviationMagnitudes({ projectId }: AssociationIds, currentScan: boolean, user: User): Promise<{[floorFirebaseId: string]: {[tradeCode: string]: number}}> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/deviations-by-floor`;
+    if (currentScan) {
+      url += "?currentScan=true";
+    }
+    return Http.get(url, user) as unknown as Promise<{[floorFirebaseId: string]: {[tradeCode: string]: number}}>;
+  }
+
   static getProjectDeviationSummary({ projectId }: AssociationIds, user: User): Promise<ApiProjectDeviationSummary> {
     let url = `${Http.baseUrl()}/projects/${projectId}/deviation-summary`;
     return Http.get(url, user) as unknown as Promise<ApiProjectDeviationSummary>;
