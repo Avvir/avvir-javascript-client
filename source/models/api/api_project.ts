@@ -49,7 +49,8 @@ export class ApiProject {
                 integrationProjectId,
                 settings,
                 baselineScheduleDate,
-                currentScheduleDate
+                currentScheduleDate,
+                isLocked
               }: ApiProjectArgument = {})
   {
     addInstantGetterAndSetterToApiModel(this, "startDate", startDate);
@@ -85,6 +86,7 @@ export class ApiProject {
     this.settings = settings;
     this.baselineScheduleDate = baselineScheduleDate;
     this.currentScheduleDate = currentScheduleDate;
+    this.isLocked = isLocked;
   }
 
   readonly id: number;
@@ -119,6 +121,7 @@ export class ApiProject {
   settings?: ApiProjectSettings;
   baselineScheduleDate?: Date;
   currentScheduleDate?: Date;
+  isLocked: boolean;
 }
 
 export default ApiProject;
