@@ -79,3 +79,6 @@ export * from "./api_user_role";
 export * from "./api_user_project";
 export * from "./api_organization_member";
 export * from "./api_minimal_planned_building_element";
+export * from "./import_error_category";
+export * from "./import_error_code";
+export * from "./api_import_project_data_error_response";
