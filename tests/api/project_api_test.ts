@@ -907,4 +907,32 @@ describe("ProjectApi", () => {
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
     });
   });
+
+  describe("#importProjectData", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/import-project-data`, 202);
+    });
+
+    it("posts the tsv as multipart form data to the import-project-data endpoint", () => {
+      ProjectApi.importProjectData({ projectId: "some-project-id" }, "Floor\tName\nsome-floor\tsome-wall", user);
+
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/import-project-data`);
+      expect(lastFetchOpts.method).to.eq("POST");
+      expect(lastFetchOpts.body).to.be.instanceof(FormData);
+    });
+
+    it("includes the authorization headers and the tsv file", () => {
+      ProjectApi.importProjectData({ projectId: "some-project-id" }, "Floor\tName\nsome-floor\tsome-wall", user);
+
+      const lastFetchOpts = fetchMock.lastOptions();
+      const body = lastFetchOpts.body as FormData;
+
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+      expect(body.has("file")).to.eq(true);
+    });
+  });
 });

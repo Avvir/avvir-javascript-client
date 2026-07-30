@@ -2,7 +2,6 @@ import getAuthorizationHeaders from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import { DateConverter } from "../converters";
-import { PbeTsvType } from "../models/api/pbe_tsv_type";
 
 import type { ApiClassificationCode, ApiCloudFile, ApiMasterformatProgress, ApiProject, ApiProjectCostAnalysisProgress, ApiProjectCostAnalysisProgressValidationResult, ApiProjectDeviationSummary, ApiProjectListing, ApiProjectProgressSummary, ApiProjectWorkPackage, ApiProjectWorkPackageCost, ApiRunningProcess, ProgressType, ProjectWorkPackageType, User } from "../models";
 import type { AssociationIds, DateLike } from "type_aliases";
@@ -286,14 +285,12 @@ export default class ProjectApi {
     return Http.post(url, user) as unknown as Promise<ApiRunningProcess>;
   }
 
-  static updateProjectExportTsv({ projectId }: AssociationIds, tsvContent: string, user: User) {
+  static importProjectData({ projectId }: AssociationIds, tsvContent: string, user: User) {
     let multipartFormData = new FormData();
     let file = new Blob([tsvContent], { type: "text/tab-separated-values" });
     multipartFormData.append("file", file, "file.tsv");
 
-    let pbeTsvType = PbeTsvType.PROJECT_LEVEL_PBE;
-
-    const url = `${Http.baseUrl()}/projects/${projectId}/planned-building-elements?pbeTsvType=${pbeTsvType}`;
+    const url = `${Http.baseUrl()}/projects/${projectId}/import-project-data`;
     return Http.fetch(url, {
       method: "POST",
       headers: {
