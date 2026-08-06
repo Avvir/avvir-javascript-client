@@ -8,13 +8,23 @@ import type { User } from "../utilities/get_authorization_headers";
 import {ApiPartialProgressElement} from "../models";
 
 export default class ElementApi {
-  static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User): Promise<ApiPlannedElement[]> {
+  /**
+   * Pass limit (and optionally offset) to fetch one page of a floor's elements.
+   */
+  static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User, limit?: number, offset?: number): Promise<ApiPlannedElement[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements`;
+    if (limit != null) {
+      url += `?limit=${limit}&offset=${offset ?? 0}`;
+    }
     return Http.get(url, user) as unknown as Promise<ApiDetailedElement[]>;
   }
 
-  static getMinimalPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User): Promise<ApiMinimalPlannedBuildingElement[]> {
+  /** Takes limit/offset on the same terms as {@link getPlannedBuildingElements}. */
+  static getMinimalPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User, limit?: number, offset?: number): Promise<ApiMinimalPlannedBuildingElement[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/minimal`;
+    if (limit != null) {
+      url += `?limit=${limit}&offset=${offset ?? 0}`;
+    }
     return Http.get(url, user) as unknown as Promise<ApiMinimalPlannedBuildingElement[]>;
   }
 
