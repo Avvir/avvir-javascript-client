@@ -104,6 +104,62 @@ describe("ElementApi", () => {
         expect(lastFetchOpts.headers.Authorization).to.eq("Bearer some-firebase.id.token");
       });
     });
+
+    describe("when a limit and offset are given", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements?limit=100&offset=200`, []);
+      });
+
+      it("requests that page", () => {
+        ElementApi.getPlannedBuildingElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id"
+        }, {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        }, 100, 200);
+
+        expect(fetchMock.lastCall()[0])
+          .to
+          .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements?limit=100&offset=200`);
+      });
+    });
+
+    describe("when only a limit is given", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements?limit=100&offset=0`, []);
+      });
+
+      it("defaults the offset to 0", () => {
+        ElementApi.getPlannedBuildingElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id"
+        }, {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        }, 100);
+
+        expect(fetchMock.lastCall()[0])
+          .to
+          .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements?limit=100&offset=0`);
+      });
+    });
+
+    describe("when an offset is given without a limit", () => {
+      it("requests the whole floor, leaving the url unpaginated", () => {
+        ElementApi.getPlannedBuildingElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id"
+        }, {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        }, undefined, 200);
+
+        expect(fetchMock.lastCall()[0])
+          .to
+          .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements`);
+      });
+    });
   });
 
   describe("::getMinimalPlannedBuildingElements", () => {
@@ -168,6 +224,78 @@ describe("ElementApi", () => {
 
         const lastFetchOpts = fetchMock.lastOptions();
         expect(lastFetchOpts.headers.Authorization).to.eq("Bearer some-firebase.id.token");
+      });
+    });
+
+    describe("when a limit and offset are given", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/minimal?limit=100&offset=200`, []);
+      });
+
+      it("requests that page", () => {
+        ElementApi.getMinimalPlannedBuildingElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id"
+        }, {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        }, 100, 200);
+
+        expect(fetchMock.lastCall()[0])
+          .to
+          .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/minimal?limit=100&offset=200`);
+      });
+    });
+
+    describe("when only a limit is given", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/minimal?limit=100&offset=0`, []);
+      });
+
+      it("defaults the offset to 0", () => {
+        ElementApi.getMinimalPlannedBuildingElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id"
+        }, {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        }, 100);
+
+        expect(fetchMock.lastCall()[0])
+          .to
+          .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/minimal?limit=100&offset=0`);
+      });
+    });
+
+    describe("when the payload carries excludeFromAnalysis", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/other-floor-id/planned-building-elements/minimal`,
+          [{
+            globalId: "some-element-id",
+            builtStatus: ApiBuiltStatus.NOT_BUILT,
+            trade: "some-trade",
+            uniformat: "A1010.10",
+            excludeFromAnalysis: true
+          }]);
+      });
+
+      it("passes it through — it is the field BIM Prep's filter keys on", () => {
+        return ElementApi.getMinimalPlannedBuildingElements({
+            projectId: "some-project-id",
+            floorId: "other-floor-id"
+          }, {
+            authType: GATEWAY_JWT,
+            gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+          })
+          .then((minimalElements) => {
+            expect(minimalElements).to.deep.eq([{
+              globalId: "some-element-id",
+              builtStatus: NOT_BUILT,
+              trade: "some-trade",
+              uniformat: "A1010.10",
+              excludeFromAnalysis: true
+            }]);
+          });
       });
     });
   });
