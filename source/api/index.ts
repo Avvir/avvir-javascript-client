@@ -14,6 +14,7 @@ import ProjectSummaryApi from "./project_summary_api";
 import RecipeApi from "./recipe_api";
 import ReportApi from "./report_api";
 import ScanDatasetApi from "./scan_dataset_api";
+import TosApi from "./tos_api";
 import TradeApi from "./trade_api";
 import UserApi from "./user_api";
 import WebGatewayApi from "./web_gateway_api";
@@ -37,6 +38,7 @@ export {
   RecipeApi,
   ReportApi,
   ScanDatasetApi,
+  TosApi,
   TradeApi,
   UserApi,
   WebGatewayApi,
