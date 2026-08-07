@@ -36,16 +36,7 @@ describe("IntegrationsApi", () => {
 
     describe("::saveIntegrationCredentials", () => {
         beforeEach(() => {
-            let response = new ApiIntegrationCredentials({
-                authorId: 1,
-                firebaseOrganizationId: "some-org-id",
-                firebaseProjectId: "some-project-id",
-                username: "some-username",
-                password: "some-password",
-                credentialsType: ApiIntegrationCredentialsType.DRONE_DEPLOY
-            });
-
-            fetchMock.put(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials/DRONE_DEPLOY`, response);
+            fetchMock.put(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials/DRONE_DEPLOY`, 200);
         });
 
         it("makes a call to the endpoint", () => {
@@ -90,21 +81,7 @@ describe("IntegrationsApi", () => {
 
     describe("::getIntegrationProjectsForCredentials", () => {
         beforeEach(() => {
-            let response = [new ApiIntegrationProject({
-                id: 1,
-                integrationCredentialsId: 2,
-                externalName: "Some Name",
-                externalId: "some-id"
-            }),
-                new ApiIntegrationProject({
-                    id: 2,
-                    integrationCredentialsId: 2,
-                    externalName: "Some Other Name",
-                    externalId: "some-other-id"
-                })
-            ];
-
-            fetchMock.get(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials/DRONE_DEPLOY/projects`, response);
+            fetchMock.get(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials/DRONE_DEPLOY/projects`, 200);
         });
 
         it("makes a call to the endpoint", () => {
@@ -141,16 +118,7 @@ describe("IntegrationsApi", () => {
 
     describe("::getIntegrationCredentials", () => {
         beforeEach(() => {
-            let response = new ApiIntegrationCredentials({
-                authorId: 1,
-                firebaseOrganizationId: "some-org-id",
-                firebaseProjectId: "some-project-id",
-                username: "some-username",
-                password: "some-password",
-                credentialsType: ApiIntegrationCredentialsType.DRONE_DEPLOY
-            });
-
-            fetchMock.get(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials/DRONE_DEPLOY`, response);
+            fetchMock.get(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials/DRONE_DEPLOY`, 200);
         });
 
         it("makes a call to the endpoint", () => {
@@ -187,16 +155,7 @@ describe("IntegrationsApi", () => {
 
     describe("::getProjectIntegrationCredentials", () => {
         beforeEach(() => {
-            let response = [new ApiIntegrationCredentials({
-                authorId: 1,
-                firebaseOrganizationId: "some-org-id",
-                firebaseProjectId: "some-project-id",
-                username: "some-username",
-                password: "some-password",
-                credentialsType: ApiIntegrationCredentialsType.DRONE_DEPLOY
-            })];
-
-            fetchMock.get(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials`, response);
+            fetchMock.get(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials`, 200);
         });
 
         it("makes a call to the endpoint", () => {
@@ -231,11 +190,7 @@ describe("IntegrationsApi", () => {
 
     describe("::syncIntegrationProjects", () => {
         beforeEach(() => {
-            let response = new ApiRunningProcess({
-                id: 1,
-                name: "some-process"
-            });
-            fetchMock.post(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials/DRONE_DEPLOY/sync-projects`, response);
+            fetchMock.post(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials/DRONE_DEPLOY/sync-projects`, 200);
         });
 
         it("makes a call to the endpoint", () => {
@@ -272,11 +227,7 @@ describe("IntegrationsApi", () => {
 
     describe("::syncIntegrationPhotoAreas", () => {
         beforeEach(() => {
-            let response = new ApiRunningProcess({
-                id: 1,
-                name: "some-process"
-            });
-            fetchMock.post(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials/DRONE_DEPLOY/sync-photo-areas`, response);
+            fetchMock.post(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/credentials/DRONE_DEPLOY/sync-photo-areas`, 200);
         });
 
         it("makes a call to the endpoint", () => {
@@ -313,7 +264,7 @@ describe("IntegrationsApi", () => {
 
     describe("::updateProjectIntegrationProject", () => {
         beforeEach(() => {
-            fetchMock.post(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/set-integration-project`, "");
+            fetchMock.post(`${Http.baseUrl()}/integrations/organizations/some-org-id/projects/some-project-id/set-integration-project`, 200);
         });
 
         it("makes a call to the endpoint", () => {
@@ -370,7 +321,7 @@ describe("IntegrationsApi", () => {
     describe("::checkProcoreAccessToken", () => {
         beforeEach(() => {
             fetchMock.get(`${Http.baseUrl()}/integrations/procore/access-token?procore-access-token=some-procore-access-token`,
-                {status: 200, body: {expiresInSeconds: 3600}});
+                          200);
         });
 
         it("includes auth headers and makes a request to check access token", () => {
@@ -412,9 +363,9 @@ describe("IntegrationsApi", () => {
     describe("::getProcoreProjects", () => {
         beforeEach(() => {
             fetchMock.get(`${Http.baseUrl()}/integrations/procore/projects?procore-access-token=some-procore-access-token`,
-                {status: 200, body: ["some-procore-project"]});
+                          200);
             fetchMock.get(`${Http.baseUrl()}/integrations/procore/projects?procore-access-token=some-procore-access-token&companyId=some-company-id`,
-                {status: 200, body: ["some-procore-project"]});
+                          200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -493,7 +444,7 @@ describe("IntegrationsApi", () => {
     describe("::getProcoreCompanies", () => {
         beforeEach(() => {
             fetchMock.get(`${Http.baseUrl()}/integrations/procore/companies?procore-access-token=some-procore-access-token`,
-                {status: 200, body: ["some-procore-company"]});
+                          200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -535,7 +486,7 @@ describe("IntegrationsApi", () => {
     describe("::getProcoreObservationTypes", () => {
         beforeEach(() => {
             fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-company-id/observation-types?procore-access-token=some-procore-access-token`,
-                {status: 200, body: ["some-procore-observation-type"]});
+                          200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -588,7 +539,7 @@ describe("IntegrationsApi", () => {
     describe("::getProcoreObservationAssignees", () => {
         beforeEach(() => {
             fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/observation-assignees?procore-access-token=some-procore-access-token`,
-                {status: 200, body: ["some-procore-observation-assignees"]});
+                          200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -681,8 +632,7 @@ describe("IntegrationsApi", () => {
 
             fetchMock.get(
                 `${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/procore-tools-permissions?procore-access-token=some-procore-access-token`,
-                {status: 200, body: mockResponse}
-            );
+                {status: 200, body: mockResponse});
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -759,7 +709,7 @@ describe("IntegrationsApi", () => {
     describe("::getProcoreRfiAssignees", () => {
         beforeEach(() => {
             fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/rfi-assignees?procore-access-token=some-procore-access-token`,
-                {status: 200, body: ["some-procore-assignees"]});
+                          200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -823,7 +773,7 @@ describe("IntegrationsApi", () => {
     describe("::getRfiManagers", () => {
         beforeEach(() => {
             fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/rfi-managers?procore-access-token=some-procore-access-token`,
-                {status: 200, body: ["some-procore-assignees"]});
+                          200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -1401,7 +1351,7 @@ describe("IntegrationsApi", () => {
     describe("::getAutodeskAccessToken", () => {
         beforeEach(() => {
             fetchMock.get(`${Http.baseUrl()}/integrations/autodesk/access-token?code=some-code&redirect-uri=some-redirect-uri`,
-                {status: 200, body: {access_token: "some-access-token"}});
+                          200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -1467,7 +1417,7 @@ describe("IntegrationsApi", () => {
     describe("::getAutoDeskHubs", () => {
         beforeEach(() => {
             fetchMock.get(`${Http.baseUrl()}/integrations/autodesk/hubs?access-token=some-access-token`,
-                {status: 200, body: ["some-autodesk-hubs"]});
+                          200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -1514,7 +1464,7 @@ describe("IntegrationsApi", () => {
     describe("::getAutoDeskProjects", () => {
         beforeEach(() => {
                 fetchMock.get(`${Http.baseUrl()}/integrations/autodesk/projects?access-token=some-access-token&hubId=some-hub-id`,
-                    {status: 200, body: ["some-autodesk-project"]});
+                              200);
             }
         );
 
@@ -1579,7 +1529,7 @@ describe("IntegrationsApi", () => {
 
         beforeEach(() => {
             fetchMock.get(`${Http.baseUrl()}/integrations/autodesk/issue-types?access-token=some-access-token&projectId=some-project-id`,
-                {status: 200, body: ["some-autodesk-issue-type"]});
+                          200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -1632,10 +1582,7 @@ describe("IntegrationsApi", () => {
 
         beforeEach(() => {
             fetchMock.get(`${Http.baseUrl()}/integrations/autodesk/assignees?access-token=some-access-token&projectId=some-project-id`,
-                {status: 200, body: [
-                        {name: "John Doe", autodeskId: "ABC123"},
-                        {name: "Jane Smith", autodeskId: "XYZ789"}
-                    ]});
+                          200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -2190,10 +2137,8 @@ describe("IntegrationsApi", () => {
 
     describe("::getReviztoAccessToken", () => {
         beforeEach(() => {
-            fetchMock.get(`${Http.baseUrl()}/integrations/revizto/access-token?code=some-code&region=some-region`, {
-                status: 200,
-                body: { access_token: "some-access-token", token_type: "Bearer", expires_in: "3600", refresh_token: "some-refresh-token" }
-            });
+            fetchMock.get(`${Http.baseUrl()}/integrations/revizto/access-token?code=some-code&region=some-region`,
+                          200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -2255,44 +2200,8 @@ describe("IntegrationsApi", () => {
 
     describe("::getReviztoData", () => {
         beforeEach(() => {
-            fetchMock.get(`${Http.baseUrl()}/integrations/revizto/get-data?access-token=some-access-token&region=some-region`, {
-                status: 200,
-                body: {
-                    userEmail: "some-user-email@example.com",
-                    hubs: [
-                        {
-                            hubId: "some-hub-id",
-                            hubName: "Some Hub Name",
-                            hubUuid: "some-hub-uuid",
-                            projects: [
-                                {
-                                    projectTitle: "Some Project Title 1",
-                                    projectUuid: "some-project-uuid-1",
-                                    projectId: "some-project-id-1",
-                                    statuses: [
-                                        {
-                                            statusName: "Some Status 1",
-                                            statusUuid: "some-status-uuid-1"
-                                        }
-                                    ],
-                                    types: [
-                                        {
-                                            typeName: "Some Type 1",
-                                            typeUuid: "some-type-uuid-1"
-                                        }
-                                    ],
-                                    assignees: [
-                                        {
-                                            assigneeEmail: "some-email-1@example.com",
-                                            asigneeUuid: "some-assignee-uuid-1"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
-            });
+            fetchMock.get(`${Http.baseUrl()}/integrations/revizto/get-data?access-token=some-access-token&region=some-region`,
+                          200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -2354,10 +2263,7 @@ describe("IntegrationsApi", () => {
 
     describe("::getPowerBIAccessToken", () => {
         beforeEach(() => {
-            fetchMock.get(`${Http.baseUrl()}/integrations/powerbi/accessToken`, {
-                status: 200,
-                body: { access_token: "some-access-token", token_type: "Bearer", expires_in: "3600", refresh_token: "some-refresh-token" }
-            });
+            fetchMock.get(`${Http.baseUrl()}/integrations/powerbi/accessToken`, 200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -2379,10 +2285,7 @@ describe("IntegrationsApi", () => {
         const url = `${Http.baseUrl()}/integrations/powerbi/embedToken/groups/${groupId}/reports/${reportId}`;
 
         beforeEach(() => {
-            fetchMock.get(url, {
-                status: 200,
-                body: { token: "some-embed-token", expiration: "2024-12-31T23:59:59Z" }
-            });
+            fetchMock.get(url, 200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -2655,7 +2558,7 @@ describe("IntegrationsApi", () => {
     describe("::getAllCreatedIssuesForDeviatedElements", () => {
         beforeEach(() => {
             fetchMock.post(`${Http.baseUrl()}/integrations/tools/issues`,
-                [{"id":1, "status":"some-status"}]);
+                           200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -2676,7 +2579,7 @@ describe("IntegrationsApi", () => {
     describe("::getProcoreTradesForCoordinateIssue", () => {
         beforeEach(() => {
             fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-company-id/trades?procore-access-token=some-procore-access-token`,
-                {status: 200, body: [{id: 1, name: "Electrical", active: true}, {id: 2, name: "Plumbing", active: true}]});
+                          200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -2728,7 +2631,7 @@ describe("IntegrationsApi", () => {
     describe("::getProcoreLocationsForCoordinateIssue", () => {
         beforeEach(() => {
             fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/locations?procore-access-token=some-procore-access-token`,
-                {status: 200, body: [{id: 1, name: "Building A", parent_id: null}, {id: 2, name: "Building B", parent_id: 1}]});
+                          200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
@@ -2791,7 +2694,7 @@ describe("IntegrationsApi", () => {
     describe("::getProcoreCoordinationIssueAssigness", () => {
         beforeEach(() => {
             fetchMock.get(`${Http.baseUrl()}/integrations/procore/some-company-id/some-project-id/coordination-issue-assignees?procore-access-token=some-procore-access-token`,
-                {status: 200, body: [{id: 1, name: "Assignee 1"}, {id: 2, name: "Assignee 2"}]});
+                          200);
         });
 
         it("includes auth headers and makes a request to the gateway", () => {
