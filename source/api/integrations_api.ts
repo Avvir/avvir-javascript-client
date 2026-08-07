@@ -27,6 +27,9 @@ import {JiraIssueRequest} from "../models/api/integrations/jira/JiraIssueRequest
 import {ApiResponse} from "../models/api/integrations/jira/ApiResponse";
 import {JiraIssueRequestModel} from "../models/api/integrations/jira/JiraIssueRequestModel";
 import {FieldsConfiguration} from "../models/api/integrations/jira/FieldsConfiguration";
+import {JiraAcsWorkItemRequest} from "../models/api/integrations/jira/JiraAcsWorkItemRequest";
+import {JiraAcsWorkItemRequestModel} from "../models/api/integrations/jira/JiraAcsWorkItemRequestModel";
+import {JiraAcsFieldsConfiguration} from "../models/api/integrations/jira/JiraAcsFieldsConfiguration";
 import { PowerBIAccessTokenResponse } from "../models/api/integrations/powerbi/api_access_token";
 import { EmbedTokenResponse } from "../models/api/integrations/powerbi/api_embed_token_response";
 import {ApiCoordinationIssueRequest} from "../models/api/integrations/procore/api_coordination_issue_request";
@@ -536,6 +539,18 @@ export default class IntegrationsApi {
     static getJiraFieldsConfiguration(user: User): Promise<FieldsConfiguration> {
         const url = `${Http.baseUrl()}/integrations/jira/configuration`;
         return Http.get(url, user) as unknown as Promise<FieldsConfiguration>;
+    }
+
+    static createJiraAcsWorkItem(jiraAcsWorkItemRequestModel: JiraAcsWorkItemRequestModel,
+                                 user: User): Promise<ApiResponse> {
+        const url = `${Http.baseUrl()}/integrations/jira/acs/create-work-item`;
+        const jiraAcsWorkItemRequest = new JiraAcsWorkItemRequest(jiraAcsWorkItemRequestModel);
+        return Http.post(url, user, jiraAcsWorkItemRequest) as unknown as Promise<ApiResponse>;
+    }
+
+    static getJiraAcsWorkItemFieldsConfiguration(user: User): Promise<JiraAcsFieldsConfiguration> {
+        const url = `${Http.baseUrl()}/integrations/jira/acs/configuration`;
+        return Http.get(url, user) as unknown as Promise<JiraAcsFieldsConfiguration>;
     }
 }
 
