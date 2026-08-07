@@ -20,6 +20,7 @@ import {AutodeskRequest} from "../../source/models/api/integrations/autodesk/api
 import AutodeskIssue from "../../source/models/api/integrations/autodesk/api_autodesk_issue";
 import {ReviztoIssueFields} from "../../source/models/api/integrations/revizto/api_issue_fields";
 import {JiraIssueRequestModel} from "../../source/models/api/integrations/jira/JiraIssueRequestModel";
+import {JiraAcsWorkItemRequestModel} from "../../source/models/api/integrations/jira/JiraAcsWorkItemRequestModel";
 import moment from "moment";
 
 
@@ -2489,6 +2490,162 @@ describe("IntegrationsApi", () => {
             IntegrationsApi.getJiraFieldsConfiguration(user);
 
             expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/integrations/jira/configuration`);
+            expect(fetchMock.lastOptions().headers["Accept"]).to.eq("application/json");
+            expect(fetchMock.lastOptions().headers["Authorization"]).to.eq("Bearer some-token");
+            expect(fetchMock.lastOptions().method).to.eq("GET");
+        });
+    });
+
+    describe("::createJiraAcsWorkItem", () => {
+        let jiraAcsWorkItemRequestModel: JiraAcsWorkItemRequestModel;
+        let user: User;
+
+        beforeEach(() => {
+            user = {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-token", role: UserRole.SUPERADMIN }
+            };
+
+            jiraAcsWorkItemRequestModel = {
+                avvirProjectId: "some-avvir-project-id",
+                workItemTypeIds: [10369, 10370],
+                summary: "Some ACS work item summary",
+                projectName: "some-project-name",
+                projectLink: "https://some-project-link.com",
+                subTaskNameTemplate: "some-sub-task-name-template",
+                numberOfAreasOrLevels: 2,
+                totalProjectSquareFootage: 200,
+                dueDate: moment("2025-09-12"),
+                buildingType: 11272,
+                priority: 10000,
+                assigneeAccountId: "some-assignee-account-id",
+                captureDate: moment("2025-09-15")
+            };
+
+            fetchMock.post(`${Http.baseUrl()}/integrations/jira/acs/create-work-item`, 201);
+        });
+
+        afterEach(() => {
+            fetchMock.restore();
+        });
+
+        it("makes a request to the gateway", () => {
+            IntegrationsApi.createJiraAcsWorkItem(jiraAcsWorkItemRequestModel, user);
+
+            expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/integrations/jira/acs/create-work-item`);
+            expect(fetchMock.lastOptions().headers["Accept"]).to.eq("application/json");
+            expect(fetchMock.lastOptions().headers["Authorization"]).to.eq("Bearer some-token");
+            expect(fetchMock.lastOptions().method).to.eq("POST");
+        });
+
+        it("sends a flat body, with none of the service desk concepts", () => {
+            IntegrationsApi.createJiraAcsWorkItem(jiraAcsWorkItemRequestModel, user);
+
+            const body = JSON.parse(lastMockedFetchCall().body);
+            expect(body.requestFieldValues).to.eq(undefined);
+            expect(body.serviceDeskId).to.eq(undefined);
+            expect(body.raiseOnBehalfOf).to.eq(undefined);
+            expect(body.requestParticipants).to.eq(undefined);
+        });
+
+        it("sends the Avvir project id, which the gateway needs to trace a failure to a project", () => {
+            IntegrationsApi.createJiraAcsWorkItem(jiraAcsWorkItemRequestModel, user);
+
+            expect(JSON.parse(lastMockedFetchCall().body).avvirProjectId).to.eq("some-avvir-project-id");
+        });
+
+        it("sends the work item type ids as numbers, which is what the gateway takes", () => {
+            IntegrationsApi.createJiraAcsWorkItem(jiraAcsWorkItemRequestModel, user);
+
+            expect(JSON.parse(lastMockedFetchCall().body).workItemTypeIds).to.deep.eq([10369, 10370]);
+        });
+
+        it("sends the building type and priority as their ids, not their names", () => {
+            IntegrationsApi.createJiraAcsWorkItem(jiraAcsWorkItemRequestModel, user);
+
+            const body = JSON.parse(lastMockedFetchCall().body);
+            expect(body.buildingType).to.eq("11272");
+            expect(body.priority).to.eq("10000");
+        });
+
+        it("formats every date the way Jira reads them", () => {
+            jiraAcsWorkItemRequestModel.dateReceived = moment("2025-09-10");
+
+            IntegrationsApi.createJiraAcsWorkItem(jiraAcsWorkItemRequestModel, user);
+
+            const body = JSON.parse(lastMockedFetchCall().body);
+            expect(body.dueDate).to.eq("2025-09-12");
+            expect(body.captureDate).to.eq("2025-09-15");
+            expect(body.dateReceived).to.eq("2025-09-10");
+        });
+
+        it("omits the priority when none was chosen, so Jira applies its own default", () => {
+            jiraAcsWorkItemRequestModel.priority = undefined;
+
+            IntegrationsApi.createJiraAcsWorkItem(jiraAcsWorkItemRequestModel, user);
+
+            expect(JSON.parse(lastMockedFetchCall().body).priority).to.eq(undefined);
+        });
+
+        it("omits a date that was never picked rather than sending null", () => {
+            jiraAcsWorkItemRequestModel.dueDate = null;
+            jiraAcsWorkItemRequestModel.captureDate = undefined;
+
+            IntegrationsApi.createJiraAcsWorkItem(jiraAcsWorkItemRequestModel, user);
+
+            const body = JSON.parse(lastMockedFetchCall().body);
+            expect(body).to.not.have.property("dueDate");
+            expect(body).to.not.have.property("captureDate");
+        });
+
+        it("omits an unfilled dropdown rather than sending it as zero", () => {
+            jiraAcsWorkItemRequestModel.buildingType = 0;
+
+            IntegrationsApi.createJiraAcsWorkItem(jiraAcsWorkItemRequestModel, user);
+
+            expect(JSON.parse(lastMockedFetchCall().body).buildingType).to.eq(undefined);
+        });
+
+        it("omits the assignee when none was chosen", () => {
+            jiraAcsWorkItemRequestModel.assigneeAccountId = undefined;
+
+            IntegrationsApi.createJiraAcsWorkItem(jiraAcsWorkItemRequestModel, user);
+
+            expect(JSON.parse(lastMockedFetchCall().body).assigneeAccountId).to.eq(undefined);
+        });
+
+        it("sends the BIM Classification fields when they are given", () => {
+            jiraAcsWorkItemRequestModel.workItemTypeIds = [10337];
+            jiraAcsWorkItemRequestModel.spreadSheetLink = "https://some-spreadsheet-link.com";
+            jiraAcsWorkItemRequestModel.squareFootage = 500;
+            jiraAcsWorkItemRequestModel.dateReceived = moment("2025-09-10");
+
+            IntegrationsApi.createJiraAcsWorkItem(jiraAcsWorkItemRequestModel, user);
+
+            const body = JSON.parse(lastMockedFetchCall().body);
+            expect(body.spreadSheetLink).to.eq("https://some-spreadsheet-link.com");
+            expect(body.squareFootage).to.eq(500);
+            expect(body.dateReceived).to.eq("2025-09-10");
+        });
+    });
+
+    describe("::getJiraAcsWorkItemFieldsConfiguration", () => {
+        let user: User;
+
+        afterEach(() => {
+            fetchMock.restore();
+        });
+
+        it("makes a request to the gateway to fetch the ACS field options", () => {
+            user = {
+                authType: GATEWAY_JWT,
+                gatewayUser: { idToken: "some-token", role: UserRole.SUPERADMIN }
+            };
+            fetchMock.get(`${Http.baseUrl()}/integrations/jira/acs/configuration`, 200);
+
+            IntegrationsApi.getJiraAcsWorkItemFieldsConfiguration(user);
+
+            expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/integrations/jira/acs/configuration`);
             expect(fetchMock.lastOptions().headers["Accept"]).to.eq("application/json");
             expect(fetchMock.lastOptions().headers["Authorization"]).to.eq("Bearer some-token");
             expect(fetchMock.lastOptions().method).to.eq("GET");
