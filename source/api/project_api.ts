@@ -3,7 +3,7 @@ import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import { DateConverter } from "../converters";
 
-import type { ApiClassificationCode, ApiCloudFile, ApiMasterformatProgress, ApiProject, ApiProjectCostAnalysisProgress, ApiProjectCostAnalysisProgressValidationResult, ApiProjectDeviationSummary, ApiProjectListing, ApiProjectProgressSummary, ApiProjectWorkPackage, ApiProjectWorkPackageCost, ApiRunningProcess, ProgressType, ProjectWorkPackageType, User } from "../models";
+import type { ApiClassificationCode, ApiCloudFile, ApiGcpSignedUrl, ApiMasterformatProgress, ApiProject, ApiProjectCostAnalysisProgress, ApiProjectCostAnalysisProgressValidationResult, ApiProjectDeviationSummary, ApiProjectListing, ApiProjectProgressSummary, ApiProjectWorkPackage, ApiProjectWorkPackageCost, ApiRunningProcess, ProgressType, ProjectWorkPackageType, User } from "../models";
 import type { AssociationIds, DateLike } from "type_aliases";
 import ApiMasterFormatWithUniformat from "../models/api/api_masterformat_with_uniformat";
 import ApiCssContactSummary from "../models/api/api_css_contact_summary";
@@ -298,6 +298,21 @@ export default class ProjectApi {
       },
       body: multipartFormData
     }) as unknown as Promise<ApiRunningProcess>;
+  }
+
+  // Direct-to-storage import: the browser uploads the TSV straight to GCS (Firebase SDK or a signed URL from
+  // getSignedUploadUrl), then hands the gateway just the storage path. Returns the running process to poll,
+  // like importProjectData — but the file bytes never go through the gateway request (no 32MB / Heroku limit).
+  static importProjectDataFromStorage({ projectId }: AssociationIds, storagePath: string, user: User): Promise<ApiRunningProcess> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/import-project-data-from-storage`;
+    return Http.post(url, user, { storagePath }) as unknown as Promise<ApiRunningProcess>;
+  }
+
+  // Get a short-lived signed PUT URL for uploading a file to a storage path in this project (mechanism B of
+  // the direct-to-storage upload, for environments where the Firebase Storage SDK path isn't used).
+  static getSignedUploadUrl({ projectId }: AssociationIds, storagePath: string, user: User): Promise<ApiGcpSignedUrl> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/gcpSignedUploadUrl`;
+    return Http.post(url, user, { storagePath }) as unknown as Promise<ApiGcpSignedUrl>;
   }
 }
 

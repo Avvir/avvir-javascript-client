@@ -128,6 +128,72 @@ describe("ProjectApi", () => {
     });
   });
 
+  describe("#importProjectDataFromStorage", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/import-project-data-from-storage`, {
+        status: 202,
+        body: { id: 1, status: "RUNNING" }
+      });
+    });
+
+    it("posts the storage path as JSON with auth headers", () => {
+      const storagePath = "organization_uploads/org/some-project-id/project_data_tsv_imports/import.tsv";
+      ProjectApi.importProjectDataFromStorage({ projectId: "some-project-id" }, storagePath, user);
+
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/import-project-data-from-storage`);
+      expect(lastFetchOpts.method).to.eq("POST");
+      expect(JSON.parse(lastFetchOpts.body as string)).to.deep.eq({ storagePath });
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+    });
+
+    describe("when the call fails", () => {
+      beforeEach(() => {
+        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/import-project-data-from-storage`,
+          { status: 500, body: { some: "body" }, headers: { "ContentType": "application/json" } },
+          { overwriteRoutes: true });
+      });
+
+      it("rejects the promise", () => {
+        let rejected = false;
+        return ProjectApi.importProjectDataFromStorage(
+            { projectId: "some-project-id" },
+            "organization_uploads/org/some-project-id/project_data_tsv_imports/import.tsv",
+            user)
+          .catch(() => {
+            rejected = true;
+          })
+          .finally(() => {
+            expect(rejected).to.eq(true);
+          });
+      });
+    });
+  });
+
+  describe("#getSignedUploadUrl", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/gcpSignedUploadUrl`, {
+        status: 200,
+        body: { signedUrl: "https://storage.googleapis.com/signed" }
+      });
+    });
+
+    it("posts the storage path as JSON with auth headers", () => {
+      const storagePath = "organization_uploads/org/some-project-id/project_data_tsv_imports/import.tsv";
+      ProjectApi.getSignedUploadUrl({ projectId: "some-project-id" }, storagePath, user);
+
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/gcpSignedUploadUrl`);
+      expect(lastFetchOpts.method).to.eq("POST");
+      expect(JSON.parse(lastFetchOpts.body as string)).to.deep.eq({ storagePath });
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+    });
+  });
+
   describe("#getProjectFloorTradeDeviationMagnitudes", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/deviations-by-floor`, {
