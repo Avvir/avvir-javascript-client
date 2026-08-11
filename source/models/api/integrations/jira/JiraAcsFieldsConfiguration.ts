@@ -7,6 +7,8 @@ export class JiraAcsFieldsConfiguration {
     workItemTypes?: JiraFieldProperty[];
 
     assignees?: JiraFieldAssignee[];
+
+    defaultPriorityId?: number;
 }
 
 export default JiraAcsFieldsConfiguration;
