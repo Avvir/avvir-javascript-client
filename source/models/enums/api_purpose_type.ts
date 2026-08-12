@@ -42,6 +42,7 @@ export enum ApiScanDatasetPurposeType {
   PREPROCESSED_SCAN_E57 = "PREPROCESSED_SCAN_E57",
   INCLUDED_BIM_IFC = "INCLUDED_BIM_IFC",
   POTREE = "POTREE",
+  POTREE2 = "POTREE2",
   /** @deprecated use ingest scan instead*/
   DOWNSAMPLED_SCAN = "DOWNSAMPLED_SCAN",
   INGESTED_SCAN = "INGESTED_SCAN",
@@ -84,6 +85,7 @@ const ApiPurposeType = {
   PREPROCESSED_SCAN_E57: ApiScanDatasetPurposeType.PREPROCESSED_SCAN_E57,
   INCLUDED_BIM_IFC: ApiScanDatasetPurposeType.INCLUDED_BIM_IFC,
   POTREE: ApiScanDatasetPurposeType.POTREE,
+  POTREE2: ApiScanDatasetPurposeType.POTREE2,
   /** @deprecated */
   DOWNSAMPLED_SCAN: ApiScanDatasetPurposeType.DOWNSAMPLED_SCAN,
   INGESTED_SCAN: ApiScanDatasetPurposeType.INGESTED_SCAN,
