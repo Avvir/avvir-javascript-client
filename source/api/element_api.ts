@@ -8,21 +8,25 @@ import type { User } from "../utilities/get_authorization_headers";
 import {ApiPartialProgressElement} from "../models";
 
 export default class ElementApi {
-  static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User): Promise<ApiPlannedElement[]> {
+  /**
+   * Omit limit to read the whole floor. Passing a limit reads one page instead, so very large floors
+   * don't have to build a single multi-gigabyte response. The page shape is the same either way.
+   */
+  static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User, limit?: number, offset?: number): Promise<ApiPlannedElement[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements`;
+    if (limit != null) {
+      url += `?limit=${limit}&offset=${offset ?? 0}`;
+    }
     return Http.get(url, user) as unknown as Promise<ApiDetailedElement[]>;
   }
 
-  static getMinimalPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User): Promise<ApiMinimalPlannedBuildingElement[]> {
+  /** Pages on the same terms as {@link getPlannedBuildingElements}. */
+  static getMinimalPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User, limit?: number, offset?: number): Promise<ApiMinimalPlannedBuildingElement[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/minimal`;
+    if (limit != null) {
+      url += `?limit=${limit}&offset=${offset ?? 0}`;
+    }
     return Http.get(url, user) as unknown as Promise<ApiMinimalPlannedBuildingElement[]>;
-  }
-
-  // same shape as getPlannedBuildingElements, but deviation vectors are trimmed to
-  // INCLUDED-only server-side. getPlannedBuildingElements remains the fallback.
-  static getOptimizedPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User): Promise<ApiPlannedElement[]> {
-    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/optimized`;
-    return Http.get(url, user) as unknown as Promise<ApiPlannedElement[]>;
   }
 
   static updateDeviationStatus({ projectId, floorId, scanDatasetId }: AssociationIds,

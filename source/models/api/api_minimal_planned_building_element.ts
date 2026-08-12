@@ -5,4 +5,5 @@ export interface ApiMinimalPlannedBuildingElement {
   builtStatus: ApiBuiltStatus;
   trade?: string;
   uniformat?: string;
+  excludeFromAnalysis?: boolean;
 }
