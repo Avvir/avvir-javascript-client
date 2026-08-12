@@ -50,6 +50,7 @@ export enum ScanDatasetPurposeType {
   PREPROCESSED_SCAN_E57 = "preprocessedScanE57",
   INCLUDED_BIM_IFC = "includedBimIfc",
   POTREE = "potree",
+  POTREE2 = "potree2",
   /** @deprecated use ingest scan instead*/
   DOWNSAMPLED_SCAN = "downsampledScan",
   INGESTED_SCAN = "ingestedScan",
@@ -105,6 +106,7 @@ export const PurposeTypeMap: ProjectTypeMap & Omit<FloorTypeMap, "OTHER"> & Omit
   PREPROCESSED_SCAN_E57: ScanDatasetPurposeType.PREPROCESSED_SCAN_E57,
   INCLUDED_BIM_IFC: ScanDatasetPurposeType.INCLUDED_BIM_IFC,
   POTREE: ScanDatasetPurposeType.POTREE,
+  POTREE2: ScanDatasetPurposeType.POTREE2,
   /** @deprecated use ingest scan instead*/
   DOWNSAMPLED_SCAN: ScanDatasetPurposeType.DOWNSAMPLED_SCAN,
   INGESTED_SCAN: ScanDatasetPurposeType.INGESTED_SCAN,
@@ -157,6 +159,7 @@ export const PREPROCESSED_SCAN = ScanDatasetPurposeType.PREPROCESSED_SCAN;
 export const PREPROCESSED_SCAN_E57 = ScanDatasetPurposeType.PREPROCESSED_SCAN_E57;
 export const INCLUDED_BIM_IFC = ScanDatasetPurposeType.INCLUDED_BIM_IFC;
 export const POTREE = ScanDatasetPurposeType.POTREE;
+export const POTREE2 = ScanDatasetPurposeType.POTREE2;
 
 export const BIM_IFC = FloorPurposeType.BIM_IFC;
 export const BIM_NWD = FloorPurposeType.BIM_NWD;
