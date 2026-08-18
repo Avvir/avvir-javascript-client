@@ -52,6 +52,11 @@ export default class ProjectApi {
     return Http.get(url, user) as unknown as Promise<{[floorFirebaseId: string]: number}>;
   }
 
+  static getProjectFloorTradeBuiltElementCounts({ projectId }: AssociationIds, user: User): Promise<{[floorFirebaseId: string]: {[tradeCode: string]: number}}> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/built-elements-by-floor-and-trade`;
+    return Http.get(url, user) as unknown as Promise<{[floorFirebaseId: string]: {[tradeCode: string]: number}}>;
+  }
+
   static getProjectDeviationSummary({ projectId }: AssociationIds, user: User): Promise<ApiProjectDeviationSummary> {
     let url = `${Http.baseUrl()}/projects/${projectId}/deviation-summary`;
     return Http.get(url, user) as unknown as Promise<ApiProjectDeviationSummary>;
