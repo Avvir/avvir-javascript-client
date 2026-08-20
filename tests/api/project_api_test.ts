@@ -290,6 +290,46 @@ describe("ProjectApi", () => {
     });
   });
 
+  describe("#getProjectFloorTradeBuiltElementCounts", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/built-elements-by-floor-and-trade`, {
+        status: 200,
+        body: {
+          "some-floor-id": { "03": 12, "06": 3 },
+        }
+      });
+    });
+
+    it("makes a request to the gateway api", () => {
+      ProjectApi.getProjectFloorTradeBuiltElementCounts({ projectId: "some-project-id" }, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/built-elements-by-floor-and-trade`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("includes the authorization headers", () => {
+      ProjectApi.getProjectFloorTradeBuiltElementCounts({ projectId: "some-project-id" }, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+
+    it("returns the built element counts keyed by floor firebase id and then trade code", () => {
+      return ProjectApi.getProjectFloorTradeBuiltElementCounts({ projectId: "some-project-id" }, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      }).then((builtCounts) => {
+        expect(builtCounts).to.deep.eq({ "some-floor-id": { "03": 12, "06": 3 } });
+      });
+    });
+  });
+
   describe("#getProjectDeviationSummary", () => {
     beforeEach(() => {
       fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/deviation-summary`, {
