@@ -13,6 +13,7 @@ export class ApiProjectSettings {
   automaticPhotoIngestion: boolean;
   dashboardProgress: boolean;
   dashboardDeviation: boolean;
+  ingestPhotosFromE57: boolean;
 }
 
 export default ApiProjectSettings;
