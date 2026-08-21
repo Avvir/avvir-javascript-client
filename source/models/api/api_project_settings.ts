@@ -1,5 +1,4 @@
 export class ApiProjectSettings {
-  projectSummaryPage: boolean;
   photosOnly: boolean;
   inspectReports: boolean;
   inspect: boolean;
