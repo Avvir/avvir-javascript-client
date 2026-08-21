@@ -860,12 +860,12 @@ describe("ProjectApi", () => {
           projectId: "some-project-id",
           name: "Some Project",
           archivedAt: null,
-          settings: { projectSummaryPage: true }
+          settings: { progress5d: true }
         }, {
           projectId: "another-project-id",
           name: "Another Project",
           archivedAt: DateConverter.dateToInstant(moment("2019-04-01")),
-          settings: { projectSummaryPage: false }
+          settings: { progress5d: false }
         }]
       });
     });
