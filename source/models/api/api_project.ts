@@ -13,6 +13,7 @@ export type ApiProjectArgument = ModifyPartial<ApiProject, {
   archivedAt: DateLike
   startDate: DateLike
   endDate: DateLike
+  bimVersionDate: DateLike
   projectReports: ApiProjectReportArgument[]
 }>
 
@@ -35,6 +36,7 @@ export class ApiProject {
                 pricing,
                 sourceAnalysisNotes,
                 startDate,
+                bimVersionDate,
                 systemOfMeasurement,
                 id,
                 clientAccountId,
@@ -55,6 +57,7 @@ export class ApiProject {
   {
     addInstantGetterAndSetterToApiModel(this, "startDate", startDate);
     addInstantGetterAndSetterToApiModel(this, "endDate", endDate);
+    addInstantGetterAndSetterToApiModel(this, "bimVersionDate", bimVersionDate);
     addInstantGetterAndSetterToApiModel(this, "archivedAt", archivedAt);
 
     addReadOnlyPropertiesToModel(this, { firebaseId, clientAccountId, id });
@@ -110,6 +113,7 @@ export class ApiProject {
   notes: string | null = null;
   startDate: number | null = null;
   endDate: number | null = null;
+  bimVersionDate: number | null = null;
   archivedAt: number | null = null;
   systemOfMeasurement: SystemOfMeasurement = IMPERIAL;
   progressNotes: string | null = null;
