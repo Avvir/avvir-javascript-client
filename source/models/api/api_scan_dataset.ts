@@ -42,7 +42,8 @@ export class ApiScanDataset {
                 qaStarted,
                 qaComplete,
                 qaState,
-                hasScanFile
+                hasScanFile,
+                uploadedViaFiles
               }: ApiScanDatasetArgument)
   {
     addInstantGetterAndSetterToApiModel(this, "scanDate", scanDate);
@@ -96,6 +97,7 @@ export class ApiScanDataset {
     this.scanDateString = scanDateString;
     this.qaState = qaState;
     this.hasScanFile = hasScanFile;
+    this.uploadedViaFiles = uploadedViaFiles;
   }
 
   /**
@@ -142,6 +144,11 @@ export class ApiScanDataset {
    */
   readonly qaState: ApiScanDatasetQaState = null;
   readonly hasScanFile?: boolean;
+  /**
+   * True when this scan dataset's point cloud came in through the Files page rather than the
+   * Operations page. Such captures are kept off the Data Dashboard.
+   */
+  readonly uploadedViaFiles?: boolean;
 }
 
 export default ApiScanDataset;
