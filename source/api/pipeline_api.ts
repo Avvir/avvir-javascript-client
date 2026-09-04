@@ -20,6 +20,15 @@ export default class PipelineApi {
     console.log(url);
     return Http.get(url, user) as unknown as Promise<ApiPipeline[]>;
   }
+
+  /**
+   * Every pipeline for the project, including project level runs that have no floor. Needed to
+   * discover a run the current browser did not start, which getFloorPipelines cannot do.
+   */
+  static getProjectPipelines({ projectId }: AssociationIds, user: User): Promise<ApiPipeline[]> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/pipelines`;
+    return Http.get(url, user) as unknown as Promise<ApiPipeline[]>;
+  }
 }
 
 makeErrorsPretty(PipelineApi);

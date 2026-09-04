@@ -19,7 +19,9 @@ export enum ProjectPurposeType {
   PROJECT_REPORT_SCREENSHOT = "projectReportScreenshot",
   PROJECT_REPORT_MINIMAP = "projectReportMinimap",
   PROJECT_REPORT_ZOOMED_MINIMAP = "projectReportZoomedMinimap",
-  IFC_BATCH_ZIP = "IFC_BATCH_ZIP"
+  IFC_BATCH_ZIP = "IFC_BATCH_ZIP",
+  BIM_MASTERFORMAT_PREDICTIONS_TSV = "BIM_MASTERFORMAT_PREDICTIONS_TSV",
+  BIM_MASTERFORMAT_CORRECTIONS_TSV = "BIM_MASTERFORMAT_CORRECTIONS_TSV"
 }
 
 /** @deprecated use ApiFloorPurposeType */
@@ -139,6 +141,9 @@ export const PurposeTypeMap: ProjectTypeMap & Omit<FloorTypeMap, "OTHER"> & Omit
   PROJECT_REPORT_ZOOMED_MINIMAP: ProjectPurposeType.PROJECT_REPORT_ZOOMED_MINIMAP,
 
   IFC_BATCH_ZIP: ProjectPurposeType.IFC_BATCH_ZIP,
+
+  BIM_MASTERFORMAT_PREDICTIONS_TSV: ProjectPurposeType.BIM_MASTERFORMAT_PREDICTIONS_TSV,
+  BIM_MASTERFORMAT_CORRECTIONS_TSV: ProjectPurposeType.BIM_MASTERFORMAT_CORRECTIONS_TSV,
 };
 
 /** @deprecated use isApiPurposeType */
