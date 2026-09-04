@@ -10,6 +10,10 @@ export type AvvirApiFileIds<Type extends ApiPurposeType = ApiPurposeType> = { [p
 
 export interface ApiCloudFileMetadata {
   offset?: Vector2Like;
+  /** On a BIM_MASTERFORMAT_PREDICTIONS_TSV, the id of the RAW_PROJECT_BIM it was predicted from. */
+  sourceBimFileId?: number;
+  /** On a BIM_MASTERFORMAT_CORRECTIONS_TSV, the id of the predictions file it corrects. */
+  sourcePredictionsFileId?: number;
 }
 
 export type ApiCloudFileArgument = ModifyPartial<ApiCloudFile, {
