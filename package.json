@@ -22,7 +22,7 @@
     "build": "yarn build-esm && yarn build-web",
     "build-esm": "tsc --project tsconfig.esm.json",
     "build-web": "yarn run webpack",
-    "clean": "rimraf ./dist",
+    "clean": "rm -rf ./dist",
     "prepublishOnly": "yarn rebuild",
     "rebuild": "yarn clean && yarn build",
     "test": "NODE_ENV=test AVVIR_ENVIRONMENT=acceptance nyc mocha --exit --require ./tests/test_utils/mocha_setup.js --recursive \"./tests{,/**/}**test.[tj]s*\" --recursive",
@@ -52,7 +52,6 @@
     "deepmerge": "^4.2.2",
     "fetch-mock": "^9.11.0",
     "mocha": "^8.2.1",
-    "rimraf": "^3.0.2",
     "sinon": "^11.1.2",
     "sinon-chai": "^3.5.0",
     "tolerant-deep-eql": "git+http://git@github.com/TiraO/deep-eql.git#06a376d",
@@ -74,7 +73,8 @@
     "stream-browserify": "^3.0.0",
     "three": "0.110.0",
     "underscore": "^1.12.0",
-    "util": "^0.12.4"
+    "util": "^0.12.4",
+    "yarn": "^1.22.22"
   },
   "mocha": {
     "require": [
@@ -83,5 +83,8 @@
     ],
     "exit": true,
     "ui": "bdd"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

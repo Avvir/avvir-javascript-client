@@ -2,15 +2,31 @@ import DeviationStatus from "../models/enums/deviation_status";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 
-import type { ApiBcfBuildingElement, ApiBuiltStatus, ApiDetailedElement, ApiPlannedElement, ApiQueryResource, ApiRunningProcess, ApiScannedElement, ApiUserAction } from "../models";
+import type { ApiBcfBuildingElement, ApiBuiltStatus, ApiDetailedElement, ApiMinimalPlannedBuildingElement, ApiPlannedElement, ApiQueryResource, ApiRunningProcess, ApiScannedElement, ApiUserAction } from "../models";
 import type { AssociationIds } from "type_aliases";
 import type { User } from "../utilities/get_authorization_headers";
 import {ApiPartialProgressElement} from "../models";
 
 export default class ElementApi {
-  static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User): Promise<ApiPlannedElement[]> {
+  /**
+   * Omit limit to read the whole floor. Passing a limit reads one page instead, so very large floors
+   * don't have to build a single multi-gigabyte response. The page shape is the same either way.
+   */
+  static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User, limit?: number, offset?: number): Promise<ApiPlannedElement[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements`;
+    if (limit != null) {
+      url += `?limit=${limit}&offset=${offset ?? 0}`;
+    }
     return Http.get(url, user) as unknown as Promise<ApiDetailedElement[]>;
+  }
+
+  /** Pages on the same terms as {@link getPlannedBuildingElements}. */
+  static getMinimalPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User, limit?: number, offset?: number): Promise<ApiMinimalPlannedBuildingElement[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/minimal`;
+    if (limit != null) {
+      url += `?limit=${limit}&offset=${offset ?? 0}`;
+    }
+    return Http.get(url, user) as unknown as Promise<ApiMinimalPlannedBuildingElement[]>;
   }
 
   static updateDeviationStatus({ projectId, floorId, scanDatasetId }: AssociationIds,

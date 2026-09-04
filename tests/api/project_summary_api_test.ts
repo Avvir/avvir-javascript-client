@@ -46,14 +46,36 @@ describe("ProjectSummaryApi", () => {
     });
   });
 
+  describe("::getProjectSupportingSignals", () => {
+    beforeEach(() => {
+
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/supporting-signals`, 200);
+    });
+
+    it("makes a request to the gateway api", () => {
+      ProjectSummaryApi.getProjectSupportingSignals("some-project-id", {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      } as User);
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/supporting-signals`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("includes the authorization headers", () => {
+      ProjectSummaryApi.getProjectSupportingSignals("some-project-id", {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      } as User);
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
   describe("::createProjectArea", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/areas`, new ApiProjectArea({
-        id: 12,
-        modelElementId: 1,
-        floorId: 7,
-        firebaseFloorId: "some-floor-id"
-      }));
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/areas`, 200);
     });
 
     it("makes a call to the endpoint", () => {
@@ -95,12 +117,7 @@ describe("ProjectSummaryApi", () => {
 
   describe("::updateProjectArea", () => {
     beforeEach(() => {
-      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/areas/12`, new ApiProjectArea({
-        id: 12,
-        modelElementId: 1,
-        floorId: 7,
-        firebaseFloorId: "some-floor-id"
-      }));
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/areas/12`, 200);
     });
 
     it("makes a call to the endpoint", () => {
@@ -142,7 +159,7 @@ describe("ProjectSummaryApi", () => {
   });
 
   describe("::updateProjectAreaProgress", () => {
-    let projectAreaId, response;
+    let projectAreaId;
     beforeEach(() => {
       projectAreaId = 1;
       let projectAreaProgress = new ApiProjectAreaWorkPackage({
@@ -155,12 +172,7 @@ describe("ProjectSummaryApi", () => {
         start: null,
         completion: null
       });
-      response = new ApiProjectArea({
-        id: 12,
-        modelElementId: projectAreaId,
-        workPackages: [projectAreaProgress]
-      });
-      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/areas/${projectAreaId}`, response);
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/areas/${projectAreaId}`, 200);
     });
 
     it("makes a call to the endpoint", () => {
@@ -222,16 +234,7 @@ describe("ProjectSummaryApi", () => {
 
   describe("::createProjectAreaWorkPackage", () => {
     beforeEach(() => {
-      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/areas/12/work-packages`, new ApiProjectAreaWorkPackage({
-        id: 54,
-        projectWorkPackageId: 5,
-        workPackageId: 3,
-        status: "started",
-        expectedStart: null,
-        expectedCompletion: null,
-        start: null,
-        completion: null
-      }));
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/areas/12/work-packages`, 200);
     });
 
     it("makes a call to the endpoint", () => {
@@ -284,16 +287,7 @@ describe("ProjectSummaryApi", () => {
 
   describe("::updateProjectAreaWorkPackages", () => {
     beforeEach(() => {
-      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/areas/12/work-packages`, [new ApiProjectAreaWorkPackage({
-        id: 54,
-        projectWorkPackageId: 5,
-        workPackageId: 3,
-        status: "started",
-        expectedStart: null,
-        expectedCompletion: null,
-        start: null,
-        completion: null
-      })]);
+      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/areas/12/work-packages`, 200);
     });
 
     it("makes a call to the endpoint", () => {
@@ -345,7 +339,7 @@ describe("ProjectSummaryApi", () => {
   });
 
   describe("::getProjectArea", () => {
-    let projectAreaId, response;
+    let projectAreaId;
     beforeEach(() => {
       projectAreaId = 1;
       let projectAreaProgress = new ApiProjectAreaWorkPackage({
@@ -359,12 +353,7 @@ describe("ProjectSummaryApi", () => {
         start: null,
         completion: null
       });
-      response = new ApiProjectArea({
-        id: 12,
-        modelElementId: projectAreaId,
-        workPackages: [projectAreaProgress]
-      });
-      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/areas/${projectAreaId}`, response);
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/areas/${projectAreaId}`, 200);
     });
 
     it("makes a call to the endpoint", () => {
@@ -394,12 +383,7 @@ describe("ProjectSummaryApi", () => {
 
   describe("::listProjectAreas", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/areas`, [new ApiProjectArea({
-        id: 12,
-        modelElementId: 3,
-        workPackages: [],
-        progress: []
-      })]);
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/areas`, 200);
     });
 
     it("makes a call to the endpoint", () => {
@@ -427,10 +411,7 @@ describe("ProjectSummaryApi", () => {
 
   describe("::listProjectAreaWorkPackages", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/areas/7/work-packages`, [new ApiProjectAreaWorkPackage({
-        id: 12,
-        projectAreaId: 7
-      })]);
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/areas/7/work-packages`, 200);
     });
 
     it("makes a call to the endpoint", () => {
@@ -460,13 +441,7 @@ describe("ProjectSummaryApi", () => {
 
   describe("::listProjectAreaWorkPackagesForProject", () => {
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/areas/work-packages`, [new ApiProjectAreaWorkPackage({
-        id: 12,
-        projectAreaId: 3
-      }), new ApiProjectAreaWorkPackage({
-        id: 13,
-        projectAreaId: 4
-      })]);
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/areas/work-packages`, 200);
     });
 
     it("makes a call to the endpoint", () => {

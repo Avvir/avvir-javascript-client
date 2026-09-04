@@ -19,21 +19,8 @@ describe("CommentApi", () => {
   describe("::getCommentThreads", () => {
     let author = new ApiUser({email: "some-user@email.com", role: UserRole.USER});
     beforeEach(() => {
-      let response = new ApiCommentThread({
-        id: 4,
-        author,
-        viewId: 7,
-        comments: [new ApiComment({
-          id: 1,
-          author,
-          text: "some text",
-          commentThreadId: 4,
-          date: 12345689
-        })]
-      });
-
-      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/comments/threads`, response);
-      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/comments/threads?floorId=some-floor&scanDatasetId=some-scan-dataset&viewId=4`, response);
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/comments/threads`, 200);
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/comments/threads?floorId=some-floor&scanDatasetId=some-scan-dataset&viewId=4`, 200);
     });
 
     it("makes a call to the endpoint", () => {
@@ -99,19 +86,7 @@ describe("CommentApi", () => {
         })]
       });
 
-      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/comments/threads`,
-        new ApiCommentThread({
-          id: 4,
-          author,
-          viewId: 7,
-          comments: [new ApiComment({
-            id: 1,
-            author,
-            text: "some text",
-            commentThreadId: 4,
-            date: 12345689
-          })]
-        }));
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/comments/threads`, 200);
     });
 
     it("makes a call to the endpoint", () => {
@@ -157,15 +132,7 @@ describe("CommentApi", () => {
         date: 12345689
       });
 
-      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/comments/threads/4`,
-        new ApiComment({
-          id: 1,
-          author,
-          text: "some text",
-          commentThreadId: 4,
-          date: 12345689
-        })
-      );
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/comments/threads/4`, 200);
     });
 
     it("makes a call to the endpoint", () => {
@@ -213,15 +180,7 @@ describe("CommentApi", () => {
         date: 12345689
       });
 
-      fetchMock.put(`${Http.baseUrl()}/projects/some-project-id/comments/1`,
-        new ApiComment({
-          id: 1,
-          author,
-          text: "some updated text",
-          commentThreadId: 4,
-          date: 12345689
-        })
-      );
+      fetchMock.put(`${Http.baseUrl()}/projects/some-project-id/comments/1`, 200);
     });
 
     it("makes a call to the endpoint", () => {

@@ -70,11 +70,12 @@ export type ViewFiltersArgument = ModifyPartial<ViewFilters, {
 export class ViewFilters {
   constructor(filters: ViewFiltersArgument = {}) {
     if (filters) {
-      const { trades, deviationTolerance, pointCloudVisible, sectionPointCloud } = filters;
+      const { trades, deviationTolerance, pointCloudVisible, sectionPointCloud, onlyShowDeviationsFromCurrentScan } = filters;
       this.trades = new ViewTrades(trades);
       this.deviationTolerance = new DeviationTolerance(deviationTolerance);
       this.pointCloudVisible = pointCloudVisible;
       this.sectionPointCloud = sectionPointCloud;
+      this.onlyShowDeviationsFromCurrentScan = onlyShowDeviationsFromCurrentScan;
     } else {
       this.trades = new ViewTrades();
       this.deviationTolerance = new DeviationTolerance();
@@ -85,6 +86,7 @@ export class ViewFilters {
   deviationTolerance: DeviationTolerance;
   pointCloudVisible: boolean;
   sectionPointCloud: boolean;
+  onlyShowDeviationsFromCurrentScan: boolean;
 }
 
 export type SelectedElements = string[]

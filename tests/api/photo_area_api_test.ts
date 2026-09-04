@@ -229,11 +229,11 @@ describe("PhotoAreaApi", () => {
 
   describe("#updatePhotoLocations", () => {
     beforeEach(() => {
-      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/locations`, {
+      fetchMock.put(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/locations`, {
         status: 200,
         body: {}
       });
-      fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/locations?photoSessionId=2`, {
+      fetchMock.put(`${Http.baseUrl()}/projects/some-project-id/photo-areas/1/locations?photoSessionId=2`, {
         status: 200,
         body: {}
       });

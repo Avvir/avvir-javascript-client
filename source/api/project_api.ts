@@ -2,11 +2,12 @@ import getAuthorizationHeaders from "../utilities/get_authorization_headers";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 import { DateConverter } from "../converters";
-import { PbeTsvType } from "../models/api/pbe_tsv_type";
 
-import type { ApiClassificationCode, ApiCloudFile, ApiMasterformatProgress, ApiProject, ApiProjectCostAnalysisProgress, ApiProjectCostAnalysisProgressValidationResult, ApiProjectListing, ApiProjectWorkPackage, ApiProjectWorkPackageCost, ApiRunningProcess, ProgressType, ProjectWorkPackageType, User } from "../models";
+import type { ApiClassificationCode, ApiCloudFile, ApiGcpSignedUrl, ApiMasterformatProgress, ApiProject, ApiProjectCostAnalysisProgress, ApiProjectCostAnalysisProgressValidationResult, ApiProjectDeviationSummary, ApiProjectListing, ApiProjectProgressSummary, ApiProjectWorkPackage, ApiProjectWorkPackageCost, ApiRunningProcess, ProgressType, ProjectWorkPackageType, User } from "../models";
 import type { AssociationIds, DateLike } from "type_aliases";
 import ApiMasterFormatWithUniformat from "../models/api/api_masterformat_with_uniformat";
+import ApiCssContactSummary from "../models/api/api_css_contact_summary";
+import ApiSupportRequest from "../models/api/api_support_request";
 
 export default class ProjectApi {
   static listProjectsForOrganization(organizationId: string, user: User, filterArchived: boolean = false): Promise<ApiProject[]> {
@@ -36,6 +37,34 @@ export default class ProjectApi {
   static getProject(projectId: string, user: User): Promise<ApiProject> {
     let url = `${Http.baseUrl()}/projects/${projectId}`;
     return Http.get(url, user) as unknown as Promise<ApiProject>;
+  }
+
+  static getProjectFloorTradeDeviationMagnitudes({ projectId }: AssociationIds, currentScan: boolean, user: User): Promise<{[floorFirebaseId: string]: {[tradeCode: string]: number}}> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/deviations-by-floor`;
+    if (currentScan) {
+      url += "?currentScan=true";
+    }
+    return Http.get(url, user) as unknown as Promise<{[floorFirebaseId: string]: {[tradeCode: string]: number}}>;
+  }
+
+  static getProjectFloorBuiltElementCounts({ projectId }: AssociationIds, user: User): Promise<{[floorFirebaseId: string]: number}> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/built-elements-by-floor`;
+    return Http.get(url, user) as unknown as Promise<{[floorFirebaseId: string]: number}>;
+  }
+
+  static getProjectFloorTradeBuiltElementCounts({ projectId }: AssociationIds, user: User): Promise<{[floorFirebaseId: string]: {[tradeCode: string]: number}}> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/built-elements-by-floor-and-trade`;
+    return Http.get(url, user) as unknown as Promise<{[floorFirebaseId: string]: {[tradeCode: string]: number}}>;
+  }
+
+  static getProjectDeviationSummary({ projectId }: AssociationIds, user: User): Promise<ApiProjectDeviationSummary> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/deviation-summary`;
+    return Http.get(url, user) as unknown as Promise<ApiProjectDeviationSummary>;
+  }
+
+  static getProjectProgressSummary({ projectId }: AssociationIds, user: User): Promise<ApiProjectProgressSummary> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/progress-summary`;
+    return Http.get(url, user) as unknown as Promise<ApiProjectProgressSummary>;
   }
 
   static createProject(organizationId: string, project: ApiProject, user: User): Promise<{ firebaseId: string }> {
@@ -121,6 +150,34 @@ export default class ProjectApi {
         ...getAuthorizationHeaders(user)
       },
     })) as unknown as Promise<Response>
+  }
+
+  static getCssContactsForProject(projectId: string, user: User): Promise<ApiCssContactSummary[]> {
+    let url = `${Http.baseUrl()}/support-center/css-contacts?projectId=${encodeURIComponent(projectId)}`;
+    return Http.get(url, user) as unknown as Promise<ApiCssContactSummary[]>;
+  }
+
+  static submitSupportRequest(projectId: string,
+                              { description, sourcePage, files }: { description: string, sourcePage?: string, files?: File[] },
+                              user: User): Promise<ApiSupportRequest> {
+    let url = `${Http.baseUrl()}/support-center/support-requests?projectId=${encodeURIComponent(projectId)}`;
+
+    let multipartFormData = new FormData();
+    multipartFormData.append("description", description);
+    if (sourcePage != null) {
+      multipartFormData.append("sourcePage", sourcePage);
+    }
+    (files || []).forEach((file) => {
+      multipartFormData.append("attachments", file, file.name);
+    });
+
+    return Http.fetch(url, {
+      method: "POST",
+      headers: {
+        ...getAuthorizationHeaders(user)
+      },
+      body: multipartFormData
+    }) as unknown as Promise<ApiSupportRequest>;
   }
 
   /**
@@ -238,14 +295,12 @@ export default class ProjectApi {
     return Http.post(url, user) as unknown as Promise<ApiRunningProcess>;
   }
 
-  static updateProjectExportTsv({ projectId }: AssociationIds, tsvContent: string, user: User) {
+  static importProjectData({ projectId }: AssociationIds, tsvContent: string, user: User) {
     let multipartFormData = new FormData();
     let file = new Blob([tsvContent], { type: "text/tab-separated-values" });
     multipartFormData.append("file", file, "file.tsv");
 
-    let pbeTsvType = PbeTsvType.PROJECT_LEVEL_PBE;
-
-    const url = `${Http.baseUrl()}/projects/${projectId}/planned-building-elements?pbeTsvType=${pbeTsvType}`;
+    const url = `${Http.baseUrl()}/projects/${projectId}/import-project-data`;
     return Http.fetch(url, {
       method: "POST",
       headers: {
@@ -253,6 +308,21 @@ export default class ProjectApi {
       },
       body: multipartFormData
     }) as unknown as Promise<ApiRunningProcess>;
+  }
+
+  // Direct-to-storage import: the browser uploads the TSV straight to GCS (Firebase SDK or a signed URL from
+  // getSignedUploadUrl), then hands the gateway just the storage path. Returns the running process to poll,
+  // like importProjectData — but the file bytes never go through the gateway request (no 32MB / Heroku limit).
+  static importProjectDataFromStorage({ projectId }: AssociationIds, storagePath: string, user: User): Promise<ApiRunningProcess> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/import-project-data-from-storage`;
+    return Http.post(url, user, { storagePath }) as unknown as Promise<ApiRunningProcess>;
+  }
+
+  // Get a short-lived signed PUT URL for uploading a file to a storage path in this project (mechanism B of
+  // the direct-to-storage upload, for environments where the Firebase Storage SDK path isn't used).
+  static getSignedUploadUrl({ projectId }: AssociationIds, storagePath: string, user: User): Promise<ApiGcpSignedUrl> {
+    const url = `${Http.baseUrl()}/projects/${projectId}/gcpSignedUploadUrl`;
+    return Http.post(url, user, { storagePath }) as unknown as Promise<ApiGcpSignedUrl>;
   }
 }
 

@@ -1,5 +1,4 @@
 export class ApiProjectSettings {
-  projectSummaryPage: boolean;
   photosOnly: boolean;
   inspectReports: boolean;
   inspect: boolean;
@@ -11,6 +10,9 @@ export class ApiProjectSettings {
   tradeFilterForceUniformat: boolean;
   createScanDatasetsAutomatically: boolean;
   automaticPhotoIngestion: boolean;
+  dashboardProgress: boolean;
+  dashboardDeviation: boolean;
+  ingestPhotosFromE57: boolean;
 }
 
 export default ApiProjectSettings;

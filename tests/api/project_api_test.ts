@@ -86,6 +86,313 @@ describe("ProjectApi", () => {
     });
   });
 
+  describe("#getCssContactsForProject", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/support-center/css-contacts?projectId=some-project-id`, {
+        status: 200,
+        body: [{ name: "Some CS Lead", email: "some.cs.lead@example.com" }]
+      });
+    });
+
+    it("makes an authenticated call to the endpoint", () => {
+      ProjectApi.getCssContactsForProject("some-project-id", user);
+
+      const fetchCall = fetchMock.lastCall();
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/support-center/css-contacts?projectId=some-project-id`);
+      expect(fetchMock.lastOptions().headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+  });
+
+  describe("#submitSupportRequest", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/support-center/support-requests?projectId=some-project-id`, {
+        status: 201,
+        body: { id: 100, createdAt: 1751414400 }
+      });
+    });
+
+    it("posts multipart form data to the endpoint with auth headers", () => {
+      ProjectApi.submitSupportRequest(
+        "some-project-id",
+        { description: "Something is broken", sourcePage: "/projects/some-project-id/summary" },
+        user
+      );
+
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/support-center/support-requests?projectId=some-project-id`);
+      expect(lastFetchOpts.method).to.eq("POST");
+      expect(lastFetchOpts.body).to.be.instanceof(FormData);
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+    });
+  });
+
+  describe("#importProjectDataFromStorage", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/import-project-data-from-storage`, {
+        status: 202,
+        body: { id: 1, status: "RUNNING" }
+      });
+    });
+
+    it("posts the storage path as JSON with auth headers", () => {
+      const storagePath = "organization_uploads/org/some-project-id/project_data_tsv_imports/import.tsv";
+      ProjectApi.importProjectDataFromStorage({ projectId: "some-project-id" }, storagePath, user);
+
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/import-project-data-from-storage`);
+      expect(lastFetchOpts.method).to.eq("POST");
+      expect(JSON.parse(lastFetchOpts.body as string)).to.deep.eq({ storagePath });
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+    });
+
+    describe("when the call fails", () => {
+      beforeEach(() => {
+        fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/import-project-data-from-storage`,
+          { status: 500, body: { some: "body" }, headers: { "ContentType": "application/json" } },
+          { overwriteRoutes: true });
+      });
+
+      it("rejects the promise", () => {
+        let rejected = false;
+        return ProjectApi.importProjectDataFromStorage(
+            { projectId: "some-project-id" },
+            "organization_uploads/org/some-project-id/project_data_tsv_imports/import.tsv",
+            user)
+          .catch(() => {
+            rejected = true;
+          })
+          .finally(() => {
+            expect(rejected).to.eq(true);
+          });
+      });
+    });
+  });
+
+  describe("#getSignedUploadUrl", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/gcpSignedUploadUrl`, {
+        status: 200,
+        body: { signedUrl: "https://storage.googleapis.com/signed" }
+      });
+    });
+
+    it("posts the storage path as JSON with auth headers", () => {
+      const storagePath = "organization_uploads/org/some-project-id/project_data_tsv_imports/import.tsv";
+      ProjectApi.getSignedUploadUrl({ projectId: "some-project-id" }, storagePath, user);
+
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/gcpSignedUploadUrl`);
+      expect(lastFetchOpts.method).to.eq("POST");
+      expect(JSON.parse(lastFetchOpts.body as string)).to.deep.eq({ storagePath });
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+    });
+  });
+
+  describe("#getProjectFloorTradeDeviationMagnitudes", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/deviations-by-floor`, {
+        status: 200,
+        body: {
+          "some-floor-id": {
+            "01": 0.0,
+            "02": 0.1,
+          }
+        }
+      });
+
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/deviations-by-floor?currentScan=true`, {
+        status: 200,
+        body: {
+          "some-floor-id": {
+            "01": 0.0,
+            "02": 0.1,
+          }
+        }
+      });
+
+    });
+
+    it("makes a request to the gateway api without ?currentScan when currentScan is false", () => {
+      ProjectApi.getProjectFloorTradeDeviationMagnitudes({ projectId: "some-project-id" }, false, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/deviations-by-floor`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("makes a request to the gateway api with ?currentScan=true when currentScan is true", () => {
+      ProjectApi.getProjectFloorTradeDeviationMagnitudes({ projectId: "some-project-id" }, true, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/deviations-by-floor?currentScan=true`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("includes the authorization headers", () => {
+      ProjectApi.getProjectFloorTradeDeviationMagnitudes({ projectId: "some-project-id" }, false, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
+  describe("#getProjectFloorBuiltElementCounts", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/built-elements-by-floor`, {
+        status: 200,
+        body: {
+          "some-floor-id": 12,
+        }
+      });
+    });
+
+    it("makes a request to the gateway api", () => {
+      ProjectApi.getProjectFloorBuiltElementCounts({ projectId: "some-project-id" }, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/built-elements-by-floor`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("includes the authorization headers", () => {
+      ProjectApi.getProjectFloorBuiltElementCounts({ projectId: "some-project-id" }, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+
+    it("returns the built element counts keyed by floor firebase id", () => {
+      return ProjectApi.getProjectFloorBuiltElementCounts({ projectId: "some-project-id" }, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      }).then((builtCounts) => {
+        expect(builtCounts).to.deep.eq({ "some-floor-id": 12 });
+      });
+    });
+  });
+
+  describe("#getProjectFloorTradeBuiltElementCounts", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/built-elements-by-floor-and-trade`, {
+        status: 200,
+        body: {
+          "some-floor-id": { "03": 12, "06": 3 },
+        }
+      });
+    });
+
+    it("makes a request to the gateway api", () => {
+      ProjectApi.getProjectFloorTradeBuiltElementCounts({ projectId: "some-project-id" }, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/built-elements-by-floor-and-trade`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("includes the authorization headers", () => {
+      ProjectApi.getProjectFloorTradeBuiltElementCounts({ projectId: "some-project-id" }, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+
+    it("returns the built element counts keyed by floor firebase id and then trade code", () => {
+      return ProjectApi.getProjectFloorTradeBuiltElementCounts({ projectId: "some-project-id" }, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      }).then((builtCounts) => {
+        expect(builtCounts).to.deep.eq({ "some-floor-id": { "03": 12, "06": 3 } });
+      });
+    });
+  });
+
+  describe("#getProjectDeviationSummary", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/deviation-summary`, {
+        status: 200,
+        body: {
+          inPlace: 0.25,
+          deviatedWithinTolerance: 0.25,
+          criticallyDeviated: 0.25,
+          notBuilt: 0.25
+        }
+      });
+    });
+
+    it("makes a request to the gateway api", () => {
+      ProjectApi.getProjectDeviationSummary({ projectId: "some-project-id" }, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/deviation-summary`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("includes the authorization headers", () => {
+      ProjectApi.getProjectDeviationSummary({ projectId: "some-project-id" }, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
+  describe("#getProjectProgressSummary", () => {
+    beforeEach(() => {
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/progress-summary`, {
+        status: 200,
+        body: { built: 0.3 }
+      });
+    });
+
+    it("makes a request to the gateway api", () => {
+      ProjectApi.getProjectProgressSummary({ projectId: "some-project-id" }, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+      const fetchCall = fetchMock.lastCall();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/progress-summary`);
+      expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+    });
+
+    it("includes the authorization headers", () => {
+      ProjectApi.getProjectProgressSummary({ projectId: "some-project-id" }, {
+        authType: "GATEWAY_JWT",
+        gatewayUser: { idToken: "some-firebase.id.token" }
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
+
   describe("#updateProject", () => {
     beforeEach(() => {
       fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id`, 200);
@@ -593,12 +900,12 @@ describe("ProjectApi", () => {
           projectId: "some-project-id",
           name: "Some Project",
           archivedAt: null,
-          settings: { projectSummaryPage: true }
+          settings: { progress5d: true }
         }, {
           projectId: "another-project-id",
           name: "Another Project",
           archivedAt: DateConverter.dateToInstant(moment("2019-04-01")),
-          settings: { projectSummaryPage: false }
+          settings: { progress5d: false }
         }]
       });
     });
@@ -744,6 +1051,34 @@ describe("ProjectApi", () => {
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/generate-all-masterformat-progress?masterformatVersion=2016&reportDate=2023-05-01T12:00:00.000Z`);
       expect(lastFetchOpts.headers).to.include.key("firebaseIdToken");
       expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+    });
+  });
+
+  describe("#importProjectData", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/import-project-data`, 202);
+    });
+
+    it("posts the tsv as multipart form data to the import-project-data endpoint", () => {
+      ProjectApi.importProjectData({ projectId: "some-project-id" }, "Floor\tName\nsome-floor\tsome-wall", user);
+
+      const fetchCall = fetchMock.lastCall();
+      const lastFetchOpts = fetchMock.lastOptions();
+
+      expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/import-project-data`);
+      expect(lastFetchOpts.method).to.eq("POST");
+      expect(lastFetchOpts.body).to.be.instanceof(FormData);
+    });
+
+    it("includes the authorization headers and the tsv file", () => {
+      ProjectApi.importProjectData({ projectId: "some-project-id" }, "Floor\tName\nsome-floor\tsome-wall", user);
+
+      const lastFetchOpts = fetchMock.lastOptions();
+      const body = lastFetchOpts.body as FormData;
+
+      expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
+      expect(lastFetchOpts.headers.firebaseIdToken).to.eq("some-firebase.id.token");
+      expect(body.has("file")).to.eq(true);
     });
   });
 });
