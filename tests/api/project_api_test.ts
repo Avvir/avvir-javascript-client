@@ -114,7 +114,7 @@ describe("ProjectApi", () => {
     it("posts multipart form data to the endpoint with auth headers", () => {
       ProjectApi.submitSupportRequest(
         "some-project-id",
-        { description: "Something is broken", sourcePage: "/projects/some-project-id/summary" },
+        { description: "Something is broken", sourcePage: "/projects/some-project-id/summary", featureOfInterest: "Project Progress" },
         user
       );
 
@@ -124,6 +124,7 @@ describe("ProjectApi", () => {
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/support-center/support-requests?projectId=some-project-id`);
       expect(lastFetchOpts.method).to.eq("POST");
       expect(lastFetchOpts.body).to.be.instanceof(FormData);
+      expect((lastFetchOpts.body as FormData).get("featureOfInterest")).to.eq("Project Progress");
       expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
     });
   });

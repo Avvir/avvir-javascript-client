@@ -158,7 +158,7 @@ export default class ProjectApi {
   }
 
   static submitSupportRequest(projectId: string,
-                              { description, sourcePage, files }: { description: string, sourcePage?: string, files?: File[] },
+                              { description, sourcePage, featureOfInterest, files }: { description: string, sourcePage?: string, featureOfInterest?: string, files?: File[] },
                               user: User): Promise<ApiSupportRequest> {
     let url = `${Http.baseUrl()}/support-center/support-requests?projectId=${encodeURIComponent(projectId)}`;
 
@@ -166,6 +166,9 @@ export default class ProjectApi {
     multipartFormData.append("description", description);
     if (sourcePage != null) {
       multipartFormData.append("sourcePage", sourcePage);
+    }
+    if (featureOfInterest != null) {
+      multipartFormData.append("featureOfInterest", featureOfInterest);
     }
     (files || []).forEach((file) => {
       multipartFormData.append("attachments", file, file.name);

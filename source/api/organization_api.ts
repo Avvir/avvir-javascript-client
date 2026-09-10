@@ -83,7 +83,7 @@ export default class OrganizationApi {
   }
 
   static submitSupportRequestForOrganization(organizationId: string,
-                                             { description, sourcePage, files }: { description: string, sourcePage?: string, files?: File[] },
+                                             { description, sourcePage, featureOfInterest, files }: { description: string, sourcePage?: string, featureOfInterest?: string, files?: File[] },
                                              user: User): Promise<ApiSupportRequest> {
     let url = `${Http.baseUrl()}/support-center/support-requests?organizationId=${encodeURIComponent(organizationId)}`;
 
@@ -91,6 +91,9 @@ export default class OrganizationApi {
     multipartFormData.append("description", description);
     if (sourcePage != null) {
       multipartFormData.append("sourcePage", sourcePage);
+    }
+    if (featureOfInterest != null) {
+      multipartFormData.append("featureOfInterest", featureOfInterest);
     }
     (files || []).forEach((file) => {
       multipartFormData.append("attachments", file, file.name);

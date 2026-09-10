@@ -92,7 +92,7 @@ describe("OrganizationApi", () => {
     it("posts multipart form data to the endpoint with auth headers", () => {
       OrganizationApi.submitSupportRequestForOrganization(
         "some-org-id",
-        { description: "Something is broken", sourcePage: "/organizations/some-org-id/support-center" },
+        { description: "Something is broken", sourcePage: "/organizations/some-org-id/support-center", featureOfInterest: "Project Deviation" },
         user
       );
 
@@ -102,6 +102,7 @@ describe("OrganizationApi", () => {
       expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/support-center/support-requests?organizationId=some-org-id`);
       expect(lastFetchOpts.method).to.eq("POST");
       expect(lastFetchOpts.body).to.be.instanceof(FormData);
+      expect((lastFetchOpts.body as FormData).get("featureOfInterest")).to.eq("Project Deviation");
       expect(lastFetchOpts.headers).to.include.keys("firebaseIdToken");
     });
   });
