@@ -11,11 +11,15 @@ export default class ElementApi {
   /**
    * Omit limit to read the whole floor. Passing a limit reads one page instead, so very large floors
    * don't have to build a single multi-gigabyte response. The page shape is the same either way.
+   * Passing toleranceMeters trims below-threshold vectors, never the floor's element/status metadata.
    */
-  static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User, limit?: number, offset?: number): Promise<ApiPlannedElement[]> {
+  static getPlannedBuildingElements({ projectId, floorId }: AssociationIds, user: User, limit?: number, offset?: number, toleranceMeters?: number): Promise<ApiPlannedElement[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements`;
     if (limit != null) {
       url += `?limit=${limit}&offset=${offset ?? 0}`;
+    }
+    if (toleranceMeters != null) {
+      url +=`${limit != null ? "&" : "?"}toleranceMeters=${toleranceMeters}`;
     }
     return Http.get(url, user) as unknown as Promise<ApiDetailedElement[]>;
   }
