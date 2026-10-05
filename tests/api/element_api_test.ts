@@ -105,6 +105,46 @@ describe("ElementApi", () => {
       });
     });
 
+    describe("when a tolerance is given", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements?toleranceMeters=0.0254`, []);
+      });
+
+      it("adds it as a query param", () => {
+        ElementApi.getPlannedBuildingElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id"
+        }, {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        }, undefined, undefined, 0.0254);
+
+        expect(fetchMock.lastCall()[0])
+          .to
+          .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements?toleranceMeters=0.0254`);
+      });
+    });
+
+    describe("when a tolerance and a limit are given", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements?limit=100&offset=0&toleranceMeters=0.0254`, []);
+      });
+
+      it("adds it after the page params", () => {
+        ElementApi.getPlannedBuildingElements({
+          projectId: "some-project-id",
+          floorId: "some-floor-id"
+        }, {
+          authType: GATEWAY_JWT,
+          gatewayUser: { idToken: "some-firebase.id.token", role: USER }
+        }, 100, undefined, 0.0254);
+
+        expect(fetchMock.lastCall()[0])
+          .to
+          .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements?limit=100&offset=0&toleranceMeters=0.0254`);
+      });
+    });
+
     describe("when a limit and an offset are given", () => {
       beforeEach(() => {
         fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements?limit=100&offset=200`, []);
