@@ -37,13 +37,15 @@ export class ApiCloudFile {
                 projectId,
                 associationType,
                 associationId,
-                metadata
+                metadata,
+                uploadBatchId,
+                uploadBatchSize
               }: ApiCloudFileArgument)
   {
     addInstantGetterAndSetterToApiModel(this, "lastModified", lastModified);
     addInstantGetterAndSetterToApiModel(this, "createdAt", createdAt);
     addReadOnlyPropertiesToModel(this,
-      { url, id, fileType, createdBy, fileSize, projectId, associationType, associationId, originalFileName });
+      { url, id, fileType, createdBy, fileSize, projectId, associationType, associationId, originalFileName, uploadBatchId, uploadBatchSize });
     let purposeTypeVal: ApiPurposeType = ApiProjectPurposeType.OTHER;
     Object.defineProperties(this, {
       purposeType: {
@@ -84,6 +86,10 @@ export class ApiCloudFile {
   readonly associationId?: number;
   metadata?: ApiCloudFileMetadata;
   readonly fileType?: string;
+  /** Shared by the files a user selected together in one upload, so the gateway sends them in one File Uploaded email. */
+  readonly uploadBatchId?: string;
+  /** How many files were selected in that upload, so the gateway knows when the batch has all arrived. */
+  readonly uploadBatchSize?: number;
 }
 
 export default ApiCloudFile;
