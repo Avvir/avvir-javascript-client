@@ -54,6 +54,25 @@ describe("FileInformationApi", () => {
       });
     });
 
+    it("sends the upload batch the file was selected in", () => {
+      FileInformationApi.createProjectFile({
+          projectId: "some-project-id"
+        },
+        new ApiCloudFile({
+          purposeType: ApiProjectPurposeType.OTHER,
+          url: "some-download-url.com",
+          originalFileName: "some-file.pdf",
+          uploadBatchId: "some-batch-id",
+          uploadBatchSize: 3,
+        }),
+        user,
+      );
+
+      const body = JSON.parse(fetchMock.lastCall()["1"].body as string);
+      expect(body.uploadBatchId).to.eq("some-batch-id");
+      expect(body.uploadBatchSize).to.eq(3);
+    });
+
     it("sends the request with authorization headers", () => {
       FileInformationApi.createProjectFile({
           projectId: "some-project-id",
