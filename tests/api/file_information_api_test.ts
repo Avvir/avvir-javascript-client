@@ -73,6 +73,23 @@ describe("FileInformationApi", () => {
       expect(body.uploadBatchSize).to.eq(3);
     });
 
+    it("sends whether the file was uploaded in the Avvir web app", () => {
+      FileInformationApi.createProjectFile({
+          projectId: "some-project-id"
+        },
+        new ApiCloudFile({
+          purposeType: ApiProjectPurposeType.OTHER,
+          url: "some-download-url.com",
+          originalFileName: "some-file.pdf",
+          uploadedInApp: true,
+        }),
+        user,
+      );
+
+      const body = JSON.parse(fetchMock.lastCall()["1"].body as string);
+      expect(body.uploadedInApp).to.eq(true);
+    });
+
     it("sends the request with authorization headers", () => {
       FileInformationApi.createProjectFile({
           projectId: "some-project-id",
