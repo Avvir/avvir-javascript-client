@@ -39,13 +39,14 @@ export class ApiCloudFile {
                 associationId,
                 metadata,
                 uploadBatchId,
-                uploadBatchSize
+                uploadBatchSize,
+                uploadedInApp
               }: ApiCloudFileArgument)
   {
     addInstantGetterAndSetterToApiModel(this, "lastModified", lastModified);
     addInstantGetterAndSetterToApiModel(this, "createdAt", createdAt);
     addReadOnlyPropertiesToModel(this,
-      { url, id, fileType, createdBy, fileSize, projectId, associationType, associationId, originalFileName, uploadBatchId, uploadBatchSize });
+      { url, id, fileType, createdBy, fileSize, projectId, associationType, associationId, originalFileName, uploadBatchId, uploadBatchSize, uploadedInApp });
     let purposeTypeVal: ApiPurposeType = ApiProjectPurposeType.OTHER;
     Object.defineProperties(this, {
       purposeType: {
@@ -90,6 +91,8 @@ export class ApiCloudFile {
   readonly uploadBatchId?: string;
   /** How many files were selected in that upload, so the gateway knows when the batch has all arrived. */
   readonly uploadBatchSize?: number;
+  /** Set by the Avvir web app on every upload, so the gateway can tell its uploads from an integration's. */
+  readonly uploadedInApp?: boolean;
 }
 
 export default ApiCloudFile;
