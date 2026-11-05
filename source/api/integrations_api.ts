@@ -18,6 +18,7 @@ import {AutodeskRequest} from "../models";
 import getAuthorizationHeaders from "../utilities/get_authorization_headers";
 import ApiIssueTypes from "../models/api/integrations/autodesk/api_issue_types";
 import ApiAssignees from "../models/api/integrations/autodesk/api_assignees";
+import ApiLocationNode from "../models/api/integrations/autodesk/api_location_node";
 import {ElementIdentifiers} from "../models/api/integrations/element_identifiers";
 import {IntegrationAssociationIds} from "../models/api/integrations/integration_ids";
 import ApiReviztoAccessToken from "../models/api/integrations/revizto/api_access_token";
@@ -418,6 +419,14 @@ export default class IntegrationsApi {
         }
         const url = `${Http.baseUrl()}/integrations/autodesk/assignees?access-token=${access_token}&projectId=${projectId}`;
         return Http.get(url, user) as unknown as Promise<ApiAssignees[]>;
+    }
+
+    static getAutodeskProjectLocations(access_token: string, projectId: string, user: User): Promise<ApiLocationNode[]> {
+        if (!access_token || !projectId) {
+            return Promise.reject(new Error("Invalid access token or projectId"));
+        }
+        const url = `${Http.baseUrl()}/integrations/autodesk/locations?access-token=${access_token}&projectId=${projectId}`;
+        return Http.get(url, user) as unknown as Promise<ApiLocationNode[]>;
     }
 
     static createAutodeskRequest(access_token: string, hubId: string, projectId: string, autodeskRequest: AutodeskRequest, imageBlob: Blob, ids:IntegrationAssociationIds, user: User): Promise<number> {

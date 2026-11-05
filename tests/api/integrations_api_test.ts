@@ -1642,6 +1642,70 @@ describe("IntegrationsApi", () => {
         });
     });
 
+    describe("::getAutodeskProjectLocations", () => {
+
+        beforeEach(() => {
+            fetchMock.get(`${Http.baseUrl()}/integrations/autodesk/locations?access-token=some-access-token&projectId=some-project-id`,
+                          200);
+        });
+
+        it("includes auth headers and makes a request to the gateway", () => {
+            IntegrationsApi.getAutodeskProjectLocations("some-access-token", "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            });
+            const fetchCall = fetchMock.lastCall();
+
+            expect(fetchCall[0]).to.eq(`${Http.baseUrl()}/integrations/autodesk/locations?access-token=some-access-token&projectId=some-project-id`);
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+            expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
+        });
+
+        it("throws an error if access token is missing", () => {
+            return IntegrationsApi.getAutodeskProjectLocations("", "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token or projectId");
+            });
+        });
+
+        it("throws an error if projectId is missing", () => {
+            return IntegrationsApi.getAutodeskProjectLocations("some-access-token", "", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token or projectId");
+            });
+        });
+
+        it("throws an error if access token is undefined", () => {
+            return IntegrationsApi.getAutodeskProjectLocations(undefined, "some-project-id", {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token or projectId");
+            });
+        });
+
+        it("throws an error if projectId is undefined", () => {
+            return IntegrationsApi.getAutodeskProjectLocations("some-access-token", undefined, {
+                authType: GATEWAY_JWT,
+                gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+            }).catch((error) => {
+                return error;
+            }).then((error) => {
+                expect(error.message).to.include("Invalid access token or projectId");
+            });
+        });
+    });
+
     describe("::createAutodeskRequest", () => {
         describe("::createAutodeskRequest", () => {
             beforeEach(() => {
