@@ -128,11 +128,14 @@ export default class ElementApi {
     return Http.get(url, user) as unknown as Promise<ApiPlannedElement[]>;
   }
 
-  static getObstructedElementsForFloor({ projectId, floorId }: AssociationIds, user: User): Promise<{
+  static getObstructedElementsForFloor({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<{
     [globalId: string]: string[]
   }>
   {
-    const url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/obstructions`;
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/obstructions`;
+    if (scanDatasetId) {
+      url += `?scanDatasetId=${scanDatasetId}`;
+    }
     return Http.get(url, user) as unknown as Promise<{ [globalId: string]: string[] }>;
   }
 
