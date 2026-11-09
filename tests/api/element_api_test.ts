@@ -5,6 +5,7 @@ import ElementApi from "../../source/api/element_api";
 import Http from "../../source/utilities/http";
 import { DETECTED, DeviationStatus, INCLUDED } from "../../source/models/enums/deviation_status";
 import { ApiBuiltStatus, DEVIATED, NOT_BUILT } from "../../source/models/enums/api_built_status";
+import ApiVerifiedStatusType from "../../source/models/enums/api_verified_status_type";
 import { FIREBASE, GATEWAY_JWT, UserAuthType } from "../../source/models/enums/user_auth_type";
 import { USER, UserRole } from "../../source/models/enums/user_role";
 import { ApiDetailedElement, ApiMinimalPlannedBuildingElement, ApiPlannedElement, ApiScannedElement, DateConverter } from "../../source";
@@ -1769,6 +1770,56 @@ describe("ElementApi", () => {
       });
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+
+    it("omits the status param when no statuses are given", () => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/clear-verified?scanDatasetId=some-scan-dataset-id`,
+        200, { overwriteRoutes: true });
+
+      ElementApi.clearVerified({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-dataset-id"
+      }, {
+        authType: UserAuthType.GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: UserRole.USER }
+      }, []);
+
+      expect(fetchMock.lastUrl())
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/clear-verified?scanDatasetId=some-scan-dataset-id`);
+    });
+
+    it("appends a single status param", () => {
+      const url = `${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/clear-verified?scanDatasetId=some-scan-dataset-id&status=BUILT`;
+      fetchMock.post(url, 200, { overwriteRoutes: true });
+
+      ElementApi.clearVerified({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-dataset-id"
+      }, {
+        authType: UserAuthType.GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: UserRole.USER }
+      }, [ApiVerifiedStatusType.BUILT]);
+
+      expect(fetchMock.lastUrl()).to.eq(url);
+    });
+
+    it("appends one status param per entry, in order", () => {
+      const url = `${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/clear-verified?scanDatasetId=some-scan-dataset-id&status=BUILT&status=DEVIATED`;
+      fetchMock.post(url, 200, { overwriteRoutes: true });
+
+      ElementApi.clearVerified({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-dataset-id"
+      }, {
+        authType: UserAuthType.GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: UserRole.USER }
+      }, [ApiVerifiedStatusType.BUILT, ApiVerifiedStatusType.DEVIATED]);
+
+      expect(fetchMock.lastUrl()).to.eq(url);
     });
   });
 
