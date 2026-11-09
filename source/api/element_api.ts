@@ -1,4 +1,5 @@
 import DeviationStatus from "../models/enums/deviation_status";
+import ApiVerifiedStatusType from "../models/enums/api_verified_status_type";
 import Http from "../utilities/http";
 import makeErrorsPretty from "../utilities/make_errors_pretty";
 
@@ -255,9 +256,17 @@ export default class ElementApi {
   }
 
 
+  /**
+   * Clears verification for the given statuses only. Omitting `statuses` (or passing an empty array)
+   * clears the legacy scope, unchanged from before status filtering existed.
+   */
   static clearVerified({ projectId, floorId, scanDatasetId }: AssociationIds,
-                       user: User): Promise<ApiDetailedElement[]> {
+                       user: User,
+                       statuses?: ApiVerifiedStatusType[]): Promise<ApiDetailedElement[]> {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/clear-verified?scanDatasetId=${scanDatasetId}`;
+    statuses?.forEach((status) => {
+      url += `&status=${status}`;
+    });
     return Http.post(url, user) as unknown as Promise<ApiDetailedElement[]>;
   };
 

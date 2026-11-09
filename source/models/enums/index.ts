@@ -1,6 +1,7 @@
 export * from "./api_built_status";
 export * from "./api_floor_file_deletion_mode";
 export * from "./api_integration_credentials_type";
+export * from "./api_verified_status_type";
 export * from "./association_type";
 export * from "./deviation_status";
 export * from "./event_type";
