@@ -757,6 +757,25 @@ describe("ElementApi", () => {
         });
     });
 
+    describe("when given a scan dataset id", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/obstructions?scanDatasetId=some-scan-dataset-id`,
+          { "some-global-id": ["some-obstructed-global-id-1"] });
+      });
+
+      it("asks for that scan's obstructed elements", () => {
+        ElementApi.getObstructedElementsForFloor({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        }, null);
+
+        expect(fetchMock.lastCall()[0])
+          .to
+          .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/obstructions?scanDatasetId=some-scan-dataset-id`);
+      });
+    });
+
     describe("when the user is signed in", () => {
       let user;
       beforeEach(() => {
