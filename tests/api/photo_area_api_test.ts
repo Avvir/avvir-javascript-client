@@ -89,41 +89,152 @@ describe("PhotoAreaApi", () => {
   });
 
   describe("#listPhotoLocations", () => {
+    const gatewayUser = {
+      authType: GATEWAY_JWT,
+      gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+    };
+
     beforeEach(() => {
-      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations`, 200);
+      fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations?limit=1000`, 200);
     });
 
-    it("makes a request to the gateway", () => {
-      PhotoAreaApi.listPhotoLocations({projectId: "some-project-id", photoAreaId: 4}, {
-        authType: GATEWAY_JWT,
-        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
-      });
+    it("makes a request to the gateway for the first page", () => {
+      PhotoAreaApi.listPhotoLocations({projectId: "some-project-id", photoAreaId: 4}, gatewayUser);
 
-      expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations`);
+      expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations?limit=1000`);
       expect(fetchMock.lastOptions().headers.Accept).to.eq("application/json");
     });
 
     it("includes the authorization headers", () => {
-      PhotoAreaApi.listPhotoLocations({projectId: "some-project-id", photoAreaId: 4}, {
-        authType: GATEWAY_JWT,
-        gatewayUser: {idToken: "some-firebase.id.token", role: USER}
-      });
+      PhotoAreaApi.listPhotoLocations({projectId: "some-project-id", photoAreaId: 4}, gatewayUser);
 
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
 
     describe("when the photo session id is included", () => {
       beforeEach(() => {
-        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations?photoSessionId=5`, 200);
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations?photoSessionId=5&limit=1000`, 200);
       });
 
       it("adds the photo session id as a query param", () => {
-        PhotoAreaApi.listPhotoLocations({projectId: "some-project-id", photoAreaId: 4, photoSessionId: 5}, {
-          authType: GATEWAY_JWT,
-          gatewayUser: {idToken: "some-firebase.id.token", role: USER}
-        });
+        PhotoAreaApi.listPhotoLocations({projectId: "some-project-id", photoAreaId: 4, photoSessionId: 5}, gatewayUser);
 
-        expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations?photoSessionId=5`);
+        expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations?photoSessionId=5&limit=1000`);
+      });
+    });
+
+    describe("when the gateway returns more than one page", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations?photoSessionId=5&limit=1000`, {
+          status: 200,
+          body: [{id: 1}, {id: 2}],
+          headers: {"X-Next-Cursor": "2"}
+        }, {overwriteRoutes: true});
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations?photoSessionId=5&limit=1000&after=2`, {
+          status: 200,
+          body: [{id: 3}, {id: 4}],
+          headers: {"X-Next-Cursor": "4"}
+        });
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations?photoSessionId=5&limit=1000&after=4`, {
+          status: 200,
+          body: [{id: 5}]
+        });
+      });
+
+      it("follows the next cursor until the last page and returns every location", () => {
+        return PhotoAreaApi.listPhotoLocations({projectId: "some-project-id", photoAreaId: 4, photoSessionId: 5}, gatewayUser)
+          .then((locations) => {
+            expect(fetchMock.calls().map(call => call[0])).to.deep.eq([
+              `${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations?photoSessionId=5&limit=1000`,
+              `${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations?photoSessionId=5&limit=1000&after=2`,
+              `${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations?photoSessionId=5&limit=1000&after=4`
+            ]);
+            expect(locations.map(location => location.id)).to.deep.eq([1, 2, 3, 4, 5]);
+          });
+      });
+    });
+
+    describe("when the gateway returns a single page without a next cursor", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations?limit=1000`, {
+          status: 200,
+          body: [{id: 1}, {id: 2}]
+        }, {overwriteRoutes: true});
+      });
+
+      it("makes one request and returns its locations", () => {
+        return PhotoAreaApi.listPhotoLocations({projectId: "some-project-id", photoAreaId: 4}, gatewayUser)
+          .then((locations) => {
+            expect(fetchMock.calls()).to.have.length(1);
+            expect(locations.map(location => location.id)).to.deep.eq([1, 2]);
+          });
+      });
+    });
+  });
+
+  describe("#listPhotoLocationsPage", () => {
+    const gatewayUser = {
+      authType: GATEWAY_JWT,
+      gatewayUser: {idToken: "some-firebase.id.token", role: USER}
+    };
+
+    describe("when there are more pages", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations?photoSessionId=5,6&limit=2&after=10`, {
+          status: 200,
+          body: [{id: 11}, {id: 12}],
+          headers: {"X-Next-Cursor": "12"}
+        });
+      });
+
+      it("requests that page and returns its items and next cursor", () => {
+        return PhotoAreaApi.listPhotoLocationsPage({
+          projectId: "some-project-id",
+          photoAreaId: 4,
+          photoSessionId: [5, 6],
+          limit: 2,
+          after: 10
+        }, gatewayUser)
+          .then((page) => {
+            expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations?photoSessionId=5,6&limit=2&after=10`);
+            expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+            expect(page.items.map(location => location.id)).to.deep.eq([11, 12]);
+            expect(page.nextCursor).to.eq(12);
+          });
+      });
+    });
+
+    describe("when it is the last page", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations?limit=2&after=12`, {
+          status: 200,
+          body: [{id: 13}]
+        });
+      });
+
+      it("returns a null next cursor", () => {
+        return PhotoAreaApi.listPhotoLocationsPage({projectId: "some-project-id", photoAreaId: 4, limit: 2, after: 12}, gatewayUser)
+          .then((page) => {
+            expect(page.items.map(location => location.id)).to.deep.eq([13]);
+            expect(page.nextCursor).to.be.null;
+          });
+      });
+    });
+
+    describe("when neither a limit nor a cursor is given", () => {
+      beforeEach(() => {
+        fetchMock.get(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations`, {
+          status: 200,
+          body: [{id: 1}]
+        });
+      });
+
+      it("sends no pagination params", () => {
+        return PhotoAreaApi.listPhotoLocationsPage({projectId: "some-project-id", photoAreaId: 4}, gatewayUser)
+          .then((page) => {
+            expect(fetchMock.lastCall()[0]).to.eq(`${Http.baseUrl()}/projects/some-project-id/photo-areas/4/locations`);
+            expect(page.nextCursor).to.be.null;
+          });
       });
     });
   });
