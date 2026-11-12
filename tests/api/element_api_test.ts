@@ -1877,4 +1877,40 @@ describe("ElementApi", () => {
       expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
     });
   });
+
+  describe("#aiVerify", () => {
+    beforeEach(() => {
+      fetchMock.post(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/ai-verify?scanDatasetId=some-scan-dataset-id`,
+        200);
+    });
+
+    it("makes a request to the gateway", () => {
+      ElementApi.aiVerify({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-dataset-id"
+      }, {
+        authType: UserAuthType.GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: UserRole.USER }
+      });
+
+      expect(fetchMock.lastOptions().headers["Accept"]).to.eq("application/json");
+      expect(fetchMock.lastUrl())
+        .to
+        .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/ai-verify?scanDatasetId=some-scan-dataset-id`);
+    });
+
+    it("includes the authorization headers", () => {
+      ElementApi.aiVerify({
+        projectId: "some-project-id",
+        floorId: "some-floor-id",
+        scanDatasetId: "some-scan-dataset-id"
+      }, {
+        authType: UserAuthType.GATEWAY_JWT,
+        gatewayUser: { idToken: "some-firebase.id.token", role: UserRole.USER }
+      });
+
+      expect(fetchMock.lastOptions().headers.Authorization).to.eq("Bearer some-firebase.id.token");
+    });
+  });
 });
