@@ -33,6 +33,7 @@ export class ApiPlannedElement {
                 reviztoId,
                 reviztoIfcGuid,
                 verified,
+                aiVerified,
                 exportedToBcf,
                 partialProgressPercent,
                 trade
@@ -63,6 +64,7 @@ export class ApiPlannedElement {
     this.reviztoId = reviztoId;
     this.reviztoIfcGuid = reviztoIfcGuid;
     this.verified = verified;
+    this.aiVerified = aiVerified;
     this.exportedToBcf = exportedToBcf;
     this.partialProgressPercent = partialProgressPercent;
     this.trade = trade;
@@ -93,6 +95,8 @@ export class ApiPlannedElement {
   reviztoId?: string;
   reviztoIfcGuid?: string;
   verified?: boolean;
+  /** Verified by Verify Scan with AI rather than by a person. Only meaningful when `verified` is true. */
+  aiVerified?: boolean;
   exportedToBcf?: boolean;
   partialProgressPercent?: number;
   trade?: string;
