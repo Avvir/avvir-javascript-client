@@ -277,6 +277,15 @@ export default class ElementApi {
     let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/auto-verify?scanDatasetId=${scanDatasetId}`;
     return Http.post(url, user) as unknown as Promise<ApiDetailedElement[]>;
   };
+
+  /**
+   * Verify Scan with AI: marks Built and Deviated elements at or above the AI confidence threshold AI Verified.
+   * Never un-verifies anything, unlike autoVerify.
+   */
+  static aiVerify({ projectId, floorId, scanDatasetId }: AssociationIds, user: User): Promise<ApiDetailedElement[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/ai-verify?scanDatasetId=${scanDatasetId}`;
+    return Http.post(url, user) as unknown as Promise<ApiDetailedElement[]>;
+  };
 }
 
 makeErrorsPretty(ElementApi);
