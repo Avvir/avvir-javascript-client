@@ -35,7 +35,8 @@ export class ApiPlannedElement {
                 verified,
                 exportedToBcf,
                 partialProgressPercent,
-                trade
+                trade,
+                statusUpdatedByAlgorithm
               }: ApiPlannedElementArgument = {})
   {
     addReadOnlyPropertiesToModel(this, { id });
@@ -66,6 +67,7 @@ export class ApiPlannedElement {
     this.exportedToBcf = exportedToBcf;
     this.partialProgressPercent = partialProgressPercent;
     this.trade = trade;
+    this.statusUpdatedByAlgorithm = statusUpdatedByAlgorithm;
   }
 
   readonly id: number;
@@ -96,6 +98,11 @@ export class ApiPlannedElement {
   exportedToBcf?: boolean;
   partialProgressPercent?: number;
   trade?: string;
+  /**
+   * Whether the deviation and progress algorithm saved this element last. Any later save by someone else, including
+   * verifying the element, makes it false. Returned by the element list; the gateway ignores it when it is sent back.
+   */
+  statusUpdatedByAlgorithm?: boolean;
 }
 
 export default ApiPlannedElement;
