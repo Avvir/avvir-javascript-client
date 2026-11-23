@@ -203,10 +203,20 @@ export default class ElementApi {
   static updatePlannedBuildingElementsForViewer({ projectId, floorId, scanDatasetId }: AssociationIds,
                                                 elements: ApiScannedElement<ApiBuiltStatus>[],
                                                 progressMode: boolean,
-                                                user: User): Promise<ApiPlannedElement[]> {
-    return Http.patch(`${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/${scanDatasetId}/viewer${progressMode ? "?progressMode=true" : ""}`,
-      user,
-      elements) as unknown as Promise<ApiPlannedElement[]>;
+                                                user: User,
+                                                notBuiltOnLaterScans?: boolean): Promise<ApiPlannedElement[]> {
+    let url = `${Http.baseUrl()}/projects/${projectId}/floors/${floorId}/planned-building-elements/${scanDatasetId}/viewer`;
+    const params = [];
+    if (progressMode) {
+      params.push("progressMode=true");
+    }
+    if (notBuiltOnLaterScans) {
+      params.push("notBuiltOnLaterScans=true");
+    }
+    if (params.length > 0) {
+      url += `?${params.join("&")}`;
+    }
+    return Http.patch(url, user, elements) as unknown as Promise<ApiPlannedElement[]>;
   }
 
   static updatePlannedBuildingElementsForViewerUndo({ projectId, floorId }: AssociationIds,
