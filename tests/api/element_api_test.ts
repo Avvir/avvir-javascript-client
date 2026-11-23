@@ -1447,6 +1447,29 @@ describe("ElementApi", () => {
           .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-scan-dataset-id/viewer?progressMode=true`);
       });
     });
+
+    describe("when the elements are Not Built on later scans too", () => {
+      beforeEach(() => {
+        fetchMock.patch(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-scan-dataset-id/viewer?notBuiltOnLaterScans=true`,
+          200);
+      });
+
+      it("sends notBuiltOnLaterScans", () => {
+        ElementApi.updatePlannedBuildingElementsForViewer({
+          projectId: "some-project-id",
+          floorId: "some-floor-id",
+          scanDatasetId: "some-scan-dataset-id"
+        }, [new ApiScannedElement({
+          globalId: "some-global-id",
+          scanLabel: NOT_BUILT,
+        })], false, user, true);
+        const fetchCall = fetchMock.lastCall();
+
+        expect(fetchCall[0])
+          .to
+          .eq(`${Http.baseUrl()}/projects/some-project-id/floors/some-floor-id/planned-building-elements/some-scan-dataset-id/viewer?notBuiltOnLaterScans=true`);
+      });
+    });
   });
 
   describe("::updatePlannedBuildingElementsForViewerUndo", () => {
