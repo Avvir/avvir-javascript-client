@@ -7,6 +7,7 @@ import GroupApi from "./group_api";
 import NewGroupApi from "./new_group_api";
 import IntegrationsApi from "./integrations_api";
 import OrganizationApi from "./organization_api";
+import PanelLayoutApi from "./panel_layout_api";
 import PhotoAreaApi from "./photo_area_api";
 import PipelineApi from "./pipeline_api";
 import ProjectApi from "./project_api";
@@ -31,6 +32,7 @@ export {
   NewGroupApi,
   IntegrationsApi,
   OrganizationApi,
+  PanelLayoutApi,
   PhotoAreaApi,
   PipelineApi,
   ProjectApi,
