@@ -12,6 +12,7 @@ export default {
   newGroups: Api.NewGroupApi,
   integrations: Api.IntegrationsApi,
   organizations: Api.OrganizationApi,
+  panelLayouts: Api.PanelLayoutApi,
   photos: Api.PhotoAreaApi,
   pipelines: Api.PipelineApi,
   projects: Api.ProjectApi,
